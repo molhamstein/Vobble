@@ -1,0 +1,77 @@
+PODS:
+  - Alamofire (4.6.0)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
+  - FBSDKCoreKit (4.24.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.24.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.24.0):
+    - FBSDKCoreKit
+  - libwebp (0.6.0):
+    - libwebp/core (= 0.6.0)
+    - libwebp/dec (= 0.6.0)
+    - libwebp/demux (= 0.6.0)
+    - libwebp/dsp (= 0.6.0)
+    - libwebp/enc (= 0.6.0)
+    - libwebp/mux (= 0.6.0)
+    - libwebp/utils (= 0.6.0)
+    - libwebp/webp (= 0.6.0)
+  - libwebp/core (0.6.0):
+    - libwebp/webp
+  - libwebp/dec (0.6.0):
+    - libwebp/core
+  - libwebp/demux (0.6.0):
+    - libwebp/core
+  - libwebp/dsp (0.6.0):
+    - libwebp/core
+  - libwebp/enc (0.6.0):
+    - libwebp/core
+  - libwebp/mux (0.6.0):
+    - libwebp/core
+  - libwebp/utils (0.6.0):
+    - libwebp/core
+  - libwebp/webp (0.6.0)
+  - PIDatePicker (0.1.3)
+  - SDWebImage/Core (4.3.0)
+  - SDWebImage/WebP (4.3.0):
+    - libwebp (~> 0.5)
+    - SDWebImage/Core
+  - SwiftyJSON (4.0.0)
+  - Toast-Swift (2.0.0)
+  - TwitterCore (3.1.0)
+  - TwitterKit (3.3.0):
+    - TwitterCore (>= 3.1.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - FBSDKCoreKit (~> 4.24.0)
+  - FBSDKLoginKit (~> 4.24.0)
+  - FBSDKShareKit (~> 4.24.0)
+  - PIDatePicker (~> 0.1.0)
+  - SDWebImage/WebP
+  - SwiftyJSON
+  - Toast-Swift (~> 2.0.0)
+  - TwitterKit
+
+SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
+  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
+  FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
+  libwebp: 1d5a07c2eb97f9c31bd5f154bb82efc0ea67c6a2
+  PIDatePicker: 5044778bdd2ca2f62ca27263ae22c6f48fb74517
+  SDWebImage: 6da6c8bca115addc4de8613362e1b15f66333825
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  Toast-Swift: 5b2f8f720f7e78e48511f693df1f9c9a6e38a25a
+  TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
+  TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
+
+PODFILE CHECKSUM: c8fd35ff5768fd6817e8047cca5a3faef3b7528d
+
+COCOAPODS: 1.4.0

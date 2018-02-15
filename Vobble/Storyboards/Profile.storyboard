@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="5I4-tb-mnN">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" id="ttS-fQ-w9w" customClass="ProfileViewController" customModule="Rombeye" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eOn-PN-1Qs"/>
+                        <viewControllerLayoutGuide type="bottom" id="ENu-M8-VbK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L1n-gt-gkI">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgc-cw-PKe">
+                                <rect key="frame" x="163" y="291" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwi-bK-A1x" customClass="RNLoadingButton" customModule="Rombeye" customModuleProvider="target">
+                                <rect key="frame" x="137" y="517" width="100" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="IJM-OI-dHB"/>
+                                    <constraint firstAttribute="width" constant="100" id="RXH-cY-DN6"/>
+                                </constraints>
+                                <state key="normal" title="LOG OUT">
+                                    <color key="titleColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="0.92156862750000001" green="0.090196078430000007" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideImageWhenLoading" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="activityIndicatorColor">
+                                        <color key="value" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBorderColor">
+                                        <color key="value" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="highlightedBorderColor">
+                                        <color key="value" red="0.92156862750000001" green="0.090196078430000007" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logoutAction:" destination="ttS-fQ-w9w" eventType="touchUpInside" id="iI6-XX-f3P"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zgc-cw-PKe" firstAttribute="centerY" secondItem="L1n-gt-gkI" secondAttribute="centerY" id="7He-Nx-LTX"/>
+                            <constraint firstItem="ENu-M8-VbK" firstAttribute="top" secondItem="xwi-bK-A1x" secondAttribute="bottom" constant="50" id="8vK-dD-x95"/>
+                            <constraint firstItem="xwi-bK-A1x" firstAttribute="centerX" secondItem="L1n-gt-gkI" secondAttribute="centerX" id="9p7-DM-MhF"/>
+                            <constraint firstItem="zgc-cw-PKe" firstAttribute="centerX" secondItem="L1n-gt-gkI" secondAttribute="centerX" id="qzB-Cp-NSS"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wlB-6C-137" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="101"/>
+        </scene>
+    </scenes>
+</document>

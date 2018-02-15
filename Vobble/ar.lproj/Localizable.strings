@@ -1,0 +1,113 @@
+/*
+ Localizable.strings
+ Vobble
+ 
+ Created by BrainSocket on 6/18/17.
+ Copyright © 2017 BrainSocket. All rights reserved.
+ */
+
+// Global messages
+"GLOBAL_ERROR_TITLE"                    = "خطأ!";
+"GLOBAL_SUCCESS_TITLE"                  = "نجاح";
+"GLOBAL_WARNING_TITLE"                  = "تنبيه!";
+"CANCEL"                                = "الغاء";
+"Ok"                                    = "موافق";
+
+// Generic erros
+"ERROR_NO_CONNECTION"                   = "لايوجد اتصال، يرجى التأكد من إعدادات الجهاز";
+"ERROR_SIGNUP_EMAIL_INVALID"            = "يرجى إدخال بريد الكتروني صحيح";
+"ERROR_SIGNUP_EMAIL_EXISTS"             = "البريد الالكتروني مسجل مسبقاً";
+"ERROR_SIGNIN_WRONG_CREDIST"     	    = "الرجاء التحقق من البريد الالكتروني و كلمة المرور";
+"ERROR_RESET_WRONG_EMAIL"               = "البريد الالكتروني غير مسجل مسبقاً";
+"ERROR_MISSING_INPUT_DATA"              = "الرجاء إدخال جميع الحقول";
+"ERROR_INVALID_VERIFY_CODE"             = "رمز التحقق المدخل غير صحيح";
+"ERROR_EXPIRED_VERIFY_CODE"             = "رمز التحقق المدخل منتهي الصلاحية";
+
+// connection errors messages
+"ERROR_NOT_AUTHORIZED"                  = "الرجاء التحقق من صلاحيات تسجيل الدخول الخاصة بك";
+"ERROR_UNKNOWN"                         = "حدث خطأ غير معروف";
+"ERROR_SOCIAL_FACEBOOK"                 = "فشلت عملية تسجيل الدخول عبر الفيسبوك، يرجى إعادة المحاولة";
+"ERROR_SOCIAL_TWITTER"                  = "فشلت عملية تسجيل الدخول عبر التويتر، يرجى إعادة المحاولة";
+"ERROR_SOCIAL_INSTAGRAM"                = "فشلت عملية تسجيل الدخول عبر الانستغرام، يرجى إعادة المحاولة";
+
+// Start screen
+"START_EMAIL_TITLE"                     = "أدخل البريد الالكتروني";
+"START_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"START_PASSWORD_TITLE"                  = "أدخل كلمة المرور";
+"START_PASSWORD_PLACEHOLDER"            = "********";
+"START_FORGET_PASSWORD"                 = "نسيت كلمة المرور؟";
+"START_NORMAL_LOGIN"                    = "تسجيل الدخول";
+"START_SOCIAL_LOGIN"                    = "تسجيل دخول عن طريق";
+"START_CREATE_ACCOUNT"                  = "إنشاء حساب جديد";
+
+// Date ago
+"YEARS_AGO"                             = "منذ %@ سنين";
+"YEAR_AGO"                              = "منذ %@ سنة";
+"MONTHS_AGO"                            = "منذ %@ شهور";
+"MONTH_AGO"                             = "منذ %@ شهر";
+"DAYS_AGO"                              = "منذ %@ أيام";
+"DAY_AGO"                               = "منذ %@ يوم";
+"HOURS_AGO"                             = "منذ %@ ساعات";
+"HOUR_AGO"                              = "منذ %@ ساعة";
+"MINUTES_AGO"                           = "منذ %@ دقائق";
+"MINUTE_AGO"                            = "منذ %@ دقيقة";
+"SECONDS_AGO"                           = "منذ %@ ثواني";
+"SECOND_AGO"                            = "منذ %@ ثانية";
+"NOW"                                   = "الآن";
+
+// Signup
+"SINGUP_STEP1_TITLE"                    = "أهلا بك!!";
+"SINGUP_FNAME_TITLE"                    = "الاسم الأول";
+"SINGUP_FNAME_PLACEHOLDER"              = "أدخل الاسم الأول";
+"SINGUP_LNAME_TITLE"                    = "اسم العائلة";
+"SINGUP_LNAME_PLACEHOLDER"              = "أدخل اسم العائلة";
+"SINGUP_STEP2_TITLE"                    = "الرجاء ادخال تاريخ ميلادك\nسوف نحافظ على سرية هذه المعلومة و لن يتم مشاركتها مع أحد";
+"SINGUP_STEP2_DESC"                     = "اختر التاريخ";
+"SINGUP_DAY_PLACEHOLDER"                = "اليوم";
+"SINGUP_MONTH_PLACEHOLDER"              = "الشهر";
+"SINGUP_YEAR_PLACEHOLDER"               = "السنة";
+"SINGUP_STEP3_TITLE"                    = "أنا اكون";
+"SINGUP_STEP3_DESC"                     = "حدد جنسك";
+"SINGUP_STEP3_MALE"                     = "ذكر";
+"SINGUP_STEP3_FEMALE"                   = "أنثى";
+"SINGUP_STEP4_TITLE"                    = "الرجاء ادخال البريد الالكتروني";
+"SINGUP_STEP4_DESC"                     = "نحن لا نقوم بارسال رسائل دعائية";
+"SINGUP_EMAIL_TITLE"                    = "أدخل البريد الالكتروني";
+"SINGUP_EMAIL_PLACEHOLDER"              = "vobblemail@gmail.com";
+"SINGUP_STEP5_TITLE"                    = "الرجاء ادخال رمز التحقق الذي تم إرساله الى بريدك الالكتروني";
+"SINGUP_VERIFICATION_TITLE"             = "أدخل الرمز";
+"SINGUP_VERIFICATION_PLACEHOLDER"       = "رمز التحقق";
+"SINGUP_PASSWORD_TITLE"                 = "أدخل كلمة المرور";
+"SINGUP_PASSWORD_PLACEHOLDER"           = "******";
+"SINGUP_NEXT"                           = "التالي";
+"SINGUP_FINISH"                         = "ارسال";
+"SINGUP_VALIDATION_FNAME"               = "رجاءً قم بادخال اسمك الاول";
+"SINGUP_VALIDATION_LNAME"               = "رجاءً قم بادخال اسم عائلتك";
+"SINGUP_VALIDATION_EMAIL"               = "رجاء قم بادخال بريدك الالكتروني";
+"SINGUP_VALIDATION_EMAIL_FORMAT"        = "الرجاء ادخال بريد الكتروني صالح";
+"SINGUP_VALIDATION_DATE"                = "الرجاء اختيار تاريخ ميلادك بشكل صحيح";
+"SINGUP_VALIDATION_PASSWORD"            = "رجاء قم بادخال كلمة المرور";
+"SINGUP_VALIDATION_PASSWORD_LENGHTH"    = "كلمة المرور يجب ان تكون من ٦ محارف على الاقل";
+"SINGUP_VALIDATION_VERIF_CODE"          = "رجاء قم بادخال رمز التحقق";
+
+// Reset password
+"RESET_STEP1_TITLE"                     = "استعادة كلمة المرور";
+"RESET_STEP1_DESC"                      = "الرجاء إدخال البريد الالكتروني الخاص بك ليتم إرسال رمز التحقق إليه";
+"RESET_STEP2_DESC"                      = "الرجاء ادخال الرمز الذي تم ارساله الى بريدك الالكتروني";
+"RESET_ACTION_NEXT"                     = "ارسال";
+"RESET_CODE_TITLE"                      = "أدخل الرمز";
+"RESET_CODE_PLACEHOLDER"                = "رمز التحقق";
+"RESET_PASSWORD_TITLE"                  = "كلمة المرور الجديدة";
+"RESET_PASSWORD_PLACEHOLDER"            = "******";
+
+// verification
+"VERIF_CODE_TITLE"                      = "رمز التحقق";
+"VERIF_CODE_PLACEHOLDER"                = "******";
+"VERIF_CODE_BUTTON"                     = "ارسال";
+"VERIF_CODE_RESEND"                     = "اعادة الارسال";
+"VERIF_CODE_EMPTY"                      = "الرجاء ادخال رمز التحقق";
+"VERIF_RESEND_SUCCESS"                  = "تم إرسال رمز تحقق جديد إلى بريدك الالكتروني";
+
+// Settings
+"SETTINGS_USER_LOGOUT"                  = "تسجيل خروج";
+"SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "هل تود تسجيل الخروج؟";

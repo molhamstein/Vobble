@@ -1,0 +1,114 @@
+/*
+ Localizable.strings
+ Vobble
+ 
+ Created by BrainSocket on 6/18/17.
+ Copyright © 2017 BrainSocket. All rights reserved.
+ */
+
+// Global messages
+"GLOBAL_ERROR_TITLE"                    = "ERROR!";
+"GLOBAL_SUCCESS_TITLE"                  = "SUCCESS";
+"GLOBAL_WARNING_TITLE"                  = "WARNING!";
+"CANCEL"                                = "Cancel";
+"Ok"                                    = "Ok";
+
+// Generic erros
+"ERROR_NO_CONNECTION"                   = "No internet connection, please check your phone settings";
+"ERROR_SIGNUP_EMAIL_EXISTS"             = "Email address already registered";
+"ERROR_SIGNUP_EMAIL_INVALID"            = "Please enter a valid email address";
+"ERROR_SIGNIN_WRONG_CREDIST"     	    = "Please check your email and password";
+"ERROR_RESET_WRONG_EMAIL"               = "Email address is not registered before";
+"ERROR_MISSING_INPUT_DATA"              = "Please fill in all required information";
+"ERROR_INVALID_VERIFY_CODE"             = "Verification code is not valid";
+"ERROR_EXPIRED_VERIFY_CODE"             = "Verification code was expired";
+
+// Connection errors messages
+"ERROR_NOT_AUTHORIZED"                  = "You are not authorized to access this data, please login again";
+"ERROR_UNKNOWN"                         = "Unknown error occured";
+"ERROR_SOCIAL_FACEBOOK"                 = "Facebook login failed, please try again";
+"ERROR_SOCIAL_TWITTER"                  = "Twitter login failed, please try again";
+"ERROR_SOCIAL_INSTAGRAM"                = "Instagram login failed, please try again";
+
+// Start screen
+"START_EMAIL_TITLE"                     = "ENTER EMAIL";
+"START_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"START_PASSWORD_TITLE"                  = "ENTER PASSWORD";
+"START_PASSWORD_PLACEHOLDER"            = "********";
+"START_FORGET_PASSWORD"                 = "Forget password?";
+"START_NORMAL_LOGIN"                    = "LOG IN";
+"START_SOCIAL_LOGIN"                    = "Social Log In";
+"START_CREATE_ACCOUNT"                  = "CREATE AN ACCOUNT";
+
+// Date ago
+"YEARS_AGO"                             = "%@ years ago";
+"YEAR_AGO"                              = "%@ year ago";
+"MONTHS_AGO"                            = "%@ months ago";
+"MONTH_AGO"                             = "%@ month ago";
+"DAYS_AGO"                              = "%@ days ago";
+"DAY_AGO"                               = "%@ day ago";
+"HOURS_AGO"                             = "%@ hours ago";
+"HOUR_AGO"                              = "%@ hour ago";
+"MINUTES_AGO"                           = "%@ minutes ago";
+"MINUTE_AGO"                            = "%@ minute ago";
+"SECONDS_AGO"                           = "%@ seconds ago";
+"SECOND_AGO"                            = "%@ second ago";
+"NOW"                                   = "Now";
+
+// Signup
+"SINGUP_STEP1_TITLE"                    = "Hello! Nice to meet you";
+"SINGUP_FNAME_TITLE"                    = "FIRST NAME";
+"SINGUP_FNAME_PLACEHOLDER"              = "Your first name";
+"SINGUP_LNAME_TITLE"                    = "LAST NAME";
+"SINGUP_LNAME_PLACEHOLDER"              = "Your last name";
+"SINGUP_STEP2_TITLE"                    = "When is your birthday?\nThis information is private, it won’t be shown to anyone";
+"SINGUP_STEP2_DESC"                     = "CHOOSE DATE";
+"SINGUP_DAY_PLACEHOLDER"                = "DD";
+"SINGUP_MONTH_PLACEHOLDER"              = "MM";
+"SINGUP_YEAR_PLACEHOLDER"               = "YYYY";
+"SINGUP_STEP3_TITLE"                    = "I am";
+"SINGUP_STEP3_DESC"                     = "CHOOSE GENDER";
+"SINGUP_STEP3_MALE"                     = "Male";
+"SINGUP_STEP3_FEMALE"                   = "Female";
+"SINGUP_STEP4_TITLE"                    = "Enter your email address";
+"SINGUP_STEP4_DESC"                     = "We do not send spam or email promotions";
+"SINGUP_EMAIL_TITLE"                    = "ENTER EMAIL";
+"SINGUP_EMAIL_PLACEHOLDER"              = "vobblemail@gmail.com";
+"SINGUP_STEP5_TITLE"                    = "Enter the verification code that has been sent to your email";
+"SINGUP_VERIFICATION_TITLE"             = "ENTER CODE";
+"SINGUP_VERIFICATION_PLACEHOLDER"       = "Verification code";
+"SINGUP_PASSWORD_TITLE"                 = "ENTER PASSWORD";
+"SINGUP_PASSWORD_PLACEHOLDER"           = "******";
+"SINGUP_NEXT"                           = "NEXT";
+"SINGUP_FINISH"                         = "FINISH";
+"SINGUP_VALIDATION_FNAME"               = "Please enter your first name";
+"SINGUP_VALIDATION_LNAME"               = "Please enter your last name";
+"SINGUP_VALIDATION_EMAIL"               = "Please enter your email";
+"SINGUP_VALIDATION_EMAIL_FORMAT"        = "Please enter a valid email address";
+"SINGUP_VALIDATION_DATE"                = "Please enter your birthday correctly";
+"SINGUP_VALIDATION_PASSWORD"            = "Please enter your password";
+"SINGUP_VALIDATION_PASSWORD_LENGHTH"    = "Password should be 6 characters long at least";
+"SINGUP_VALIDATION_VERIF_CODE"          = "Please enter your verification code";
+
+// Reset password
+"RESET_STEP1_TITLE"                     = "RESET PASSWORD";
+"RESET_STEP1_DESC"                      = "Please enter your email address to receive a verification code and change your password";
+"RESET_STEP2_DESC"                      = "Enter the code that have received in your email";
+"RESET_ACTION_NEXT"                     = "SEND";
+"RESET_CODE_TITLE"                      = "ENTER CODE";
+"RESET_CODE_PLACEHOLDER"                = "Verification code";
+"RESET_PASSWORD_TITLE"                  = "NEW PASSWORD";
+"RESET_PASSWORD_PLACEHOLDER"            = "******";
+
+// verification
+"VERIF_CODE_TITLE"                      = "ENTER CODE";
+"VERIF_CODE_PLACEHOLDER"                = "Verification code";
+"VERIF_CODE_BUTTON"                     = "VERIFY";
+"VERIF_CODE_RESEND"                     = "RESEND CODE";
+"VERIF_CODE_EMPTY"                      = "Please enter the verification code";
+"VERIF_RESEND_SUCCESS"                  = "New verification code has been sent to your email";
+
+// Settings
+"SETTINGS_USER_LOGOUT"                  = "Logout";
+"SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "Are you sure you want to logout?";
+

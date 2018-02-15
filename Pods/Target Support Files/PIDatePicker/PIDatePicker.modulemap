@@ -1,0 +1,6 @@
+framework module PIDatePicker {
+  umbrella header "PIDatePicker-umbrella.h"
+
+  export *
+  module * { export * }
+}
