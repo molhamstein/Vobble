@@ -54,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YXWaveView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>libwebp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,7 +67,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>20E52E9C0A277CBF3608740102F7379D</key>
+		<key>130C39E5C1B5871BB71663724197BE6A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>231E553FBC5C7892978A7D24A5F0ECC8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,7 +87,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8571C50F6D64CBB15AB0F312E6CB5B64</key>
+		<key>6CBECDAA8418A72A5E240A6F0124A234</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,17 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BF8428F8C428A47406DE85A80449DAD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>92C8CAD0D55C6826E760CD515909011D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CF17506F7FE73E882A53A22F00BB781</key>
+		<key>A555C224E479B89136EACE70CCDF7A81</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -113,6 +118,11 @@
 			<true/>
 		</dict>
 		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F8E297736041E6D7EBA31D7C5FF5FC22</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -20,27 +20,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NA8-ir-pGA">
-                                <rect key="frame" x="136" y="320.5" width="102" height="26.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N8q-QT-fv5">
-                                        <rect key="frame" x="0.0" y="0.0" width="102" height="26.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Logo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4k-Kh-9Ad">
-                                                <rect key="frame" x="0.0" y="0.0" width="102" height="26.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Logo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4k-Kh-9Ad">
+                                <rect key="frame" x="136.5" y="320" width="102" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NA8-ir-pGA" firstAttribute="centerY" secondItem="nWU-3c-ciV" secondAttribute="centerY" id="1fm-VF-CE3"/>
-                            <constraint firstItem="NA8-ir-pGA" firstAttribute="centerX" secondItem="nWU-3c-ciV" secondAttribute="centerX" id="e31-d2-te4"/>
+                            <constraint firstItem="X4k-Kh-9Ad" firstAttribute="centerY" secondItem="nWU-3c-ciV" secondAttribute="centerY" id="VF9-wJ-WSQ"/>
+                            <constraint firstItem="X4k-Kh-9Ad" firstAttribute="centerX" secondItem="nWU-3c-ciV" secondAttribute="centerX" id="mtm-sA-seb"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -1097,7 +1087,7 @@
                                 <rect key="frame" x="16" y="226" width="343" height="315"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kb-Ts-40N">
-                                        <rect key="frame" x="0.0" y="121.5" width="343" height="72"/>
+                                        <rect key="frame" x="0.0" y="122" width="343" height="72"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Log In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0e-Yx-EB1">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="20"/>
@@ -1266,7 +1256,7 @@
         <image name="twitterIcon" width="31" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Smk-dt-CjV"/>
-        <segue reference="FiN-FU-0Qz"/>
+        <segue reference="FED-30-AYj"/>
+        <segue reference="n6q-w1-Hpu"/>
     </inferredMetricsTieBreakers>
 </document>

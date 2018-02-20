@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
+		B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B52442038ADC300C51EE8 /* WaveView.swift */; };
+		B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B52462038AE7700C51EE8 /* WaveView.xib */; };
+		B11B52492038B19700C51EE8 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11B52482038B19700C51EE8 /* Test.storyboard */; };
+		B11B524B2038BAF200C51EE8 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B524A2038BAF200C51EE8 /* TestViewController.swift */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -181,6 +185,10 @@
 		9234B5E8203356570085F9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9234B5EF203356570085F9F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9234B5F4203356570085F9F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B11B52442038ADC300C51EE8 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
+		B11B52462038AE7700C51EE8 /* WaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveView.xib; sourceTree = "<group>"; };
+		B11B52482038B19700C51EE8 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
+		B11B524A2038BAF200C51EE8 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -572,6 +580,7 @@
 				B193710B2033D000007B1E7D /* Abstract */,
 				B193710D2033D024007B1E7D /* Home */,
 				B193710F2033D03C007B1E7D /* Start */,
+				B11B524A2038BAF200C51EE8 /* TestViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -619,8 +628,18 @@
 			children = (
 				B19372CE2033E36C007B1E7D /* Abstract */,
 				B19372D02033E36C007B1E7D /* Home */,
+				B11B52432038AD8100C51EE8 /* Wave */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B11B52432038AD8100C51EE8 /* Wave */ = {
+			isa = PBXGroup;
+			children = (
+				B11B52442038ADC300C51EE8 /* WaveView.swift */,
+				B11B52462038AE7700C51EE8 /* WaveView.xib */,
+			);
+			path = Wave;
 			sourceTree = "<group>";
 		};
 		B18A5C4E20348E4200F139B7 /* Extensions */ = {
@@ -1056,6 +1075,7 @@
 				B193730F20342D9F007B1E7D /* Main.storyboard */,
 				B193731120342D9F007B1E7D /* Profile.storyboard */,
 				B193731020342D9F007B1E7D /* NewsfeedListCell.xib */,
+				B11B52482038B19700C51EE8 /* Test.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1137,12 +1157,14 @@
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				B193732020342D9F007B1E7D /* Start.storyboard in Resources */,
+				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
 				B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
+				B11B52492038B19700C51EE8 /* Test.storyboard in Resources */,
 				B19372F62033E44E007B1E7D /* OpenSansSemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1188,6 +1210,7 @@
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/YXWaveView/YXWaveView.framework",
 				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1203,6 +1226,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YXWaveView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1250,6 +1274,7 @@
 				B18A5DC520348E4300F139B7 /* NSObject+SimpleAuthAdditions.m in Sources */,
 				B18A5D6E20348E4300F139B7 /* NSObject+RACDescription.m in Sources */,
 				B18A5D7B20348E4300F139B7 /* RACBehaviorSubject.m in Sources */,
+				B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */,
 				B18A5D7320348E4300F139B7 /* NSOrderedSet+RACSequenceAdditions.m in Sources */,
 				B18A5D6B20348E4300F139B7 /* NSInvocation+RACTypeParsing.m in Sources */,
 				B18A5D5D20348E4300F139B7 /* CMDQueryStringSerialization.m in Sources */,
@@ -1304,6 +1329,7 @@
 				B18A5D5120348E4300F139B7 /* Collection.swift in Sources */,
 				B18A5D7720348E4300F139B7 /* NSString+RACSupport.m in Sources */,
 				B18A5D7420348E4300F139B7 /* NSSet+RACSequenceAdditions.m in Sources */,
+				B11B524B2038BAF200C51EE8 /* TestViewController.swift in Sources */,
 				B18A5DC120348E4300F139B7 /* ACAccountStore+SimpleAuth.m in Sources */,
 				B193711F2033D95E007B1E7D /* VerificationViewController.swift in Sources */,
 				B19372B02033E27B007B1E7D /* ApiManager.swift in Sources */,

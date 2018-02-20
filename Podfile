@@ -15,5 +15,6 @@ pod 'FBSDKShareKit', '~> 4.24.0'
 pod 'TwitterKit'
 pod 'Toast-Swift', '~> 2.0.0'
 pod 'PIDatePicker', '~> 0.1.0'
+pod 'YXWaveView'
 
 end
