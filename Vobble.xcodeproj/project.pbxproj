@@ -12,7 +12,10 @@
 		B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B52442038ADC300C51EE8 /* WaveView.swift */; };
 		B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B52462038AE7700C51EE8 /* WaveView.xib */; };
 		B11B52492038B19700C51EE8 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11B52482038B19700C51EE8 /* Test.storyboard */; };
-		B11B524B2038BAF200C51EE8 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B524A2038BAF200C51EE8 /* TestViewController.swift */; };
+		B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61C203DE93600755799 /* Antipasto_extrabold.otf */; };
+		B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61D203DE93600755799 /* Antipasto_regular.otf */; };
+		B135B622203DE97000755799 /* MullerBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61E203DE93600755799 /* MullerBold.otf */; };
+		B135B623203DE97400755799 /* MullerRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61F203DE93600755799 /* MullerRegular.otf */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -174,7 +177,9 @@
 		B193731920342D9F007B1E7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193730F20342D9F007B1E7D /* Main.storyboard */; };
 		B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B193731020342D9F007B1E7D /* NewsfeedListCell.xib */; };
 		B193731B20342D9F007B1E7D /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193731120342D9F007B1E7D /* Profile.storyboard */; };
-		B193732020342D9F007B1E7D /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193731620342D9F007B1E7D /* Start.storyboard */; };
+		B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */; };
+		B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */; };
+		B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
 /* End PBXBuildFile section */
 
@@ -188,7 +193,10 @@
 		B11B52442038ADC300C51EE8 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		B11B52462038AE7700C51EE8 /* WaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveView.xib; sourceTree = "<group>"; };
 		B11B52482038B19700C51EE8 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
-		B11B524A2038BAF200C51EE8 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		B135B61C203DE93600755799 /* Antipasto_extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Antipasto_extrabold.otf; sourceTree = "<group>"; };
+		B135B61D203DE93600755799 /* Antipasto_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Antipasto_regular.otf; sourceTree = "<group>"; };
+		B135B61E203DE93600755799 /* MullerBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerBold.otf; sourceTree = "<group>"; };
+		B135B61F203DE93600755799 /* MullerRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerRegular.otf; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -474,7 +482,9 @@
 		B193730F20342D9F007B1E7D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B193731020342D9F007B1E7D /* NewsfeedListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedListCell.xib; sourceTree = "<group>"; };
 		B193731120342D9F007B1E7D /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		B193731620342D9F007B1E7D /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
+		B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VobbleNavigationBar.xib; sourceTree = "<group>"; };
+		B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleNavigationBar.swift; sourceTree = "<group>"; };
+		B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleButton.swift; sourceTree = "<group>"; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -580,7 +590,6 @@
 				B193710B2033D000007B1E7D /* Abstract */,
 				B193710D2033D024007B1E7D /* Home */,
 				B193710F2033D03C007B1E7D /* Start */,
-				B11B524A2038BAF200C51EE8 /* TestViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -626,6 +635,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B19B16D5203DF54E004D684F /* NavigationBar */,
 				B19372CE2033E36C007B1E7D /* Abstract */,
 				B19372D02033E36C007B1E7D /* Home */,
 				B11B52432038AD8100C51EE8 /* Wave */,
@@ -669,7 +679,7 @@
 		B18A5C5A20348E4200F139B7 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				B18A5C5B20348E4200F139B7 /* RNLoadingButton.swift */,
+				B1EA3CA8203C9FFD00A7A261 /* CustomButton */,
 				B18A5C5C20348E4200F139B7 /* SimpleAuthInstagram */,
 			);
 			path = ThirdParty;
@@ -1058,6 +1068,10 @@
 		B19372EA2033E44E007B1E7D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				B135B61C203DE93600755799 /* Antipasto_extrabold.otf */,
+				B135B61D203DE93600755799 /* Antipasto_regular.otf */,
+				B135B61E203DE93600755799 /* MullerBold.otf */,
+				B135B61F203DE93600755799 /* MullerRegular.otf */,
 				B19372EB2033E44E007B1E7D /* DroidKufiBold.ttf */,
 				B19372EC2033E44E007B1E7D /* DroidKufiRegular.ttf */,
 				B19372ED2033E44E007B1E7D /* OpenSansBold.ttf */,
@@ -1071,13 +1085,30 @@
 			isa = PBXGroup;
 			children = (
 				B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */,
-				B193731620342D9F007B1E7D /* Start.storyboard */,
 				B193730F20342D9F007B1E7D /* Main.storyboard */,
 				B193731120342D9F007B1E7D /* Profile.storyboard */,
 				B193731020342D9F007B1E7D /* NewsfeedListCell.xib */,
 				B11B52482038B19700C51EE8 /* Test.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		B19B16D5203DF54E004D684F /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */,
+				B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		B1EA3CA8203C9FFD00A7A261 /* CustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				B18A5C5B20348E4200F139B7 /* RNLoadingButton.swift */,
+				B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */,
+			);
+			path = CustomButton;
 			sourceTree = "<group>";
 		};
 		FE5F8BA41684F3115C60BED0 /* Frameworks */ = {
@@ -1152,15 +1183,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				B193731B20342D9F007B1E7D /* Profile.storyboard in Resources */,
+				B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */,
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
-				B193732020342D9F007B1E7D /* Start.storyboard in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
+				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
+				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
+				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
 				B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
@@ -1272,6 +1307,7 @@
 				B18A5D6520348E4300F139B7 /* NSArray+RACSequenceAdditions.m in Sources */,
 				B19372B22033E27B007B1E7D /* DataStore.swift in Sources */,
 				B18A5DC520348E4300F139B7 /* NSObject+SimpleAuthAdditions.m in Sources */,
+				B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */,
 				B18A5D6E20348E4300F139B7 /* NSObject+RACDescription.m in Sources */,
 				B18A5D7B20348E4300F139B7 /* RACBehaviorSubject.m in Sources */,
 				B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */,
@@ -1320,6 +1356,7 @@
 				B19372D22033E36C007B1E7D /* AbstractNibView.swift in Sources */,
 				B18A5D8020348E4300F139B7 /* RACCompoundDisposableProvider.d in Sources */,
 				B19372E32033E3FC007B1E7D /* HashTag.swift in Sources */,
+				B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */,
 				B18A5D8F20348E4300F139B7 /* RACKVOProxy.m in Sources */,
 				B18A5DBF20348E4300F139B7 /* Result.swift in Sources */,
 				B18A5DC620348E4300F139B7 /* SimpleAuth.m in Sources */,
@@ -1329,7 +1366,6 @@
 				B18A5D5120348E4300F139B7 /* Collection.swift in Sources */,
 				B18A5D7720348E4300F139B7 /* NSString+RACSupport.m in Sources */,
 				B18A5D7420348E4300F139B7 /* NSSet+RACSequenceAdditions.m in Sources */,
-				B11B524B2038BAF200C51EE8 /* TestViewController.swift in Sources */,
 				B18A5DC120348E4300F139B7 /* ACAccountStore+SimpleAuth.m in Sources */,
 				B193711F2033D95E007B1E7D /* VerificationViewController.swift in Sources */,
 				B19372B02033E27B007B1E7D /* ApiManager.swift in Sources */,

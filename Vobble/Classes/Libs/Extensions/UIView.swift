@@ -53,6 +53,34 @@ extension UIView {
         }, completion: nil)
     }
     
+    /// set shadow to current view
+    func dropShadow() {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowRadius = 10
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = true ? UIScreen.main.scale : 1
+        
+
+    }
+    
+    /// set gradient to current view
+    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> Void {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.locations = locations
+        gradient.borderColor = self.layer.borderColor
+        gradient.borderWidth = self.layer.borderWidth
+        gradient.cornerRadius = self.layer.cornerRadius
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+        self.layer.insertSublayer(gradient, at:0)
+    }
+    
     /// set corner radius from interface builder
     @IBInspectable var cornerRadius: CGFloat {
         get {

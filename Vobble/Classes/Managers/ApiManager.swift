@@ -149,7 +149,9 @@ class ApiManager: NSObject {
     /// User login request
     func userLogin(email: String, password: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user:AppUser?) -> Void) {
         // url & parameters
-        let signInURL = "\(baseURL)auth/login"
+//        let signInURL = "\(baseURL)auth/login"
+        let signInURL = "\(baseURL)/users/login?include=user"
+        
         let parameters : [String : Any] = [
             "email": email,
             "password": password

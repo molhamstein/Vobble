@@ -38,12 +38,15 @@ class WaveView : AbstractNibView {
         
         
         // Add WaveView
-//        if let water = waterView {
         
-            self.view.addSubview(waterView!)
-            // Start wave
-            waterView!.start()
-//        }
+        self.view.addSubview(waterView!)
+        // Start wave
+        waterView!.start()
+        
+        let image = UIImage(named: "bottle-1.png")
+        let imageView = UIImageView(image: image!)
+        imageView.frame = CGRect(x: UIScreen.main.bounds.width/2, y: 0, width: imageView.bounds.width, height: imageView.bounds.height)
+        self.view.addSubview(imageView)
         
     }
     

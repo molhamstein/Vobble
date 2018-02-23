@@ -11,6 +11,10 @@ import UIKit
 class ResetPasswordViewController: AbstractController {
     
     // MARK: Properties
+    
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var resetPswView: UIView!
+    
     // stages containers
     @IBOutlet weak var resetStage1: UIView!
     @IBOutlet weak var resetStage2: UIView!
@@ -47,58 +51,60 @@ class ResetPasswordViewController: AbstractController {
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showNavBackButton = true
+//        self.showNavBackButton = true
+         resetPswView.dropShadow()
+         backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], locations: [0.0, 1.0])
     }
     
     // Customize all view members (fonts - style - text)
     override func customizeView() {
         super.customizeView()
-        // set fonts
-        stage1Label.font = AppFonts.big
-        stage1Desc.font = AppFonts.small
-        emailLabel.font = AppFonts.xSmallBold
-        stage2Label.font = AppFonts.big
-        stage2Desc.font = AppFonts.small
-        codeLabel.font = AppFonts.xSmallBold
-        passwordLabel.font = AppFonts.xSmallBold
-        nextButton.titleLabel?.font = AppFonts.normalSemiBold
-        // set text
-        stage1Label.text = "RESET_STEP1_TITLE".localized
-        stage1Desc.text = "RESET_STEP1_DESC".localized
-        emailLabel.text = "SINGUP_EMAIL_TITLE".localized
-        emailTextField.placeholder = "SINGUP_EMAIL_PLACEHOLDER".localized
-        stage2Label.text = "RESET_STEP1_TITLE".localized
-        stage2Desc.text = "RESET_STEP2_DESC".localized
-        codeLabel.text = "RESET_CODE_TITLE".localized
-        codeTextField.placeholder = "RESET_CODE_PLACEHOLDER".localized
-        passwordLabel.text = "RESET_PASSWORD_TITLE".localized
-        passwordTextField.placeholder = "RESET_PASSWORD_PLACEHOLDER".localized
-        nextButton.setTitle("RESET_ACTION_NEXT".localized, for: .normal)
-        nextButton.setTitle("RESET_ACTION_NEXT".localized, for: .highlighted)
-        nextButton.hideTextWhenLoading = true
-        // text field styles
-        emailTextField.appStyle()
-        codeTextField.appStyle()
-        passwordTextField.appStyle()
-        // init stages array
-        arrayStagesContainers.append(resetStage1)
-        arrayStagesContainers.append(resetStage2)
-        arrayStagesBullets.append(s1Bullet)
-        arrayStagesBullets.append(s2Bullet)
-        // start first stage
-        nextStageAction(nextButton)
+//        // set fonts
+//        stage1Label.font = AppFonts.big
+//        stage1Desc.font = AppFonts.small
+//        emailLabel.font = AppFonts.xSmallBold
+//        stage2Label.font = AppFonts.big
+//        stage2Desc.font = AppFonts.small
+//        codeLabel.font = AppFonts.xSmallBold
+//        passwordLabel.font = AppFonts.xSmallBold
+//        nextButton.titleLabel?.font = AppFonts.normalSemiBold
+//        // set text
+//        stage1Label.text = "RESET_STEP1_TITLE".localized
+//        stage1Desc.text = "RESET_STEP1_DESC".localized
+//        emailLabel.text = "SINGUP_EMAIL_TITLE".localized
+//        emailTextField.placeholder = "SINGUP_EMAIL_PLACEHOLDER".localized
+//        stage2Label.text = "RESET_STEP1_TITLE".localized
+//        stage2Desc.text = "RESET_STEP2_DESC".localized
+//        codeLabel.text = "RESET_CODE_TITLE".localized
+//        codeTextField.placeholder = "RESET_CODE_PLACEHOLDER".localized
+//        passwordLabel.text = "RESET_PASSWORD_TITLE".localized
+//        passwordTextField.placeholder = "RESET_PASSWORD_PLACEHOLDER".localized
+//        nextButton.setTitle("RESET_ACTION_NEXT".localized, for: .normal)
+//        nextButton.setTitle("RESET_ACTION_NEXT".localized, for: .highlighted)
+//        nextButton.hideTextWhenLoading = true
+//        // text field styles
+//        emailTextField.appStyle()
+//        codeTextField.appStyle()
+//        passwordTextField.appStyle()
+//        // init stages array
+//        arrayStagesContainers.append(resetStage1)
+//        arrayStagesContainers.append(resetStage2)
+//        arrayStagesBullets.append(s1Bullet)
+//        arrayStagesBullets.append(s2Bullet)
+//        // start first stage
+//        nextStageAction(nextButton)
     }
     
     override func backButtonAction(_ sender: AnyObject) {
         // hide keyboard
-        emailTextField.resignFirstResponder()
-        codeTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-        if currentStageIndex == 0 {
-            _ = self.navigationController?.popViewController(animated: true)
-        } else {
-            backStage()
-        }
+//        emailTextField.resignFirstResponder()
+//        codeTextField.resignFirstResponder()
+//        passwordTextField.resignFirstResponder()
+//        if currentStageIndex == 0 {
+//            _ = self.navigationController?.popViewController(animated: true)
+//        } else {
+//            backStage()
+//        }
     }
     
     // MARK: Actions
