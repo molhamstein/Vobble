@@ -47,6 +47,7 @@ class LoginViewController: AbstractController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        waveSubView.awakeFromNib()
         waveSubView.showWave()
         hideView(withType: .signup)
         loginView1.dropShadow()
