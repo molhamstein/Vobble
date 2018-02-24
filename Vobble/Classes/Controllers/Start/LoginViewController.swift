@@ -25,11 +25,13 @@ class LoginViewController: AbstractController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: VobbleButton!
     @IBOutlet weak var forgetPasswordButton: UIButton!
-    
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var waveSubView: WaveView!
     @IBOutlet weak var loginView1: UIView!
     @IBOutlet weak var signupView: UIView!
+    
+    //signup view
+    
     
     // social view
     @IBOutlet weak var socialView: UIView!
