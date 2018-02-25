@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +22,43 @@
                     <view key="view" contentMode="scaleToFill" id="rNN-9z-ciS">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sea" translatesAutoresizingMaskIntoConstraints="NO" id="ZTN-6J-MC5">
+                                <rect key="frame" x="0.0" y="181" width="375" height="422"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sky1" translatesAutoresizingMaskIntoConstraints="NO" id="ybT-hf-WwB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="181"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island" translatesAutoresizingMaskIntoConstraints="NO" id="NaN-E1-PzY">
+                                <rect key="frame" x="282.5" y="200" width="142.5" height="64.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NaN-E1-PzY" secondAttribute="height" multiplier="715:324" id="Vmx-Yn-9bb"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shore1" translatesAutoresizingMaskIntoConstraints="NO" id="Dwk-Ai-TGx">
+                                <rect key="frame" x="0.0" y="389" width="263.5" height="214"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Dwk-Ai-TGx" secondAttribute="height" multiplier="1321:1073" id="53W-eK-10M"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NaN-E1-PzY" firstAttribute="top" secondItem="whB-KS-iro" secondAttribute="bottom" constant="200" id="6Vw-du-5cC"/>
+                            <constraint firstItem="ybT-hf-WwB" firstAttribute="top" secondItem="whB-KS-iro" secondAttribute="bottom" id="AMF-z4-t7H"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Dwk-Ai-TGx" secondAttribute="bottom" id="BCw-BF-zKj"/>
+                            <constraint firstAttribute="trailing" secondItem="ZTN-6J-MC5" secondAttribute="trailing" id="DIm-PM-0kD"/>
+                            <constraint firstItem="ZTN-6J-MC5" firstAttribute="height" secondItem="rNN-9z-ciS" secondAttribute="height" multiplier="0.7" id="FTr-DD-u7J"/>
+                            <constraint firstItem="ZTN-6J-MC5" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="KJI-UA-zCg"/>
+                            <constraint firstItem="ybT-hf-WwB" firstAttribute="height" secondItem="rNN-9z-ciS" secondAttribute="height" multiplier="0.3" id="Kdl-fm-HtW"/>
+                            <constraint firstItem="NaN-E1-PzY" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="0.38" id="WG1-tw-sPu"/>
+                            <constraint firstItem="Dwk-Ai-TGx" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="ZWt-IQ-A3b"/>
+                            <constraint firstItem="bmI-2Y-Jhk" firstAttribute="top" secondItem="ZTN-6J-MC5" secondAttribute="bottom" id="dGh-dI-xeo"/>
+                            <constraint firstItem="ybT-hf-WwB" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="dlj-gZ-xBI"/>
+                            <constraint firstAttribute="trailing" secondItem="NaN-E1-PzY" secondAttribute="trailing" constant="-50" id="jJI-WV-5t6"/>
+                            <constraint firstItem="Dwk-Ai-TGx" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="0.7" constant="1" id="mk1-f1-23f"/>
+                            <constraint firstAttribute="trailing" secondItem="ybT-hf-WwB" secondAttribute="trailing" id="vS8-7O-8uw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="M9q-Yh-9Gh"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -48,4 +87,10 @@
             <point key="canvasLocation" x="-4335.1999999999998" y="-640.02998500749629"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="island" width="715" height="324"/>
+        <image name="sea" width="4500" height="1961"/>
+        <image name="shore1" width="1321" height="1073"/>
+        <image name="sky1" width="1500" height="838"/>
+    </resources>
 </document>
