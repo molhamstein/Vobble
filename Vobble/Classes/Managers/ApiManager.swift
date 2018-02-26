@@ -192,15 +192,29 @@ class ApiManager: NSObject {
                 return
         }
         
-        let signUpURL = "\(baseURL)auth/signup"
+        let signUpURL = "\(baseURL)/users"
+        
+//        var parameters : [String : String] = [
+//            "firstName": user.firstName!,
+//            "lastName": user.lastName!,
+//            "email": user.email!,
+//            "gender": user.gender?.rawValue ?? "male",
+//            "password": password
+//        ]
         
         var parameters : [String : String] = [
             "firstName": user.firstName!,
-            "lastName": user.lastName!,
+            "lastName": "asami",
+            "phone": "+96332559681",
+            "website": "http://brain-socket.com",
+            "followersCount": "0",
+            "advertisementCount": "0",
+            "status": "active",
+            "isFollowed": "false",
             "email": user.email!,
-            "gender": user.gender?.rawValue ?? "male",
             "password": password
         ]
+        
         
         if let bDate = user.birthday {
             let bDateString = DateHelper.getISOStringFromDate(bDate)

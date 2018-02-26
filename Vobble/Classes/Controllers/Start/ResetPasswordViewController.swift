@@ -12,6 +12,7 @@ class ResetPasswordViewController: AbstractController {
     
     // MARK: Properties
     
+    // main view
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var resetPswView: UIView!
     

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
+		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
+		B1053E882043EBE600A4383D /* CountryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B1053E862043EBE600A4383D /* CountryPicker.m */; };
 		B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B52442038ADC300C51EE8 /* WaveView.swift */; };
 		B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B52462038AE7700C51EE8 /* WaveView.xib */; };
 		B11B52492038B19700C51EE8 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11B52482038B19700C51EE8 /* Test.storyboard */; };
@@ -190,6 +192,9 @@
 		9234B5E8203356570085F9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9234B5EF203356570085F9F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9234B5F4203356570085F9F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1053E842043EBE600A4383D /* CountryPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CountryPicker.bundle; sourceTree = "<group>"; };
+		B1053E852043EBE600A4383D /* CountryPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryPicker.h; sourceTree = "<group>"; };
+		B1053E862043EBE600A4383D /* CountryPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryPicker.m; sourceTree = "<group>"; };
 		B11B52442038ADC300C51EE8 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		B11B52462038AE7700C51EE8 /* WaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveView.xib; sourceTree = "<group>"; };
 		B11B52482038B19700C51EE8 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
@@ -540,6 +545,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B1053E832043EBA700A4383D /* CountryPicker */ = {
+			isa = PBXGroup;
+			children = (
+				B1053E842043EBE600A4383D /* CountryPicker.bundle */,
+				B1053E852043EBE600A4383D /* CountryPicker.h */,
+				B1053E862043EBE600A4383D /* CountryPicker.m */,
+			);
+			path = CountryPicker;
+			sourceTree = "<group>";
+		};
 		B117970A2033C64B006D96BE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,6 +612,7 @@
 		B117970F2033C723006D96BE /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				B1053E832043EBA700A4383D /* CountryPicker */,
 				B18A5C4E20348E4200F139B7 /* Extensions */,
 				B18A5C5720348E4200F139B7 /* Helpers */,
 				B18A5C5A20348E4200F139B7 /* ThirdParty */,
@@ -1190,6 +1206,7 @@
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
+				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
@@ -1404,6 +1421,7 @@
 				B18A5D8920348E4300F139B7 /* RACErrorSignal.m in Sources */,
 				B18A5D6820348E4300F139B7 /* NSEnumerator+RACSequenceAdditions.m in Sources */,
 				B18A5D9C20348E4300F139B7 /* RACSignalProvider.d in Sources */,
+				B1053E882043EBE600A4383D /* CountryPicker.m in Sources */,
 				B19372E42033E3FC007B1E7D /* Location.swift in Sources */,
 				B19372DF2033E3FC007B1E7D /* Attachment.swift in Sources */,
 				B18A5DB620348E4300F139B7 /* UISegmentedControl+RACSignalSupport.m in Sources */,
