@@ -11,27 +11,44 @@ import UIKit
 enum ViewType {
     case login
     case signup
+    case countryV
 }
 
-class LoginViewController: AbstractController {
+class LoginViewController: AbstractController, CountryPickerDelegate {
     
     
     
     // MARK: Properties
-    // login view
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordLabel: UILabel!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: VobbleButton!
-    @IBOutlet weak var forgetPasswordButton: UIButton!
+    
+    //main view
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var waveSubView: WaveView!
-    @IBOutlet weak var loginView1: UIView!
+    
+    // login view
+    @IBOutlet weak var loginView: UIView!
+    @IBOutlet weak var lvEmailLabel: UILabel!
+    @IBOutlet weak var lvEmailTextField: UITextField!
+    @IBOutlet weak var lvPasswordLabel: UILabel!
+    @IBOutlet weak var lvPasswordTextField: UITextField!
+    @IBOutlet weak var forgetPasswordButton: UIButton!
+    @IBOutlet weak var loginButton: VobbleButton!
+    @IBOutlet weak var registerButton: UIButton!
+    
+    // signup view
     @IBOutlet weak var signupView: UIView!
-    
-    //signup view
-    
+    @IBOutlet weak var svEmailLabel: UILabel!
+    @IBOutlet weak var svEmailTextField: UITextField!
+    @IBOutlet weak var svUserNamelabel: UILabel!
+    @IBOutlet weak var svUserNameTextField: UITextField!
+    @IBOutlet weak var svPasswordLabel: UILabel!
+    @IBOutlet weak var svPasswordTextField: UITextField!
+    @IBOutlet weak var maleButton: UIButton!
+    @IBOutlet weak var femaleButton: UIButton!
+    @IBOutlet weak var selectCountryButton: UIButton!
+    @IBOutlet weak var signupButton: VobbleButton!
+   
+    // country View
+    @IBOutlet weak var countryView: UIView!
     
     // social view
     @IBOutlet weak var socialView: UIView!
@@ -39,9 +56,13 @@ class LoginViewController: AbstractController {
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var twitterButton: UIButton!
     @IBOutlet weak var instagramButton: UIButton!
-    // footer view
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet weak var signupButton: UIButton!
+    
+    // Data
+    var tempUserInfoHolder: AppUser = AppUser()
+    var password: String = ""
+    var isMale: Bool = true
+    var countryName: String = ""
+    
     
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
@@ -50,9 +71,12 @@ class LoginViewController: AbstractController {
         waveSubView.awakeFromNib()
         waveSubView.showWave()
         hideView(withType: .signup)
-        loginView1.dropShadow()
+        hideView(withType: .countryV)
+        loginView.dropShadow()
         backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], locations: [0.0, 1.0])
         
+       
+    
     }
     
     // Customize all view members (fonts - style - text)
@@ -93,10 +117,10 @@ class LoginViewController: AbstractController {
     // MARK: Actions
     @IBAction func loginAction(_ sender: RNLoadingButton) {
         // validate email
-        if let email = emailTextField.text, !email.isEmpty {
+        if let email = lvEmailTextField.text, !email.isEmpty {
             if email.isValidEmail() {
                 // validate password
-                if let password = passwordTextField.text, !password.isEmpty {
+                if let password = lvPasswordTextField.text, !password.isEmpty {
                     if password.length >= AppConfig.passwordLength {
                         // start login process
                         loginButton.isLoading = true
@@ -212,14 +236,100 @@ class LoginViewController: AbstractController {
         
         
     }
+    
+    @IBAction func signupBtnPressed(_ sender: Any) {
+        
+        if validateFields() {
+          // show loader
+          signupButton.isLoading = true
+          self.view.isUserInteractionEnabled = false
+          ApiManager.shared.userSignup(user: tempUserInfoHolder, password: password) { (success: Bool, err: ServerError?, user: AppUser?) in
+              // hide loader
+              self.signupButton.isLoading = false
+              self.view.isUserInteractionEnabled = true
+              if success {
+                 // self.performSegue(withIdentifier: "signupVerificationSegue", sender: self)
+                 self.showMessage(message:"success @_@", type: .warning)
+                
+              } else {
+                  self.showMessage(message:(err?.type.errorMessage)!, type: .error)
+              }
+          }
+        }
+    }
+    
+    @IBAction func CancelBtnPressed(_ sender: Any) {
+        hideView(withType: .countryV)
+    }
+    
+    
+    @IBAction func pickCountryPressed(_ sender: Any) {
+         hideView(withType: .countryV)
+         selectCountryButton.setTitle(countryName, for: .normal)
+    }
+    
+    @IBAction func doneBtnPressed(_ sender: Any) {
+         hideView(withType: .countryV)
+         selectCountryButton.setTitle(countryName, for: .normal)
+    }
+    
+    @IBAction func countryBtnPressed(_ sender: Any) {
+        showView(withType: .countryV)
+    }
+    
+    
+    func validateFields () -> Bool {
+        
+        if let uName = svUserNameTextField.text, !uName.isEmpty {
+            tempUserInfoHolder.firstName = uName
+        } else {
+            showMessage(message:"SINGUP_VALIDATION_FNAME".localized, type: .warning)
+            return false
+        }
+        
+        tempUserInfoHolder.gender = isMale ? .male : .female
+        
+        // validate email
+        if let email = svEmailTextField.text, !email.isEmpty {
+            
+        } else {
+            showMessage(message:"SINGUP_VALIDATION_EMAIL".localized, type: .warning)
+            return false
+        }
+        
+        if svEmailTextField.text!.isValidEmail() {
+            tempUserInfoHolder.email = svEmailTextField.text!
+        } else {
+            showMessage(message:"SINGUP_VALIDATION_EMAIL_FORMAT".localized, type: .warning)
+            return false
+        }
+        
+        // validate password
+        if let psw = svPasswordTextField.text, !psw.isEmpty {
+        } else {
+            showMessage(message:"SINGUP_VALIDATION_PASSWORD".localized, type: .warning)
+            return false
+        }
+        
+        if svPasswordTextField.text!.length >= AppConfig.passwordLength {
+            password = svPasswordTextField.text!;
+        } else {
+            showMessage(message:"SINGUP_VALIDATION_PASSWORD_LENGHTH".localized, type: .warning)
+            return false
+        }
+
+        
+        return true
+    }
+    
     ////////////////////////////////
     
     // MARK: textField delegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == emailTextField {
-            passwordTextField.becomeFirstResponder()
-        } else if textField == passwordTextField {
-            passwordTextField.resignFirstResponder()
+        if textField == lvEmailTextField {
+            lvPasswordTextField.becomeFirstResponder()
+        } else if textField == lvPasswordTextField {
+            lvPasswordTextField.resignFirstResponder()
             loginAction(loginButton)
         } else {
             textField.resignFirstResponder()
@@ -230,21 +340,29 @@ class LoginViewController: AbstractController {
     func showView(withType:ViewType) {
         switch withType {
         case .login :
-            loginView1.isHidden  = false
-            loginView1.dropShadow()
+            loginView.isHidden  = false
+            loginView.dropShadow()
         case .signup :
             signupView.isHidden = false
             signupView.dropShadow()
+        case .countryV :
+            countryView.isHidden = false
         }
     }
     
     func hideView(withType:ViewType) {
         switch withType {
         case .login :
-            loginView1.isHidden  = true
+            loginView.isHidden  = true
         case .signup :
             signupView.isHidden = true
+        case .countryV :
+            countryView.isHidden = true
         }
+    }
+    
+    func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
+        self.countryName = name
     }
 }
 
