@@ -19,46 +19,37 @@ class WaveView : AbstractNibView {
         
         // Init
         let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.view.frame.size.height - 30)
-        waterView = YXWaveView(frame: frame, color: UIColor.white)
+        waterView = YXWaveView(frame: frame, color: UIColor(red: 0.0, green: 175.0/255.0, blue: 255.0/255.0, alpha: 0.8))
         // wave speed (default: 0.6)
-        waterView?.waveSpeed = 0.4
+        waterView?.waveSpeed = 0.3
         // wave height (default: 5)
         waterView?.waveHeight = 15
         // wave curvature (default: 1.5)
         waterView?.waveCurvature = 1.2
-        // real wave color
-        waterView?.realWaveColor = AppColors.blueXLight
-        // mask wave color
-        //waterView?.maskWaveColor = AppColors.blueXDark
-        
-        
-        //let image = UIImage(named: "bottle-1.png")
-        //let imageView = UIImageView(image: image!)
-        //bottle.frame = CGRect(x: UIScreen.main.bounds.width/2, y: 0, width: imageView.bounds.width, height: imageView.bounds.height)
-        //self.view.addSubview(imageView)
-        
-        
         // Add WaveView
-        
         self.view.addSubview(waterView!)
         // Start wave
         waterView!.start()
         
-
-        waterView = YXWaveView(frame: frame, color: UIColor.white)
+        // add a second wave view
+        waterView = YXWaveView(frame: frame, color: UIColor(red: 0.0, green: 190.0/255.0, blue: 255.0/255.0, alpha: 0.8))
         // wave speed (default: 0.6)
         waterView?.waveSpeed = 0.8
         // wave height (default: 5)
         waterView?.waveHeight = 10
         // wave curvature (default: 1.5)
-        waterView?.waveCurvature = 1.5
-        // real wave color
-        waterView?.realWaveColor = AppColors.blueXLight
-        // mask wave color
-        waterView?.maskWaveColor = AppColors.blueXDark
+        waterView?.waveCurvature = 1.8
+        // add view
         self.view.addSubview(waterView!)
+        waterView?.overView = bottle
         // Start wave
         waterView!.start()
+        
+        // animate the bottle
+        bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/5)).translatedBy(x: self.view.frame.width/3, y: 45)
+        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+            self.bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/8)).translatedBy(x: (self.view.frame.width/3)-10, y: 45)
+        }, completion: nil)
         
     }
     
