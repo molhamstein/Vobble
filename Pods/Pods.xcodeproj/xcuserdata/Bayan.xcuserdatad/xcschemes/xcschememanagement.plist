@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BMPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,6 +34,26 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GTMOAuth2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NVActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>PIDatePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -40,6 +65,11 @@
 			<false/>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,12 +97,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>130C39E5C1B5871BB71663724197BE6A</key>
+		<key>007E1F352BBDCF79216810967474DAE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>231E553FBC5C7892978A7D24A5F0ECC8</key>
+		<key>492580595E61396988A42C6121691F90</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6CBECDAA8418A72A5E240A6F0124A234</key>
+		<key>681BE6E3D02A43F9BA63777AC435C8FD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7524B0EA5717F1851C23C231934E6A79</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>86F821A89A142F1F0DD12CC748DCA627</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,7 +142,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A555C224E479B89136EACE70CCDF7A81</key>
+		<key>B1C4AAFAF49036C7007633DAA3C806AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3614DB25E1D30296FFAF2CB824D5803</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BC18A5BD95720214EAB87286D9A7B8FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,12 +167,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CF7D5D6C203849F69F787F31045FF721</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DEC05651D1F4F24769A11DC2A95A1FF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F8E297736041E6D7EBA31D7C5FF5FC22</key>
+		<key>F05BBF0ABCBAB1D55C2FE0C052A8CF62</key>
 		<dict>
 			<key>primary</key>
 			<true/>

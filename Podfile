@@ -16,5 +16,7 @@ pod 'TwitterKit'
 pod 'Toast-Swift', '~> 2.0.0'
 pod 'PIDatePicker', '~> 0.1.0'
 pod 'YXWaveView'
+pod 'GoogleSignIn'
+pod 'BMPlayer', '~> 0.9.1'
 
 end

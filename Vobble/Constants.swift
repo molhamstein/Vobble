@@ -17,10 +17,11 @@ struct AppConfig {
     static let useLiveAPI: Bool = false
     static let useCurrentLocation: Bool = false
     // social
-    static let instagramClienID = "a33bd13f810c4df7ae344437c21fc926gg"
+    static let instagramClienID = "aec83807b3e74ec2a8336f4fdc0b8148"
     static let instagramRedirectURI = "http://brain-socket.com"
     static let twitterConsumerKey = "eq0dVMoM1JqNcR6VJJILsdXNddo"
     static let twitterConsumerSecret = "6JkdvzSijm13xjBW0fYSEG4yF2tbro8pwxz1vDx290Bj0aMw2vssI"
+    static let googleClientID = "545676047391-kgl2o7n3d419h1anpp8ao4a99005fqgp.apps.googleusercontent.com"
     // validation
     static let passwordLength = 6
     // current application language

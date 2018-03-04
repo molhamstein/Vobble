@@ -29,6 +29,7 @@
 "ERROR_SOCIAL_FACEBOOK"                 = "Facebook login failed, please try again";
 "ERROR_SOCIAL_TWITTER"                  = "Twitter login failed, please try again";
 "ERROR_SOCIAL_INSTAGRAM"                = "Instagram login failed, please try again";
+"ERROR_SOCIAL_GOOGLE"                = "Google login failed, please try again";
 
 // Start screen
 "START_EMAIL_TITLE"                     = "ENTER EMAIL";

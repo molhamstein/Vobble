@@ -13,11 +13,16 @@
 		B1053E882043EBE600A4383D /* CountryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B1053E862043EBE600A4383D /* CountryPicker.m */; };
 		B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B52442038ADC300C51EE8 /* WaveView.swift */; };
 		B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B52462038AE7700C51EE8 /* WaveView.xib */; };
-		B11B52492038B19700C51EE8 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11B52482038B19700C51EE8 /* Test.storyboard */; };
+		B11B52492038B19700C51EE8 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11B52482038B19700C51EE8 /* Start.storyboard */; };
 		B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61C203DE93600755799 /* Antipasto_extrabold.otf */; };
 		B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61D203DE93600755799 /* Antipasto_regular.otf */; };
 		B135B622203DE97000755799 /* MullerBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61E203DE93600755799 /* MullerBold.otf */; };
 		B135B623203DE97400755799 /* MullerRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61F203DE93600755799 /* MullerRegular.otf */; };
+		B1508CD620461F630048123F /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508CD520461F630048123F /* VideoPlayViewController.swift */; };
+		B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1508CD72046207B0048123F /* FindBottle.storyboard */; };
+		B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA6F204B450100CC3C50 /* PickerViewController.swift */; };
+		B171DA73204B473E00CC3C50 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA72204B473E00CC3C50 /* VideoPlayerView.swift */; };
+		B171DA75204B593300CC3C50 /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B171DA74204B593300CC3C50 /* VideoPlayerView.xib */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -181,6 +186,10 @@
 		B193731B20342D9F007B1E7D /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193731120342D9F007B1E7D /* Profile.storyboard */; };
 		B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */; };
 		B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */; };
+		B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A3743F204530160080A323 /* SystemConfiguration.framework */; };
+		B1A37442204530230080A323 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37441204530230080A323 /* StoreKit.framework */; };
+		B1A37444204530310080A323 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37443204530310080A323 /* AddressBook.framework */; };
+		B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A37445204532670080A323 /* GoogleService-Info.plist */; };
 		B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
 /* End PBXBuildFile section */
@@ -197,11 +206,16 @@
 		B1053E862043EBE600A4383D /* CountryPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryPicker.m; sourceTree = "<group>"; };
 		B11B52442038ADC300C51EE8 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		B11B52462038AE7700C51EE8 /* WaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveView.xib; sourceTree = "<group>"; };
-		B11B52482038B19700C51EE8 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
+		B11B52482038B19700C51EE8 /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
 		B135B61C203DE93600755799 /* Antipasto_extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Antipasto_extrabold.otf; sourceTree = "<group>"; };
 		B135B61D203DE93600755799 /* Antipasto_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Antipasto_regular.otf; sourceTree = "<group>"; };
 		B135B61E203DE93600755799 /* MullerBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerBold.otf; sourceTree = "<group>"; };
 		B135B61F203DE93600755799 /* MullerRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerRegular.otf; sourceTree = "<group>"; };
+		B1508CD520461F630048123F /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayViewController.swift; path = ../VideoPlayViewController.swift; sourceTree = "<group>"; };
+		B1508CD72046207B0048123F /* FindBottle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindBottle.storyboard; sourceTree = "<group>"; };
+		B171DA6F204B450100CC3C50 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		B171DA72204B473E00CC3C50 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		B171DA74204B593300CC3C50 /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerView.xib; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -489,6 +503,10 @@
 		B193731120342D9F007B1E7D /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VobbleNavigationBar.xib; sourceTree = "<group>"; };
 		B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleNavigationBar.swift; sourceTree = "<group>"; };
+		B1A3743F204530160080A323 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B1A37441204530230080A323 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B1A37443204530310080A323 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B1A37445204532670080A323 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleButton.swift; sourceTree = "<group>"; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -498,6 +516,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1A37444204530310080A323 /* AddressBook.framework in Frameworks */,
+				B1A37442204530230080A323 /* StoreKit.framework in Frameworks */,
+				B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */,
 				B193730A20342BD5007B1E7D /* QuartzCore.framework in Frameworks */,
 				B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */,
 			);
@@ -585,6 +606,7 @@
 				B19372F92034196A007B1E7D /* Constants.swift */,
 				B19372FF20342423007B1E7D /* Localizable.strings */,
 				9234B5F4203356570085F9F7 /* Info.plist */,
+				B1A37445204532670080A323 /* GoogleService-Info.plist */,
 				B19372FB203419C7007B1E7D /* Vobble-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
@@ -601,6 +623,7 @@
 		B117970E2033C712006D96BE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B171DA6E204B43C200CC3C50 /* FindBottle */,
 				B193710E2033D031007B1E7D /* Profile */,
 				B193710B2033D000007B1E7D /* Abstract */,
 				B193710D2033D024007B1E7D /* Home */,
@@ -651,6 +674,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B171DA71204B46F500CC3C50 /* VideoPlayer */,
 				B19B16D5203DF54E004D684F /* NavigationBar */,
 				B19372CE2033E36C007B1E7D /* Abstract */,
 				B19372D02033E36C007B1E7D /* Home */,
@@ -666,6 +690,24 @@
 				B11B52462038AE7700C51EE8 /* WaveView.xib */,
 			);
 			path = Wave;
+			sourceTree = "<group>";
+		};
+		B171DA6E204B43C200CC3C50 /* FindBottle */ = {
+			isa = PBXGroup;
+			children = (
+				B1508CD520461F630048123F /* VideoPlayViewController.swift */,
+				B171DA6F204B450100CC3C50 /* PickerViewController.swift */,
+			);
+			path = FindBottle;
+			sourceTree = "<group>";
+		};
+		B171DA71204B46F500CC3C50 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				B171DA72204B473E00CC3C50 /* VideoPlayerView.swift */,
+				B171DA74204B593300CC3C50 /* VideoPlayerView.xib */,
+			);
+			name = VideoPlayer;
 			sourceTree = "<group>";
 		};
 		B18A5C4E20348E4200F139B7 /* Extensions */ = {
@@ -1101,10 +1143,11 @@
 			isa = PBXGroup;
 			children = (
 				B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */,
+				B11B52482038B19700C51EE8 /* Start.storyboard */,
 				B193730F20342D9F007B1E7D /* Main.storyboard */,
 				B193731120342D9F007B1E7D /* Profile.storyboard */,
 				B193731020342D9F007B1E7D /* NewsfeedListCell.xib */,
-				B11B52482038B19700C51EE8 /* Test.storyboard */,
+				B1508CD72046207B0048123F /* FindBottle.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1130,6 +1173,9 @@
 		FE5F8BA41684F3115C60BED0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B1A37443204530310080A323 /* AddressBook.framework */,
+				B1A37441204530230080A323 /* StoreKit.framework */,
+				B1A3743F204530160080A323 /* SystemConfiguration.framework */,
 				B193730920342BD5007B1E7D /* QuartzCore.framework */,
 				8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */,
 			);
@@ -1215,8 +1261,11 @@
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
 				B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
+				B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
-				B11B52492038B19700C51EE8 /* Test.storyboard in Resources */,
+				B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */,
+				B171DA75204B593300CC3C50 /* VideoPlayerView.xib in Resources */,
+				B11B52492038B19700C51EE8 /* Start.storyboard in Resources */,
 				B19372F62033E44E007B1E7D /* OpenSansSemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1231,11 +1280,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 			);
@@ -1252,12 +1303,18 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BMPlayer/BMPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PIDatePicker/PIDatePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
@@ -1268,12 +1325,18 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIDatePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
@@ -1368,6 +1431,7 @@
 				B18A5DAB20348E4300F139B7 /* UIActionSheet+RACSignalSupport.m in Sources */,
 				B18A5D8820348E4300F139B7 /* RACEmptySignal.m in Sources */,
 				B18A5D6620348E4300F139B7 /* NSData+RACSupport.m in Sources */,
+				B1508CD620461F630048123F /* VideoPlayViewController.swift in Sources */,
 				B18A5D7020348E4300F139B7 /* NSObject+RACLifting.m in Sources */,
 				B18A5D7520348E4300F139B7 /* NSString+RACKeyPathUtilities.m in Sources */,
 				B19372D22033E36C007B1E7D /* AbstractNibView.swift in Sources */,
@@ -1386,6 +1450,7 @@
 				B18A5DC120348E4300F139B7 /* ACAccountStore+SimpleAuth.m in Sources */,
 				B193711F2033D95E007B1E7D /* VerificationViewController.swift in Sources */,
 				B19372B02033E27B007B1E7D /* ApiManager.swift in Sources */,
+				B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */,
 				B18A5D5220348E4300F139B7 /* String.swift in Sources */,
 				B18A5D9120348E4300F139B7 /* RACMulticastConnection.m in Sources */,
 				B18A5D6720348E4300F139B7 /* NSDictionary+RACSequenceAdditions.m in Sources */,
@@ -1406,6 +1471,7 @@
 				B18A5D7D20348E4300F139B7 /* RACChannel.m in Sources */,
 				B19372D32033E36C007B1E7D /* NewsfeedListCell.swift in Sources */,
 				B18A5D8E20348E4300F139B7 /* RACKVOChannel.m in Sources */,
+				B171DA73204B473E00CC3C50 /* VideoPlayerView.swift in Sources */,
 				B18A5D9D20348E4300F139B7 /* RACSignalSequence.m in Sources */,
 				B18A5DAA20348E4300F139B7 /* RACValueTransformer.m in Sources */,
 				B18A5DB120348E4300F139B7 /* UIControl+RACSignalSupportPrivate.m in Sources */,

@@ -17,6 +17,7 @@ enum ViewType {
 class LoginViewController: AbstractController, CountryPickerDelegate {
     
     
+    @IBOutlet weak var emailtest: UILabel!
     
     // MARK: Properties
     
@@ -33,6 +34,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var forgetPasswordButton: UIButton!
     @IBOutlet weak var loginButton: VobbleButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var signInButton: GIDSignInButton!
     
     // signup view
     @IBOutlet weak var signupView: UIView!
@@ -46,6 +48,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var selectCountryButton: UIButton!
     @IBOutlet weak var signupButton: VobbleButton!
+    @IBOutlet weak var checkButton: UIButton!
    
     // country View
     @IBOutlet weak var countryView: UIView!
@@ -73,10 +76,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         hideView(withType: .signup)
         hideView(withType: .countryV)
         loginView.dropShadow()
-        backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], locations: [0.0, 1.0])
         
-       
+    }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+        loginButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+        signupButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
     }
     
     // Customize all view members (fonts - style - text)
@@ -225,6 +232,33 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         }
     }
     
+    @IBAction func googleAction(_ sender: UIButton) {
+        // show activity loader
+//        self.showActivityLoader(true)
+//        SocialManager.shared.googleLogin(controller: self) { (isSuccess, error) in
+//            // hide activity loader
+//            self.showActivityLoader(false)
+//            // login succeed go to home screen
+//            if (isSuccess) {
+//                self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+//            } else {
+//                let errorServer = error ?? ServerError.unknownError
+//                // social login failed
+//                if errorServer.type == ServerError.socialLoginError.type {
+//                    self.showMessage(message: "ERROR_SOCIAL_GOOGLE", type: .error)
+//                } else {
+//                    self.showMessage(message: errorServer.type.errorMessage, type: .error)
+//                }
+//            }
+//        }
+//        GIDSignIn.sharedInstance().delegate = self
+//        GIDSignIn.sharedInstance().uiDelegate = self
+//        GIDSignIn.sharedInstance().clientID = AppConfig.googleClientID
+//        GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
+//        GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
+//        GIDSignIn.sharedInstance().signInSilently()
+    }
+    
     @IBAction func registerBtnPressed(_ sender: AnyObject) {
         
         /***  register btn in login view  ***/
@@ -273,8 +307,32 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
          selectCountryButton.setTitle(countryName, for: .normal)
     }
     
-    @IBAction func countryBtnPressed(_ sender: Any) {
+    @IBAction func countryBtnPressed(_ sender: UIButton) {
         showView(withType: .countryV)
+    }
+    
+    @IBAction func femaleBtnPressed(_ sender: UIButton) {
+        
+        femaleButton.alpha = 1
+        maleButton.alpha = 0.5
+        isMale = false
+    }
+    
+    @IBAction func maleBtnPressed(_ sender: UIButton) {
+        
+        maleButton.alpha = 1
+        femaleButton.alpha = 0.5
+        isMale = true
+    }
+    
+    @IBAction func checkBtnPressed(_ sender: Any) {
+        
+        if checkButton.currentImage == UIImage(named: "checkBox") {
+            checkButton.setImage(UIImage(named: "checkBoxActive"), for: .normal)
+        }
+        else {
+            checkButton.setImage(UIImage(named: "checkBox"), for: .normal)
+        }
     }
     
     
@@ -364,5 +422,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
         self.countryName = name
     }
+
 }
 

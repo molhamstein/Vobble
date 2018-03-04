@@ -22,13 +22,6 @@ open class VobbleButton : RNLoadingButton {
     }
     
     
-    /// set gradient when gradient is visible.
-    @IBInspectable open var gradient: Bool = false {
-        didSet {
-            setGradient()
-        }
-    }
-    
     /// set image icon when image_name is visible.
     @IBInspectable open var image_name: UIImage? {
         didSet {
@@ -50,15 +43,6 @@ open class VobbleButton : RNLoadingButton {
     fileprivate func setCornerRadius() {
         self.layer.cornerRadius = self.frame.height/2
         self.layer.borderWidth = 1
-    }
-    
-    fileprivate func setGradient() {
-        
-        if (self.gradient) {
-            
-            applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], locations: [0.0, 1.0])
-        }
-        
     }
 
     fileprivate func setLeftImage(imageName:UIImage?) {
