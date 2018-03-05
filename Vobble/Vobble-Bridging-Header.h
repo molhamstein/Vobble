@@ -13,4 +13,5 @@
 #import "ISO8601.h"
 #import "SimpleAuth.h"
 #import "CountryPicker.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 #import "GCD.h"

@@ -15,6 +15,7 @@ class ResetPasswordViewController: AbstractController {
     // main view
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var resetPswView: UIView!
+    @IBOutlet weak var navigationView: VobbleNavigationBar!
     
     // stages containers
     @IBOutlet weak var resetStage1: UIView!
@@ -40,6 +41,8 @@ class ResetPasswordViewController: AbstractController {
     @IBOutlet weak var s1Bullet: UIImageView!
     @IBOutlet weak var s2Bullet: UIImageView!
     
+    @IBOutlet weak var submitButton: VobbleButton!
+    
     var arrayStagesContainers: [UIView] = [UIView]()
     var arrayStagesBullets: [UIImageView] = [UIImageView]()
     
@@ -53,8 +56,15 @@ class ResetPasswordViewController: AbstractController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.showNavBackButton = true
-         resetPswView.dropShadow()
-         backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], locations: [0.0, 1.0])
+        
+         navigationView.viewcontroller = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        resetPswView.dropShadow()
+        backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+        submitButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
     }
     
     // Customize all view members (fonts - style - text)

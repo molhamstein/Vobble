@@ -13,7 +13,7 @@ import TwitterKit
 ///     - Login Facebook, Twitter and Instagram
 ///     - Share on social media
 ///
-class SocialManager: NSObject {
+class SocialManager: NSObject{
     
     //MARK: Shared Instance
     static let shared: SocialManager = SocialManager()
@@ -127,6 +127,19 @@ class SocialManager: NSObject {
             }
         }
     }
+    
+    /// Google login request
+    func googleLogin(controller: UIViewController, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+//        GIDSignIn.sharedInstance().delegate = self
+//        GIDSignIn.sharedInstance().uiDelegate = self
+//        GIDSignIn.sharedInstance().clientID = AppConfig.googleClientID
+//        GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
+//        GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
+//        GIDSignIn.sharedInstance().signInSilently()
+        
+        
+    }
+   
 }
 
 

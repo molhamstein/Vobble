@@ -13,6 +13,7 @@ class VobbleNavigationBar : AbstractNibView {
     
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var navTitle: UILabel!
+    public var viewcontroller : UIViewController?
     
     /// set navigation title when navigationTitle is visible.
     @IBInspectable open var title: String = "" {
@@ -50,5 +51,8 @@ class VobbleNavigationBar : AbstractNibView {
         }
     }
     
+    @IBAction func leftIconPressed(_ sender: Any) {
+        viewcontroller?.dismiss(animated: true, completion: nil)
+    }
     
 }

@@ -27,7 +27,7 @@
 			<string>FB</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb922516221222606</string>
+				<string>fb1813258948705368</string>
 			</array>
 		</dict>
 		<dict>
@@ -38,11 +38,27 @@
 				<string>twitterkit-eq0dVMoM1JqNcR6VJJILsdXNo</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.brain-socket.Vobble</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.545676047391-kgl2o7n3d419h1anpp8ao4a99005fqgp</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>922516221222606</string>
+	<string>1813258948705368</string>
 	<key>FacebookDisplayName</key>
 	<string>Vobble</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -131,7 +147,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>FindBottle</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

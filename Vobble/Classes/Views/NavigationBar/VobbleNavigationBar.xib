@@ -33,6 +33,9 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN4-5k-Fqc">
                             <rect key="frame" x="17.5" y="386.5" width="30" height="34"/>
+                            <connections>
+                                <action selector="leftIconPressed:" destination="-1" eventType="touchUpInside" id="9H0-gU-1Qb"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DC-up-vPY">
                             <rect key="frame" x="188" y="403.5" width="0.0" height="0.0"/>

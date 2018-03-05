@@ -20,6 +20,13 @@ class ClosureSleeve {
     }
 }
 
+enum GradientDirection {
+    case horizontal
+    case vertical
+    case diagonal
+    
+}
+
 extension UIView {
     /// add **touch up selector** to any **view**
     ///
@@ -67,16 +74,32 @@ extension UIView {
     }
     
     /// set gradient to current view
-    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> Void {
+    func applyGradient(colours: [UIColor], direction: GradientDirection) -> Void {
+        
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = colours.map { $0.cgColor }
-        gradient.locations = locations
+        gradient.locations = [0.0,1.0]
         gradient.borderColor = self.layer.borderColor
         gradient.borderWidth = self.layer.borderWidth
         gradient.cornerRadius = self.layer.cornerRadius
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+        
+        if direction == .horizontal {
+            
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+            
+        } else if direction == .vertical {
+            
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+            
+        } else if direction == .diagonal {
+            
+            gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+            gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+            
+        }
         self.layer.insertSublayer(gradient, at:0)
     }
     
