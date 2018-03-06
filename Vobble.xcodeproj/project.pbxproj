@@ -18,11 +18,13 @@
 		B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61D203DE93600755799 /* Antipasto_regular.otf */; };
 		B135B622203DE97000755799 /* MullerBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61E203DE93600755799 /* MullerBold.otf */; };
 		B135B623203DE97400755799 /* MullerRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61F203DE93600755799 /* MullerRegular.otf */; };
+		B1410E93204C84BA00752223 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = B1410E92204C84BA00752223 /* GCD.m */; };
 		B1508CD620461F630048123F /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508CD520461F630048123F /* VideoPlayViewController.swift */; };
 		B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1508CD72046207B0048123F /* FindBottle.storyboard */; };
 		B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA6F204B450100CC3C50 /* PickerViewController.swift */; };
 		B171DA73204B473E00CC3C50 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA72204B473E00CC3C50 /* VideoPlayerView.swift */; };
 		B171DA75204B593300CC3C50 /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B171DA74204B593300CC3C50 /* VideoPlayerView.xib */; };
+		B17447A4204EEF40003D17E7 /* Shop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17447A3204EEF40003D17E7 /* Shop.storyboard */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -190,6 +192,10 @@
 		B1A37442204530230080A323 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37441204530230080A323 /* StoreKit.framework */; };
 		B1A37444204530310080A323 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37443204530310080A323 /* AddressBook.framework */; };
 		B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A37445204532670080A323 /* GoogleService-Info.plist */; };
+		B1BDA56D204DC25F005CABC2 /* ShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1BDA56C204DC25F005CABC2 /* ShopCollectionViewCell.xib */; };
+		B1BDA56F204DC273005CABC2 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDA56E204DC273005CABC2 /* ShopCollectionViewCell.swift */; };
+		B1BDA571204DCD87005CABC2 /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDA570204DCD87005CABC2 /* ShopItem.swift */; };
+		B1D724DE204DAE0300D1C923 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D724DD204DAE0300D1C923 /* ShopViewController.swift */; };
 		B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
 /* End PBXBuildFile section */
@@ -211,11 +217,14 @@
 		B135B61D203DE93600755799 /* Antipasto_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Antipasto_regular.otf; sourceTree = "<group>"; };
 		B135B61E203DE93600755799 /* MullerBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerBold.otf; sourceTree = "<group>"; };
 		B135B61F203DE93600755799 /* MullerRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerRegular.otf; sourceTree = "<group>"; };
+		B1410E91204C84B300752223 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
+		B1410E92204C84BA00752223 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 		B1508CD520461F630048123F /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayViewController.swift; path = ../VideoPlayViewController.swift; sourceTree = "<group>"; };
 		B1508CD72046207B0048123F /* FindBottle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindBottle.storyboard; sourceTree = "<group>"; };
 		B171DA6F204B450100CC3C50 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		B171DA72204B473E00CC3C50 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		B171DA74204B593300CC3C50 /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerView.xib; sourceTree = "<group>"; };
+		B17447A3204EEF40003D17E7 /* Shop.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Shop.storyboard; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -507,6 +516,10 @@
 		B1A37441204530230080A323 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B1A37443204530310080A323 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		B1A37445204532670080A323 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B1BDA56C204DC25F005CABC2 /* ShopCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCollectionViewCell.xib; sourceTree = "<group>"; };
+		B1BDA56E204DC273005CABC2 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1BDA570204DCD87005CABC2 /* ShopItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
+		B1D724DD204DAE0300D1C923 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleButton.swift; sourceTree = "<group>"; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -623,6 +636,7 @@
 		B117970E2033C712006D96BE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B1D724DC204DADE400D1C923 /* Shop */,
 				B171DA6E204B43C200CC3C50 /* FindBottle */,
 				B193710E2033D031007B1E7D /* Profile */,
 				B193710B2033D000007B1E7D /* Abstract */,
@@ -667,6 +681,7 @@
 				B19372D82033E3FC007B1E7D /* Comment.swift */,
 				B19372DD2033E3FC007B1E7D /* Reply.swift */,
 				B19372D92033E3FC007B1E7D /* HashTag.swift */,
+				B1BDA570204DCD87005CABC2 /* ShopItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -674,6 +689,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B1BDA56B204DC1FC005CABC2 /* Shop */,
 				B171DA71204B46F500CC3C50 /* VideoPlayer */,
 				B19B16D5203DF54E004D684F /* NavigationBar */,
 				B19372CE2033E36C007B1E7D /* Abstract */,
@@ -707,12 +723,14 @@
 				B171DA72204B473E00CC3C50 /* VideoPlayerView.swift */,
 				B171DA74204B593300CC3C50 /* VideoPlayerView.xib */,
 			);
-			name = VideoPlayer;
+			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
 		B18A5C4E20348E4200F139B7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B1410E92204C84BA00752223 /* GCD.m */,
+				B1410E91204C84B300752223 /* GCD.h */,
 				B18A5C4F20348E4200F139B7 /* Collection.swift */,
 				B18A5C5020348E4200F139B7 /* String.swift */,
 				B18A5C5120348E4200F139B7 /* UIApplication.swift */,
@@ -1148,6 +1166,7 @@
 				B193731120342D9F007B1E7D /* Profile.storyboard */,
 				B193731020342D9F007B1E7D /* NewsfeedListCell.xib */,
 				B1508CD72046207B0048123F /* FindBottle.storyboard */,
+				B17447A3204EEF40003D17E7 /* Shop.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1159,6 +1178,23 @@
 				B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */,
 			);
 			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		B1BDA56B204DC1FC005CABC2 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				B1BDA56E204DC273005CABC2 /* ShopCollectionViewCell.swift */,
+				B1BDA56C204DC25F005CABC2 /* ShopCollectionViewCell.xib */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		B1D724DC204DADE400D1C923 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				B1D724DD204DAE0300D1C923 /* ShopViewController.swift */,
+			);
+			path = Shop;
 			sourceTree = "<group>";
 		};
 		B1EA3CA8203C9FFD00A7A261 /* CustomButton */ = {
@@ -1245,6 +1281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B17447A4204EEF40003D17E7 /* Shop.storyboard in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				B193731B20342D9F007B1E7D /* Profile.storyboard in Resources */,
@@ -1255,6 +1292,7 @@
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
+				B1BDA56D204DC25F005CABC2 /* ShopCollectionViewCell.xib in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
@@ -1386,6 +1424,7 @@
 				B18A5DAF20348E4300F139B7 /* UICollectionReusableView+RACSignalSupport.m in Sources */,
 				B18A5D6520348E4300F139B7 /* NSArray+RACSequenceAdditions.m in Sources */,
 				B19372B22033E27B007B1E7D /* DataStore.swift in Sources */,
+				B1D724DE204DAE0300D1C923 /* ShopViewController.swift in Sources */,
 				B18A5DC520348E4300F139B7 /* NSObject+SimpleAuthAdditions.m in Sources */,
 				B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */,
 				B18A5D6E20348E4300F139B7 /* NSObject+RACDescription.m in Sources */,
@@ -1441,6 +1480,7 @@
 				B18A5D8F20348E4300F139B7 /* RACKVOProxy.m in Sources */,
 				B18A5DBF20348E4300F139B7 /* Result.swift in Sources */,
 				B18A5DC620348E4300F139B7 /* SimpleAuth.m in Sources */,
+				B1BDA571204DCD87005CABC2 /* ShopItem.swift in Sources */,
 				B18A5D5720348E4300F139B7 /* UIView.swift in Sources */,
 				B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */,
 				B18A5D9F20348E4300F139B7 /* RACStringSequence.m in Sources */,
@@ -1508,6 +1548,7 @@
 				B18A5DC920348E4300F139B7 /* SimpleAuthUtilities.m in Sources */,
 				B18A5D9320348E4300F139B7 /* RACQueueScheduler.m in Sources */,
 				B19372B32033E27B007B1E7D /* SocialManager.swift in Sources */,
+				B1BDA56F204DC273005CABC2 /* ShopCollectionViewCell.swift in Sources */,
 				B18A5DAC20348E4300F139B7 /* UIAlertView+RACSignalSupport.m in Sources */,
 				B18A5DB920348E4300F139B7 /* UISwitch+RACSignalSupport.m in Sources */,
 				B18A5DA820348E4300F139B7 /* RACUnarySequence.m in Sources */,
@@ -1530,6 +1571,7 @@
 				B19371172033D8FC007B1E7D /* HomeViewController.swift in Sources */,
 				B18A5D8720348E4300F139B7 /* RACEmptySequence.m in Sources */,
 				B18A5D9920348E4300F139B7 /* RACSerialDisposable.m in Sources */,
+				B1410E93204C84BA00752223 /* GCD.m in Sources */,
 				B19372F12033E44E007B1E7D /* AppFonts.swift in Sources */,
 				B18A5DB520348E4300F139B7 /* UIRefreshControl+RACCommandSupport.m in Sources */,
 			);
