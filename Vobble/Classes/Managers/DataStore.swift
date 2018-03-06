@@ -20,11 +20,13 @@ class DataStore :NSObject {
     
     //MARK: Cache keys
     private let CACHE_KEY_CATEGORIES = "categories"
+    private let CACHE_KEY_SHORES = "SHORES"
     private let CACHE_KEY_USER = "user"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
     private var _categories: [Category] = []
+    private var _shores: [Shore] = []
     // user loggedin flag
     var isLoggedin: Bool {
         if let token = me?.token, !token.isEmpty {
@@ -47,6 +49,19 @@ class DataStore :NSObject {
         }
     }
     
+    public var shores: [Shore] {
+        set {
+            _shores = newValue
+            saveBaseModelArray(array: _shores, withKey: CACHE_KEY_SHORES)
+        }
+        get {
+            if(_shores.isEmpty){
+                _shores = loadBaseModelArrayForKey(key: CACHE_KEY_SHORES)
+            }
+            return _shores
+        }
+    }
+    
     public var me:AppUser?{
         set {
             _me = newValue
@@ -66,11 +81,18 @@ class DataStore :NSObject {
     
     private override init(){
         super.init()
+        
+        // temp 
+        var shore1 = Shore()
+        shore1.name = "Main"
+        shore1.cover = ""
+        shore1.icon = ""
+        shores.append(shore1)
     }
    
     //MARK: Cache Utils
     private func saveBaseModelArray(array: [BaseModel] , withKey key:String){
-        let array : [[String:Any]] = categories.map{$0.dictionaryRepresentation()}
+        let array : [[String:Any]] = array.map{$0.dictionaryRepresentation()}
         UserDefaults.standard.set(array, forKey: key)
         UserDefaults.standard.synchronize()
     }

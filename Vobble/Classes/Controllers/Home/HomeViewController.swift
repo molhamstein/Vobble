@@ -14,10 +14,12 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivSea: UIView!
     @IBOutlet var ivSky: UIImageView!
     @IBOutlet var ivClouds: UIImageView!
+    @IBOutlet var ivSun: UIImageView!
     @IBOutlet var ivIsland: UIImageView!
     @IBOutlet var ivShore1Shore: UIImageView!
     @IBOutlet var ivShore2Shore: UIImageView!
     @IBOutlet var ivShore2Lovers: UIImageView!
+    @IBOutlet var ivShore3Shore: UIImageView!
     
     var screenWidth: CGFloat = 0.0;
     var blockPageTransitions: Bool = false;
@@ -64,6 +66,24 @@ class HomeViewController: AbstractController {
 //        vGestureReciever.addGestureRecognizer(panRec3)
     }
     
+    
+    @IBAction func throwBottlePressed(_ sender: UIButton) {
+        [self .performSegue(withIdentifier: "homeRecrodSegue", sender: self)]
+    }
+    
+    @IBAction func findBottlePressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func myBottlesPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {
+//        brands = (segue.source as! RecordMediaViewController).selectedBrands
+//        type = (segue.source as! RecordMediaViewController).selectedType
+//        loadWorkshops()
+    }
     
     func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
         

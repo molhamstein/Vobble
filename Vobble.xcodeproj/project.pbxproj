@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5706C430204DC568006E7C9A /* RecordMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C42F204DC568006E7C9A /* RecordMediaViewController.swift */; };
+		5706C432204DCAA3006E7C9A /* Shore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C431204DCAA3006E7C9A /* Shore.swift */; };
+		5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5706C433204DDFE0006E7C9A /* ShoreCell.xib */; };
+		5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C435204DDFF4006E7C9A /* ShoreCell.swift */; };
+		57413D55204D3B5700450A42 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 57413D54204D3B5700450A42 /* GCD.m */; };
+		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
+		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
 		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
@@ -195,6 +202,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5706C42F204DC568006E7C9A /* RecordMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordMediaViewController.swift; sourceTree = "<group>"; };
+		5706C431204DCAA3006E7C9A /* Shore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shore.swift; sourceTree = "<group>"; };
+		5706C433204DDFE0006E7C9A /* ShoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoreCell.xib; sourceTree = "<group>"; };
+		5706C435204DDFF4006E7C9A /* ShoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoreCell.swift; sourceTree = "<group>"; };
+		57413D53204D3B5700450A42 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
+		57413D54204D3B5700450A42 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
+		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
+		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -527,6 +542,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5706C42E204DC557006E7C9A /* Throw bottle */ = {
+			isa = PBXGroup;
+			children = (
+				5706C42F204DC568006E7C9A /* RecordMediaViewController.swift */,
+				5706C435204DDFF4006E7C9A /* ShoreCell.swift */,
+				575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */,
+			);
+			name = "Throw bottle";
+			sourceTree = "<group>";
+		};
 		9234B5DC203356560085F9F7 = {
 			isa = PBXGroup;
 			children = (
@@ -623,6 +648,7 @@
 		B117970E2033C712006D96BE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5706C42E204DC557006E7C9A /* Throw bottle */,
 				B171DA6E204B43C200CC3C50 /* FindBottle */,
 				B193710E2033D031007B1E7D /* Profile */,
 				B193710B2033D000007B1E7D /* Abstract */,
@@ -667,6 +693,7 @@
 				B19372D82033E3FC007B1E7D /* Comment.swift */,
 				B19372DD2033E3FC007B1E7D /* Reply.swift */,
 				B19372D92033E3FC007B1E7D /* HashTag.swift */,
+				5706C431204DCAA3006E7C9A /* Shore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -713,6 +740,8 @@
 		B18A5C4E20348E4200F139B7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				57413D53204D3B5700450A42 /* GCD.h */,
+				57413D54204D3B5700450A42 /* GCD.m */,
 				B18A5C4F20348E4200F139B7 /* Collection.swift */,
 				B18A5C5020348E4200F139B7 /* String.swift */,
 				B18A5C5120348E4200F139B7 /* UIApplication.swift */,
@@ -720,6 +749,7 @@
 				B18A5C5320348E4200F139B7 /* UIStoryBoard.swift */,
 				B18A5C5420348E4200F139B7 /* UITextField.swift */,
 				B18A5C5520348E4200F139B7 /* UIView.swift */,
+				575A16D0204EC30100F4B510 /* UIImageView.swift */,
 				B18A5C5620348E4200F139B7 /* UIViewController.swift */,
 			);
 			path = Extensions;
@@ -1147,6 +1177,7 @@
 				B193730F20342D9F007B1E7D /* Main.storyboard */,
 				B193731120342D9F007B1E7D /* Profile.storyboard */,
 				B193731020342D9F007B1E7D /* NewsfeedListCell.xib */,
+				5706C433204DDFE0006E7C9A /* ShoreCell.xib */,
 				B1508CD72046207B0048123F /* FindBottle.storyboard */,
 			);
 			path = Storyboards;
@@ -1217,7 +1248,8 @@
 				TargetAttributes = {
 					9234B5E4203356560085F9F7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = C398J8JGBZ;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1259,6 +1291,7 @@
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
+				5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */,
 				B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
 				B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */,
@@ -1311,8 +1344,10 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera/LLSimpleCamera.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PIDatePicker/PIDatePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/SDRecordButton/SDRecordButton.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -1333,8 +1368,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LLSimpleCamera.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIDatePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDRecordButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -1407,11 +1444,13 @@
 				B18A5D6420348E4300F139B7 /* MKAnnotationView+RACSignalSupport.m in Sources */,
 				B18A5D9B20348E4300F139B7 /* RACSignal.m in Sources */,
 				B18A5DA920348E4300F139B7 /* RACUnit.m in Sources */,
+				5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */,
 				B193711D2033D943007B1E7D /* SignupViewController.swift in Sources */,
 				B19371152033D2F8007B1E7D /* AbstractController.swift in Sources */,
 				B18A5D7820348E4300F139B7 /* NSURLConnection+RACSupport.m in Sources */,
 				B18A5D6120348E4300F139B7 /* ISO8601Serialization.m in Sources */,
 				B18A5D9A20348E4300F139B7 /* RACSignal+Operations.m in Sources */,
+				5706C432204DCAA3006E7C9A /* Shore.swift in Sources */,
 				B18A5DB720348E4300F139B7 /* UISlider+RACSignalSupport.m in Sources */,
 				B18A5DAE20348E4300F139B7 /* UIButton+RACCommandSupport.m in Sources */,
 				B18A5D8D20348E4300F139B7 /* RACIndexSetSequence.m in Sources */,
@@ -1460,6 +1499,7 @@
 				B18A5DC220348E4300F139B7 /* SimpleAuthWebViewController.m in Sources */,
 				B18A5DC820348E4300F139B7 /* SimpleAuthProvider.m in Sources */,
 				B19372E62033E3FC007B1E7D /* Post.swift in Sources */,
+				5706C430204DC568006E7C9A /* RecordMediaViewController.swift in Sources */,
 				B18A5DA620348E4300F139B7 /* RACTuple.m in Sources */,
 				B18A5DB220348E4300F139B7 /* UIDatePicker+RACSignalSupport.m in Sources */,
 				B19371212033D975007B1E7D /* ResetPasswordViewController.swift in Sources */,
@@ -1504,6 +1544,7 @@
 				B18A5D6D20348E4300F139B7 /* NSObject+RACDeallocating.m in Sources */,
 				B18A5DB820348E4300F139B7 /* UIStepper+RACSignalSupport.m in Sources */,
 				B18A5DA720348E4300F139B7 /* RACTupleSequence.m in Sources */,
+				575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */,
 				B18A5D7620348E4300F139B7 /* NSString+RACSequenceAdditions.m in Sources */,
 				B18A5DC920348E4300F139B7 /* SimpleAuthUtilities.m in Sources */,
 				B18A5D9320348E4300F139B7 /* RACQueueScheduler.m in Sources */,
@@ -1530,7 +1571,9 @@
 				B19371172033D8FC007B1E7D /* HomeViewController.swift in Sources */,
 				B18A5D8720348E4300F139B7 /* RACEmptySequence.m in Sources */,
 				B18A5D9920348E4300F139B7 /* RACSerialDisposable.m in Sources */,
+				57413D55204D3B5700450A42 /* GCD.m in Sources */,
 				B19372F12033E44E007B1E7D /* AppFonts.swift in Sources */,
+				575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */,
 				B18A5DB520348E4300F139B7 /* UIRefreshControl+RACCommandSupport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1650,11 +1693,14 @@
 			baseConfigurationReference = BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C398J8JGBZ;
 				INFOPLIST_FILE = Vobble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vobble/Vobble-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1665,11 +1711,13 @@
 			baseConfigurationReference = 8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C398J8JGBZ;
 				INFOPLIST_FILE = Vobble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vobble/Vobble-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

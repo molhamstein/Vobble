@@ -18,5 +18,7 @@ pod 'PIDatePicker', '~> 0.1.0'
 pod 'YXWaveView'
 pod 'GoogleSignIn'
 pod 'BMPlayer', '~> 0.9.1'
+pod 'SDRecordButton'
+pod 'LLSimpleCamera'
 
 end

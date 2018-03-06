@@ -73,6 +73,10 @@ extension UIView {
         
     }
     
+    func bringToFront() {
+        self.superview?.bringSubview(toFront: self)
+    }
+    
     /// set gradient to current view
     func applyGradient(colours: [UIColor], direction: GradientDirection) -> Void {
         
