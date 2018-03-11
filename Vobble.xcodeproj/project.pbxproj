@@ -31,6 +31,10 @@
 		B1508CD620461F630048123F /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508CD520461F630048123F /* VideoPlayViewController.swift */; };
 		B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1508CD72046207B0048123F /* FindBottle.storyboard */; };
 		B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA6F204B450100CC3C50 /* PickerViewController.swift */; };
+		B17DE5B02055BAF300DC349B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */; };
+		B17DE5B42055BB8600DC349B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5B22055BB8600DC349B /* FilterView.swift */; };
+		B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B17DE5B32055BB8600DC349B /* FilterView.xib */; };
+		B17DE5B72055BC0300DC349B /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17DE5B62055BC0300DC349B /* Filter.storyboard */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -233,6 +237,10 @@
 		B1508CD520461F630048123F /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayViewController.swift; path = ../VideoPlayViewController.swift; sourceTree = "<group>"; };
 		B1508CD72046207B0048123F /* FindBottle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindBottle.storyboard; sourceTree = "<group>"; };
 		B171DA6F204B450100CC3C50 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		B17DE5B22055BB8600DC349B /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		B17DE5B32055BB8600DC349B /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
+		B17DE5B62055BC0300DC349B /* Filter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -659,6 +667,7 @@
 		B117970E2033C712006D96BE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B17DE5AE2055BAF300DC349B /* Filters */,
 				5706C42E204DC557006E7C9A /* Throw bottle */,
 				B171DA6E204B43C200CC3C50 /* FindBottle */,
 				B193710E2033D031007B1E7D /* Profile */,
@@ -712,6 +721,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B17DE5B12055BB8600DC349B /* Filter View */,
 				B171DA71204B46F500CC3C50 /* VideoPlayer */,
 				B19B16D5203DF54E004D684F /* NavigationBar */,
 				B19372CE2033E36C007B1E7D /* Abstract */,
@@ -746,6 +756,23 @@
 				5742C140205660B300A5402D /* VideoPlayerView.xib */,
 			);
 			name = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		B17DE5AE2055BAF300DC349B /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		B17DE5B12055BB8600DC349B /* Filter View */ = {
+			isa = PBXGroup;
+			children = (
+				B17DE5B22055BB8600DC349B /* FilterView.swift */,
+				B17DE5B32055BB8600DC349B /* FilterView.xib */,
+			);
+			path = "Filter View";
 			sourceTree = "<group>";
 		};
 		B18A5C4E20348E4200F139B7 /* Extensions */ = {
@@ -1190,6 +1217,7 @@
 				B193731020342D9F007B1E7D /* NewsfeedListCell.xib */,
 				5706C433204DDFE0006E7C9A /* ShoreCell.xib */,
 				B1508CD72046207B0048123F /* FindBottle.storyboard */,
+				B17DE5B62055BC0300DC349B /* Filter.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1288,6 +1316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B17DE5B72055BC0300DC349B /* Filter.storyboard in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				57687D14204FE56F007A5FFA /* girl..gif in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
@@ -1303,6 +1332,7 @@
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
+				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
 				5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */,
 				B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */,
@@ -1489,6 +1519,7 @@
 				B18A5D7020348E4300F139B7 /* NSObject+RACLifting.m in Sources */,
 				B18A5D7520348E4300F139B7 /* NSString+RACKeyPathUtilities.m in Sources */,
 				B19372D22033E36C007B1E7D /* AbstractNibView.swift in Sources */,
+				B17DE5B02055BAF300DC349B /* FiltersViewController.swift in Sources */,
 				B18A5D8020348E4300F139B7 /* RACCompoundDisposableProvider.d in Sources */,
 				B19372E32033E3FC007B1E7D /* HashTag.swift in Sources */,
 				B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */,
@@ -1562,6 +1593,7 @@
 				B18A5D7620348E4300F139B7 /* NSString+RACSequenceAdditions.m in Sources */,
 				B18A5DC920348E4300F139B7 /* SimpleAuthUtilities.m in Sources */,
 				B18A5D9320348E4300F139B7 /* RACQueueScheduler.m in Sources */,
+				B17DE5B42055BB8600DC349B /* FilterView.swift in Sources */,
 				B19372B32033E27B007B1E7D /* SocialManager.swift in Sources */,
 				B18A5DAC20348E4300F139B7 /* UIAlertView+RACSignalSupport.m in Sources */,
 				B18A5DB920348E4300F139B7 /* UISwitch+RACSignalSupport.m in Sources */,
