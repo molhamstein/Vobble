@@ -147,7 +147,11 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>FindBottle</string>
+<<<<<<< HEAD
+	<string>Main</string>
+=======
+	<string>Shop</string>
+>>>>>>> fc423218d8f16e9335405a427c5794dc742a47aa
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

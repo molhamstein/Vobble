@@ -15,11 +15,13 @@ class VideoPlayerView: AbstractNibView {
     var player: BMPlayer!
     @IBOutlet weak var videoView: UIView!
     
+    
     public func preparePlayer(videoURL: String) {
         
         resetPlayerManager()
         
         player = BMPlayer()
+        
         videoView.addSubview(player)
         
         player.snp.makeConstraints { (make) in
@@ -98,12 +100,16 @@ extension VideoPlayerView: BMPlayerDelegate {
     }
 }
 
-//class jj: BMPlayer {
+//class CustomBMPlayer: BMPlayer {
 //    
 //    override class open func storyBoardCustomControl() -> BMPlayerControlView? {
-//        //super.storyBoardCustomControl()
-//        var b:BMPlayerControlView = BMPlayerControlView()
-//        b.playButton = UIButton()
+////        super.storyBoardCustomControl()
+//        let b:BMPlayerControlView = BMPlayerControlView()
+//        let btn:UIButton = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
+//        btn.backgroundColor = .yellow
+//        btn.setTitle("*", for: .normal)
+//        b.replayButton = btn
+//        
 //        return b
 //    }
 //    

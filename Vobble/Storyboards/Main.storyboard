@@ -24,52 +24,52 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sea" translatesAutoresizingMaskIntoConstraints="NO" id="ZTN-6J-MC5">
-                                <rect key="frame" x="0.0" y="173.5" width="1125" height="493.5"/>
+                                <rect key="frame" x="0.0" y="167" width="1125" height="500"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sky1" translatesAutoresizingMaskIntoConstraints="NO" id="ybT-hf-WwB">
-                                <rect key="frame" x="0.0" y="57" width="375" height="126.5"/>
+                                <rect key="frame" x="0.0" y="10" width="375" height="167"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="montains" translatesAutoresizingMaskIntoConstraints="NO" id="qsg-lz-eO2">
-                                <rect key="frame" x="0.0" y="163.5" width="1125" height="20"/>
+                                <rect key="frame" x="0.0" y="157" width="1125" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qsg-lz-eO2" secondAttribute="height" multiplier="4500:80" id="kXa-ng-h1A"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island" translatesAutoresizingMaskIntoConstraints="NO" id="NaN-E1-PzY">
-                                <rect key="frame" x="305" y="190" width="120" height="97.5"/>
+                                <rect key="frame" x="305" y="210" width="120" height="97.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NaN-E1-PzY" secondAttribute="height" multiplier="753:613" id="Vmx-Yn-9bb"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shore1" translatesAutoresizingMaskIntoConstraints="NO" id="Dwk-Ai-TGx">
-                                <rect key="frame" x="0.0" y="438" width="282.5" height="229"/>
+                                <rect key="frame" x="0.0" y="407.5" width="320" height="259.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Dwk-Ai-TGx" secondAttribute="height" multiplier="1321:1073" id="53W-eK-10M"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shore2" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-Ch-gD5">
-                                <rect key="frame" x="510" y="495" width="240" height="172"/>
+                                <rect key="frame" x="476.5" y="457" width="307.5" height="210"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lEk-Ch-gD5" secondAttribute="height" multiplier="1198:819" id="Mv4-iM-a54"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nxw-0v-3Ac">
-                                <rect key="frame" x="517.5" y="477" width="225" height="120"/>
+                                <rect key="frame" x="512" y="421" width="236" height="126"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="umbrella" translatesAutoresizingMaskIntoConstraints="NO" id="Qf5-1d-nmD">
-                                        <rect key="frame" x="6.5" y="-73" width="213.5" height="193"/>
+                                        <rect key="frame" x="0.5" y="-87.5" width="236.5" height="213.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Qf5-1d-nmD" secondAttribute="height" multiplier="993:899" id="Yoz-Ad-BnK"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boy" translatesAutoresizingMaskIntoConstraints="NO" id="u2Q-ov-2Tw">
-                                        <rect key="frame" x="89.5" y="-8" width="135.5" height="118"/>
+                                        <rect key="frame" x="94" y="-8" width="142" height="124"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="u2Q-ov-2Tw" secondAttribute="height" multiplier="544:476" id="kEh-Ey-Trg"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JCb-y9-NJ1">
-                                        <rect key="frame" x="0.0" y="-24" width="89.5" height="134"/>
+                                        <rect key="frame" x="0.0" y="-24.5" width="94" height="140.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="JCb-y9-NJ1" secondAttribute="height" multiplier="2:3" id="QUz-LE-6eQ"/>
                                         </constraints>
@@ -90,13 +90,13 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shore3" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-fK-hVl">
-                                <rect key="frame" x="750" y="398.5" width="375" height="268.5"/>
+                                <rect key="frame" x="750" y="336.5" width="375" height="330.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="h7w-fK-hVl" secondAttribute="height" multiplier="1461:1288" id="0Sr-en-WUl"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="50H-Bb-9Qs">
-                                <rect key="frame" x="0.0" y="100.5" width="1125" height="88"/>
+                                <rect key="frame" x="0.0" y="54" width="1125" height="116.5"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="cG6-TI-tlY">
                                 <rect key="frame" x="0.0" y="80" width="150" height="130.5"/>
