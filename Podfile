@@ -20,5 +20,6 @@ pod 'GoogleSignIn'
 pod 'BMPlayer', '~> 0.9.1'
 pod 'SDRecordButton'
 pod 'LLSimpleCamera'
+pod 'YLGIFImage'
 
 end

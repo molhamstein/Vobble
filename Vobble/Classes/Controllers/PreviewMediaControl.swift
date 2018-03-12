@@ -118,7 +118,7 @@ class PreviewMediaControl : AbstractController {
     }
     
     @IBAction func throwInSea () {
-        self.performUnwind
+        //self.performUnwind
     }
     
     @IBAction func nextAction() {

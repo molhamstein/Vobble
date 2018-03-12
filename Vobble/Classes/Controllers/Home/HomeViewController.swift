@@ -14,11 +14,12 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivSea: UIView!
     @IBOutlet var ivSky: UIImageView!
     @IBOutlet var ivClouds: UIImageView!
+    @IBOutlet var ivMountains: UIImageView!
     @IBOutlet var ivSun: UIImageView!
     @IBOutlet var ivIsland: UIImageView!
     @IBOutlet var ivShore1Shore: UIImageView!
     @IBOutlet var ivShore2Shore: UIImageView!
-    @IBOutlet var ivShore2Lovers: UIImageView!
+    @IBOutlet var shore2Lovers: UIView!
     @IBOutlet var ivShore3Shore: UIImageView!
     
     var screenWidth: CGFloat = 0.0;
@@ -27,9 +28,16 @@ class HomeViewController: AbstractController {
     var isInitialized = false
     
     let seaParallaxSpeed :CGFloat = 0.3
+    let cloudsParallaxSpeed :CGFloat = 0.2
+    let mountainsParallaxSpeed :CGFloat = 0.25
+    let island2ParallaxSpeed :CGFloat = 0.3
     let shore1ParallaxSpeed :CGFloat = 1.0
     let shore2ParallaxSpeed :CGFloat = 1.0
-    let island2ParallaxSpeed :CGFloat = 0.2
+    let shore3ParallaxSpeed :CGFloat = 1.0
+    let loversParallaxSpeed :CGFloat = 1.0
+    
+    
+
     
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
@@ -110,9 +118,26 @@ class HomeViewController: AbstractController {
                     let duration = 0.1
                     UIView.animate(withDuration: duration, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                         self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.seaParallaxSpeed, y: 0)
+                        self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.cloudsParallaxSpeed, y: 0)
+                        self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.mountainsParallaxSpeed, y: 0)
                         self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.island2ParallaxSpeed, y: 0)
                         self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.shore1ParallaxSpeed, y: 0)
                         self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.shore2ParallaxSpeed, y: 0)
+                        //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: translation.x * 0.4, y: 0)
+                    }, completion: {(finished: Bool) in
+                    })
+                } else if currentPageIndex == 1 {
+                    //let transform = CGAffineTransform.identity.translatedBy(x: translation.x, y: 0)
+                    let duration = 0.1
+                    let trans = (self.screenWidth * -1) + translation.x
+                    UIView.animate(withDuration: duration, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                        self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: trans * self.seaParallaxSpeed, y: 0)
+                        self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: trans * self.cloudsParallaxSpeed, y: 0)
+                        self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: trans * self.mountainsParallaxSpeed, y: 0)
+                        self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: trans * self.island2ParallaxSpeed, y: 0)
+                        self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore2ParallaxSpeed, y: 0)
+                        self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
+                        self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: trans * self.loversParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: translation.x * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -122,18 +147,33 @@ class HomeViewController: AbstractController {
                 if currentPageIndex == 0 {
                     // no action to take
                 } else if currentPageIndex == 1 {
-                    let transform = CGAffineTransform.identity.translatedBy(x: translation.x - self.screenWidth, y: 0)
+                    let trans = (translation.x - self.screenWidth)
                     UIView.animate(withDuration: 0.1, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
-                        self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * self.seaParallaxSpeed, y: 0)
-                        self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * self.island2ParallaxSpeed, y: 0)
-                        self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * self.shore1ParallaxSpeed, y: 0)
-                        self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * self.shore2ParallaxSpeed, y: 0)
+                        self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: trans * self.seaParallaxSpeed, y: 0)
+                        self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: trans * self.cloudsParallaxSpeed, y: 0)
+                        self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: trans * self.mountainsParallaxSpeed, y: 0)
+                        self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: trans * self.island2ParallaxSpeed, y: 0)
+                        self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore1ParallaxSpeed, y: 0)
+                        self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore2ParallaxSpeed, y: 0)
+                        self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: trans * self.loversParallaxSpeed, y: 0)
                         
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
-                } else {
-                    
+                } else if currentPageIndex == 2 {
+                    let trans = (translation.x - (self.screenWidth * 2))
+                    UIView.animate(withDuration: 0.1, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                        self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: trans * self.seaParallaxSpeed, y: 0)
+                        self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: trans * self.cloudsParallaxSpeed, y: 0)
+                        self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: trans * self.mountainsParallaxSpeed, y: 0)
+                        self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: trans * self.island2ParallaxSpeed, y: 0)
+                        self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore2ParallaxSpeed, y: 0)
+                        self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
+                        self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: trans * self.loversParallaxSpeed, y: 0)
+                        
+                        //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * 0.4, y: 0)
+                    }, completion: {(finished: Bool) in
+                    })
                 }
             }
         } else if gestureRecognizer.state == .ended || gestureRecognizer.state == .cancelled {
@@ -148,11 +188,15 @@ class HomeViewController: AbstractController {
                     blockPageTransitions = false;
                 } else if ( currentPageIndex == 1 ) {
                     self.goToMainShore()
+                } else if ( currentPageIndex == 2 ) {
+                    self.goToLoveShore()
                 }
             } else if (translation.x <= -100) {
                 // moving to next view
                 if (currentPageIndex == 0) {
                     self.goToLoveShore()
+                } else if currentPageIndex == 1 {
+                    self.goToFadFedShore()
                 } else {
                     blockPageTransitions = false;
                     // no action to take
@@ -164,6 +208,8 @@ class HomeViewController: AbstractController {
                     self.goToMainShore()
                 } else if ( currentPageIndex == 1 ) {
                     self.goToLoveShore()
+                } else {
+                    self.goToFadFedShore()
                 }
             }
         }
@@ -176,43 +222,20 @@ class HomeViewController: AbstractController {
             return
         }
         
-        let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
+        //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
         UIView.animate(withDuration: 0.5, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
             self.ivSea.transform = CGAffineTransform.identity
             self.ivIsland.transform = CGAffineTransform.identity
             self.ivShore1Shore.transform = CGAffineTransform.identity
             self.ivShore2Shore.transform = CGAffineTransform.identity
+            self.ivShore3Shore.transform = CGAffineTransform.identity
+            self.shore2Lovers.transform = CGAffineTransform.identity
+            self.ivMountains.transform = CGAffineTransform.identity
+            self.ivClouds.transform = CGAffineTransform.identity
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 0
             self.blockPageTransitions = false
         })
-        
-//        UIView.animate(withDuration: 0.7, delay:0.0, usingSpringWithDamping:0.7, initialSpringVelocity:3, options: UIViewAnimationOptions.curveLinear, animations: {
-//            self.momentsControl?.view.transform = transform
-//            self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: -self.screenWidth * 0.4, y: 0)
-//        }, completion: {(finished: Bool) in
-//        })
-//        
-//        // adding a different delay
-//        UIView.animate(withDuration: 0.5, delay:0.3, usingSpringWithDamping:0.75, initialSpringVelocity:2, options: UIViewAnimationOptions.curveLinear, animations: {
-//            self.momentsControl?.ivlike.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
-//        }, completion: {(finished: Bool) in
-//        })
-//        
-//        // adding a different delay
-//        UIView.animate(withDuration: 0.5, delay:0.5, usingSpringWithDamping:0.75, initialSpringVelocity:2, options: UIViewAnimationOptions.curveLinear, animations: {
-//            self.momentsControl?.ivIgnore.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
-//        }, completion: {(finished: Bool) in
-//            
-//        })
-        
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(9 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-//            snackbar.dismiss()
-//        }
-//        dispatch_main_after(0.5) {
-//            self.currentPageIndex = 0
-//            self.blockPageTransitions = false
-//        }
     }
     
     func goToLoveShore() {
@@ -226,6 +249,10 @@ class HomeViewController: AbstractController {
             self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.island2ParallaxSpeed), y: 0)
             self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore1ParallaxSpeed), y: 0)
             self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore2ParallaxSpeed), y: 0)
+            self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore3ParallaxSpeed), y: 0)
+            self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.loversParallaxSpeed), y: 0)
+            self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.cloudsParallaxSpeed), y: 0)
+            self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.mountainsParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 1
             self.blockPageTransitions = false
@@ -233,7 +260,25 @@ class HomeViewController: AbstractController {
     }
     
     func goToFadFedShore() {
+        if blockPageTransitions {
+            return
+        }
         
+        //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
+        let doubleScreenWidth = self.screenWidth * 2
+        UIView.animate(withDuration: 0.5, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+            self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.seaParallaxSpeed), y: 0)
+            self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.island2ParallaxSpeed), y: 0)
+            self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore1ParallaxSpeed), y: 0)
+            self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore2ParallaxSpeed), y: 0)
+            self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore3ParallaxSpeed), y: 0)
+            self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.loversParallaxSpeed), y: 0)
+            self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.cloudsParallaxSpeed), y: 0)
+            self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.mountainsParallaxSpeed), y: 0)
+        }, completion: {(finished: Bool) in
+            self.currentPageIndex = 2
+            self.blockPageTransitions = false
+        })
     }
 }
 

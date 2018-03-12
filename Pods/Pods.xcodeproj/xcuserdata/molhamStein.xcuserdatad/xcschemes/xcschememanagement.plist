@@ -94,6 +94,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YLGIFImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>YXWaveView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,27 +117,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0185FCD199B8180AE14FBB0A7253A877</key>
+		<key>114D6B4A1D2874ABBEDE82E2356E7165</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>061F55005C75819948421B2AE487CFFF</key>
+		<key>34989D140114F874B4D1C923FA692D40</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>262C28B43ADF3E545429282BE78FFD1E</key>
+		<key>41060F02562B1DD41DA6C5502A047CB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4F436DDF37D8EF5C583FD5A307E3AC74</key>
+		<key>489CE5E7E72663C4DBE7339222B531B2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>531B78FD8AD31B542B8001A970D876EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5B224884E737C2B02735D2037D5FA10B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,12 +157,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7712EF4E1ACEB932ED6873937ABA8A5B</key>
+		<key>8362B6C83F1BC58C2EB1CFD322ACE4B7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8362B6C83F1BC58C2EB1CFD322ACE4B7</key>
+		<key>88DE0B8B8C7EC10CDC56D59E4A1F6C8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,6 +192,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CB02BCE401556D6316BF1F01A6258749</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CF7D5D6C203849F69F787F31045FF721</key>
 		<dict>
 			<key>primary</key>
@@ -193,11 +208,6 @@
 			<true/>
 		</dict>
 		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ECF1E63C7A52B2AEBAC9C6077697E0A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
