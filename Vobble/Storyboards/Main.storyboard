@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -36,19 +36,19 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island" translatesAutoresizingMaskIntoConstraints="NO" id="NaN-E1-PzY">
-                                <rect key="frame" x="305" y="210" width="120" height="97.5"/>
+                                <rect key="frame" x="305" y="210" width="120" height="98"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NaN-E1-PzY" secondAttribute="height" multiplier="753:613" id="Vmx-Yn-9bb"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shore1" translatesAutoresizingMaskIntoConstraints="NO" id="Dwk-Ai-TGx">
-                                <rect key="frame" x="0.0" y="407.5" width="320" height="259.5"/>
+                                <rect key="frame" x="0.0" y="408" width="320" height="259"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Dwk-Ai-TGx" secondAttribute="height" multiplier="1321:1073" id="53W-eK-10M"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shore2" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-Ch-gD5">
-                                <rect key="frame" x="476.5" y="457" width="307.5" height="210"/>
+                                <rect key="frame" x="477" y="457" width="307" height="210"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lEk-Ch-gD5" secondAttribute="height" multiplier="1198:819" id="Mv4-iM-a54"/>
                                 </constraints>
@@ -57,7 +57,7 @@
                                 <rect key="frame" x="512" y="421" width="236" height="126"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="umbrella" translatesAutoresizingMaskIntoConstraints="NO" id="Qf5-1d-nmD">
-                                        <rect key="frame" x="0.5" y="-87.5" width="236.5" height="213.5"/>
+                                        <rect key="frame" x="1" y="-87" width="236" height="213"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Qf5-1d-nmD" secondAttribute="height" multiplier="993:899" id="Yoz-Ad-BnK"/>
                                         </constraints>
@@ -69,7 +69,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JCb-y9-NJ1">
-                                        <rect key="frame" x="0.0" y="-24.5" width="94" height="140.5"/>
+                                        <rect key="frame" x="0.0" y="-24" width="94" height="140"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="JCb-y9-NJ1" secondAttribute="height" multiplier="2:3" id="QUz-LE-6eQ"/>
                                         </constraints>
@@ -90,16 +90,16 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shore3" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-fK-hVl">
-                                <rect key="frame" x="750" y="336.5" width="375" height="330.5"/>
+                                <rect key="frame" x="750" y="337" width="375" height="330"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="h7w-fK-hVl" secondAttribute="height" multiplier="1461:1288" id="0Sr-en-WUl"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="50H-Bb-9Qs">
-                                <rect key="frame" x="0.0" y="54" width="1125" height="116.5"/>
+                                <rect key="frame" x="0.0" y="54" width="1125" height="117"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="cG6-TI-tlY">
-                                <rect key="frame" x="0.0" y="80" width="150" height="130.5"/>
+                                <rect key="frame" x="0.0" y="80" width="150" height="131"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cG6-TI-tlY" secondAttribute="height" multiplier="1755:1531" id="Ly9-eW-TPc"/>
                                 </constraints>
