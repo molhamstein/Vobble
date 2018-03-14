@@ -18,6 +18,7 @@ class ConversationViewController: AbstractController {
     fileprivate var currentUser: AppUser = AppUser()
     fileprivate var filteredConvArray: [Conversation] = [Conversation]()
     fileprivate var searchText: UITextField?
+    fileprivate var searchString: String = ""
     public var tap: tapOption = .myBottles
     
     
@@ -198,11 +199,10 @@ extension ConversationViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-//        if self.filteredBottles.count > 0 {
-//            // string contains non-whitespace characters
-//            return self.filteredBottles.count
-//        }
-        if tap == .myBottles {
+        if self.filteredConvArray.count > 0 {
+            // string contains non-whitespace characters
+            return self.filteredConvArray.count
+        } else if tap == .myBottles {
             return self.currentUser.conversationArray.count
         }
         
@@ -214,12 +214,10 @@ extension ConversationViewController: UICollectionViewDataSource {
         
         let convCell = collectionView.dequeueReusableCell(withReuseIdentifier: "conversationCollectionViewCellID", for: indexPath) as! ConversationCollectionViewCell
 
-//        if self.filteredBottles.count > 0 {
-//            let obj = self.filteredBottles[indexPath.row]
-//            shopCell.configCell(bottleObj: obj )
-//        } else {
-        
-        if tap == .myBottles {
+        if self.filteredConvArray.count > 0 {
+            let obj = self.filteredConvArray[indexPath.row]
+            convCell.configCell(convObj: obj )
+        } else if tap == .myBottles {
             let obj = self.currentUser.conversationArray[indexPath.row]
             convCell.configCell(convObj: obj)
         } else if tap == .myReplies {
@@ -234,6 +232,7 @@ extension ConversationViewController: UICollectionViewDataSource {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "conversationCollectionViewHeaderID", for: indexPath) as! ConversationCollectionViewHeader
         
+        headerView.searchTetField.text = searchString
         headerView.searchTetField.delegate = self
         headerView.convVC = self
         
@@ -279,7 +278,6 @@ extension ConversationViewController {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let string1 = string
         let string2 = (self.searchText?.text)!
-        var searchString = ""
 
         if string.characters.count > 0 { // if it was not delete character
             searchString = string2 + string1
@@ -288,11 +286,12 @@ extension ConversationViewController {
             
             searchString = String(string2.characters.dropLast())
         }
-
+        
         filteredConvArray = currentUser.conversationArray.filter{(($0.user2?.firstName)!.lowercased().contains(searchString.lowercased()))}
         
         print(filteredConvArray.count)
-       // bottleCollectionView.reloadData()
+        
+        bottleCollectionView.reloadData()
         
         return true
     }
