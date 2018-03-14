@@ -14,9 +14,13 @@
 		57413D55204D3B5700450A42 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 57413D54204D3B5700450A42 /* GCD.m */; };
 		5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C13F205660B300A5402D /* VideoPlayerView.swift */; };
 		5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5742C140205660B300A5402D /* VideoPlayerView.xib */; };
+		5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C14320573BC200A5402D /* UIImage+Gif.swift */; };
 		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
 		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
-		57687D14204FE56F007A5FFA /* girl..gif in Resources */ = {isa = PBXBuildFile; fileRef = 57687D13204FE56F007A5FFA /* girl..gif */; };
+		578A25112058771A00801F77 /* girl_3_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A250F2058771A00801F77 /* girl_3_1.gif */; };
+		578A25122058771A00801F77 /* girl_3_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A25102058771A00801F77 /* girl_3_2.gif */; };
+		578A25142058823C00801F77 /* girl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A25132058823C00801F77 /* girl.gif */; };
+		578A251620588C9E00801F77 /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A251520588C9E00801F77 /* find_bottle.gif */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
 		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
@@ -211,9 +215,13 @@
 		57413D54204D3B5700450A42 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 		5742C13F205660B300A5402D /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerView.swift; path = VideoPlayer/VideoPlayerView.swift; sourceTree = "<group>"; };
 		5742C140205660B300A5402D /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoPlayerView.xib; path = VideoPlayer/VideoPlayerView.xib; sourceTree = "<group>"; };
+		5742C14320573BC200A5402D /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
 		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		57687D13204FE56F007A5FFA /* girl..gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl..gif; sourceTree = "<group>"; };
+		578A250F2058771A00801F77 /* girl_3_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_1.gif; sourceTree = "<group>"; };
+		578A25102058771A00801F77 /* girl_3_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_2.gif; sourceTree = "<group>"; };
+		578A25132058823C00801F77 /* girl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl.gif; sourceTree = "<group>"; };
+		578A251520588C9E00801F77 /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -557,7 +565,10 @@
 		57687D12204FE509007A5FFA /* gif */ = {
 			isa = PBXGroup;
 			children = (
-				57687D13204FE56F007A5FFA /* girl..gif */,
+				578A25132058823C00801F77 /* girl.gif */,
+				578A250F2058771A00801F77 /* girl_3_1.gif */,
+				578A25102058771A00801F77 /* girl_3_2.gif */,
+				578A251520588C9E00801F77 /* find_bottle.gif */,
 			);
 			name = gif;
 			sourceTree = "<group>";
@@ -778,6 +789,7 @@
 		B18A5C5A20348E4200F139B7 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				5742C14320573BC200A5402D /* UIImage+Gif.swift */,
 				B1EA3CA8203C9FFD00A7A261 /* CustomButton */,
 				B18A5C5C20348E4200F139B7 /* SimpleAuthInstagram */,
 			);
@@ -1289,7 +1301,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
-				57687D14204FE56F007A5FFA /* girl..gif in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */,
 				B193731B20342D9F007B1E7D /* Profile.storyboard in Resources */,
@@ -1299,6 +1310,7 @@
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
+				578A25142058823C00801F77 /* girl.gif in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
@@ -1308,10 +1320,13 @@
 				B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
 				B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */,
+				578A25112058771A00801F77 /* girl_3_1.gif in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
 				B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */,
+				578A25122058771A00801F77 /* girl_3_2.gif in Resources */,
 				B11B52492038B19700C51EE8 /* Start.storyboard in Resources */,
 				B19372F62033E44E007B1E7D /* OpenSansSemiBold.ttf in Resources */,
+				578A251620588C9E00801F77 /* find_bottle.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1366,7 +1381,6 @@
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
-				"${BUILT_PRODUCTS_DIR}/YLGIFImage/YLGIFImage.framework",
 				"${BUILT_PRODUCTS_DIR}/YXWaveView/YXWaveView.framework",
 				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
 			);
@@ -1391,7 +1405,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YLGIFImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YXWaveView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
 			);
@@ -1428,6 +1441,7 @@
 				B18A5DC020348E4300F139B7 /* ResultType.swift in Sources */,
 				B18A5D9420348E4300F139B7 /* RACReplaySubject.m in Sources */,
 				B18A5D7F20348E4300F139B7 /* RACCompoundDisposable.m in Sources */,
+				5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */,
 				B18A5D5A20348E4300F139B7 /* LocationHelper.swift in Sources */,
 				B19372E12033E3FC007B1E7D /* Category.swift in Sources */,
 				B18A5DBD20348E4300F139B7 /* UITextView+RACSignalSupport.m in Sources */,
