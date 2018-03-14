@@ -8,96 +8,167 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>BMPlayer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>FBSDKLoginKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>FBSDKShareKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>GTMOAuth2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>LLSimpleCamera.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
 		</dict>
 		<key>NVActivityIndicatorView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>PIDatePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>12</integer>
 		</dict>
 		<key>Pods-Vobble.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>SDRecordButton.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>14</integer>
 		</dict>
 		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>15</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>16</integer>
 		</dict>
 		<key>Toast-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>YLGIFImage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
 		</dict>
 		<key>YXWaveView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>18</integer>
 		</dict>
 		<key>libwebp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>007E1F352BBDCF79216810967474DAE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>114D6B4A1D2874ABBEDE82E2356E7165</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>34989D140114F874B4D1C923FA692D40</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41060F02562B1DD41DA6C5502A047CB6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>489CE5E7E72663C4DBE7339222B531B2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -108,6 +179,11 @@
 			<true/>
 		</dict>
 		<key>531B78FD8AD31B542B8001A970D876EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5B224884E737C2B02735D2037D5FA10B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,7 +203,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8362B6C83F1BC58C2EB1CFD322ACE4B7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>86F821A89A142F1F0DD12CC748DCA627</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>88DE0B8B8C7EC10CDC56D59E4A1F6C8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -163,6 +249,11 @@
 			<true/>
 		</dict>
 		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB02BCE401556D6316BF1F01A6258749</key>
 		<dict>
 			<key>primary</key>
 			<true/>
