@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MyBottlesCollectionViewCell: UICollectionViewCell {
+class ConversationCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -31,14 +31,14 @@ class MyBottlesCollectionViewCell: UICollectionViewCell {
         //        mainView.dropShadow()
     }
     
-    func configCell(bottleObj: Bottle) {
+    func configCell(convObj: Conversation) {
         
         //        mainView.dropShadow()
-        mainView.applyGradient(colours: [bottleObj.firstColor!, bottleObj.secondColor!], direction: .horizontal)
-        bottleNameLabel.text = bottleObj.name
-        timeLabel.text = "Time left: "+bottleObj.time!
-        countryLabel.text = bottleObj.country
-        image.image = bottleObj.imageUrl
+        mainView.applyGradient(colours: [(convObj.user2?.firstColor)!, (convObj.user2?.secondColor)!], direction: .horizontal)
+        bottleNameLabel.text = convObj.user2?.firstName
+        timeLabel.text = "Time left: "+convObj.timeLeft!
+        countryLabel.text = convObj.user2?.country
+        image.image = convObj.user2?.imageUrl
     }
     
 }

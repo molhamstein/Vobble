@@ -30,6 +30,9 @@
 		B135B623203DE97400755799 /* MullerRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61F203DE93600755799 /* MullerRegular.otf */; };
 		B1508CD620461F630048123F /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508CD520461F630048123F /* VideoPlayViewController.swift */; };
 		B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1508CD72046207B0048123F /* FindBottle.storyboard */; };
+		B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B156A4402058763E00654E2A /* ConversationCollectionViewHeader.xib */; };
+		B156A44320587E8000654E2A /* ConversationCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156A44220587E8000654E2A /* ConversationCollectionViewHeader.swift */; };
+		B156A4452058952300654E2A /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156A4442058952300654E2A /* Conversation.swift */; };
 		B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA6F204B450100CC3C50 /* PickerViewController.swift */; };
 		B17DE5B02055BAF300DC349B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */; };
 		B17DE5B42055BB8600DC349B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5B22055BB8600DC349B /* FilterView.swift */; };
@@ -202,10 +205,10 @@
 		B1A37442204530230080A323 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37441204530230080A323 /* StoreKit.framework */; };
 		B1A37444204530310080A323 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37443204530310080A323 /* AddressBook.framework */; };
 		B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A37445204532670080A323 /* GoogleService-Info.plist */; };
-		B1EA39CB205606AE008AADC9 /* MyBottlesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1EA39CA205606AE008AADC9 /* MyBottlesCollectionViewCell.xib */; };
-		B1EA39CD205606D8008AADC9 /* MyBottlesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CC205606D8008AADC9 /* MyBottlesCollectionViewCell.swift */; };
+		B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */; };
+		B1EA39CD205606D8008AADC9 /* ConversationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */; };
 		B1EA39CF20560824008AADC9 /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CE20560824008AADC9 /* Bottle.swift */; };
-		B1EA39D120562673008AADC9 /* MyBottleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39D020562673008AADC9 /* MyBottleViewController.swift */; };
+		B1EA39D120562673008AADC9 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39D020562673008AADC9 /* ConversationViewController.swift */; };
 		B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
 /* End PBXBuildFile section */
@@ -240,6 +243,9 @@
 		B135B61F203DE93600755799 /* MullerRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerRegular.otf; sourceTree = "<group>"; };
 		B1508CD520461F630048123F /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayViewController.swift; path = ../VideoPlayViewController.swift; sourceTree = "<group>"; };
 		B1508CD72046207B0048123F /* FindBottle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindBottle.storyboard; sourceTree = "<group>"; };
+		B156A4402058763E00654E2A /* ConversationCollectionViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCollectionViewHeader.xib; sourceTree = "<group>"; };
+		B156A44220587E8000654E2A /* ConversationCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewHeader.swift; sourceTree = "<group>"; };
+		B156A4442058952300654E2A /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		B171DA6F204B450100CC3C50 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		B17DE5B22055BB8600DC349B /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -536,10 +542,10 @@
 		B1A37441204530230080A323 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B1A37443204530310080A323 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		B1A37445204532670080A323 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B1EA39CA205606AE008AADC9 /* MyBottlesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyBottlesCollectionViewCell.xib; sourceTree = "<group>"; };
-		B1EA39CC205606D8008AADC9 /* MyBottlesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBottlesCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCollectionViewCell.xib; sourceTree = "<group>"; };
+		B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1EA39CE20560824008AADC9 /* Bottle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bottle.swift; sourceTree = "<group>"; };
-		B1EA39D020562673008AADC9 /* MyBottleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBottleViewController.swift; sourceTree = "<group>"; };
+		B1EA39D020562673008AADC9 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleButton.swift; sourceTree = "<group>"; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -723,6 +729,7 @@
 				B19372D92033E3FC007B1E7D /* HashTag.swift */,
 				5706C431204DCAA3006E7C9A /* Shore.swift */,
 				B1EA39CE20560824008AADC9 /* Bottle.swift */,
+				B156A4442058952300654E2A /* Conversation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -772,7 +779,7 @@
 			isa = PBXGroup;
 			children = (
 				B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */,
-				B1EA39D020562673008AADC9 /* MyBottleViewController.swift */,
+				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -1245,8 +1252,10 @@
 		B1EA39C920560694008AADC9 /* My Bottles */ = {
 			isa = PBXGroup;
 			children = (
-				B1EA39CA205606AE008AADC9 /* MyBottlesCollectionViewCell.xib */,
-				B1EA39CC205606D8008AADC9 /* MyBottlesCollectionViewCell.swift */,
+				B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */,
+				B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */,
+				B156A4402058763E00654E2A /* ConversationCollectionViewHeader.xib */,
+				B156A44220587E8000654E2A /* ConversationCollectionViewHeader.swift */,
 			);
 			path = "My Bottles";
 			sourceTree = "<group>";
@@ -1346,7 +1355,8 @@
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
-				B1EA39CB205606AE008AADC9 /* MyBottlesCollectionViewCell.xib in Resources */,
+				B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */,
+				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
@@ -1487,6 +1497,7 @@
 				B18A5D7C20348E4300F139B7 /* RACBlockTrampoline.m in Sources */,
 				B18A5DAF20348E4300F139B7 /* UICollectionReusableView+RACSignalSupport.m in Sources */,
 				B18A5D6520348E4300F139B7 /* NSArray+RACSequenceAdditions.m in Sources */,
+				B156A44320587E8000654E2A /* ConversationCollectionViewHeader.swift in Sources */,
 				B19372B22033E27B007B1E7D /* DataStore.swift in Sources */,
 				B18A5DC520348E4300F139B7 /* NSObject+SimpleAuthAdditions.m in Sources */,
 				B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */,
@@ -1523,6 +1534,7 @@
 				B18A5D7920348E4300F139B7 /* NSUserDefaults+RACSupport.m in Sources */,
 				B19372E72033E3FC007B1E7D /* Reply.swift in Sources */,
 				B18A5D7A20348E4300F139B7 /* RACArraySequence.m in Sources */,
+				B156A4452058952300654E2A /* Conversation.swift in Sources */,
 				B18A5DB420348E4300F139B7 /* UIImagePickerController+RACSignalSupport.m in Sources */,
 				B18A5D5420348E4300F139B7 /* UIColor.swift in Sources */,
 				B19372FA2034196A007B1E7D /* Constants.swift in Sources */,
@@ -1603,7 +1615,7 @@
 				B18A5D8520348E4300F139B7 /* RACDynamicSignal.m in Sources */,
 				B18A5D5520348E4300F139B7 /* UIStoryBoard.swift in Sources */,
 				B18A5D6A20348E4300F139B7 /* NSIndexSet+RACSequenceAdditions.m in Sources */,
-				B1EA39D120562673008AADC9 /* MyBottleViewController.swift in Sources */,
+				B1EA39D120562673008AADC9 /* ConversationViewController.swift in Sources */,
 				B18A5D9020348E4300F139B7 /* RACKVOTrampoline.m in Sources */,
 				B18A5DAD20348E4300F139B7 /* UIBarButtonItem+RACCommandSupport.m in Sources */,
 				B193711B2033D92F007B1E7D /* LoginViewController.swift in Sources */,
@@ -1621,7 +1633,7 @@
 				B18A5DB920348E4300F139B7 /* UISwitch+RACSignalSupport.m in Sources */,
 				B18A5DA820348E4300F139B7 /* RACUnarySequence.m in Sources */,
 				B18A5DA020348E4300F139B7 /* RACSubject.m in Sources */,
-				B1EA39CD205606D8008AADC9 /* MyBottlesCollectionViewCell.swift in Sources */,
+				B1EA39CD205606D8008AADC9 /* ConversationCollectionViewCell.swift in Sources */,
 				B19371132033D254007B1E7D /* ProfileViewController.swift in Sources */,
 				B18A5D8220348E4300F139B7 /* RACDisposable.m in Sources */,
 				B18A5D9220348E4300F139B7 /* RACPassthroughSubscriber.m in Sources */,

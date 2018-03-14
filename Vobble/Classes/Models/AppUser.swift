@@ -54,6 +54,12 @@ class AppUser: BaseModel {
     private let kUserAccountTypeKey = "type"
     private let kUserIsVerifiedKey = "isVerified"
     private let kUserTokenKey = "token"
+    
+    private let kBottleFirstColor: String = "fcolor"
+    private let kBottleSecondColor: String = "lcolor"
+    private let kBottleImageUrl: String = "imgurl"
+
+    
     // MARK: Properties
     public var objectId: String?
     public var firstName: String?
@@ -70,6 +76,13 @@ class AppUser: BaseModel {
     public var accountType: AccountType?
     public var isVerified: Bool?
     public var token: String?
+    
+    public var firstColor : UIColor?
+    public var secondColor : UIColor?
+    public var imageUrl : UIImage?
+    public var conversationArray:[Conversation] = [Conversation]()
+    public var repliesArray:[Conversation] = [Conversation]()
+    
     
     // MARK: User initializer
     public override init(){
