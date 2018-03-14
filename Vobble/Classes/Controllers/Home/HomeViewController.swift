@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class HomeViewController: AbstractController {
     
     // MARK: Properties
@@ -21,6 +22,13 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivShore2Shore: UIImageView!
     @IBOutlet var shore2Lovers: UIView!
     @IBOutlet var ivShore3Shore: UIImageView!
+    @IBOutlet var shore3Friends: UIView!
+    
+    // GIF images
+    @IBOutlet var ivShore2Girl: UIImageView!
+    @IBOutlet var ivShore3Girl1: UIImageView!
+    @IBOutlet var ivShore3Girl2: UIImageView!
+    @IBOutlet var ivShore3Boy: UIImageView!
     
     var screenWidth: CGFloat = 0.0;
     var blockPageTransitions: Bool = false;
@@ -28,6 +36,7 @@ class HomeViewController: AbstractController {
     var isInitialized = false
     
     let seaParallaxSpeed :CGFloat = 0.3
+    let sunParallaxSpeed :CGFloat = 0.1
     let cloudsParallaxSpeed :CGFloat = 0.2
     let mountainsParallaxSpeed :CGFloat = 0.25
     let island2ParallaxSpeed :CGFloat = 0.3
@@ -35,9 +44,11 @@ class HomeViewController: AbstractController {
     let shore2ParallaxSpeed :CGFloat = 1.0
     let shore3ParallaxSpeed :CGFloat = 1.0
     let loversParallaxSpeed :CGFloat = 1.0
+    let friendsParallaxSpeed :CGFloat = 1.0
     
+    // bottle animations 
+    @IBOutlet var ivFindBottle: UIImageView!
     
-
     
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
@@ -72,15 +83,23 @@ class HomeViewController: AbstractController {
 //        let panRec3 = UIPanGestureRecognizer.init(target: self, action: #selector(handleEdgeGestureRight))
 //        panRec3.delegate = self
 //        vGestureReciever.addGestureRecognizer(panRec3)
+        
+        self.ivShore2Girl.loadGif(name: "girl")
+        
+        self.ivShore3Girl1.loadGif(name: "girl_3_1")
+        self.ivShore3Girl2.loadGif(name: "girl_3_2")
+        
+        //ivShore2Girl.loadGif(asset: "girl")
     }
     
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
-        [self .performSegue(withIdentifier: "homeRecrodSegue", sender: self)]
+        self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
     }
     
     @IBAction func findBottlePressed(_ sender: UIButton) {
         
+        self.ivFindBottle.loadGif(name: "find_bottle")
     }
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
@@ -88,6 +107,13 @@ class HomeViewController: AbstractController {
     }
     
     @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {
+        
+        self.ivShore2Girl.loadGif(name: "girl")
+        
+        // A UIImageView with async loading from asset catalog(from iOS9)
+        //let imageView = UIImageView()
+        //ivShore2Girl.loadGif(asset: "girl")
+        
 //        brands = (segue.source as! RecordMediaViewController).selectedBrands
 //        type = (segue.source as! RecordMediaViewController).selectedType
 //        loadWorkshops()
@@ -118,11 +144,13 @@ class HomeViewController: AbstractController {
                     let duration = 0.1
                     UIView.animate(withDuration: duration, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                         self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.seaParallaxSpeed, y: 0)
+                        self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.sunParallaxSpeed, y: 0)
                         self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.cloudsParallaxSpeed, y: 0)
                         self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.mountainsParallaxSpeed, y: 0)
                         self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.island2ParallaxSpeed, y: 0)
                         self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.shore1ParallaxSpeed, y: 0)
                         self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.shore2ParallaxSpeed, y: 0)
+                        self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.loversParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: translation.x * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -132,12 +160,16 @@ class HomeViewController: AbstractController {
                     let trans = (self.screenWidth * -1) + translation.x
                     UIView.animate(withDuration: duration, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                         self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: trans * self.seaParallaxSpeed, y: 0)
+                        self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: trans * self.sunParallaxSpeed, y: 0)
                         self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: trans * self.cloudsParallaxSpeed, y: 0)
                         self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: trans * self.mountainsParallaxSpeed, y: 0)
                         self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: trans * self.island2ParallaxSpeed, y: 0)
+                        // shore 2
                         self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore2ParallaxSpeed, y: 0)
-                        self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
                         self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: trans * self.loversParallaxSpeed, y: 0)
+                        // shore 3
+                        self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
+                        self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: translation.x * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -150,6 +182,7 @@ class HomeViewController: AbstractController {
                     let trans = (translation.x - self.screenWidth)
                     UIView.animate(withDuration: 0.1, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                         self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: trans * self.seaParallaxSpeed, y: 0)
+                        self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: trans * self.sunParallaxSpeed, y: 0)
                         self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: trans * self.cloudsParallaxSpeed, y: 0)
                         self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: trans * self.mountainsParallaxSpeed, y: 0)
                         self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: trans * self.island2ParallaxSpeed, y: 0)
@@ -164,12 +197,15 @@ class HomeViewController: AbstractController {
                     let trans = (translation.x - (self.screenWidth * 2))
                     UIView.animate(withDuration: 0.1, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                         self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: trans * self.seaParallaxSpeed, y: 0)
+                        self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: trans * self.sunParallaxSpeed, y: 0)
                         self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: trans * self.cloudsParallaxSpeed, y: 0)
                         self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: trans * self.mountainsParallaxSpeed, y: 0)
                         self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: trans * self.island2ParallaxSpeed, y: 0)
                         self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore2ParallaxSpeed, y: 0)
-                        self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
                         self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: trans * self.loversParallaxSpeed, y: 0)
+                        // shore 3
+                        self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
+                        self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
                         
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
@@ -250,7 +286,9 @@ class HomeViewController: AbstractController {
             self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore1ParallaxSpeed), y: 0)
             self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore2ParallaxSpeed), y: 0)
             self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore3ParallaxSpeed), y: 0)
+            self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.friendsParallaxSpeed), y: 0)
             self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.loversParallaxSpeed), y: 0)
+            self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.cloudsParallaxSpeed), y: 0)
             self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.mountainsParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
@@ -272,7 +310,9 @@ class HomeViewController: AbstractController {
             self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore1ParallaxSpeed), y: 0)
             self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore2ParallaxSpeed), y: 0)
             self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore3ParallaxSpeed), y: 0)
+            self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.friendsParallaxSpeed), y: 0)
             self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.loversParallaxSpeed), y: 0)
+            self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.cloudsParallaxSpeed), y: 0)
             self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.mountainsParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
