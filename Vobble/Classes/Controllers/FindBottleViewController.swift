@@ -1,5 +1,5 @@
 //
-//  VideoPlayViewController.swift
+//  FindBottleViewController.swift
 //  BMPlayer
 //
 //  Created by BrikerMan on 16/4/28.
@@ -11,7 +11,7 @@ import BMPlayer
 import AVFoundation
 import NVActivityIndicatorView
 
-class VideoPlayViewController: AbstractController {
+class FindBottleViewController: AbstractController {
     
     
     @IBOutlet weak var topView: UIView!
@@ -37,6 +37,10 @@ class VideoPlayViewController: AbstractController {
         bottomView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
         ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
         replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+    }
+    
+    @IBAction func exitButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="leftIcon" destination="gN4-5k-Fqc" id="EXg-GK-Neb"/>
                 <outlet property="navTitle" destination="1DC-up-vPY" id="vkm-6f-Yvp"/>
+                <outlet property="rightIcon" destination="yuD-6v-FJa" id="Jqa-PN-CTi"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -32,22 +33,30 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN4-5k-Fqc">
-                            <rect key="frame" x="17.5" y="386.5" width="30" height="34"/>
+                            <rect key="frame" x="17" y="387" width="30" height="34"/>
                             <connections>
                                 <action selector="leftIconPressed:" destination="-1" eventType="touchUpInside" id="9H0-gU-1Qb"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DC-up-vPY">
-                            <rect key="frame" x="188" y="403.5" width="0.0" height="0.0"/>
+                            <rect key="frame" x="188" y="404" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuD-6v-FJa">
+                            <rect key="frame" x="323" y="379" width="30" height="30"/>
+                            <connections>
+                                <action selector="rightIconPressed:" destination="-1" eventType="touchUpInside" id="g2l-N9-qdg"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.18" id="5Dd-EB-P2J"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" id="ERp-gD-ZM4"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="M8h-2l-Xzs"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="0.17" id="Vmk-yN-LUn"/>
+                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="1.8" id="d6Y-ih-y8W"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="yFe-D9-Pvs"/>
                     </constraints>
                 </view>

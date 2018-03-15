@@ -15,6 +15,7 @@ class ShopViewController: AbstractController {
     @IBOutlet weak var bottlesButton: UIButton!
     @IBOutlet weak var genderFilterButton: UIButton!
     @IBOutlet weak var countryFilterButton: UIButton!
+    @IBOutlet weak var navigationView: VobbleNavigationBar!
     
     @IBOutlet weak var waveSubView: WaveView!
     
@@ -35,6 +36,7 @@ class ShopViewController: AbstractController {
         
         super.viewDidLoad()
 
+        self.navigationView.viewcontroller = self
          self.shopCollectionView.register(UINib(nibName: "ShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ShopCollectionViewCellID")
          self.initBottleArray()
 //        bottlesButton.setTitleColor(UIColor.red, for: .selected)

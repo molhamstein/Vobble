@@ -23,6 +23,9 @@ class HomeViewController: AbstractController {
     @IBOutlet var shore2Lovers: UIView!
     @IBOutlet var ivShore3Shore: UIImageView!
     @IBOutlet var shore3Friends: UIView!
+    @IBOutlet weak var navigationView: VobbleNavigationBar!
+    @IBOutlet weak var mainFilterView: UIView!
+    @IBOutlet weak var filterView: FilterView!
     
     // GIF images
     @IBOutlet var ivShore2Girl: UIImageView!
@@ -55,6 +58,9 @@ class HomeViewController: AbstractController {
         super.viewDidLoad()
         // enable profile
         self.showNavProfileButton = true
+        self.navigationView.viewcontroller = self
+        self.mainFilterView.isHidden = true
+        self.filterView.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,9 +106,16 @@ class HomeViewController: AbstractController {
     @IBAction func findBottlePressed(_ sender: UIButton) {
         
         self.ivFindBottle.loadGif(name: "find_bottle")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 6 second
+            
+            self.performSegue(withIdentifier: "findBottleSegue", sender: self)
+        }
+    
     }
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
+        
+        self.performSegue(withIdentifier: "myBottlesSegue", sender: self)
         
     }
     
@@ -320,6 +333,18 @@ class HomeViewController: AbstractController {
             self.blockPageTransitions = false
         })
     }
+    
+    func showFilter () {
+        if self.mainFilterView.isHidden == false {
+            self.mainFilterView.isHidden = true
+        } else {
+            self.mainFilterView.isHidden = false
+        }
+    }
+    
+    func showShopView() {
+        self.performSegue(withIdentifier:"shopSegue", sender: self)
+    }
 }
 
 extension HomeViewController {
@@ -327,4 +352,14 @@ extension HomeViewController {
         return true
     }
 }
+
+extension HomeViewController: FilterViewDelegate {
+    
+    func getFilterInfo(gender: String, country: String) {
+        print(gender)
+        print(country)
+        print("----------")
+    }
+}
+
 

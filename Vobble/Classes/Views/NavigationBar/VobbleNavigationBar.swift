@@ -9,10 +9,12 @@
 import Foundation
 import UIKit
 
+
 class VobbleNavigationBar : AbstractNibView {
     
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var navTitle: UILabel!
+    @IBOutlet weak var rightIcon: UIButton!
     public var viewcontroller : UIViewController?
     
     /// set navigation title when navigationTitle is visible.
@@ -23,9 +25,16 @@ class VobbleNavigationBar : AbstractNibView {
     }
     
     /// set left image icon when image_name is visible.
-    @IBInspectable open var imageName: UIImage? {
+    @IBInspectable open var left_image: UIImage? {
         didSet {
-            setLeftIcon(image: imageName)
+            setLeftIcon(image: left_image)
+        }
+    }
+    
+    /// set right image icon when image_name is visible.
+    @IBInspectable open var right_image: UIImage? {
+        didSet {
+            setRightIcon(image: right_image)
         }
     }
     
@@ -50,9 +59,30 @@ class VobbleNavigationBar : AbstractNibView {
            leftIcon.setImage(img, for: .normal)
         }
     }
+   
+    // set left icon
+    fileprivate func setRightIcon (image: UIImage?) {
+        
+        if let img = image {
+            rightIcon.setImage(img, for: .normal)
+        }
+    }
     
     @IBAction func leftIconPressed(_ sender: Any) {
-        viewcontroller?.dismiss(animated: true, completion: nil)
+        if leftIcon.currentImage == UIImage(named: "navBackIcon") {
+             viewcontroller?.dismiss(animated: true, completion: nil)
+        } else if leftIcon.currentImage == UIImage(named: "filters") {
+            let vc = viewcontroller as! HomeViewController
+            vc.showFilter()
+        }
+        
     }
+    
+    @IBAction func rightIconPressed(_ sender: Any) {
+        
+        let vc = viewcontroller as! HomeViewController
+        vc.showShopView()
+    }
+    
     
 }

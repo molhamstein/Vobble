@@ -70,9 +70,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        waveSubView.awakeFromNib()
-        waveSubView.showWave()
+    
         hideView(withType: .signup)
         hideView(withType: .countryV)
         loginView.dropShadow()
@@ -81,6 +79,9 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        waveSubView.awakeFromNib()
+        waveSubView.showWave()
         backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
         loginButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
         signupButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
@@ -139,14 +140,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                             // login success
                             if (isSuccess) {
                                 
-                                
-                                 self.showMessage(message:"success ^_^", type: .warning)
-                                
-//                                // user verified
+                               // user verified
 //                                if (DataStore.shared.me?.isVerified)! {
-//                                    self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
-//                                } else {// need to verify first
-//                                    self.performSegue(withIdentifier: "loginVerificationSegue", sender: self)
+                                    self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+//                                }
+//                                else {// need to verify first
+////                                    self.performSegue(withIdentifier: "loginVerificationSegue", sender: self)
 //                                }
                                 
                                 

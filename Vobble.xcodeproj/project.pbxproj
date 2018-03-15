@@ -32,16 +32,13 @@
 		B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61D203DE93600755799 /* Antipasto_regular.otf */; };
 		B135B622203DE97000755799 /* MullerBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61E203DE93600755799 /* MullerBold.otf */; };
 		B135B623203DE97400755799 /* MullerRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61F203DE93600755799 /* MullerRegular.otf */; };
-		B1508CD620461F630048123F /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508CD520461F630048123F /* VideoPlayViewController.swift */; };
-		B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1508CD72046207B0048123F /* FindBottle.storyboard */; };
+		B1508CD620461F630048123F /* FindBottleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1508CD520461F630048123F /* FindBottleViewController.swift */; };
 		B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B156A4402058763E00654E2A /* ConversationCollectionViewHeader.xib */; };
 		B156A44320587E8000654E2A /* ConversationCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156A44220587E8000654E2A /* ConversationCollectionViewHeader.swift */; };
 		B156A4452058952300654E2A /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B156A4442058952300654E2A /* Conversation.swift */; };
 		B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA6F204B450100CC3C50 /* PickerViewController.swift */; };
-		B17DE5B02055BAF300DC349B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */; };
 		B17DE5B42055BB8600DC349B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5B22055BB8600DC349B /* FilterView.swift */; };
 		B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B17DE5B32055BB8600DC349B /* FilterView.xib */; };
-		B17DE5B72055BC0300DC349B /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B17DE5B62055BC0300DC349B /* Filter.storyboard */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -201,8 +198,6 @@
 		B193730A20342BD5007B1E7D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B193730920342BD5007B1E7D /* QuartzCore.framework */; };
 		B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */; };
 		B193731920342D9F007B1E7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193730F20342D9F007B1E7D /* Main.storyboard */; };
-		B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B193731020342D9F007B1E7D /* NewsfeedListCell.xib */; };
-		B193731B20342D9F007B1E7D /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193731120342D9F007B1E7D /* Profile.storyboard */; };
 		B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */; };
 		B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */; };
 		B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A3743F204530160080A323 /* SystemConfiguration.framework */; };
@@ -214,6 +209,10 @@
 		B1EA39CF20560824008AADC9 /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CE20560824008AADC9 /* Bottle.swift */; };
 		B1EA39D120562673008AADC9 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39D020562673008AADC9 /* ConversationViewController.swift */; };
 		B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */; };
+		B1F7A456205A0F39009B18AB /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A455205A0F39009B18AB /* ShopViewController.swift */; };
+		B1F7A458205A113B009B18AB /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A457205A113B009B18AB /* ShopItem.swift */; };
+		B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A45A205A114E009B18AB /* ShopCollectionViewCell.swift */; };
+		B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
 /* End PBXBuildFile section */
 
@@ -249,16 +248,13 @@
 		B135B61D203DE93600755799 /* Antipasto_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Antipasto_regular.otf; sourceTree = "<group>"; };
 		B135B61E203DE93600755799 /* MullerBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerBold.otf; sourceTree = "<group>"; };
 		B135B61F203DE93600755799 /* MullerRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MullerRegular.otf; sourceTree = "<group>"; };
-		B1508CD520461F630048123F /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayViewController.swift; path = ../VideoPlayViewController.swift; sourceTree = "<group>"; };
-		B1508CD72046207B0048123F /* FindBottle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindBottle.storyboard; sourceTree = "<group>"; };
+		B1508CD520461F630048123F /* FindBottleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindBottleViewController.swift; path = ../FindBottleViewController.swift; sourceTree = "<group>"; };
 		B156A4402058763E00654E2A /* ConversationCollectionViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCollectionViewHeader.xib; sourceTree = "<group>"; };
 		B156A44220587E8000654E2A /* ConversationCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewHeader.swift; sourceTree = "<group>"; };
 		B156A4442058952300654E2A /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		B171DA6F204B450100CC3C50 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
-		B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		B17DE5B22055BB8600DC349B /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		B17DE5B32055BB8600DC349B /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
-		B17DE5B62055BC0300DC349B /* Filter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -542,8 +538,6 @@
 		B193730920342BD5007B1E7D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B193730F20342D9F007B1E7D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		B193731020342D9F007B1E7D /* NewsfeedListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedListCell.xib; sourceTree = "<group>"; };
-		B193731120342D9F007B1E7D /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VobbleNavigationBar.xib; sourceTree = "<group>"; };
 		B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleNavigationBar.swift; sourceTree = "<group>"; };
 		B1A3743F204530160080A323 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -553,8 +547,12 @@
 		B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCollectionViewCell.xib; sourceTree = "<group>"; };
 		B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1EA39CE20560824008AADC9 /* Bottle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bottle.swift; sourceTree = "<group>"; };
-		B1EA39D020562673008AADC9 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		B1EA39D020562673008AADC9 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationViewController.swift; path = ../Filters/ConversationViewController.swift; sourceTree = "<group>"; };
 		B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleButton.swift; sourceTree = "<group>"; };
+		B1F7A455205A0F39009B18AB /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopViewController.swift; path = ../Shop/ShopViewController.swift; sourceTree = "<group>"; };
+		B1F7A457205A113B009B18AB /* ShopItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
+		B1F7A45A205A114E009B18AB /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCollectionViewCell.xib; sourceTree = "<group>"; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -692,7 +690,6 @@
 		B117970E2033C712006D96BE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B17DE5AE2055BAF300DC349B /* Filters */,
 				5706C42E204DC557006E7C9A /* Throw bottle */,
 				B171DA6E204B43C200CC3C50 /* FindBottle */,
 				B193710E2033D031007B1E7D /* Profile */,
@@ -728,6 +725,7 @@
 		B11797112033C804006D96BE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B1F7A457205A113B009B18AB /* ShopItem.swift */,
 				B19372D42033E3FC007B1E7D /* AppUser.swift */,
 				B19372D62033E3FC007B1E7D /* BaseModel.swift */,
 				B19372D72033E3FC007B1E7D /* Category.swift */,
@@ -748,6 +746,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B1F7A459205A114E009B18AB /* Shop */,
 				B1EA39C920560694008AADC9 /* My Bottles */,
 				B17DE5B12055BB8600DC349B /* Filter View */,
 				B171DA71204B46F500CC3C50 /* VideoPlayer */,
@@ -771,7 +770,6 @@
 		B171DA6E204B43C200CC3C50 /* FindBottle */ = {
 			isa = PBXGroup;
 			children = (
-				B1508CD520461F630048123F /* VideoPlayViewController.swift */,
 				B171DA6F204B450100CC3C50 /* PickerViewController.swift */,
 			);
 			path = FindBottle;
@@ -784,15 +782,6 @@
 				5742C140205660B300A5402D /* VideoPlayerView.xib */,
 			);
 			name = VideoPlayer;
-			sourceTree = "<group>";
-		};
-		B17DE5AE2055BAF300DC349B /* Filters */ = {
-			isa = PBXGroup;
-			children = (
-				B17DE5AF2055BAF300DC349B /* FiltersViewController.swift */,
-				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
-			);
-			path = Filters;
 			sourceTree = "<group>";
 		};
 		B17DE5B12055BB8600DC349B /* Filter View */ = {
@@ -1180,7 +1169,10 @@
 		B193710D2033D024007B1E7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B1F7A455205A0F39009B18AB /* ShopViewController.swift */,
 				B19371162033D8FC007B1E7D /* HomeViewController.swift */,
+				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
+				B1508CD520461F630048123F /* FindBottleViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1243,11 +1235,7 @@
 				B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */,
 				B11B52482038B19700C51EE8 /* Start.storyboard */,
 				B193730F20342D9F007B1E7D /* Main.storyboard */,
-				B193731120342D9F007B1E7D /* Profile.storyboard */,
-				B193731020342D9F007B1E7D /* NewsfeedListCell.xib */,
 				5706C433204DDFE0006E7C9A /* ShoreCell.xib */,
-				B1508CD72046207B0048123F /* FindBottle.storyboard */,
-				B17DE5B62055BC0300DC349B /* Filter.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1279,6 +1267,15 @@
 				B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */,
 			);
 			path = CustomButton;
+			sourceTree = "<group>";
+		};
+		B1F7A459205A114E009B18AB /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				B1F7A45A205A114E009B18AB /* ShopCollectionViewCell.swift */,
+				B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */,
+			);
+			path = Shop;
 			sourceTree = "<group>";
 		};
 		FE5F8BA41684F3115C60BED0 /* Frameworks */ = {
@@ -1357,11 +1354,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B17DE5B72055BC0300DC349B /* Filter.storyboard in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */,
-				B193731B20342D9F007B1E7D /* Profile.storyboard in Resources */,
 				B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */,
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
@@ -1375,12 +1370,11 @@
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
+				B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */,
 				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
 				5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */,
-				B193731A20342D9F007B1E7D /* NewsfeedListCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
-				B1508CD82046207B0048123F /* FindBottle.storyboard in Resources */,
 				578A25112058771A00801F77 /* girl_3_1.gif in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
 				B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */,
@@ -1501,6 +1495,7 @@
 			files = (
 				B18A5DC020348E4300F139B7 /* ResultType.swift in Sources */,
 				B18A5D9420348E4300F139B7 /* RACReplaySubject.m in Sources */,
+				B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */,
 				B18A5D7F20348E4300F139B7 /* RACCompoundDisposable.m in Sources */,
 				5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */,
 				B18A5D5A20348E4300F139B7 /* LocationHelper.swift in Sources */,
@@ -1539,6 +1534,7 @@
 				B193711D2033D943007B1E7D /* SignupViewController.swift in Sources */,
 				B19371152033D2F8007B1E7D /* AbstractController.swift in Sources */,
 				B18A5D7820348E4300F139B7 /* NSURLConnection+RACSupport.m in Sources */,
+				B1F7A456205A0F39009B18AB /* ShopViewController.swift in Sources */,
 				B18A5D6120348E4300F139B7 /* ISO8601Serialization.m in Sources */,
 				B18A5D9A20348E4300F139B7 /* RACSignal+Operations.m in Sources */,
 				5706C432204DCAA3006E7C9A /* Shore.swift in Sources */,
@@ -1562,16 +1558,16 @@
 				B18A5DAB20348E4300F139B7 /* UIActionSheet+RACSignalSupport.m in Sources */,
 				B18A5D8820348E4300F139B7 /* RACEmptySignal.m in Sources */,
 				B18A5D6620348E4300F139B7 /* NSData+RACSupport.m in Sources */,
-				B1508CD620461F630048123F /* VideoPlayViewController.swift in Sources */,
+				B1508CD620461F630048123F /* FindBottleViewController.swift in Sources */,
 				B18A5D7020348E4300F139B7 /* NSObject+RACLifting.m in Sources */,
 				B18A5D7520348E4300F139B7 /* NSString+RACKeyPathUtilities.m in Sources */,
 				B19372D22033E36C007B1E7D /* AbstractNibView.swift in Sources */,
-				B17DE5B02055BAF300DC349B /* FiltersViewController.swift in Sources */,
 				B18A5D8020348E4300F139B7 /* RACCompoundDisposableProvider.d in Sources */,
 				B19372E32033E3FC007B1E7D /* HashTag.swift in Sources */,
 				B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */,
 				B18A5D8F20348E4300F139B7 /* RACKVOProxy.m in Sources */,
 				B18A5DBF20348E4300F139B7 /* Result.swift in Sources */,
+				B1F7A458205A113B009B18AB /* ShopItem.swift in Sources */,
 				B18A5DC620348E4300F139B7 /* SimpleAuth.m in Sources */,
 				B18A5D5720348E4300F139B7 /* UIView.swift in Sources */,
 				B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */,

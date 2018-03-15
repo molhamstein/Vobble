@@ -13,6 +13,7 @@ class ConversationViewController: AbstractController {
     // MARK: Properties
     @IBOutlet weak var bottleCollectionView: UICollectionView!
     @IBOutlet weak var waveSubView: WaveView!
+    @IBOutlet weak var navigationView: VobbleNavigationBar!
     
     
     fileprivate var currentUser: AppUser = AppUser()
@@ -26,6 +27,7 @@ class ConversationViewController: AbstractController {
         
         super.viewDidLoad()
         
+        self.navigationView.viewcontroller = self
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "conversationCollectionViewCellID")
         
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewHeader",bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "conversationCollectionViewHeaderID")
@@ -233,6 +235,7 @@ extension ConversationViewController: UICollectionViewDataSource {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "conversationCollectionViewHeaderID", for: indexPath) as! ConversationCollectionViewHeader
         
         headerView.searchTetField.text = searchString
+        headerView.searchTetField.becomeFirstResponder()
         headerView.searchTetField.delegate = self
         headerView.convVC = self
         
