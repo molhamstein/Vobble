@@ -71,9 +71,13 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+//        if let m = DataStore.shared.me {
+//             self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+//        }
         hideView(withType: .signup)
         hideView(withType: .countryV)
         loginView.dropShadow()
+        
         
     }
     

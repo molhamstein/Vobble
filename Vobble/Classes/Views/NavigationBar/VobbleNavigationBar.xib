@@ -45,14 +45,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuD-6v-FJa">
-                            <rect key="frame" x="323" y="379" width="30" height="30"/>
+                            <rect key="frame" x="323" y="318.5" width="30" height="30"/>
                             <connections>
                                 <action selector="rightIconPressed:" destination="-1" eventType="touchUpInside" id="g2l-N9-qdg"/>
                             </connections>
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.18" id="5Dd-EB-P2J"/>
+                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" id="5Dd-EB-P2J"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" id="ERp-gD-ZM4"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="M8h-2l-Xzs"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="0.17" id="Vmk-yN-LUn"/>

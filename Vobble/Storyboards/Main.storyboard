@@ -221,7 +221,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Main Shore"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="filters"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="filters"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="right_image" value="filters"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="right_image" value="ic_shop"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -320,7 +320,7 @@
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Vfw-kW-c1W" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mMZ-OZ-kkc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mMZ-OZ-kkc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -338,7 +338,7 @@
         <scene sceneID="jME-nh-gzT">
             <objects>
                 <navigationController navigationBarHidden="YES" id="9aW-Lr-Rgh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="O6b-p9-Rmu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O6b-p9-Rmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -643,16 +643,16 @@
                                                 </constraints>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gwE-GP-LSE">
-                                                <rect key="frame" x="88" y="13" width="87" height="42"/>
+                                                <rect key="frame" x="88" y="13.5" width="86.5" height="41"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qq1-fV-vFz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="87" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="86.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main Shore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkW-fY-pKf">
-                                                        <rect key="frame" x="0.0" y="21" width="87" height="21"/>
+                                                        <rect key="frame" x="0.0" y="20.5" width="86.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -683,10 +683,10 @@
                                 <rect key="frame" x="0.0" y="494" width="375" height="133"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96s-Ya-2Dz">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="133"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="133"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ni-2I-t0H" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                                <rect key="frame" x="73" y="26" width="80" height="80"/>
+                                                <rect key="frame" x="72.5" y="26" width="80" height="80"/>
                                                 <color key="backgroundColor" red="0.0" green="0.4850566275" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="3Kj-ev-tg9"/>
@@ -704,7 +704,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ZZ-T5-aNn">
-                                        <rect key="frame" x="188" y="0.0" width="187" height="133"/>
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="133"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-Xy-Jtd" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="27" width="80" height="80"/>
@@ -1016,6 +1016,7 @@
         <image name="clouds" width="4500" height="662"/>
         <image name="filters" width="23" height="23"/>
         <image name="ic_close_white" width="20" height="20"/>
+        <image name="ic_shop" width="26" height="21"/>
         <image name="island" width="753" height="613"/>
         <image name="montains" width="4500" height="80"/>
         <image name="navBackIcon" width="25" height="23"/>
