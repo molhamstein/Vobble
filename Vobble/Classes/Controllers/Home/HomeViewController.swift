@@ -109,6 +109,7 @@ class HomeViewController: AbstractController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 6 second
             
             self.performSegue(withIdentifier: "findBottleSegue", sender: self)
+            self.ivFindBottle.image = nil
         }
     
     }
