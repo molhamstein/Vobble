@@ -26,8 +26,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZZ-yO-962">
-                        <rect key="frame" x="25" y="15" width="463" height="483"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="25" y="15" width="463" height="478"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yu0-Y2-TI0">
                         <rect key="frame" x="25" y="15" width="463" height="483"/>
@@ -85,7 +85,7 @@
                                 <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -112,7 +112,7 @@
                 <constraint firstItem="yu0-Y2-TI0" firstAttribute="bottom" secondItem="Ehc-uj-KWX" secondAttribute="bottom" constant="15" id="EJK-C3-1DE"/>
                 <constraint firstItem="tZZ-yO-962" firstAttribute="trailing" secondItem="yu0-Y2-TI0" secondAttribute="trailing" id="Rhd-Be-hIv"/>
                 <constraint firstItem="Ehc-uj-KWX" firstAttribute="leading" secondItem="exh-Rt-hrl" secondAttribute="leading" constant="7" id="Yjd-Qc-wuu"/>
-                <constraint firstItem="tZZ-yO-962" firstAttribute="bottom" secondItem="yu0-Y2-TI0" secondAttribute="bottom" id="ddo-MP-IHY"/>
+                <constraint firstItem="tZZ-yO-962" firstAttribute="bottom" secondItem="yu0-Y2-TI0" secondAttribute="bottom" constant="-5" id="ddo-MP-IHY"/>
                 <constraint firstItem="Ehc-uj-KWX" firstAttribute="top" secondItem="qJV-4y-zAB" secondAttribute="bottom" constant="5" id="gjD-0P-ElP"/>
                 <constraint firstItem="uDx-kN-RYn" firstAttribute="top" secondItem="exh-Rt-hrl" secondAttribute="top" id="hz8-Lf-nnp"/>
                 <constraint firstAttribute="bottom" secondItem="yu0-Y2-TI0" secondAttribute="bottom" constant="10" id="kDb-Gu-Vat"/>

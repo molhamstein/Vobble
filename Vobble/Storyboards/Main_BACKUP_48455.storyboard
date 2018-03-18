@@ -146,7 +146,11 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5La-uT-nVd">
+<<<<<<< HEAD
                                 <rect key="frame" x="0.0" y="109" width="225" height="315.5"/>
+=======
+                                <rect key="frame" x="0.0" y="167" width="356.5" height="500"/>
+>>>>>>> bcc81907c4ad70c6c673841c643dc6fd10be448a
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5La-uT-nVd" secondAttribute="height" multiplier="712:1000" id="GWq-6J-fXf"/>
                                 </constraints>

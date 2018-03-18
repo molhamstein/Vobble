@@ -14,13 +14,17 @@ class VideoPlayerView: AbstractNibView {
     
     var player: BMPlayer!
     @IBOutlet weak var videoView: UIView!
+    let controller: BMPlayerCustomControlView = BMPlayerCustomControlView()
     
-    
-    public func preparePlayer(videoURL: String) {
+    public func preparePlayer(videoURL: String,customPlayBtn: UIButton) {
         
         resetPlayerManager()
         
-        player = BMPlayer()
+//        let controller: BMPlayerCustomControlView = BMPlayerCustomControlView()
+        controller.setCustomPlayBtn(playBtn: customPlayBtn)
+        player = BMPlayer(customControlView: controller)
+        
+//        player = BMPlayer()
         
         videoView.addSubview(player)
         
@@ -57,6 +61,10 @@ class VideoPlayerView: AbstractNibView {
         BMPlayerConf.enableVolumeGestures = true
         // enable setting the playtime by touch gesture in the player
         BMPlayerConf.enablePlaytimeGestures = true
+    }
+    
+    func playButtonPressed() {
+        controller.delegate?.controlView(controlView: controller, didPressButton: controller.playButton)
     }
     
 }
@@ -98,20 +106,6 @@ extension VideoPlayerView: BMPlayerDelegate {
     func bmPlayer(player: BMPlayer, loadedTimeDidChange loadedDuration: TimeInterval, totalDuration: TimeInterval) {
         //  print("| BMPlayerDelegate | loadedTimeDidChange | \(loadedDuration) of \(totalDuration)")
     }
+    
 }
 
-//class CustomBMPlayer: BMPlayer {
-//    
-//    override class open func storyBoardCustomControl() -> BMPlayerControlView? {
-////        super.storyBoardCustomControl()
-//        let b:BMPlayerControlView = BMPlayerControlView()
-//        let btn:UIButton = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
-//        btn.backgroundColor = .yellow
-//        btn.setTitle("*", for: .normal)
-//        b.replayButton = btn
-//        
-//        return b
-//    }
-//    
-//    
-//}

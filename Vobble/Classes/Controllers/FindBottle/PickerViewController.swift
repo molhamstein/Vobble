@@ -39,7 +39,7 @@ extension PickerViewController: UIImagePickerControllerDelegate, UINavigationCon
         videoURL = info["UIImagePickerControllerReferenceURL"] as? NSURL
         videoPickerController.dismiss(animated: true, completion: nil)
         if let url = videoURL?.absoluteString {
-            vp.preparePlayer(videoURL: url)
+//            vp.preparePlayer(videoURL: url)
         }
         
     }
