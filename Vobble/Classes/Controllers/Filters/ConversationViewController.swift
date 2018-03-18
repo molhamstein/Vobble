@@ -15,7 +15,6 @@ class ConversationViewController: AbstractController {
     @IBOutlet weak var waveSubView: WaveView!
     @IBOutlet weak var navigationView: VobbleNavigationBar!
     
-    
     fileprivate var currentUser: AppUser = AppUser()
     fileprivate var filteredConvArray: [Conversation] = [Conversation]()
     fileprivate var searchText: UITextField?
@@ -29,7 +28,6 @@ class ConversationViewController: AbstractController {
         
         self.navigationView.viewcontroller = self
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "conversationCollectionViewCellID")
-        
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewHeader",bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "conversationCollectionViewHeaderID")
         
         self.initBottleArray()
@@ -209,7 +207,6 @@ extension ConversationViewController: UICollectionViewDataSource {
         }
         
        return self.currentUser.repliesArray.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -246,7 +243,7 @@ extension ConversationViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: self.bottleCollectionView.bounds.width, height: 210)
+        return CGSize(width: self.bottleCollectionView.bounds.width, height: 230)
     }
 }
 
@@ -256,7 +253,7 @@ extension ConversationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemW = (UIScreen.main.bounds.size.width)
-        let itemh = CGFloat(140)
+        let itemh = CGFloat(155)
         
         return CGSize(width: itemW, height: itemh)
     }
@@ -271,7 +268,6 @@ extension ConversationViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        
     }
 }
 
@@ -284,8 +280,7 @@ extension ConversationViewController {
 
         if string.characters.count > 0 { // if it was not delete character
             searchString = string2 + string1
-        }
-        else if string2.characters.count > 0 { // if it was a delete character
+        } else if string2.characters.count > 0 { // if it was a delete character
             
             searchString = String(string2.characters.dropLast())
         }

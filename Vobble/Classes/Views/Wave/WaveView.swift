@@ -46,9 +46,9 @@ class WaveView : AbstractNibView {
         waterView!.start()
         
         // animate the bottle
-        bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/5)).translatedBy(x: self.view.frame.width/3, y: 45)
+        bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/5)).translatedBy(x: self.view.frame.width/3, y: 30)
         UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
-            self.bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/8)).translatedBy(x: (self.view.frame.width/3)-10, y: 45)
+            self.bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/8)).translatedBy(x: (self.view.frame.width/3)-10, y: 30)
         }, completion: nil)
         
     }

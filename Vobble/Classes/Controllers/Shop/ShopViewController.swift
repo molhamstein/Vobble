@@ -50,14 +50,26 @@ class ShopViewController: AbstractController {
     @IBAction func bottlesBtnPressed(_ sender: Any) {
         self.initBottleArray()
         self.shopCollectionView.reloadData()
+        
+        bottlesButton.isSelected = true
+        genderFilterButton.isSelected = false
+        countryFilterButton.isSelected = false
     }
     
     @IBAction func genderFilterBtnPressed(_ sender: Any) {
         self.initGenderFilterArray()
         self.shopCollectionView.reloadData()
+        
+        bottlesButton.isSelected = false
+        genderFilterButton.isSelected = true
+        countryFilterButton.isSelected = false
     }
    
     @IBAction func countryFilterBtnPressed(_ sender: Any) {
+        
+        bottlesButton.isSelected = false
+        genderFilterButton.isSelected = false
+        countryFilterButton.isSelected = true
     }
     
     
@@ -70,7 +82,7 @@ class ShopViewController: AbstractController {
         obj1.title = "Gender Filter"
         obj1.price = "1.5$"
         obj1.imageUrl = UIImage(named: "gender")
-        obj1.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+        obj1.description = "buy 1 bottle so you dont have to wait for the automatic refill"
         genderFilterArray.append(obj1)
         
         let obj2:ShopItem = ShopItem()
@@ -88,7 +100,7 @@ class ShopViewController: AbstractController {
         obj3.title = "Gender Filter"
         obj3.price = "4.5$"
         obj3.imageUrl = UIImage(named: "gender")
-        obj3.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+        obj3.description = "buy 5 bottles so you dont have to wait for the automatic refill"
         genderFilterArray.append(obj3)
         
         let obj4:ShopItem = ShopItem()

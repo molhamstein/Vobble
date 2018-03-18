@@ -66,14 +66,16 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     var isMale: Bool = true
     var countryName: String = ""
     
-    
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        hideView(withType: .signup)
-        hideView(withType: .countryV)
-        loginView.dropShadow()
+//        if let m = DataStore.shared.me {
+//             self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+//        }
+        //hideView(withType: .signup)
+        //hideView(withType: .countryV)
+        //loginView.dropShadow()
         
     }
     
@@ -85,6 +87,19 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
         loginButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
         signupButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // set initial state and hide views to show later with animation
+        self.signupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.signupView.frame.height)
+        self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.loginView.frame.height)
+        self.countryView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.countryView.frame.height)
+        dispatch_main_after(0.7) {
+            self.showView(withType: .login)
+        }
     }
     
     // Customize all view members (fonts - style - text)
@@ -189,27 +204,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         }
     }
     
-    @IBAction func twitterAction(_ sender: UIButton) {
-        // show activity loader
-        self.showActivityLoader(true)
-        SocialManager.shared.twitterLogin(controller: self) { (isSuccess, error) in
-            // hide activity loader
-            self.showActivityLoader(false)
-            // login succeed go to home screen
-            if (isSuccess) {
-                self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
-            } else {
-                let errorServer = error ?? ServerError.unknownError
-                // social login failed
-                if errorServer.type == ServerError.socialLoginError.type {
-                    self.showMessage(message: "ERROR_SOCIAL_TWITTER", type: .error)
-                } else {
-                    self.showMessage(message: errorServer.type.errorMessage, type: .error)
-                }
-            }
-        }
-    }
-    
     @IBAction func instagramAction(_ sender: UIButton) {
         // show activity loader
         self.showActivityLoader(true)
@@ -233,30 +227,37 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBAction func googleAction(_ sender: UIButton) {
         // show activity loader
-//        self.showActivityLoader(true)
-//        SocialManager.shared.googleLogin(controller: self) { (isSuccess, error) in
-//            // hide activity loader
-//            self.showActivityLoader(false)
-//            // login succeed go to home screen
-//            if (isSuccess) {
-//                self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
-//            } else {
-//                let errorServer = error ?? ServerError.unknownError
-//                // social login failed
-//                if errorServer.type == ServerError.socialLoginError.type {
-//                    self.showMessage(message: "ERROR_SOCIAL_GOOGLE", type: .error)
-//                } else {
-//                    self.showMessage(message: errorServer.type.errorMessage, type: .error)
-//                }
-//            }
-//        }
+        self.showActivityLoader(true)
+        SocialManager.shared.googleLogin(controller: self) { (isSuccess, error) in
+            // hide activity loader
+            self.showActivityLoader(false)
+            // login succeed go to home screen
+            if (isSuccess) {
+                self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+            } else {
+                let errorServer = error ?? ServerError.unknownError
+                // social login failed
+                if errorServer.type == ServerError.socialLoginError.type {
+                    self.showMessage(message: "ERROR_SOCIAL_GOOGLE", type: .error)
+                } else {
+                    self.showMessage(message: errorServer.type.errorMessage, type: .error)
+                }
+            }
+        }
+        
+        GIDSignIn.sharedInstance().clientID = AppConfig.googleClientID
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
+        
 //        GIDSignIn.sharedInstance().delegate = self
 //        GIDSignIn.sharedInstance().uiDelegate = self
-//        GIDSignIn.sharedInstance().clientID = AppConfig.googleClientID
-//        GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
-//        GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
-//        GIDSignIn.sharedInstance().signInSilently()
+        
+        //GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
+        //GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
+        //GIDSignIn.sharedInstance().signInSilently()
     }
+    
     
     @IBAction func registerBtnPressed(_ sender: AnyObject) {
         
@@ -264,10 +265,22 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         //   1 - hide login view
         //   2 - show signup view
         
-        showView(withType: .signup)
         hideView(withType: .login)
+        dispatch_main_after(0.2) {
+            self.showView(withType: .signup)
+        }
+    }
+    
+    @IBAction func backToLoginBtnPressed(_ sender: AnyObject) {
         
+        /***  register btn in login view  ***/
+        //   1 - hide login view
+        //   2 - show signup view
         
+        self.hideView(withType: .signup)
+        dispatch_main_after(0.4) {
+            self.showView(withType: .login)
+        }
     }
     
     @IBAction func signupBtnPressed(_ sender: Any) {
@@ -393,28 +406,54 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         }
         return true
     }
+
     
     func showView(withType:ViewType) {
         switch withType {
         case .login :
-            loginView.isHidden  = false
             loginView.dropShadow()
+            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+            }, completion: {(finished: Bool) in
+                
+            })
         case .signup :
-            signupView.isHidden = false
             signupView.dropShadow()
+            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.signupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+            }, completion: {(finished: Bool) in
+                
+            })
         case .countryV :
-            countryView.isHidden = false
+            signupView.dropShadow()
+            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.countryView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+            }, completion: {(finished: Bool) in
+                
+            })
         }
     }
     
     func hideView(withType:ViewType) {
         switch withType {
         case .login :
-            loginView.isHidden  = true
+            UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.loginView.frame.height)
+            }, completion: {(finished: Bool) in
+                
+            })
         case .signup :
-            signupView.isHidden = true
+            UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.signupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.signupView.frame.height)
+            }, completion: {(finished: Bool) in
+                
+            })
         case .countryV :
-            countryView.isHidden = true
+            UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.countryView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.countryView.frame.height)
+            }, completion: {(finished: Bool) in
+                
+            })
         }
     }
     
@@ -424,3 +463,46 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
 
 }
 
+extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
+    
+    //MARK:Google SignIn Delegate
+    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
+        self.showActivityLoader(false)
+    }
+    
+    // Present a view that prompts the user to sign in with Google
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    // Dismiss the "Sign in with Google" view
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //completed sign In
+    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        self.showActivityLoader(false)
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            let userId = user.userID                  // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+            // ...
+        } else {
+            print("\(error.localizedDescription)")
+        }
+    }
+    
+    public func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+         self.showActivityLoader(false)
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
+    }
+    
+}

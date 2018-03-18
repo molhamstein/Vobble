@@ -22,14 +22,17 @@ class DataStore :NSObject {
     private let CACHE_KEY_CATEGORIES = "categories"
     private let CACHE_KEY_SHORES = "SHORES"
     private let CACHE_KEY_USER = "user"
+    private let CACHE_KEY_TOKEN = "token"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
     private var _categories: [Category] = []
     private var _shores: [Shore] = []
+    private var _token: String?
+    
     // user loggedin flag
     var isLoggedin: Bool {
-        if let token = me?.token, !token.isEmpty {
+        if let id = token, !id.isEmpty {
             return true
         }
         return false
@@ -73,6 +76,20 @@ class DataStore :NSObject {
                 _me = loadBaseModelObjectForKey(key: CACHE_KEY_USER)
             }
             return _me
+        }
+    }
+    
+    public var token:String? {
+        set{
+            _token = newValue
+            saveStringWithKey(stringToStore: _token!, key: CACHE_KEY_TOKEN)
+            
+        }
+        get {
+            if (_token == nil) {
+                _token = loadStringForKey(key: CACHE_KEY_TOKEN)
+            }
+            return _token
         }
     }
     

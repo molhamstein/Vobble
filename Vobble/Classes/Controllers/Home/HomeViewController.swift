@@ -273,7 +273,7 @@ class HomeViewController: AbstractController {
         }
         
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
-        UIView.animate(withDuration: 0.5, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
             self.ivSea.transform = CGAffineTransform.identity
             self.ivIsland.transform = CGAffineTransform.identity
             self.ivShore1Shore.transform = CGAffineTransform.identity
@@ -293,8 +293,7 @@ class HomeViewController: AbstractController {
             return
         }
         
-        //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
-        UIView.animate(withDuration: 0.5, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
             self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.seaParallaxSpeed), y: 0)
             self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.island2ParallaxSpeed), y: 0)
             self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore1ParallaxSpeed), y: 0)
@@ -318,7 +317,7 @@ class HomeViewController: AbstractController {
         
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
         let doubleScreenWidth = self.screenWidth * 2
-        UIView.animate(withDuration: 0.5, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
             self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.seaParallaxSpeed), y: 0)
             self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.island2ParallaxSpeed), y: 0)
             self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore1ParallaxSpeed), y: 0)

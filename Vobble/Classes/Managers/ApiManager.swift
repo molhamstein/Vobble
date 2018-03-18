@@ -166,6 +166,7 @@ class ApiManager: NSObject {
                 } else {
                     // parse response to data model >> user object
                     let user = AppUser(json: jsonResponse["user"])
+                    DataStore.shared.token = jsonResponse["id"].string
                     DataStore.shared.me = user
                     completionBlock(true , nil, user)
                 }
