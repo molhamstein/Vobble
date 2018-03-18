@@ -83,7 +83,6 @@ class DataStore :NSObject {
         set{
             _token = newValue
             saveStringWithKey(stringToStore: _token!, key: CACHE_KEY_TOKEN)
-            
         }
         get {
             if (_token == nil) {

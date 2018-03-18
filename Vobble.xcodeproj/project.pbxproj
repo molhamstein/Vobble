@@ -162,6 +162,8 @@
 		B18A5DC920348E4300F139B7 /* SimpleAuthUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B18A5D4B20348E4300F139B7 /* SimpleAuthUtilities.m */; };
 		B18A5DCA20348E4300F139B7 /* SimpleAuthInstagramLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B18A5D4E20348E4300F139B7 /* SimpleAuthInstagramLoginViewController.m */; };
 		B18A5DCB20348E4300F139B7 /* SimpleAuthInstagramProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B18A5D5020348E4300F139B7 /* SimpleAuthInstagramProvider.m */; };
+		B190AD25205DADB300C9F030 /* BMPlayerCustomControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */; };
+		B190AD26205DADB300C9F030 /* BMPlayerCustomControlView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B190AD24205DADB300C9F030 /* BMPlayerCustomControlView2.swift */; };
 		B19371132033D254007B1E7D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19371122033D254007B1E7D /* ProfileViewController.swift */; };
 		B19371152033D2F8007B1E7D /* AbstractController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19371142033D2F8007B1E7D /* AbstractController.swift */; };
 		B19371172033D8FC007B1E7D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19371162033D8FC007B1E7D /* HomeViewController.swift */; };
@@ -499,6 +501,8 @@
 		B18A5D4E20348E4300F139B7 /* SimpleAuthInstagramLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAuthInstagramLoginViewController.m; sourceTree = "<group>"; };
 		B18A5D4F20348E4300F139B7 /* SimpleAuthInstagramProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAuthInstagramProvider.h; sourceTree = "<group>"; };
 		B18A5D5020348E4300F139B7 /* SimpleAuthInstagramProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAuthInstagramProvider.m; sourceTree = "<group>"; };
+		B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BMPlayerCustomControlView.swift; path = VideoPlayer/BMPlayerCustomControlView.swift; sourceTree = "<group>"; };
+		B190AD24205DADB300C9F030 /* BMPlayerCustomControlView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BMPlayerCustomControlView2.swift; path = VideoPlayer/BMPlayerCustomControlView2.swift; sourceTree = "<group>"; };
 		B19371122033D254007B1E7D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B19371142033D2F8007B1E7D /* AbstractController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractController.swift; sourceTree = "<group>"; };
 		B19371162033D8FC007B1E7D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -778,6 +782,8 @@
 		B171DA71204B46F500CC3C50 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */,
+				B190AD24205DADB300C9F030 /* BMPlayerCustomControlView2.swift */,
 				5742C13F205660B300A5402D /* VideoPlayerView.swift */,
 				5742C140205660B300A5402D /* VideoPlayerView.xib */,
 			);
@@ -1495,6 +1501,7 @@
 			files = (
 				B18A5DC020348E4300F139B7 /* ResultType.swift in Sources */,
 				B18A5D9420348E4300F139B7 /* RACReplaySubject.m in Sources */,
+				B190AD25205DADB300C9F030 /* BMPlayerCustomControlView.swift in Sources */,
 				B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */,
 				B18A5D7F20348E4300F139B7 /* RACCompoundDisposable.m in Sources */,
 				5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */,
@@ -1604,6 +1611,7 @@
 				B18A5DAA20348E4300F139B7 /* RACValueTransformer.m in Sources */,
 				B18A5DB120348E4300F139B7 /* UIControl+RACSignalSupportPrivate.m in Sources */,
 				B18A5D7120348E4300F139B7 /* NSObject+RACPropertySubscribing.m in Sources */,
+				B190AD26205DADB300C9F030 /* BMPlayerCustomControlView2.swift in Sources */,
 				B18A5D6020348E4300F139B7 /* NSURL+CMDQueryStringSerialization.m in Sources */,
 				B18A5DA320348E4300F139B7 /* RACSubscriptionScheduler.m in Sources */,
 				B18A5D7220348E4300F139B7 /* NSObject+RACSelectorSignal.m in Sources */,
