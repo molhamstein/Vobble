@@ -75,7 +75,6 @@ class VobbleNavigationBar : AbstractNibView {
             let vc = viewcontroller as! HomeViewController
             vc.showFilter()
         }
-        
     }
     
     @IBAction func rightIconPressed(_ sender: Any) {

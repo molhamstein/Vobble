@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,19 +44,22 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuD-6v-FJa">
-                            <rect key="frame" x="323" y="318.5" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuD-6v-FJa">
+                            <rect key="frame" x="326.5" y="313" width="30" height="34"/>
+                            <state key="normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
                                 <action selector="rightIconPressed:" destination="-1" eventType="touchUpInside" id="g2l-N9-qdg"/>
                             </connections>
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" id="5Dd-EB-P2J"/>
+                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="0.99" id="5Dd-EB-P2J"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" id="ERp-gD-ZM4"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="M8h-2l-Xzs"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="0.17" id="Vmk-yN-LUn"/>
-                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="1.8" id="d6Y-ih-y8W"/>
+                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="1.82" id="d6Y-ih-y8W"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="yFe-D9-Pvs"/>
                     </constraints>
                 </view>

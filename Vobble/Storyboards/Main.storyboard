@@ -985,7 +985,7 @@
                                     <constraint firstAttribute="height" constant="110.33" id="g7s-38-YeN"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="shop"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Shop"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="navBackIcon"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
