@@ -27,7 +27,7 @@ class Bottle: BaseModel {
     public var viewsCount : String?
     public var repliesCount : String?
     public var createdAt : UIColor?
-    public var ownerId : UIColor?
+    public var ownerId : AppUser?
     public var shoreId : UIImage?
     
     

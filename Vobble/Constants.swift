@@ -23,7 +23,7 @@ struct AppConfig {
     static let instagramRedirectURI = "http://brain-socket.com"
     static let twitterConsumerKey = "eq0dVMoM1JqNcR6VJJILsdXNddo"
     static let twitterConsumerSecret = "6JkdvzSijm13xjBW0fYSEG4yF2tbro8pwxz1vDx290Bj0aMw2vssI"
-    static let googleClientID = "545676047391-kgl2o7n3d419h1anpp8ao4a99005fqgp.apps.googleusercontent.com"
+    static let googleClientID = "82142364137-21s23clufpu4d0abp5ppa5na245tak1u.apps.googleusercontent.com"
     
     static let PlaceHolderImage = UIImage(named: "bottle-1")
     

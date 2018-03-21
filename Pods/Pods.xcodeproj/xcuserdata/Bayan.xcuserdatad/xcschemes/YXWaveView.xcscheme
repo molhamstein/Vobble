@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '86F821A89A142F1F0DD12CC748DCA627'
-               BlueprintName = 'YXWaveView'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'YXWaveView.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6580089D8312FDF79AC98332514E126D"
+               BlueprintName = "YXWaveView"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "YXWaveView.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
