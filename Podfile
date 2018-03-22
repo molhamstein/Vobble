@@ -20,5 +20,9 @@ pod 'GoogleSignIn'
 pod 'BMPlayer', '~> 0.9.1'
 pod 'SDRecordButton'
 pod 'LLSimpleCamera'
+pod 'Firebase/Storage'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
+pod 'JSQMessagesViewController'
 
 end

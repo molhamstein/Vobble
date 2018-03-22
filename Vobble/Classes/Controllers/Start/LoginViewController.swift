@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 enum ViewType {
     case login
@@ -150,19 +151,21 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                         self.view.isUserInteractionEnabled = false
                         ApiManager.shared.userLogin(email: email, password: password) { (isSuccess, error, user) in
                             // stop loading
-                            self.loginButton.isLoading = false
+//                            self.loginButton.isLoading = false
                             self.view.isUserInteractionEnabled = true
                             // login success
                             if (isSuccess) {
-                                
-                               // user verified
-//                                if (DataStore.shared.me?.isVerified)! {
+                            
+                                Auth.auth().signInAnonymously(completion: { (user, error) in
+                                    if let err:Error = error {
+//                                        print(err.localizedDescription)
+                                        self.loginButton.isLoading = false
+                                        self.showMessage(message:err.localizedDescription, type: .error)
+                                        return
+                                    }
+                                    self.loginButton.isLoading = false
                                     self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
-//                                }
-//                                else {// need to verify first
-////                                    self.performSegue(withIdentifier: "loginVerificationSegue", sender: self)
-//                                }
-                                
+                                })
                                 
                             } else {
                                 self.showMessage(message:(error?.type.errorMessage)!, type: .error)

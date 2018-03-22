@@ -164,7 +164,6 @@
 		B18A5DCA20348E4300F139B7 /* SimpleAuthInstagramLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B18A5D4E20348E4300F139B7 /* SimpleAuthInstagramLoginViewController.m */; };
 		B18A5DCB20348E4300F139B7 /* SimpleAuthInstagramProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B18A5D5020348E4300F139B7 /* SimpleAuthInstagramProvider.m */; };
 		B190AD25205DADB300C9F030 /* BMPlayerCustomControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */; };
-		B190AD26205DADB300C9F030 /* BMPlayerCustomControlView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B190AD24205DADB300C9F030 /* BMPlayerCustomControlView2.swift */; };
 		B19371132033D254007B1E7D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19371122033D254007B1E7D /* ProfileViewController.swift */; };
 		B19371152033D2F8007B1E7D /* AbstractController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19371142033D2F8007B1E7D /* AbstractController.swift */; };
 		B19371172033D8FC007B1E7D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19371162033D8FC007B1E7D /* HomeViewController.swift */; };
@@ -201,12 +200,13 @@
 		B193730A20342BD5007B1E7D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B193730920342BD5007B1E7D /* QuartzCore.framework */; };
 		B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */; };
 		B193731920342D9F007B1E7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193730F20342D9F007B1E7D /* Main.storyboard */; };
+		B1961240206199540065019D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B196123F206199540065019D /* ChatViewController.swift */; };
+		B19612462061CEC00065019D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B19612452061CEC00065019D /* GoogleService-Info.plist */; };
 		B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */; };
 		B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */; };
 		B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A3743F204530160080A323 /* SystemConfiguration.framework */; };
 		B1A37442204530230080A323 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37441204530230080A323 /* StoreKit.framework */; };
 		B1A37444204530310080A323 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37443204530310080A323 /* AddressBook.framework */; };
-		B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A37445204532670080A323 /* GoogleService-Info.plist */; };
 		B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */; };
 		B1EA39CD205606D8008AADC9 /* ConversationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */; };
 		B1EA39CF20560824008AADC9 /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CE20560824008AADC9 /* Bottle.swift */; };
@@ -504,7 +504,6 @@
 		B18A5D4F20348E4300F139B7 /* SimpleAuthInstagramProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAuthInstagramProvider.h; sourceTree = "<group>"; };
 		B18A5D5020348E4300F139B7 /* SimpleAuthInstagramProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAuthInstagramProvider.m; sourceTree = "<group>"; };
 		B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BMPlayerCustomControlView.swift; path = VideoPlayer/BMPlayerCustomControlView.swift; sourceTree = "<group>"; };
-		B190AD24205DADB300C9F030 /* BMPlayerCustomControlView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BMPlayerCustomControlView2.swift; path = VideoPlayer/BMPlayerCustomControlView2.swift; sourceTree = "<group>"; };
 		B19371122033D254007B1E7D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B19371142033D2F8007B1E7D /* AbstractController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractController.swift; sourceTree = "<group>"; };
 		B19371162033D8FC007B1E7D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -544,12 +543,13 @@
 		B193730920342BD5007B1E7D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B193730F20342D9F007B1E7D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B196123F206199540065019D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		B19612452061CEC00065019D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VobbleNavigationBar.xib; sourceTree = "<group>"; };
 		B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleNavigationBar.swift; sourceTree = "<group>"; };
 		B1A3743F204530160080A323 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B1A37441204530230080A323 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B1A37443204530310080A323 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		B1A37445204532670080A323 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCollectionViewCell.xib; sourceTree = "<group>"; };
 		B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1EA39CE20560824008AADC9 /* Bottle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bottle.swift; sourceTree = "<group>"; };
@@ -680,7 +680,7 @@
 				B19372F92034196A007B1E7D /* Constants.swift */,
 				B19372FF20342423007B1E7D /* Localizable.strings */,
 				9234B5F4203356570085F9F7 /* Info.plist */,
-				B1A37445204532670080A323 /* GoogleService-Info.plist */,
+				B19612452061CEC00065019D /* GoogleService-Info.plist */,
 				B19372FB203419C7007B1E7D /* Vobble-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
@@ -786,7 +786,6 @@
 			isa = PBXGroup;
 			children = (
 				B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */,
-				B190AD24205DADB300C9F030 /* BMPlayerCustomControlView2.swift */,
 				5742C13F205660B300A5402D /* VideoPlayerView.swift */,
 				5742C140205660B300A5402D /* VideoPlayerView.xib */,
 			);
@@ -1178,6 +1177,7 @@
 		B193710D2033D024007B1E7D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B196123F206199540065019D /* ChatViewController.swift */,
 				B1F7A455205A0F39009B18AB /* ShopViewController.swift */,
 				B19371162033D8FC007B1E7D /* HomeViewController.swift */,
 				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
@@ -1376,6 +1376,7 @@
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
 				578A25142058823C00801F77 /* girl.gif in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
+				B19612462061CEC00065019D /* GoogleService-Info.plist in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
@@ -1387,7 +1388,6 @@
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
 				578A25112058771A00801F77 /* girl_3_1.gif in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
-				B1A37446204532670080A323 /* GoogleService-Info.plist in Resources */,
 				578A25122058771A00801F77 /* girl_3_2.gif in Resources */,
 				B11B52492038B19700C51EE8 /* Start.storyboard in Resources */,
 				B19372F62033E44E007B1E7D /* OpenSansSemiBold.ttf in Resources */,
@@ -1436,6 +1436,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera/LLSimpleCamera.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PIDatePicker/PIDatePicker.framework",
@@ -1447,7 +1449,9 @@
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YXWaveView/YXWaveView.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1460,6 +1464,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LLSimpleCamera.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIDatePicker.framework",
@@ -1471,7 +1477,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YXWaveView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1505,6 +1513,7 @@
 			files = (
 				B18A5DC020348E4300F139B7 /* ResultType.swift in Sources */,
 				B18A5D9420348E4300F139B7 /* RACReplaySubject.m in Sources */,
+				B1961240206199540065019D /* ChatViewController.swift in Sources */,
 				B190AD25205DADB300C9F030 /* BMPlayerCustomControlView.swift in Sources */,
 				B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */,
 				B18A5D7F20348E4300F139B7 /* RACCompoundDisposable.m in Sources */,
@@ -1615,7 +1624,6 @@
 				B18A5DAA20348E4300F139B7 /* RACValueTransformer.m in Sources */,
 				B18A5DB120348E4300F139B7 /* UIControl+RACSignalSupportPrivate.m in Sources */,
 				B18A5D7120348E4300F139B7 /* NSObject+RACPropertySubscribing.m in Sources */,
-				B190AD26205DADB300C9F030 /* BMPlayerCustomControlView2.swift in Sources */,
 				B18A5D6020348E4300F139B7 /* NSURL+CMDQueryStringSerialization.m in Sources */,
 				B18A5DA320348E4300F139B7 /* RACSubscriptionScheduler.m in Sources */,
 				B18A5D7220348E4300F139B7 /* NSObject+RACSelectorSignal.m in Sources */,

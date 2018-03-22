@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E396A93E4C79B22B7816E9F02F62ECED'
-               BlueprintName = 'FBSDKShareKit'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'FBSDKShareKit.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E396A93E4C79B22B7816E9F02F62ECED"
+               BlueprintName = "FBSDKShareKit"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "FBSDKShareKit.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

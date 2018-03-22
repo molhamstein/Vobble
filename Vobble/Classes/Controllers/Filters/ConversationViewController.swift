@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 class ConversationViewController: AbstractController {
     
@@ -21,6 +22,11 @@ class ConversationViewController: AbstractController {
     fileprivate var searchString: String = ""
     public var tap: tapOption = .myBottles
     
+    // MARK: - firebase Properties
+    fileprivate var conversationRefHandle: DatabaseHandle?
+    
+    fileprivate lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
+    
     
     override func viewDidLoad() {
         
@@ -30,7 +36,14 @@ class ConversationViewController: AbstractController {
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "conversationCollectionViewCellID")
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewHeader",bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "conversationCollectionViewHeaderID")
         
+        observeConversation()
         self.initBottleArray()
+    }
+    
+    deinit {
+        if let refHandle = conversationRefHandle {
+            conversationRef.removeObserver(withHandle: refHandle)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -263,11 +276,29 @@ extension ConversationViewController: UICollectionViewDelegateFlowLayout {
 extension ConversationViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let conversation = currentUser.conversationArray[(indexPath as NSIndexPath).row]
+        self.performSegue(withIdentifier: "goToChat", sender: conversation)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
+    }
+    
+    // MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let conversation = sender as? Conversation {
+           
+            let nav = segue.destination as! UINavigationController
+            let chatVc = nav.topViewController as! ChatViewController
+
+//            let chatVc = segue.destination as! ChatViewController
+            
+            chatVc.senderDisplayName = "test"
+            chatVc.conversation = conversation
+            chatVc.conversationRef = conversationRef.child("-L850E6M5LklpEkExkBM")
+        }
     }
 }
 
@@ -297,3 +328,26 @@ extension ConversationViewController {
     
 }
 
+// MARK: Firebase related methods
+
+extension ConversationViewController {
+    
+    fileprivate func observeConversation() {
+        // We can use the observe method to listen for new
+        // channels being written to the Firebase DB
+        conversationRefHandle = conversationRef.observe(.childAdded, with: { (snapshot) -> Void in
+            let convData = snapshot.value as! Dictionary<String, AnyObject>
+            let id = snapshot.key
+//            if let name = convData["name"] as! String!, let user1_id = convData["user1_id"] as! String!,let user2_id = convData["user1_id"] as! String!, let bottle_id = convData["bottle_id"] as! String!, name.characters.count > 0 {
+//                if user1_id == "user1_1" {
+//                    self.channels.append(Channel(id: id, name: name, user1_id: user1_id, user2_id: user2_id, bottle_id: bottle_id))
+//                    self.tableView.reloadData()
+//                }
+//                
+//            } else {
+//                print("Error! Could not decode channel data")
+//            }
+        })
+        
+    }
+}

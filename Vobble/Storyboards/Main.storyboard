@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -330,7 +330,7 @@
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Vfw-kW-c1W" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mMZ-OZ-kkc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mMZ-OZ-kkc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -348,7 +348,7 @@
         <scene sceneID="jME-nh-gzT">
             <objects>
                 <navigationController navigationBarHidden="YES" id="9aW-Lr-Rgh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="O6b-p9-Rmu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O6b-p9-Rmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -799,11 +799,20 @@
                         <outlet property="replyButton" destination="zuW-Xy-Jtd" id="G4i-DU-bkN"/>
                         <outlet property="topView" destination="mXs-T0-xQv" id="CpO-9l-nXb"/>
                         <outlet property="videoView" destination="A0z-Nd-C7w" id="Ome-Ui-a4r"/>
+                        <segue destination="W1h-f8-Qe1" kind="show" identifier="goToChat" id="5KC-hU-8eo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIC-MW-qfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2967" y="-1452"/>
+        </scene>
+        <!--chatNavigationID-->
+        <scene sceneID="3Uy-Ox-dZN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="chatNavigationID" id="W1h-f8-Qe1" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xu-Pg-Niu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2427" y="-1428"/>
         </scene>
         <!--Conversation View Controller-->
         <scene sceneID="jQT-7N-SLC">
@@ -902,6 +911,7 @@
                         <outlet property="bottleCollectionView" destination="I7H-cB-IAM" id="gIh-21-K8O"/>
                         <outlet property="navigationView" destination="tBt-4d-eoz" id="ovc-8e-cRE"/>
                         <outlet property="waveSubView" destination="qs2-zg-8mI" id="bo8-Dl-t8D"/>
+                        <segue destination="ZVK-88-g6q" kind="show" identifier="goToChat" action="showDetailViewController:sender:" id="aHo-xj-ijL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sPl-d8-dYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1061,6 +1071,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nef-IB-Vhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2260" y="225"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="Taz-dV-rfH">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewControllerID" id="UjY-mq-EFz" customClass="ChatViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FGC-Da-32N"/>
+                        <viewControllerLayoutGuide type="bottom" id="yWf-bH-dpb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3QE-wa-jv3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NTp-aV-j7B"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oly-N6-bwi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2028" y="998.95052473763121"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aOT-pW-IkK">
+            <objects>
+                <navigationController storyboardIdentifier="chatNavigationID" automaticallyAdjustsScrollViewInsets="NO" id="ZVK-88-g6q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S0C-q7-DjL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UjY-mq-EFz" kind="relationship" relationship="rootViewController" id="WkC-Bh-ZiS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="040-RN-wRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2967.1999999999998" y="998.95052473763121"/>
         </scene>
     </scenes>
     <resources>
