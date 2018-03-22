@@ -99,11 +99,24 @@ class DataStore :NSObject {
         super.init()
         
         // temp 
-        var shore1 = Shore()
-        shore1.name = "Main"
-        shore1.cover = ""
-        shore1.icon = ""
+        let shore1 = Shore()
+        shore1.name = "Main Shore"
+        shore1.cover = "shore"
+        shore1.icon = "shore"
+        
+        let shore2 = Shore()
+        shore2.name = "Love Shore"
+        shore2.cover = "shore2"
+        shore2.icon = "shore2"
+        
+        let shore3 = Shore()
+        shore3.name = "Fad Fed"
+        shore3.cover = "shore"
+        shore3.icon = ""
+        
         shores.append(shore1)
+        shores.append(shore2)
+        shores.append(shore3)
     }
    
     //MARK: Cache Utils

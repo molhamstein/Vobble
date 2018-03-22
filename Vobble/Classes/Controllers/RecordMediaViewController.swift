@@ -96,7 +96,7 @@ class RecordMediaViewController: AbstractController {
                     label.numberOfLines = 2
                     label.lineBreakMode = .byWordWrapping;
                     label.backgroundColor = UIColor.clear
-                    label.font = UIFont(name: "AvenirNext-DemiBold", size: 13.0)
+                    label.font = UIFont(name: "AvenirNext-SemiBold", size: 13.0)
                     label.textColor = UIColor.white
                     label.textAlignment = .center
                     label.sizeToFit()
@@ -106,7 +106,7 @@ class RecordMediaViewController: AbstractController {
                     self.view!.addSubview(self.errorLabel)
                     
                     let jumpSettingsBtn: UIButton = UIButton(frame: CGRect(x:50, y:label.frame.origin.y + 50, width:screenRect.size.width - 100, height:50));
-                    jumpSettingsBtn.titleLabel!.font = UIFont(name: "AvenirNext-DemiBold", size: 24.0)
+                    jumpSettingsBtn.titleLabel!.font = UIFont(name: "AvenirNext-SemiBold", size: 24.0)
                     jumpSettingsBtn.setTitle("Go Settings", for: .normal);
                     jumpSettingsBtn.setTitleColor(UIColor.white, for: .normal);
                     jumpSettingsBtn.layer.borderColor = UIColor.white.cgColor;
@@ -230,7 +230,6 @@ class RecordMediaViewController: AbstractController {
             }
         }
     }
-    
 }
 
 
@@ -239,17 +238,13 @@ extension RecordMediaViewController : UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
         dismiss(animated: true, completion: nil)
-        let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
-        previewControl.type = .IMAGE
-        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage
-        {
-            previewControl.image = editedImage
+        
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.gotToPreview(videoUrl: nil, image: editedImage)
+        } else if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.gotToPreview(videoUrl: nil, image: pickedImage)
         }
-        else if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        {
-            previewControl.image = pickedImage
-        }
-        self.navigationController?.pushViewController(previewControl, animated: true)
+        
         prepareForRecording()
     }
     
@@ -318,10 +313,7 @@ extension RecordMediaViewController
             self.camera.capture({(camera, image, metadata, error) -> Void in
                 if (error == nil) {
                     camera?.perform(#selector(NetService.stop), with: nil, afterDelay: 0.2)
-                    let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
-                    previewControl.type = .IMAGE
-                    previewControl.image = image ?? UIImage()
-                    self.navigationController?.pushViewController(previewControl, animated: true)
+                    self.gotToPreview(videoUrl: nil, image: image ?? UIImage())
                     self.prepareForRecording()
                 }
                 else {
@@ -437,10 +429,7 @@ extension RecordMediaViewController
                     }
                     
                     DispatchQueue.main.async {
-                        let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
-                        previewControl.type = .VIDEO
-                        previewControl.videoUrl = videoUrlForUpload as NSURL? ??  NSURL()
-                        self.navigationController?.pushViewController(previewControl, animated: true)
+                        self.gotToPreview(videoUrl: videoUrlForUpload as NSURL? , image: nil)
                     }
                 }
 
@@ -525,6 +514,24 @@ extension RecordMediaViewController
         exportSession.exportAsynchronously { () -> Void in
             handler(exportSession)
         }
+    }
+    
+    
+    func gotToPreview(videoUrl: NSURL?, image: UIImage?) {
+        // image picker
+        dismiss(animated: true, completion: nil)
+        let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
+        if let img = image {
+            previewControl.type = .IMAGE
+            previewControl.image = img
+        }
+        
+        if let vidUrl = videoUrl {
+            previewControl.type = .VIDEO
+            previewControl.videoUrl = vidUrl
+        }
+        
+        self.navigationController?.pushViewController(previewControl, animated: true)
     }
 }
 

@@ -15,6 +15,7 @@
 		5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C13F205660B300A5402D /* VideoPlayerView.swift */; };
 		5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5742C140205660B300A5402D /* VideoPlayerView.xib */; };
 		5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C14320573BC200A5402D /* UIImage+Gif.swift */; };
+		57521FC6205FE9210062A4A5 /* throwBottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57521FC5205FE9210062A4A5 /* throwBottle.gif */; };
 		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
 		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
 		578A25112058771A00801F77 /* girl_3_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A250F2058771A00801F77 /* girl_3_1.gif */; };
@@ -228,6 +229,7 @@
 		5742C13F205660B300A5402D /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerView.swift; path = VideoPlayer/VideoPlayerView.swift; sourceTree = "<group>"; };
 		5742C140205660B300A5402D /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoPlayerView.xib; path = VideoPlayer/VideoPlayerView.xib; sourceTree = "<group>"; };
 		5742C14320573BC200A5402D /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		57521FC5205FE9210062A4A5 /* throwBottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = throwBottle.gif; sourceTree = "<group>"; };
 		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
 		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		578A250F2058771A00801F77 /* girl_3_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_1.gif; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 		57687D12204FE509007A5FFA /* gif */ = {
 			isa = PBXGroup;
 			children = (
+				57521FC5205FE9210062A4A5 /* throwBottle.gif */,
 				578A25132058823C00801F77 /* girl.gif */,
 				578A250F2058771A00801F77 /* girl_3_1.gif */,
 				578A25102058771A00801F77 /* girl_3_2.gif */,
@@ -1378,6 +1381,7 @@
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
 				B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */,
 				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
+				57521FC6205FE9210062A4A5 /* throwBottle.gif in Resources */,
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
 				5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,

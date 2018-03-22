@@ -51,6 +51,7 @@ class HomeViewController: AbstractController {
     
     // bottle animations 
     @IBOutlet var ivFindBottle: UIImageView!
+    @IBOutlet var ivThrowBottle: UIImageView!
     
     
     // MARK: Controller Life Cycle
@@ -111,26 +112,19 @@ class HomeViewController: AbstractController {
             self.performSegue(withIdentifier: "findBottleSegue", sender: self)
             self.ivFindBottle.image = nil
         }
-    
     }
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: "myBottlesSegue", sender: self)
-        
     }
     
     @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {
         
-        self.ivShore2Girl.loadGif(name: "girl")
-        
-        // A UIImageView with async loading from asset catalog(from iOS9)
-        //let imageView = UIImageView()
-        //ivShore2Girl.loadGif(asset: "girl")
-        
-//        brands = (segue.source as! RecordMediaViewController).selectedBrands
-//        type = (segue.source as! RecordMediaViewController).selectedType
-//        loadWorkshops()
+        self.ivThrowBottle.loadGif(name: "throwBottle")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 6 second
+            self.ivThrowBottle.image = nil
+        }
     }
     
     func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {

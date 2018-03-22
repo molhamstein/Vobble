@@ -27,7 +27,6 @@ class FindBottleViewController: AbstractController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-       
         videoView.preparePlayer(videoURL: "http://twigbig.com/vidoes/desktop.mp4",customPlayBtn: playButton)
     }
     

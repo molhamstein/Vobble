@@ -17,7 +17,6 @@ class PreviewMediaControl : AbstractController {
     
     @IBOutlet weak var imageView:UIImageView!
     @IBOutlet weak var backButton:UIButton!
-    @IBOutlet weak var btnSubmit:UIButton!
     @IBOutlet weak var vOverlay:UIView!
     @IBOutlet weak var cvShorePicker:UICollectionView!
     
@@ -60,7 +59,6 @@ class PreviewMediaControl : AbstractController {
                 self.imageView.image = self.image
             } else {
                 self.imageView.setImageForURL(imgUrl, placeholder: AppConfig.PlaceHolderImage)
-                btnSubmit.isHidden = true
             }
         
 //        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PreviewMediaControl.viewTapped(gesture:)))
@@ -79,8 +77,8 @@ class PreviewMediaControl : AbstractController {
             self.view.layer.addSublayer(self.avPlayerLayer)
         }
         
+        //self.vOverlay.applyGradient(colours: [AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
         self.backButton.tintColor = UIColor.white
-        self.btnSubmit.bringToFront()
         self.vOverlay.bringToFront()
         self.cvShorePicker.bringToFront()
         
@@ -158,7 +156,7 @@ extension PreviewMediaControl:UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoreCell", for: indexPath) as! ShoreCell
-        //cell.shore = DataStore.shared.shores[indexPath.item]
+        cell.shore = DataStore.shared.shores[indexPath.item]
         
         return cell
     }

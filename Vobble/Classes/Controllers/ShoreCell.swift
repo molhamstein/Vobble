@@ -24,6 +24,7 @@ class ShoreCell: UICollectionViewCell {
                 return
             }
             lblTitle.text = shore.name
+            ivCover.image = UIImage.init(named: shore.cover!)
         }
     }
 
