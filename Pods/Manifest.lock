@@ -13,6 +13,7 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - CountdownLabel (2.0.1)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
@@ -128,6 +129,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - BMPlayer (~> 0.9.1)
+  - CountdownLabel (~> 2.0.0)
   - FBSDKCoreKit (~> 4.24.0)
   - FBSDKLoginKit (~> 4.24.0)
   - FBSDKShareKit (~> 4.24.0)
@@ -149,6 +151,7 @@ SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   BMPlayer: e68ba160d9c05ea5fffc31d37448aa02433418ab
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  CountdownLabel: 1297533b42ef5c1a441cd458136c35ad93210da1
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
@@ -180,6 +183,6 @@ SPEC CHECKSUMS:
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
   YXWaveView: 3570d7244b08effd077a5c63b0693aa44b7cd369
 
-PODFILE CHECKSUM: 074186b0c1b4a4b52aa4add356d814683a305c7b
+PODFILE CHECKSUM: 01ce464bbe7f72246151973435541da6e1920e42
 
 COCOAPODS: 1.4.0

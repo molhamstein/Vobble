@@ -39,8 +39,8 @@ enum LoginType: String {
 
 class AppUser: BaseModel {
     // MARK: Keys
-    private let kUserObjectIdKey = "_id"
-    private let kUserFirstNameKey = "firstName"
+    private let kUserObjectIdKey = "id"
+    private let kUserFirstNameKey = "username"
     private let kUserLastNameKey = "lastName"
     private let kUserEmailKey = "email"
     private let kUserProfilePicKey = "avatar"
@@ -61,7 +61,7 @@ class AppUser: BaseModel {
 
     
     // MARK: Properties
-    public var objectId: String?
+    public var objectId: Int?
     public var firstName: String?
     public var lastName: String?
     public var email: String?
@@ -91,7 +91,7 @@ class AppUser: BaseModel {
     
     public required init(json: JSON) {
         super.init(json: json)
-        objectId = json[kUserObjectIdKey].string
+        objectId = json[kUserObjectIdKey].int
         firstName = json[kUserFirstNameKey].string
         lastName = json[kUserLastNameKey].string
         email = json[kUserEmailKey].string

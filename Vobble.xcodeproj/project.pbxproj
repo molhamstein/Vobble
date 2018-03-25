@@ -39,6 +39,7 @@
 		B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171DA6F204B450100CC3C50 /* PickerViewController.swift */; };
 		B17DE5B42055BB8600DC349B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5B22055BB8600DC349B /* FilterView.swift */; };
 		B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B17DE5B32055BB8600DC349B /* FilterView.xib */; };
+		B1818F712066D30000086030 /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1818F702066D30000086030 /* TimerLabel.swift */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -206,6 +207,8 @@
 		B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A3743F204530160080A323 /* SystemConfiguration.framework */; };
 		B1A37442204530230080A323 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37441204530230080A323 /* StoreKit.framework */; };
 		B1A37444204530310080A323 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37443204530310080A323 /* AddressBook.framework */; };
+		B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1C0C11120637E72004D82B8 /* VobbleChatNavigationBar.xib */; };
+		B1C0C11420637E83004D82B8 /* VobbleChatNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C0C11320637E83004D82B8 /* VobbleChatNavigationBar.swift */; };
 		B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */; };
 		B1EA39CD205606D8008AADC9 /* ConversationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */; };
 		B1EA39CF20560824008AADC9 /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CE20560824008AADC9 /* Bottle.swift */; };
@@ -257,6 +260,7 @@
 		B171DA6F204B450100CC3C50 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		B17DE5B22055BB8600DC349B /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		B17DE5B32055BB8600DC349B /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
+		B1818F702066D30000086030 /* TimerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -548,6 +552,8 @@
 		B1A3743F204530160080A323 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B1A37441204530230080A323 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B1A37443204530310080A323 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B1C0C11120637E72004D82B8 /* VobbleChatNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VobbleChatNavigationBar.xib; sourceTree = "<group>"; };
+		B1C0C11320637E83004D82B8 /* VobbleChatNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleChatNavigationBar.swift; sourceTree = "<group>"; };
 		B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCollectionViewCell.xib; sourceTree = "<group>"; };
 		B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1EA39CE20560824008AADC9 /* Bottle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bottle.swift; sourceTree = "<group>"; };
@@ -707,6 +713,7 @@
 		B117970F2033C723006D96BE /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				B1818F6F2066D2E700086030 /* TimerLabel */,
 				B1053E832043EBA700A4383D /* CountryPicker */,
 				B18A5C4E20348E4200F139B7 /* Extensions */,
 				B18A5C5720348E4200F139B7 /* Helpers */,
@@ -796,6 +803,15 @@
 				B17DE5B32055BB8600DC349B /* FilterView.xib */,
 			);
 			path = "Filter View";
+			sourceTree = "<group>";
+		};
+		B1818F6F2066D2E700086030 /* TimerLabel */ = {
+			isa = PBXGroup;
+			children = (
+				B1818F702066D30000086030 /* TimerLabel.swift */,
+			);
+			name = TimerLabel;
+			path = ../Views/TimerLabel;
 			sourceTree = "<group>";
 		};
 		B18A5C4E20348E4200F139B7 /* Extensions */ = {
@@ -1251,6 +1267,8 @@
 			children = (
 				B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */,
 				B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */,
+				B1C0C11120637E72004D82B8 /* VobbleChatNavigationBar.xib */,
+				B1C0C11320637E83004D82B8 /* VobbleChatNavigationBar.swift */,
 			);
 			path = NavigationBar;
 			sourceTree = "<group>";
@@ -1367,6 +1385,7 @@
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
+				B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */,
 				B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */,
 				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
@@ -1426,6 +1445,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BMPlayer/BMPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CountdownLabel/CountdownLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -1454,6 +1474,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountdownLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -1566,6 +1587,7 @@
 				B19372FA2034196A007B1E7D /* Constants.swift in Sources */,
 				B18A5DBA20348E4300F139B7 /* UITableViewCell+RACSignalSupport.m in Sources */,
 				B18A5D7E20348E4300F139B7 /* RACCommand.m in Sources */,
+				B1C0C11420637E83004D82B8 /* VobbleChatNavigationBar.swift in Sources */,
 				B18A5DB320348E4300F139B7 /* UIGestureRecognizer+RACSignalSupport.m in Sources */,
 				B18A5DBB20348E4300F139B7 /* UITableViewHeaderFooterView+RACSignalSupport.m in Sources */,
 				B18A5DBC20348E4300F139B7 /* UITextField+RACSignalSupport.m in Sources */,
@@ -1677,6 +1699,7 @@
 				B18A5DCA20348E4300F139B7 /* SimpleAuthInstagramLoginViewController.m in Sources */,
 				B19372DE2033E3FC007B1E7D /* AppUser.swift in Sources */,
 				B19371172033D8FC007B1E7D /* HomeViewController.swift in Sources */,
+				B1818F712066D30000086030 /* TimerLabel.swift in Sources */,
 				B18A5D8720348E4300F139B7 /* RACEmptySequence.m in Sources */,
 				B18A5D9920348E4300F139B7 /* RACSerialDisposable.m in Sources */,
 				57413D55204D3B5700450A42 /* GCD.m in Sources */,
