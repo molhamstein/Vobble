@@ -36,7 +36,7 @@ class ConversationViewController: AbstractController {
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "conversationCollectionViewCellID")
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewHeader",bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "conversationCollectionViewHeaderID")
         
-        observeConversation()
+//        observeConversation()
         self.initBottleArray()
     }
     
@@ -276,7 +276,19 @@ extension ConversationViewController: UICollectionViewDelegateFlowLayout {
 extension ConversationViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let conversation = currentUser.conversationArray[(indexPath as NSIndexPath).row]
+        var conversation = Conversation()
+        
+        if self.filteredConvArray.count > 0 {
+            conversation = self.filteredConvArray[indexPath.row]
+            
+        } else if tap == .myBottles {
+            conversation = self.currentUser.conversationArray[indexPath.row]
+            
+        } else if tap == .myReplies {
+            conversation = self.currentUser.repliesArray[indexPath.row]
+            
+        }
+        
         self.performSegue(withIdentifier: "goToChat", sender: conversation)
     }
     
@@ -292,12 +304,10 @@ extension ConversationViewController: UICollectionViewDelegate {
            
             let nav = segue.destination as! UINavigationController
             let chatVc = nav.topViewController as! ChatViewController
-
-//            let chatVc = segue.destination as! ChatViewController
             
             chatVc.senderDisplayName = "test"
             chatVc.conversation = conversation
-            chatVc.conversationRef = conversationRef.child("-L850E6M5LklpEkExkBM")
+            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
         }
     }
 }

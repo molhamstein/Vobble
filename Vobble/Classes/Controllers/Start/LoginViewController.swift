@@ -151,7 +151,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                         self.view.isUserInteractionEnabled = false
                         ApiManager.shared.userLogin(email: email, password: password) { (isSuccess, error, user) in
                             // stop loading
-//                            self.loginButton.isLoading = false
+                            self.loginButton.isLoading = false
                             self.view.isUserInteractionEnabled = true
                             // login success
                             if (isSuccess) {
@@ -159,7 +159,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                                 Auth.auth().signInAnonymously(completion: { (user, error) in
                                     if let err:Error = error {
 //                                        print(err.localizedDescription)
-                                        self.loginButton.isLoading = false
+//                                        self.loginButton.isLoading = false
                                         self.showMessage(message:err.localizedDescription, type: .error)
                                         
                                     }

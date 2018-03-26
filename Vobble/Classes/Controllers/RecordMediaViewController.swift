@@ -202,6 +202,7 @@ class RecordMediaViewController: AbstractController {
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = ["public.movie"]
         self.present(imagePicker, animated: true, completion: nil)
     }
     
