@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class ShoreCell: UICollectionViewCell {
 
     

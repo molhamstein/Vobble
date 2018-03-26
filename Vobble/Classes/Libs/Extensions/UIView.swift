@@ -154,9 +154,11 @@ extension UIView {
 
 enum AnimationType {
     case animateInFromBottom
+    case animateInFromTop
     case animateInFromRight
     case animateInFromLeft
     case animateOutToBottom
+    case animateOutToTop
     case animateOutToRight
     case animateOutToLeft
 }
@@ -177,12 +179,16 @@ extension UIView {
         switch mode {
         case .animateInFromBottom:
             initialTransform = CGAffineTransform(translationX: 0, y: UIView.animDist)
+        case .animateInFromTop:
+            initialTransform = CGAffineTransform(translationX: 0, y: -UIView.animDist)
         case .animateInFromRight:
             initialTransform = CGAffineTransform(translationX: UIView.animDist, y: 0)
         case .animateInFromLeft:
             initialTransform = CGAffineTransform(translationX: -UIView.animDist, y: 0)
         case .animateOutToBottom:
             finalTransform = CGAffineTransform(translationX: 0, y: UIView.animDist)
+        case .animateOutToTop:
+            finalTransform = CGAffineTransform(translationX: 0, y: -UIView.animDist)
         case .animateOutToRight:
             finalTransform = CGAffineTransform(translationX: UIView.animDist, y: 0)
         case .animateOutToLeft:
@@ -192,13 +198,15 @@ extension UIView {
         switch mode {
         case .animateInFromLeft,
              .animateInFromRight,
+             .animateInFromTop,
              .animateInFromBottom:
             finalTransform = CGAffineTransform.identity
             initialAlpha = 0
             finalAlpha = 1
         case .animateOutToLeft,
              .animateOutToRight,
-             .animateOutToBottom:
+             .animateOutToBottom,
+             .animateOutToTop:
             initialTransform = CGAffineTransform.identity
             initialAlpha = 1
             finalAlpha = 0

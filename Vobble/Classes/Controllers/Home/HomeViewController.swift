@@ -24,7 +24,7 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivShore3Shore: UIImageView!
     @IBOutlet var shore3Friends: UIView!
     @IBOutlet weak var navigationView: VobbleNavigationBar!
-    @IBOutlet weak var mainFilterView: UIView!
+    @IBOutlet weak var filterViewOverlay: UIView!
     @IBOutlet weak var filterView: FilterView!
     
     // GIF images
@@ -54,14 +54,21 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivThrowBottle: UIImageView!
     
     
+    var introAnimationDone: Bool = false
+    var filterViewVisible = false
+    
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // enable profile
         self.showNavProfileButton = true
         self.navigationView.viewcontroller = self
-        self.mainFilterView.isHidden = true
         self.filterView.delegate = self
+        
+        
+        // hide filters View by default
+        self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
+        self.filterViewOverlay.alpha = 0.0
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,6 +79,23 @@ class HomeViewController: AbstractController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         screenWidth = self.view.frame.size.width;
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // animate view in
+        if !introAnimationDone {
+            ivClouds.animateIn(mode: .animateInFromTop, delay: 0.2)
+            ivMountains.animateIn(mode: .animateInFromTop, delay: 0.3)
+            ivSun.animateIn(mode: .animateInFromLeft, delay: 0.4)
+            ivIsland.animateIn(mode: .animateInFromRight, delay: 0.5)
+            ivShore1Shore.animateIn(mode: .animateInFromLeft, delay: 0.5)
+            navigationView.animateIn(mode: .animateInFromTop, delay: 0.8)
+            introAnimationDone = true
+        }
+        
     }
     
     /// Customize view
@@ -265,7 +289,7 @@ class HomeViewController: AbstractController {
         if blockPageTransitions {
             return
         }
-        
+        blockPageTransitions = true
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
             self.ivSea.transform = CGAffineTransform.identity
@@ -286,7 +310,7 @@ class HomeViewController: AbstractController {
         if blockPageTransitions {
             return
         }
-        
+        blockPageTransitions = true
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
             self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.seaParallaxSpeed), y: 0)
             self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.island2ParallaxSpeed), y: 0)
@@ -308,7 +332,7 @@ class HomeViewController: AbstractController {
         if blockPageTransitions {
             return
         }
-        
+        blockPageTransitions = true
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
         let doubleScreenWidth = self.screenWidth * 2
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
@@ -319,7 +343,7 @@ class HomeViewController: AbstractController {
             self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore3ParallaxSpeed), y: 0)
             self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.friendsParallaxSpeed), y: 0)
             self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.loversParallaxSpeed), y: 0)
-            self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.sunParallaxSpeed), y: 0)
+            self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.cloudsParallaxSpeed), y: 0)
             self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.mountainsParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
@@ -329,10 +353,22 @@ class HomeViewController: AbstractController {
     }
     
     func showFilter () {
-        if self.mainFilterView.isHidden == false {
-            self.mainFilterView.isHidden = true
+        if self.filterViewVisible {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
+                self.filterViewOverlay.alpha = 0.0
+            }, completion: {(finished: Bool) in
+                self.filterViewVisible = false
+                self.filterViewOverlay.isHidden = true
+            })
         } else {
-            self.mainFilterView.isHidden = false
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.filterView.transform = CGAffineTransform.identity
+                self.filterViewOverlay.alpha = 1.0
+            }, completion: {(finished: Bool) in
+                self.filterViewVisible = true
+                self.filterViewOverlay.isHidden = false
+            })
         }
     }
     

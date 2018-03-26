@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
-            timestampString = "542672030.923617"
+            timestampString = "543442217.141511"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
-            timestampString = "543055114.670463"
+            timestampString = "543440486.812024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "myBottlesPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
-            timestampString = "543055114.670463"
+            timestampString = "543440486.812024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "handlePan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/RecordMediaViewController.swift"
-            timestampString = "542044864.52271"
+            timestampString = "543406772.279237"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "didPressCapture(gestureRecognizer:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,28 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
-            timestampString = "542672030.923617"
+            timestampString = "543440486.812024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "customizeView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
-            timestampString = "543066180.592664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
-            landmarkName = "countryBtnPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -143,8 +127,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "230"
             endingLineNumber = "230"
-            landmarkName = "googleAction(_:)"
-            landmarkType = "7">
+            landmarkName = "LoginViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,76 +138,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
-            timestampString = "543066408.072576"
+            timestampString = "543447183.115202"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "LoginViewController"
+            landmarkType = "4">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
+            timestampString = "543447183.115202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "499"
+            endingLineNumber = "499"
+            landmarkName = "LoginViewController"
+            landmarkType = "4">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
+            timestampString = "543447183.115202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
+            landmarkName = "LoginViewController"
+            landmarkType = "4">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
+            timestampString = "543447183.115202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
+            landmarkName = "LoginViewController"
+            landmarkType = "4">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
+            timestampString = "543447183.115202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
             landmarkName = "sign(_:didSignInFor:withError:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
-            timestampString = "543066408.072576"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
-            landmarkName = "sign(_:dismiss:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
-            timestampString = "543066339.068616"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
-            landmarkName = "sign(_:present:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
-            timestampString = "543066638.255179"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
-            landmarkName = "signInWillDispatch(signIn:error:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Start/LoginViewController.swift"
-            timestampString = "543067200.7396621"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "501"
-            endingLineNumber = "501"
-            landmarkName = "sign(inWillDispatch:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,12 +234,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/RecordMediaViewController.swift"
-            timestampString = "543156281.462762"
+            timestampString = "543406772.279237"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "close()"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -265,13 +249,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Managers/DataStore.swift"
-            timestampString = "543316613.73068"
+            filePath = "Vobble/Classes/Controllers/RecordMediaViewController.swift"
+            timestampString = "543406608.071188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "init()"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/ShoreCell.swift"
+            timestampString = "543429017.139141"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "shore"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Managers/ApiManager.swift"
+            timestampString = "543595889.804657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "userLogin(email:password:completionBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -281,13 +297,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/RecordMediaViewController.swift"
-            timestampString = "543398203.329808"
+            filePath = "Vobble/Classes/Managers/ApiManager.swift"
+            timestampString = "543595894.834757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "userLogin(email:password:completionBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

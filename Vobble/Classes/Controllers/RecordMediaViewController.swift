@@ -43,6 +43,18 @@ class RecordMediaViewController: AbstractController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         prepareForRecording()
+        
+        
+        // animate in 
+        recordButton.animateIn(mode: .animateInFromBottom, delay: 0.45)
+        btnPhotoLibrary.animateIn(mode: .animateInFromBottom, delay: 0.3)
+        redImageView.animateIn(mode: .animateInFromTop, delay: 0.3)
+        recordTimeLabel.animateIn(mode: .animateInFromTop, delay: 0.35)
+        
+        switchButton.animateIn(mode: .animateInFromTop, delay: 0.3)
+        flashButton.animateIn(mode: .animateInFromTop, delay: 0.33)
+        closeButton.animateIn(mode: .animateInFromTop, delay: 0.4)
+        
     }
     
     func applicationDocumentsDirectory()-> NSURL {
@@ -516,22 +528,35 @@ extension RecordMediaViewController
         }
     }
     
-    
     func gotToPreview(videoUrl: NSURL?, image: UIImage?) {
-        // image picker
-        dismiss(animated: true, completion: nil)
-        let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
-        if let img = image {
-            previewControl.type = .IMAGE
-            previewControl.image = img
+        
+        // animate Views out
+        recordButton.animateIn(mode: .animateOutToBottom, delay: 0.3)
+        redImageView.animateIn(mode: .animateOutToTop, delay: 0.2)
+        recordTimeLabel.animateIn(mode: .animateOutToTop, delay: 0.2)
+        
+        switchButton.animateIn(mode: .animateOutToTop, delay: 0.2)
+        flashButton.animateIn(mode: .animateOutToTop, delay: 0.23)
+        closeButton.animateIn(mode: .animateOutToTop, delay: 0.2)
+        btnPhotoLibrary.animateIn(mode: .animateOutToBottom, delay: 0.3)
+        
+        
+        // show preview 
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
+            let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
+            if let img = image {
+                previewControl.type = .IMAGE
+                previewControl.image = img
+            }
+            
+            if let vidUrl = videoUrl {
+                previewControl.type = .VIDEO
+                previewControl.videoUrl = vidUrl
+            }
+            
+            self.navigationController?.pushViewController(previewControl, animated: false)
         }
         
-        if let vidUrl = videoUrl {
-            previewControl.type = .VIDEO
-            previewControl.videoUrl = vidUrl
-        }
-        
-        self.navigationController?.pushViewController(previewControl, animated: true)
     }
 }
 

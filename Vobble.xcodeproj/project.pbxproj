@@ -1334,7 +1334,7 @@
 				TargetAttributes = {
 					9234B5E4203356560085F9F7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = C398J8JGBZ;
+						DevelopmentTeam = BBSB6N9C9P;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1806,7 +1806,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = C398J8JGBZ;
+				DEVELOPMENT_TEAM = BBSB6N9C9P;
 				INFOPLIST_FILE = Vobble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble";
@@ -1815,6 +1815,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vobble/Vobble-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1824,7 +1825,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = C398J8JGBZ;
+				DEVELOPMENT_TEAM = BBSB6N9C9P;
 				INFOPLIST_FILE = Vobble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble";
@@ -1832,6 +1833,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vobble/Vobble-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

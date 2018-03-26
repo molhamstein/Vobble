@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -137,10 +137,10 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="50H-Bb-9Qs">
-                                <rect key="frame" x="0.0" y="54" width="1125" height="117"/>
+                                <rect key="frame" x="0.0" y="63" width="1125" height="117"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="cG6-TI-tlY">
-                                <rect key="frame" x="0.0" y="80" width="150" height="131.5"/>
+                                <rect key="frame" x="0.0" y="90" width="150" height="131.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cG6-TI-tlY" secondAttribute="height" multiplier="1755:1531" id="Ly9-eW-TPc"/>
                                 </constraints>
@@ -152,7 +152,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V1f-e7-nIF">
-                                <rect key="frame" x="0.0" y="-363.5" width="375" height="1030.5"/>
+                                <rect key="frame" x="187.5" y="152" width="187.5" height="515"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="V1f-e7-nIF" secondAttribute="height" multiplier="250:687" id="2NC-dL-G0Q"/>
                                 </constraints>
@@ -192,30 +192,22 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7I8-R9-BWP" userLabel="filter View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2L-hB-sqJ" customClass="FilterView" customModule="Vobble" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="0.0" width="345" height="367"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28000000000000003" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="b2L-hB-sqJ" firstAttribute="leading" secondItem="7I8-R9-BWP" secondAttribute="leading" constant="15" id="2dm-pL-bjb"/>
-                                    <constraint firstItem="b2L-hB-sqJ" firstAttribute="top" secondItem="7I8-R9-BWP" secondAttribute="top" id="9LK-Dg-Crb"/>
-                                    <constraint firstAttribute="trailing" secondItem="b2L-hB-sqJ" secondAttribute="trailing" constant="15" id="L0V-w2-KxT"/>
-                                    <constraint firstItem="b2L-hB-sqJ" firstAttribute="height" secondItem="7I8-R9-BWP" secondAttribute="height" multiplier="0.55" id="PXV-lW-IUx"/>
-                                </constraints>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2L-hB-sqJ" customClass="FilterView" customModule="Vobble" customModuleProvider="target">
+                                <rect key="frame" x="31" y="20" width="313" height="367"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3A8-ec-NGe" userLabel="Navigation View" customClass="VobbleNavigationBar" customModule="Vobble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -233,6 +225,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="b2L-hB-sqJ" firstAttribute="top" secondItem="whB-KS-iro" secondAttribute="bottom" id="2Su-i3-obC"/>
                             <constraint firstItem="qsg-lz-eO2" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="3" id="2rW-6S-if9"/>
                             <constraint firstItem="cG6-TI-tlY" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="3Ce-qd-FEa"/>
                             <constraint firstItem="GsD-qm-Xxu" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="0.64" id="3Y6-4o-dQ4"/>
@@ -243,6 +236,7 @@
                             <constraint firstItem="h7w-fK-hVl" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" id="EKS-dS-AOO"/>
                             <constraint firstItem="cG6-TI-tlY" firstAttribute="top" secondItem="rNN-9z-ciS" secondAttribute="topMargin" constant="90" id="F2v-qA-Qxh"/>
                             <constraint firstItem="ZTN-6J-MC5" firstAttribute="height" secondItem="rNN-9z-ciS" secondAttribute="height" multiplier="0.75" id="FTr-DD-u7J"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="b2L-hB-sqJ" secondAttribute="trailing" constant="8" id="FzV-Ml-J08"/>
                             <constraint firstItem="qsg-lz-eO2" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="GJp-HD-ibO"/>
                             <constraint firstItem="50H-Bb-9Qs" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="H9v-CE-6U8"/>
                             <constraint firstItem="bmI-2Y-Jhk" firstAttribute="top" secondItem="V1f-e7-nIF" secondAttribute="bottom" id="Idp-p0-gj5"/>
@@ -257,6 +251,7 @@
                             <constraint firstAttribute="trailing" secondItem="V1f-e7-nIF" secondAttribute="trailing" id="N0f-RP-Cj2"/>
                             <constraint firstItem="5La-uT-nVd" firstAttribute="centerY" secondItem="rNN-9z-ciS" secondAttribute="centerY" multiplier="0.8" id="Oux-RH-okQ"/>
                             <constraint firstItem="h7w-fK-hVl" firstAttribute="centerX" secondItem="rNN-9z-ciS" secondAttribute="centerX" multiplier="5" id="PGG-JO-PRv"/>
+                            <constraint firstItem="b2L-hB-sqJ" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leadingMargin" constant="8" id="POH-NL-hsR"/>
                             <constraint firstItem="50H-Bb-9Qs" firstAttribute="centerY" secondItem="ybT-hf-WwB" secondAttribute="centerY" multiplier="1.3" id="QGu-3H-46D"/>
                             <constraint firstItem="7I8-R9-BWP" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="Tfw-w7-svL"/>
                             <constraint firstItem="5La-uT-nVd" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" multiplier="712:1000" id="UTU-kW-Ep9"/>
@@ -284,6 +279,7 @@
                             <constraint firstItem="lEk-Ch-gD5" firstAttribute="centerX" secondItem="rNN-9z-ciS" secondAttribute="centerX" multiplier="3.36" id="uF0-RH-9ig"/>
                             <constraint firstItem="bmI-2Y-Jhk" firstAttribute="top" secondItem="fG3-1V-oRw" secondAttribute="bottom" constant="10" id="uUZ-z6-3dk"/>
                             <constraint firstItem="Nxw-0v-3Ac" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="0.63" id="uZS-Iz-SIZ"/>
+                            <constraint firstItem="b2L-hB-sqJ" firstAttribute="height" secondItem="rNN-9z-ciS" secondAttribute="height" multiplier="0.55" id="ubg-kn-jMc"/>
                             <constraint firstAttribute="trailing" secondItem="ybT-hf-WwB" secondAttribute="trailing" id="vS8-7O-8uw"/>
                             <constraint firstItem="ZTN-6J-MC5" firstAttribute="top" secondItem="ybT-hf-WwB" secondAttribute="bottom" constant="-10" id="yBK-5S-qKF"/>
                             <constraint firstAttribute="trailing" secondItem="7I8-R9-BWP" secondAttribute="trailing" id="yLz-6e-h5b"/>
@@ -294,6 +290,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="filterView" destination="b2L-hB-sqJ" id="Z2N-f1-yZx"/>
+                        <outlet property="filterViewOverlay" destination="7I8-R9-BWP" id="XuG-0w-0Be"/>
                         <outlet property="ivClouds" destination="50H-Bb-9Qs" id="0LU-EU-1bF"/>
                         <outlet property="ivFindBottle" destination="5La-uT-nVd" id="gOc-qN-IDg"/>
                         <outlet property="ivIsland" destination="NaN-E1-PzY" id="xtJ-cw-PcJ"/>
@@ -309,7 +306,6 @@
                         <outlet property="ivSky" destination="ybT-hf-WwB" id="EvU-VS-Q3L"/>
                         <outlet property="ivSun" destination="cG6-TI-tlY" id="E7x-z6-4Lf"/>
                         <outlet property="ivThrowBottle" destination="V1f-e7-nIF" id="yg8-iH-rlZ"/>
-                        <outlet property="mainFilterView" destination="7I8-R9-BWP" id="h32-uF-wAT"/>
                         <outlet property="navigationView" destination="3A8-ec-NGe" id="L6r-wc-yJx"/>
                         <outlet property="shore2Lovers" destination="Nxw-0v-3Ac" id="q0J-HW-k38"/>
                         <outlet property="shore3Friends" destination="GsD-qm-Xxu" id="OQ1-0P-JaB"/>
@@ -330,7 +326,7 @@
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Vfw-kW-c1W" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mMZ-OZ-kkc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mMZ-OZ-kkc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -348,7 +344,7 @@
         <scene sceneID="jME-nh-gzT">
             <objects>
                 <navigationController navigationBarHidden="YES" id="9aW-Lr-Rgh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O6b-p9-Rmu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="O6b-p9-Rmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -553,7 +549,7 @@
                                     <constraint firstItem="Acp-9z-pUC" firstAttribute="leading" secondItem="5yw-ck-flP" secondAttribute="leading" constant="8" id="jQj-tZ-GHC"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hii-un-Rp6">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hii-un-Rp6">
                                 <rect key="frame" x="0.0" y="407" width="375" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1096,7 +1092,7 @@
             <objects>
                 <navigationController storyboardIdentifier="chatNavigationID" automaticallyAdjustsScrollViewInsets="NO" id="ZVK-88-g6q" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S0C-q7-DjL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="S0C-q7-DjL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

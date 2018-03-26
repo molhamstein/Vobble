@@ -35,10 +35,15 @@ class PreviewMediaControl : AbstractController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false);
-        if(type == .VIDEO)
-        {
+        if(type == .VIDEO) {
             self.avPlayer.play();
         }
+        
+        // itro animation 
+        cvShorePicker.animateIn(mode: .animateInFromBottom, delay: 0.3)
+        backButton.animateIn(mode: .animateInFromTop, delay: 0.2)
+        
+        self.vOverlay.applyGradient(colours: [ AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,7 +82,6 @@ class PreviewMediaControl : AbstractController {
             self.view.layer.addSublayer(self.avPlayerLayer)
         }
         
-        //self.vOverlay.applyGradient(colours: [AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
         self.backButton.tintColor = UIColor.white
         self.vOverlay.bringToFront()
         self.cvShorePicker.bringToFront()
@@ -116,7 +120,14 @@ class PreviewMediaControl : AbstractController {
     }
     
     @IBAction func throwInSea () {
-        //self.performUnwind
+        
+        // animate views out
+        cvShorePicker.animateIn(mode: .animateOutToBottom, delay: 0.3)
+        backButton.animateIn(mode: .animateOutToTop, delay: 0.2)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 6 second
+            self.performSegue(withIdentifier: "unwindRecordMediaSegue", sender: self)
+            self.popOrDismissViewControllerAnimated(animated: true)
+        }
     }
     
     @IBAction func nextAction() {
@@ -163,8 +174,7 @@ extension PreviewMediaControl:UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "unwindRecordMediaSegue", sender: self)
-        self.popOrDismissViewControllerAnimated(animated: true)
+        throwInSea()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

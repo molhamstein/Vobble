@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,10 +27,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-BV-v3M" userLabel="Main View">
-                    <rect key="frame" x="20" y="120" width="335" height="547"/>
+                    <rect key="frame" x="20" y="90" width="335" height="577"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cq-Ea-TNs" userLabel="Gender View">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="171"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="177"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:12 left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQY-ww-E8m">
                                     <rect key="frame" x="259" y="0.0" width="76" height="17"/>
@@ -39,7 +39,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ygV-fQ-NuN">
-                                    <rect key="frame" x="0.0" y="0.0" width="251" height="171"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="251" height="177"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Filter By Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwd-PA-FpY">
                                             <rect key="frame" x="0.0" y="0.0" width="149" height="20"/>
@@ -47,25 +47,25 @@
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5Ic-MG-B7C">
-                                            <rect key="frame" x="0.0" y="20" width="176" height="151"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="5Ic-MG-B7C">
+                                            <rect key="frame" x="0.0" y="20" width="202" height="157"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Veq-FD-Q4r">
-                                                    <rect key="frame" x="0.0" y="0.0" width="67" height="151"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="67" height="157"/>
                                                     <state key="normal" image="allGenders"/>
                                                     <connections>
                                                         <action selector="allGenderBtnPressed:" destination="-1" eventType="touchUpInside" id="GeU-C3-wvb"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7d-rZ-V8r">
-                                                    <rect key="frame" x="72" y="0.0" width="63" height="151"/>
+                                                    <rect key="frame" x="85" y="0.0" width="63" height="157"/>
                                                     <state key="normal" image="signup_male"/>
                                                     <connections>
                                                         <action selector="maleBtnPressed:" destination="-1" eventType="touchUpInside" id="aXv-yB-Aac"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEX-hv-Ul6">
-                                                    <rect key="frame" x="140" y="0.0" width="36" height="151"/>
+                                                    <rect key="frame" x="166" y="0.0" width="36" height="157"/>
                                                     <state key="normal" image="signup_female"/>
                                                     <connections>
                                                         <action selector="femalePressed:" destination="-1" eventType="touchUpInside" id="opf-HP-en3"/>
@@ -87,7 +87,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21h-5f-0ct" userLabel="Country View">
-                            <rect key="frame" x="0.0" y="171" width="335" height="376"/>
+                            <rect key="frame" x="0.0" y="187" width="335" height="390"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ypy-f9-G9X">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="29"/>
@@ -114,7 +114,7 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-2n-8aY" customClass="CountryPicker">
-                                    <rect key="frame" x="0.0" y="39" width="335" height="327"/>
+                                    <rect key="frame" x="0.0" y="39" width="335" height="341"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="GBL-3w-uvC"/>
@@ -133,9 +133,9 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.72882882699999996" blue="0.6462742896" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" id="Gjp-QG-NGe"/>
+                        <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" constant="10" id="Gjp-QG-NGe"/>
                         <constraint firstAttribute="trailing" secondItem="21h-5f-0ct" secondAttribute="trailing" id="PE7-bG-Y0v"/>
                         <constraint firstItem="21h-5f-0ct" firstAttribute="leading" secondItem="SqP-BV-v3M" secondAttribute="leading" id="bm7-mk-rwD"/>
                         <constraint firstItem="7Cq-Ea-TNs" firstAttribute="top" secondItem="SqP-BV-v3M" secondAttribute="top" id="eRC-JR-y69"/>
@@ -150,7 +150,7 @@
             <constraints>
                 <constraint firstItem="SqP-BV-v3M" firstAttribute="leading" secondItem="zbW-6X-gnJ" secondAttribute="leading" constant="20" id="QvU-IS-ESd"/>
                 <constraint firstAttribute="bottom" secondItem="SqP-BV-v3M" secondAttribute="bottom" id="VKo-JE-cP2"/>
-                <constraint firstItem="SqP-BV-v3M" firstAttribute="top" secondItem="zbW-6X-gnJ" secondAttribute="top" constant="120" id="boc-NZ-arM"/>
+                <constraint firstItem="SqP-BV-v3M" firstAttribute="top" secondItem="zbW-6X-gnJ" secondAttribute="top" constant="90" id="boc-NZ-arM"/>
                 <constraint firstAttribute="trailing" secondItem="SqP-BV-v3M" secondAttribute="trailing" constant="20" id="s7w-0c-k01"/>
             </constraints>
             <userDefinedRuntimeAttributes>
@@ -164,6 +164,7 @@
                     <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="24" y="75"/>
         </view>
     </objects>
     <resources>

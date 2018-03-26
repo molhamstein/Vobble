@@ -161,7 +161,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
 //                                        print(err.localizedDescription)
                                         self.loginButton.isLoading = false
                                         self.showMessage(message:err.localizedDescription, type: .error)
-                                        return
+                                        
                                     }
                                     self.loginButton.isLoading = false
                                     self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
@@ -290,18 +290,37 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         
         if validateFields() {
           // show loader
-          signupButton.isLoading = true
-          self.view.isUserInteractionEnabled = false
-          ApiManager.shared.userSignup(user: tempUserInfoHolder, password: password) { (success: Bool, err: ServerError?, user: AppUser?) in
-              // hide loader
-              self.signupButton.isLoading = false
-              self.view.isUserInteractionEnabled = true
-              if success {
-                 // self.performSegue(withIdentifier: "signupVerificationSegue", sender: self)
-                 self.showMessage(message:"success @_@", type: .warning)
+            signupButton.isLoading = true
+            self.view.isUserInteractionEnabled = false
+            ApiManager.shared.userSignup(user: tempUserInfoHolder, password: password) { (success: Bool, err: ServerError?, user: AppUser?) in
+              
+                if let email = self.tempUserInfoHolder.email, success {
+                
+                    ApiManager.shared.userLogin(email: email, password: self.password) { (isSuccess, error, user) in
+                        // hide loader
+                        self.signupButton.isLoading = false
+                        self.view.isUserInteractionEnabled = true
+                        // login success
+                        if (isSuccess) {
+                        
+                            Auth.auth().signInAnonymously(completion: { (user, error) in
+                                if let err:Error = error {
+                                    self.loginButton.isLoading = false
+                                    self.showMessage(message:err.localizedDescription, type: .error)
+                                }
+                                self.loginButton.isLoading = false
+                                self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                            })
+                        
+                        } else {
+                            self.showMessage(message:(error?.type.errorMessage)!, type: .error)
+                        }
+                    }
+                
+                    //self.showMessage(message:"success @_@", type: .warning)
                 
               } else {
-                  self.showMessage(message:(err?.type.errorMessage)!, type: .error)
+                    self.showMessage(message:(err?.type.errorMessage)!, type: .error)
               }
           }
         }
