@@ -22,7 +22,9 @@ class ShoreCell: UICollectionViewCell {
                 return
             }
             lblTitle.text = shore.name
-            ivCover.image = UIImage.init(named: shore.cover!)
+            ivCover.sd_setShowActivityIndicatorView(true)
+            ivCover.sd_setIndicatorStyle(.gray)
+            ivCover.sd_setImage(with: URL(string: shore.cover!))
         }
     }
 

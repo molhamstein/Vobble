@@ -80,8 +80,8 @@ class AppUser: BaseModel {
     public var firstColor : UIColor?
     public var secondColor : UIColor?
     public var imageUrl : UIImage?
-    public var conversationArray:[Conversation] = [Conversation]()
-    public var repliesArray:[Conversation] = [Conversation]()
+    public var myBottlesArray:[Conversation] = [Conversation]()
+    public var myRepliesArray:[Conversation] = [Conversation]()
     
     
     // MARK: User initializer

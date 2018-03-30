@@ -16,19 +16,21 @@ class Bottle: BaseModel {
     private let kStatus: String = "status"
     private let kViewsCount: String = "viewsCount"
     private let kRepliesCount: String = "repliesCount"
-    private let kCreatedAt: String = "createdAt"
     private let kOwnerId: String = "ownerId"
+    private let kOwner: String = "owner"
     private let kShoreId: String = "shoreId"
+    private let kattachment: String = "attachment"
     
     
     // MARK: Properties
-    public var idString : String?
+    public var bottle_id : Int?
     public var status : String?
-    public var viewsCount : String?
-    public var repliesCount : String?
-    public var createdAt : UIColor?
-    public var ownerId : AppUser?
-    public var shoreId : UIImage?
+    public var viewsCount : Int?
+    public var repliesCount : Int?
+    public var ownerId : Int?
+    public var shoreId : Int?
+    public var attachment: String?
+    public var owner: AppUser?
     
     
     // MARK: Initializers
@@ -39,36 +41,37 @@ class Bottle: BaseModel {
     required init(json: JSON) {
         super.init(json: json)
         
-        if let value = json[kBottleId].string {
-            idString = value
+        if let value = json[kBottleId].int {
+            bottle_id = value
         }
         if let value = json[kStatus].string {
             status = value
         }
-        if let value = json[kViewsCount].string {
+        if let value = json[kViewsCount].int {
             viewsCount = value
         }
-        if let value = json[kRepliesCount].string {
+        if let value = json[kRepliesCount].int {
             repliesCount = value
         }
-//                if let value = json[kCreatedAt].string {
-//                    createdAt = value
-//                }
-//                if let value = json[kOwnerId].string {
-//                    ownerId = value
-//                }
-//        set image
-//                if let value = json[kShoreId].string {
-//                    shoreId = value
-//                }
-        
+        if let value = json[kattachment].string {
+            attachment = value
+        }
+        if let value = json[kOwnerId].int {
+            ownerId = value
+        }
+        if let value = json[kShoreId].int {
+                shoreId = value
+        }
+        if json[kOwner] != JSON.null {
+            owner = AppUser(json: json[kOwner])
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
         
         var dictionary: [String: Any] = super.dictionaryRepresentation()
         
-        if let value = idString {
+        if let value = bottle_id {
             dictionary[kBottleId] = value
         }
         
@@ -85,16 +88,20 @@ class Bottle: BaseModel {
         }
         
         if let value = ownerId {
-            dictionary[kCreatedAt] = value
-        }
-        
-        if let value = ownerId {
             dictionary[kOwnerId] = value
         }
         
-        //        if let value = shoreId {
-        //            dictionary[kShoreId] = value
-        //        }
+        if let value = attachment {
+            dictionary[kattachment] = value
+        }
+        
+        if let value = shoreId {
+            dictionary[kShoreId] = value
+        }
+        
+        if let value = owner {
+            dictionary[kOwner] = value.dictionaryRepresentation()
+        }
         
         return dictionary
     }

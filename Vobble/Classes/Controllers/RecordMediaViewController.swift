@@ -11,6 +11,12 @@ import SDRecordButton
 
 let MAX_VIDEO_LENGTH:Float = 12
 
+enum typeOfController {
+    case findBottle
+    case throwBottle
+}
+
+
 class RecordMediaViewController: AbstractController {
     
     var errorLabel = UILabel();
@@ -25,9 +31,11 @@ class RecordMediaViewController: AbstractController {
     @IBOutlet weak var vOverlay:UIView!
     @IBOutlet weak var btnPhotoLibrary:UIButton!
     
+    
     var videoImageTimer: Timer?
     var recordTimer: Timer?
     var captureMediaType:MEDIA_TYPE = .IMAGE
+    var from: typeOfController = .throwBottle
     
     var settingsButton = UIButton();
     var camera = LLSimpleCamera();
@@ -252,11 +260,16 @@ extension RecordMediaViewController : UIImagePickerControllerDelegate, UINavigat
     {
         dismiss(animated: true, completion: nil)
         
-        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            self.gotToPreview(videoUrl: nil, image: editedImage)
-        } else if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.gotToPreview(videoUrl: nil, image: pickedImage)
+        
+        if let videoURL = info[UIImagePickerControllerMediaURL] as? NSURL {
+            self.gotToPreview(videoUrl: videoURL, image: nil)
         }
+        
+//        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+//            self.gotToPreview(videoUrl: nil, image: editedImage)
+//        } else if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            self.gotToPreview(videoUrl: nil, image: pickedImage)
+//        }
         
         prepareForRecording()
     }
@@ -554,6 +567,7 @@ extension RecordMediaViewController
                 previewControl.type = .VIDEO
                 previewControl.videoUrl = vidUrl
             }
+            previewControl.from = self.from
             
             self.navigationController?.pushViewController(previewControl, animated: false)
         }

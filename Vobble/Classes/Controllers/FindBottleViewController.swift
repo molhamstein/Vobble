@@ -24,8 +24,12 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var replyButton: VobbleButton!
     @IBOutlet weak var playButton: UIButton!
     
+    public var bottle:Bottle?
+    public var myVideoUrl = NSURL()
+    
     // MARK: - firebase Properties
     fileprivate var conversationRefHandle: DatabaseHandle?
+    
     
     fileprivate lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
 
@@ -34,7 +38,7 @@ class FindBottleViewController: AbstractController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        videoView.preparePlayer(videoURL: "http://twigbig.com/vidoes/desktop.mp4",customPlayBtn: playButton)
+        videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,50 +58,35 @@ class FindBottleViewController: AbstractController {
     
     @IBAction func replyBtnPressed(_ sender: Any) {
         
-//        let newConvRef = conversationRef.childByAutoId()
-//        let convlItem = [
-//            "bottle_id": "bottle_1",
-//            "user1_id": DataStore.shared.me?.id,
-//            "user1_name": DataStore.shared.me?.firstName,
-//            "user2_id": "1",
-//            "user2_name": "bayan"
-//        ]
-        //==================
-//        let user1 = [
-//            "id": DataStore.shared.me?.id,
-//            "username": DataStore.shared.me?.firstName,
-//            "country": "Syria"
-//        ]
-//        let user2 = [
-//            "id": "1",
-//            "username": "koko koko",
-//            "country": "USA"
-//        ]
-    //-----
-//        newConvRef.setValue(convlItem)
-    
-//        newConvRef.child("user1").childByAutoId().setValue(user1)
-//
-//        newConvRef.child("user2").childByAutoId().setValue(user2)
-        
-        self.performSegue(withIdentifier: "goToChat", sender: nil)
+        // show preview
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
+            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
+            recordControl.from = .findBottle
+            
+            self.navigationController?.pushViewController(recordControl, animated: false)
+        }
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
         
-//        if let newConvRef = sender as? DatabaseReference {
+        if let newConvRef = sender as? DatabaseReference {
             let nav = segue.destination as! UINavigationController
             let chatVc = nav.topViewController as! ChatViewController
-        
-//            let chatVc = segue.destination as! ChatViewController
-        
             chatVc.senderDisplayName = DataStore.shared.me?.firstName
 //            chatVc.conversation = conversation
-            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
-//            chatVc.conversationRef = newConvRef
-//        }
+//            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
+//            chatVc.uploadMedia(mediaReferenceUrl: bottle?.attachment!, mediaType: "public.movie", senderId: "\(bottle?.ownerId)")
+            chatVc.conversationRef = newConvRef
+            
+            if let uid = DataStore.shared.me?.objectId {
+                chatVc.senderId = "\(uid)"
+                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(uid)")
+            }
+            
+        }
         
     }
     
@@ -110,4 +99,23 @@ class FindBottleViewController: AbstractController {
         videoView.playButtonPressed()
     }
     
+    @IBAction func unwindToFindBottle(segue: UIStoryboardSegue) {
+        
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // delay 6 second
+           self.goToChat()
+       }
+    }
+    
+    func goToChat() {
+
+        let newConvRef = self.conversationRef.childByAutoId()
+        let convlItem:[String : Any] = [
+            "bottle": self.bottle?.dictionaryRepresentation(),
+            "user": DataStore.shared.me?.dictionaryRepresentation()
+        ]
+        
+        newConvRef.setValue(convlItem)
+        
+        self.performSegue(withIdentifier: "goToChat", sender: newConvRef)
+        }
 }

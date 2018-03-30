@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class StartViewController: AbstractController {
     
@@ -21,10 +22,20 @@ class StartViewController: AbstractController {
         super.viewDidAppear(animated)
         // check if user logged in
         if DataStore.shared.isLoggedin {
-        
-            self.performSegue(withIdentifier: "startHomeSegue", sender: self)
-           
+    
+            Auth.auth().signInAnonymously(completion: { (user, error) in
+                if let err:Error = error {
+                    self.showMessage(message:err.localizedDescription, type: .error)     
+                }
+                ApiManager.shared.getShores(completionBlock: { (shores, error) in
+                    
+                   self.performSegue(withIdentifier: "startHomeSegue", sender: self)
+                    
+                })
+            })
+            
         } else {// user not logged in
+            
             self.performSegue(withIdentifier: "startLoginSegue", sender: self)
         }
     }

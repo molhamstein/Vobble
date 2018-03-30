@@ -208,6 +208,7 @@
 		B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A3743F204530160080A323 /* SystemConfiguration.framework */; };
 		B1A37442204530230080A323 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37441204530230080A323 /* StoreKit.framework */; };
 		B1A37444204530310080A323 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A37443204530310080A323 /* AddressBook.framework */; };
+		B1AE405320699A52006B38FD /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AE405220699A52006B38FD /* Media.swift */; };
 		B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1C0C11120637E72004D82B8 /* VobbleChatNavigationBar.xib */; };
 		B1C0C11420637E83004D82B8 /* VobbleChatNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C0C11320637E83004D82B8 /* VobbleChatNavigationBar.swift */; };
 		B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */; };
@@ -554,6 +555,7 @@
 		B1A3743F204530160080A323 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B1A37441204530230080A323 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B1A37443204530310080A323 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B1AE405220699A52006B38FD /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		B1C0C11120637E72004D82B8 /* VobbleChatNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VobbleChatNavigationBar.xib; sourceTree = "<group>"; };
 		B1C0C11320637E83004D82B8 /* VobbleChatNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleChatNavigationBar.swift; sourceTree = "<group>"; };
 		B1EA39CA205606AE008AADC9 /* ConversationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				5706C431204DCAA3006E7C9A /* Shore.swift */,
 				B1EA39CE20560824008AADC9 /* Bottle.swift */,
 				B156A4442058952300654E2A /* Conversation.swift */,
+				B1AE405220699A52006B38FD /* Media.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1583,6 +1586,7 @@
 				B18A5DAE20348E4300F139B7 /* UIButton+RACCommandSupport.m in Sources */,
 				B18A5D8D20348E4300F139B7 /* RACIndexSetSequence.m in Sources */,
 				B18A5D7920348E4300F139B7 /* NSUserDefaults+RACSupport.m in Sources */,
+				B1AE405320699A52006B38FD /* Media.swift in Sources */,
 				B19372E72033E3FC007B1E7D /* Reply.swift in Sources */,
 				B18A5D7A20348E4300F139B7 /* RACArraySequence.m in Sources */,
 				B156A4452058952300654E2A /* Conversation.swift in Sources */,

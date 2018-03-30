@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -195,7 +195,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2L-hB-sqJ" customClass="FilterView" customModule="Vobble" customModuleProvider="target">
-                                <rect key="frame" x="31" y="20" width="313" height="367"/>
+                                <rect key="frame" x="24" y="20" width="327" height="367"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -310,7 +310,7 @@
                         <outlet property="shore2Lovers" destination="Nxw-0v-3Ac" id="q0J-HW-k38"/>
                         <outlet property="shore3Friends" destination="GsD-qm-Xxu" id="OQ1-0P-JaB"/>
                         <segue destination="9aW-Lr-Rgh" kind="presentation" identifier="homeRecrodSegue" id="nLz-PW-Ry2"/>
-                        <segue destination="cyQ-xT-FEa" kind="show" identifier="findBottleSegue" id="iBc-ms-v9Z"/>
+                        <segue destination="jSj-sV-840" kind="show" identifier="findBottleSegue" id="iBc-ms-v9Z"/>
                         <segue destination="JHw-gh-lbH" kind="show" identifier="myBottlesSegue" action="showDetailViewController:sender:" id="iv4-15-2aj"/>
                         <segue destination="nsm-q8-EXx" kind="show" identifier="shopSegue" id="nBc-5T-Bzd"/>
                     </connections>
@@ -359,7 +359,7 @@
         <!--Record Media View Controller-->
         <scene sceneID="toQ-Pc-Po5">
             <objects>
-                <viewController id="mVw-xN-B6R" customClass="RecordMediaViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordMediaViewControllerID" id="mVw-xN-B6R" customClass="RecordMediaViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ndC-cu-W2C"/>
                         <viewControllerLayoutGuide type="bottom" id="Lga-km-YhZ"/>
@@ -576,9 +576,28 @@
                                     <outlet property="delegate" destination="E99-d6-6s1" id="PQd-On-tGp"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXt-cc-Os2" userLabel="Submit Button" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
+                                <rect key="frame" x="84" y="473" width="206" height="44"/>
+                                <color key="backgroundColor" red="0.26290465429999998" green="0.68604801510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="206" id="IMT-rI-Od1"/>
+                                    <constraint firstAttribute="height" constant="44" id="b61-UB-0qJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="submitBtnPressed:" destination="E99-d6-6s1" eventType="touchUpInside" id="4cj-rh-SrN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vXt-cc-Os2" firstAttribute="centerX" secondItem="BD9-c0-vgi" secondAttribute="centerX" id="4GS-Xh-afk"/>
                             <constraint firstItem="5yw-ck-flP" firstAttribute="leading" secondItem="BD9-c0-vgi" secondAttribute="leading" id="4kH-rf-gb9"/>
                             <constraint firstAttribute="trailing" secondItem="5yw-ck-flP" secondAttribute="trailing" id="7CF-P5-VJy"/>
                             <constraint firstItem="sbJ-Sx-Lig" firstAttribute="top" secondItem="BD9-c0-vgi" secondAttribute="top" id="Btn-XF-oTc"/>
@@ -588,6 +607,7 @@
                             <constraint firstItem="sbJ-Sx-Lig" firstAttribute="leading" secondItem="BD9-c0-vgi" secondAttribute="leading" id="hrW-Fp-quy"/>
                             <constraint firstItem="5yw-ck-flP" firstAttribute="top" secondItem="BD9-c0-vgi" secondAttribute="top" id="i4Y-F0-Yvu"/>
                             <constraint firstAttribute="trailing" secondItem="Hii-un-Rp6" secondAttribute="trailing" id="jNf-7s-S6g"/>
+                            <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="vXt-cc-Os2" secondAttribute="bottom" constant="150" id="sGl-mP-kVB"/>
                             <constraint firstAttribute="trailing" secondItem="sbJ-Sx-Lig" secondAttribute="trailing" id="xHG-FJ-fbv"/>
                         </constraints>
                     </view>
@@ -595,8 +615,10 @@
                         <outlet property="backButton" destination="Acp-9z-pUC" id="8oD-d0-NXF"/>
                         <outlet property="cvShorePicker" destination="Hii-un-Rp6" id="uaC-cI-RhT"/>
                         <outlet property="imageView" destination="sbJ-Sx-Lig" id="SWu-Bk-11a"/>
+                        <outlet property="submitButton" destination="vXt-cc-Os2" id="gzj-Mb-dDD"/>
                         <outlet property="vOverlay" destination="5yw-ck-flP" id="jsv-cY-XcC"/>
                         <segue destination="dB1-pa-ISF" kind="unwind" identifier="unwindRecordMediaSegue" unwindAction="unwindRecordMediaWithSegue:" id="g9X-O5-Zb8"/>
+                        <segue destination="Bw2-UA-qTi" kind="unwind" identifier="unwindToFindBottleSegue" unwindAction="unwindToFindBottleWithSegue:" id="Ptd-Bx-Kg7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3wI-sc-OIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -800,7 +822,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIC-MW-qfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2967" y="-1452"/>
+            <point key="canvasLocation" x="-2028" y="-1452.3238380809596"/>
         </scene>
         <!--chatNavigationID-->
         <scene sceneID="3Uy-Ox-dZN">
@@ -808,7 +830,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="chatNavigationID" id="W1h-f8-Qe1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xu-Pg-Niu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2427" y="-1428"/>
+            <point key="canvasLocation" x="-1488.8" y="-1428.4857571214393"/>
         </scene>
         <!--Conversation View Controller-->
         <scene sceneID="jQT-7N-SLC">
@@ -1077,7 +1099,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yWf-bH-dpb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3QE-wa-jv3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -1094,7 +1116,7 @@
             <objects>
                 <navigationController storyboardIdentifier="chatNavigationID" automaticallyAdjustsScrollViewInsets="NO" id="ZVK-88-g6q" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="S0C-q7-DjL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="S0C-q7-DjL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1106,6 +1128,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="040-RN-wRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2967.1999999999998" y="998.95052473763121"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PJc-56-xe3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="jSj-sV-840" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3SC-cM-chG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cyQ-xT-FEa" kind="relationship" relationship="rootViewController" id="E5x-3z-zg1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFH-4H-bnJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Bw2-UA-qTi" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-2967.1999999999998" y="-1452.3238380809596"/>
         </scene>
     </scenes>
     <resources>
@@ -1127,7 +1168,7 @@
         <image name="recordRecordingIcon" width="4" height="4"/>
         <image name="sea" width="4500" height="1801"/>
         <image name="shore1" width="1281" height="1086"/>
-        <image name="shore2" width="512" height="288"/>
+        <image name="shore2" width="1198" height="819"/>
         <image name="shore3" width="1461" height="1288"/>
         <image name="sky1" width="4500" height="721"/>
         <image name="sun" width="1755" height="1531"/>
