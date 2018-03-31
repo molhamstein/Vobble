@@ -256,6 +256,8 @@ extension RecordMediaViewController : UIImagePickerControllerDelegate, UINavigat
             self.gotToPreview(videoUrl: nil, image: editedImage)
         } else if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.gotToPreview(videoUrl: nil, image: pickedImage)
+        } else if if let pickedImage = info[UIImagePickerControllerMediaURL] as? UIImage {
+            self.gotToPreview(videoUrl: nil, image: pickedImage)
         }
         
         prepareForRecording()

@@ -25,6 +25,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>CountdownLabel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -177,6 +182,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0238D258EE41DD9B1BE06B8BF438D163</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>061F55005C75819948421B2AE487CFFF</key>
 		<dict>
 			<key>primary</key>
@@ -188,6 +198,11 @@
 			<true/>
 		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>153953551F347F6F98E93A5B3547C859</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -213,6 +228,11 @@
 			<true/>
 		</dict>
 		<key>4F436DDF37D8EF5C583FD5A307E3AC74</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>500EFDCB97BACCBDD55A792A1F2F6225</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -252,6 +272,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8F254C70EA7289F49F560FEF44F5E03E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>92C8CAD0D55C6826E760CD515909011D</key>
 		<dict>
 			<key>primary</key>
@@ -287,12 +312,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>D3D0A4E035E96C8FD9240C3B08725CF5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>DC4EA43B8AD7E0E79CACDAB6E3019186</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DEC05651D1F4F24769A11DC2A95A1FF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E0051D9366769A9CB81C618724A88E2D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -308,6 +343,11 @@
 			<true/>
 		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA0F67E25AAF4CAD5AB6E483CA9DE46F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
