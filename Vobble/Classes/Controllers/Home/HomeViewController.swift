@@ -123,18 +123,40 @@ class HomeViewController: AbstractController {
         //ivShore2Girl.loadGif(asset: "girl")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let bottle = sender as? Bottle {
+
+            let nav = segue.destination as! UINavigationController
+            let findBottleVC = nav.topViewController as! FindBottleViewController
+            
+            findBottleVC.bottle = bottle
+         }
+    }
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
+        
         self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
     }
     
     @IBAction func findBottlePressed(_ sender: UIButton) {
         
         self.ivFindBottle.loadGif(name: "find_bottle")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 6 second
-            
-            self.performSegue(withIdentifier: "findBottleSegue", sender: self)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 5 second
             self.ivFindBottle.image = nil
+            self.showActivityLoader(true)
+            ApiManager.shared.findBottle { (bottle, error) in
+    
+                if error == nil {
+                    self.showActivityLoader(false)
+                    //print("\(bottle?.bottle_id)")
+                    self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
+                    self.ivFindBottle.image = nil
+                } else {
+                    //print(erorr)
+                }
+            }
         }
     }
     
@@ -375,6 +397,7 @@ class HomeViewController: AbstractController {
     func showShopView() {
         self.performSegue(withIdentifier:"shopSegue", sender: self)
     }
+    
 }
 
 extension HomeViewController {

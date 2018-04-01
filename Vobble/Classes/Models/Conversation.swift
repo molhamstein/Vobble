@@ -13,16 +13,14 @@ class Conversation: BaseModel {
     
     // MARK: Keys
     private let kConvId: String = "id"
-    private let kuser1: String = "user1"
-    private let kuser2: String = "user2"
+    private let kuser: String = "user"
     private let kBottle: String = "bottle"
     private let kTimeleft: String = "timeleft"
     
     
     // MARK: Properties
     public var idString : String?
-    public var user1 : AppUser?
-    public var user2 : AppUser?
+    public var user : AppUser?
     public var bottle: Bottle?
     public var timeLeft: String?
     
@@ -38,16 +36,12 @@ class Conversation: BaseModel {
         if let value = json[kConvId].string {
             idString = value
         }
-//        if let value = json[kuser1].string {
-//            user1 = value
-//        }
-//        if let value = json[kuser2].string {
-//            user2 = value
-//        }
-//        if let value = json[kBottle].string {
-//            bottle = value
-//        }
-        
+        if json[kuser] != JSON.null {
+            user = AppUser(json: json[kuser])
+        }
+        if json[kBottle] != JSON.null {
+            bottle = Bottle(json: json[kBottle])
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -58,17 +52,13 @@ class Conversation: BaseModel {
             dictionary[kConvId] = value
         }
         
-//        if let value = user1 {
-//            dictionary[kuser1] = value
-//        }
-//        
-//        if let value = user2 {
-//            dictionary[kuser2] = value
-//        }
+        if let value = user {
+            dictionary[kuser] = value.dictionaryRepresentation()
+        }
         
-//        if let bottle = time {
-//            dictionary[kBottle] = value
-//        }
+        if let value = bottle {
+            dictionary[kBottle] = value.dictionaryRepresentation()
+        }
         
         return dictionary
     }

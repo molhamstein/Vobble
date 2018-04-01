@@ -98,27 +98,27 @@ class DataStore :NSObject {
     private override init(){
         super.init()
         
-        // temp
-        var shoresTemp : [Shore] = []
-        let shore1 = Shore()
-        shore1.name = "Main Shore"
-        shore1.cover = "shore"
-        shore1.icon = "shore"
-        
-        let shore2 = Shore()
-        shore2.name = "Love Shore"
-        shore2.cover = "shoret2"
-        shore2.icon = "shoret2"
-        
-        let shore3 = Shore()
-        shore3.name = "Fad Fed"
-        shore3.cover = "shore"
-        shore3.icon = ""
-        
-        shoresTemp.append(shore1)
-        shoresTemp.append(shore2)
-        shoresTemp.append(shore3)
-        shores = shoresTemp
+//        // temp
+//        var shoresTemp : [Shore] = []
+//        let shore1 = Shore()
+//        shore1.name = "Main Shore"
+//        shore1.cover = "shore"
+//        shore1.icon = "shore"
+//        
+//        let shore2 = Shore()
+//        shore2.name = "Love Shore"
+//        shore2.cover = "shoret2"
+//        shore2.icon = "shoret2"
+//        
+//        let shore3 = Shore()
+//        shore3.name = "Fad Fed"
+//        shore3.cover = "shore"
+//        shore3.icon = ""
+//        
+//        shoresTemp.append(shore1)
+//        shoresTemp.append(shore2)
+//        shoresTemp.append(shore3)
+//        shores = shoresTemp
     }
    
     //MARK: Cache Utils

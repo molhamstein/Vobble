@@ -163,8 +163,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                                         self.showMessage(message:err.localizedDescription, type: .error)
                                         
                                     }
-                                    self.loginButton.isLoading = false
-                                    self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                                    ApiManager.shared.getShores(completionBlock: { (shores, error) in
+                                        
+                                        self.loginButton.isLoading = false
+                                        self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                                        
+                                    })
                                 })
                                 
                             } else {

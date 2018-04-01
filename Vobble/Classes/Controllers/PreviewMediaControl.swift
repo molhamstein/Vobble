@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import UIKit
 
 enum MEDIA_TYPE {
     case IMAGE
@@ -19,9 +20,11 @@ class PreviewMediaControl : AbstractController {
     @IBOutlet weak var backButton:UIButton!
     @IBOutlet weak var vOverlay:UIView!
     @IBOutlet weak var cvShorePicker:UICollectionView!
+    @IBOutlet weak var submitButton: VobbleButton!
     
     var type:MEDIA_TYPE!
     var isShorePickerVisible: Bool = false
+    var from: typeOfController = .throwBottle
     
     //Image
     var image = UIImage();
@@ -38,7 +41,17 @@ class PreviewMediaControl : AbstractController {
         if(type == .VIDEO) {
             self.avPlayer.play();
         }
-        
+        if (from == .findBottle) {
+            
+            cvShorePicker.isHidden = true
+            submitButton.isHidden = false
+            
+        } else if (from == .throwBottle) {
+            
+            cvShorePicker.isHidden = false
+            submitButton.isHidden = true
+            
+        }
         // itro animation 
         cvShorePicker.animateIn(mode: .animateInFromBottom, delay: 0.3)
         backButton.animateIn(mode: .animateInFromTop, delay: 0.2)
@@ -119,14 +132,68 @@ class PreviewMediaControl : AbstractController {
         return true
     }
     
-    @IBAction func throwInSea () {
+    @IBAction func throwInSea (shoreId: Int) {
+     
+        let urls:[URL] = [self.videoUrl as URL]
         
-        // animate views out
-        cvShorePicker.animateIn(mode: .animateOutToBottom, delay: 0.3)
-        backButton.animateIn(mode: .animateOutToTop, delay: 0.2)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 6 second
-            self.performSegue(withIdentifier: "unwindRecordMediaSegue", sender: self)
-            self.popOrDismissViewControllerAnimated(animated: true)
+//        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
+        
+//            if errorMessage == nil {
+        
+                let bottle = Bottle()
+//                bottle.attachment = files[0].fileUrl ?? " "
+                bottle.attachment = "https://vobble.herokuapp.com/api/uploads/videos/download/1522161098010_EEE5E5FE-50BA-47DC-8514-C29FBE09A769.MOV"
+                bottle.ownerId = DataStore.shared.me?.id
+                bottle.status = "active"
+                bottle.shoreId = shoreId
+        
+                showActivityLoader(true)
+                ApiManager.shared.addBottle(bottle: bottle, completionBlock: { (success, error, bottle) in
+                
+                    if error == nil {
+                        self.showActivityLoader(false)
+                        
+                        print("\(bottle?.id)")
+                        // animate views out
+                        self.cvShorePicker.animateIn(mode: .animateOutToBottom, delay: 0.3)
+                        self.backButton.animateIn(mode: .animateOutToTop, delay: 0.2)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 6 second
+                            self.performSegue(withIdentifier: "unwindRecordMediaSegue", sender: self)
+                            self.popOrDismissViewControllerAnimated(animated: true)
+                        }
+                    } else {
+                        self.showActivityLoader(false)
+                        
+                        print(error?.type.errorMessage)
+                    }
+                    
+                })
+                
+//            }
+//            else {
+//                print(errorMessage)
+//            }
+        
+//        }
+        
+        
+    }
+    
+    @IBAction func submitBtnPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToFindBottleSegue", sender: self)
+        self.popOrDismissViewControllerAnimated(animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        
+        if (segue.identifier == "unwindToFindBottleSegue") {
+            
+//            let nav = segue.destination as! UINavigationController
+            let findBottleVC = segue.destination  as! FindBottleViewController
+            findBottleVC.myVideoUrl = self.videoUrl
+            
         }
     }
     
@@ -161,7 +228,7 @@ extension PreviewMediaControl:UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return DataStore.shared.shores.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -174,7 +241,7 @@ extension PreviewMediaControl:UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        throwInSea()
+        throwInSea(shoreId: DataStore.shared.shores[indexPath.item].shore_id!)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

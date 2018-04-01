@@ -45,10 +45,10 @@ final class ChatViewController: JSQMessagesViewController {
     
     //  private var localTyping = false
     
-    var conversation: Conversation? {
+    var convTitle: String? {
         didSet {
             //      title = conversation?.user2?.firstName
-            title = "chat"
+            title = convTitle ?? ""
         }
     }
     
@@ -364,45 +364,58 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         picker.dismiss(animated: true, completion:nil)
         
+        if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL, let mediaType = info[UIImagePickerControllerMediaType] as? String  {
+            
+            uploadMedia(mediaReferenceUrl: mediaReferenceUrl,mediaType: mediaType,senderId: self.senderId)
+            
+        }
+       
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion:nil)
+    }
+    
+    func uploadMedia(mediaReferenceUrl:URL,mediaType: String,senderId:String) {
         // 1
-        if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
+//        if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
             // Handle picking a Photo from the Photo Library
             // 2
             let assets = PHAsset.fetchAssets(withALAssetURLs: [mediaReferenceUrl], options: nil)
             let asset = assets.firstObject
             
             if let key = sendPhotoMessage() {
+                
+//                if let mediaType = info[UIImagePickerControllerMediaType] as? String {
                     
-               if let mediaType = info[UIImagePickerControllerMediaType] as? String {
+                    let path = "\(senderId)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\(mediaReferenceUrl.lastPathComponent)"
+                    
+                    if mediaType  == "public.image" {
                         
-                  let path = "\(self.senderId)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\(mediaReferenceUrl.lastPathComponent)"
+                        asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
+                            
+                            self.upload(url: (contentEditingInput?.fullSizeImageURL)!, path: path,key:key)
+                            
+                        })
                         
-                   if mediaType  == "public.image" {
-                    
-                       asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
-    
-                           self.uploadMedia(url: (contentEditingInput?.fullSizeImageURL)!, path: path,key:key)
-                                
-                       })
-                    
                     } else if mediaType == "public.movie" {
-                    
+                        
                         PHCachingImageManager().requestAVAsset(forVideo: asset!, options: nil, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [AnyHashable : Any]?) in
                             let asset = asset as! AVURLAsset
-                                
-                            self.uploadMedia(url: asset.url, path: path,key:key)
-                              
+                            
+                            self.upload(url: asset.url, path: path,key:key)
+                            
                         })
                     }
-                }
+//                }
             }
-    
-        } else {
-            // Handle picking a Photo from the Camera - TODO
-        }
+            
+//        } else {
+//            // Handle picking a Photo from the Camera - TODO
+//        }
     }
     
-    func uploadMedia(url:URL,path:String,key:String) {
+    func upload(url:URL,path:String,key:String) {
         
         self.storageRef.child(path).putFile(from: url, metadata: nil) { (metadata, error) in
             if let error = error {
@@ -413,9 +426,4 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
         
     }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion:nil)
-    }
-    
 }

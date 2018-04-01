@@ -26,6 +26,7 @@ class ConversationCollectionViewCell: UICollectionViewCell {
         // Initialization
         // mainView.dropShadow()
         chatButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+        mainView.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
     }
     
     override func layoutSubviews() {
@@ -35,14 +36,19 @@ class ConversationCollectionViewCell: UICollectionViewCell {
 //        }
     }
     
-    func configCell(convObj: Conversation) {
+    func configCell(convObj: Conversation,tap: tapOption) {
         
         //        mainView.dropShadow()
-        mainView.applyGradient(colours: [(convObj.user2?.firstColor)!, (convObj.user2?.secondColor)!], direction: .horizontal)
-        bottleNameLabel.text = convObj.user2?.firstName
-        timeLabel.text = "Time left: "+convObj.timeLeft!
-        countryLabel.text = convObj.user2?.country
-        image.image = convObj.user2?.imageUrl
+//        mainView.applyGradient(colours: [(convObj.user2?.firstColor)!, (convObj.user2?.secondColor)!], direction: .horizontal)
+        
+        if tap == .myBottles {
+            bottleNameLabel.text = convObj.bottle?.owner?.firstName
+        } else {
+            bottleNameLabel.text = convObj.user?.firstName
+        }
+//        timeLabel.text = "Time left: "+convObj.timeLeft!
+//        countryLabel.text = convObj.user2?.country
+//        image.image = convObj.user2?.imageUrl
         
         dispatch_main_after(0.2) {
             if !self.shadowApplied {
