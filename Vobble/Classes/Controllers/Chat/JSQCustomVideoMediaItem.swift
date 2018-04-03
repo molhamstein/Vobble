@@ -12,7 +12,6 @@ import JSQMessagesViewController
 class JSQCustomVideoMediaItem: JSQVideoMediaItem {
     
     var thumbImageView: UIImageView!
-//    var videoUrl: String!
     var message: Message = Message()
 
     private var activityIndicator = JSQMessagesMediaPlaceholderView.withActivityIndicator()
@@ -43,7 +42,7 @@ class JSQCustomVideoMediaItem: JSQVideoMediaItem {
     
     func setThumbWithURL(url: URL) {
         
-        if url.absoluteString.hasPrefix("http://") ||  url.absoluteString.hasPrefix("https://") {
+        if let videoUrl = message.videoUrl, videoUrl.hasPrefix("http://") {
             
             // thumb
             self.thumbImageView.sd_setShowActivityIndicatorView(true)

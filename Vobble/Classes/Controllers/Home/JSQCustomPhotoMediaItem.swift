@@ -12,17 +12,19 @@ import JSQMessagesViewController
 class JSQCustomPhotoMediaItem: JSQPhotoMediaItem {
     
     var asyncImageView: UIImageView!
+    var message: Message = Message()
+    
     private var activityIndicator = JSQMessagesMediaPlaceholderView.withActivityIndicator()
     
     override init!(maskAsOutgoing: Bool) {
         super.init(maskAsOutgoing: maskAsOutgoing)
     }
     
-    init(withURL url: URL, imageSize: CGSize, isOperator: Bool) {
+    init(message:Message, isOperator: Bool) {
         super.init()
         appliesMediaViewMaskAsOutgoing = (isOperator == false)
         asyncImageView = UIImageView()
-        asyncImageView.frame = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
+        asyncImageView.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         asyncImageView.contentMode = .scaleAspectFit
         asyncImageView.clipsToBounds = true
         asyncImageView.layer.cornerRadius = 5
@@ -30,15 +32,16 @@ class JSQCustomPhotoMediaItem: JSQPhotoMediaItem {
         activityIndicator?.frame = asyncImageView.frame
         asyncImageView.addSubview(activityIndicator!)
         
+        self.message = message
     }
     
-    func setImageWithURL(url: URL) {
+    func setImageWithURL() {
         
-        if url.absoluteString.hasPrefix("http://") {
+        if let photoUrl = self.message.photoUrl, photoUrl.hasPrefix("http://") {
             
             self.asyncImageView.sd_setShowActivityIndicatorView(true)
             self.asyncImageView.sd_setIndicatorStyle(.gray)
-            self.asyncImageView.sd_setImage(with: url)
+            self.asyncImageView.sd_setImage(with: URL(string:photoUrl))
             activityIndicator?.removeFromSuperview()
         }
     }

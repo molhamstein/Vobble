@@ -231,10 +231,11 @@ final class ChatViewController: JSQMessagesViewController {
                 self.finishReceivingMessage()
             } else if let id = message.senderId, let mediaURL = message.photoUrl {
                 
-                let mediaItem = JSQCustomPhotoMediaItem(withURL: URL(string: mediaURL)!, imageSize: CGSize(width: 150, height: 150), isOperator: id == self.senderId)
+                let mediaItem = JSQCustomPhotoMediaItem(message: message, isOperator: id == self.senderId)
                 self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                 
                 if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                    mediaItem.message = message
                     self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
                 }
                 
@@ -265,6 +266,7 @@ final class ChatViewController: JSQMessagesViewController {
             if let mediaURL = message.photoUrl {
                 // The photo has been updated.
                 if let mediaItem = self.photoMessageMap[message.idString!] {
+                    mediaItem.message = message
                     self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                 }
                 
@@ -281,7 +283,7 @@ final class ChatViewController: JSQMessagesViewController {
     
     private func fetchImageDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQCustomPhotoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
         
-        mediaItem.setImageWithURL(url: URL(string: mediaURL)!)
+        mediaItem.setImageWithURL()
         self.collectionView.reloadData()
         guard key != nil else {
             return

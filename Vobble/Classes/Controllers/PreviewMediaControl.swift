@@ -243,6 +243,7 @@ extension PreviewMediaControl:UICollectionViewDelegate,UICollectionViewDataSourc
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoreCell", for: indexPath) as! ShoreCell
         cell.shore = DataStore.shared.shores[indexPath.item]
+        cell.btnThrow.isUserInteractionEnabled = false
         
         return cell
     }
