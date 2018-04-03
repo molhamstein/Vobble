@@ -24,6 +24,7 @@ import UIKit
 import Photos
 import Firebase
 import JSQMessagesViewController
+import SwiftyJSON
 
 final class ChatViewController: JSQMessagesViewController {
     
@@ -33,7 +34,7 @@ final class ChatViewController: JSQMessagesViewController {
     var conversationRef: DatabaseReference?
     
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
-    fileprivate lazy var storageRef: StorageReference = Storage.storage().reference(forURL: "gs://vobble-1521577974841.appspot.com")
+//    fileprivate lazy var storageRef: StorageReference = Storage.storage().reference(forURL: "gs://vobble-1521577974841.appspot.com")
     //  private lazy var userIsTypingRef: DatabaseReference = self.conversationRef!.child("typingIndicator").child(self.senderId)
     //  private lazy var usersTypingQuery: DatabaseQuery = self.conversationRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
     
@@ -41,7 +42,8 @@ final class ChatViewController: JSQMessagesViewController {
     private var updatedMessageRefHandle: DatabaseHandle?
     
     private var messages: [JSQMessage] = []
-    private var photoMessageMap = [String: JSQPhotoMediaItem]()
+    private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
+    private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
     
     //  private var localTyping = false
     
@@ -51,6 +53,8 @@ final class ChatViewController: JSQMessagesViewController {
             title = convTitle ?? ""
         }
     }
+    
+    var selectedImage: UIImage?
     
     //  var isTyping: Bool {
     //    get {
@@ -164,6 +168,50 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
+        
+        let message = self.messages[indexPath.row]
+        if message.isMediaMessage == true {
+            let mediaItem = message.media
+            // Photo Message
+            if mediaItem is JSQCustomPhotoMediaItem {
+                let photoItem = mediaItem as! JSQCustomPhotoMediaItem
+                if let test: UIImage = photoItem.asyncImageView.image {
+                    selectedImage = test
+                    self.performSegue(withIdentifier: "showPhoto", sender: self)
+                }
+            }
+            // Video Message
+            if mediaItem is JSQCustomVideoMediaItem {
+                let videoItem = mediaItem as! JSQCustomVideoMediaItem
+                print(videoItem.message.videoUrl)
+                if  let videoUrl = videoItem.message.videoUrl, videoUrl.hasPrefix("http://") {
+                    
+                    let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
+                    previewControl.from = .chatView
+                    previewControl.type = .VIDEO
+                    previewControl.videoUrl = NSURL(string: videoUrl)!
+                    
+                    self.navigationController?.pushViewController(previewControl, animated: false)
+                }
+                
+            }
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPhoto" {
+            if let pageDeDestination = segue.destination as? ShowPhotoViewController {
+                pageDeDestination.image = selectedImage!
+            } else {
+                print("type destination not ok")
+            }
+        } else {
+            print("segue inexistant")
+        }
+    }
+    
     // MARK: Firebase related methods
     
     private func observeMessages() {
@@ -173,20 +221,34 @@ final class ChatViewController: JSQMessagesViewController {
         // We can use the observe method to listen for new
         // messages being written to the Firebase DB
         newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
-            let messageData = snapshot.value as! Dictionary<String, String>
+//            let messageData = snapshot.value as! Dictionary<String, String>
             
-            if let id = messageData["senderId"] as String!, let name = messageData["senderName"] as String!, let text = messageData["text"] as String!, text.characters.count > 0 {
+            let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+            message.idString = snapshot.key
+            
+            if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
                 self.addMessage(withId: id, name: name, text: text)
                 self.finishReceivingMessage()
-            } else if let id = messageData["senderId"] as String!, let mediaURL = messageData["mediaURL"] as String! {
-                if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self.senderId) {
-                    self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
-                    
-                    if mediaURL.hasPrefix("gs://") {
-                        self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
-                    }
+            } else if let id = message.senderId, let mediaURL = message.photoUrl {
+                
+                let mediaItem = JSQCustomPhotoMediaItem(withURL: URL(string: mediaURL)!, imageSize: CGSize(width: 150, height: 150), isOperator: id == self.senderId)
+                self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                
+                if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                    self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
                 }
-            } else {
+                
+            } else if let id = message.senderId, let mediaURL = message.videoUrl {
+                
+                let mediaItem = JSQCustomVideoMediaItem(message: message, isOperator: id == self.senderId)
+                self.addVideoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                
+                if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                    mediaItem.message.videoUrl = mediaURL
+                    self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
+                }
+                
+            }  else {
                 print("Error! Could not decode message data")
             }
         })
@@ -196,46 +258,47 @@ final class ChatViewController: JSQMessagesViewController {
         // We use this to be notified when a photo has been stored
         // to the Firebase Storage, so we can update the message data
         updatedMessageRefHandle = messageRef.observe(.childChanged, with: { (snapshot) in
-            let key = snapshot.key
-            let messageData = snapshot.value as! Dictionary<String, String>
+       
+            let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+            message.idString = snapshot.key
             
-            if let mediaURL = messageData["mediaURL"] as String! {
+            if let mediaURL = message.photoUrl {
                 // The photo has been updated.
-                if let mediaItem = self.photoMessageMap[key] {
-                    self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: key)
+                if let mediaItem = self.photoMessageMap[message.idString!] {
+                    self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                 }
+                
+            } else if let mediaURL = message.videoUrl {
+             
+                if let mediaItem = self.videoMessageMap[message.idString!] {
+                    mediaItem.message.videoUrl = mediaURL
+                    self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
+                }
+                
             }
         })
     }
     
-    private func fetchImageDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQPhotoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
-        let storageRef = Storage.storage().reference(forURL: mediaURL)
+    private func fetchImageDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQCustomPhotoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
         
-        storageRef.getData(maxSize: INT64_MAX){ (data, error) in
-            if let error = error {
-                print("Error downloading image data: \(error)")
-                return
-            }
-            
-            storageRef.getMetadata(completion: { (metadata, metadataErr) in
-                if let error = metadataErr {
-                    print("Error downloading metadata: \(error)")
-                    return
-                }
-                
-                if (metadata?.contentType == "image/gif") {
-                    mediaItem.image = UIImage.gif(data: data!)
-                } else {
-                    mediaItem.image = UIImage.init(data: data!)
-                }
-                self.collectionView.reloadData()
-                
-                guard key != nil else {
-                    return
-                }
-                self.photoMessageMap.removeValue(forKey: key!)
-            })
+        mediaItem.setImageWithURL(url: URL(string: mediaURL)!)
+        self.collectionView.reloadData()
+        guard key != nil else {
+            return
         }
+        self.photoMessageMap.removeValue(forKey: key!)
+        
+    }
+    
+    private func fetchVideoDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQCustomVideoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
+        
+        mediaItem.setThumbWithURL(url: URL(string: mediaURL)!)
+        self.collectionView.reloadData()
+        guard key != nil else {
+            return
+        }
+        self.videoMessageMap.removeValue(forKey: key!)
+        
     }
     
     //  private func observeTyping() {
@@ -280,11 +343,11 @@ final class ChatViewController: JSQMessagesViewController {
         //    isTyping = false
     }
     
-    func sendPhotoMessage() -> String? {
+    func sendMediaMessage(mediaTag: String) -> String? {
         let itemRef = messageRef.childByAutoId()
         
         let messageItem = [
-            "mediaURL": imageURLNotSetKey,
+            mediaTag : imageURLNotSetKey,
             "senderId": senderId!,
             ]
         
@@ -296,9 +359,13 @@ final class ChatViewController: JSQMessagesViewController {
         return itemRef.key
     }
     
-    func setImageURL(_ url: String, forPhotoMessageWithKey key: String) {
+    func setMediaURL(_ media: Media, forPhotoMessageWithKey key: String) {
         let itemRef = messageRef.child(key)
-        itemRef.updateChildValues(["mediaURL": url])
+        if media.type == "image/jpeg" ||  media.type == "image/png" {
+            itemRef.updateChildValues(["photoURL": media.fileUrl!])
+        } else if media.type == "video/quicktime" {
+            itemRef.updateChildValues(["videoURL": media.fileUrl!])
+        }
     }
     
     // MARK: UI and User Interaction
@@ -333,12 +400,24 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
-    private func addPhotoMessage(withId id: String, key: String, mediaItem: JSQPhotoMediaItem) {
+    private func addPhotoMessage(withId id: String, key: String, mediaItem: JSQCustomPhotoMediaItem) {
         if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
             messages.append(message)
             
             if (mediaItem.image == nil) {
                 photoMessageMap[key] = mediaItem
+            }
+            
+            collectionView.reloadData()
+        }
+    }
+    
+    private func addVideoMessage(withId id: String, key: String, mediaItem: JSQCustomVideoMediaItem) {
+        if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
+            messages.append(message)
+            
+            if (mediaItem.thumbImageView.image == nil ) {
+                videoMessageMap[key] = mediaItem
             }
             
             collectionView.reloadData()
@@ -364,10 +443,16 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         picker.dismiss(animated: true, completion:nil)
         
-        if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL, let mediaType = info[UIImagePickerControllerMediaType] as? String  {
+        let mediaType = info[UIImagePickerControllerMediaType] as? String
+        if mediaType == "public.image" {
+            if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
+                uploadPhoto(photoUrl: mediaReferenceUrl)
+            }
             
-            uploadMedia(mediaReferenceUrl: mediaReferenceUrl,mediaType: mediaType,senderId: self.senderId)
-            
+        } else if mediaType == "public.movie" {
+            if let mediaUrl = info[UIImagePickerControllerMediaURL] as? URL {
+                uploadVideo(videoUrl: mediaUrl)
+            }
         }
        
     }
@@ -376,54 +461,86 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismiss(animated: true, completion:nil)
     }
     
-    func uploadMedia(mediaReferenceUrl:URL,mediaType: String,senderId:String) {
-        // 1
-//        if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
-            // Handle picking a Photo from the Photo Library
-            // 2
-            let assets = PHAsset.fetchAssets(withALAssetURLs: [mediaReferenceUrl], options: nil)
+    func uploadPhoto(photoUrl:URL) {
+        
+        if let key = sendMediaMessage(mediaTag: "photoURL") {
+            
+            let assets = PHAsset.fetchAssets(withALAssetURLs: [photoUrl], options: nil)
             let asset = assets.firstObject
-            
-            if let key = sendPhotoMessage() {
+            asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
                 
-//                if let mediaType = info[UIImagePickerControllerMediaType] as? String {
-                    
-                    let path = "\(senderId)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\(mediaReferenceUrl.lastPathComponent)"
-                    
-                    if mediaType  == "public.image" {
-                        
-                        asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
-                            
-                            self.upload(url: (contentEditingInput?.fullSizeImageURL)!, path: path,key:key)
-                            
-                        })
-                        
-                    } else if mediaType == "public.movie" {
-                        
-                        PHCachingImageManager().requestAVAsset(forVideo: asset!, options: nil, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [AnyHashable : Any]?) in
-                            let asset = asset as! AVURLAsset
-                            
-                            self.upload(url: asset.url, path: path,key:key)
-                            
-                        })
-                    }
-//                }
-            }
+                self.upload(url: (contentEditingInput?.fullSizeImageURL)!, key:key)
+            })
             
-//        } else {
-//            // Handle picking a Photo from the Camera - TODO
-//        }
+        }
     }
     
-    func upload(url:URL,path:String,key:String) {
+    func uploadVideo(videoUrl:URL) {
         
-        self.storageRef.child(path).putFile(from: url, metadata: nil) { (metadata, error) in
-            if let error = error {
-                print("Error uploading media: \(error.localizedDescription)")
-                return
+        if let key = sendMediaMessage(mediaTag: "videoURL")  {
+             self.upload(url: videoUrl, key:key)
+        }
+    }
+    
+    func upload(url:URL,key:String) {
+        
+        let urls:[URL] = [url]
+        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
+            
+            if errorMessage == nil {
+               
+                self.setMediaURL(files[0], forPhotoMessageWithKey: key)
+                
+            } else {
+                print("error")
             }
-            self.setImageURL(self.storageRef.child((metadata?.path)!).description, forPhotoMessageWithKey: key)
+            
         }
         
     }
+
+    
+//    func uploadMedia(mediaReferenceUrl:URL,mediaType: String,senderId:String) {
+//        
+////        let assets = PHAsset.fetchAssets(withALAssetURLs: [mediaReferenceUrl], options: nil)
+////        let asset = assets.firstObject
+//        
+//        if let key = sendPhotoMessage() {
+//            
+////            let path = "\(senderId)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\(mediaReferenceUrl.lastPathComponent)"
+//            
+//            if mediaType  == "public.image" {
+//                
+////                asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
+//                
+////                    self.upload(url: (contentEditingInput?.fullSizeImageURL)!, path: path,key:key)
+//                self.upload(url: mediaReferenceUrl, key:key)
+//                
+////                })
+//                
+//            } else if mediaType == "public.movie" {
+//                
+////                PHCachingImageManager().requestAVAsset(forVideo: asset!, options: nil, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [AnyHashable : Any]?) in
+////                    let asset = asset as! AVURLAsset
+//                
+////                    self.upload(url: asset.url, path: path,key:key)
+//                 self.upload(url: mediaReferenceUrl, key:key)
+////                })
+//            }
+//            
+//        }
+//    }
+    
+    
+//    func upload(url:URL,path:String,key:String) {
+//
+//        self.storageRef.child(path).putFile(from: url, metadata: nil) { (metadata, error) in
+//            if let error = error {
+//                print("Error uploading media: \(error.localizedDescription)")
+//                return
+//            }
+//            self.setImageURL(self.storageRef.child((metadata?.path)!).description, forPhotoMessageWithKey: key)
+//        }
+//        
+//    }
 }

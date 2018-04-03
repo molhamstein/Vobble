@@ -14,6 +14,7 @@ let MAX_VIDEO_LENGTH:Float = 12
 enum typeOfController {
     case findBottle
     case throwBottle
+    case chatView
 }
 
 class RecordMediaViewController: AbstractController {
@@ -259,10 +260,17 @@ extension RecordMediaViewController : UIImagePickerControllerDelegate, UINavigat
     {
         dismiss(animated: true, completion: nil)
         
-        
-        if let videoURL = info[UIImagePickerControllerMediaURL] as? NSURL {
+        if let videoURL = info[UIImagePickerControllerMediaURL] as? NSURL{
             self.gotToPreview(videoUrl: videoURL, image: nil)
+            
         }
+//        if let videoURL = info[UIImagePickerControllerMediaURL] as? NSURL, self.from == .throwBottle {
+//            self.gotToPreview(videoUrl: videoURL, image: nil)
+//            
+//        }
+//        else if let videoURL = info[UIImagePickerControllerReferenceURL] as? NSURL, self.from == .findBottle {
+//            self.gotToPreview(videoUrl: videoURL, image: nil)
+//        }
         
 //        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
 //            self.gotToPreview(videoUrl: nil, image: editedImage)

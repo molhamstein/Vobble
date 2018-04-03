@@ -80,12 +80,26 @@ class FindBottleViewController: AbstractController {
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
 //            chatVc.uploadMedia(mediaReferenceUrl: bottle?.attachment!, mediaType: "public.movie", senderId: "\(bottle?.ownerId)")
             chatVc.conversationRef = newConvRef
+          
+//            if let bottleOwnerId = bottle?.ownerId {
+//                chatVc.senderId = "\(bottleOwnerId)"
+//                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(bottleOwnerId)")
+//            }
             
+//            if let uid = DataStore.shared.me?.objectId {
+//                chatVc.senderId = "\(uid)"
+//                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(uid)")
+//            }
+
             if let uid = DataStore.shared.me?.objectId {
                 chatVc.senderId = "\(uid)"
-                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(uid)")
+                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
             }
             
+            if let bottleOwnerId = bottle?.ownerId {
+                chatVc.senderId = "\(bottleOwnerId)"
+                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
+            }
         }
         
     }

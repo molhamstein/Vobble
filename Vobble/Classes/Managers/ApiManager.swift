@@ -455,7 +455,8 @@ class ApiManager: NSObject {
     // MARK: Upload Video
     func uploadMedia(urls:[URL], completionBlock: @escaping (_ files: [Media], _ errorMessage: String?) -> Void) {
         
-        let mediaURL = "\(baseURL)/uploads/videos/upload"
+//        let mediaURL = "\(baseURL)/uploads/videos/upload"
+        let mediaURL = "http://104.217.253.15:9999/api/uploads/videos/upload"
         
         let payload : Payload = /*@escaping*/{ multipartFormData in
             
@@ -485,9 +486,9 @@ class ApiManager: NSObject {
                                     } else {
                                         if let resJson = resJson.dictionary {
                                         
-                                            if let jsonData = resJson["result"], let data = jsonData["files"]["file"].array{
+                                            if let jsonData = resJson["file"]?.array {
                                             
-                                                let files: [Media] = data.map{Media(json: $0)}
+                                                let files: [Media] = jsonData.map{Media(json: $0)}
                                                     completionBlock(files, nil)
                                                         
                                                         
@@ -599,12 +600,12 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 
                 let resJson = JSON(responseObject.result.value!)
-                if let data = resJson.array
+                if let data = resJson.array, data.count>0
                 {
                     let bottle = Bottle(json: data[Int(arc4random_uniform(UInt32(data.count)))])
                     
                     completionBlock(bottle, nil)
-                }
+                } 
             }
             if responseObject.result.isFailure {
                 let error : NSError = responseObject.result.error! as NSError

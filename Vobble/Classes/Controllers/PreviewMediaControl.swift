@@ -24,7 +24,7 @@ class PreviewMediaControl : AbstractController {
     
     var type:MEDIA_TYPE!
     var isShorePickerVisible: Bool = false
-    var from: typeOfController = .throwBottle
+    var from: typeOfController = .chatView
     
     //Image
     var image = UIImage();
@@ -41,6 +41,7 @@ class PreviewMediaControl : AbstractController {
         if(type == .VIDEO) {
             self.avPlayer.play();
         }
+        
         if (from == .findBottle) {
             
             cvShorePicker.isHidden = true
@@ -51,7 +52,13 @@ class PreviewMediaControl : AbstractController {
             cvShorePicker.isHidden = false
             submitButton.isHidden = true
             
+        } else if (from == .chatView) {
+            
+            cvShorePicker.isHidden = true
+            submitButton.isHidden = true
         }
+        
+        
         // itro animation 
         cvShorePicker.animateIn(mode: .animateInFromBottom, delay: 0.3)
         backButton.animateIn(mode: .animateInFromTop, delay: 0.2)
@@ -135,25 +142,25 @@ class PreviewMediaControl : AbstractController {
     @IBAction func throwInSea (shoreId: Int) {
      
         let urls:[URL] = [self.videoUrl as URL]
-        
+        showActivityLoader(true)
 //        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
         
 //            if errorMessage == nil {
         
                 let bottle = Bottle()
 //                bottle.attachment = files[0].fileUrl ?? " "
-                bottle.attachment = "https://vobble.herokuapp.com/api/uploads/videos/download/1522161098010_EEE5E5FE-50BA-47DC-8514-C29FBE09A769.MOV"
+                bottle.attachment = "http://104.217.253.15:3000/api/uploads/videos/download/1522571917248_FD1D8580-AF4E-4594-B804-2C1231AC4D5A.MOV"
                 bottle.ownerId = DataStore.shared.me?.id
                 bottle.status = "active"
                 bottle.shoreId = shoreId
         
-                showActivityLoader(true)
+                
                 ApiManager.shared.addBottle(bottle: bottle, completionBlock: { (success, error, bottle) in
                 
                     if error == nil {
                         self.showActivityLoader(false)
                         
-                        print("\(bottle?.id)")
+                        print("\(bottle?.bottle_id)")
                         // animate views out
                         self.cvShorePicker.animateIn(mode: .animateOutToBottom, delay: 0.3)
                         self.backButton.animateIn(mode: .animateOutToTop, delay: 0.2)
@@ -171,11 +178,12 @@ class PreviewMediaControl : AbstractController {
                 
 //            }
 //            else {
+//                self.showActivityLoader(false)
 //                print(errorMessage)
 //            }
         
 //        }
-        
+    
         
     }
     

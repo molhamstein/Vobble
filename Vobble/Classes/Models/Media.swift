@@ -35,7 +35,10 @@ class Media: BaseModel {
         if let value = json[ktype].string {
             type = value
         }
-        self.fileUrl = "\(AppConfig.appBaseLiveURL)/uploads/videos/download/\(name)"
+        if let n = name {
+           self.fileUrl = "\(AppConfig.appBaseDevURL)/uploads/videos/download/\(n)" 
+        }
+        
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
