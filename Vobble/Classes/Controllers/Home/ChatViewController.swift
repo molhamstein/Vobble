@@ -45,6 +45,8 @@ final class ChatViewController: JSQMessagesViewController {
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
     
+    @IBOutlet var customNavBar: VobbleNavigationBar!
+    
     //  private var localTyping = false
     
     var convTitle: String? {
@@ -91,10 +93,26 @@ final class ChatViewController: JSQMessagesViewController {
         // No avatars
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if customNavBar.superview == nil {
+            // re-add subiews connected from storyboard as the JSQM messages framewordk detaches them
+            customNavBar.frame = CGRect(x: 0, y: -20, width: self.view.frame.width, height: 110)
+            self.view.addSubview(customNavBar)
+            
+            // init nav bar
+            customNavBar.title = convTitle ?? ""
+            customNavBar.viewcontroller = self
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         //    observeTyping()
     }
     

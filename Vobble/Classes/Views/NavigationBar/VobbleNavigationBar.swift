@@ -70,7 +70,11 @@ class VobbleNavigationBar : AbstractNibView {
     
     @IBAction func leftIconPressed(_ sender: Any) {
         if leftIcon.currentImage == UIImage(named: "navBackIcon") {
-             viewcontroller?.dismiss(animated: true, completion: nil)
+            if let nc = viewcontroller?.navigationController, viewcontroller == nc.viewControllers[0] {
+                nc.dismiss(animated: true, completion: {})
+            } else {
+                viewcontroller?.dismiss(animated: true, completion: nil)
+            }
         } else if leftIcon.currentImage == UIImage(named: "filters") {
             let vc = viewcontroller as! HomeViewController
             vc.showFilter()

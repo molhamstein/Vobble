@@ -27,6 +27,19 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var filterViewOverlay: UIView!
     @IBOutlet weak var filterView: FilterView!
     
+    // throw
+    @IBOutlet weak var vThrowBtnContainer: UIView!
+    @IBOutlet weak var lblThrowBtn: UILabel!
+    @IBOutlet weak var ivThrowBtn: UIImageView!
+    // my bottles
+    @IBOutlet weak var vMyBottlesBtnContainer: UIView!
+    @IBOutlet weak var lblMyBottlesBtn: UILabel!
+    @IBOutlet weak var ivMyBottlesBtn: UIImageView!
+    // find
+    @IBOutlet weak var vFindBtnContainer: UIView!
+    @IBOutlet weak var lblFindBtn: UILabel!
+    @IBOutlet weak var ivFindBtn: UIImageView!
+    
     // GIF images
     @IBOutlet var ivShore2Girl: UIImageView!
     @IBOutlet var ivShore3Girl1: UIImageView!
@@ -53,7 +66,6 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivFindBottle: UIImageView!
     @IBOutlet var ivThrowBottle: UIImageView!
     
-    
     var introAnimationDone: Bool = false
     var filterViewVisible = false
     
@@ -64,7 +76,6 @@ class HomeViewController: AbstractController {
         self.showNavProfileButton = true
         self.navigationView.viewcontroller = self
         self.filterView.delegate = self
-        
         
         // hide filters View by default
         self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
@@ -100,20 +111,11 @@ class HomeViewController: AbstractController {
     
     /// Customize view
     override func customizeView() {
-        // add here any viewes intialization code
         
         //add geture recognizer for swipping horizontally
         let panRec1 = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan))
         panRec1.delegate = self
         self.view.addGestureRecognizer(panRec1)
-        
-//        let panRec2 = UIPanGestureRecognizer.init(target: self, action: #selector(handleEdgeGestureRight))
-//        panRec2.delegate = self
-//        self.discoverControl?.twigListController.view.addGestureRecognizer(panRec2)
-//        
-//        let panRec3 = UIPanGestureRecognizer.init(target: self, action: #selector(handleEdgeGestureRight))
-//        panRec3.delegate = self
-//        vGestureReciever.addGestureRecognizer(panRec3)
         
         self.ivShore2Girl.loadGif(name: "girl")
         
@@ -135,14 +137,14 @@ class HomeViewController: AbstractController {
     }
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
-        
+        self.wiggleAnimate(view: self.ivThrowBtn)
         self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
     }
     
     @IBAction func findBottlePressed(_ sender: UIButton) {
         
         self.ivFindBottle.loadGif(name: "find_bottle")
-        
+        self.wiggleAnimate(view: self.ivFindBtn)
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 5 second
             self.ivFindBottle.image = nil
             self.showActivityLoader(true)
@@ -161,7 +163,7 @@ class HomeViewController: AbstractController {
     }
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
-        
+        self.wiggleAnimate(view: self.ivMyBottlesBtn)
         self.performSegue(withIdentifier: "myBottlesSegue", sender: self)
     }
     
@@ -186,6 +188,17 @@ class HomeViewController: AbstractController {
         }
     }
     
+    func wiggleAnimate(view: UIView) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x - 10, y: view.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: view.center.x + 10, y: view.center.y))
+        
+        view.layer.add(animation, forKey: "position")
+    }
+
     func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
         
         if gestureRecognizer.state == .began {
