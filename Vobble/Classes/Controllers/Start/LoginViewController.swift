@@ -50,6 +50,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var selectCountryButton: UIButton!
     @IBOutlet weak var signupButton: VobbleButton!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var maleLabel: UILabel!
+    @IBOutlet weak var femaleLabel: UILabel!
    
     // country View
     @IBOutlet weak var countryView: UIView!
@@ -352,6 +354,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBAction func femaleBtnPressed(_ sender: UIButton) {
         
         femaleButton.alpha = 1
+        femaleLabel.alpha = 1
+        maleLabel.alpha = 0.5
         maleButton.alpha = 0.5
         isMale = false
     }
@@ -359,6 +363,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBAction func maleBtnPressed(_ sender: UIButton) {
         
         maleButton.alpha = 1
+        maleLabel.alpha = 1
+        femaleLabel.alpha = 0.5
         femaleButton.alpha = 0.5
         isMale = true
     }
