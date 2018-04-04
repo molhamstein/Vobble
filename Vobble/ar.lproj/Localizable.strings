@@ -112,3 +112,8 @@
 // Settings
 "SETTINGS_USER_LOGOUT"                  = "تسجيل خروج";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "هل تود تسجيل الخروج؟";
+
+// home
+"main_shore"                            = "الشاطئ الرئيسي";
+"love_shore"                            = "شاطئ الحب";
+"fadfed_shore"                          = "شاطئ الفضفضة";

@@ -168,8 +168,21 @@ class HomeViewController: AbstractController {
     @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {
         
         self.ivThrowBottle.loadGif(name: "throwBottle")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 6 second
-            self.ivThrowBottle.image = nil
+        if let sourceController = segue.source as? PreviewMediaControl {
+            switch sourceController.selectedShoreIndex {
+            case 0:
+                goToMainShore()
+            case 1:
+                goToLoveShore()
+            case 2:
+                goToFadFedShore()
+            default:
+                goToMainShore()
+            }
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 6 second
+                self.ivThrowBottle.image = nil
+            }
         }
     }
     
@@ -325,6 +338,7 @@ class HomeViewController: AbstractController {
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 0
             self.blockPageTransitions = false
+            self.navigationView.navTitle.text = "main_shore".localized
         })
     }
     
@@ -347,6 +361,7 @@ class HomeViewController: AbstractController {
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 1
             self.blockPageTransitions = false
+            self.navigationView.navTitle.text = "love_shore".localized
         })
     }
     
@@ -371,6 +386,7 @@ class HomeViewController: AbstractController {
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 2
             self.blockPageTransitions = false
+            self.navigationView.navTitle.text = "fadfed_shore".localized
         })
     }
     

@@ -113,3 +113,8 @@
 "SETTINGS_USER_LOGOUT"                  = "Logout";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "Are you sure you want to logout?";
 
+// home
+"main_shore"                            = "Main shore";
+"love_shore"                            = "Love shore";
+"fadfed_shore"                          = "FadFed shore";
+

@@ -26,6 +26,8 @@ class PreviewMediaControl : AbstractController {
     var isShorePickerVisible: Bool = false
     var from: typeOfController = .chatView
     
+    var selectedShoreIndex: Int = -1
+    
     //Image
     var image = UIImage();
     var imgUrl:String = ""
@@ -105,6 +107,7 @@ class PreviewMediaControl : AbstractController {
         self.backButton.tintColor = UIColor.white
         self.vOverlay.bringToFront()
         self.cvShorePicker.bringToFront()
+        self.submitButton.bringToFront()
         
         // regisert the shores picker cells
         let shoreNib = UINib(nibName: "ShoreCell", bundle: nil)
@@ -149,7 +152,7 @@ class PreviewMediaControl : AbstractController {
         
                 let bottle = Bottle()
 //                bottle.attachment = files[0].fileUrl ?? " "
-                bottle.attachment = "http://104.217.253.15:3000/api/uploads/videos/download/1522571917248_FD1D8580-AF4E-4594-B804-2C1231AC4D5A.MOV"
+                bottle.attachment = "http://104.217.253.15:5000/api/uploads/videos/download/1522571917248_FD1D8580-AF4E-4594-B804-2C1231AC4D5A.MOV"
                 bottle.ownerId = DataStore.shared.me?.id
                 bottle.status = "active"
                 bottle.shoreId = shoreId
@@ -249,6 +252,7 @@ extension PreviewMediaControl:UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        selectedShoreIndex = indexPath.item;
         throwInSea(shoreId: DataStore.shared.shores[indexPath.item].shore_id!)
     }
     
