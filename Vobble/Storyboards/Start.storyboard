@@ -249,10 +249,10 @@
                                                         <rect key="frame" x="0.0" y="335" width="372" height="335"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoQ-xm-45Y">
-                                                                <rect key="frame" x="84.666666666666657" y="0.66666666666668561" width="203.99999999999997" height="29"/>
+                                                                <rect key="frame" x="84.333333333333314" y="0.66666666666668561" width="204" height="29"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcL-GE-JNj" userLabel="or">
-                                                                        <rect key="frame" x="0.3333333333333286" y="0.0" width="20.333333333333343" height="29"/>
+                                                                        <rect key="frame" x="0.3333333333333286" y="0.0" width="20.333333333333329" height="29"/>
                                                                         <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -261,7 +261,7 @@
                                                                         </variation>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f71-6J-L8g" userLabel="Register">
-                                                                        <rect key="frame" x="20.666666666666671" y="0.0" width="66.999999999999986" height="29"/>
+                                                                        <rect key="frame" x="20.666666666666657" y="0.0" width="67.000000000000014" height="29"/>
                                                                         <fontDescription key="fontDescription" name="MullerBold" family="Muller" pointSize="17"/>
                                                                         <state key="normal" title="Register">
                                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -486,7 +486,7 @@
                                                                                 <rect key="frame" x="0.0" y="197.33333333333331" width="372" height="98.333333333333371"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2jN-3r-3Bj" userLabel="Password Stack View">
-                                                                                        <rect key="frame" x="20" y="6" width="332" height="58"/>
+                                                                                        <rect key="frame" x="20" y="5.3333333333333144" width="332" height="58"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HvW-0x-cVm" userLabel="Password Label">
                                                                                                 <rect key="frame" x="0.0" y="0.33333333333331439" width="332" height="23"/>
@@ -765,7 +765,7 @@
                                                                                 <rect key="frame" x="0.0" y="138.00000000000006" width="372" height="137.66666666666663"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id2-bd-yau">
-                                                                                        <rect key="frame" x="91.666666666666657" y="1" width="187.66666666666671" height="29"/>
+                                                                                        <rect key="frame" x="91.666666666666657" y="0.33333333333337123" width="187.66666666666671" height="29"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8v-lQ-m9i">
                                                                                                 <rect key="frame" x="0.0" y="0.33333333333337123" width="142.66666666666669" height="29"/>

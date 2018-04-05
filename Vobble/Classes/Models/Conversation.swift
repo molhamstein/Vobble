@@ -15,15 +15,15 @@ class Conversation: BaseModel {
     private let kConvId: String = "id"
     private let kuser: String = "user"
     private let kBottle: String = "bottle"
-    private let kTimeleft: String = "timeleft"
+    private let kCreatedAt: String = "createdAt"
     
     
     // MARK: Properties
     public var idString : String?
     public var user : AppUser?
     public var bottle: Bottle?
-    public var timeLeft: String?
-    
+    public var createdAt: Double?
+    public var finishTime: Double?
     
     // MARK: Initializers
     override init() {
@@ -42,6 +42,9 @@ class Conversation: BaseModel {
         if json[kBottle] != JSON.null {
             bottle = Bottle(json: json[kBottle])
         }
+        if let value = json[kCreatedAt].double {
+            createdAt = value
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -58,6 +61,10 @@ class Conversation: BaseModel {
         
         if let value = bottle {
             dictionary[kBottle] = value.dictionaryRepresentation()
+        }
+        
+        if let value = createdAt {
+            dictionary[kCreatedAt] = value
         }
         
         return dictionary

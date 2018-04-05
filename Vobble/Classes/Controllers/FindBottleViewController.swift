@@ -16,6 +16,8 @@ class FindBottleViewController: AbstractController {
     
     
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var shoreNameLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
     
     @IBOutlet var videoView: VideoPlayerView!
@@ -25,7 +27,9 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var playButton: UIButton!
     
     public var bottle:Bottle?
+    public var shoreName:String?
     public var myVideoUrl = NSURL()
+    
     
     // MARK: - firebase Properties
     fileprivate var conversationRefHandle: DatabaseHandle?
@@ -38,6 +42,8 @@ class FindBottleViewController: AbstractController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        shoreNameLabel.text = shoreName
+        userNameLabel.text = bottle?.owner?.firstName
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
     }
     
@@ -91,6 +97,7 @@ class FindBottleViewController: AbstractController {
 //                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(uid)")
 //            }
 
+            chatVc.seconds = 24*60*60
             if let uid = DataStore.shared.me?.objectId {
                 chatVc.senderId = "\(uid)"
                 chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
@@ -123,9 +130,11 @@ class FindBottleViewController: AbstractController {
     func goToChat() {
 
         let newConvRef = self.conversationRef.childByAutoId()
+        
         let convlItem:[String : Any] = [
             "bottle": self.bottle?.dictionaryRepresentation(),
-            "user": DataStore.shared.me?.dictionaryRepresentation()
+            "user": DataStore.shared.me?.dictionaryRepresentation(),
+            "createdAt" : ServerValue.timestamp()
         ]
         
         newConvRef.setValue(convlItem)

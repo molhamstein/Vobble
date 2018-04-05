@@ -21,11 +21,13 @@ class PreviewMediaControl : AbstractController {
     @IBOutlet weak var vOverlay:UIView!
     @IBOutlet weak var cvShorePicker:UICollectionView!
     @IBOutlet weak var submitButton: VobbleButton!
+    @IBOutlet var vp: VideoPlayerView!
+    @IBOutlet weak var playButton: UIButton!
     
     var type:MEDIA_TYPE!
     var isShorePickerVisible: Bool = false
     var from: typeOfController = .chatView
-    
+    var isVOverlayApplyGradient:Bool = false
     var selectedShoreIndex: Int = -1
     
     //Image
@@ -34,15 +36,15 @@ class PreviewMediaControl : AbstractController {
     
     //Video
     var videoUrl = NSURL();
-    var avPlayer = AVPlayer();
-    var avPlayerLayer = AVPlayerLayer();
+//    var avPlayer = AVPlayer();
+//    var avPlayerLayer = AVPlayerLayer();
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false);
-        if(type == .VIDEO) {
-            self.avPlayer.play();
-        }
+//        if(type == .VIDEO) {
+//            self.avPlayer.play();
+//        }
         
         if (from == .findBottle) {
             
@@ -65,12 +67,22 @@ class PreviewMediaControl : AbstractController {
         cvShorePicker.animateIn(mode: .animateInFromBottom, delay: 0.3)
         backButton.animateIn(mode: .animateInFromTop, delay: 0.2)
         
-        self.vOverlay.applyGradient(colours: [ AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
+//        self.vOverlay.applyGradient(colours: [ AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
+        
+//        vp.preparePlayer(videoURL: self.videoUrl as URL)
+        vp.preparePlayer(videoURL: self.videoUrl.absoluteString!, customPlayBtn: playButton)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.avPlayer.pause()
+//        self.avPlayer.pause()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if !isVOverlayApplyGradient {
+           self.vOverlay.applyGradient(colours: [ AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
+           isVOverlayApplyGradient = true
+        }
     }
     
     override func viewDidLoad() {
@@ -80,29 +92,29 @@ class PreviewMediaControl : AbstractController {
     
     func initViews() {
         
-        if(type == .IMAGE) {
-            
-            if(imgUrl.isEmpty) {
-                self.imageView.image = self.image
-            } else {
-                self.imageView.setImageForURL(imgUrl, placeholder: AppConfig.PlaceHolderImage)
-            }
-        
-//        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PreviewMediaControl.viewTapped(gesture:)))
-//        self.view!.addGestureRecognizer(tapGesture)
-        } else {
-            // the video player
-            let item = AVPlayerItem(url: self.videoUrl as URL);
-            self.avPlayer = AVPlayer(playerItem: item);
-            self.avPlayer.actionAtItemEnd = .none
-            self.avPlayerLayer = AVPlayerLayer(player: self.avPlayer);
-            NotificationCenter.default.addObserver(self, selector: #selector(PreviewMediaControl.playerItemDidReachEnd(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.avPlayer.currentItem!)
-            
-            let screenRect: CGRect = UIScreen.main.bounds
-            
-            self.avPlayerLayer.frame = CGRect(x:0, y:0, width:screenRect.size.width, height:screenRect.size.height)
-            self.view.layer.addSublayer(self.avPlayerLayer)
-        }
+//        if(type == .IMAGE) {
+//            
+//            if(imgUrl.isEmpty) {
+//                self.imageView.image = self.image
+//            } else {
+//                self.imageView.setImageForURL(imgUrl, placeholder: AppConfig.PlaceHolderImage)
+//            }
+//        
+////        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PreviewMediaControl.viewTapped(gesture:)))
+////        self.view!.addGestureRecognizer(tapGesture)
+//        } else {
+//            // the video player
+//            let item = AVPlayerItem(url: self.videoUrl as URL);
+//            self.avPlayer = AVPlayer(playerItem: item);
+//            self.avPlayer.actionAtItemEnd = .none
+//            self.avPlayerLayer = AVPlayerLayer(player: self.avPlayer);
+//            NotificationCenter.default.addObserver(self, selector: #selector(PreviewMediaControl.playerItemDidReachEnd(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.avPlayer.currentItem!)
+//            
+//            let screenRect: CGRect = UIScreen.main.bounds
+//            
+//            self.avPlayerLayer.frame = CGRect(x:0, y:0, width:screenRect.size.width, height:screenRect.size.height)
+//            self.view.layer.addSublayer(self.avPlayerLayer)
+//        }
         
         self.backButton.tintColor = UIColor.white
         self.vOverlay.bringToFront()
@@ -115,7 +127,7 @@ class PreviewMediaControl : AbstractController {
     }
     
     func playerItemDidReachEnd(notification: NSNotification) {
-        self.avPlayer.seek(to: kCMTimeZero)
+//        self.avPlayer.seek(to: kCMTimeZero)
     }
     
 //    func viewTapped(gesture: UIGestureRecognizer) {
@@ -128,14 +140,14 @@ class PreviewMediaControl : AbstractController {
         imgUrl = ""
         //Video
         videoUrl = NSURL()
-        avPlayer = AVPlayer();
-        avPlayerLayer = AVPlayerLayer();
+//        avPlayer = AVPlayer();
+//        avPlayerLayer = AVPlayerLayer();
         
-        if(!imgUrl.isEmpty) {
+//        if(!imgUrl.isEmpty) {
             self.dismiss(animated: true, completion: nil)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+//        } else {
+//            self.navigationController?.popViewController(animated: true)
+//        }
     }
     
     override var prefersStatusBarHidden: Bool{
@@ -217,6 +229,16 @@ class PreviewMediaControl : AbstractController {
 //        }
 //        self.performSegue(withIdentifier: "newTwigMediaLocationSegue", sender: nil)
     }
+    
+    @IBAction func playButtonPressed(_ sender: Any) {
+        if self.playButton.currentImage == UIImage(named: "ic_play") {
+            self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+        } else if self.playButton.currentImage == UIImage(named: "pause") {
+            self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
+        }
+        vp.playButtonPressed()
+    }
+
 }
 
 // shore psicker logic

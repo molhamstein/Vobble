@@ -24,6 +24,12 @@ struct DateHelper {
         return dateFormater.string(from: date)
     }
     
+    /// Get iso date string from date object
+    static func getISOStringFromTimestamp(_ timestamp: Double) -> String? {
+        let timestampDate = NSDate(timeIntervalSince1970: Double(timestamp as NSNumber)/1000)
+        return getISOStringFromDate(timestampDate as Date)
+    }
+    
     static func ellapsedString(fromDate date:Date?) -> String {
         guard let created = date?.timeIntervalSince1970 else {
             return ""

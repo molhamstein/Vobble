@@ -162,6 +162,12 @@ extension ConversationViewController: UICollectionViewDelegate {
                 chatVc.convTitle = conversation.user?.firstName ?? ""
             }
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
+            
+            if let fTime = conversation.finishTime {
+                let currentDate = Int(Date().timeIntervalSince1970 * 1000)
+                chatVc.seconds = (Int(fTime) - currentDate)/1000
+            }
+            
             chatVc.conversationRef = conversationRef.child(conversation.idString!)
         }
     }
@@ -205,11 +211,56 @@ extension ConversationViewController {
     fileprivate func observeConversation() {
         // We can use the observe method to listen for new
         // conversations being written to the Firebase DB
-        conversationRefHandle = conversationRef.observe(.childAdded, with: { (snapshot) -> Void in
-
+//        self.showActivityLoader(true)
+//        conversationRefHandle = conversationRef.observe(.childAdded, with: { (snapshot) -> Void in
+//
+//            self.showActivityLoader(false)
+//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+//            conversation.idString = snapshot.key
+//
+//            //(My replies)
+//            if DataStore.shared.me?.id == conversation.user?.objectId {
+//                print("my bottles")
+//                DataStore.shared.me?.myBottlesArray.append(conversation)
+//                self.bottleCollectionView.reloadData()
+//            } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
+//                print("my replies")
+//                DataStore.shared.me?.myRepliesArray.append(conversation)
+//                self.bottleCollectionView.reloadData()
+//            }
+//
+//        })
+        
+        let convQuery = conversationRef.queryLimited(toLast:25)
+        self.showActivityLoader(true)
+        // We can use the observe method to listen for new
+        // messages being written to the Firebase DB
+//        conversationRefHandle = convQuery.observe(.childAdded, with: { (snapshot) -> Void in
+//            self.showActivityLoader(false)
+//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+//            conversation.idString = snapshot.key
+//            
+//            //(My replies)
+//            if DataStore.shared.me?.id == conversation.user?.objectId {
+//                print("my bottles")
+//                DataStore.shared.me?.myBottlesArray.append(conversation)
+//                self.bottleCollectionView.reloadData()
+//            } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
+//                print("my replies")
+//                DataStore.shared.me?.myRepliesArray.append(conversation)
+//                self.bottleCollectionView.reloadData()
+//            }
+//        })
+        
+        conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
+            
+            self.showActivityLoader(false)
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             conversation.idString = snapshot.key
-
+            if let created_at = conversation.createdAt {
+                conversation.finishTime = created_at + (24*60*60*1000)
+            }
+            
             //(My replies)
             if DataStore.shared.me?.id == conversation.user?.objectId {
                 print("my bottles")
@@ -220,8 +271,11 @@ extension ConversationViewController {
                 DataStore.shared.me?.myRepliesArray.append(conversation)
                 self.bottleCollectionView.reloadData()
             }
-
-        })
+            
+        }) { (error) in
+            self.showActivityLoader(false)
+        }
+//        self.showActivityLoader(false)
         
     }
 }
