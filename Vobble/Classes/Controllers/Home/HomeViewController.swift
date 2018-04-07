@@ -131,7 +131,7 @@ class HomeViewController: AbstractController {
 
             let nav = segue.destination as! UINavigationController
             let findBottleVC = nav.topViewController as! FindBottleViewController
-            
+            findBottleVC.shoreName = self.navigationView.navTitle.text
             findBottleVC.bottle = bottle
          }
     }

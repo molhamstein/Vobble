@@ -45,7 +45,7 @@ final class ChatViewController: JSQMessagesViewController {
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
     
-    @IBOutlet var customNavBar: VobbleNavigationBar!
+    @IBOutlet var customNavBar: VobbleChatNavigationBar!
     
     //  private var localTyping = false
     
@@ -57,6 +57,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     var selectedImage: UIImage?
+    var seconds = 0
     
     //  var isTyping: Bool {
     //    get {
@@ -105,7 +106,8 @@ final class ChatViewController: JSQMessagesViewController {
             self.view.addSubview(customNavBar)
             
             // init nav bar
-            customNavBar.title = convTitle ?? ""
+//            customNavBar.title = convTitle ?? ""
+            customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
             customNavBar.viewcontroller = self
         }
     }

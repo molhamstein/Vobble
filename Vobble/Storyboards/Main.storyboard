@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -618,6 +618,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIt-5E-9FG" customClass="VideoPlayerView" customModule="Vobble" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sbJ-Sx-Lig">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
@@ -689,6 +693,28 @@
                                     <action selector="submitBtnPressed:" destination="E99-d6-6s1" eventType="touchUpInside" id="4cj-rh-SrN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbj-w0-fQC" userLabel="play button">
+                                <rect key="frame" x="167" y="587" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="7Yb-Sf-yH9"/>
+                                    <constraint firstAttribute="height" constant="40" id="EmC-S7-RQs"/>
+                                </constraints>
+                                <state key="normal" image="pause"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="E99-d6-6s1" eventType="touchUpInside" id="VcQ-nJ-8Oi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -696,22 +722,30 @@
                             <constraint firstItem="5yw-ck-flP" firstAttribute="leading" secondItem="BD9-c0-vgi" secondAttribute="leading" id="4kH-rf-gb9"/>
                             <constraint firstAttribute="trailing" secondItem="5yw-ck-flP" secondAttribute="trailing" id="7CF-P5-VJy"/>
                             <constraint firstItem="sbJ-Sx-Lig" firstAttribute="top" secondItem="BD9-c0-vgi" secondAttribute="top" id="Btn-XF-oTc"/>
+                            <constraint firstItem="HIt-5E-9FG" firstAttribute="leading" secondItem="BD9-c0-vgi" secondAttribute="leading" id="C6g-Hb-N5I"/>
+                            <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="HIt-5E-9FG" secondAttribute="bottom" id="CTw-kL-5GK"/>
+                            <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="Qbj-w0-fQC" secondAttribute="bottom" constant="40" id="MQh-3P-R9Z"/>
+                            <constraint firstAttribute="trailing" secondItem="HIt-5E-9FG" secondAttribute="trailing" id="OZn-BN-yJo"/>
                             <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="Hii-un-Rp6" secondAttribute="bottom" constant="110" id="RnS-la-ql6"/>
                             <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="sbJ-Sx-Lig" secondAttribute="bottom" id="ZxK-dr-lyf"/>
                             <constraint firstItem="Hii-un-Rp6" firstAttribute="leading" secondItem="BD9-c0-vgi" secondAttribute="leading" id="de2-w0-d1z"/>
                             <constraint firstItem="sbJ-Sx-Lig" firstAttribute="leading" secondItem="BD9-c0-vgi" secondAttribute="leading" id="hrW-Fp-quy"/>
                             <constraint firstItem="5yw-ck-flP" firstAttribute="top" secondItem="BD9-c0-vgi" secondAttribute="top" id="i4Y-F0-Yvu"/>
+                            <constraint firstItem="Qbj-w0-fQC" firstAttribute="centerX" secondItem="BD9-c0-vgi" secondAttribute="centerX" id="in7-Mk-Y6A"/>
                             <constraint firstAttribute="trailing" secondItem="Hii-un-Rp6" secondAttribute="trailing" id="jNf-7s-S6g"/>
                             <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="vXt-cc-Os2" secondAttribute="bottom" constant="150" id="sGl-mP-kVB"/>
                             <constraint firstAttribute="trailing" secondItem="sbJ-Sx-Lig" secondAttribute="trailing" id="xHG-FJ-fbv"/>
+                            <constraint firstItem="HIt-5E-9FG" firstAttribute="top" secondItem="cU6-ic-nE9" secondAttribute="bottom" id="y6e-HQ-4eE"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Acp-9z-pUC" id="8oD-d0-NXF"/>
                         <outlet property="cvShorePicker" destination="Hii-un-Rp6" id="uaC-cI-RhT"/>
                         <outlet property="imageView" destination="sbJ-Sx-Lig" id="SWu-Bk-11a"/>
+                        <outlet property="playButton" destination="Qbj-w0-fQC" id="bkC-Jy-avT"/>
                         <outlet property="submitButton" destination="vXt-cc-Os2" id="gzj-Mb-dDD"/>
                         <outlet property="vOverlay" destination="5yw-ck-flP" id="jsv-cY-XcC"/>
+                        <outlet property="vp" destination="HIt-5E-9FG" id="x8J-mQ-pnW"/>
                         <segue destination="dB1-pa-ISF" kind="unwind" identifier="unwindRecordMediaSegue" unwindAction="unwindRecordMediaWithSegue:" id="g9X-O5-Zb8"/>
                         <segue destination="Bw2-UA-qTi" kind="unwind" identifier="unwindToFindBottleSegue" unwindAction="unwindToFindBottleWithSegue:" id="Ptd-Bx-Kg7"/>
                     </connections>
@@ -910,7 +944,9 @@
                         <outlet property="ignoreButton" destination="3Ni-2I-t0H" id="6Qn-mG-uoD"/>
                         <outlet property="playButton" destination="fRM-BQ-2qY" id="SFM-UB-O6l"/>
                         <outlet property="replyButton" destination="zuW-Xy-Jtd" id="G4i-DU-bkN"/>
+                        <outlet property="shoreNameLabel" destination="IkW-fY-pKf" id="lOQ-8j-ZvM"/>
                         <outlet property="topView" destination="mXs-T0-xQv" id="CpO-9l-nXb"/>
+                        <outlet property="userNameLabel" destination="qq1-fV-vFz" id="UFB-vc-Awh"/>
                         <outlet property="videoView" destination="A0z-Nd-C7w" id="Ome-Ui-a4r"/>
                         <segue destination="W1h-f8-Qe1" kind="show" identifier="goToChat" id="5KC-hU-8eo"/>
                     </connections>
@@ -1197,7 +1233,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASE-1h-xxO" customClass="VobbleNavigationBar" customModule="Vobble" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASE-1h-xxO" customClass="VobbleChatNavigationBar" customModule="Vobble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="-20" width="375" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

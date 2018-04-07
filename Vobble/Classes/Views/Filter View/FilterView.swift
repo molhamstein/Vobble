@@ -21,22 +21,31 @@ class FilterView: AbstractNibView {
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var delegate: FilterViewDelegate?
+    @IBOutlet weak var allGenderLabel: UILabel!
+    @IBOutlet weak var maleLabel: UILabel!
+    @IBOutlet weak var femaleLabel: UILabel!
     
     fileprivate var selectedGender: String = "allGender"
     fileprivate var selectedCountry: String = "Afghanistan"
     
     @IBAction func allGenderBtnPressed(_ sender: Any) {
         allGenderButton.alpha = 1
+        allGenderLabel.alpha = 1
         maleButton.alpha = 0.5
+        maleLabel.alpha = 0.5
         femaleButton.alpha = 0.5
+        femaleLabel.alpha = 0.5
         selectedGender = "allGender"
         self.delegate?.getFilterInfo(gender: selectedGender, country: selectedCountry)
     }
     
     @IBAction func maleBtnPressed(_ sender: Any) {
         maleButton.alpha = 1
+        maleLabel.alpha = 1
         femaleButton.alpha = 0.5
+        femaleLabel.alpha = 0.5
         allGenderButton.alpha = 0.5
+        allGenderLabel.alpha = 0.5
         selectedGender = "male"
         self.delegate?.getFilterInfo(gender: selectedGender, country: selectedCountry)
 
@@ -44,8 +53,11 @@ class FilterView: AbstractNibView {
     
     @IBAction func femalePressed(_ sender: Any) {
         femaleButton.alpha = 1
+        femaleLabel.alpha = 1
         maleButton.alpha = 0.5
+        maleLabel.alpha = 0.5
         allGenderButton.alpha = 0.5
+        allGenderLabel.alpha = 0.5
         selectedGender = "female"
         self.delegate?.getFilterInfo(gender: selectedGender, country: selectedCountry)
     }

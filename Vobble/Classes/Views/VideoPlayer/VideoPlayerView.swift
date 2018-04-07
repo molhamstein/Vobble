@@ -16,12 +16,15 @@ class VideoPlayerView: AbstractNibView {
     @IBOutlet weak var videoView: UIView!
     let controller: BMPlayerCustomControlView = BMPlayerCustomControlView()
     
-    public func preparePlayer(videoURL: String,customPlayBtn: UIButton) {
+    public func preparePlayer(videoURL: String,customPlayBtn: UIButton?) {
         
         resetPlayerManager()
         
 //        let controller: BMPlayerCustomControlView = BMPlayerCustomControlView()
-        controller.setCustomPlayBtn(playBtn: customPlayBtn)
+        if let cButton = customPlayBtn {
+            controller.setCustomPlayBtn(playBtn: cButton)
+        }
+        
         player = BMPlayer(customControlView: controller)
         
 //        player = BMPlayer()

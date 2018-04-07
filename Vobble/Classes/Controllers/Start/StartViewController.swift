@@ -38,6 +38,7 @@ class StartViewController: AbstractController {
             
             self.performSegue(withIdentifier: "startLoginSegue", sender: self)
         }
+        
     }
     
 }
