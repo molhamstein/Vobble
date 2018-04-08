@@ -42,6 +42,7 @@ class JSQCustomPhotoMediaItem: JSQPhotoMediaItem {
             self.asyncImageView.sd_setShowActivityIndicatorView(true)
             self.asyncImageView.sd_setIndicatorStyle(.gray)
             self.asyncImageView.sd_setImage(with: URL(string:photoUrl))
+            self.asyncImageView.contentMode = .scaleAspectFit
             activityIndicator?.removeFromSuperview()
         }
     }

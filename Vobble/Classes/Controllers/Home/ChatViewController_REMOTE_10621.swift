@@ -56,13 +56,7 @@ final class ChatViewController: JSQMessagesViewController {
             title = convTitle ?? ""
         }
     }
-<<<<<<< HEAD
     var seconds = 0
-=======
-    
-    var selectedImage: UIImage?
-    var seconds: Double = 0.0
->>>>>>> 47969cb4c87ae24b61acda0334ebd7b31f5cda7b
     
     //  var isTyping: Bool {
     //    get {

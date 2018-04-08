@@ -25,7 +25,6 @@ import Photos
 import Firebase
 import JSQMessagesViewController
 import SwiftyJSON
-import NYTPhotoViewer
 
 final class ChatViewController: JSQMessagesViewController {
     
@@ -56,13 +55,9 @@ final class ChatViewController: JSQMessagesViewController {
             title = convTitle ?? ""
         }
     }
-<<<<<<< HEAD
-    var seconds = 0
-=======
     
     var selectedImage: UIImage?
-    var seconds: Double = 0.0
->>>>>>> 47969cb4c87ae24b61acda0334ebd7b31f5cda7b
+    var seconds = 0
     
     //  var isTyping: Bool {
     //    get {
@@ -202,11 +197,8 @@ final class ChatViewController: JSQMessagesViewController {
             if mediaItem is JSQCustomPhotoMediaItem {
                 let photoItem = mediaItem as! JSQCustomPhotoMediaItem
                 if let test: UIImage = photoItem.asyncImageView.image {
-                    let photo: PreviewPhoto = PreviewPhoto(image: test, title: description)
-                    let images = [photo]
-                    let photosViewController = NYTPhotosViewController(photos: images)
-                    present(photosViewController, animated: true, completion: nil)
-                    
+                    selectedImage = test
+                    self.performSegue(withIdentifier: "showPhoto", sender: self)
                 }
             }
             // Video Message
@@ -228,6 +220,18 @@ final class ChatViewController: JSQMessagesViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPhoto" {
+            if let pageDeDestination = segue.destination as? ShowPhotoViewController {
+                pageDeDestination.image = selectedImage!
+            } else {
+                print("type destination not ok")
+            }
+        } else {
+            print("segue inexistant")
+        }
+    }
+    
     // MARK: Firebase related methods
     
     private func observeMessages() {
@@ -238,21 +242,6 @@ final class ChatViewController: JSQMessagesViewController {
         // messages being written to the Firebase DB
         newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
 //            let messageData = snapshot.value as! Dictionary<String, String>
-            
-
-            // audio message
-//            let sample = Bundle.main.path(forResource: "jsq_messages_sample", ofType: "m4a")
-//            
-//            let audioData = NSData(contentsOfFile: sample!)
-//            let audioItem = JSQAudioMediaItem(data: audioData as Data?)
-//            let audioMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: audioItem)
-//            
-//            self.messages.append(audioMessage!)
-////            collectionView.reloadData()
-//            JSQSystemSoundPlayer.jsq_playMessageSentSound()
-//            self.finishSendingMessage(animated: true)
-            
-
             
             let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             message.idString = snapshot.key
@@ -576,23 +565,4 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 //        }
 //        
 //    }
-}
-
-class PreviewPhoto: NSObject, NYTPhoto {
-    
-    var image: UIImage?
-    var imageData: Data?
-    var placeholderImage: UIImage?
-    let attributedCaptionTitle: NSAttributedString?
-    let attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.gray])
-    let attributedCaptionCredit: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.darkGray])
-    
-    
-    init(image: UIImage? = nil, title: String) {
-        self.image = image
-        self.imageData = nil
-        self.attributedCaptionTitle = NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.gray])
-        super.init()
-    }
-    
 }

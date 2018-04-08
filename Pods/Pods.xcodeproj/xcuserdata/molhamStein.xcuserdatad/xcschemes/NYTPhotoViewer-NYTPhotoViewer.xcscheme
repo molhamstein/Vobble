@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F254C70EA7289F49F560FEF44F5E03E"
-               BuildableName = "CountdownLabel.framework"
-               BlueprintName = "CountdownLabel"
+               BlueprintIdentifier = "D85C3D5A275CC39B0CEEC53C5FA8F233"
+               BuildableName = "NYTPhotoViewer.bundle"
+               BlueprintName = "NYTPhotoViewer-NYTPhotoViewer"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8F254C70EA7289F49F560FEF44F5E03E"
-            BuildableName = "CountdownLabel.framework"
-            BlueprintName = "CountdownLabel"
+            BlueprintIdentifier = "D85C3D5A275CC39B0CEEC53C5FA8F233"
+            BuildableName = "NYTPhotoViewer.bundle"
+            BlueprintName = "NYTPhotoViewer-NYTPhotoViewer"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8F254C70EA7289F49F560FEF44F5E03E"
-            BuildableName = "CountdownLabel.framework"
-            BlueprintName = "CountdownLabel"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
