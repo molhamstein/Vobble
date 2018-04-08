@@ -13,11 +13,11 @@ class ConversationCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var shadowHolderView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var chatButton: VobbleButton!
     @IBOutlet weak var bottleNameLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var timerLabel: TimerLabel!
     
     var shadowApplied: Bool! = false
     
@@ -49,6 +49,11 @@ class ConversationCollectionViewCell: UICollectionViewCell {
 //        timeLabel.text = "Time left: "+convObj.timeLeft!
 //        countryLabel.text = convObj.user2?.country
 //        image.image = convObj.user2?.imageUrl
+        
+        if let fTime = convObj.finishTime {
+            let currentDate = Int(Date().timeIntervalSince1970 * 1000)
+            timerLabel.startTimer(seconds: TimeInterval((Int(fTime) - currentDate)/1000))
+        }
         
         dispatch_main_after(0.2) {
             if !self.shadowApplied {
