@@ -97,7 +97,7 @@ class FindBottleViewController: AbstractController {
 //                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(uid)")
 //            }
 
-            chatVc.seconds = 24*60*60
+            chatVc.seconds = 24.0*60.0*60.0
             if let uid = DataStore.shared.me?.objectId {
                 chatVc.senderId = "\(uid)"
                 chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)

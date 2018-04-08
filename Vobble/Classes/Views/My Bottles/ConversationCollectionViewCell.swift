@@ -51,8 +51,8 @@ class ConversationCollectionViewCell: UICollectionViewCell {
 //        image.image = convObj.user2?.imageUrl
         
         if let fTime = convObj.finishTime {
-            let currentDate = Int(Date().timeIntervalSince1970 * 1000)
-            timerLabel.startTimer(seconds: TimeInterval((Int(fTime) - currentDate)/1000))
+            let currentDate = Date().timeIntervalSince1970 * 1000
+            timerLabel.startTimer(seconds: TimeInterval((fTime - currentDate)/1000.0))
         }
         
         dispatch_main_after(0.2) {
