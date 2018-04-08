@@ -23,6 +23,7 @@ pod 'LLSimpleCamera'
 pod 'Firebase/Storage'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
+pod 'NYTPhotoViewer', '~> 1.1.0'
 pod 'JSQMessagesViewController'
 
 end

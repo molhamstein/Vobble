@@ -13,7 +13,6 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
-  - CountdownLabel (2.0.1)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
@@ -53,6 +52,7 @@ PODS:
     - FirebaseAnalytics (~> 4.1)
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FLAnimatedImage (1.0.12)
   - GoogleSignIn (4.1.2):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -112,6 +112,13 @@ PODS:
   - NVActivityIndicatorView (3.7.0):
     - NVActivityIndicatorView/Presenter (= 3.7.0)
   - NVActivityIndicatorView/Presenter (3.7.0)
+  - NYTPhotoViewer (1.1.0):
+    - NYTPhotoViewer/AnimatedGifSupport (= 1.1.0)
+    - NYTPhotoViewer/Core (= 1.1.0)
+  - NYTPhotoViewer/AnimatedGifSupport (1.1.0):
+    - FLAnimatedImage (~> 1.0.8)
+    - NYTPhotoViewer/Core
+  - NYTPhotoViewer/Core (1.1.0)
   - PIDatePicker (0.1.3)
   - SDRecordButton (1.0.3)
   - SDWebImage/Core (4.3.2)
@@ -129,7 +136,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - BMPlayer (~> 0.9.1)
-  - CountdownLabel (~> 2.0.0)
   - FBSDKCoreKit (~> 4.24.0)
   - FBSDKLoginKit (~> 4.24.0)
   - FBSDKShareKit (~> 4.24.0)
@@ -139,6 +145,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - JSQMessagesViewController
   - LLSimpleCamera
+  - NYTPhotoViewer (~> 1.1.0)
   - PIDatePicker (~> 0.1.0)
   - SDRecordButton
   - SDWebImage/WebP
@@ -151,7 +158,6 @@ SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   BMPlayer: e68ba160d9c05ea5fffc31d37448aa02433418ab
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  CountdownLabel: 1297533b42ef5c1a441cd458136c35ad93210da1
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
@@ -162,6 +168,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 5f0bc6134c5c237cf55f9e1249d406770a75eafd
   FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
   FirebaseStorage: 9a863a2bb96c406958eeff7c2f1dfa9f44c44a13
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
@@ -173,6 +180,7 @@ SPEC CHECKSUMS:
   LLSimpleCamera: 7175ccb81be71c83d79933089322eb662b1f0327
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
+  NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
   PIDatePicker: 5044778bdd2ca2f62ca27263ae22c6f48fb74517
   SDRecordButton: 2533ae9e0e731c1540fa50b6fc43cdc3f15d20f4
   SDWebImage: 29bd3c0bc1f01e5eb59720847c64ad4c4ca1af5d
@@ -183,6 +191,6 @@ SPEC CHECKSUMS:
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
   YXWaveView: 3570d7244b08effd077a5c63b0693aa44b7cd369
 
-PODFILE CHECKSUM: 01ce464bbe7f72246151973435541da6e1920e42
+PODFILE CHECKSUM: d321047b7e6966c0c36784b51c68f46391b5b4c3
 
 COCOAPODS: 1.4.0

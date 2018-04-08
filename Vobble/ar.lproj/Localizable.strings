@@ -90,6 +90,7 @@
 "SINGUP_VALIDATION_PASSWORD"            = "رجاء قم بادخال كلمة المرور";
 "SINGUP_VALIDATION_PASSWORD_LENGHTH"    = "كلمة المرور يجب ان تكون من ٦ محارف على الاقل";
 "SINGUP_VALIDATION_VERIF_CODE"          = "رجاء قم بادخال رمز التحقق";
+"SINGUP_VALIDATION_TERMS"               = "يجب ان توافق على شروط الاستخدام قبل التمكن من متابعة تسجيل الدخول";
 
 // Reset password
 "RESET_STEP1_TITLE"                     = "استعادة كلمة المرور";

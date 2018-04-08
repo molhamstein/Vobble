@@ -45,6 +45,7 @@
 		B17DE5B42055BB8600DC349B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17DE5B22055BB8600DC349B /* FilterView.swift */; };
 		B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B17DE5B32055BB8600DC349B /* FilterView.xib */; };
 		B1818F712066D30000086030 /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1818F702066D30000086030 /* TimerLabel.swift */; };
+		B18719CB2079952800861B45 /* jsq_messages_sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B18719CA207992BC00861B45 /* jsq_messages_sample.m4a */; };
 		B18A5D5120348E4300F139B7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C4F20348E4200F139B7 /* Collection.swift */; };
 		B18A5D5220348E4300F139B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5020348E4200F139B7 /* String.swift */; };
 		B18A5D5320348E4300F139B7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18A5C5120348E4200F139B7 /* UIApplication.swift */; };
@@ -221,7 +222,6 @@
 		B1EA39CF20560824008AADC9 /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39CE20560824008AADC9 /* Bottle.swift */; };
 		B1EA39D120562673008AADC9 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA39D020562673008AADC9 /* ConversationViewController.swift */; };
 		B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */; };
-		B1F13CC320707298007A60C2 /* ShowPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F13CC220707298007A60C2 /* ShowPhotoViewController.swift */; };
 		B1F7A456205A0F39009B18AB /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A455205A0F39009B18AB /* ShopViewController.swift */; };
 		B1F7A458205A113B009B18AB /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A457205A113B009B18AB /* ShopItem.swift */; };
 		B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A45A205A114E009B18AB /* ShopCollectionViewCell.swift */; };
@@ -274,6 +274,7 @@
 		B17DE5B22055BB8600DC349B /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		B17DE5B32055BB8600DC349B /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		B1818F702066D30000086030 /* TimerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
+		B18719CA207992BC00861B45 /* jsq_messages_sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jsq_messages_sample.m4a; sourceTree = "<group>"; };
 		B18A5C4F20348E4200F139B7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		B18A5C5020348E4200F139B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B18A5C5120348E4200F139B7 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -574,7 +575,6 @@
 		B1EA39CE20560824008AADC9 /* Bottle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bottle.swift; sourceTree = "<group>"; };
 		B1EA39D020562673008AADC9 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationViewController.swift; path = ../Filters/ConversationViewController.swift; sourceTree = "<group>"; };
 		B1EA3CA6203C9FED00A7A261 /* VobbleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleButton.swift; sourceTree = "<group>"; };
-		B1F13CC220707298007A60C2 /* ShowPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPhotoViewController.swift; sourceTree = "<group>"; };
 		B1F7A455205A0F39009B18AB /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShopViewController.swift; path = ../Shop/ShopViewController.swift; sourceTree = "<group>"; };
 		B1F7A457205A113B009B18AB /* ShopItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		B1F7A45A205A114E009B18AB /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -641,6 +641,7 @@
 		9234B5E7203356570085F9F7 /* Vobble */ = {
 			isa = PBXGroup;
 			children = (
+				B18719CA207992BC00861B45 /* jsq_messages_sample.m4a */,
 				57687D12204FE509007A5FFA /* gif */,
 				B117970A2033C64B006D96BE /* Classes */,
 				B193730D20342D78007B1E7D /* Storyboards */,
@@ -1224,7 +1225,6 @@
 				B19371162033D8FC007B1E7D /* HomeViewController.swift */,
 				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
 				B1508CD520461F630048123F /* FindBottleViewController.swift */,
-				B1F13CC220707298007A60C2 /* ShowPhotoViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1410,6 +1410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B18719CB2079952800861B45 /* jsq_messages_sample.m4a in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */,
@@ -1478,10 +1479,10 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BMPlayer/BMPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/CountdownLabel/CountdownLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -1489,6 +1490,7 @@
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/LLSimpleCamera/LLSimpleCamera.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/PIDatePicker/PIDatePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/SDRecordButton/SDRecordButton.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -1507,10 +1509,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountdownLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -1518,6 +1520,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LLSimpleCamera.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PIDatePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDRecordButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -1742,7 +1745,6 @@
 				B18A5D9920348E4300F139B7 /* RACSerialDisposable.m in Sources */,
 				B105CBF420715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift in Sources */,
 				57413D55204D3B5700450A42 /* GCD.m in Sources */,
-				B1F13CC320707298007A60C2 /* ShowPhotoViewController.swift in Sources */,
 				B19372F12033E44E007B1E7D /* AppFonts.swift in Sources */,
 				575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */,
 				B18A5DB520348E4300F139B7 /* UIRefreshControl+RACCommandSupport.m in Sources */,

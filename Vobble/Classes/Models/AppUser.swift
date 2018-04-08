@@ -54,6 +54,7 @@ class AppUser: BaseModel {
     private let kUserAccountTypeKey = "type"
     private let kUserIsVerifiedKey = "isVerified"
     private let kUserTokenKey = "token"
+    private let kUserImage = "image"
     
     private let kBottleFirstColor: String = "fcolor"
     private let kBottleSecondColor: String = "lcolor"
@@ -79,7 +80,8 @@ class AppUser: BaseModel {
     
     public var firstColor : UIColor?
     public var secondColor : UIColor?
-    public var imageUrl : UIImage?
+//    public var imageUrl : UIImage?
+    public var imageUrl : String?
     public var myBottlesArray:[Conversation] = [Conversation]()
     public var myRepliesArray:[Conversation] = [Conversation]()
     
