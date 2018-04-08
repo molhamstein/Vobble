@@ -232,7 +232,8 @@ extension ConversationViewController {
 //        })
         
         let convQuery = conversationRef.queryLimited(toLast:25)
-        self.showActivityLoader(true)
+        //self.showActivityLoader(true)
+        
         // We can use the observe method to listen for new
         // messages being written to the Firebase DB
 //        conversationRefHandle = convQuery.observe(.childAdded, with: { (snapshot) -> Void in

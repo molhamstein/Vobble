@@ -158,13 +158,13 @@ class PreviewMediaControl : AbstractController {
      
         let urls:[URL] = [self.videoUrl as URL]
         showActivityLoader(true)
-//        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
+        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
         
-//            if errorMessage == nil {
+            if errorMessage == nil {
         
                 let bottle = Bottle()
-//                bottle.attachment = files[0].fileUrl ?? " "
-                bottle.attachment = "http://104.217.253.15:5000/api/uploads/videos/download/1522571917248_FD1D8580-AF4E-4594-B804-2C1231AC4D5A.MOV"
+                bottle.attachment = files[0].fileUrl ?? " "
+//                bottle.attachment = "http://104.217.253.15:5000/api/uploads/videos/download/1522571917248_FD1D8580-AF4E-4594-B804-2C1231AC4D5A.MOV"
                 bottle.ownerId = DataStore.shared.me?.id
                 bottle.status = "active"
                 bottle.shoreId = shoreId
@@ -191,13 +191,13 @@ class PreviewMediaControl : AbstractController {
                     
                 })
                 
-//            }
-//            else {
-//                self.showActivityLoader(false)
-//                print(errorMessage)
-//            }
+            }
+            else {
+                self.showActivityLoader(false)
+                print(errorMessage)
+            }
         
-//        }
+        }
     
         
     }

@@ -53,22 +53,22 @@
                             <rect key="frame" x="120" y="53.5" width="245" height="52.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="jMV-1b-yX9">
-                                    <rect key="frame" x="0.0" y="0.0" width="81.5" height="52.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="61.5" height="52.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Throwed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx6-j1-vgs">
-                                            <rect key="frame" x="0.0" y="0.0" width="81.5" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="61.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXm-mA-oE3">
-                                            <rect key="frame" x="0.0" y="16.5" width="81.5" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="61.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bou-d0-RSB">
-                                            <rect key="frame" x="0.0" y="39" width="81.5" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="39" width="61.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -76,51 +76,58 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rb1-xp-9kr">
-                                    <rect key="frame" x="81.5" y="0.0" width="82" height="52.5"/>
+                                    <rect key="frame" x="61.5" y="0.0" width="61" height="52.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MII-u1-n5f">
-                                            <rect key="frame" x="0.0" y="0.0" width="82" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="61" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vy0-tu-vcm">
-                                            <rect key="frame" x="0.0" y="16.5" width="82" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="61" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYo-Na-I7H">
-                                            <rect key="frame" x="0.0" y="39" width="82" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="39" width="61" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Vkr-AS-tUJ">
-                                    <rect key="frame" x="163.5" y="0.0" width="81.5" height="52.5"/>
+                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Vkr-AS-tUJ">
+                                    <rect key="frame" x="122.5" y="0.0" width="61.5" height="52.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kY5-r8-foq">
-                                            <rect key="frame" x="0.0" y="0.0" width="81.5" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="61.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLq-oE-oUS">
-                                            <rect key="frame" x="0.0" y="16.5" width="81.5" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="61.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-ol-NJY">
-                                            <rect key="frame" x="0.0" y="39" width="81.5" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="39" width="61.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTn-GQ-HE7">
+                                    <rect key="frame" x="184" y="0.0" width="61" height="32"/>
+                                    <state key="normal" image="ic_settings"/>
+                                    <connections>
+                                        <action selector="settingsPressed:" destination="eUA-Pv-khb" eventType="touchUpInside" id="5sa-KB-Gx9"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </stackView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="rxL-i8-YA5">
@@ -240,12 +247,14 @@
             <connections>
                 <outlet property="btnMyBottles" destination="oMt-1h-1lb" id="Ebj-rb-SAq"/>
                 <outlet property="btnMyReplies" destination="x8H-lq-tCX" id="71t-7c-dbC"/>
+                <outlet property="btnSettings" destination="pTn-GQ-HE7" id="vWw-mA-5sa"/>
                 <outlet property="searchTetField" destination="KGh-qf-l8K" id="iNp-Dr-M9l"/>
             </connections>
         </collectionReusableView>
     </objects>
     <resources>
         <image name="ic_search" width="15" height="15"/>
+        <image name="ic_settings" width="33" height="32"/>
         <image name="user_placeholder" width="1024" height="1024"/>
     </resources>
 </document>

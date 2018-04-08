@@ -117,3 +117,14 @@
 "main_shore"                            = "الشاطئ الرئيسي";
 "love_shore"                            = "شاطئ الحب";
 "fadfed_shore"                          = "شاطئ الفضفضة";
+
+// settings
+"SETTINGS_CONTACT"                      = "تواصل معنا";
+"SETTINGS_ABOUT"                        = "من نحن";
+"SETTINGS_TERMS"                        = "شروط الاستخدام";
+"SETTINGS_LOGOUT"                       = "تسجيل الخروج";
+"SETTINGS_LOGOUT_MSG"                   = "هل انت متاكد انك تريد تسجل الخروج";
+
+
+"ABOUT_TITLE"                          = "من نحن";
+"TERMS_TITLE"                          = "شروط الاستخدام";

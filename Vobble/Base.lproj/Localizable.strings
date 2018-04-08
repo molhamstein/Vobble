@@ -118,3 +118,13 @@
 "love_shore"                            = "Love shore";
 "fadfed_shore"                          = "FadFed shore";
 
+// settings
+"SETTINGS_CONTACT"                      = "Contact Us";
+"SETTINGS_ABOUT"                        = "About us";
+"SETTINGS_TERMS"                        = "Terms of Service";
+"SETTINGS_LOGOUT"                       = "Logout";
+"SETTINGS_LOGOUT_MSG"                   = "Are you sure you want to logout?";
+
+"ABOUT_TITLE"                          = "About us";
+"TERMS_TITLE"                          = "Terms of Service";
+

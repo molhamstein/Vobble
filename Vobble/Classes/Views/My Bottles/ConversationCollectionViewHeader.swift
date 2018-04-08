@@ -18,6 +18,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     @IBOutlet weak var searchTetField: UITextField!
     @IBOutlet weak var btnMyBottles: UIButton!
     @IBOutlet weak var btnMyReplies: UIButton!
+    @IBOutlet weak var btnSettings: UIButton!
     public var convVC: ConversationViewController?
    
     override func awakeFromNib() {
@@ -41,6 +42,12 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         convVC?.bottleCollectionView.reloadData()
         btnMyReplies.isSelected = true
         btnMyBottles.isSelected = false
+    }
+    
+    @IBAction func settingsPressed(_ sender: Any) {
+
+        convVC?.performSegue(withIdentifier: "conversationsSettingsSegue", sender: convVC)
+
     }
     
 }
