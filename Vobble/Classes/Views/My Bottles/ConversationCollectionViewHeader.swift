@@ -21,6 +21,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     @IBOutlet weak var btnSettings: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageBtn: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     public var convVC: ConversationViewController?
     
@@ -29,6 +30,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         super.awakeFromNib()
         // Initialization
         userNameLabel.text = DataStore.shared.me?.firstName
+        self.activityIndicator.isHidden = true
     }
     
     func configCell(userObj: AppUser) {
@@ -57,7 +59,9 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     
     @IBAction func setUserImageBtnPressed(_ sender: Any) {
         
-        convVC?.setUserImage(userImage: userImageBtn)
+        convVC?.imgLoading = self.activityIndicator
+        convVC?.userImageBtn = self.userImageBtn
+        convVC?.setUserImage()
         
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import SwiftyJSON
+import Photos
 
 class ConversationViewController: AbstractController {
     
@@ -22,7 +23,7 @@ class ConversationViewController: AbstractController {
     fileprivate var searchText: UITextField?
     fileprivate var searchString: String = ""
     public var tap: tapOption = .myBottles
-    
+    var imgLoading: UIActivityIndicatorView?
     var userImageBtn:UIButton = UIButton()
     
     // MARK: - firebase Properties
@@ -181,19 +182,44 @@ extension ConversationViewController: UICollectionViewDelegate {
         }
     }
     
-    func setUserImage(userImage:UIButton) {
+    func setUserImage() {
+          showActionSheet()
+    }
+    
+    func camera()
+    {
         let picker = UIImagePickerController()
-        picker.delegate = self
-        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-            picker.sourceType = .camera
-        } else {
-            picker.sourceType = .photoLibrary
-        }
-        picker.mediaTypes = ["public.image"]
-        
-        self.userImageBtn = userImage
+        picker.delegate = self;
+        picker.sourceType = .camera
         present(picker, animated: true, completion:nil)
     }
+    
+    func photoLibrary()
+    {
+        let picker = UIImagePickerController()
+        picker.delegate = self;
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = ["public.image"]
+        present(picker, animated: true, completion:nil)
+    }
+    
+    func showActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            self.camera()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            self.photoLibrary()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(actionSheet, animated: true, completion: nil)
+        
+    }
+    
 }
 
 // MARK: - textfield delegate
@@ -235,6 +261,34 @@ extension ConversationViewController: UIImagePickerControllerDelegate, UINavigat
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.userImageBtn.setImage(pickedImage, for: .normal)
+            
+            self.imgLoading?.isHidden = false
+            self.imgLoading?.hidesWhenStopped = true
+            self.imgLoading?.activityIndicatorViewStyle = .gray
+            self.imgLoading?.startAnimating()
+            
+            let photoUrl = info[UIImagePickerControllerReferenceURL] as? URL
+            let assets = PHAsset.fetchAssets(withALAssetURLs: [photoUrl!], options: nil)
+            let asset = assets.firstObject
+            asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
+                
+                let urls:[URL] = [(contentEditingInput?.fullSizeImageURL)!]
+                
+                ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
+                    
+                    if errorMessage == nil {
+                        
+                        DataStore.shared.me?.imageUrl = files[0].fileUrl
+                        self.imgLoading?.stopAnimating()
+                        
+                    } else {
+                        print("error")
+                        self.imgLoading?.stopAnimating()
+                    }
+                    
+                }
+            })
+
         }
         
     }
@@ -263,16 +317,16 @@ extension ConversationViewController {
             if DataStore.shared.me?.id == conversation.user?.objectId {
                 print("my bottles")
                 DataStore.shared.me?.myBottlesArray.append(conversation)
-//                DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
-//                     return (obj1.createdAt! < obj2.createdAt!)
-//                })
+                DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
+                     return (obj1.createdAt! > obj2.createdAt!)
+                })
                 self.bottleCollectionView.reloadData()
             } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
                 print("my replies")
                 DataStore.shared.me?.myRepliesArray.append(conversation)
-//                DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
-//                    return (obj1.createdAt! < obj2.createdAt!)
-//                })
+                DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
+                    return (obj1.createdAt! > obj2.createdAt!)
+                })
                 self.bottleCollectionView.reloadData()
             }
             

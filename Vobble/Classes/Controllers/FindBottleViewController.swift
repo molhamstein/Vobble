@@ -64,6 +64,8 @@ class FindBottleViewController: AbstractController {
     
     @IBAction func replyBtnPressed(_ sender: Any) {
         
+        self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+        videoView.playButtonPressed()
         // show preview
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
             let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController

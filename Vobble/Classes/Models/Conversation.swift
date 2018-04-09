@@ -24,6 +24,25 @@ class Conversation: BaseModel {
     public var bottle: Bottle?
     public var createdAt: Double?
     public var finishTime: Double?
+    private var _isActive: Bool?
+    
+    
+    public var isActive:Bool? {
+        set{
+            _isActive = newValue
+        }
+        get {
+            let currentDate = Date().timeIntervalSince1970 * 1000
+            if let ft = finishTime {
+                if  currentDate >= ft {
+                    _isActive = true
+                } else {
+                    _isActive = false
+                }
+            }
+            return _isActive
+        }
+    }
     
     // MARK: Initializers
     override init() {
