@@ -75,9 +75,11 @@ class HomeViewController: AbstractController {
         // enable profile
         self.showNavProfileButton = true
         self.navigationView.viewcontroller = self
+        self.navigationView.mode = .home
         self.filterView.delegate = self
         
         // hide filters View by default
+        self.filterView.isHidden = true
         self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
         self.filterViewOverlay.alpha = 0.0
     }
@@ -338,6 +340,7 @@ class HomeViewController: AbstractController {
             return
         }
         blockPageTransitions = true
+        self.navigationView.navTitle.text = "main_shore".localized
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
             self.ivSea.transform = CGAffineTransform.identity
@@ -351,7 +354,6 @@ class HomeViewController: AbstractController {
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 0
             self.blockPageTransitions = false
-            self.navigationView.navTitle.text = "main_shore".localized
         })
     }
     
@@ -360,6 +362,7 @@ class HomeViewController: AbstractController {
             return
         }
         blockPageTransitions = true
+        self.navigationView.navTitle.text = "love_shore".localized
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
             self.ivSea.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.seaParallaxSpeed), y: 0)
             self.ivIsland.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.island2ParallaxSpeed), y: 0)
@@ -374,7 +377,6 @@ class HomeViewController: AbstractController {
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 1
             self.blockPageTransitions = false
-            self.navigationView.navTitle.text = "love_shore".localized
         })
     }
     
@@ -383,6 +385,7 @@ class HomeViewController: AbstractController {
             return
         }
         blockPageTransitions = true
+        self.navigationView.navTitle.text = "fadfed_shore".localized
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
         let doubleScreenWidth = self.screenWidth * 2
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
@@ -399,12 +402,12 @@ class HomeViewController: AbstractController {
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 2
             self.blockPageTransitions = false
-            self.navigationView.navTitle.text = "fadfed_shore".localized
         })
     }
     
     func showFilter () {
         if self.filterViewVisible {
+            // hide
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
                 self.filterViewOverlay.alpha = 0.0
@@ -413,6 +416,8 @@ class HomeViewController: AbstractController {
                 self.filterViewOverlay.isHidden = true
             })
         } else {
+            // show
+            self.filterView.isHidden = false
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.filterView.transform = CGAffineTransform.identity
                 self.filterViewOverlay.alpha = 1.0

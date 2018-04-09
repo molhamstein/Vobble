@@ -324,6 +324,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     }
                 
                     //self.showMessage(message:"success @_@", type: .warning)
+                    ApiManager.shared.getShores(completionBlock: { (shores, error) in
+                    })
                 
               } else {
                     self.showMessage(message:(err?.type.errorMessage)!, type: .error)

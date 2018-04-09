@@ -182,6 +182,7 @@ class DataStore :NSObject {
     public func logout() {
         clearCache()
         me = nil
+        token = nil
         categories = [Category]()
     }
 }

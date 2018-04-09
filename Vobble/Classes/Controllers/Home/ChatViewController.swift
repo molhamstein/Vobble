@@ -57,7 +57,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     var selectedImage: UIImage?
-    var seconds = 0
+    var seconds: Double = 0.0
     
     //  var isTyping: Bool {
     //    get {

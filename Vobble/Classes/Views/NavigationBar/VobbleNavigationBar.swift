@@ -12,10 +12,17 @@ import UIKit
 
 class VobbleNavigationBar : AbstractNibView {
     
+    enum NavBarMode{
+        case home
+        case normal
+    }
+    
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var navTitle: UILabel!
     @IBOutlet weak var rightIcon: UIButton!
     public var viewcontroller : UIViewController?
+    
+    var mode:NavBarMode = .normal
     
     /// set navigation title when navigationTitle is visible.
     @IBInspectable open var title: String = "" {
@@ -69,13 +76,13 @@ class VobbleNavigationBar : AbstractNibView {
     }
     
     @IBAction func leftIconPressed(_ sender: Any) {
-        if leftIcon.currentImage == UIImage(named: "navBackIcon") {
+        if mode != .home {
             if let nc = viewcontroller?.navigationController, viewcontroller == nc.viewControllers[0] {
                 nc.dismiss(animated: true, completion: {})
             } else {
                 viewcontroller?.dismiss(animated: true, completion: nil)
             }
-        } else if leftIcon.currentImage == UIImage(named: "filters") {
+        } else if mode == .home {
             let vc = viewcontroller as! HomeViewController
             vc.showFilter()
         }

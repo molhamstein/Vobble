@@ -164,8 +164,15 @@ extension ConversationViewController: UICollectionViewDelegate {
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
             
             if let fTime = conversation.finishTime {
-                let currentDate = Int(Date().timeIntervalSince1970 * 1000)
-                chatVc.seconds = (Int(fTime) - currentDate)/1000
+                let currentDate = Date().timeIntervalSince1970 * 1000
+                
+                let createdAt = conversation.createdAt
+                if let creationTime = conversation.createdAt{
+                    let mSecsLeft = fTime - creationTime
+                    let hoursLeft = (((mSecsLeft / 1000.0)/60.0)/60.0)
+                }
+                
+                chatVc.seconds = (fTime - currentDate)/1000.0
             }
             
             chatVc.conversationRef = conversationRef.child(conversation.idString!)

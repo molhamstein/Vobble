@@ -27,11 +27,10 @@ class StartViewController: AbstractController {
                 if let err:Error = error {
                     self.showMessage(message:err.localizedDescription, type: .error)     
                 }
-                ApiManager.shared.getShores(completionBlock: { (shores, error) in
-                    
-                   self.performSegue(withIdentifier: "startHomeSegue", sender: self)
-                    
-                })
+            })
+            
+            ApiManager.shared.getShores(completionBlock: { (shores, error) in
+                self.performSegue(withIdentifier: "startHomeSegue", sender: self)
             })
             
         } else {// user not logged in
