@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +26,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2p-3x-HAy" userLabel="userinfo View">
                     <rect key="frame" x="0.0" y="25" width="375" height="130"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xE6-y1-bfD">
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xE6-y1-bfD" userLabel="Stack View1">
                             <rect key="frame" x="130" y="10" width="230" height="13.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QV-9r-3Bm" userLabel="UserName">
@@ -130,35 +130,39 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="rxL-i8-YA5">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gma-mX-Kdl" userLabel="user_image">
                             <rect key="frame" x="20" y="0.0" width="80" height="80"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="80" id="bQc-kv-J09"/>
-                                <constraint firstAttribute="height" constant="80" id="c5U-zI-Bmc"/>
+                                <constraint firstAttribute="width" constant="80" id="Af8-ms-ipr"/>
+                                <constraint firstAttribute="height" constant="80" id="LFg-BE-deh"/>
                             </constraints>
+                            <state key="normal" image="user_placeholder"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="40"/>
                                 </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                     <real key="value" value="1"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                        </imageView>
+                            <connections>
+                                <action selector="setUserImageBtnPressed:" destination="eUA-Pv-khb" eventType="touchUpInside" id="NfF-Bl-mEE"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="rxL-i8-YA5" firstAttribute="leading" secondItem="W2p-3x-HAy" secondAttribute="leading" constant="20" id="EaW-Tf-kvP"/>
                         <constraint firstItem="FlQ-vp-Lg5" firstAttribute="top" secondItem="xE6-y1-bfD" secondAttribute="bottom" constant="30" id="HVX-MQ-BM0"/>
                         <constraint firstAttribute="trailing" secondItem="xE6-y1-bfD" secondAttribute="trailing" constant="15" id="QOB-Ak-rsi"/>
-                        <constraint firstItem="rxL-i8-YA5" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" id="QjV-QU-Dfr"/>
+                        <constraint firstItem="FlQ-vp-Lg5" firstAttribute="leading" secondItem="gma-mX-Kdl" secondAttribute="trailing" constant="20" id="Sdr-d7-KaV"/>
                         <constraint firstAttribute="trailing" secondItem="FlQ-vp-Lg5" secondAttribute="trailing" constant="10" id="Tot-Va-1Eo"/>
+                        <constraint firstItem="gma-mX-Kdl" firstAttribute="leading" secondItem="W2p-3x-HAy" secondAttribute="leading" constant="20" id="aGo-VI-DUv"/>
                         <constraint firstItem="4QV-9r-3Bm" firstAttribute="leading" secondItem="Rx6-j1-vgs" secondAttribute="leading" constant="10" id="bi5-aR-o18"/>
+                        <constraint firstItem="gma-mX-Kdl" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" id="dFe-2a-AaK"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="fJN-f8-4FP"/>
-                        <constraint firstItem="FlQ-vp-Lg5" firstAttribute="leading" secondItem="rxL-i8-YA5" secondAttribute="trailing" constant="20" id="jFF-xp-Voh"/>
                         <constraint firstItem="xE6-y1-bfD" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" constant="10" id="k4u-6y-Bot"/>
                         <constraint firstAttribute="height" constant="130" id="lL4-aa-Lzt"/>
                     </constraints>
@@ -249,6 +253,8 @@
                 <outlet property="btnMyReplies" destination="x8H-lq-tCX" id="71t-7c-dbC"/>
                 <outlet property="btnSettings" destination="pTn-GQ-HE7" id="vWw-mA-5sa"/>
                 <outlet property="searchTetField" destination="KGh-qf-l8K" id="iNp-Dr-M9l"/>
+                <outlet property="userImageBtn" destination="gma-mX-Kdl" id="twc-OJ-bZ4"/>
+                <outlet property="userNameLabel" destination="4QV-9r-3Bm" id="hr1-PJ-g79"/>
             </connections>
         </collectionReusableView>
     </objects>

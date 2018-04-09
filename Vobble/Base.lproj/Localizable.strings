@@ -90,6 +90,7 @@
 "SINGUP_VALIDATION_PASSWORD"            = "Please enter your password";
 "SINGUP_VALIDATION_PASSWORD_LENGHTH"    = "Password should be 6 characters long at least";
 "SINGUP_VALIDATION_VERIF_CODE"          = "Please enter your verification code";
+"SINGUP_VALIDATION_TERMS"               = "You need to agree to the terms and conditions before signup";
 
 // Reset password
 "RESET_STEP1_TITLE"                     = "RESET PASSWORD";

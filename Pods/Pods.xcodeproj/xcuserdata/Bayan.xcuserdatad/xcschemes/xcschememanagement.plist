@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CountdownLabel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -35,6 +30,11 @@
 			<false/>
 		</dict>
 		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FLAnimatedImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -70,6 +70,16 @@
 			<false/>
 		</dict>
 		<key>NVActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NYTPhotoViewer-NYTPhotoViewer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NYTPhotoViewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -137,17 +147,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0238D258EE41DD9B1BE06B8BF438D163</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>153953551F347F6F98E93A5B3547C859</key>
+		<key>16D54EE82680F841DA1248A257DE8B62</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2FB2522236F6922FAF393F067BF9A525</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>32EA67299D5FB63782526C0B60F0FDA4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,12 +172,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>500EFDCB97BACCBDD55A792A1F2F6225</key>
+		<key>451C89A54DED789DF48AB1D7903C9C1C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>531B78FD8AD31B542B8001A970D876EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>565C5ADC73D57FC4F66A3B02AC7D39FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,12 +202,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<key>83B5B60C676A8D31829A6AE91CE86A75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F254C70EA7289F49F560FEF44F5E03E</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,7 +217,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>AFEE4F7663BF7C020CEDF326196D4E0A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B1C4AAFAF49036C7007633DAA3C806AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B97720AEDDAEC6569BE907F8D81E7EB7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,17 +257,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3D0A4E035E96C8FD9240C3B08725CF5</key>
+		<key>D85C3D5A275CC39B0CEEC53C5FA8F233</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DEC05651D1F4F24769A11DC2A95A1FF7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E0051D9366769A9CB81C618724A88E2D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -248,11 +273,6 @@
 			<true/>
 		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EA0F67E25AAF4CAD5AB6E483CA9DE46F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

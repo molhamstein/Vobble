@@ -384,6 +384,11 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     func validateFields () -> Bool {
         
+        if checkButton.currentImage == UIImage(named: "checkBox") {
+            showMessage(message:"SINGUP_VALIDATION_TERMS".localized, type: .warning)
+            return false
+        }
+        
         if let uName = svUserNameTextField.text, !uName.isEmpty {
             tempUserInfoHolder.firstName = uName
         } else {

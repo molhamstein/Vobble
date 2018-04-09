@@ -23,6 +23,8 @@ class ConversationViewController: AbstractController {
     fileprivate var searchString: String = ""
     public var tap: tapOption = .myBottles
     
+    var userImageBtn:UIButton = UIButton()
+    
     // MARK: - firebase Properties
     fileprivate var conversationRefHandle: DatabaseHandle?
     
@@ -178,6 +180,20 @@ extension ConversationViewController: UICollectionViewDelegate {
             chatVc.conversationRef = conversationRef.child(conversation.idString!)
         }
     }
+    
+    func setUserImage(userImage:UIButton) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+        }
+        picker.mediaTypes = ["public.image"]
+        
+        self.userImageBtn = userImage
+        present(picker, animated: true, completion:nil)
+    }
 }
 
 // MARK: - textfield delegate
@@ -211,6 +227,19 @@ extension ConversationViewController {
     
 }
 
+extension ConversationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        picker.dismiss(animated: true, completion:nil)
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.userImageBtn.setImage(pickedImage, for: .normal)
+        }
+        
+    }
+}
+
 // MARK: Firebase related methods
 
 extension ConversationViewController {
@@ -218,47 +247,8 @@ extension ConversationViewController {
     fileprivate func observeConversation() {
         // We can use the observe method to listen for new
         // conversations being written to the Firebase DB
-//        self.showActivityLoader(true)
-//        conversationRefHandle = conversationRef.observe(.childAdded, with: { (snapshot) -> Void in
-//
-//            self.showActivityLoader(false)
-//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-//            conversation.idString = snapshot.key
-//
-//            //(My replies)
-//            if DataStore.shared.me?.id == conversation.user?.objectId {
-//                print("my bottles")
-//                DataStore.shared.me?.myBottlesArray.append(conversation)
-//                self.bottleCollectionView.reloadData()
-//            } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
-//                print("my replies")
-//                DataStore.shared.me?.myRepliesArray.append(conversation)
-//                self.bottleCollectionView.reloadData()
-//            }
-//
-//        })
         
-        let convQuery = conversationRef.queryLimited(toLast:25)
-        //self.showActivityLoader(true)
-        
-        // We can use the observe method to listen for new
-        // messages being written to the Firebase DB
-//        conversationRefHandle = convQuery.observe(.childAdded, with: { (snapshot) -> Void in
-//            self.showActivityLoader(false)
-//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-//            conversation.idString = snapshot.key
-//            
-//            //(My replies)
-//            if DataStore.shared.me?.id == conversation.user?.objectId {
-//                print("my bottles")
-//                DataStore.shared.me?.myBottlesArray.append(conversation)
-//                self.bottleCollectionView.reloadData()
-//            } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
-//                print("my replies")
-//                DataStore.shared.me?.myRepliesArray.append(conversation)
-//                self.bottleCollectionView.reloadData()
-//            }
-//        })
+        self.showActivityLoader(true)
         
         conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
             
@@ -273,17 +263,22 @@ extension ConversationViewController {
             if DataStore.shared.me?.id == conversation.user?.objectId {
                 print("my bottles")
                 DataStore.shared.me?.myBottlesArray.append(conversation)
+//                DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
+//                     return (obj1.createdAt! < obj2.createdAt!)
+//                })
                 self.bottleCollectionView.reloadData()
             } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
                 print("my replies")
                 DataStore.shared.me?.myRepliesArray.append(conversation)
+//                DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
+//                    return (obj1.createdAt! < obj2.createdAt!)
+//                })
                 self.bottleCollectionView.reloadData()
             }
             
         }) { (error) in
             self.showActivityLoader(false)
         }
-//        self.showActivityLoader(false)
         
     }
 }
