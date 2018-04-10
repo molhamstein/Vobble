@@ -82,13 +82,21 @@ class DataStore :NSObject {
     public var token:String? {
         set{
             _token = newValue
-            saveStringWithKey(stringToStore: _token!, key: CACHE_KEY_TOKEN)
+            if let tokenSting = _token {
+                saveStringWithKey(stringToStore: tokenSting, key: CACHE_KEY_TOKEN)
+            }
         }
         get {
             if (_token == nil) {
                 _token = loadStringForKey(key: CACHE_KEY_TOKEN)
             }
             return _token
+        }
+    }
+    
+    public var currentUTCTime:TimeInterval {
+        get {
+            return Date().timeIntervalSince1970 * 1000
         }
     }
     

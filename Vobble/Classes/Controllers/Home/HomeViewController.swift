@@ -12,7 +12,7 @@ import UIKit
 class HomeViewController: AbstractController {
     
     // MARK: Properties
-    @IBOutlet var ivSea: UIView!
+    @IBOutlet var ivSea: UIImageView!
     @IBOutlet var ivSky: UIImageView!
     @IBOutlet var ivClouds: UIImageView!
     @IBOutlet var ivMountains: UIImageView!
@@ -45,6 +45,7 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivShore3Girl1: UIImageView!
     @IBOutlet var ivShore3Girl2: UIImageView!
     @IBOutlet var ivShore3Boy: UIImageView!
+    @IBOutlet var ivFire: UIImageView!
     
     var screenWidth: CGFloat = 0.0;
     var blockPageTransitions: Bool = false;
@@ -129,6 +130,45 @@ class HomeViewController: AbstractController {
         self.ivShore3Girl2.loadGif(name: "girl_3_2")
         
         //ivShore2Girl.loadGif(asset: "girl")
+        
+        self.setArtImages()
+    }
+    
+    func setArtImages(){
+        
+        let date = Date()
+        let calendar = Calendar.current
+        
+        let hour = calendar.component(.hour, from: date)
+        
+        //var isNight = hour > 18 || hour < 5
+        var isNight = true
+        
+        //hours += 1
+        if isNight {
+            ivSea.image = UIImage(named:"sea_night")
+            ivSky.image = UIImage(named:"sky1_night")
+            ivClouds.image = nil
+            ivMountains.image = UIImage(named:"montains_night")
+            ivSun.image = UIImage(named:"sun_night")
+            ivIsland.image = UIImage(named:"island_night")
+            ivShore1Shore.image = UIImage(named:"shore1_night")
+            ivShore2Shore.image = UIImage(named:"shore2_night")
+            ivShore3Shore.image = UIImage(named:"shore3_night")
+            ivFire.loadGif(name: "fire")
+        } else {
+            ivSea.image = UIImage(named:"sea")
+            ivSky.image = UIImage(named:"sky1")
+            ivClouds.image = UIImage(named:"clouds")
+            ivMountains.image = UIImage(named:"montains")
+            ivSun.image = UIImage(named:"sun")
+            ivIsland.image = UIImage(named:"island")
+            ivShore1Shore.image = UIImage(named:"shore1")
+            ivShore2Shore.image = UIImage(named:"shore2")
+            ivShore3Shore.image = UIImage(named:"shore3")
+            ivFire.image = nil
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -257,6 +297,7 @@ class HomeViewController: AbstractController {
                         // shore 3
                         self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
                         self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
+                        self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: translation.x * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -293,7 +334,7 @@ class HomeViewController: AbstractController {
                         // shore 3
                         self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
                         self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
-                        
+                        self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -355,6 +396,7 @@ class HomeViewController: AbstractController {
             self.ivShore3Shore.transform = CGAffineTransform.identity
             self.shore2Lovers.transform = CGAffineTransform.identity
             self.ivMountains.transform = CGAffineTransform.identity
+            self.ivSun.transform = CGAffineTransform.identity
             self.ivClouds.transform = CGAffineTransform.identity
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 0
@@ -375,6 +417,7 @@ class HomeViewController: AbstractController {
             self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore2ParallaxSpeed), y: 0)
             self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore3ParallaxSpeed), y: 0)
             self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.friendsParallaxSpeed), y: 0)
+            self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.friendsParallaxSpeed), y: 0)
             self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.loversParallaxSpeed), y: 0)
             self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.cloudsParallaxSpeed), y: 0)
@@ -400,6 +443,7 @@ class HomeViewController: AbstractController {
             self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore2ParallaxSpeed), y: 0)
             self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore3ParallaxSpeed), y: 0)
             self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.friendsParallaxSpeed), y: 0)
+            self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.friendsParallaxSpeed), y: 0)
             self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.loversParallaxSpeed), y: 0)
             self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.cloudsParallaxSpeed), y: 0)

@@ -24,6 +24,7 @@
 		578A25142058823C00801F77 /* girl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A25132058823C00801F77 /* girl.gif */; };
 		5796242F20793B790005292A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242D20793B790005292A /* TermsViewController.swift */; };
 		5796243020793B790005292A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242E20793B790005292A /* AboutViewController.swift */; };
+		57DE7459207D77E00061CA2F /* fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57DE7458207D77E00061CA2F /* fire.gif */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
 		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
@@ -248,6 +249,7 @@
 		578A25132058823C00801F77 /* girl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl.gif; sourceTree = "<group>"; };
 		5796242D20793B790005292A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsViewController.swift; path = ../Home/TermsViewController.swift; sourceTree = "<group>"; };
 		5796242E20793B790005292A /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ../Home/AboutViewController.swift; sourceTree = "<group>"; };
+		57DE7458207D77E00061CA2F /* fire.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fire.gif; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -611,6 +613,7 @@
 		57687D12204FE509007A5FFA /* gif */ = {
 			isa = PBXGroup;
 			children = (
+				57DE7458207D77E00061CA2F /* fire.gif */,
 				57395CD1207047AE00F0A3DB /* find_bottle.gif */,
 				57521FC5205FE9210062A4A5 /* throwBottle.gif */,
 				578A25132058823C00801F77 /* girl.gif */,
@@ -1428,6 +1431,7 @@
 				B19612462061CEC00065019D /* GoogleService-Info.plist in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
+				57DE7459207D77E00061CA2F /* fire.gif in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
 				B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */,
 				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
