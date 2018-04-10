@@ -42,6 +42,8 @@ final class ChatViewController: JSQMessagesViewController {
     private var newMessageRefHandle: DatabaseHandle?
     private var updatedMessageRefHandle: DatabaseHandle?
     
+    fileprivate var isLoadedMedia:Bool = true
+    fileprivate var numberOfSentMedia = 0
     private var messages: [JSQMessage] = []
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
@@ -90,6 +92,7 @@ final class ChatViewController: JSQMessagesViewController {
         if let userId = DataStore.shared.me?.id {
             self.senderId = "\(userId)"
         }
+        customNavBar.delegate = self
         observeMessages()
         self.navigationItem.leftBarButtonItem = navBackButton
         // No avatars
@@ -480,7 +483,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             
         } else if mediaType == "public.movie" {
             if let mediaUrl = info[UIImagePickerControllerMediaURL] as? URL {
-                uploadVideo(videoUrl: mediaUrl)
+                uploadVideo(videoUrl: mediaUrl, upload:true)
             }
         }
        
@@ -504,23 +507,38 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
     }
     
-    func uploadVideo(videoUrl:URL) {
+    func uploadVideo(videoUrl:URL, upload: Bool) {
         
         if let key = sendMediaMessage(mediaTag: "videoURL")  {
-             self.upload(url: videoUrl, key:key)
+            if upload {
+                self.upload(url: videoUrl, key:key)
+            } else {
+                let media:Media = Media()
+                media.fileUrl = videoUrl.absoluteString
+                media.type = "video/quicktime" 
+                self.setMediaURL(media, forPhotoMessageWithKey: key)
+            }
         }
+        
+        
     }
     
     func upload(url:URL,key:String) {
         
+        self.isLoadedMedia = false
+        self.numberOfSentMedia += 1
         let urls:[URL] = [url]
         ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
             
             if errorMessage == nil {
-               
+                self.numberOfSentMedia -= 1
+                if self.numberOfSentMedia == 0 {
+                    self.isLoadedMedia = true
+                }
                 self.setMediaURL(files[0], forPhotoMessageWithKey: key)
                 
             } else {
+                self.isLoadedMedia = true
                 print("error")
             }
             
@@ -591,4 +609,24 @@ class PreviewPhoto: NSObject, NYTPhoto {
         super.init()
     }
     
+}
+
+extension ChatViewController: ChatNavigationDelegate {
+    
+    func navLeftBtnPressed() {
+        if self.isLoadedMedia {
+          dismiss(animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "", message: "UPLOAD_MEDIA_WARNING".localized , preferredStyle: .alert)
+            //We add buttons to the alert controller by creating UIAlertActions:
+            let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
+                self.dismiss(animated: true, completion: nil)
+            })
+            alertController.addAction(ok)
+            let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
 }

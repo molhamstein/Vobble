@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+@objc protocol ChatNavigationDelegate {
+    @objc optional func navLeftBtnPressed()
+    @objc optional func navRightBtnPressed()
+}
 
 class VobbleChatNavigationBar: AbstractNibView {
     
@@ -16,6 +20,7 @@ class VobbleChatNavigationBar: AbstractNibView {
     @IBOutlet weak var timerLabel: TimerLabel!
     public var viewcontroller : UIViewController?
     
+    var delegate:ChatNavigationDelegate?
 
     /// set left image icon when image_name is visible.
     @IBInspectable open var left_image: UIImage? {
@@ -42,9 +47,10 @@ class VobbleChatNavigationBar: AbstractNibView {
     }
  
     @IBAction func leftIconPressed(_ sender: Any) {
-        if leftIcon.currentImage == UIImage(named: "navBackIcon") {
-            viewcontroller?.dismiss(animated: true, completion: nil)
-        } 
+//        if leftIcon.currentImage == UIImage(named: "navBackIcon") {
+//            viewcontroller?.dismiss(animated: true, completion: nil)
+//        }
+        self.delegate?.navLeftBtnPressed?()
     }
 
 }

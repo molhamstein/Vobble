@@ -28,6 +28,19 @@ class FilterView: AbstractNibView {
     fileprivate var selectedGender: String = "allGender"
     fileprivate var selectedCountry: String = "Afghanistan"
     
+    // MARK: - Initializers
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        allGenderLabel.text = "ALL_GENDER".localized
+        maleLabel.text = "MALE".localized
+        femaleLabel.text = "FEMALE".localized
+        allGenderButton.alpha = 1
+        allGenderLabel.alpha = 1
+        
+    }
+    
     @IBAction func allGenderBtnPressed(_ sender: Any) {
         allGenderButton.alpha = 1
         allGenderLabel.alpha = 1
@@ -69,7 +82,7 @@ class FilterView: AbstractNibView {
 extension FilterView: CountryPickerDelegate {
     
     func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
-        self.selectedCountry = name
+        self.selectedCountry = code
         self.delegate?.getFilterInfo(gender: selectedGender, country: selectedCountry)
         
     }

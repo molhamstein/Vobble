@@ -587,7 +587,7 @@ class ApiManager: NSObject {
     }
     
     // MARK: -  find bottles
-    func findBottle(completionBlock: @escaping (_ bottle: Bottle?, _ error: NSError?) -> Void) {
+    func findBottle(gender:String, countryCode:String, shoreId:Int, completionBlock: @escaping (_ bottle: Bottle?, _ error: NSError?) -> Void) {
         
         var findhBottleURL = "\(baseURL)/bottles?filter[where][ownerId][neq]="
         
@@ -595,7 +595,17 @@ class ApiManager: NSObject {
             findhBottleURL += "\(userId)&filter[include]=owner"
         }
         
-        Alamofire.request(findhBottleURL).responseJSON { (responseObject) -> Void in
+        findhBottleURL += "&filter[where][shoreId]=\(shoreId)&filter[where][owner][countryId]=\(countryCode)"
+        
+        if gender != "allGender" {
+            findhBottleURL += "&filter[where][owner][gender]=\(gender)"
+        }
+        
+        findhBottleURL += "&filter[order]=createdAt DESC&filter[limit]=5"
+        
+        let encoedeUrl = findhBottleURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        Alamofire.request(encoedeUrl!).responseJSON { (responseObject) -> Void in
             
             if responseObject.result.isSuccess {
                 

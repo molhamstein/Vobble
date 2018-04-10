@@ -119,6 +119,14 @@
 "love_shore"                            = "Love shore";
 "fadfed_shore"                          = "FadFed shore";
 
+// chat
+"UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? you will no longer could upload your video.";
+
+// filter
+"FEMALE"                                = "female";
+"MALE"                                  = "male";
+"ALL_GENDER"                            = "all";
+
 // settings
 "SETTINGS_CONTACT"                      = "Contact Us";
 "SETTINGS_ABOUT"                        = "About us";

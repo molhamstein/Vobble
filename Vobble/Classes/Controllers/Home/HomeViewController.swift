@@ -65,6 +65,10 @@ class HomeViewController: AbstractController {
     // bottle animations 
     @IBOutlet var ivFindBottle: UIImageView!
     @IBOutlet var ivThrowBottle: UIImageView!
+   
+    //filter option
+    var countryCode = "AF"
+    var gender = "allGender"
     
     var introAnimationDone: Bool = false
     var filterViewVisible = false
@@ -150,8 +154,8 @@ class HomeViewController: AbstractController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 5 second
             self.ivFindBottle.image = nil
             self.showActivityLoader(true)
-            ApiManager.shared.findBottle { (bottle, error) in
-    
+            
+            ApiManager.shared.findBottle(gender: self.gender, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
                 if error == nil {
                     self.showActivityLoader(false)
                     //print("\(bottle?.bottle_id)")
@@ -159,8 +163,9 @@ class HomeViewController: AbstractController {
                     self.ivFindBottle.image = nil
                 } else {
                     //print(erorr)
+                    self.showActivityLoader(false)
                 }
-            }
+            })
         }
     }
     
@@ -443,6 +448,8 @@ extension HomeViewController {
 extension HomeViewController: FilterViewDelegate {
     
     func getFilterInfo(gender: String, country: String) {
+        self.gender = gender
+        self.countryCode = country
         print(gender)
         print(country)
         print("----------")

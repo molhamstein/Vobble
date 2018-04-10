@@ -119,6 +119,14 @@
 "love_shore"                            = "شاطئ الحب";
 "fadfed_shore"                          = "شاطئ الفضفضة";
 
+// chat
+"UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد أنك تريد العودة؟ لن تتمكن بعد ذلك من تحميل الفيديو الخاص بك.";
+
+// filter
+"FEMALE"                                = "انثى";
+"MALE"                                  = "ذكر";
+"ALL_GENDER"                            = "الجميع";
+
 // settings
 "SETTINGS_CONTACT"                      = "تواصل معنا";
 "SETTINGS_ABOUT"                        = "من نحن";
