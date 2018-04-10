@@ -33,7 +33,7 @@
                     <rect key="frame" x="20" y="90" width="335" height="577"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cq-Ea-TNs" userLabel="Gender View">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="174"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="172.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:12 left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQY-ww-E8m">
                                     <rect key="frame" x="259" y="0.0" width="76" height="17"/>
@@ -42,16 +42,16 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ygV-fQ-NuN">
-                                    <rect key="frame" x="0.0" y="0.0" width="251" height="174"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="251" height="172.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Filter By Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwd-PA-FpY">
-                                            <rect key="frame" x="0.0" y="0.0" width="149" height="17"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="149" height="15.5"/>
                                             <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="20"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="5Ic-MG-B7C">
-                                            <rect key="frame" x="0.0" y="17" width="237" height="157"/>
+                                            <rect key="frame" x="0.0" y="15.5" width="237" height="157"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qbd-vo-FF0" userLabel="all gender View">
                                                     <rect key="frame" x="0.0" y="0.0" width="67" height="157"/>
@@ -91,11 +91,11 @@
                                                     <rect key="frame" x="85" y="0.0" width="67" height="157"/>
                                                     <subviews>
                                                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7d-rZ-V8r">
-                                                            <rect key="frame" x="-0.5" y="67.5" width="67.5" height="22"/>
+                                                            <rect key="frame" x="-0.5" y="59" width="67.5" height="39"/>
                                                             <state key="normal" image="signup_male"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="male" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEh-Lp-xl2" userLabel="male label">
-                                                            <rect key="frame" x="0.0" y="99.5" width="67" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="108" width="67" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -125,11 +125,11 @@
                                                     <rect key="frame" x="170" y="0.0" width="67" height="157"/>
                                                     <subviews>
                                                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEX-hv-Ul6">
-                                                            <rect key="frame" x="0.0" y="67.5" width="67" height="22"/>
+                                                            <rect key="frame" x="0.0" y="59" width="67" height="39"/>
                                                             <state key="normal" image="signup_female"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="female" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URR-dN-Haa" userLabel="female label">
-                                                            <rect key="frame" x="0.0" y="99.5" width="67" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="108" width="67" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -156,6 +156,10 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XEh-Lp-xl2" firstAttribute="baseline" secondItem="TgN-kq-Stf" secondAttribute="baseline" id="QdX-64-rTL"/>
+                                                <constraint firstItem="URR-dN-Haa" firstAttribute="baseline" secondItem="TgN-kq-Stf" secondAttribute="baseline" id="lgK-iv-ooK"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                 </stackView>
@@ -171,7 +175,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21h-5f-0ct" userLabel="Country View">
-                            <rect key="frame" x="0.0" y="194" width="335" height="383"/>
+                            <rect key="frame" x="0.0" y="197.5" width="335" height="379.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ypy-f9-G9X">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="29"/>
@@ -198,7 +202,7 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-2n-8aY" customClass="CountryPicker">
-                                    <rect key="frame" x="0.0" y="39" width="335" height="334"/>
+                                    <rect key="frame" x="0.0" y="39" width="335" height="330.5"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="GBL-3w-uvC"/>
@@ -219,7 +223,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" constant="20" id="Gjp-QG-NGe"/>
+                        <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" constant="25" id="Gjp-QG-NGe"/>
                         <constraint firstAttribute="trailing" secondItem="21h-5f-0ct" secondAttribute="trailing" id="PE7-bG-Y0v"/>
                         <constraint firstItem="21h-5f-0ct" firstAttribute="leading" secondItem="SqP-BV-v3M" secondAttribute="leading" id="bm7-mk-rwD"/>
                         <constraint firstItem="7Cq-Ea-TNs" firstAttribute="top" secondItem="SqP-BV-v3M" secondAttribute="top" id="eRC-JR-y69"/>

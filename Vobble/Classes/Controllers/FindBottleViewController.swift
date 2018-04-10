@@ -64,8 +64,10 @@ class FindBottleViewController: AbstractController {
     
     @IBAction func replyBtnPressed(_ sender: Any) {
         
-        self.playButton.setImage(UIImage(named: "pause"), for: .normal)
-        videoView.playButtonPressed()
+         if self.playButton.currentImage == UIImage(named: "pause") {
+            videoView.playButtonPressed()
+        }
+        
         // show preview
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
             let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
@@ -100,15 +102,18 @@ class FindBottleViewController: AbstractController {
 //            }
 
             chatVc.seconds = 24.0*60.0*60.0
-            if let uid = DataStore.shared.me?.objectId {
-                chatVc.senderId = "\(uid)"
-                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
+            
+            if let btl = bottle, let bottleOwnerId = btl.ownerId, let url = btl.attachment {
+                chatVc.senderId = "\(bottleOwnerId)"
+                chatVc.uploadVideo(videoUrl: URL(string: url)!, upload: false)
             }
             
-            if let bottleOwnerId = bottle?.ownerId {
-                chatVc.senderId = "\(bottleOwnerId)"
-                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
+            if let myId = DataStore.shared.me?.objectId {
+                chatVc.senderId = "\(myId)"
+                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL, upload: true)
             }
+            
+            
         }
         
     }
