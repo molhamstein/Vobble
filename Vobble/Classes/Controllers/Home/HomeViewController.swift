@@ -13,6 +13,7 @@ class HomeViewController: AbstractController {
     
     // MARK: Properties
     @IBOutlet var ivSea: UIImageView!
+    @IBOutlet var ivWaves: UIImageView!
     @IBOutlet var ivSky: UIImageView!
     @IBOutlet var ivClouds: UIImageView!
     @IBOutlet var ivMountains: UIImageView!
@@ -53,7 +54,7 @@ class HomeViewController: AbstractController {
     var isInitialized = false
     
     let seaParallaxSpeed :CGFloat = 0.3
-    let sunParallaxSpeed :CGFloat = 0.1
+    let sunParallaxSpeed :CGFloat = 0.015
     let cloudsParallaxSpeed :CGFloat = 0.2
     let mountainsParallaxSpeed :CGFloat = 0.25
     let island2ParallaxSpeed :CGFloat = 0.3
@@ -67,6 +68,8 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivFindBottle: UIImageView!
     @IBOutlet var ivThrowBottle: UIImageView!
    
+    var panRecognizer: UIPanGestureRecognizer?
+    
     //filter option
     var countryCode = "AF"
     var gender = "allGender"
@@ -87,6 +90,7 @@ class HomeViewController: AbstractController {
         self.filterView.isHidden = true
         self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
         self.filterViewOverlay.alpha = 0.0
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,7 +101,12 @@ class HomeViewController: AbstractController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         screenWidth = self.view.frame.size.width;
-        
+     
+        // animate sea waves
+        ivWaves?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: -2, y: 6)
+        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+            self.ivWaves?.transform = CGAffineTransform.identity.translatedBy(x: 2, y: -2)
+        }, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,16 +122,15 @@ class HomeViewController: AbstractController {
             navigationView.animateIn(mode: .animateInFromTop, delay: 0.8)
             introAnimationDone = true
         }
-        
     }
     
     /// Customize view
     override func customizeView() {
         
         //add geture recognizer for swipping horizontally
-        let panRec1 = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan))
-        panRec1.delegate = self
-        self.view.addGestureRecognizer(panRec1)
+        panRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan))
+        panRecognizer?.delegate = self
+        self.view.addGestureRecognizer(panRecognizer!)
         
         self.ivShore2Girl.loadGif(name: "girl")
         
@@ -142,7 +150,7 @@ class HomeViewController: AbstractController {
         let hour = calendar.component(.hour, from: date)
         
         //var isNight = hour > 18 || hour < 5
-        var isNight = true
+        var isNight = false
         
         //hours += 1
         if isNight {
@@ -196,14 +204,11 @@ class HomeViewController: AbstractController {
             self.showActivityLoader(true)
             
             ApiManager.shared.findBottle(gender: self.gender, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
-                if error == nil {
-                    self.showActivityLoader(false)
+                self.showActivityLoader(false)
+                if error == nil && bottle != nil {
                     //print("\(bottle?.bottle_id)")
                     self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
-                    self.ivFindBottle.image = nil
                 } else {
-                    //print(erorr)
-                    self.showActivityLoader(false)
                 }
             })
         }
@@ -229,7 +234,7 @@ class HomeViewController: AbstractController {
                 goToMainShore()
             }
         
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 6 second
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 6 second
                 self.ivThrowBottle.image = nil
             }
         }
@@ -464,6 +469,8 @@ class HomeViewController: AbstractController {
                 self.filterViewVisible = false
                 self.filterViewOverlay.isHidden = true
             })
+            // enable shores navigation back
+            panRecognizer?.isEnabled = true
         } else {
             // show
             self.filterView.isHidden = false
@@ -474,6 +481,8 @@ class HomeViewController: AbstractController {
                 self.filterViewVisible = true
                 self.filterViewOverlay.isHidden = false
             })
+            // disable shores navigation as the gesture is interferring with the countries picker
+            panRecognizer?.isEnabled = false
         }
     }
     

@@ -1,6 +1,6 @@
 //
 //  PreviewMediaControl.swift
-//  twigBIG
+//  Vobble
 //
 //  Created by Dania on 6/3/17.
 //
@@ -144,9 +144,9 @@ class PreviewMediaControl : AbstractController {
 //        avPlayerLayer = AVPlayerLayer();
         
 //        if(!imgUrl.isEmpty) {
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
 //        } else {
-//            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
 //        }
     }
     
@@ -156,7 +156,7 @@ class PreviewMediaControl : AbstractController {
     
     @IBAction func throwInSea (shoreId: Int) {
      
-        let urls:[URL] = [self.videoUrl as URL]
+        //let urls:[URL] = [self.videoUrl as URL]
         showActivityLoader(true)
 //        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
 //        
@@ -170,13 +170,12 @@ class PreviewMediaControl : AbstractController {
                 bottle.status = "active"
                 bottle.shoreId = shoreId
         
-                
                 ApiManager.shared.addBottle(bottle: bottle, completionBlock: { (success, error, bottle) in
                 
                     if error == nil {
                         self.showActivityLoader(false)
                         
-                        print("\(bottle?.bottle_id)")
+                        //print("\(bottle?.bottle_id)")
                         // animate views out
                         self.cvShorePicker.animateIn(mode: .animateOutToBottom, delay: 0.3)
                         self.backButton.animateIn(mode: .animateOutToTop, delay: 0.2)
@@ -187,9 +186,8 @@ class PreviewMediaControl : AbstractController {
                     } else {
                         self.showActivityLoader(false)
                         
-                        print(error?.type.errorMessage)
+                        //print(error?.type.errorMessage)
                     }
-                    
                 })
                 
 //            }
@@ -199,8 +197,6 @@ class PreviewMediaControl : AbstractController {
 //            }
     
 //        }
-    
-        
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
@@ -239,7 +235,6 @@ class PreviewMediaControl : AbstractController {
         }
         vp.playButtonPressed()
     }
-
 }
 
 // shore psicker logic

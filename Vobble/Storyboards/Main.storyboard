@@ -31,6 +31,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sea" translatesAutoresizingMaskIntoConstraints="NO" id="ZTN-6J-MC5">
                                 <rect key="frame" x="0.0" y="167" width="1125" height="500"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wave" translatesAutoresizingMaskIntoConstraints="NO" id="SmX-cY-bzy">
+                                <rect key="frame" x="0.0" y="362.5" width="1125" height="184.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="SmX-cY-bzy" secondAttribute="height" multiplier="4500:739" id="K5K-hR-zFq"/>
+                                </constraints>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sky1" translatesAutoresizingMaskIntoConstraints="NO" id="ybT-hf-WwB">
                                 <rect key="frame" x="0.0" y="10" width="375" height="167"/>
                             </imageView>
@@ -137,7 +143,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LPq-SD-GR5">
-                                <rect key="frame" x="834.5" y="522.5" width="131" height="70"/>
+                                <rect key="frame" x="870.5" y="510" width="131" height="105"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LPq-SD-GR5" secondAttribute="height" multiplier="625:500" id="Wlu-kf-B6N"/>
@@ -336,6 +342,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="b2L-hB-sqJ" secondAttribute="trailing" constant="8" id="FzV-Ml-J08"/>
                             <constraint firstItem="qsg-lz-eO2" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="GJp-HD-ibO"/>
                             <constraint firstItem="50H-Bb-9Qs" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="H9v-CE-6U8"/>
+                            <constraint firstItem="SmX-cY-bzy" firstAttribute="bottom" secondItem="ZTN-6J-MC5" secondAttribute="bottom" constant="-120" id="IAl-uG-JV7"/>
                             <constraint firstItem="bmI-2Y-Jhk" firstAttribute="top" secondItem="V1f-e7-nIF" secondAttribute="bottom" id="Idp-p0-gj5"/>
                             <constraint firstItem="3A8-ec-NGe" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="Ik0-jX-ZMC"/>
                             <constraint firstItem="ZTN-6J-MC5" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="3" id="JdJ-0m-IO7"/>
@@ -360,6 +367,7 @@
                             <constraint firstItem="bmI-2Y-Jhk" firstAttribute="top" secondItem="ohl-cV-N1S" secondAttribute="bottom" constant="8" id="Xwi-UU-bhK"/>
                             <constraint firstItem="LPq-SD-GR5" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="0.35" id="YbG-5f-gaD"/>
                             <constraint firstItem="Dwk-Ai-TGx" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="ZWt-IQ-A3b"/>
+                            <constraint firstItem="SmX-cY-bzy" firstAttribute="trailing" secondItem="ZTN-6J-MC5" secondAttribute="trailing" id="cJs-cz-56D"/>
                             <constraint firstItem="bmI-2Y-Jhk" firstAttribute="top" secondItem="ZTN-6J-MC5" secondAttribute="bottom" id="dGh-dI-xeo"/>
                             <constraint firstItem="bmI-2Y-Jhk" firstAttribute="top" secondItem="h7w-fK-hVl" secondAttribute="bottom" id="dRF-X6-HPh"/>
                             <constraint firstItem="ybT-hf-WwB" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" id="dlj-gZ-xBI"/>
@@ -375,6 +383,7 @@
                             <constraint firstItem="VXf-ox-frh" firstAttribute="leading" secondItem="rNN-9z-ciS" secondAttribute="leading" constant="15" id="tLy-lY-uiW"/>
                             <constraint firstItem="lEk-Ch-gD5" firstAttribute="centerX" secondItem="rNN-9z-ciS" secondAttribute="centerX" multiplier="3" id="uF0-RH-9ig"/>
                             <constraint firstItem="Nxw-0v-3Ac" firstAttribute="width" secondItem="rNN-9z-ciS" secondAttribute="width" multiplier="0.63" id="uZS-Iz-SIZ"/>
+                            <constraint firstItem="SmX-cY-bzy" firstAttribute="leading" secondItem="ZTN-6J-MC5" secondAttribute="leading" id="ubI-SY-zDw"/>
                             <constraint firstItem="b2L-hB-sqJ" firstAttribute="height" secondItem="rNN-9z-ciS" secondAttribute="height" multiplier="0.55" id="ubg-kn-jMc"/>
                             <constraint firstItem="LPq-SD-GR5" firstAttribute="centerY" secondItem="GsD-qm-Xxu" secondAttribute="centerY" multiplier="1.09" id="uye-nG-78l"/>
                             <constraint firstAttribute="trailing" secondItem="ybT-hf-WwB" secondAttribute="trailing" id="vS8-7O-8uw"/>
@@ -408,6 +417,7 @@
                         <outlet property="ivSun" destination="cG6-TI-tlY" id="E7x-z6-4Lf"/>
                         <outlet property="ivThrowBottle" destination="V1f-e7-nIF" id="yg8-iH-rlZ"/>
                         <outlet property="ivThrowBtn" destination="Cnq-sx-okP" id="Sdk-aH-ROw"/>
+                        <outlet property="ivWaves" destination="SmX-cY-bzy" id="LcV-23-CCI"/>
                         <outlet property="lblFindBtn" destination="5Qa-2n-Th5" id="8w7-gN-xMu"/>
                         <outlet property="lblMyBottlesBtn" destination="mev-RJ-pbR" id="C6A-5f-yTc"/>
                         <outlet property="lblThrowBtn" destination="9JU-fi-wIx" id="s9R-1p-V6S"/>
@@ -434,7 +444,7 @@
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Vfw-kW-c1W" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="mMZ-OZ-kkc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mMZ-OZ-kkc">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -452,7 +462,7 @@
         <scene sceneID="jME-nh-gzT">
             <objects>
                 <navigationController navigationBarHidden="YES" id="9aW-Lr-Rgh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="O6b-p9-Rmu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O6b-p9-Rmu">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1247,7 +1257,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASE-1h-xxO" customClass="VobbleChatNavigationBar" customModule="Vobble" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ASE-1h-xxO" customClass="VobbleChatNavigationBar" customModule="Vobble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="-20" width="375" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1276,7 +1286,7 @@
             <objects>
                 <navigationController storyboardIdentifier="chatNavigationID" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ZVK-88-g6q" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="S0C-q7-DjL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="S0C-q7-DjL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1294,7 +1304,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="jSj-sV-840" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3SC-cM-chG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3SC-cM-chG">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1602,7 +1612,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="nNH-E6-cxb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="VuU-tG-1k8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="VuU-tG-1k8">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1644,5 +1654,6 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="sky1" width="4500" height="721"/>
         <image name="sun" width="1755" height="1531"/>
         <image name="umbrella" width="993" height="899"/>
+        <image name="wave" width="4500" height="739"/>
     </resources>
 </document>

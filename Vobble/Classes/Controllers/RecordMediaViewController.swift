@@ -181,10 +181,11 @@ class RecordMediaViewController: AbstractController {
         panRec.minimumPressDuration = 0.3
         self.recordButton.addGestureRecognizer(panRec)
         
-        let tapRec : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didPressCapture(gestureRecognizer:)))
-        tapRec.cancelsTouchesInView = false
-        tapRec.delegate = self
-        self.recordButton.addGestureRecognizer(tapRec)
+        // no capture image
+//        let tapRec : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didPressCapture(gestureRecognizer:)))
+//        tapRec.cancelsTouchesInView = false
+//        tapRec.delegate = self
+//        self.recordButton.addGestureRecognizer(tapRec)
         
         self.vOverlay.bringToFront()
         self.closeButton.tintColor = UIColor.white
@@ -204,8 +205,8 @@ class RecordMediaViewController: AbstractController {
         UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL);
     }
     
-    @IBAction func presentLibraryPicker()
-    {
+    @IBAction func presentLibraryPicker() {
+        
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
@@ -225,8 +226,7 @@ class RecordMediaViewController: AbstractController {
         self.camera.togglePosition()
     }
     
-    @IBAction func close()
-    {
+    @IBAction func close() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
@@ -289,14 +289,14 @@ extension RecordMediaViewController : UIImagePickerControllerDelegate, UINavigat
 //MARK: Record button stuff
 extension RecordMediaViewController
 {
-    func updateTotalMediaDuration() -> Int{
+    func updateTotalMediaDuration() -> Int {
 //    _lblStoryDuration.text = [NSString stringWithFormat:@"00:%02d", totalDuration];
 //    return totalDuration;
         return 0
     }
     
-    func stopRecording()
-    {
+    func stopRecording() {
+        
         videoImageTimer?.invalidate()
         videoImageTimer = nil
         
@@ -372,9 +372,9 @@ extension RecordMediaViewController
         recordTimeView.isHidden = false
         
         // start recording
-            if (!self.camera.isRecording){
-                startRecordTimer()
-            }
+        if (!self.camera.isRecording){
+            startRecordTimer()
+        }
     }
     
     //MARK: Timer stuff
@@ -388,7 +388,7 @@ extension RecordMediaViewController
         videoImageTimer?.invalidate()
         videoImageTimer = nil
         // run the timer
-        videoImageTimer = Timer.scheduledTimer(timeInterval: 1.0,
+        videoImageTimer = Timer.scheduledTimer(timeInterval: 0.5,
                                                target: self,
                                                selector: #selector(RecordMediaViewController.startRecording(timer:)),
                                                userInfo: nil,

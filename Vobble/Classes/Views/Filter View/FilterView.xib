@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-BV-v3M" userLabel="Main View">
-                    <rect key="frame" x="20" y="90" width="335" height="577"/>
+                    <rect key="frame" x="20" y="80" width="335" height="587"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cq-Ea-TNs" userLabel="Gender View">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="172.5"/>
@@ -45,8 +45,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="251" height="172.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Filter By Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwd-PA-FpY">
-                                            <rect key="frame" x="0.0" y="0.0" width="149" height="15.5"/>
-                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="20"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="134" height="15.5"/>
+                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="18"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -175,14 +175,14 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21h-5f-0ct" userLabel="Country View">
-                            <rect key="frame" x="0.0" y="197.5" width="335" height="379.5"/>
+                            <rect key="frame" x="0.0" y="207.5" width="335" height="379.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ypy-f9-G9X">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="29"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Filter By Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miQ-hw-Zmj">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="29"/>
-                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="18"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -223,7 +223,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" constant="25" id="Gjp-QG-NGe"/>
+                        <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" constant="35" id="Gjp-QG-NGe"/>
                         <constraint firstAttribute="trailing" secondItem="21h-5f-0ct" secondAttribute="trailing" id="PE7-bG-Y0v"/>
                         <constraint firstItem="21h-5f-0ct" firstAttribute="leading" secondItem="SqP-BV-v3M" secondAttribute="leading" id="bm7-mk-rwD"/>
                         <constraint firstItem="7Cq-Ea-TNs" firstAttribute="top" secondItem="SqP-BV-v3M" secondAttribute="top" id="eRC-JR-y69"/>
@@ -238,7 +238,7 @@
             <constraints>
                 <constraint firstItem="SqP-BV-v3M" firstAttribute="leading" secondItem="zbW-6X-gnJ" secondAttribute="leading" constant="20" id="QvU-IS-ESd"/>
                 <constraint firstAttribute="bottom" secondItem="SqP-BV-v3M" secondAttribute="bottom" id="VKo-JE-cP2"/>
-                <constraint firstItem="SqP-BV-v3M" firstAttribute="top" secondItem="zbW-6X-gnJ" secondAttribute="top" constant="90" id="boc-NZ-arM"/>
+                <constraint firstItem="SqP-BV-v3M" firstAttribute="top" secondItem="zbW-6X-gnJ" secondAttribute="top" constant="80" id="boc-NZ-arM"/>
                 <constraint firstAttribute="trailing" secondItem="SqP-BV-v3M" secondAttribute="trailing" constant="20" id="s7w-0c-k01"/>
             </constraints>
             <userDefinedRuntimeAttributes>

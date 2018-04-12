@@ -610,12 +610,11 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 
                 let resJson = JSON(responseObject.result.value!)
-                if let data = resJson.array, data.count>0
-                {
+                if let data = resJson.array, data.count>0 {
                     let bottle = Bottle(json: data[Int(arc4random_uniform(UInt32(data.count)))])
-                    
                     completionBlock(bottle, nil)
-                } 
+                }
+                completionBlock(nil, nil)
             }
             if responseObject.result.isFailure {
                 let error : NSError = responseObject.result.error! as NSError
