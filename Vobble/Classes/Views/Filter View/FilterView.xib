@@ -45,13 +45,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="251" height="172.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Filter By Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwd-PA-FpY">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="134" height="15.5"/>
                                             <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="18"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="149" height="15.5"/>
-                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="20"/>
->>>>>>> origin/tembMergeBranch
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -180,11 +175,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21h-5f-0ct" userLabel="Country View">
-<<<<<<< HEAD
                             <rect key="frame" x="0.0" y="207.5" width="335" height="379.5"/>
-=======
-                            <rect key="frame" x="0.0" y="197.5" width="335" height="379.5"/>
->>>>>>> origin/tembMergeBranch
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ypy-f9-G9X">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="29"/>
@@ -232,11 +223,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-<<<<<<< HEAD
                         <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" constant="35" id="Gjp-QG-NGe"/>
-=======
-                        <constraint firstItem="21h-5f-0ct" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="bottom" constant="25" id="Gjp-QG-NGe"/>
->>>>>>> origin/tembMergeBranch
                         <constraint firstAttribute="trailing" secondItem="21h-5f-0ct" secondAttribute="trailing" id="PE7-bG-Y0v"/>
                         <constraint firstItem="21h-5f-0ct" firstAttribute="leading" secondItem="SqP-BV-v3M" secondAttribute="leading" id="bm7-mk-rwD"/>
                         <constraint firstItem="7Cq-Ea-TNs" firstAttribute="top" secondItem="SqP-BV-v3M" secondAttribute="top" id="eRC-JR-y69"/>
