@@ -99,6 +99,23 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
+        //////////////////
+        let height: Float = Float(inputToolbar.contentView.leftBarButtonContainerView.frame.size.height)
+        var image = UIImage(named: "ic_play")
+        let smileButton = UIButton(type: .custom)
+        smileButton.setImage(image, for: .normal)
+        //smileButton.addTarget(self, action: #selector(self.addMessage), for: .touchUpInside)
+        smileButton.frame = CGRect(x: 0, y: 0, width: 25, height: CGFloat(height))
+        image = UIImage(named: "ic_play")
+        let attachButton = UIButton(type: .custom)
+        attachButton.setImage(image, for: .normal)
+        //attachButton.addTarget(self, action: #selector(self.addMessage), for: .touchUpInside)
+        attachButton.frame = CGRect(x: 30, y: 0, width: 25, height: CGFloat(height))
+        inputToolbar.contentView.leftBarButtonItemWidth = 55
+        inputToolbar.contentView.leftBarButtonContainerView.addSubview(smileButton)
+        inputToolbar.contentView.leftBarButtonContainerView.addSubview(attachButton)
+//        inputToolbar.contentView.leftBarButtonItem.isHidden = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
