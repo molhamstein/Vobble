@@ -22,6 +22,7 @@
 "ERROR_MISSING_INPUT_DATA"              = "الرجاء إدخال جميع الحقول";
 "ERROR_INVALID_VERIFY_CODE"             = "رمز التحقق المدخل غير صحيح";
 "ERROR_EXPIRED_VERIFY_CODE"             = "رمز التحقق المدخل منتهي الصلاحية";
+"ERROR_BOTTLE_NOT_FOUND"                = "لا بوجد قنينه";
 
 // connection errors messages
 "ERROR_NOT_AUTHORIZED"                  = "الرجاء التحقق من صلاحيات تسجيل الدخول الخاصة بك";

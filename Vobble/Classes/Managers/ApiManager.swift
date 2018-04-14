@@ -587,7 +587,7 @@ class ApiManager: NSObject {
     }
     
     // MARK: -  find bottles
-    func findBottle(gender:String, countryCode:String, shoreId:Int, completionBlock: @escaping (_ bottle: Bottle?, _ error: NSError?) -> Void) {
+    func findBottle(gender:String, countryCode:String, shoreId:Int, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: String?) -> Void) {
         
         var findhBottleURL = "\(baseURL)/bottles?filter[where][ownerId][neq]="
         
@@ -595,9 +595,12 @@ class ApiManager: NSObject {
             findhBottleURL += "\(userId)&filter[include]=owner"
         }
         
-        findhBottleURL += "&filter[where][shoreId]=\(shoreId)&filter[where][owner][countryId]=\(countryCode)"
+        if countryCode != "" {
+            findhBottleURL += "&filter[where][owner][countryId]=\(countryCode)"
+        }
+        findhBottleURL += "&filter[where][shoreId]=\(shoreId)"
         
-        if gender != "allGender" {
+        if gender != GenderType.allGender.rawValue {
             findhBottleURL += "&filter[where][owner][gender]=\(gender)"
         }
         
@@ -614,11 +617,12 @@ class ApiManager: NSObject {
                     let bottle = Bottle(json: data[Int(arc4random_uniform(UInt32(data.count)))])
                     completionBlock(bottle, nil)
                 }
-                completionBlock(nil, nil)
+                
+                completionBlock(nil, "ERROR_BOTTLE_NOT_FOUND".localized)
             }
             if responseObject.result.isFailure {
                 let error : NSError = responseObject.result.error! as NSError
-                completionBlock(nil, error)
+                completionBlock(nil, error.localizedDescription)
             }
         }
     }

@@ -30,6 +30,7 @@
 		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
 		B1053E882043EBE600A4383D /* CountryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B1053E862043EBE600A4383D /* CountryPicker.m */; };
 		B105CBF420715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B105CBF320715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift */; };
+		B11406D1207EB6AB003CEF96 /* ChatInputToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11406D0207EB6AB003CEF96 /* ChatInputToolbar.swift */; };
 		B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B52442038ADC300C51EE8 /* WaveView.swift */; };
 		B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B52462038AE7700C51EE8 /* WaveView.xib */; };
 		B11B52492038B19700C51EE8 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11B52482038B19700C51EE8 /* Start.storyboard */; };
@@ -260,6 +261,7 @@
 		B1053E852043EBE600A4383D /* CountryPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryPicker.h; sourceTree = "<group>"; };
 		B1053E862043EBE600A4383D /* CountryPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryPicker.m; sourceTree = "<group>"; };
 		B105CBF320715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSQCustomPhotoMediaItem.swift; path = ../Home/JSQCustomPhotoMediaItem.swift; sourceTree = "<group>"; };
+		B11406D0207EB6AB003CEF96 /* ChatInputToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInputToolbar.swift; sourceTree = "<group>"; };
 		B11B52442038ADC300C51EE8 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		B11B52462038AE7700C51EE8 /* WaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveView.xib; sourceTree = "<group>"; };
 		B11B52482038B19700C51EE8 /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				B196123F206199540065019D /* ChatViewController.swift */,
 				B105CBF320715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift */,
 				B13AE0992071ACB500C05F80 /* JSQCustomVideoMediaItem.swift */,
+				B11406D0207EB6AB003CEF96 /* ChatInputToolbar.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1666,6 +1669,7 @@
 				B18A5D9620348E4300F139B7 /* RACScheduler.m in Sources */,
 				B18A5D5620348E4300F139B7 /* UITextField.swift in Sources */,
 				B18A5D5B20348E4300F139B7 /* RNLoadingButton.swift in Sources */,
+				B11406D1207EB6AB003CEF96 /* ChatInputToolbar.swift in Sources */,
 				B18A5DC220348E4300F139B7 /* SimpleAuthWebViewController.m in Sources */,
 				B18A5DC820348E4300F139B7 /* SimpleAuthProvider.m in Sources */,
 				B19372E62033E3FC007B1E7D /* Post.swift in Sources */,
