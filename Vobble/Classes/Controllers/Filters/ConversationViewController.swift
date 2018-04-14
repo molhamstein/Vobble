@@ -315,6 +315,7 @@ extension ConversationViewController {
         
         //self.showActivityLoader(true)
         
+        
         if (self.conversationRefHandle != nil) {
             conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
                 
