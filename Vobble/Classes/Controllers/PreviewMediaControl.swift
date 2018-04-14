@@ -156,15 +156,15 @@ class PreviewMediaControl : AbstractController {
     
     @IBAction func throwInSea (shoreId: Int) {
      
-        //let urls:[URL] = [self.videoUrl as URL]
+        let urls:[URL] = [self.videoUrl as URL]
         showActivityLoader(true)
-//        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
+        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
 //        
-//            if errorMessage == nil {
+            if errorMessage == nil {
         
                 let bottle = Bottle()
-//                bottle.attachment = files[0].fileUrl ?? " "
-                bottle.attachment = "http://104.217.253.15:9999/api/uploads/videos/download/1523169457577_0261BAEB-C40E-49DE-A148-2E62190B43F8.MOV"
+                bottle.attachment = files[0].fileUrl ?? " "
+                //bottle.attachment = "http://104.217.253.15:9999/api/uploads/videos/download/1523169457577_0261BAEB-C40E-49DE-A148-2E62190B43F8.MOV"
                 bottle.ownerId = DataStore.shared.me?.id
                 bottle.owner = DataStore.shared.me
                 bottle.status = "active"
@@ -190,13 +190,13 @@ class PreviewMediaControl : AbstractController {
                     }
                 })
                 
-//            }
-//            else {
-//                self.showActivityLoader(false)
-//                print(errorMessage)
-//            }
+            }
+            else {
+                self.showActivityLoader(false)
+                print(errorMessage)
+            }
     
-//        }
+        }
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {

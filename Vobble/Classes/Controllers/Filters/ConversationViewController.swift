@@ -302,7 +302,7 @@ extension ConversationViewController {
         // We can use the observe method to listen for new
         // conversations being written to the Firebase DB
         
-        self.showActivityLoader(true)
+        //self.showActivityLoader(true)
         
         conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
             

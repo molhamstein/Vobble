@@ -124,7 +124,7 @@ class ShopViewController: AbstractController {
         obj1.secondColor = AppColors.blueXLight
         obj1.title = "3 Bottles"
         obj1.price = "1.5$"
-        obj1.imageUrl = UIImage(named: "bottles")
+        obj1.imageUrl = UIImage(named: "bottles2")
         obj1.description = "buy 3 bottles so you dont have to wait for the automatic refill"
         bottlrArray.append(obj1)
         
@@ -142,7 +142,7 @@ class ShopViewController: AbstractController {
         obj3.secondColor = AppColors.grayXDark
         obj3.title = "3 Bottles"
         obj3.price = "4.5$"
-        obj3.imageUrl = UIImage(named: "bottles")
+        obj3.imageUrl = UIImage(named: "bottles2")
         obj3.description = "buy 3 bottles so you dont have to wait for the automatic refill"
         bottlrArray.append(obj3)
         

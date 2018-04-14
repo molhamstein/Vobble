@@ -11,6 +11,8 @@
 		5706C432204DCAA3006E7C9A /* Shore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C431204DCAA3006E7C9A /* Shore.swift */; };
 		5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5706C433204DDFE0006E7C9A /* ShoreCell.xib */; };
 		5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C435204DDFF4006E7C9A /* ShoreCell.swift */; };
+		570BB322208138ED00542EAD /* PassthroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570BB320208138ED00542EAD /* PassthroughView.m */; };
+		570BB3242081445C00542EAD /* crab.gif in Resources */ = {isa = PBXBuildFile; fileRef = 570BB3232081445C00542EAD /* crab.gif */; };
 		57395CD2207047AE00F0A3DB /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57395CD1207047AE00F0A3DB /* find_bottle.gif */; };
 		57413D55204D3B5700450A42 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 57413D54204D3B5700450A42 /* GCD.m */; };
 		5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C13F205660B300A5402D /* VideoPlayerView.swift */; };
@@ -235,6 +237,9 @@
 		5706C431204DCAA3006E7C9A /* Shore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shore.swift; sourceTree = "<group>"; };
 		5706C433204DDFE0006E7C9A /* ShoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoreCell.xib; sourceTree = "<group>"; };
 		5706C435204DDFF4006E7C9A /* ShoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoreCell.swift; sourceTree = "<group>"; };
+		570BB320208138ED00542EAD /* PassthroughView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassthroughView.m; sourceTree = "<group>"; };
+		570BB321208138ED00542EAD /* PassthroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassthroughView.h; sourceTree = "<group>"; };
+		570BB3232081445C00542EAD /* crab.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = crab.gif; sourceTree = "<group>"; };
 		57395CD1207047AE00F0A3DB /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
 		57413D53204D3B5700450A42 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		57413D54204D3B5700450A42 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
@@ -613,6 +618,7 @@
 		57687D12204FE509007A5FFA /* gif */ = {
 			isa = PBXGroup;
 			children = (
+				570BB3232081445C00542EAD /* crab.gif */,
 				57DE7458207D77E00061CA2F /* fire.gif */,
 				57395CD1207047AE00F0A3DB /* find_bottle.gif */,
 				57521FC5205FE9210062A4A5 /* throwBottle.gif */,
@@ -851,6 +857,8 @@
 		B18A5C4E20348E4200F139B7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				570BB320208138ED00542EAD /* PassthroughView.m */,
+				570BB321208138ED00542EAD /* PassthroughView.h */,
 				57413D53204D3B5700450A42 /* GCD.h */,
 				57413D54204D3B5700450A42 /* GCD.m */,
 				B18A5C4F20348E4200F139B7 /* Collection.swift */,
@@ -1420,6 +1428,7 @@
 				B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */,
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
+				570BB3242081445C00542EAD /* crab.gif in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */,
 				B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */,
@@ -1606,6 +1615,7 @@
 				B18A5D5F20348E4300F139B7 /* NSString+CMDQueryStringSerialization.m in Sources */,
 				B18A5D6420348E4300F139B7 /* MKAnnotationView+RACSignalSupport.m in Sources */,
 				B18A5D9B20348E4300F139B7 /* RACSignal.m in Sources */,
+				570BB322208138ED00542EAD /* PassthroughView.m in Sources */,
 				5796242F20793B790005292A /* TermsViewController.swift in Sources */,
 				B18A5DA920348E4300F139B7 /* RACUnit.m in Sources */,
 				5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */,

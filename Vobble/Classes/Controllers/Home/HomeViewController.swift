@@ -47,6 +47,9 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivShore3Girl2: UIImageView!
     @IBOutlet var ivShore3Boy: UIImageView!
     @IBOutlet var ivFire: UIImageView!
+    @IBOutlet var ivCrap: UIImageView!
+    @IBOutlet var ivShark: UIImageView!
+    @IBOutlet var ivBoat: UIImageView!
     
     var screenWidth: CGFloat = 0.0;
     var blockPageTransitions: Bool = false;
@@ -56,8 +59,8 @@ class HomeViewController: AbstractController {
     let seaParallaxSpeed :CGFloat = 0.3
     let sunParallaxSpeed :CGFloat = 0.015
     let cloudsParallaxSpeed :CGFloat = 0.2
-    let mountainsParallaxSpeed :CGFloat = 0.25
-    let island2ParallaxSpeed :CGFloat = 0.3
+    let mountainsParallaxSpeed :CGFloat = 0.15
+    let island2ParallaxSpeed :CGFloat = 0.2
     let shore1ParallaxSpeed :CGFloat = 1.0
     let shore2ParallaxSpeed :CGFloat = 1.0
     let shore3ParallaxSpeed :CGFloat = 1.0
@@ -103,10 +106,13 @@ class HomeViewController: AbstractController {
         screenWidth = self.view.frame.size.width;
      
         // animate sea waves
-        ivWaves?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: -2, y: 6)
-        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
-            self.ivWaves?.transform = CGAffineTransform.identity.translatedBy(x: 2, y: -2)
-        }, completion: nil)
+//        ivWaves?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: -2, y: 6)
+//        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+//            self.ivWaves?.transform = CGAffineTransform.identity.translatedBy(x: 2, y: -2)
+//        }, completion: nil)
+        if currentPageIndex == 0 {
+            animateCrab()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,8 +126,11 @@ class HomeViewController: AbstractController {
             ivIsland.animateIn(mode: .animateInFromRight, delay: 0.5)
             ivShore1Shore.animateIn(mode: .animateInFromLeft, delay: 0.5)
             navigationView.animateIn(mode: .animateInFromTop, delay: 0.8)
+            ivCrap.animateIn(mode: .animateInFromBottom, delay: 0.6)
             introAnimationDone = true
         }
+        
+        self.setArtImages()
     }
     
     /// Customize view
@@ -139,7 +148,7 @@ class HomeViewController: AbstractController {
         
         //ivShore2Girl.loadGif(asset: "girl")
         
-        self.setArtImages()
+        
     }
     
     func setArtImages(){
@@ -149,8 +158,8 @@ class HomeViewController: AbstractController {
         
         let hour = calendar.component(.hour, from: date)
         
-        //var isNight = hour > 18 || hour < 5
-        var isNight = false
+        //let isNight = hour >= 18 || hour <= 5
+        var isNight = true
         
         //hours += 1
         if isNight {
@@ -164,6 +173,8 @@ class HomeViewController: AbstractController {
             ivShore2Shore.image = UIImage(named:"shore2_night")
             ivShore3Shore.image = UIImage(named:"shore3_night")
             ivFire.loadGif(name: "fire")
+            
+            ivWaves.image = nil
         } else {
             ivSea.image = UIImage(named:"sea")
             ivSky.image = UIImage(named:"sky1")
@@ -175,8 +186,29 @@ class HomeViewController: AbstractController {
             ivShore2Shore.image = UIImage(named:"shore2")
             ivShore3Shore.image = UIImage(named:"shore3")
             ivFire.image = nil
+            
+            ivWaves.image = nil
         }
         
+        ivCrap.loadGif(name: "crab")
+//        ivCrap?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: 0, y: 0)
+//        UIView.animate(withDuration: 35.0, delay: 0, options: [.repeat, .autoreverse, .curveLinear], animations: {
+//            self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 2, y: 0)
+//        }, completion: nil)
+        
+        
+        ivShark?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+        UIView.animate(withDuration: 18.0, delay: 15, options: [.repeat, .curveLinear], animations: {
+            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 3, y: 0)
+        }, completion: nil)
+        
+    }
+    
+    func animateCrab() {
+        self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+        UIView.animate(withDuration: 35.0, delay: 0, options: [.repeat, .autoreverse, .curveLinear], animations: {
+            self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 2, y: 0)
+        }, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -283,6 +315,7 @@ class HomeViewController: AbstractController {
                         self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.shore1ParallaxSpeed, y: 0)
                         self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.shore2ParallaxSpeed, y: 0)
                         self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.loversParallaxSpeed, y: 0)
+                        self.ivCrap.transform = CGAffineTransform.identity.translatedBy(x: translation.x * self.shore1ParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: translation.x * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -322,7 +355,7 @@ class HomeViewController: AbstractController {
                         self.ivShore1Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore1ParallaxSpeed, y: 0)
                         self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore2ParallaxSpeed, y: 0)
                         self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: trans * self.loversParallaxSpeed, y: 0)
-                        
+                        self.ivCrap.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore1ParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -403,9 +436,14 @@ class HomeViewController: AbstractController {
             self.ivMountains.transform = CGAffineTransform.identity
             self.ivSun.transform = CGAffineTransform.identity
             self.ivClouds.transform = CGAffineTransform.identity
+            self.ivCrap.transform = CGAffineTransform.identity
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 0
             self.blockPageTransitions = false
+            
+            // animate the crab 
+            self.animateCrab()
+
         })
     }
     
@@ -413,6 +451,9 @@ class HomeViewController: AbstractController {
         if blockPageTransitions {
             return
         }
+        
+        ivCrap.stopAnimating()
+        
         blockPageTransitions = true
         self.navigationView.navTitle.text = "love_shore".localized
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
@@ -427,6 +468,7 @@ class HomeViewController: AbstractController {
             self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.cloudsParallaxSpeed), y: 0)
             self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.mountainsParallaxSpeed), y: 0)
+            self.ivCrap.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore1ParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 1
             self.blockPageTransitions = false
@@ -437,6 +479,9 @@ class HomeViewController: AbstractController {
         if blockPageTransitions {
             return
         }
+        
+        ivCrap.stopAnimating()
+        
         blockPageTransitions = true
         self.navigationView.navTitle.text = "fadfed_shore".localized
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
@@ -453,6 +498,7 @@ class HomeViewController: AbstractController {
             self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.cloudsParallaxSpeed), y: 0)
             self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.mountainsParallaxSpeed), y: 0)
+            self.ivCrap.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore1ParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
             self.currentPageIndex = 2
             self.blockPageTransitions = false
