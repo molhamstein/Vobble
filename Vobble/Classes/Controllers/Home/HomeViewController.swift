@@ -113,6 +113,7 @@ class HomeViewController: AbstractController {
         if currentPageIndex == 0 {
             animateCrab()
         }
+        self.animateShark()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,8 +159,8 @@ class HomeViewController: AbstractController {
         
         let hour = calendar.component(.hour, from: date)
         
-        //let isNight = hour >= 18 || hour <= 5
-        var isNight = true
+        let isNight = hour >= 18 || hour <= 5
+        //var isNight = true
         
         //hours += 1
         if isNight {
@@ -196,18 +197,19 @@ class HomeViewController: AbstractController {
 //            self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 2, y: 0)
 //        }, completion: nil)
         
-        
-        ivShark?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
-        UIView.animate(withDuration: 18.0, delay: 15, options: [.repeat, .curveLinear], animations: {
-            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 3, y: 0)
-        }, completion: nil)
-        
     }
     
     func animateCrab() {
         self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
         UIView.animate(withDuration: 35.0, delay: 0, options: [.repeat, .autoreverse, .curveLinear], animations: {
             self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 2, y: 0)
+        }, completion: nil)
+    }
+    
+    func animateShark() {
+        ivShark?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+        UIView.animate(withDuration: 18.0, delay: 5, options: [.repeat, .curveLinear], animations: {
+            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 3, y: 0)
         }, completion: nil)
     }
     

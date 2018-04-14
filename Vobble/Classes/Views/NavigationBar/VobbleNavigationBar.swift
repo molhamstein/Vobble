@@ -90,8 +90,9 @@ class VobbleNavigationBar : AbstractNibView {
     
     @IBAction func rightIconPressed(_ sender: Any) {
         
-        let vc = viewcontroller as! HomeViewController
-        vc.showShopView()
+        if let vc = viewcontroller as? HomeViewController {
+            vc.showShopView()
+        }
     }
     
     

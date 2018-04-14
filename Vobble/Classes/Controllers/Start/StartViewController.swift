@@ -28,9 +28,10 @@ class StartViewController: AbstractController {
                     self.showMessage(message:err.localizedDescription, type: .error)     
                 } else {
                     ApiManager.shared.getShores(completionBlock: { (shores, error) in
-                        self.performSegue(withIdentifier: "startHomeSegue", sender: self)
+                        //self.performSegue(withIdentifier: "startHomeSegue", sender: self)
                     })
                 }
+                self.performSegue(withIdentifier: "startHomeSegue", sender: self)
             })
             
         } else {// user not logged in

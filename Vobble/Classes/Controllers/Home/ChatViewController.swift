@@ -66,6 +66,7 @@ final class ChatViewController: JSQMessagesViewController {
     public var navUserName: String?
     public var navShoreName: String?
     
+    var audioRec: AVAudioRecorder?
     
     //  var isTyping: Bool {
     //    get {
@@ -104,7 +105,7 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
-//        initCustomToolBar()
+        initCustomToolBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -579,116 +580,117 @@ extension ChatViewController: ChatNavigationDelegate {
 
 //TODO: make custom chat toole bar class
 // MARK:- AVAudioRecorderDelegate
-//extension ChatViewController: AVAudioRecorderDelegate {
-//    
-//    var audioRec: AVAudioRecorder?
-//    
-//    fileprivate func initCustomToolBar() {
-//        let height: Float = Float(inputToolbar.contentView.leftBarButtonContainerView.frame.size.height)
-//        var image = UIImage(named: "chatMoreOptions")
-//        let mediaButton = UIButton(type: .custom)
-//        mediaButton.setImage(image, for: .normal)
-//        mediaButton.addTarget(self, action: #selector(self.submitMediaAction), for: .touchUpInside)
-//        mediaButton.frame = CGRect(x: 0, y: 0, width: 25, height: CGFloat(height))
-//        
-//        image = UIImage(named: "recordSoundMsg")
-//        let recordButton = UIButton(type: .custom)
-//        recordButton.setImage(image, for: .normal)
-//        let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
-//        
-//        //        longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
-//        //        longGesture.minimumPressDuration = 1
-//        //        viewLong.addGestureRecognizer(longGesture)
-//        
-//        recordButton.addGestureRecognizer(longGestureRecognizer)
-//        recordButton.frame = CGRect(x: 30, y: 0, width: 25, height: CGFloat(height))
-//        inputToolbar.contentView.leftBarButtonItemWidth = 55
-//        inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
-//        inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)
-//        inputToolbar.contentView.leftBarButtonItem.isHidden = true
-//    }
-//    
-//    func submitMediaAction() {
-//        let picker = UIImagePickerController()
-//        picker.delegate = self
-//        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-//            picker.sourceType = .camera
+extension ChatViewController: AVAudioRecorderDelegate {
+    
+    
+    fileprivate func initCustomToolBar() {
+        let height: Float = Float(inputToolbar.contentView.leftBarButtonContainerView.frame.size.height)
+        var image = UIImage(named: "chatMoreOptions")
+        let mediaButton = UIButton(type: .custom)
+        mediaButton.setImage(image, for: .normal)
+        mediaButton.addTarget(self, action: #selector(self.submitMediaAction), for: .touchUpInside)
+        mediaButton.frame = CGRect(x: 0, y: 0, width: 25, height: CGFloat(height))
+        
+        image = UIImage(named: "recordSoundMsg")
+        let recordButton = UIButton(type: .custom)
+        recordButton.setImage(image, for: .normal)
+        let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
+        
+        //        longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
+        //        longGesture.minimumPressDuration = 1
+        //        viewLong.addGestureRecognizer(longGesture)
+        
+        recordButton.addGestureRecognizer(longGestureRecognizer)
+        recordButton.frame = CGRect(x: 30, y: 0, width: 25, height: CGFloat(height))
+        inputToolbar.contentView.leftBarButtonItemWidth = 55
+        inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
+        inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)
+        inputToolbar.contentView.leftBarButtonItem.isHidden = true
+    }
+    
+    func submitMediaAction() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+        }
+        picker.mediaTypes = ["public.image","public.movie"]
+        
+        present(picker, animated: true, completion:nil)
+        
+    }
+    
+    func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
+        print("Long tap is handled")
+        if sender.state == .began {
+            print("UILongPressGestureRecognizerStateBegan so start the recording voice here")
+            //write the function for start recording the voice here
+            recordAudio()
+        }
+        else if sender.state == .ended {
+            print("UILongPressGestureRecognizerStateEnded so stop the recording voice here")
+            //write the function for stop recording the voice here
+        }
+    }
+    
+    func recordAudio() {
+        
+//        AVAudioSession.sharedInstance().requestRecordPermission { (allowed) in
+//            
+//        }
+        
+        
+        
+        AVAudioSession.sharedInstance().requestRecordPermission({(allowed: Bool)-> Void in
+            do {
+                if allowed {
+                    // Microphone allowed, do what you like!
+                    
+                    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                    let docsDirect = paths[0]
+                    
+                    let audioUrl = try docsDirect.appendingPathComponent("record.m4a")
+                    
+                    //1. create the session
+                    let session = AVAudioSession.sharedInstance()
+                    
+                    // 2. configure the session for recording and playback
+                    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+                    try session.setActive(true)
+                    // 3. set up a high-quality recording session
+                    let settings = [
+                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                        AVSampleRateKey: 44100,
+                        AVNumberOfChannelsKey: 2,
+                        AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+                    ]
+                    // 4. create the audio recording, and assign ourselves as the delegate
+                    if let urlObj = URL(string: "") {
+                        self.audioRec = try AVAudioRecorder(url: urlObj, settings: settings)
+                        self.audioRec?.delegate = self
+                        self.audioRec?.record()
+                    }
+                    
+                } else {
+                    // User denied microphone. Tell them off!
+                    
+                }
+            }catch {
+                print ("record error")
+            }
+        })
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+//        if !flag {
+//            recordingEnded(success: false)
 //        } else {
-//            picker.sourceType = .photoLibrary
+//            recordingEnded(success: true)
 //        }
-//        picker.mediaTypes = ["public.image","public.movie"]
-//        
-//        present(picker, animated: true, completion:nil)
-//        
-//    }
-//    
-//    func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
-//        print("Long tap is handled")
-//        if sender.state == .began {
-//            print("UILongPressGestureRecognizerStateBegan so start the recording voice here")
-//            //write the function for start recording the voice here
-//            recordAudio()
-//        }
-//        else if sender.state == .ended {
-//            print("UILongPressGestureRecognizerStateEnded so stop the recording voice here")
-//            //write the function for stop recording the voice here
-//        }
-//    }
-//    
-//    func recordAudio() {
-//        
-////        AVAudioSession.sharedInstance().requestRecordPermission { (allowed) in
-////            
-////        }
-////
-////        AVAudioSession.sharedInstance().requestRecordPermission () {
-////            [unowned self] allowed in
-////            if allowed {
-////                // Microphone allowed, do what you like!
-////                
-////                let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-////                let docsDirect = paths[0]
-////                
-////                let audioUrl = try docsDirect.appendingPathComponent("record.m4a")
-////                
-////                //1. create the session
-////                let session = AVAudioSession.sharedInstance()
-////                
-////                do {
-////                    // 2. configure the session for recording and playback
-////                    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
-////                    try session.setActive(true)
-////                    // 3. set up a high-quality recording session
-////                    let settings = [
-////                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-////                        AVSampleRateKey: 44100,
-////                        AVNumberOfChannelsKey: 2,
-////                        AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-////                    ]
-////                    // 4. create the audio recording, and assign ourselves as the delegate
-////                    audioRec = try AVAudioRecorder(url: URL(string: ""), settings: settings)
-////                    audioRec?.delegate = self
-////                    audioRec?.record()
-////                } 
-////                catch let error {
-////                    // failed to record!
-////                }
-////                
-////            } else {
-////                // User denied microphone. Tell them off!
-////                
-////            }
-////        }
-//    }
-//    
-////    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-////        if !flag {
-////            recordingEnded(success: false)
-////        } else {
-////            recordingEnded(success: true)
-////        }
-////    }
-//}
+    }
+}
 
 class PreviewPhoto: NSObject, NYTPhoto {
     
