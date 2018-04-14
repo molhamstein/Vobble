@@ -177,6 +177,17 @@ extension ConversationViewController: UICollectionViewDelegate {
                 
                 chatVc.seconds = (fTime - currentDate)/1000.0
             }
+            if let userName = conversation.bottle?.owner?.firstName {
+                chatVc.navUserName = userName
+            }
+            if let shore_id = conversation.bottle?.shoreId {
+                for sh in  DataStore.shared.shores {
+                    if sh.shore_id == shore_id {
+                        chatVc.navShoreName = sh.name ?? ""
+                        break
+                    }
+                }
+            }
             
             chatVc.conversationRef = conversationRef.child(conversation.idString!)
         }
@@ -304,35 +315,40 @@ extension ConversationViewController {
         
         //self.showActivityLoader(true)
         
-        conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
-            
-            self.showActivityLoader(false)
-            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-            conversation.idString = snapshot.key
-            if let created_at = conversation.createdAt {
-                conversation.finishTime = created_at + (24*60*60*1000)
+        if (self.conversationRefHandle != nil) {
+            conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
+                
+                self.showActivityLoader(false)
+                let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+                conversation.idString = snapshot.key
+                if let created_at = conversation.createdAt {
+                    conversation.finishTime = created_at + (24*60*60*1000)
+                }
+                if let is_active = conversation.isActive, !is_active {
+                    //(My replies)
+                    if DataStore.shared.me?.id == conversation.user?.objectId {
+                        print("my bottles")
+                        DataStore.shared.me?.myBottlesArray.append(conversation)
+                        DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
+                            return (obj1.createdAt! > obj2.createdAt!)
+                        })
+                        self.bottleCollectionView.reloadData()
+                    } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
+                        print("my replies")
+                        DataStore.shared.me?.myRepliesArray.append(conversation)
+                        DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
+                            return (obj1.createdAt! > obj2.createdAt!)
+                        })
+                        self.bottleCollectionView.reloadData()
+                    }
+                }
+                
+            }) { (error) in
+                self.showActivityLoader(false)
             }
-            
-            //(My replies)
-            if DataStore.shared.me?.id == conversation.user?.objectId {
-                print("my bottles")
-                DataStore.shared.me?.myBottlesArray.append(conversation)
-                DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
-                     return (obj1.createdAt! > obj2.createdAt!)
-                })
-                self.bottleCollectionView.reloadData()
-            } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
-                print("my replies")
-                DataStore.shared.me?.myRepliesArray.append(conversation)
-                DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
-                    return (obj1.createdAt! > obj2.createdAt!)
-                })
-                self.bottleCollectionView.reloadData()
-            }
-            
-        }) { (error) in
-            self.showActivityLoader(false)
+
+        } else {
+             self.showActivityLoader(false)
         }
-        
     }
 }

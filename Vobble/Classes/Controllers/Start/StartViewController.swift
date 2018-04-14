@@ -26,11 +26,11 @@ class StartViewController: AbstractController {
             Auth.auth().signInAnonymously(completion: { (user, error) in
                 if let err:Error = error {
                     self.showMessage(message:err.localizedDescription, type: .error)     
+                } else {
+                    ApiManager.shared.getShores(completionBlock: { (shores, error) in
+                        self.performSegue(withIdentifier: "startHomeSegue", sender: self)
+                    })
                 }
-            })
-            
-            ApiManager.shared.getShores(completionBlock: { (shores, error) in
-                self.performSegue(withIdentifier: "startHomeSegue", sender: self)
             })
             
         } else {// user not logged in

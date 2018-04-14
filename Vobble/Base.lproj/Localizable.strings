@@ -22,6 +22,7 @@
 "ERROR_MISSING_INPUT_DATA"              = "Please fill in all required information";
 "ERROR_INVALID_VERIFY_CODE"             = "Verification code is not valid";
 "ERROR_EXPIRED_VERIFY_CODE"             = "Verification code was expired";
+"ERROR_BOTTLE_NOT_FOUND"                = "there is no bottle";
 
 // Connection errors messages
 "ERROR_NOT_AUTHORIZED"                  = "You are not authorized to access this data, please login again";

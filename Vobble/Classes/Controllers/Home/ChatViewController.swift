@@ -62,6 +62,11 @@ final class ChatViewController: JSQMessagesViewController {
     var selectedImage: UIImage?
     var seconds: Double = 0.0
     
+    // VobbleChatNavigationBar
+    public var navUserName: String?
+    public var navShoreName: String?
+    
+    
     //  var isTyping: Bool {
     //    get {
     //      return localTyping
@@ -99,23 +104,7 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
-        //////////////////
-        let height: Float = Float(inputToolbar.contentView.leftBarButtonContainerView.frame.size.height)
-        var image = UIImage(named: "ic_play")
-        let smileButton = UIButton(type: .custom)
-        smileButton.setImage(image, for: .normal)
-        //smileButton.addTarget(self, action: #selector(self.addMessage), for: .touchUpInside)
-        smileButton.frame = CGRect(x: 0, y: 0, width: 25, height: CGFloat(height))
-        image = UIImage(named: "ic_play")
-        let attachButton = UIButton(type: .custom)
-        attachButton.setImage(image, for: .normal)
-        //attachButton.addTarget(self, action: #selector(self.addMessage), for: .touchUpInside)
-        attachButton.frame = CGRect(x: 30, y: 0, width: 25, height: CGFloat(height))
-        inputToolbar.contentView.leftBarButtonItemWidth = 55
-        inputToolbar.contentView.leftBarButtonContainerView.addSubview(smileButton)
-        inputToolbar.contentView.leftBarButtonContainerView.addSubview(attachButton)
-//        inputToolbar.contentView.leftBarButtonItem.isHidden = true
-        
+//        initCustomToolBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,6 +118,8 @@ final class ChatViewController: JSQMessagesViewController {
             // init nav bar
 //            customNavBar.title = convTitle ?? ""
             customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
+            customNavBar.shoreNameLabel.text = navShoreName
+            customNavBar.userNameLabel.text = navUserName
             customNavBar.viewcontroller = self
         }
     }
@@ -473,6 +464,7 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    
     // MARK: UITextViewDelegate methods
     
     override func textViewDidChange(_ textView: UITextView) {
@@ -562,72 +554,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
         
     }
-
-    
-//    func uploadMedia(mediaReferenceUrl:URL,mediaType: String,senderId:String) {
-//        
-////        let assets = PHAsset.fetchAssets(withALAssetURLs: [mediaReferenceUrl], options: nil)
-////        let asset = assets.firstObject
-//        
-//        if let key = sendPhotoMessage() {
-//            
-////            let path = "\(senderId)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\(mediaReferenceUrl.lastPathComponent)"
-//            
-//            if mediaType  == "public.image" {
-//                
-////                asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
-//                
-////                    self.upload(url: (contentEditingInput?.fullSizeImageURL)!, path: path,key:key)
-//                self.upload(url: mediaReferenceUrl, key:key)
-//                
-////                })
-//                
-//            } else if mediaType == "public.movie" {
-//                
-////                PHCachingImageManager().requestAVAsset(forVideo: asset!, options: nil, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [AnyHashable : Any]?) in
-////                    let asset = asset as! AVURLAsset
-//                
-////                    self.upload(url: asset.url, path: path,key:key)
-//                 self.upload(url: mediaReferenceUrl, key:key)
-////                })
-//            }
-//            
-//        }
-//    }
-    
-    
-//    func upload(url:URL,path:String,key:String) {
-//
-//        self.storageRef.child(path).putFile(from: url, metadata: nil) { (metadata, error) in
-//            if let error = error {
-//                print("Error uploading media: \(error.localizedDescription)")
-//                return
-//            }
-//            self.setImageURL(self.storageRef.child((metadata?.path)!).description, forPhotoMessageWithKey: key)
-//        }
-//        
-//    }
 }
 
-class PreviewPhoto: NSObject, NYTPhoto {
-    
-    var image: UIImage?
-    var imageData: Data?
-    var placeholderImage: UIImage?
-    let attributedCaptionTitle: NSAttributedString?
-    let attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.gray])
-    let attributedCaptionCredit: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.darkGray])
-    
-    
-    init(image: UIImage? = nil, title: String) {
-        self.image = image
-        self.imageData = nil
-        self.attributedCaptionTitle = NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.gray])
-        super.init()
-    }
-    
-}
-
+// MARK:- ChatNavigationDelegate
 extension ChatViewController: ChatNavigationDelegate {
     
     func navLeftBtnPressed() {
@@ -646,4 +575,136 @@ extension ChatViewController: ChatNavigationDelegate {
         }
         
     }
+}
+
+//TODO: make custom chat toole bar class
+// MARK:- AVAudioRecorderDelegate
+//extension ChatViewController: AVAudioRecorderDelegate {
+//    
+//    var audioRec: AVAudioRecorder?
+//    
+//    fileprivate func initCustomToolBar() {
+//        let height: Float = Float(inputToolbar.contentView.leftBarButtonContainerView.frame.size.height)
+//        var image = UIImage(named: "chatMoreOptions")
+//        let mediaButton = UIButton(type: .custom)
+//        mediaButton.setImage(image, for: .normal)
+//        mediaButton.addTarget(self, action: #selector(self.submitMediaAction), for: .touchUpInside)
+//        mediaButton.frame = CGRect(x: 0, y: 0, width: 25, height: CGFloat(height))
+//        
+//        image = UIImage(named: "recordSoundMsg")
+//        let recordButton = UIButton(type: .custom)
+//        recordButton.setImage(image, for: .normal)
+//        let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
+//        
+//        //        longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
+//        //        longGesture.minimumPressDuration = 1
+//        //        viewLong.addGestureRecognizer(longGesture)
+//        
+//        recordButton.addGestureRecognizer(longGestureRecognizer)
+//        recordButton.frame = CGRect(x: 30, y: 0, width: 25, height: CGFloat(height))
+//        inputToolbar.contentView.leftBarButtonItemWidth = 55
+//        inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
+//        inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)
+//        inputToolbar.contentView.leftBarButtonItem.isHidden = true
+//    }
+//    
+//    func submitMediaAction() {
+//        let picker = UIImagePickerController()
+//        picker.delegate = self
+//        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+//            picker.sourceType = .camera
+//        } else {
+//            picker.sourceType = .photoLibrary
+//        }
+//        picker.mediaTypes = ["public.image","public.movie"]
+//        
+//        present(picker, animated: true, completion:nil)
+//        
+//    }
+//    
+//    func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
+//        print("Long tap is handled")
+//        if sender.state == .began {
+//            print("UILongPressGestureRecognizerStateBegan so start the recording voice here")
+//            //write the function for start recording the voice here
+//            recordAudio()
+//        }
+//        else if sender.state == .ended {
+//            print("UILongPressGestureRecognizerStateEnded so stop the recording voice here")
+//            //write the function for stop recording the voice here
+//        }
+//    }
+//    
+//    func recordAudio() {
+//        
+////        AVAudioSession.sharedInstance().requestRecordPermission { (allowed) in
+////            
+////        }
+////
+////        AVAudioSession.sharedInstance().requestRecordPermission () {
+////            [unowned self] allowed in
+////            if allowed {
+////                // Microphone allowed, do what you like!
+////                
+////                let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+////                let docsDirect = paths[0]
+////                
+////                let audioUrl = try docsDirect.appendingPathComponent("record.m4a")
+////                
+////                //1. create the session
+////                let session = AVAudioSession.sharedInstance()
+////                
+////                do {
+////                    // 2. configure the session for recording and playback
+////                    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+////                    try session.setActive(true)
+////                    // 3. set up a high-quality recording session
+////                    let settings = [
+////                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+////                        AVSampleRateKey: 44100,
+////                        AVNumberOfChannelsKey: 2,
+////                        AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+////                    ]
+////                    // 4. create the audio recording, and assign ourselves as the delegate
+////                    audioRec = try AVAudioRecorder(url: URL(string: ""), settings: settings)
+////                    audioRec?.delegate = self
+////                    audioRec?.record()
+////                } 
+////                catch let error {
+////                    // failed to record!
+////                }
+////                
+////            } else {
+////                // User denied microphone. Tell them off!
+////                
+////            }
+////        }
+//    }
+//    
+////    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+////        if !flag {
+////            recordingEnded(success: false)
+////        } else {
+////            recordingEnded(success: true)
+////        }
+////    }
+//}
+
+class PreviewPhoto: NSObject, NYTPhoto {
+    
+    var image: UIImage?
+    var imageData: Data?
+    var placeholderImage: UIImage?
+    let attributedCaptionTitle: NSAttributedString?
+    let attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.gray])
+    let attributedCaptionCredit: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.darkGray])
+    
+    
+    init(image: UIImage? = nil, title: String) {
+        self.image = image
+        self.imageData = nil
+        self.attributedCaptionTitle = NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.gray])
+        super.init()
+    }
+    
 }

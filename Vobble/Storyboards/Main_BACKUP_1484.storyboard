@@ -819,8 +819,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKi-6x-39o" userLabel="exit View">
                                         <rect key="frame" x="0.0" y="20" width="375" height="40"/>
                                         <subviews>
+<<<<<<< HEAD
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-Kt-cKf">
+                                                <rect key="frame" x="30" y="9" width="20" height="22"/>
+=======
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-Kt-cKf" userLabel="exit button">
                                                 <rect key="frame" x="30" y="9.5" width="20" height="22"/>
+>>>>>>> f8da040372f471ba970a6c8d9359b72835c69557
                                                 <state key="normal" image="ic_close_white"/>
                                                 <connections>
                                                     <action selector="exitButtonPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="Qgu-hP-Rge"/>

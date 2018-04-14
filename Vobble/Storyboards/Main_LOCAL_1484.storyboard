@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -819,50 +819,31 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKi-6x-39o" userLabel="exit View">
                                         <rect key="frame" x="0.0" y="20" width="375" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-Kt-cKf" userLabel="exit button">
-                                                <rect key="frame" x="30" y="9.5" width="20" height="22"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-Kt-cKf">
+                                                <rect key="frame" x="30" y="9" width="20" height="22"/>
                                                 <state key="normal" image="ic_close_white"/>
                                                 <connections>
                                                     <action selector="exitButtonPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="Qgu-hP-Rge"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02f-rh-QdI" userLabel="more Button">
-                                                <rect key="frame" x="323" y="9" width="22" height="22"/>
-                                                <state key="normal" image="chatMoreOptions"/>
-                                                <connections>
-                                                    <action selector="moreOptionBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="Ova-dE-pMb"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="6zJ-Kt-cKf" firstAttribute="centerY" secondItem="UKi-6x-39o" secondAttribute="centerY" id="3R0-5X-R7H"/>
                                             <constraint firstAttribute="height" constant="40" id="9RV-fW-r6I"/>
-                                            <constraint firstAttribute="trailing" secondItem="02f-rh-QdI" secondAttribute="trailing" constant="30" id="Dxl-oP-2Yi"/>
-                                            <constraint firstItem="02f-rh-QdI" firstAttribute="centerY" secondItem="UKi-6x-39o" secondAttribute="centerY" id="EKI-8F-xAY"/>
                                             <constraint firstItem="6zJ-Kt-cKf" firstAttribute="leading" secondItem="UKi-6x-39o" secondAttribute="leading" constant="30" id="WoF-jO-jaW"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99U-U6-K8D" userLabel="userInfo View">
                                         <rect key="frame" x="0.0" y="65" width="375" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="qHm-VL-mSv">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWF-VI-p9O" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="5" width="40" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.72882882699999996" blue="0.6462742896" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="8ok-J0-vnp"/>
-                                                    <constraint firstAttribute="width" constant="40" id="aee-nH-5Pq"/>
+                                                    <constraint firstAttribute="width" constant="40" id="Fav-N5-FCW"/>
+                                                    <constraint firstAttribute="height" constant="40" id="gVs-wW-LQJ"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
+                                            </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gwE-GP-LSE">
                                                 <rect key="frame" x="68" y="4" width="87" height="42"/>
                                                 <subviews>
@@ -884,9 +865,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="GoA-C9-vkN"/>
                                             <constraint firstItem="gwE-GP-LSE" firstAttribute="centerY" secondItem="99U-U6-K8D" secondAttribute="centerY" id="OLr-4Z-geA"/>
-                                            <constraint firstItem="qHm-VL-mSv" firstAttribute="centerY" secondItem="99U-U6-K8D" secondAttribute="centerY" id="hay-Ws-ERJ"/>
-                                            <constraint firstItem="gwE-GP-LSE" firstAttribute="leading" secondItem="qHm-VL-mSv" secondAttribute="trailing" constant="8" symbolic="YES" id="iYz-bE-X5I"/>
-                                            <constraint firstItem="qHm-VL-mSv" firstAttribute="leading" secondItem="99U-U6-K8D" secondAttribute="leading" constant="20" id="rPL-nQ-wH4"/>
+                                            <constraint firstItem="oWF-VI-p9O" firstAttribute="leading" secondItem="99U-U6-K8D" secondAttribute="leading" constant="20" id="fIM-BO-plD"/>
+                                            <constraint firstItem="oWF-VI-p9O" firstAttribute="centerY" secondItem="99U-U6-K8D" secondAttribute="centerY" id="sfo-4M-dqb"/>
+                                            <constraint firstItem="gwE-GP-LSE" firstAttribute="leading" secondItem="oWF-VI-p9O" secondAttribute="trailing" constant="8" symbolic="YES" id="umb-GP-JHt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -917,9 +898,6 @@
                                                 <state key="normal" title="Ignore">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="ignoreBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="K7U-IE-PxC"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -1012,7 +990,6 @@
                         <outlet property="shoreNameLabel" destination="IkW-fY-pKf" id="lOQ-8j-ZvM"/>
                         <outlet property="topView" destination="mXs-T0-xQv" id="CpO-9l-nXb"/>
                         <outlet property="userNameLabel" destination="qq1-fV-vFz" id="UFB-vc-Awh"/>
-                        <outlet property="userimage" destination="qHm-VL-mSv" id="I2L-aT-GrP"/>
                         <outlet property="videoView" destination="A0z-Nd-C7w" id="Ome-Ui-a4r"/>
                         <segue destination="W1h-f8-Qe1" kind="show" identifier="goToChat" id="5KC-hU-8eo"/>
                     </connections>
@@ -1675,7 +1652,6 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="boy_3_1" width="351" height="327"/>
         <image name="camera-flash-off" width="16" height="16"/>
         <image name="camera-switch" width="29" height="22"/>
-        <image name="chatMoreOptions" width="22" height="20"/>
         <image name="chevron" width="24" height="24"/>
         <image name="clouds" width="2000" height="662"/>
         <image name="filters" width="23" height="23"/>
@@ -1699,7 +1675,6 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="sky1" width="721" height="721"/>
         <image name="sun" width="1755" height="1531"/>
         <image name="umbrella" width="993" height="899"/>
-        <image name="user_placeholder" width="1024" height="1024"/>
         <image name="wave" width="4500" height="739"/>
     </resources>
 </document>

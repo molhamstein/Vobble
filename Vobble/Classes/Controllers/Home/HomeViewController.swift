@@ -74,8 +74,8 @@ class HomeViewController: AbstractController {
     var panRecognizer: UIPanGestureRecognizer?
     
     //filter option
-    var countryCode = "AF"
-    var gender = "allGender"
+    var countryCode = ""
+    var gender = GenderType.allGender
     
     var introAnimationDone: Bool = false
     var filterViewVisible = false
@@ -235,12 +235,17 @@ class HomeViewController: AbstractController {
             self.ivFindBottle.image = nil
             self.showActivityLoader(true)
             
-            ApiManager.shared.findBottle(gender: self.gender, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
+            ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
                 self.showActivityLoader(false)
                 if error == nil && bottle != nil {
                     //print("\(bottle?.bottle_id)")
                     self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
                 } else {
+                    print(error)
+                    let alertController = UIAlertController(title: "", message: error , preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
                 }
             })
         }
@@ -547,7 +552,7 @@ extension HomeViewController {
 extension HomeViewController: FilterViewDelegate {
     
     func getFilterInfo(gender: String, country: String) {
-        self.gender = gender
+        self.gender = GenderType(rawValue: gender)!
         self.countryCode = country
         print(gender)
         print(country)

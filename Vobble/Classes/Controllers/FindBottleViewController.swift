@@ -19,6 +19,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var shoreNameLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var userimage: UIImageView!
     
     @IBOutlet var videoView: VideoPlayerView!
     
@@ -45,6 +46,15 @@ class FindBottleViewController: AbstractController {
         shoreNameLabel.text = shoreName
         userNameLabel.text = bottle?.owner?.firstName
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
+        
+        if let imgUrl = bottle?.owner?.imageUrl {
+          
+            userimage.sd_setShowActivityIndicatorView(true)
+            userimage.sd_setIndicatorStyle(.gray)
+            userimage.sd_setImage(with: URL(string: imgUrl))
+            
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,6 +70,8 @@ class FindBottleViewController: AbstractController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func moreOptionBtnPressed(_ sender: Any) {
+    }
 //    var newConvRef:DatabaseReference?
     
     @IBAction func replyBtnPressed(_ sender: Any) {
@@ -77,6 +89,11 @@ class FindBottleViewController: AbstractController {
         }
 
     }
+    
+    @IBAction func ignoreBtnPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)

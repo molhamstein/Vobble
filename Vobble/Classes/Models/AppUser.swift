@@ -12,6 +12,7 @@ import SwiftyJSON
 enum GenderType: String {
     case male = "male"
     case female = "female"
+    case allGender = "allGender"
 }
 
 // MARK: User account type

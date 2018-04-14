@@ -25,7 +25,7 @@ class FilterView: AbstractNibView {
     @IBOutlet weak var maleLabel: UILabel!
     @IBOutlet weak var femaleLabel: UILabel!
     
-    fileprivate var selectedGender: String = "allGender"
+    fileprivate var selectedGender: String = GenderType.allGender.rawValue
     fileprivate var selectedCountry: String = "Afghanistan"
     
     // MARK: - Initializers
@@ -48,7 +48,7 @@ class FilterView: AbstractNibView {
         maleLabel.alpha = 0.5
         femaleButton.alpha = 0.5
         femaleLabel.alpha = 0.5
-        selectedGender = "allGender"
+        selectedGender = GenderType.allGender.rawValue
         self.delegate?.getFilterInfo(gender: selectedGender, country: selectedCountry)
     }
     
@@ -59,7 +59,7 @@ class FilterView: AbstractNibView {
         femaleLabel.alpha = 0.5
         allGenderButton.alpha = 0.5
         allGenderLabel.alpha = 0.5
-        selectedGender = "male"
+        selectedGender = GenderType.male.rawValue
         self.delegate?.getFilterInfo(gender: selectedGender, country: selectedCountry)
 
     }
@@ -71,7 +71,7 @@ class FilterView: AbstractNibView {
         maleLabel.alpha = 0.5
         allGenderButton.alpha = 0.5
         allGenderLabel.alpha = 0.5
-        selectedGender = "female"
+        selectedGender = GenderType.female.rawValue
         self.delegate?.getFilterInfo(gender: selectedGender, country: selectedCountry)
     }
     
