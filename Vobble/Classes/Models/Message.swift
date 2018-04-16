@@ -17,6 +17,7 @@ class Message: BaseModel {
     private let kText: String = "text"
     private let kPhotoUrl: String = "photoURL"
     private let kVideoUrl: String = "videoURL"
+    private let kAudioUrl: String = "audioURL"
 
     
     // MARK: Properties
@@ -26,6 +27,8 @@ class Message: BaseModel {
     public var text : String?
     public var photoUrl: String?
     public var videoUrl: String?
+    public var audioUrl: String?
+    
     
     // MARK: Initializers
     override init() {
@@ -50,6 +53,9 @@ class Message: BaseModel {
         if let value = json[kVideoUrl].string {
             videoUrl = value
         }
+        if let value = json[kAudioUrl].string {
+            audioUrl = value
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -70,6 +76,9 @@ class Message: BaseModel {
         }
         if let value = videoUrl {
             dictionary[kVideoUrl] = value
+        }
+        if let value = audioUrl {
+            dictionary[kAudioUrl] = value
         }
         return dictionary
     }

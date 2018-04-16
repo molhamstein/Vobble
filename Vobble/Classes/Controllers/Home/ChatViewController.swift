@@ -26,6 +26,7 @@ import Firebase
 import JSQMessagesViewController
 import SwiftyJSON
 import NYTPhotoViewer
+import SDRecordButton
 
 final class ChatViewController: JSQMessagesViewController {
     
@@ -44,11 +45,13 @@ final class ChatViewController: JSQMessagesViewController {
     
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
-    private var messages: [JSQMessage] = []
+    fileprivate var messages: [JSQMessage] = []
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
+    private var audioMessageMap = [String: JSQAudioMediaItem]()
     
     @IBOutlet var customNavBar: VobbleChatNavigationBar!
+    @IBOutlet var recordButton : SDRecordButton!
     
     //  private var localTyping = false
     
@@ -67,6 +70,20 @@ final class ChatViewController: JSQMessagesViewController {
     public var navShoreName: String?
     
     var audioRec: AVAudioRecorder?
+    var audioRecorder:AVAudioRecorder!
+    var audioUrl: URL? = nil
+    
+    
+    var soundRecorder : AVAudioRecorder!
+    var SoundPlayer : AVAudioPlayer!
+    var isAnimating: Bool = false
+    var AudioFileName = "sound.m4a"
+    var timeOut: Float = 0.0
+    var recordTimer: Timer?
+    let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
+                          AVFormatIDKey : NSNumber(value: Int32(kAudioFormatMPEG4AAC) as Int32),
+                          AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),
+                          AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]
     
     //  var isTyping: Bool {
     //    get {
@@ -247,21 +264,6 @@ final class ChatViewController: JSQMessagesViewController {
         newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
 //            let messageData = snapshot.value as! Dictionary<String, String>
             
-
-            // audio message
-//            let sample = Bundle.main.path(forResource: "jsq_messages_sample", ofType: "m4a")
-//            
-//            let audioData = NSData(contentsOfFile: sample!)
-//            let audioItem = JSQAudioMediaItem(data: audioData as Data?)
-//            let audioMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: audioItem)
-//            
-//            self.messages.append(audioMessage!)
-////            collectionView.reloadData()
-//            JSQSystemSoundPlayer.jsq_playMessageSentSound()
-//            self.finishSendingMessage(animated: true)
-            
-
-            
             let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             message.idString = snapshot.key
             
@@ -288,7 +290,18 @@ final class ChatViewController: JSQMessagesViewController {
                     self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
                 }
                 
-            }  else {
+            } else if let id = message.senderId, let mediaURL = message.audioUrl {
+                
+                let audioData = NSData(contentsOf: URL(string:mediaURL)!)
+                let audioItem = JSQAudioMediaItem(data: audioData as Data?)
+                self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+               
+                if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                    self.collectionView.reloadData()
+                    self.videoMessageMap.removeValue(forKey: snapshot.key)
+                }
+                
+            } else {
                 print("Error! Could not decode message data")
             }
         })
@@ -314,6 +327,17 @@ final class ChatViewController: JSQMessagesViewController {
                 if let mediaItem = self.videoMessageMap[message.idString!] {
                     mediaItem.message.videoUrl = mediaURL
                     self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
+                }
+                
+            } else if let mediaURL = message.audioUrl {
+                
+                if let mediaItem = self.audioMessageMap[message.idString!] {
+                    
+                    let audioData = NSData(contentsOf: URL(string:mediaURL)!)
+                    
+                    mediaItem.audioData = audioData as Data?
+                    self.collectionView.reloadData()
+                    self.audioMessageMap.removeValue(forKey: message.idString!)
                 }
                 
             }
@@ -406,6 +430,8 @@ final class ChatViewController: JSQMessagesViewController {
             itemRef.updateChildValues(["photoURL": media.fileUrl!])
         } else if media.type == "video/quicktime" {
             itemRef.updateChildValues(["videoURL": media.fileUrl!])
+        } else if media.type == "audio/x-m4a" {
+            itemRef.updateChildValues(["audioURL": media.fileUrl!])
         }
     }
     
@@ -465,6 +491,17 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    private func addAudioMessage(withId id: String, key: String, mediaItem: JSQAudioMediaItem) {
+        if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
+            messages.append(message)
+            
+            if (mediaItem.audioData == nil ) {
+                audioMessageMap[key] = mediaItem
+            }
+            
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: UITextViewDelegate methods
     
@@ -529,8 +566,13 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 self.setMediaURL(media, forPhotoMessageWithKey: key)
             }
         }
+    }
+    
+    func uploadAudio(audioUrl:URL) {
         
-        
+        if let key = sendMediaMessage(mediaTag: "audioURL") {
+           self.upload(url: audioUrl, key:key)
+        }
     }
     
     func upload(url:URL,key:String) {
@@ -576,14 +618,15 @@ extension ChatViewController: ChatNavigationDelegate {
         }
         
     }
+    
 }
 
 //TODO: make custom chat toole bar class
 // MARK:- AVAudioRecorderDelegate
 extension ChatViewController: AVAudioRecorderDelegate {
     
-    
     fileprivate func initCustomToolBar() {
+        setupRecorder()
         let height: Float = Float(inputToolbar.contentView.leftBarButtonContainerView.frame.size.height)
         var image = UIImage(named: "chatMoreOptions")
         let mediaButton = UIButton(type: .custom)
@@ -595,11 +638,6 @@ extension ChatViewController: AVAudioRecorderDelegate {
         let recordButton = UIButton(type: .custom)
         recordButton.setImage(image, for: .normal)
         let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
-        
-        //        longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
-        //        longGesture.minimumPressDuration = 1
-        //        viewLong.addGestureRecognizer(longGesture)
-        
         recordButton.addGestureRecognizer(longGestureRecognizer)
         recordButton.frame = CGRect(x: 30, y: 0, width: 25, height: CGFloat(height))
         inputToolbar.contentView.leftBarButtonItemWidth = 55
@@ -622,76 +660,101 @@ extension ChatViewController: AVAudioRecorderDelegate {
         
     }
     
+    
     func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
         print("Long tap is handled")
         if sender.state == .began {
             print("UILongPressGestureRecognizerStateBegan so start the recording voice here")
             //write the function for start recording the voice here
-            recordAudio()
+            recordButton.frame = CGRect(x: self.view.frame.width/2 - 70, y: self.view.frame.height/2 - 80, width: 70, height: 80)
+            self.view.addSubview(recordButton)
+            
+            // reset the timer
+            recordTimer?.invalidate()
+            recordTimer = nil;
+            // run the timer
+            recordTimer = Timer.scheduledTimer(timeInterval: 0.05,
+                                               target: self,
+                                               selector: #selector(RecordMediaViewController.tickRecorder(timer:)),
+                                               userInfo: nil,
+                                               repeats: true)
+            
+            // run the timer
+            let runner: RunLoop = RunLoop.current
+            runner.add(recordTimer!, forMode: .defaultRunLoopMode)
+            
+            soundRecorder.record()
         }
         else if sender.state == .ended {
+            stopRecorderTimer()
             print("UILongPressGestureRecognizerStateEnded so stop the recording voice here")
             //write the function for stop recording the voice here
+            if let url = audioUrl {
+                  uploadAudio(audioUrl:url)
+            }
         }
     }
     
-    func recordAudio() {
+    func setupRecorder(){
         
-//        AVAudioSession.sharedInstance().requestRecordPermission { (allowed) in
-//            
-//        }
+        let audioSession:AVAudioSession = AVAudioSession.sharedInstance()
         
-        
-        
-        AVAudioSession.sharedInstance().requestRecordPermission({(allowed: Bool)-> Void in
-            do {
-                if allowed {
-                    // Microphone allowed, do what you like!
+        //ask for permission
+        if (audioSession.responds(to: #selector(AVAudioSession.requestRecordPermission(_:)))) {
+            AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
+                if granted {
+                    print("granted")
                     
-                    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-                    let docsDirect = paths[0]
-                    
-                    let audioUrl = try docsDirect.appendingPathComponent("record.m4a")
-                    
-                    //1. create the session
-                    let session = AVAudioSession.sharedInstance()
-                    
-                    // 2. configure the session for recording and playback
-                    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
-                    try session.setActive(true)
-                    // 3. set up a high-quality recording session
-                    let settings = [
-                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                        AVSampleRateKey: 44100,
-                        AVNumberOfChannelsKey: 2,
-                        AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-                    ]
-                    // 4. create the audio recording, and assign ourselves as the delegate
-                    if let urlObj = URL(string: "") {
-                        self.audioRec = try AVAudioRecorder(url: urlObj, settings: settings)
-                        self.audioRec?.delegate = self
-                        self.audioRec?.record()
+                    //set category and activate recorder session
+                    do {
+                        
+                        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                        try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
+                        self.soundRecorder.prepareToRecord()
+                        
+                    } catch {
+                        print("Error Recording");
                     }
-                    
-                } else {
-                    // User denied microphone. Tell them off!
-                    
                 }
-            }catch {
-                print ("record error")
-            }
-        })
+            })
+        }
     }
     
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-//        if !flag {
-//            recordingEnded(success: false)
-//        } else {
-//            recordingEnded(success: true)
-//        }
+    func directoryURL() -> URL? {
+        let fileManager = FileManager.default
+        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = urls[0] as URL
+        let soundURL = documentDirectory.appendingPathComponent("sound.m4a")
+        audioUrl = soundURL
+        return soundURL
+    }
+
+    // Stop play image
+    func tickRecorder(timer:Timer){
+        // count down 0
+        if (timeOut >= MAX_VIDEO_LENGTH){
+            // stop image timer
+            recordTimer?.invalidate()
+            recordTimer = nil;
+            stopRecorderTimer()
+            
+        } else {
+            timeOut += 0.05;
+//           recordTimeLabel.text = String(format: "%02d", Int(timeOut))
+            self.recordButton.setProgress(CGFloat(timeOut/MAX_VIDEO_LENGTH))
+        }
+    }
+    
+    func stopRecorderTimer(){
+        // stop recording
+        self.recordButton.setProgress(0)
+        timeOut = 0.0
+        recordButton.removeFromSuperview()
+        soundRecorder.stop()
     }
 }
 
+// MARK:- class PreviewPhoto
 class PreviewPhoto: NSObject, NYTPhoto {
     
     var image: UIImage?

@@ -315,8 +315,10 @@ extension ConversationViewController {
         
         self.showActivityLoader(true)
         
+        let convRef: DatabaseReference?
+        convRef = conversationRef
         
-        if (self.conversationRefHandle != nil) {
+        if (convRef != nil) {
             conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
                 
                 self.showActivityLoader(false)
