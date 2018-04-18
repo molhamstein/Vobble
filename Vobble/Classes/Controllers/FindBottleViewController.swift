@@ -31,10 +31,17 @@ class FindBottleViewController: AbstractController {
     public var shoreName:String?
     public var myVideoUrl = NSURL()
     
+    @IBOutlet weak var optionView: UIStackView!
+    @IBOutlet weak var reportButton: UIButton!
+    @IBOutlet weak var blockButton: UIButton!
+    @IBOutlet weak var reportView: UIView!
+    @IBOutlet weak var reportPicker: UIPickerView!
+    
+//    fileprivate let pickerArray = ["Bangladesh","India","Pakistan","USA"]
     
     // MARK: - firebase Properties
     fileprivate var conversationRefHandle: DatabaseHandle?
-    
+    fileprivate var reportReasonIndex:Int = 0
     
     fileprivate lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
 
@@ -46,6 +53,12 @@ class FindBottleViewController: AbstractController {
         shoreNameLabel.text = shoreName
         userNameLabel.text = bottle?.owner?.firstName
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
+        optionView.isHidden = true
+        reportView.isHidden = true
+        reportButton.setTitle("REPORT".localized, for: .normal)
+        blockButton.setTitle("BLOCK_USER".localized, for: .normal)
+        ignoreButton.setTitle("IGNORE".localized, for: .normal)
+        replyButton.setTitle("REPLY".localized, for: .normal)
         
         if let imgUrl = bottle?.owner?.imageUrl {
           
@@ -71,12 +84,55 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func moreOptionBtnPressed(_ sender: Any) {
+        if optionView.isHidden == true {
+            optionView.isHidden = false
+        } else {
+            optionView.isHidden = true
+        }
     }
+    
+    @IBAction func reportBtnPressed(_ sender: Any) {
+        if self.playButton.currentImage == UIImage(named: "pause") {
+            videoView.playButtonPressed()
+        }
+        reportView.isHidden = false
+        optionView.isHidden = true
+    }
+    
+    @IBAction func blockBtnPressed(_ sender: Any) {
+        if self.playButton.currentImage == UIImage(named: "pause") {
+            videoView.playButtonPressed()
+        }
+        
+        let blockMessage = String(format: "BLOCK_USER_WARNING".localized, "\(DataStore.shared.me?.firstName ?? " ")")
+        
+        let alertController = UIAlertController(title: "", message: blockMessage , preferredStyle: .alert)
+        //We add buttons to the alert controller by creating UIAlertActions:
+        let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
+            //self.dismiss(animated: true, completion: nil)
+            // here send block to server
+        })
+        alertController.addAction(ok)
+        let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+        alertController.addAction(cancel)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        reportView.isHidden = true
+    }
+    
+    @IBAction func doneBtnPressed(_ sender: Any) {
+        print(self.reportReasonIndex)
+        reportView.isHidden = true
+    }
+    
+    
 //    var newConvRef:DatabaseReference?
     
     @IBAction func replyBtnPressed(_ sender: Any) {
         
-         if self.playButton.currentImage == UIImage(named: "pause") {
+        if self.playButton.currentImage == UIImage(named: "pause") {
             videoView.playButtonPressed()
         }
         
@@ -165,4 +221,33 @@ class FindBottleViewController: AbstractController {
         
         self.performSegue(withIdentifier: "goToChat", sender: newConvRef)
         }
+}
+
+extension FindBottleViewController: UIPickerViewDelegate,UIPickerViewDataSource {
+    
+    private var pickerArray: [String] {
+        get {
+           return ["SPAM".localized, "OFFENDING".localized, "SEXUAL_CONTENT".localized]
+        }
+    }
+    
+    public func numberOfComponents(in pickerView:  UIPickerView) -> Int  {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerArray.count
+    }
+    
+    public func pickerView(_pickerView:UIPickerView,numberOfRowsInComponent component: Int) -> Int {
+        return pickerArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerArray[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.reportReasonIndex = row
+        print(pickerArray[row])
+    }
 }

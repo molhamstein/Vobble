@@ -138,3 +138,12 @@
 "ABOUT_TITLE"                          = "About us";
 "TERMS_TITLE"                          = "Terms of Service";
 
+// findBottle screen
+"REPORT"                               = "report";
+"BLOCK_USER"                           = "block user";
+"IGNORE"                               = "ignore";
+"REPLY"                                = "reply";
+"SPAM"                                 = "spam";
+"OFFENDING"                            = "offending";
+"SEXUAL_CONTENT"                       = "sexual content";
+"BLOCK_USER_WARNING"                   = "Are you sure you dont want to see content from %@ anymore?";

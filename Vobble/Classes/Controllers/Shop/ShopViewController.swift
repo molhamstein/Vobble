@@ -39,7 +39,7 @@ class ShopViewController: AbstractController {
         self.navigationView.viewcontroller = self
          self.shopCollectionView.register(UINib(nibName: "ShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ShopCollectionViewCellID")
          self.initBottleArray()
-//        bottlesButton.setTitleColor(UIColor.red, for: .selected)
+         bottlesButton.isSelected = true
     }
     
     override func viewDidLayoutSubviews() {

@@ -98,7 +98,6 @@ extension ConversationViewController: UICollectionViewDataSource {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "conversationCollectionViewHeaderID", for: indexPath) as! ConversationCollectionViewHeader
         
         headerView.searchTetField.text = searchString
-        headerView.searchTetField.becomeFirstResponder()
         headerView.searchTetField.delegate = self
         headerView.convVC = self
         
@@ -315,10 +314,10 @@ extension ConversationViewController {
         
         self.showActivityLoader(true)
         
-        let convRef: DatabaseReference?
-        convRef = conversationRef
+//        let convRef: DatabaseReference?
+//        convRef = conversationRef
         
-        if (convRef != nil) {
+//        if (convRef != nil) {
             conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
                 
                 self.showActivityLoader(false)
@@ -347,11 +346,14 @@ extension ConversationViewController {
                 }
                 
             }) { (error) in
+                print("****************")
+                print(error)
                 self.showActivityLoader(false)
+                
             }
 
-        } else {
-             self.showActivityLoader(false)
-        }
+//        } else {
+//             self.showActivityLoader(false)
+//        }
     }
 }

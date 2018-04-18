@@ -31,6 +31,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         // Initialization
         userNameLabel.text = DataStore.shared.me?.firstName
         self.activityIndicator.isHidden = true
+        btnMyBottles.isSelected = true
     }
     
     func configCell(userObj: AppUser) {

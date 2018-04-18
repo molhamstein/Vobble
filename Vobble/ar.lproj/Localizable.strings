@@ -138,3 +138,13 @@
 
 "ABOUT_TITLE"                          = "من نحن";
 "TERMS_TITLE"                          = "شروط الاستخدام";
+
+// findBottle screen
+"REPORT"                               = "ابلاغ";
+"BLOCK_USER"                           = "حظر";
+"IGNORE"                               = "تجاهل";
+"REPLY"                                = "رد";
+"SPAM"                                 = "عشوائي";
+"OFFENDING"                             = "مهين";
+"SEXUAL_CONTENT"                       = "محتوى جنسي";
+"BLOCK_USER_WARNING"                   = "هل أنت متأكد أنك لا تريد رؤية المحتوى من %@ بعد الآن؟";
