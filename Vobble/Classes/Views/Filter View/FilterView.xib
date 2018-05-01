@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,8 +18,18 @@
             <connections>
                 <outlet property="allGenderButton" destination="Veq-FD-Q4r" id="uzI-sU-x2Z"/>
                 <outlet property="allGenderLabel" destination="TgN-kq-Stf" id="aQ3-Oz-8aX"/>
+                <outlet property="countryBuyFilterButton" destination="cRj-es-M7c" id="hV5-ts-Z5k"/>
+                <outlet property="countryFilterStackView" destination="zXo-Qe-w3v" id="mU4-Qo-o7a"/>
+                <outlet property="countryLeftLabel" destination="vog-mP-Dho" id="MeT-HN-xa7"/>
+                <outlet property="countryTimer" destination="OAv-of-0LM" id="n9x-bW-tQc"/>
+                <outlet property="countryTimerStackView" destination="TdC-XG-G62" id="tZ1-YA-rCZ"/>
                 <outlet property="femaleButton" destination="XEX-hv-Ul6" id="H5q-2z-gim"/>
                 <outlet property="femaleLabel" destination="URR-dN-Haa" id="mcL-W7-hTT"/>
+                <outlet property="genderBuyFilterButton" destination="kRI-a8-p8N" id="xX4-sC-nsY"/>
+                <outlet property="genderFilterStackView" destination="J0a-3T-Xk9" id="MY2-P6-M1l"/>
+                <outlet property="genderLeftLabel" destination="keR-Ot-NR9" id="oMq-4y-dpc"/>
+                <outlet property="genderTimer" destination="AqJ-Yb-dwO" id="Dvl-SM-1Dw"/>
+                <outlet property="genderTimerStackView" destination="7dM-DL-AyY" id="kiM-oB-kEl"/>
                 <outlet property="maleButton" destination="D7d-rZ-V8r" id="htj-LG-fEd"/>
                 <outlet property="maleLabel" destination="XEh-Lp-xl2" id="eQN-Zc-6bY"/>
             </connections>
@@ -33,41 +43,83 @@
                     <rect key="frame" x="20" y="80" width="335" height="587"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cq-Ea-TNs" userLabel="Gender View">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="172.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="173"/>
                             <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-DL-AyY" userLabel="timer Stack View">
+                                    <rect key="frame" x="236" y="0.0" width="99" height="15"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AqJ-Yb-dwO" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="71" height="15"/>
+                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keR-Ot-NR9">
+                                            <rect key="frame" x="75" y="0.0" width="24" height="15"/>
+                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="J0a-3T-Xk9" userLabel="filter Stack View">
+                                    <rect key="frame" x="250" y="0.0" width="85" height="27"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRI-a8-p8N">
+                                            <rect key="frame" x="0.0" y="0.0" width="67" height="27"/>
+                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="15"/>
+                                            <state key="normal" title="Buy Filter">
+                                                <color key="titleColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="genderFilterBtnPressed:" destination="-1" eventType="touchUpInside" id="dgV-jH-ekb"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6o-1s-cuX">
+                                            <rect key="frame" x="72" y="0.0" width="13" height="27"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <state key="normal" image="arrow_buy_filter">
+                                                <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="genderFilterBtnPressed:" destination="-1" eventType="touchUpInside" id="aa0-TZ-7XY"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:12 left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQY-ww-E8m">
-                                    <rect key="frame" x="259" y="0.0" width="76" height="17"/>
+                                    <rect key="frame" x="245" y="0.0" width="90" height="17"/>
                                     <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
                                     <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ygV-fQ-NuN">
-                                    <rect key="frame" x="0.0" y="0.0" width="251" height="172.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="237" height="173"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Filter By Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwd-PA-FpY">
-                                            <rect key="frame" x="0.0" y="0.0" width="134" height="15.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="134" height="16"/>
                                             <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="18"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="5Ic-MG-B7C">
-                                            <rect key="frame" x="0.0" y="15.5" width="237" height="157"/>
+                                            <rect key="frame" x="0.0" y="16" width="237" height="157"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qbd-vo-FF0" userLabel="all gender View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="67" height="157"/>
+                                                    <rect key="frame" x="0.0" y="1" width="67" height="157"/>
                                                     <subviews>
                                                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Veq-FD-Q4r">
-                                                            <rect key="frame" x="0.0" y="59" width="67" height="39"/>
+                                                            <rect key="frame" x="0.0" y="60" width="67" height="39"/>
                                                             <state key="normal" image="allGenders"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="all" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgN-kq-Stf" userLabel="all label">
-                                                            <rect key="frame" x="0.0" y="108" width="67" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="109" width="67" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWq-eC-KVt" userLabel="big all btn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="67" height="157"/>
+                                                            <rect key="frame" x="0.0" y="1" width="67" height="157"/>
                                                             <connections>
                                                                 <action selector="allGenderBtnPressed:" destination="-1" eventType="touchUpInside" id="v3G-g8-lOR"/>
                                                             </connections>
@@ -88,20 +140,20 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCy-6Q-PLi" userLabel="male View">
-                                                    <rect key="frame" x="85" y="0.0" width="67" height="157"/>
+                                                    <rect key="frame" x="85" y="1" width="67" height="157"/>
                                                     <subviews>
                                                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7d-rZ-V8r">
-                                                            <rect key="frame" x="-0.5" y="59" width="67.5" height="39"/>
+                                                            <rect key="frame" x="0.0" y="60" width="67" height="39"/>
                                                             <state key="normal" image="signup_male"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="male" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEh-Lp-xl2" userLabel="male label">
-                                                            <rect key="frame" x="0.0" y="108" width="67" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="109" width="67" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXX-0n-383" userLabel="big male btn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="67" height="157"/>
+                                                            <rect key="frame" x="0.0" y="1" width="67" height="157"/>
                                                             <connections>
                                                                 <action selector="maleBtnPressed:" destination="-1" eventType="touchUpInside" id="nGq-jE-5Vj"/>
                                                             </connections>
@@ -122,20 +174,20 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AvH-78-DCs" userLabel="female View">
-                                                    <rect key="frame" x="170" y="0.0" width="67" height="157"/>
+                                                    <rect key="frame" x="170" y="1" width="67" height="157"/>
                                                     <subviews>
                                                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEX-hv-Ul6">
-                                                            <rect key="frame" x="0.0" y="59" width="67" height="39"/>
+                                                            <rect key="frame" x="0.0" y="60" width="67" height="39"/>
                                                             <state key="normal" image="signup_female"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="female" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URR-dN-Haa" userLabel="female label">
-                                                            <rect key="frame" x="0.0" y="108" width="67" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="109" width="67" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGO-8o-9en" userLabel="big female btn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="67" height="157"/>
+                                                            <rect key="frame" x="0.0" y="1" width="67" height="157"/>
                                                             <connections>
                                                                 <action selector="femalePressed:" destination="-1" eventType="touchUpInside" id="eFj-QU-tqS"/>
                                                             </connections>
@@ -167,42 +219,81 @@
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="ygV-fQ-NuN" secondAttribute="bottom" id="0aD-s8-fMX"/>
+                                <constraint firstItem="J0a-3T-Xk9" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="top" id="0b4-Gq-wjj"/>
                                 <constraint firstItem="LQY-ww-E8m" firstAttribute="leading" secondItem="ygV-fQ-NuN" secondAttribute="trailing" priority="999" constant="8" symbolic="YES" id="D2H-KK-DgH"/>
+                                <constraint firstAttribute="trailing" secondItem="J0a-3T-Xk9" secondAttribute="trailing" id="Ek5-tq-jXJ"/>
                                 <constraint firstItem="LQY-ww-E8m" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="top" id="OkR-Hb-ckQ"/>
                                 <constraint firstItem="ygV-fQ-NuN" firstAttribute="leading" secondItem="7Cq-Ea-TNs" secondAttribute="leading" id="PTV-MM-4xn"/>
+                                <constraint firstItem="7dM-DL-AyY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fwd-PA-FpY" secondAttribute="trailing" constant="10" id="Tp0-fP-BF7"/>
                                 <constraint firstAttribute="trailing" secondItem="LQY-ww-E8m" secondAttribute="trailing" id="an9-Bn-KCR"/>
+                                <constraint firstAttribute="trailing" secondItem="7dM-DL-AyY" secondAttribute="trailing" id="cmD-38-vHe"/>
                                 <constraint firstItem="ygV-fQ-NuN" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="top" id="d2C-JP-Oyn"/>
+                                <constraint firstItem="7dM-DL-AyY" firstAttribute="top" secondItem="7Cq-Ea-TNs" secondAttribute="top" id="mXL-m3-j6k"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="LQY-ww-E8m"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21h-5f-0ct" userLabel="Country View">
-                            <rect key="frame" x="0.0" y="207.5" width="335" height="379.5"/>
+                            <rect key="frame" x="0.0" y="208" width="335" height="379"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ypy-f9-G9X">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="29"/>
+                                    <rect key="frame" x="0.0" y="1" width="335" height="27"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Filter By Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miQ-hw-Zmj">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="29"/>
+                                            <rect key="frame" x="0.0" y="1" width="145" height="27"/>
                                             <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="18"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRj-es-M7c">
-                                            <rect key="frame" x="243" y="0.0" width="76" height="29"/>
-                                            <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
-                                            <state key="normal" title="Buy Filter">
-                                                <color key="titleColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6P-pL-95a">
-                                            <rect key="frame" x="322" y="0.0" width="13" height="29"/>
-                                            <state key="normal" image="arrow_buy_filter">
-                                                <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                        </button>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="TdC-XG-G62" userLabel="timer Stack View">
+                                            <rect key="frame" x="148" y="1" width="99" height="27"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAv-of-0LM" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="1" width="71" height="27"/>
+                                                    <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vog-mP-Dho">
+                                                    <rect key="frame" x="75" y="1" width="24" height="27"/>
+                                                    <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zXo-Qe-w3v">
+                                            <rect key="frame" x="250" y="1" width="85" height="27"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRj-es-M7c">
+                                                    <rect key="frame" x="0.0" y="1" width="67" height="27"/>
+                                                    <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="15"/>
+                                                    <state key="normal" title="Buy Filter">
+                                                        <color key="titleColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="countryFilterBtnPressed:" destination="-1" eventType="touchUpInside" id="J72-yi-PDV"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6P-pL-95a">
+                                                    <rect key="frame" x="72" y="1" width="13" height="27"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" image="arrow_buy_filter">
+                                                        <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="countryFilterBtnPressed:" destination="-1" eventType="touchUpInside" id="ToE-1c-lFC"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-2n-8aY" customClass="CountryPicker">
-                                    <rect key="frame" x="0.0" y="39" width="335" height="330.5"/>
+                                    <rect key="frame" x="0.0" y="38" width="335" height="332"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="GBL-3w-uvC"/>

@@ -119,6 +119,7 @@
 "main_shore"                            = "Main shore";
 "love_shore"                            = "Love shore";
 "fadfed_shore"                          = "FadFed shore";
+"THROW_BOTTLE_WARNING"                  = "you dont have bottles in Bottles Package";
 
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? you will no longer could upload your video.";
@@ -127,6 +128,8 @@
 "FEMALE"                                = "female";
 "MALE"                                  = "male";
 "ALL_GENDER"                            = "all";
+"BUY_FILTER_WARNING"                    = "you should go to shop to buy this filter";
+"GO_TO_SHOP"                            = "Go To Shop";
 
 // settings
 "SETTINGS_CONTACT"                      = "Contact Us";
@@ -147,3 +150,7 @@
 "OFFENDING"                            = "offending";
 "SEXUAL_CONTENT"                       = "sexual content";
 "BLOCK_USER_WARNING"                   = "Are you sure you dont want to see content from %@ anymore?";
+
+// shop
+"BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item and pay %@ ?";
+"CANT_BUY_ITEM_WARNING"                = "you already have an active filter of this type";

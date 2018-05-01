@@ -168,6 +168,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                                     ApiManager.shared.getShores(completionBlock: { (shores, error) in
                                         
                                         self.loginButton.isLoading = false
+                                        DataStore.shared.me?.bottlesCount = 3
                                         self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                                         
                                     })

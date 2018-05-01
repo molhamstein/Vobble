@@ -20,6 +20,11 @@ class ShopItem: BaseModel {
     private let kShopItemSecondColor: String = "lcolor"
     private let kShopItemImageUrl: String = "imgurl"
     
+    private let kShopItemType: String = "type"
+    private let kShopItemProdId: String = "ProdId"
+    private let kShopItemStartDate: String = "startDate"
+    private let kShopItemEndDate: String = "EndDate"
+    
     
     // MARK: Properties
     public var idString : String?
@@ -29,7 +34,10 @@ class ShopItem: BaseModel {
     public var firstColor : UIColor?
     public var secondColor : UIColor?
     public var imageUrl : UIImage?
-    
+    public var ProdId : String?
+    public var startDate : Double?
+    public var endDate : Double?
+    public var type : String?
     
     // MARK: Initializers
     override init() {
@@ -50,6 +58,18 @@ class ShopItem: BaseModel {
         }
         if let value = json[kShopItemPrice].string {
             price = value
+        }
+        if let value = json[kShopItemType].string {
+            type = value
+        }
+        if let value = json[kShopItemEndDate].double {
+            endDate = value
+        }
+        if let value = json[kShopItemStartDate].double {
+            startDate = value
+        }
+        if let value = json[kShopItemProdId].string {
+            ProdId = value
         }
 //        if let value = json[kShopItemFirstColor].string {
 //            firstColor = value
@@ -84,12 +104,28 @@ class ShopItem: BaseModel {
             dictionary[kShopItemPrice] = value
         }
         
-        if let value = firstColor {
-            dictionary[kShopItemFirstColor] = value
+//        if let value = firstColor {
+//            dictionary[kShopItemFirstColor] = value
+//        }
+//        
+//        if let value = secondColor {
+//            dictionary[kShopItemSecondColor] = value
+//        }
+        
+        if let value = type {
+            dictionary[kShopItemType] = value
         }
         
-        if let value = secondColor {
-            dictionary[kShopItemSecondColor] = value
+        if let value = endDate {
+            dictionary[kShopItemEndDate] = value
+        }
+        
+        if let value = startDate {
+            dictionary[kShopItemStartDate] = value
+        }
+        
+        if let value = ProdId {
+            dictionary[kShopItemProdId] = value
         }
         
 //        if let value = imageUrl {

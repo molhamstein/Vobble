@@ -119,6 +119,7 @@
 "main_shore"                            = "الشاطئ الرئيسي";
 "love_shore"                            = "شاطئ الحب";
 "fadfed_shore"                          = "شاطئ الفضفضة";
+"THROW_BOTTLE_WARNING"                  = "ليس لديك زجاجات في عبوات الزجاجات";
 
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد أنك تريد العودة؟ لن تتمكن بعد ذلك من تحميل الفيديو الخاص بك.";
@@ -127,6 +128,9 @@
 "FEMALE"                                = "انثى";
 "MALE"                                  = "ذكر";
 "ALL_GENDER"                            = "الجميع";
+"BUY_FILTER_WARNING"                    = "يجب أن تذهب للتسوق لشراء هذا الفلتر";
+"GO_TO_SHOP"                            = "ذهاب الي التسوق";
+
 
 // settings
 "SETTINGS_CONTACT"                      = "تواصل معنا";
@@ -148,3 +152,7 @@
 "OFFENDING"                             = "مهين";
 "SEXUAL_CONTENT"                       = "محتوى جنسي";
 "BLOCK_USER_WARNING"                   = "هل أنت متأكد أنك لا تريد رؤية المحتوى من %@ بعد الآن؟";
+
+// shop
+"BUY_ITEM_WARNING"                     = "هل آنت متآكد من آنك تريد شراء هذا المنتج ودفع %@ ؟";
+"CANT_BUY_ITEM_WARNING"                = "لديك مسبقا فلتر نشط من هذا النوع";

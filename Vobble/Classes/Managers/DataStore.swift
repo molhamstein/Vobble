@@ -21,12 +21,14 @@ class DataStore :NSObject {
     //MARK: Cache keys
     private let CACHE_KEY_CATEGORIES = "categories"
     private let CACHE_KEY_SHORES = "SHORES"
+    private let CACHE_KEY_SHOPITEM = "SHOPITEM"
     private let CACHE_KEY_USER = "user"
     private let CACHE_KEY_TOKEN = "token"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
     private var _categories: [Category] = []
+    private var _shopItems: [ShopItem] = [ShopItem]()
     private var _shores: [Shore] = []
     private var _token: String?
     
@@ -62,6 +64,19 @@ class DataStore :NSObject {
                 _shores = loadBaseModelArrayForKey(key: CACHE_KEY_SHORES)
             }
             return _shores
+        }
+    }
+    
+    public var shopItems: [ShopItem] {
+        set {
+            _shopItems = newValue
+            saveBaseModelArray(array: _shopItems, withKey: CACHE_KEY_SHOPITEM)
+        }
+        get {
+            if(_shopItems.isEmpty){
+                _shopItems = loadBaseModelArrayForKey(key: CACHE_KEY_SHOPITEM)
+            }
+            return _shopItems
         }
     }
     
@@ -105,28 +120,6 @@ class DataStore :NSObject {
     
     private override init(){
         super.init()
-        
-//        // temp
-//        var shoresTemp : [Shore] = []
-//        let shore1 = Shore()
-//        shore1.name = "Main Shore"
-//        shore1.cover = "shore"
-//        shore1.icon = "shore"
-//        
-//        let shore2 = Shore()
-//        shore2.name = "Love Shore"
-//        shore2.cover = "shoret2"
-//        shore2.icon = "shoret2"
-//        
-//        let shore3 = Shore()
-//        shore3.name = "Fad Fed"
-//        shore3.cover = "shore"
-//        shore3.icon = ""
-//        
-//        shoresTemp.append(shore1)
-//        shoresTemp.append(shore2)
-//        shoresTemp.append(shore3)
-//        shores = shoresTemp
     }
    
     //MARK: Cache Utils
@@ -192,6 +185,7 @@ class DataStore :NSObject {
         me = nil
         token = nil
         categories = [Category]()
+        shopItems = [ShopItem]()
     }
 }
 

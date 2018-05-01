@@ -89,6 +89,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-OneSignalNotificationServiceExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Vobble.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -193,6 +198,11 @@
 			<true/>
 		</dict>
 		<key>681BE6E3D02A43F9BA63777AC435C8FD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>745A2536ABC9981AD547B885DBBC3C73</key>
 		<dict>
 			<key>primary</key>
 			<true/>

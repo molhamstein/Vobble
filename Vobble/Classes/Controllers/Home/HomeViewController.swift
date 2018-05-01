@@ -221,36 +221,54 @@ class HomeViewController: AbstractController {
             let findBottleVC = nav.topViewController as! FindBottleViewController
             findBottleVC.shoreName = self.navigationView.navTitle.text
             findBottleVC.bottle = bottle
-         }
+        
+        } else if let type = sender as? filterType {
+            let vc = segue.destination as! ShopViewController
+            vc.fType = type
+        }
     }
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
-        self.wiggleAnimate(view: self.ivThrowBtn)
-        self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
-    }
+       
+        let bCount2 = DataStore.shared.me?.bottlesCount
+        if let bCount = DataStore.shared.me?.bottlesCount, bCount>0 {
+            DataStore.shared.me?.bottlesCount = bCount - 1
+            self.wiggleAnimate(view: self.ivThrowBtn)
+            self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
+        } else {
+            let alertController = UIAlertController(title: "", message: "THROW_BOTTLE_WARNING".localized, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
+       }
     
+    }
+
     @IBAction func findBottlePressed(_ sender: UIButton) {
         
-        self.ivFindBottle.loadGif(name: "find_bottle")
-        self.wiggleAnimate(view: self.ivFindBtn)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 5 second
-            self.ivFindBottle.image = nil
-            self.showActivityLoader(true)
-            
-            ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
-                self.showActivityLoader(false)
-                if error == nil && bottle != nil {
-                    //print("\(bottle?.bottle_id)")
-                    self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
-                } else {
-                    print(error)
-                    let alertController = UIAlertController(title: "", message: error , preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                    alertController.addAction(ok)
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            })
-        }
+       
+            self.ivFindBottle.loadGif(name: "find_bottle")
+            self.wiggleAnimate(view: self.ivFindBtn)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 5 second
+                self.ivFindBottle.image = nil
+                self.showActivityLoader(true)
+                
+                ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
+                    self.showActivityLoader(false)
+                    if error == nil && bottle != nil {
+                        //print("\(bottle?.bottle_id)")
+                        self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
+                    } else {
+                        print(error)
+                        let alertController = UIAlertController(title: "", message: error , preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                        alertController.addAction(ok)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                })
+            }
+        
+        
     }
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
@@ -559,6 +577,19 @@ extension HomeViewController: FilterViewDelegate {
         print(gender)
         print(country)
         print("----------")
+    }
+    
+    func showBuyFilterMessage(type: filterType) {
+        
+        let alertController = UIAlertController(title: "", message: "BUY_FILTER_WARNING".localized, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "GO_TO_SHOP".localized, style: .default, handler: { (alertAction) in
+            self.performSegue(withIdentifier:"shopSegue", sender: type)
+        })
+        alertController.addAction(ok)
+        let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+        alertController.addAction(cancel)
+        self.present(alertController, animated: true, completion: nil)
+        
     }
 }
 

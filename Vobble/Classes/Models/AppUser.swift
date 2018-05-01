@@ -56,6 +56,11 @@ class AppUser: BaseModel {
     private let kUserIsVerifiedKey = "isVerified"
     private let kUserTokenKey = "token"
     private let kUserImage = "image"
+    private let kUserBottles = "myBottles"
+    private let kUserReplies = "myReplies"
+    private let kUserShopItems = "shopItems"
+    
+    private let kUserBottlesCount = "bottlesCount"
     
     private let kBottleFirstColor: String = "fcolor"
     private let kBottleSecondColor: String = "lcolor"
@@ -78,6 +83,7 @@ class AppUser: BaseModel {
     public var accountType: AccountType?
     public var isVerified: Bool?
     public var token: String?
+    public var bottlesCount: Int?
     
     public var firstColor : UIColor?
     public var secondColor : UIColor?
@@ -85,6 +91,7 @@ class AppUser: BaseModel {
     public var imageUrl : String?
     public var myBottlesArray:[Conversation] = [Conversation]()
     public var myRepliesArray:[Conversation] = [Conversation]()
+//    public var shopItems:[ShopItem] = [ShopItem]()
     
     
     // MARK: User initializer
@@ -117,6 +124,8 @@ class AppUser: BaseModel {
         }
         isVerified = json[kUserIsVerifiedKey].boolValue
         token = json[kUserTokenKey].string
+//        bottlesCount = json[kUserBottlesCount].int
+         bottlesCount = 3
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -181,6 +190,14 @@ class AppUser: BaseModel {
         if let value = token {
             dictionary[kUserTokenKey] = value
         }
+        // bottle count
+        if let value = bottlesCount {
+            dictionary[kUserBottlesCount] = value
+        }
+        dictionary[kUserBottles] = myBottlesArray.map{$0}
+        dictionary[kUserReplies] = myRepliesArray.map{$0}
+//        dictionary[kUserShopItems] = shopItems.map{$0}
+        
         return dictionary
     }
     
