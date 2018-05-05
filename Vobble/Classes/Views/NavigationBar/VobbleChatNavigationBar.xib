@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VobbleChatNavigationBar">
             <connections>
                 <outlet property="leftIcon" destination="97f-uB-vZw" id="y4u-oI-cu5"/>
+                <outlet property="leftLabel" destination="MLS-OQ-7ca" id="JM1-oJ-yrl"/>
                 <outlet property="shoreNameLabel" destination="CBq-Rw-fmT" id="oFr-qt-HMd"/>
                 <outlet property="timerLabel" destination="yGv-8L-ytb" id="pax-PK-uuF"/>
                 <outlet property="userNameLabel" destination="bmq-6j-haP" id="See-nJ-F4L"/>

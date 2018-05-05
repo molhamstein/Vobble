@@ -62,6 +62,8 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    var isHideInputToolBar: Bool = false
+    
     var selectedImage: UIImage?
     var seconds: Double = 0.0
     
@@ -122,7 +124,13 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
-        initCustomToolBar()
+        if isHideInputToolBar {
+            inputToolbar.isHidden = true
+        } else {
+            inputToolbar.isHidden = false
+            initCustomToolBar()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,7 +143,12 @@ final class ChatViewController: JSQMessagesViewController {
             
             // init nav bar
 //            customNavBar.title = convTitle ?? ""
-            customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
+            if seconds != 0.0 {
+                customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
+            } else {
+                customNavBar.timerLabel.isHidden = true
+                customNavBar.leftLabel.isHidden = true
+            }
             customNavBar.shoreNameLabel.text = navShoreName
             customNavBar.userNameLabel.text = navUserName
             customNavBar.viewcontroller = self

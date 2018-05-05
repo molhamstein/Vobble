@@ -174,7 +174,7 @@ class FindBottleViewController: AbstractController {
 //                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(uid)")
 //            }
 
-            chatVc.seconds = 24.0*60.0*60.0
+//            chatVc.seconds = 24.0*60.0*60.0
             
             if let btl = bottle, let bottleOwnerId = btl.ownerId, let url = btl.attachment {
                 chatVc.senderId = "\(bottleOwnerId)"
@@ -185,7 +185,7 @@ class FindBottleViewController: AbstractController {
                 chatVc.senderId = "\(myId)"
                 chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL, upload: true)
             }
-            
+            chatVc.isHideInputToolBar = true
             
         }
         
@@ -214,7 +214,9 @@ class FindBottleViewController: AbstractController {
         let convlItem:[String : Any] = [
             "bottle": self.bottle?.dictionaryRepresentation(),
             "user": DataStore.shared.me?.dictionaryRepresentation(),
-            "createdAt" : ServerValue.timestamp()
+            "createdAt" : ServerValue.timestamp(),
+            "is_seen" : 0,
+            "startTime" : 0.0
         ]
         
         newConvRef.setValue(convlItem)

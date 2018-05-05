@@ -21,6 +21,7 @@ class VobbleChatNavigationBar: AbstractNibView {
     public var viewcontroller : UIViewController?
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var shoreNameLabel: UILabel!
+    @IBOutlet weak var leftLabel: UILabel!
     
     var delegate:ChatNavigationDelegate?
 

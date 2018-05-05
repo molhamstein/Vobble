@@ -157,25 +157,35 @@ extension ConversationViewController: UICollectionViewDelegate {
             let nav = segue.destination as! UINavigationController
             let chatVc = nav.topViewController as! ChatViewController
             
+            let convRef = conversationRef.child(conversation.idString!)
+            
             chatVc.senderDisplayName = "test"
+            
             if tap == .myBottles {
                 chatVc.convTitle = conversation.bottle?.owner?.firstName ?? ""
+                //if is_seen == false --> hide chat tool bar so we can't send any message
+                chatVc.isHideInputToolBar = true
+                
             } else if tap == .myReplies {
                 chatVc.convTitle = conversation.user?.firstName ?? ""
+                if let is_seen = conversation.is_seen, is_seen == 0 {
+                    convRef.updateChildValues(["is_seen": 1])
+                    convRef.updateChildValues(["startTime": ServerValue.timestamp()])
+                    chatVc.isHideInputToolBar = false
+                    chatVc.seconds = 24.0*60.0*60.0
+                 }
             }
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
-            
-            if let fTime = conversation.finishTime {
-                let currentDate = Date().timeIntervalSince1970 * 1000
+           
+            if let is_seen = conversation.is_seen, is_seen == 1 {
                 
-                let createdAt = conversation.createdAt
-                if let creationTime = conversation.createdAt{
-                    let mSecsLeft = fTime - creationTime
-                    let hoursLeft = (((mSecsLeft / 1000.0)/60.0)/60.0)
+                chatVc.isHideInputToolBar = false
+                if let fTime = conversation.finishTime {
+                    let currentDate = Date().timeIntervalSince1970 * 1000
+                    chatVc.seconds = (fTime - currentDate)/1000.0
                 }
-                
-                chatVc.seconds = (fTime - currentDate)/1000.0
             }
+            
             if let userName = conversation.bottle?.owner?.firstName {
                 chatVc.navUserName = userName
             }
@@ -187,8 +197,7 @@ extension ConversationViewController: UICollectionViewDelegate {
                     }
                 }
             }
-            
-            chatVc.conversationRef = conversationRef.child(conversation.idString!)
+            chatVc.conversationRef = convRef
         }
     }
     
@@ -314,28 +323,30 @@ extension ConversationViewController {
         
         self.showActivityLoader(true)
         
-//        let convRef: DatabaseReference?
-//        convRef = conversationRef
-        
-//        if (convRef != nil) {
-            conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
+        conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
                 
                 self.showActivityLoader(false)
                 let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 conversation.idString = snapshot.key
-                if let created_at = conversation.createdAt {
-                    conversation.finishTime = created_at + (24*60*60*1000)
+                if let is_seen = conversation.is_seen, is_seen == 1 {
+                    
+                    if let startTime = conversation.startTime {
+                        conversation.finishTime = startTime + (24*60*60*1000)
+                    }
+                } else {
+                    conversation.isActive = false
                 }
+                
                 if let is_active = conversation.isActive, !is_active {
                     //(My replies)
-                    if DataStore.shared.me?.id == conversation.user?.objectId {
+                    if let currentUserID = DataStore.shared.me?.objectId, let convUserID = conversation.user?.objectId,currentUserID == convUserID {
                         print("my bottles")
                         DataStore.shared.me?.myBottlesArray.append(conversation)
                         DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
                             return (obj1.createdAt! > obj2.createdAt!)
                         })
                         self.bottleCollectionView.reloadData()
-                    } else if DataStore.shared.me?.id == conversation.bottle?.owner?.objectId { // (My replies)
+                    } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID { // (My replies)
                         print("my replies")
                         DataStore.shared.me?.myRepliesArray.append(conversation)
                         DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
@@ -351,9 +362,67 @@ extension ConversationViewController {
                 self.showActivityLoader(false)
                 
             }
+        
+        conversationRef.observe(.childChanged, with: { (snapshot) in
+        
+            self.showActivityLoader(false)
+            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+            conversation.idString = snapshot.key
+            if let is_seen = conversation.is_seen, is_seen == 1 {
+                
+                if let startTime = conversation.startTime {
+                    conversation.finishTime = startTime + (24*60*60*1000)
+                }
+            } else {
+                conversation.isActive = false
+            }
+            
+            if let is_active = conversation.isActive, !is_active {
+                //(My replies)
+                if let currentUserID = DataStore.shared.me?.objectId, let convUserID = conversation.user?.objectId,currentUserID == convUserID {
+                    print("my bottles")
+                    
+                    if let myBottlesArray = DataStore.shared.me?.myBottlesArray {
+                        var i = 0
+                        for conv in myBottlesArray {
+                            
+                            if conv.idString == conversation.idString {
+                                DataStore.shared.me?.myBottlesArray[i] = conversation
+                                DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
+                                    return (obj1.createdAt! > obj2.createdAt!)
+                                })
+                                self.bottleCollectionView.reloadData()
+                                break
+                            } else {
+                                i = i + 1
+                            }
+                        }
+                        
+                    }
+                    
+                } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID { // (My replies)
+                    print("my replies")
 
-//        } else {
-//             self.showActivityLoader(false)
-//        }
+                    if let myBottlesArray = DataStore.shared.me?.myRepliesArray {
+                        var i = 0
+                        for conv in myBottlesArray {
+                            
+                            if conv.idString == conversation.idString {
+                                DataStore.shared.me?.myRepliesArray[i] = conversation
+                                DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
+                                    return (obj1.createdAt! > obj2.createdAt!)
+                                })
+                                self.bottleCollectionView.reloadData()
+                                break
+                            } else {
+                                i = i + 1
+                            }
+                        }
+                        
+                    }
+                    
+                }
+            }
+        })
     }
 }

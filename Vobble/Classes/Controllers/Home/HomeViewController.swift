@@ -230,7 +230,6 @@ class HomeViewController: AbstractController {
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
        
-        let bCount2 = DataStore.shared.me?.bottlesCount
         if let bCount = DataStore.shared.me?.bottlesCount, bCount>0 {
             DataStore.shared.me?.bottlesCount = bCount - 1
             self.wiggleAnimate(view: self.ivThrowBtn)

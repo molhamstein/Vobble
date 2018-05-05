@@ -16,6 +16,9 @@ class Conversation: BaseModel {
     private let kuser: String = "user"
     private let kBottle: String = "bottle"
     private let kCreatedAt: String = "createdAt"
+    private let kStartTime: String = "startTime"
+    private let kFinishTime: String = "finishTime"
+    private let kIsSeen: String = "is_seen"
     
     
     // MARK: Properties
@@ -23,8 +26,10 @@ class Conversation: BaseModel {
     public var user : AppUser?
     public var bottle: Bottle?
     public var createdAt: Double?
+    public var startTime: Double?
     public var finishTime: Double?
     private var _isActive: Bool?
+    public var is_seen: Int?
     
     
     public var isActive:Bool? {
@@ -64,6 +69,12 @@ class Conversation: BaseModel {
         if let value = json[kCreatedAt].double {
             createdAt = value
         }
+        if let value = json[kStartTime].double {
+            startTime = value
+        }
+        if let value = json[kIsSeen].int {
+            is_seen = value
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -84,6 +95,18 @@ class Conversation: BaseModel {
         
         if let value = createdAt {
             dictionary[kCreatedAt] = value
+        }
+        
+        if let value = startTime {
+            dictionary[kStartTime] = value
+        }
+        
+        if let value = finishTime {
+            dictionary[kFinishTime] = value
+        }
+        
+        if let value = is_seen {
+            dictionary[kIsSeen] = value
         }
         
         return dictionary
