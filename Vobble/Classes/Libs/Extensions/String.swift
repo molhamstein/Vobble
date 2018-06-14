@@ -23,6 +23,10 @@ extension String {
         return emailTest.evaluate(with: self)
     }
     
+    func isValidLink() -> Bool {
+        return self.hasPrefix("http://") || self.hasPrefix("https://")
+    }
+    
     /// Check if the string is alphanumeric
     var isAlphanumeric: Bool {
         return self.range(of: "^[a-z A-Z]+$", options:String.CompareOptions.regularExpression) != nil

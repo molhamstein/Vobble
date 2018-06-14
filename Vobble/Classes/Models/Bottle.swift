@@ -19,17 +19,19 @@ class Bottle: BaseModel {
     private let kOwnerId: String = "ownerId"
     private let kOwner: String = "owner"
     private let kShoreId: String = "shoreId"
-    private let kattachment: String = "attachment"
+    private let kattachment: String = "file"
+    private let kThumb: String = "thumbnail"
     
     
     // MARK: Properties
-    public var bottle_id : Int?
+    public var bottle_id : String?
     public var status : String?
     public var viewsCount : Int?
     public var repliesCount : Int?
-    public var ownerId : Int?
-    public var shoreId : Int?
+    public var ownerId : String?
+    public var shoreId : String?
     public var attachment: String?
+    public var thumb: String?
     public var owner: AppUser?
     
     
@@ -41,7 +43,7 @@ class Bottle: BaseModel {
     required init(json: JSON) {
         super.init(json: json)
         
-        if let value = json[kBottleId].int {
+        if let value = json[kBottleId].string {
             bottle_id = value
         }
         if let value = json[kStatus].string {
@@ -56,10 +58,13 @@ class Bottle: BaseModel {
         if let value = json[kattachment].string {
             attachment = value
         }
-        if let value = json[kOwnerId].int {
+        if let value = json[kThumb].string {
+            thumb = value
+        }
+        if let value = json[kOwnerId].string {
             ownerId = value
         }
-        if let value = json[kShoreId].int {
+        if let value = json[kShoreId].string {
                 shoreId = value
         }
         if json[kOwner] != JSON.null {
@@ -93,6 +98,10 @@ class Bottle: BaseModel {
         
         if let value = attachment {
             dictionary[kattachment] = value
+        }
+        
+        if let value = thumb {
+            dictionary[kThumb] = value
         }
         
         if let value = shoreId {

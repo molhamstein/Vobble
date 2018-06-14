@@ -18,6 +18,7 @@ class Message: BaseModel {
     private let kPhotoUrl: String = "photoURL"
     private let kVideoUrl: String = "videoURL"
     private let kAudioUrl: String = "audioURL"
+    private let kThumb: String = "thumb"
 
     
     // MARK: Properties
@@ -28,6 +29,7 @@ class Message: BaseModel {
     public var photoUrl: String?
     public var videoUrl: String?
     public var audioUrl: String?
+    public var thumbUrl: String?
     
     
     // MARK: Initializers
@@ -49,6 +51,9 @@ class Message: BaseModel {
         }
         if let value = json[kPhotoUrl].string {
             photoUrl = value
+        }
+        if let value = json[kThumb].string {
+            thumbUrl = value
         }
         if let value = json[kVideoUrl].string {
             videoUrl = value
@@ -73,6 +78,9 @@ class Message: BaseModel {
         }
         if let value = photoUrl {
             dictionary[kPhotoUrl] = value
+        }
+        if let value = thumbUrl {
+            dictionary[kThumb] = value
         }
         if let value = videoUrl {
             dictionary[kVideoUrl] = value

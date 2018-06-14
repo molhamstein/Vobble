@@ -11,14 +11,17 @@ import SwiftyJSON
 
 class Media: BaseModel {
     
+    
     // MARK: Keys
-    private let kname: String = "name"
-    private let ktype: String = "type"
+    private let kType: String = "type"
+    private let kThumb: String = "thumbnail"
+    private let kFile: String = "file"
     
     // MARK: Properties
-    public var name : String?
-    public var type : String?
+    //public var name : String?
+    public var type : AppMediaType?
     public var fileUrl: String?
+    public var thumbUrl: String?
     
     
     // MARK: Initializers
@@ -29,27 +32,26 @@ class Media: BaseModel {
     required init(json: JSON) {
         super.init(json: json)
         
-        if let value = json[kname].string {
-            name = value
+        if let n = json[kFile].string {
+           self.fileUrl = n
         }
-        if let value = json[ktype].string {
-            type = value
+        if let t = json[kThumb].string {
+            self.thumbUrl = t
         }
-        if let n = name {
-           self.fileUrl = "\(AppConfig.appBaseDevURL)/uploads/videos/download/\(n)" 
-        }
-        
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
         
         var dictionary: [String: Any] = super.dictionaryRepresentation()
         
-        if let value = name {
-            dictionary[kname] = value
+        if let value = fileUrl {
+            dictionary[kFile] = value
+        }
+        if let value = thumbUrl {
+            dictionary[kThumb] = value
         }
         if let value = type {
-            dictionary[ktype] = value
+            dictionary[kType] = value.rawValue
         }
         
         return dictionary

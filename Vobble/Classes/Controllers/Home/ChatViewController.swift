@@ -34,6 +34,7 @@ final class ChatViewController: JSQMessagesViewController {
     private let imageURLNotSetKey = "NOTSET"
     
     var conversationRef: DatabaseReference?
+    var conversationOriginalObject: Conversation?
     
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
 //    fileprivate lazy var storageRef: StorageReference = Storage.storage().reference(forURL: "gs://vobble-1521577974841.appspot.com")
@@ -52,6 +53,11 @@ final class ChatViewController: JSQMessagesViewController {
     
     @IBOutlet var customNavBar: VobbleChatNavigationBar!
     @IBOutlet var recordButton : SDRecordButton!
+    @IBOutlet var recordButtonContainer : UIView!
+    
+    
+    // notifications
+    var lastNotificationSentDate: Date?
     
     //  private var localTyping = false
     
@@ -114,7 +120,7 @@ final class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.senderId = FIRAuth.auth()?.currentUser?.uid
-        if let userId = DataStore.shared.me?.id {
+        if let userId = DataStore.shared.me?.objectId {
             self.senderId = "\(userId)"
         }
         customNavBar.delegate = self
@@ -138,7 +144,7 @@ final class ChatViewController: JSQMessagesViewController {
         
         if customNavBar.superview == nil {
             // re-add subiews connected from storyboard as the JSQM messages framewordk detaches them
-            customNavBar.frame = CGRect(x: 0, y: -20, width: self.view.frame.width, height: 110)
+            customNavBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 110)
             self.view.addSubview(customNavBar)
             
             // init nav bar
@@ -240,7 +246,7 @@ final class ChatViewController: JSQMessagesViewController {
             if mediaItem is JSQCustomPhotoMediaItem {
                 let photoItem = mediaItem as! JSQCustomPhotoMediaItem
                 if let test: UIImage = photoItem.asyncImageView.image {
-                    let photo: PreviewPhoto = PreviewPhoto(image: test, title: description)
+                    let photo: PreviewPhoto = PreviewPhoto(image: test, title: "")
                     let images = [photo]
                     let photosViewController = NYTPhotosViewController(photos: images)
                     present(photosViewController, animated: true, completion: nil)
@@ -251,7 +257,7 @@ final class ChatViewController: JSQMessagesViewController {
             if mediaItem is JSQCustomVideoMediaItem {
                 let videoItem = mediaItem as! JSQCustomVideoMediaItem
                 print(videoItem.message.videoUrl)
-                if  let videoUrl = videoItem.message.videoUrl, videoUrl.hasPrefix("http://") {
+                if  let videoUrl = videoItem.message.videoUrl, (videoUrl.hasPrefix("http://") || videoUrl.hasPrefix("https://")) {
                     
                     let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
                     previewControl.from = .chatView
@@ -260,10 +266,8 @@ final class ChatViewController: JSQMessagesViewController {
                     
                     self.navigationController?.pushViewController(previewControl, animated: false)
                 }
-                
             }
         }
-        
     }
     
     // MARK: Firebase related methods
@@ -299,7 +303,7 @@ final class ChatViewController: JSQMessagesViewController {
                 self.addVideoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                 
                 if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
-                    mediaItem.message.videoUrl = mediaURL
+                    mediaItem.message = message
                     self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
                 }
                 
@@ -338,7 +342,7 @@ final class ChatViewController: JSQMessagesViewController {
             } else if let mediaURL = message.videoUrl {
              
                 if let mediaItem = self.videoMessageMap[message.idString!] {
-                    mediaItem.message.videoUrl = mediaURL
+                    mediaItem.message = message
                     self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                 }
                 
@@ -406,8 +410,7 @@ final class ChatViewController: JSQMessagesViewController {
         let messageItem = [
             "senderId": senderId!,
             "senderName": senderDisplayName!,
-            "text": text!,
-            "test": "test",
+            "text": text!
             ]
         
         // 3
@@ -416,34 +419,49 @@ final class ChatViewController: JSQMessagesViewController {
         // 4
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
+        onNewMessageSent()
+        
         // 5
         finishSendingMessage()
         //    isTyping = false
     }
     
-    func sendMediaMessage(mediaTag: String) -> String? {
+    func sendMediaMessage(mediaType: AppMediaType) -> String? {
         let itemRef = messageRef.childByAutoId()
         
-        let messageItem = [
-            mediaTag : imageURLNotSetKey,
-            "senderId": senderId!,
+        var messageItem = [
+            "senderId": senderId!
             ]
+        if mediaType == .video {
+            messageItem["videoURL"] = imageURLNotSetKey
+            messageItem["thumb"] = imageURLNotSetKey
+        } else if mediaType == .image {
+            messageItem["photoURL"] = imageURLNotSetKey
+            messageItem["thumb"] = imageURLNotSetKey
+        } else { // audio
+            messageItem["audioURL"] = imageURLNotSetKey
+        }
         
         itemRef.setValue(messageItem)
         
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
         finishSendingMessage()
+        
         return itemRef.key
     }
     
     func setMediaURL(_ media: Media, forPhotoMessageWithKey key: String) {
         let itemRef = messageRef.child(key)
-        if media.type == "image/jpeg" ||  media.type == "image/png" {
+        if media.type == .image {
             itemRef.updateChildValues(["photoURL": media.fileUrl!])
-        } else if media.type == "video/quicktime" {
-            itemRef.updateChildValues(["videoURL": media.fileUrl!])
-        } else if media.type == "audio/x-m4a" {
+        } else if media.type == .video {
+            if let thumbUrl = media.thumbUrl {
+                itemRef.updateChildValues(["thumb": thumbUrl, "videoURL": media.fileUrl!])
+            } else {
+                itemRef.updateChildValues(["videoURL": media.fileUrl!])
+            }
+        } else if media.type == .audio {
             itemRef.updateChildValues(["audioURL": media.fileUrl!])
         }
     }
@@ -487,7 +505,6 @@ final class ChatViewController: JSQMessagesViewController {
             if (mediaItem.image == nil) {
                 photoMessageMap[key] = mediaItem
             }
-            
             collectionView.reloadData()
         }
     }
@@ -499,7 +516,6 @@ final class ChatViewController: JSQMessagesViewController {
             if (mediaItem.thumbImageView.image == nil ) {
                 videoMessageMap[key] = mediaItem
             }
-            
             collectionView.reloadData()
         }
     }
@@ -511,8 +527,25 @@ final class ChatViewController: JSQMessagesViewController {
             if (mediaItem.audioData == nil ) {
                 audioMessageMap[key] = mediaItem
             }
-            
             collectionView.reloadData()
+        }
+    }
+    
+    func onNewMessageSent() {
+        
+        // send a push notifications to the peer if the last push notification sent was more than 20 seconds ago
+        var shouldSenPushNotification = false
+        if let lastNotifDate = lastNotificationSentDate {
+            shouldSenPushNotification = ((lastNotifDate.timeIntervalSinceNow) >= 30)
+        } else {
+            shouldSenPushNotification = true
+        }
+        if shouldSenPushNotification {
+            lastNotificationSentDate = Date()
+            if let peer = conversationOriginalObject?.getPeer {
+            let msgToSend = String(format: "NOTIFICATION_NEW_MSG".localized, (DataStore.shared.me?.userName)!)
+                ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: peer, completionBlock: { (success, error) in })
+            }
         }
     }
     
@@ -523,8 +556,6 @@ final class ChatViewController: JSQMessagesViewController {
         // If the text is not empty, the user is typing
         //    isTyping = textView.text != ""
     }
-    
-    
 }
 
 // MARK: Image Picker Delegate
@@ -543,7 +574,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             
         } else if mediaType == "public.movie" {
             if let mediaUrl = info[UIImagePickerControllerMediaURL] as? URL {
-                uploadVideo(videoUrl: mediaUrl, upload:true)
+                uploadVideo(videoUrl: mediaUrl)
             }
         }
        
@@ -555,45 +586,46 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     func uploadPhoto(photoUrl:URL) {
         
-        if let key = sendMediaMessage(mediaTag: "photoURL") {
+        if let key = sendMediaMessage(mediaType: .image) {
             
             let assets = PHAsset.fetchAssets(withALAssetURLs: [photoUrl], options: nil)
             let asset = assets.firstObject
             asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
                 
-                self.upload(url: (contentEditingInput?.fullSizeImageURL)!, key:key)
+                self.upload(url: (contentEditingInput?.fullSizeImageURL)!, key:key, mediaType: .image)
             })
-            
         }
     }
     
-    func uploadVideo(videoUrl:URL, upload: Bool) {
-        
-        if let key = sendMediaMessage(mediaTag: "videoURL")  {
-            if upload {
-                self.upload(url: videoUrl, key:key)
-            } else {
-                let media:Media = Media()
-                media.fileUrl = videoUrl.absoluteString
-                media.type = "video/quicktime" 
-                self.setMediaURL(media, forPhotoMessageWithKey: key)
-            }
+    func submitMessageWithVideoURL(videoUrl: String, thumbURL: String) {
+        if let key = sendMediaMessage(mediaType: .video)  {
+            let media:Media = Media()
+            media.fileUrl = videoUrl
+            media.thumbUrl = thumbURL
+            media.type = .video
+            self.setMediaURL(media, forPhotoMessageWithKey: key)
+        }
+    }
+    
+    func uploadVideo(videoUrl:URL) {
+        if let key = sendMediaMessage(mediaType: .video)  {
+            self.upload(url: videoUrl, key:key, mediaType: .video)
         }
     }
     
     func uploadAudio(audioUrl:URL) {
         
-        if let key = sendMediaMessage(mediaTag: "audioURL") {
-           self.upload(url: audioUrl, key:key)
+        if let key = sendMediaMessage(mediaType: .audio) {
+           self.upload(url: audioUrl, key:key, mediaType: .audio)
         }
     }
     
-    func upload(url:URL,key:String) {
+    func upload(url:URL, key:String, mediaType: AppMediaType) {
         
         self.isLoadedMedia = false
         self.numberOfSentMedia += 1
         let urls:[URL] = [url]
-        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
+        ApiManager.shared.uploadMedia(urls: urls, mediaType: mediaType) { (files, errorMessage) in
             
             if errorMessage == nil {
                 self.numberOfSentMedia -= 1
@@ -602,13 +634,21 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 }
                 self.setMediaURL(files[0], forPhotoMessageWithKey: key)
                 
+                self.onNewMessageSent()
+                if self.messages.count <= 2 {
+                    // this means this was the first reply messsage in the conversation and the chat is not open yet
+                    // show explanation message
+                    let alertController = UIAlertController(title: "", message: "CHAT_REPLY_SENT_MSG".localized, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
             } else {
                 self.isLoadedMedia = true
                 print("error")
             }
-            
         }
-        
     }
 }
 
@@ -698,8 +738,8 @@ extension ChatViewController: AVAudioRecorderDelegate {
         if sender.state == .began {
             print("UILongPressGestureRecognizerStateBegan so start the recording voice here")
             //write the function for start recording the voice here
-            recordButton.frame = CGRect(x: self.view.frame.width/2 - 70, y: self.view.frame.height/2 - 80, width: 70, height: 80)
-            self.view.addSubview(recordButton)
+            recordButtonContainer.frame = CGRect(x: self.view.frame.width/2 - 100, y: self.view.frame.height/2 - 120, width: 200, height: 240)
+            self.view.addSubview(recordButtonContainer)
             
             // reset the timer
             recordTimer?.invalidate()
@@ -781,7 +821,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         // stop recording
         self.recordButton.setProgress(0)
         timeOut = 0.0
-        recordButton.removeFromSuperview()
+        recordButtonContainer.removeFromSuperview()
         soundRecorder.stop()
     }
 }

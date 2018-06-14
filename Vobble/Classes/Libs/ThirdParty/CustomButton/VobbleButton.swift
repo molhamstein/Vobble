@@ -18,6 +18,7 @@ open class VobbleButton : RNLoadingButton {
        
         setShadow()
         setCornerRadius()
+        self.titleLabel?.font = AppFonts.bigBold
         
     }
     

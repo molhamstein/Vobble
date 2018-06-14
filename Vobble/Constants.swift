@@ -13,20 +13,21 @@ struct AppConfig {
     
     // domain
     //static let appBaseDevURL = "https://brain-socket.com/dev"
-    static let appBaseDevURL = "http://104.217.253.15:9999/api"
-//    static let appBaseDevURL = "https://vobble.herokuapp.com/api"
+    //static let appBaseDevURL = "https://vobble.herokuapp.com/api"
+    static let appBaseDevURL = "http://104.217.253.15:7000/api"
     static let appBaseLiveURL = "https://brain-socket.com/live"
     static let useLiveAPI: Bool = false
     static let useCurrentLocation: Bool = false
     static let contactUsEmail: String = "hey@vobble.com"
     
     // social
-    static let instagramClienID = "aec83807b3e74ec2a8336f4fdc0b8148"
+    static let instagramClienID = "99366a1b59984cffb7e99bb8c9c7fda8"
     static let instagramRedirectURI = "http://brain-socket.com"
     static let twitterConsumerKey = "eq0dVMoM1JqNcR6VJJILsdXNddo"
     static let twitterConsumerSecret = "6JkdvzSijm13xjBW0fYSEG4yF2tbro8pwxz1vDx290Bj0aMw2vssI"
     static let googleClientID = "82142364137-21s23clufpu4d0abp5ppa5na245tak1u.apps.googleusercontent.com"
     static let oneSingleID = "3754a01e-b355-4248-a906-e04549e6ab32"
+    static let AppleStoreAppId = "3754a01e-b355-4248-a906-e04549e6ab32"
     
     static let PlaceHolderImage = UIImage(named: "bottle-1")
     
@@ -67,6 +68,15 @@ enum ScreenSize {
     static let isBigScreen =  UIScreen.main.bounds.height >= 736 // iphone 6Plus/7Plus
     static let isIphone = UIDevice.current.userInterfaceIdiom == .phone
 }
+
+
+// MARK: media Type
+enum AppMediaType :String{
+    case video = "video/*"
+    case image = "image/*"
+    case audio = "audio/*"
+}
+
 
 // MARK: Application language
 enum AppLanguage{

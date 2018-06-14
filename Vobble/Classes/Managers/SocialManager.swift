@@ -24,10 +24,10 @@ class SocialManager: NSObject{
    
     // MARK: Authorization
     /// Facebook login request
-    func facebookLogin(controller: UIViewController, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+    func facebookLogin(controller: UIViewController, completionBlock: @escaping (_ user: AppUser?, _ success: Bool, _ error: ServerError?) -> Void) {
         let fbLoginManager: FBSDKLoginManager = FBSDKLoginManager()
         // ask for email permission
-        fbLoginManager.logIn(withReadPermissions: ["email"], from: controller) { (result, error) in
+        fbLoginManager.logIn(withReadPermissions: ["email", "user_location"], from: controller) { (result, error) in
             // check errors
             if (error == nil) {
                 // check if user grants the permissions
@@ -35,37 +35,51 @@ class SocialManager: NSObject{
                 if (fbloginresult.grantedPermissions != nil) {
                     if (fbloginresult.grantedPermissions.contains("email")) {
                         if ((FBSDKAccessToken.current()) != nil) {
-                            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id,name,first_name,last_name,picture,email,location{location{country_code}},gender"]).start(completionHandler: { (connection, result, error) -> Void in
                                 if (error == nil) {
                                     let dict = result as! [String : AnyObject]
                                     if let facebookId = dict["id"] as? String {
+                                        let fName = dict["first_name"] as? String
+                                        let lName = dict["last_name"] as? String
+                                        let userName = (fName?.trimed)! + "." + (lName?.trimed)!
+                                        var pictureLink = ""
+                                        let email = dict["email"] as! String
+                                        var countryCode = "CH"
+                                        let gender = "male"
+                                        if let locationObj = dict["location"] as? [String : AnyObject], let innerLocationObj = locationObj["location"] as? [String : AnyObject] {
+                                            countryCode = innerLocationObj["country_code"] as! String
+                                        }
+                                        if let picObj = dict["picture"] as? [String : AnyObject], let innerPicObj = picObj["data"] as? [String : AnyObject] {
+                                            pictureLink = innerPicObj["url"] as! String
+                                        }
+                                        
                                         // send facebook ID to start login process
-                                        ApiManager.shared.userFacebookLogin(facebookId: facebookId) { (isSuccess, error, user) in
+                                        ApiManager.shared.userFacebookLogin(facebookId: facebookId, fbName: userName, fbToken: FBSDKAccessToken.current().tokenString, email: email, fbGender: gender, imageLink: pictureLink) { (isSuccess, error, user) in
                                             // login success
                                             if (isSuccess) {
-                                                completionBlock(true , nil)
+                                                completionBlock(user, true , nil)
                                             } else {
-                                                completionBlock(false , error)
+                                                completionBlock(nil, false , error)
                                             }
                                         }
                                     } else {
-                                        completionBlock(false , ServerError.socialLoginError)
+                                        completionBlock(nil, false , ServerError.socialLoginError)
                                     }
                                 }  else {
-                                    completionBlock(false , ServerError.socialLoginError)
+                                    completionBlock(nil, false , ServerError.socialLoginError)
                                 }
                             })
                         } else {
-                            completionBlock(false , ServerError.socialLoginError)
+                            completionBlock(nil, false , ServerError.socialLoginError)
                         }
                     } else {
-                        completionBlock(false , ServerError.socialLoginError)
+                        completionBlock(nil, false , ServerError.socialLoginError)
                     }
                 } else {
-                    completionBlock(false , ServerError.socialLoginError)
+                    completionBlock(nil, false , ServerError.socialLoginError)
                 }
             } else {
-                completionBlock(false , ServerError.socialLoginError)
+                completionBlock(nil, false , ServerError.socialLoginError)
             }
         }
     }
@@ -99,7 +113,7 @@ class SocialManager: NSObject{
     }
     
     /// Instagram login request
-    func instagramLogin(controller: UIViewController, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+    func instagramLogin(controller: UIViewController, completionBlock: @escaping (_ user: AppUser?, _ success: Bool, _ error: ServerError?) -> Void) {
         typealias JSONDictionary = [String:Any]
         // set instagram client ID and redirect URI
         let auth: NSMutableDictionary = ["client_id": AppConfig.instagramClienID, SimpleAuthRedirectURIKey: AppConfig.instagramRedirectURI]
@@ -110,26 +124,77 @@ class SocialManager: NSObject{
             if (error == nil) {
                 let dict = result as! [String : AnyObject]
                 if let instagramId = dict["uid"] as? String, let instagramToken = dict["credentials"]?["token"] as? String {
+                    let instaUserInfo = dict["user_info"] as! [String : AnyObject]
+                    let username = instaUserInfo["username"] as? String
+                    let image = instaUserInfo["image"] as? String
+                    let userInfoHolder = AppUser()
+                    userInfoHolder.userName = username
+                    userInfoHolder.profilePic = image
+                    userInfoHolder.loginType = .instagram
+                    userInfoHolder.socialId = instagramId
+                    userInfoHolder.socialToken = instagramToken
+                    userInfoHolder.gender = .male
+                    userInfoHolder.countryISOCode = "CH"
                     // send instagram ID and token to start login process
-                    ApiManager.shared.userInstagramLogin(userId: instagramId, token: instagramToken) { (isSuccess, error, user) in
+                    ApiManager.shared.userInstagramLogin(user: userInfoHolder) { (isSuccess, error, user) in
                         // login success
                         if (isSuccess) {
-                            completionBlock(true , nil)
+                            completionBlock(user, true , nil)
                         } else {
-                            completionBlock(false , error)
+                            completionBlock(nil, false , error)
                         }
                     }
                 } else {
-                    completionBlock(false , ServerError.socialLoginError)
+                    completionBlock(nil, false , ServerError.socialLoginError)
                 }
             } else {
-                completionBlock(false , ServerError.socialLoginError)
+                completionBlock(nil, false , ServerError.socialLoginError)
             }
         }
     }
     
+    func googleLoginResult(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!, completionBlock: @escaping (_ user: AppUser?, _ success: Bool, _ error: ServerError?) -> Void) {
+        
+        if (error == nil) {
+            let userDataHolder = AppUser()
+            userDataHolder.userName = user.profile.name
+            userDataHolder.socialToken = user.authentication.idToken
+            userDataHolder.socialId = user.userID
+            userDataHolder.email = user.profile.email
+            userDataHolder.profilePic = user.profile.imageURL(withDimension: 200).absoluteString
+            userDataHolder.gender = .male
+            userDataHolder.loginType = .google
+            userDataHolder.countryISOCode = "CH"
+            
+            ApiManager.shared.userInstagramLogin(user: userDataHolder) { (isSuccess, error, user) in
+                // login success
+                if (isSuccess) {
+                    completionBlock(user, true , nil)
+                } else {
+                    completionBlock(nil, false , error)
+                }
+            }
+//            let userId = user.userID                  // For client-side use only!
+//            let idToken = user.authentication.idToken // Safe to send to the server
+//            let fullName = user.profile.name
+//            let givenName = user.profile.givenName
+//            let familyName = user.profile.familyName
+//            let email = user.profile.email
+            
+            // ...
+        } else {
+            completionBlock(nil, false , ServerError.socialLoginError)
+        }
+    }
+    
     /// Google login request
-    func googleLogin(controller: UIViewController, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+    func googleLogin(delegateController: LoginViewController) {
+        
+        GIDSignIn.sharedInstance().clientID = AppConfig.googleClientID
+        GIDSignIn.sharedInstance().delegate = delegateController
+        GIDSignIn.sharedInstance().uiDelegate = delegateController
+        GIDSignIn.sharedInstance().signIn()
+        
 //        GIDSignIn.sharedInstance().delegate = self
 //        GIDSignIn.sharedInstance().uiDelegate = self
 //        GIDSignIn.sharedInstance().clientID = AppConfig.googleClientID
@@ -141,5 +206,7 @@ class SocialManager: NSObject{
     }
    
 }
+
+
 
 

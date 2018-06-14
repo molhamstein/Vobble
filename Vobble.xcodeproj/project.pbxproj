@@ -14,7 +14,10 @@
 		5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C435204DDFF4006E7C9A /* ShoreCell.swift */; };
 		570BB322208138ED00542EAD /* PassthroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570BB320208138ED00542EAD /* PassthroughView.m */; };
 		570BB3242081445C00542EAD /* crab.gif in Resources */ = {isa = PBXBuildFile; fileRef = 570BB3232081445C00542EAD /* crab.gif */; };
-		57395CD2207047AE00F0A3DB /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57395CD1207047AE00F0A3DB /* find_bottle.gif */; };
+		571084C720C01176001163EA /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C620C01176001163EA /* InventoryItem.swift */; };
+		571084C920C02262001163EA /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C820C02262001163EA /* ReportType.swift */; };
+		572F5A0B20A4216100355D7F /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 572F5A0A20A4216100355D7F /* find_bottle.gif */; };
+		572F5A0F20A4225B00355D7F /* girl_3_1_night.gif in Resources */ = {isa = PBXBuildFile; fileRef = 572F5A0E20A4225B00355D7F /* girl_3_1_night.gif */; };
 		57413D55204D3B5700450A42 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 57413D54204D3B5700450A42 /* GCD.m */; };
 		5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C13F205660B300A5402D /* VideoPlayerView.swift */; };
 		5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5742C140205660B300A5402D /* VideoPlayerView.xib */; };
@@ -22,11 +25,13 @@
 		57521FC6205FE9210062A4A5 /* throwBottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57521FC5205FE9210062A4A5 /* throwBottle.gif */; };
 		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
 		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
+		576807B120AF1A500039E2C2 /* RateUsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */; };
+		5773BDD820B6363F0011256A /* dolphin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5773BDD720B6363F0011256A /* dolphin.gif */; };
 		578A25112058771A00801F77 /* girl_3_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A250F2058771A00801F77 /* girl_3_1.gif */; };
 		578A25122058771A00801F77 /* girl_3_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A25102058771A00801F77 /* girl_3_2.gif */; };
-		578A25142058823C00801F77 /* girl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 578A25132058823C00801F77 /* girl.gif */; };
 		5796242F20793B790005292A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242D20793B790005292A /* TermsViewController.swift */; };
 		5796243020793B790005292A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242E20793B790005292A /* AboutViewController.swift */; };
+		57D3A89A20A9EB4E004DFED2 /* girl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57D3A89920A9EB4E004DFED2 /* girl.gif */; };
 		57DE7459207D77E00061CA2F /* fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57DE7458207D77E00061CA2F /* fire.gif */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
@@ -269,7 +274,10 @@
 		570BB320208138ED00542EAD /* PassthroughView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassthroughView.m; sourceTree = "<group>"; };
 		570BB321208138ED00542EAD /* PassthroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassthroughView.h; sourceTree = "<group>"; };
 		570BB3232081445C00542EAD /* crab.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = crab.gif; sourceTree = "<group>"; };
-		57395CD1207047AE00F0A3DB /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
+		571084C620C01176001163EA /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
+		571084C820C02262001163EA /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
+		572F5A0A20A4216100355D7F /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
+		572F5A0E20A4225B00355D7F /* girl_3_1_night.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_1_night.gif; sourceTree = "<group>"; };
 		57413D53204D3B5700450A42 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		57413D54204D3B5700450A42 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 		5742C13F205660B300A5402D /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerView.swift; path = VideoPlayer/VideoPlayerView.swift; sourceTree = "<group>"; };
@@ -278,11 +286,13 @@
 		57521FC5205FE9210062A4A5 /* throwBottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = throwBottle.gif; sourceTree = "<group>"; };
 		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
 		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateUsPopupViewController.swift; sourceTree = "<group>"; };
+		5773BDD720B6363F0011256A /* dolphin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dolphin.gif; sourceTree = "<group>"; };
 		578A250F2058771A00801F77 /* girl_3_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_1.gif; sourceTree = "<group>"; };
 		578A25102058771A00801F77 /* girl_3_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_2.gif; sourceTree = "<group>"; };
-		578A25132058823C00801F77 /* girl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl.gif; sourceTree = "<group>"; };
 		5796242D20793B790005292A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsViewController.swift; path = ../Home/TermsViewController.swift; sourceTree = "<group>"; };
 		5796242E20793B790005292A /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ../Home/AboutViewController.swift; sourceTree = "<group>"; };
+		57D3A89920A9EB4E004DFED2 /* girl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl.gif; sourceTree = "<group>"; };
 		57DE7458207D77E00061CA2F /* fire.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fire.gif; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
@@ -662,11 +672,13 @@
 			isa = PBXGroup;
 			children = (
 				570BB3232081445C00542EAD /* crab.gif */,
+				572F5A0A20A4216100355D7F /* find_bottle.gif */,
 				57DE7458207D77E00061CA2F /* fire.gif */,
-				57395CD1207047AE00F0A3DB /* find_bottle.gif */,
 				57521FC5205FE9210062A4A5 /* throwBottle.gif */,
-				578A25132058823C00801F77 /* girl.gif */,
+				5773BDD720B6363F0011256A /* dolphin.gif */,
 				578A250F2058771A00801F77 /* girl_3_1.gif */,
+				572F5A0E20A4225B00355D7F /* girl_3_1_night.gif */,
+				57D3A89920A9EB4E004DFED2 /* girl.gif */,
 				578A25102058771A00801F77 /* girl_3_2.gif */,
 			);
 			name = gif;
@@ -812,6 +824,7 @@
 			isa = PBXGroup;
 			children = (
 				B1F7A457205A113B009B18AB /* ShopItem.swift */,
+				571084C620C01176001163EA /* InventoryItem.swift */,
 				B19372D42033E3FC007B1E7D /* AppUser.swift */,
 				B19372D62033E3FC007B1E7D /* BaseModel.swift */,
 				B19372D72033E3FC007B1E7D /* Category.swift */,
@@ -827,6 +840,7 @@
 				B156A4442058952300654E2A /* Conversation.swift */,
 				B1AE405220699A52006B38FD /* Media.swift */,
 				B1B6DB322073D55400BD16BC /* Message.swift */,
+				571084C820C02262001163EA /* ReportType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1303,6 +1317,7 @@
 				B19371122033D254007B1E7D /* ProfileViewController.swift */,
 				5796242D20793B790005292A /* TermsViewController.swift */,
 				5796242E20793B790005292A /* AboutViewController.swift */,
+				576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1520,15 +1535,16 @@
 				5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */,
 				B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */,
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
+				57D3A89A20A9EB4E004DFED2 /* girl.gif in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				570BB3242081445C00542EAD /* crab.gif in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
+				572F5A0F20A4225B00355D7F /* girl_3_1_night.gif in Resources */,
 				B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */,
 				B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */,
 				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
-				578A25142058823C00801F77 /* girl.gif in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
 				B19612462061CEC00065019D /* GoogleService-Info.plist in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
@@ -1536,6 +1552,7 @@
 				57DE7459207D77E00061CA2F /* fire.gif in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
 				B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */,
+				5773BDD820B6363F0011256A /* dolphin.gif in Resources */,
 				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
 				57521FC6205FE9210062A4A5 /* throwBottle.gif in Resources */,
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
@@ -1543,10 +1560,10 @@
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
 				578A25112058771A00801F77 /* girl_3_1.gif in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
+				572F5A0B20A4216100355D7F /* find_bottle.gif in Resources */,
 				578A25122058771A00801F77 /* girl_3_2.gif in Resources */,
 				B11B52492038B19700C51EE8 /* Start.storyboard in Resources */,
 				B19372F62033E44E007B1E7D /* OpenSansSemiBold.ttf in Resources */,
-				57395CD2207047AE00F0A3DB /* find_bottle.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1840,6 +1857,7 @@
 				B1B6DB332073D55400BD16BC /* Message.swift in Sources */,
 				B18A5D6220348E4300F139B7 /* NSDate+ISO8601.m in Sources */,
 				B18A5D8920348E4300F139B7 /* RACErrorSignal.m in Sources */,
+				576807B120AF1A500039E2C2 /* RateUsPopupViewController.swift in Sources */,
 				B18A5D6820348E4300F139B7 /* NSEnumerator+RACSequenceAdditions.m in Sources */,
 				B18A5D9C20348E4300F139B7 /* RACSignalProvider.d in Sources */,
 				B1053E882043EBE600A4383D /* CountryPicker.m in Sources */,
@@ -1848,6 +1866,7 @@
 				B18A5DB620348E4300F139B7 /* UISegmentedControl+RACSignalSupport.m in Sources */,
 				B18A5D9E20348E4300F139B7 /* RACStream.m in Sources */,
 				B18A5DA120348E4300F139B7 /* RACSubscriber.m in Sources */,
+				571084C720C01176001163EA /* InventoryItem.swift in Sources */,
 				B19372AF2033E27B007B1E7D /* Actions.swift in Sources */,
 				B18A5D8520348E4300F139B7 /* RACDynamicSignal.m in Sources */,
 				B18A5D5520348E4300F139B7 /* UIStoryBoard.swift in Sources */,
@@ -1868,6 +1887,7 @@
 				B19372B32033E27B007B1E7D /* SocialManager.swift in Sources */,
 				B18A5DAC20348E4300F139B7 /* UIAlertView+RACSignalSupport.m in Sources */,
 				B18A5DB920348E4300F139B7 /* UISwitch+RACSignalSupport.m in Sources */,
+				571084C920C02262001163EA /* ReportType.swift in Sources */,
 				B18A5DA820348E4300F139B7 /* RACUnarySequence.m in Sources */,
 				B18A5DA020348E4300F139B7 /* RACSubject.m in Sources */,
 				B1EA39CD205606D8008AADC9 /* ConversationCollectionViewCell.swift in Sources */,

@@ -266,18 +266,12 @@ class SignupViewController: AbstractController, PIDatePickerDelegate {
     func validateStage1() -> Bool{
         
         if let fName = fNameTextField.text, !fName.isEmpty {
-            tempUserInfoHolder.firstName = fName
+            tempUserInfoHolder.userName = fName
         } else {
             showMessage(message:"SINGUP_VALIDATION_FNAME".localized, type: .warning)
             return false
         }
         
-        if let lName = lNameTextField.text, !lName.isEmpty {
-            tempUserInfoHolder.lastName = lName
-        } else {
-            showMessage(message:"SINGUP_VALIDATION_LNAME".localized, type: .warning)
-            return false
-        }
         
         return true
     }
@@ -336,6 +330,7 @@ class SignupViewController: AbstractController, PIDatePickerDelegate {
             showMessage(message:"SINGUP_VALIDATION_PASSWORD_LENGHTH".localized, type: .warning)
             return false
         }
+        
         
         return true
     }

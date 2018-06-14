@@ -23,6 +23,12 @@ class ShopCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        titleLabel.font = AppFonts.xBigBold
+        priceLabel.font = AppFonts.xBigBold
+        descriptionLabel.font = AppFonts.small
+        buyButton.titleLabel?.font = AppFonts.normalBold
+        
+        buyButton.setTitle("SHOP_BTN_BUY".localized, for: .normal)
         // Initialization
     }
     
@@ -32,11 +38,14 @@ class ShopCollectionViewCell: UICollectionViewCell {
     
     func configCell(shopItemObj: ShopItem) {
         
-        mainView.applyGradient(colours: [shopItemObj.firstColor!, shopItemObj.secondColor!], direction: .horizontal)
+        mainView.removeGradientLayer()
+        mainView.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .horizontal)
         titleLabel.text = shopItemObj.title
         priceLabel.text = shopItemObj.price
         descriptionLabel.text = shopItemObj.description
-        image.image = shopItemObj.imageUrl
+        if let iconUrl = shopItemObj.icon {
+            image.sd_setImage(with: URL(string:iconUrl))
+        }
         
         dispatch_main_after(0.2) {
             if !self.shadowApplied {

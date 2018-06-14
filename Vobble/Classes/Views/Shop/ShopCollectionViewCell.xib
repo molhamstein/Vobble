@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -32,50 +33,36 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yu0-Y2-TI0">
                         <rect key="frame" x="25" y="15" width="463" height="483"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJV-4y-zAB">
-                                <rect key="frame" x="18" y="5" width="325" height="423"/>
-                                <subviews>
-                                    <stackView opaque="NO" tag="5" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GiR-VY-FBj">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="423"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yYn-4m-iv6">
-                                                <rect key="frame" x="0.0" y="0.0" width="325" height="32"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Gender Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBT-6n-3pb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="273" height="32"/>
-                                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="28"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-Rv-rfG">
-                                                        <rect key="frame" x="278" y="0.0" width="47" height="32"/>
-                                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="28"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="buy 3 bottles so you dont have to wait for the automatic refill" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEA-KO-0wH">
-                                                <rect key="frame" x="0.0" y="32" width="325" height="391"/>
-                                                <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="GiR-VY-FBj" firstAttribute="leading" secondItem="qJV-4y-zAB" secondAttribute="leading" id="1jh-PI-YIN"/>
-                                    <constraint firstAttribute="bottom" secondItem="GiR-VY-FBj" secondAttribute="bottom" id="A0G-Bd-ExP"/>
-                                    <constraint firstAttribute="trailing" secondItem="GiR-VY-FBj" secondAttribute="trailing" id="O81-NI-5Gu"/>
-                                    <constraint firstItem="GiR-VY-FBj" firstAttribute="top" secondItem="qJV-4y-zAB" secondAttribute="top" id="owH-1n-44f"/>
-                                </constraints>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Gender Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FBT-6n-3pb">
+                                <rect key="frame" x="15" y="9.9999999999999982" width="311.33333333333331" height="31.333333333333329"/>
+                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="28"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-Rv-rfG">
+                                <rect key="frame" x="336.33333333333331" y="9.9999999999999982" width="46.666666666666686" height="31.333333333333329"/>
+                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="28"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="buy 3 bottles so you dont have to wait for the automatic refill" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEA-KO-0wH">
+                                <rect key="frame" x="15" y="44.333333333333343" width="368" height="383.66666666666663"/>
+                                <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.67843137249999996" green="0.70588235290000001" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="qJV-4y-zAB" firstAttribute="top" secondItem="yu0-Y2-TI0" secondAttribute="top" constant="5" id="2UV-Up-jhM"/>
-                            <constraint firstItem="qJV-4y-zAB" firstAttribute="leading" secondItem="yu0-Y2-TI0" secondAttribute="leading" constant="18" id="98f-iw-XUs"/>
+                            <constraint firstItem="FBT-6n-3pb" firstAttribute="leading" secondItem="yu0-Y2-TI0" secondAttribute="leading" constant="15" id="BxO-0o-IGh"/>
+                            <constraint firstItem="FBT-6n-3pb" firstAttribute="top" secondItem="yu0-Y2-TI0" secondAttribute="top" constant="10" id="KZE-WN-Z83"/>
+                            <constraint firstAttribute="trailing" secondItem="xEA-KO-0wH" secondAttribute="trailing" constant="80" id="Nqt-8u-bM4"/>
+                            <constraint firstItem="eQB-Rv-rfG" firstAttribute="leading" secondItem="FBT-6n-3pb" secondAttribute="trailing" constant="10" id="Uhy-L8-3n3"/>
+                            <constraint firstItem="xEA-KO-0wH" firstAttribute="top" secondItem="FBT-6n-3pb" secondAttribute="bottom" constant="3" id="UoA-QC-KKL"/>
+                            <constraint firstItem="xEA-KO-0wH" firstAttribute="leading" secondItem="yu0-Y2-TI0" secondAttribute="leading" constant="15" id="ZOm-bM-Cx4"/>
+                            <constraint firstAttribute="trailing" secondItem="eQB-Rv-rfG" secondAttribute="trailing" constant="80" id="amD-oi-FMD"/>
+                            <constraint firstAttribute="bottom" secondItem="xEA-KO-0wH" secondAttribute="bottom" constant="55" id="sbl-sR-m3A"/>
+                            <constraint firstItem="eQB-Rv-rfG" firstAttribute="top" secondItem="yu0-Y2-TI0" secondAttribute="top" constant="10" id="vbq-U5-uH4"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -90,7 +77,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottles2" translatesAutoresizingMaskIntoConstraints="NO" id="uDx-kN-RYn">
-                        <rect key="frame" x="388" y="0.0" width="125" height="125"/>
+                        <rect key="frame" x="398" y="0.0" width="125" height="125"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="125" id="ItQ-ol-9MF"/>
                             <constraint firstAttribute="width" constant="125" id="yKq-kk-T7N"/>
@@ -112,18 +99,16 @@
             </view>
             <constraints>
                 <constraint firstItem="yu0-Y2-TI0" firstAttribute="top" secondItem="exh-Rt-hrl" secondAttribute="top" constant="15" id="BDS-UU-iUH"/>
-                <constraint firstItem="uDx-kN-RYn" firstAttribute="leading" secondItem="qJV-4y-zAB" secondAttribute="trailing" constant="20" id="CqV-Xp-9Oo"/>
                 <constraint firstItem="yu0-Y2-TI0" firstAttribute="bottom" secondItem="Ehc-uj-KWX" secondAttribute="bottom" constant="15" id="EJK-C3-1DE"/>
                 <constraint firstItem="tZZ-yO-962" firstAttribute="trailing" secondItem="yu0-Y2-TI0" secondAttribute="trailing" id="Rhd-Be-hIv"/>
                 <constraint firstItem="Ehc-uj-KWX" firstAttribute="leading" secondItem="exh-Rt-hrl" secondAttribute="leading" constant="7" id="Yjd-Qc-wuu"/>
                 <constraint firstItem="tZZ-yO-962" firstAttribute="bottom" secondItem="yu0-Y2-TI0" secondAttribute="bottom" constant="-5" id="ddo-MP-IHY"/>
-                <constraint firstItem="Ehc-uj-KWX" firstAttribute="top" secondItem="qJV-4y-zAB" secondAttribute="bottom" constant="5" id="gjD-0P-ElP"/>
                 <constraint firstItem="uDx-kN-RYn" firstAttribute="top" secondItem="exh-Rt-hrl" secondAttribute="top" id="hz8-Lf-nnp"/>
                 <constraint firstAttribute="bottom" secondItem="yu0-Y2-TI0" secondAttribute="bottom" constant="10" id="kDb-Gu-Vat"/>
                 <constraint firstItem="yu0-Y2-TI0" firstAttribute="leading" secondItem="exh-Rt-hrl" secondAttribute="leading" constant="25" id="oFp-4a-AjZ"/>
                 <constraint firstItem="tZZ-yO-962" firstAttribute="top" secondItem="yu0-Y2-TI0" secondAttribute="top" id="sx7-BQ-IHg"/>
                 <constraint firstItem="tZZ-yO-962" firstAttribute="leading" secondItem="yu0-Y2-TI0" secondAttribute="leading" id="tZU-eY-byb"/>
-                <constraint firstAttribute="trailing" secondItem="uDx-kN-RYn" secondAttribute="trailing" id="uqc-l8-pUI"/>
+                <constraint firstAttribute="trailing" secondItem="uDx-kN-RYn" secondAttribute="trailing" constant="-10" id="uqc-l8-pUI"/>
                 <constraint firstAttribute="trailing" secondItem="yu0-Y2-TI0" secondAttribute="trailing" constant="25" id="y8E-io-AiP"/>
             </constraints>
             <size key="customSize" width="513" height="508"/>

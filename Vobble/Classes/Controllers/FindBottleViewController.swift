@@ -37,6 +37,8 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var reportView: UIView!
     @IBOutlet weak var reportPicker: UIPickerView!
     
+    var isInitialized = false
+    
 //    fileprivate let pickerArray = ["Bangladesh","India","Pakistan","USA"]
     
     // MARK: - firebase Properties
@@ -51,7 +53,7 @@ class FindBottleViewController: AbstractController {
         
         super.viewDidLoad()
         shoreNameLabel.text = shoreName
-        userNameLabel.text = bottle?.owner?.firstName
+        userNameLabel.text = bottle?.owner?.userName
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
         optionView.isHidden = true
         reportView.isHidden = true
@@ -60,23 +62,23 @@ class FindBottleViewController: AbstractController {
         ignoreButton.setTitle("IGNORE".localized, for: .normal)
         replyButton.setTitle("REPLY".localized, for: .normal)
         
-        if let imgUrl = bottle?.owner?.imageUrl {
-          
+        if let imgUrl = bottle?.owner?.profilePic, imgUrl.isValidLink() {
             userimage.sd_setShowActivityIndicatorView(true)
             userimage.sd_setIndicatorStyle(.gray)
             userimage.sd_setImage(with: URL(string: imgUrl))
-            
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        topView.applyGradient(colours: [AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
-        //bottomView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
-        ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
-        replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+        if isInitialized == false {
+            topView.applyGradient(colours: [AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
+            //bottomView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
+            ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
+            replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+            isInitialized = true
+        }
     }
     
     @IBAction func exitButtonPressed(_ sender: Any) {
@@ -104,7 +106,7 @@ class FindBottleViewController: AbstractController {
             videoView.playButtonPressed()
         }
         
-        let blockMessage = String(format: "BLOCK_USER_WARNING".localized, "\(DataStore.shared.me?.firstName ?? " ")")
+        let blockMessage = String(format: "BLOCK_USER_WARNING".localized, "\(DataStore.shared.me?.userName ?? " ")")
         
         let alertController = UIAlertController(title: "", message: blockMessage , preferredStyle: .alert)
         //We add buttons to the alert controller by creating UIAlertActions:
@@ -125,6 +127,21 @@ class FindBottleViewController: AbstractController {
     @IBAction func doneBtnPressed(_ sender: Any) {
         print(self.reportReasonIndex)
         reportView.isHidden = true
+        if let bottle = self.bottle {
+            ApiManager.shared.reportBottle(bottle: bottle, reportType: DataStore.shared.reportTypes[self.reportReasonIndex], completionBlock: { (success, error) in
+                if success {
+                    let alertController = UIAlertController(title: "", message: "REPORT_SUCCESS_MSG".localized, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    let alertController = UIAlertController(title: "", message: "ERROR_NO_CONNECTION".localized, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     
@@ -158,7 +175,7 @@ class FindBottleViewController: AbstractController {
         if let newConvRef = sender as? DatabaseReference {
             let nav = segue.destination as! UINavigationController
             let chatVc = nav.topViewController as! ChatViewController
-            chatVc.senderDisplayName = DataStore.shared.me?.firstName
+            chatVc.senderDisplayName = DataStore.shared.me?.userName
 //            chatVc.conversation = conversation
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
 //            chatVc.uploadMedia(mediaReferenceUrl: bottle?.attachment!, mediaType: "public.movie", senderId: "\(bottle?.ownerId)")
@@ -176,15 +193,22 @@ class FindBottleViewController: AbstractController {
 
 //            chatVc.seconds = 24.0*60.0*60.0
             
-            if let btl = bottle, let bottleOwnerId = btl.ownerId, let url = btl.attachment {
+            if let btl = bottle, let bottleOwnerId = btl.ownerId, let url = btl.attachment, let thumbUrl = btl.thumb {
                 chatVc.senderId = "\(bottleOwnerId)"
-                chatVc.uploadVideo(videoUrl: URL(string: url)!, upload: false)
+                chatVc.submitMessageWithVideoURL(videoUrl: url, thumbURL: thumbUrl)
+                
+                //send push notification to bottle owner to inform him about the new reply
+                if let peer = btl.owner {
+                    let msgToSend = String(format: "NOTIFICATION_NEW_REPLY".localized, (DataStore.shared.me?.userName)!)
+                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: peer, completionBlock: { (success, error) in })
+                }
             }
             
             if let myId = DataStore.shared.me?.objectId {
                 chatVc.senderId = "\(myId)"
-                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL, upload: true)
+                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
             }
+            
             chatVc.isHideInputToolBar = true
             
         }
@@ -202,7 +226,7 @@ class FindBottleViewController: AbstractController {
     
     @IBAction func unwindToFindBottle(segue: UIStoryboardSegue) {
         
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // delay 6 second
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
            self.goToChat()
        }
     }
@@ -227,9 +251,9 @@ class FindBottleViewController: AbstractController {
 
 extension FindBottleViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
-    private var pickerArray: [String] {
+    private var pickerArray: [ReportType] {
         get {
-           return ["SPAM".localized, "OFFENDING".localized, "SEXUAL_CONTENT".localized]
+           return DataStore.shared.reportTypes
         }
     }
     
@@ -246,7 +270,7 @@ extension FindBottleViewController: UIPickerViewDelegate,UIPickerViewDataSource 
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerArray[row]
+        return pickerArray[row].name
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.reportReasonIndex = row

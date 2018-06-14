@@ -23,6 +23,9 @@
 "ERROR_INVALID_VERIFY_CODE"             = "Verification code is not valid";
 "ERROR_EXPIRED_VERIFY_CODE"             = "Verification code was expired";
 "ERROR_BOTTLE_NOT_FOUND"                = "there is no bottle";
+"ERROR_UNACTIVATED_USER"                = "Your Account is not activated yet, please check your email";
+"ERROR_INVALID_USERNAME"                = "Username already exists";
+
 
 // Connection errors messages
 "ERROR_NOT_AUTHORIZED"                  = "You are not authorized to access this data, please login again";
@@ -30,7 +33,34 @@
 "ERROR_SOCIAL_FACEBOOK"                 = "Facebook login failed, please try again";
 "ERROR_SOCIAL_TWITTER"                  = "Twitter login failed, please try again";
 "ERROR_SOCIAL_INSTAGRAM"                = "Instagram login failed, please try again";
-"ERROR_SOCIAL_GOOGLE"                = "Google login failed, please try again";
+"ERROR_SOCIAL_GOOGLE"                   = "Google login failed, please try again";
+
+// login screen
+"LOGIN_EMAIL_TITLE"                     = "EMAIL";
+"LOGIN_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"LOGIN_PSW_TITLE"                       = "PASSWORD";
+"LOGIN_PSW_PLACEHOLDER"                 = "********";
+"LOGIN_FORGOT_PSW"                      = "Forgot Password?";
+"LOGIN_LOGIN_BTN"                       = "Login";
+"LOGIN_REGISTER_BTN_PREFIX"             = "Or";
+"LOGIN_REGISTER_BTN"                    = "Register";
+"LOGIN_REGISTER_BTN_SUFFIX"             = "a new account";
+
+// Signup screen
+"SIGNUP_EMAIL_TITLE"                     = "EMAIL";
+"SIGNUP_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"SIGNUP_NAME_TITLE"                      = "USERNAME";
+"SIGNUP_NAME_PLACEHOLDER"                = "Vobbler";
+"SIGNUP_PSW_TITLE"                       = "PASSWORD";
+"SIGNUP_PSW_PLACEHOLDER"                 = "********";
+"SIGNUP_SIGNUP_BTN"                      = "Signup";
+"SIGNUP_LOGIN_BTN"                       = "Login";
+"SIGNUP_LOGIN_BTN_PREFIX"                = "Have an account";
+"SIGNUP_COUNTRY_PLACEHOLDER"             = "Select your country";
+"SIGNUP_ACCESSEPT"                       = "Accept";
+"SIGNUP_PRIVACY"                         = "Privacy Policy";
+"SIGNUP_TERMS"                           = "Terms Of Service";
+"SIGNUP_AND"                             = " and ";
 
 // Start screen
 "START_EMAIL_TITLE"                     = "ENTER EMAIL";
@@ -58,33 +88,7 @@
 "NOW"                                   = "Now";
 
 // Signup
-"SINGUP_STEP1_TITLE"                    = "Hello! Nice to meet you";
-"SINGUP_FNAME_TITLE"                    = "FIRST NAME";
-"SINGUP_FNAME_PLACEHOLDER"              = "Your first name";
-"SINGUP_LNAME_TITLE"                    = "LAST NAME";
-"SINGUP_LNAME_PLACEHOLDER"              = "Your last name";
-"SINGUP_STEP2_TITLE"                    = "When is your birthday?\nThis information is private, it won’t be shown to anyone";
-"SINGUP_STEP2_DESC"                     = "CHOOSE DATE";
-"SINGUP_DAY_PLACEHOLDER"                = "DD";
-"SINGUP_MONTH_PLACEHOLDER"              = "MM";
-"SINGUP_YEAR_PLACEHOLDER"               = "YYYY";
-"SINGUP_STEP3_TITLE"                    = "I am";
-"SINGUP_STEP3_DESC"                     = "CHOOSE GENDER";
-"SINGUP_STEP3_MALE"                     = "Male";
-"SINGUP_STEP3_FEMALE"                   = "Female";
-"SINGUP_STEP4_TITLE"                    = "Enter your email address";
-"SINGUP_STEP4_DESC"                     = "We do not send spam or email promotions";
-"SINGUP_EMAIL_TITLE"                    = "ENTER EMAIL";
-"SINGUP_EMAIL_PLACEHOLDER"              = "vobblemail@gmail.com";
-"SINGUP_STEP5_TITLE"                    = "Enter the verification code that has been sent to your email";
-"SINGUP_VERIFICATION_TITLE"             = "ENTER CODE";
-"SINGUP_VERIFICATION_PLACEHOLDER"       = "Verification code";
-"SINGUP_PASSWORD_TITLE"                 = "ENTER PASSWORD";
-"SINGUP_PASSWORD_PLACEHOLDER"           = "******";
-"SINGUP_NEXT"                           = "NEXT";
-"SINGUP_FINISH"                         = "FINISH";
-"SINGUP_VALIDATION_FNAME"               = "Please enter your first name";
-"SINGUP_VALIDATION_LNAME"               = "Please enter your last name";
+"SINGUP_VALIDATION_FNAME"               = "Please enter your user name";
 "SINGUP_VALIDATION_EMAIL"               = "Please enter your email";
 "SINGUP_VALIDATION_EMAIL_FORMAT"        = "Please enter a valid email address";
 "SINGUP_VALIDATION_DATE"                = "Please enter your birthday correctly";
@@ -92,6 +96,11 @@
 "SINGUP_VALIDATION_PASSWORD_LENGHTH"    = "Password should be 6 characters long at least";
 "SINGUP_VALIDATION_VERIF_CODE"          = "Please enter your verification code";
 "SINGUP_VALIDATION_TERMS"               = "You need to agree to the terms and conditions before signup";
+"SINGUP_VALIDATION_CHOOSE_COUNTRY"      = "Please select your country";
+
+
+"SINGUP_EMAIL_TITLE"                    = "ENTER EMAIL";
+"SINGUP_SOCIAL_WELCOM"                  = "Welcome %@ \n please fill the rest of these information to finish the signup";
 
 // Reset password
 "RESET_STEP1_TITLE"                     = "RESET PASSWORD";
@@ -103,14 +112,6 @@
 "RESET_PASSWORD_TITLE"                  = "NEW PASSWORD";
 "RESET_PASSWORD_PLACEHOLDER"            = "******";
 
-// verification
-"VERIF_CODE_TITLE"                      = "ENTER CODE";
-"VERIF_CODE_PLACEHOLDER"                = "Verification code";
-"VERIF_CODE_BUTTON"                     = "VERIFY";
-"VERIF_CODE_RESEND"                     = "RESEND CODE";
-"VERIF_CODE_EMPTY"                      = "Please enter the verification code";
-"VERIF_RESEND_SUCCESS"                  = "New verification code has been sent to your email";
-
 // Settings
 "SETTINGS_USER_LOGOUT"                  = "Logout";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "Are you sure you want to logout?";
@@ -120,9 +121,13 @@
 "love_shore"                            = "Love shore";
 "fadfed_shore"                          = "FadFed shore";
 "THROW_BOTTLE_WARNING"                  = "you dont have bottles in Bottles Package";
+"HOME_THROW_BTN"                        = "Throw Bottle";
+"HOME_FIND_BTN"                         = "Find Bottle";
+"HOME_MY_BOTTLES_BTN"                   = "My Bottles";
 
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? you will no longer could upload your video.";
+"CHAT_REPLY_SENT_MSG"                   = "Your Reply was sent to the bottle owner, when he sees your reply you will 24 hours to chat together";
 
 // filter
 "FEMALE"                                = "female";
@@ -130,13 +135,24 @@
 "ALL_GENDER"                            = "all";
 "BUY_FILTER_WARNING"                    = "you should go to shop to buy this filter";
 "GO_TO_SHOP"                            = "Go To Shop";
+"FILTERS_PANEL_GENDER_TITLE"            = "Filter by Gender";
+"FILTERS_PANEL_COUNTRY_TITLE"           = "Filter by Country";
+"FILTERS_PANEL_GENDER_BUY_BTN"          = "Buy Filter";
+"FILTERS_PANEL_COUNTRY_BUY_BTN"         = "Buy Filter";
+"FILTERS_PANEL_FILTER_NOW_BTN"          = "Find Bottle Now";
+"FILTERS_PANEL_PLACEHOLDER_GENDER"     = "Want to find bottles from males or females only?";
+"FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "Find Bottles from specific country";
+
 
 // settings
 "SETTINGS_CONTACT"                      = "Contact Us";
 "SETTINGS_ABOUT"                        = "About us";
+"SETTINGS_SHARE"                        = "Share Vibo";
+"SETTINGS_RATE"                         = "Rate Us";
 "SETTINGS_TERMS"                        = "Terms of Service";
 "SETTINGS_LOGOUT"                       = "Logout";
 "SETTINGS_LOGOUT_MSG"                   = "Are you sure you want to logout?";
+"SETTINGS_SHARE_MSG"                    = "Come over and try this cool App, \n http://brain-socket.com";
 
 "ABOUT_TITLE"                          = "About us";
 "TERMS_TITLE"                          = "Terms of Service";
@@ -150,7 +166,39 @@
 "OFFENDING"                            = "offending";
 "SEXUAL_CONTENT"                       = "sexual content";
 "BLOCK_USER_WARNING"                   = "Are you sure you dont want to see content from %@ anymore?";
+"REPORT_SUCCESS_MSG"                   = "Ok We Got that one, Our team will be cehecking it";
 
 // shop
 "BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item and pay %@ ?";
 "CANT_BUY_ITEM_WARNING"                = "you already have an active filter of this type";
+"TAB_BOTTLES"                          = "Bottles";
+"TAB_GENDER"                           = "Gender Filters";
+"TAB_COUNTRY"                          = "Country Filters";
+"SHOP_TITLE"                           = "The Shop";
+"SHOP_BTN_BUY"                         = "Buy Now";
+
+// My bottles
+"MY_BOTTLES_TITLE"                     = "My Bottles";
+"MY_BOTTLES_LEFT_TITLE"                = "You Have";
+"MY_BOTTLES_LEFT_SUBTITLE"             = "Bottles";
+"MY_BOTTLES_THROWN_TITLE"              = "You Throwed";
+"MY_BOTTLES_THROWN_SUBTITLE"           = "Bottles";
+"MY_BOTTLES_REPLIES_TITLE"             = "My Replies";
+"MY_BOTTLES_BOTTLES_TITLE"             = "My Bottles";
+"MY_BOTTLES_NEXT_REFILL"               = "Next refill in:";
+"MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "Peer Didn't reply yet";
+"MY_BOTTLES_BTN_CHAT"                  = "Chat Now";
+"MY_BOTTLES_TIME_LEFT"                 = "Time left:";
+"MY_BOTTLES_EMPTY_PLACEHOLDER"         = "No Conversations Found!! \n go ahead and reply to a bottle";
+
+// rate us
+"RATE_US_TITLE"                         = "Liked Vibo?";
+"RATE_US_MSG"                           = "If you like Vibo give us some stars on iTunes store, it means a lot to us ;)";
+"RATE_US_BTN"                           = "Rate Vibo on Itunes";
+"RATE_US_SKIP"                          = "No, I won't help";
+
+// notifications
+"NOTIFICATION_NEW_REPLY"                = "Hey, looks like %@ has found your bottle, come in and check his reply";
+"NOTIFICATION_CHAT_IS_ACTIVE"           = " %@ has Seen your reply, you can now chat together for 24 hours";
+"NOTIFICATION_NEW_MSG"                  = "seems like %@ has sent you a new message, dont keep him waiting";
+

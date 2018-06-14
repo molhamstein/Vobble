@@ -30,19 +30,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         TWTRTwitter.sharedInstance().start(withConsumerKey: AppConfig.twitterConsumerKey, consumerSecret: AppConfig.twitterConsumerSecret)
         FirebaseApp.configure()
+        
+        
         // init notification
-//        OneSignal.initWithLaunchOptions(launchOptions,
-//                                        appId: AppConfig.oneSingleID,
-//                                        handleNotificationAction: nil,
-//                                        settings: onesignalInitSettings)
-//        
-//        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
-//        
-//        // Recommend moving the below line to prompt for push after informing the user about
-//        //   how your app will use them.
-//        OneSignal.promptForPushNotifications(userResponse: { accepted in
-//            print("User accepted notifications: \(accepted)")
-//        })
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        
+        // Replace 'YOUR_APP_ID' with your OneSignal App ID.
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: AppConfig.oneSingleID,
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        
+        // Recommend moving the below line to prompt for push after informing the user about
+        //   how your app will use them.
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+        })
         
         return true
     }

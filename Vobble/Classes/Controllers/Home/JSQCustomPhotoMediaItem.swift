@@ -37,12 +37,12 @@ class JSQCustomPhotoMediaItem: JSQPhotoMediaItem {
     
     func setImageWithURL() {
         
-        if let photoUrl = self.message.photoUrl, photoUrl.hasPrefix("http://") {
+        if let photoUrl = self.message.photoUrl, (photoUrl.hasPrefix("http://") || photoUrl.hasPrefix("https://")) {
             
             self.asyncImageView.sd_setShowActivityIndicatorView(true)
             self.asyncImageView.sd_setIndicatorStyle(.gray)
             self.asyncImageView.sd_setImage(with: URL(string:photoUrl))
-            self.asyncImageView.contentMode = .scaleAspectFit
+            self.asyncImageView.contentMode = .scaleAspectFill
             activityIndicator?.removeFromSuperview()
         }
     }

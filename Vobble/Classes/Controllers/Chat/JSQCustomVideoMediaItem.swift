@@ -33,22 +33,28 @@ class JSQCustomVideoMediaItem: JSQVideoMediaItem {
         thumbImageView.clipsToBounds = true
         thumbImageView.layer.cornerRadius = 5
         thumbImageView.backgroundColor = UIColor.jsq_messageBubbleLightGray()
+        thumbImageView.contentMode = .scaleAspectFill
         activityIndicator?.frame = thumbImageView.frame
         thumbImageView.addSubview(activityIndicator!)
         
         self.message = message
-        
     }
     
     func setThumbWithURL(url: URL) {
         
-        if let videoUrl = message.videoUrl, videoUrl.hasPrefix("http://") {
+        if let videoUrl = message.videoUrl, (videoUrl.hasPrefix("http://") || videoUrl.hasPrefix("https://"))  {
             
             // thumb
             self.thumbImageView.sd_setShowActivityIndicatorView(true)
             self.thumbImageView.sd_setIndicatorStyle(.gray)
-            self.thumbImageView.sd_setImage(with: URL(string:"http://104.217.253.15:9999/api/uploads/videos/download/1522664513030_IMG_0004.JPG"))
             activityIndicator?.removeFromSuperview()
+            if let thumbStrUrl = message.thumbUrl, let thumbUrl = URL(string:thumbStrUrl) {
+                self.thumbImageView.sd_setImage(with: thumbUrl)
+                //self.thumbImageView.backgroundColor = UIColor.blue
+            } else {
+                self.thumbImageView.image = nil
+                //self.thumbImageView.backgroundColor = UIColor.clear
+            }
         }
     }
     

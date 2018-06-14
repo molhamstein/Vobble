@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +42,7 @@
                                     <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:03:04" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Neb-5c-Epb">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:03:04" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Neb-5c-Epb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
                                     <rect key="frame" x="188.5" y="0.0" width="41.5" height="13.5"/>
                                     <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                     <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,22 +54,22 @@
                             <rect key="frame" x="120" y="53.5" width="245" height="52.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="jMV-1b-yX9">
-                                    <rect key="frame" x="0.0" y="0.0" width="61.5" height="52.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="81.5" height="52.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Throwed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx6-j1-vgs">
-                                            <rect key="frame" x="0.0" y="0.0" width="61.5" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="81.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXm-mA-oE3">
-                                            <rect key="frame" x="0.0" y="16.5" width="61.5" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="81.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bou-d0-RSB">
-                                            <rect key="frame" x="0.0" y="39" width="61.5" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="39" width="81.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -76,45 +77,22 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rb1-xp-9kr">
-                                    <rect key="frame" x="61.5" y="0.0" width="61" height="52.5"/>
+                                    <rect key="frame" x="81.5" y="0.0" width="82" height="52.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MII-u1-n5f">
-                                            <rect key="frame" x="0.0" y="0.0" width="61" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="82" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vy0-tu-vcm">
-                                            <rect key="frame" x="0.0" y="16.5" width="61" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="16.5" width="82" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYo-Na-I7H">
-                                            <rect key="frame" x="0.0" y="39" width="61" height="13.5"/>
-                                            <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
-                                            <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </stackView>
-                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Vkr-AS-tUJ">
-                                    <rect key="frame" x="122.5" y="0.0" width="61.5" height="52.5"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kY5-r8-foq">
-                                            <rect key="frame" x="0.0" y="0.0" width="61.5" height="13.5"/>
-                                            <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
-                                            <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLq-oE-oUS">
-                                            <rect key="frame" x="0.0" y="16.5" width="61.5" height="19.5"/>
-                                            <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-ol-NJY">
-                                            <rect key="frame" x="0.0" y="39" width="61.5" height="13.5"/>
+                                            <rect key="frame" x="0.0" y="39" width="82" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -122,7 +100,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTn-GQ-HE7">
-                                    <rect key="frame" x="184" y="0.0" width="61" height="32"/>
+                                    <rect key="frame" x="163.5" y="0.0" width="81.5" height="32"/>
                                     <state key="normal" image="ic_settings"/>
                                     <connections>
                                         <action selector="settingsPressed:" destination="eUA-Pv-khb" eventType="touchUpInside" id="5sa-KB-Gx9"/>
@@ -130,22 +108,32 @@
                                 </button>
                             </subviews>
                         </stackView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="wwn-rf-iZW">
+                            <rect key="frame" x="20" y="0.0" width="80" height="80"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="40"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gma-mX-Kdl" userLabel="user_image">
                             <rect key="frame" x="20" y="0.0" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="Af8-ms-ipr"/>
                                 <constraint firstAttribute="height" constant="80" id="LFg-BE-deh"/>
                             </constraints>
-                            <state key="normal" image="user_placeholder"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="40"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                     <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.0"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -163,24 +151,28 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="mOv-gc-f5s" firstAttribute="centerY" secondItem="gma-mX-Kdl" secondAttribute="centerY" id="Ceh-uB-uJL"/>
+                        <constraint firstItem="wwn-rf-iZW" firstAttribute="leading" secondItem="gma-mX-Kdl" secondAttribute="leading" id="HJK-gj-Q3w"/>
                         <constraint firstItem="FlQ-vp-Lg5" firstAttribute="top" secondItem="xE6-y1-bfD" secondAttribute="bottom" constant="30" id="HVX-MQ-BM0"/>
+                        <constraint firstItem="wwn-rf-iZW" firstAttribute="top" secondItem="gma-mX-Kdl" secondAttribute="top" id="KlU-gM-TuN"/>
                         <constraint firstAttribute="trailing" secondItem="xE6-y1-bfD" secondAttribute="trailing" constant="15" id="QOB-Ak-rsi"/>
                         <constraint firstItem="FlQ-vp-Lg5" firstAttribute="leading" secondItem="gma-mX-Kdl" secondAttribute="trailing" constant="20" id="Sdr-d7-KaV"/>
                         <constraint firstAttribute="trailing" secondItem="FlQ-vp-Lg5" secondAttribute="trailing" constant="10" id="Tot-Va-1Eo"/>
+                        <constraint firstItem="wwn-rf-iZW" firstAttribute="trailing" secondItem="gma-mX-Kdl" secondAttribute="trailing" id="XCD-JP-usr"/>
                         <constraint firstItem="gma-mX-Kdl" firstAttribute="leading" secondItem="W2p-3x-HAy" secondAttribute="leading" constant="20" id="aGo-VI-DUv"/>
                         <constraint firstItem="4QV-9r-3Bm" firstAttribute="leading" secondItem="Rx6-j1-vgs" secondAttribute="leading" constant="10" id="bi5-aR-o18"/>
                         <constraint firstItem="gma-mX-Kdl" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" id="dFe-2a-AaK"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="fJN-f8-4FP"/>
                         <constraint firstItem="xE6-y1-bfD" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" constant="10" id="k4u-6y-Bot"/>
                         <constraint firstAttribute="height" constant="130" id="lL4-aa-Lzt"/>
+                        <constraint firstItem="wwn-rf-iZW" firstAttribute="bottom" secondItem="gma-mX-Kdl" secondAttribute="bottom" id="nVy-Es-5cb"/>
                         <constraint firstItem="mOv-gc-f5s" firstAttribute="centerX" secondItem="gma-mX-Kdl" secondAttribute="centerX" id="qi0-VM-toP"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="n6G-Uv-rjN">
-                    <rect key="frame" x="0.0" y="155" width="375" height="32"/>
+                    <rect key="frame" x="0.0" y="155" width="375" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMt-1h-1lb">
-                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="32"/>
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="40"/>
                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="My Bottles">
@@ -194,7 +186,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8H-lq-tCX">
-                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="32"/>
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="My Replies">
@@ -210,7 +202,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhp-pX-jzS" userLabel="search View">
-                    <rect key="frame" x="0.0" y="187" width="375" height="40"/>
+                    <rect key="frame" x="0.0" y="195" width="375" height="40"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KGh-qf-l8K" userLabel="search textfield">
                             <rect key="frame" x="55" y="10" width="320" height="17"/>
@@ -262,8 +254,17 @@
                 <outlet property="btnMyBottles" destination="oMt-1h-1lb" id="Ebj-rb-SAq"/>
                 <outlet property="btnMyReplies" destination="x8H-lq-tCX" id="71t-7c-dbC"/>
                 <outlet property="btnSettings" destination="pTn-GQ-HE7" id="vWw-mA-5sa"/>
+                <outlet property="lblBottlesLeftCount" destination="vy0-tu-vcm" id="fTd-IS-uQu"/>
+                <outlet property="lblBottlesLeftCountSubTitle" destination="cYo-Na-I7H" id="4DB-E1-RV3"/>
+                <outlet property="lblBottlesLeftCountTitle" destination="MII-u1-n5f" id="oUL-Cu-a7v"/>
+                <outlet property="lblBottlesThrownCount" destination="GXm-mA-oE3" id="JOG-mZ-k8m"/>
+                <outlet property="lblBottlesThrownCountSubTitle" destination="bou-d0-RSB" id="bpj-WH-na7"/>
+                <outlet property="lblBottlesThrownCountTitle" destination="Rx6-j1-vgs" id="oda-8K-G5q"/>
+                <outlet property="lblNextRefillDate" destination="Neb-5c-Epb" id="hix-5D-iyJ"/>
+                <outlet property="lblNextRefillTitle" destination="MJc-XL-Slh" id="9x4-H6-dYS"/>
                 <outlet property="searchTetField" destination="KGh-qf-l8K" id="iNp-Dr-M9l"/>
                 <outlet property="userImageBtn" destination="gma-mX-Kdl" id="twc-OJ-bZ4"/>
+                <outlet property="userImageView" destination="wwn-rf-iZW" id="axC-EH-K1L"/>
                 <outlet property="userNameLabel" destination="4QV-9r-3Bm" id="hr1-PJ-g79"/>
             </connections>
         </collectionReusableView>

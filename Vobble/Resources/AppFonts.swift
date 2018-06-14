@@ -10,11 +10,11 @@ import UIKit
 
 struct AppFonts {
     // MARK: fonts names
-    private static let fontNameBoldEN = "OpenSans-Bold"
+    private static let fontNameBoldEN = "Antipasto-ExtraBold"
     private static let fontNameBoldAR = "DroidArabicKufi-Bold"
-    private static let fontNameSemiBoldEN = "OpenSans-SemiBold"
+    private static let fontNameSemiBoldEN = "Antipasto-ExtraBold"
     private static let fontNameSemiBoldAR = "DroidArabicKufi"
-    private static let fontNameRegularEN = "OpenSans-Regular"
+    private static let fontNameRegularEN = "Antipasto"
     private static let fontNameRegularAR = "DroidArabicKufi"
     
     // MARK: font sizes
@@ -117,6 +117,11 @@ struct AppFonts {
         } else {                    // iPhone 6+ & 7+ (736)
             scale = 1.0;
         }
+        
+        if AppConfig.currentLanguage == .arabic {
+            scale *= 0.9
+        }
+        
         return scale;
     }
     

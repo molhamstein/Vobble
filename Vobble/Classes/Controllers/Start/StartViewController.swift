@@ -27,10 +27,10 @@ class StartViewController: AbstractController {
                 if let err:Error = error {
                     self.showMessage(message:err.localizedDescription, type: .error)     
                 } else {
-                    ApiManager.shared.getShores(completionBlock: { (shores, error) in
-                        //self.performSegue(withIdentifier: "startHomeSegue", sender: self)
-                    })
+                    
                 }
+                
+                DataStore.shared.fetchBaseData()
                 self.performSegue(withIdentifier: "startHomeSegue", sender: self)
             })
             

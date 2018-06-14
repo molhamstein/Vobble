@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class HomeViewController: AbstractController {
     
     // MARK: Properties
@@ -21,6 +20,7 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivIsland: UIImageView!
     @IBOutlet var ivShore1Shore: UIImageView!
     @IBOutlet var ivShore2Shore: UIImageView!
+    @IBOutlet var ivShore2Umbrella: UIImageView!
     @IBOutlet var shore2Lovers: UIView!
     @IBOutlet var ivShore3Shore: UIImageView!
     @IBOutlet var shore3Friends: UIView!
@@ -32,6 +32,7 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var vThrowBtnContainer: UIView!
     @IBOutlet weak var lblThrowBtn: UILabel!
     @IBOutlet weak var ivThrowBtn: UIImageView!
+    @IBOutlet weak var lblBottlesLeftBadge: UILabel!
     // my bottles
     @IBOutlet weak var vMyBottlesBtnContainer: UIView!
     @IBOutlet weak var lblMyBottlesBtn: UILabel!
@@ -80,6 +81,9 @@ class HomeViewController: AbstractController {
     var introAnimationDone: Bool = false
     var filterViewVisible = false
     
+    // temp Data Holders
+    var productType: ShopItemType?
+    
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,10 +114,27 @@ class HomeViewController: AbstractController {
 //        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
 //            self.ivWaves?.transform = CGAffineTransform.identity.translatedBy(x: 2, y: -2)
 //        }, completion: nil)
+
+        
+        ivShore2Umbrella.setAnchorPoint(anchorPoint: CGPoint(x: 0.483 , y: 0.71))
+        ivShore2Umbrella?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0))
+        UIView.animate(withDuration: 1.5, delay: 0, options: [.repeat, .autoreverse], animations: {
+            self.ivShore2Umbrella?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0.05))
+        }, completion: nil)
+        
+        //ivSea.setAnchorPoint(anchorPoint: CGPoint(x: 0.483 , y: 0.71))
+//        ivWaves?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: 0, y: 0)
+//        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+//            self.ivWaves?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0.0)).translatedBy(x: 0, y: 10)
+//        }, completion: nil)
+        
         if currentPageIndex == 0 {
             animateCrab()
         }
         self.animateShark()
+        
+        ApiManager.shared.getMe(completionBlock: { (success, error, user) in})
+        ApiManager.shared.requestUserInventoryItems { (items, error) in}
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,10 +153,30 @@ class HomeViewController: AbstractController {
         }
         
         self.setArtImages()
+        filterView?.refreshFilterView()
+        refreshViewData()
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+//            self.ivWaves?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: 0, y: 0)
+//            UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+//                self.ivWaves?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 20)
+//            }, completion: nil)
+//        }
     }
     
     /// Customize view
     override func customizeView() {
+        
+        // Wording
+        lblThrowBtn.text = "HOME_THROW_BTN".localized
+        lblFindBtn.text = "HOME_FIND_BTN".localized
+        lblMyBottlesBtn.text = "HOME_MY_BOTTLES_BTN".localized
+        self.navigationView.navTitle.text = "main_shore".localized
+        
+        // fonts
+        lblThrowBtn.font = AppFonts.xSmallBold
+        lblFindBtn.font = AppFonts.xSmallBold
+        lblMyBottlesBtn.font = AppFonts.xSmallBold
         
         //add geture recognizer for swipping horizontally
         panRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan))
@@ -143,12 +184,16 @@ class HomeViewController: AbstractController {
         self.view.addGestureRecognizer(panRecognizer!)
         
         self.ivShore2Girl.loadGif(name: "girl")
-        
         self.ivShore3Girl1.loadGif(name: "girl_3_1")
         self.ivShore3Girl2.loadGif(name: "girl_3_2")
         
+        filterView.delegate = self
         //ivShore2Girl.loadGif(asset: "girl")
+    }
+    
+    func refreshViewData () {
         
+        lblBottlesLeftBadge.text = "\(DataStore.shared.me?.bottlesLeftToThrowCount ?? 0)"
         
     }
     
@@ -159,8 +204,8 @@ class HomeViewController: AbstractController {
         
         let hour = calendar.component(.hour, from: date)
         
-        let isNight = hour >= 18 || hour <= 5
-        //var isNight = true
+        //let isNight = hour >= 18 || hour <= 5
+        let isNight = false
         
         //hours += 1
         if isNight {
@@ -175,7 +220,7 @@ class HomeViewController: AbstractController {
             ivShore3Shore.image = UIImage(named:"shore3_night")
             ivFire.loadGif(name: "fire")
             
-            ivWaves.image = nil
+            //ivWaves.image = nil
         } else {
             ivSea.image = UIImage(named:"sea")
             ivSky.image = UIImage(named:"sky1")
@@ -188,7 +233,7 @@ class HomeViewController: AbstractController {
             ivShore3Shore.image = UIImage(named:"shore3")
             ivFire.image = nil
             
-            ivWaves.image = nil
+            //ivWaves.image = nil
         }
         
         ivCrap.loadGif(name: "crab")
@@ -207,31 +252,69 @@ class HomeViewController: AbstractController {
     }
     
     func animateShark() {
-        ivShark?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
-        UIView.animate(withDuration: 18.0, delay: 5, options: [.repeat, .curveLinear], animations: {
-            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 3, y: 0)
-        }, completion: nil)
+//        ivShark?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+        
+//        UIView.animate(withDuration: 18.0, delay: 5, options: [.repeat, .curveLinear], animations: {
+//            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 3, y: 0)
+//        }, completion: nil)
+        
+//        UIView.animateKeyframes(withDuration: 18, delay: 3, options: [.repeat], animations: {
+//            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33) {
+//                self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth/3 , y: 8).rotated(by: 0.1).scaledBy(x: 1.08, y: 1.08)
+//            }
+//            UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 0.33) {
+//                self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth/2, y: 0)
+//            }
+//            UIView.addKeyframe(withRelativeStartTime: 0.66, relativeDuration: 0.34) {
+//                self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth , y: -8)
+//            }
+//        }) { (done) in
+//            
+//        }
+        
+//        ivShark?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: 0, y: 0)
+//        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+//            self.ivShark?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0.0)).translatedBy(x: 0, y: 10)
+//        }, completion: nil)
+        
+        
+        let maxYTransaltion = CGFloat(180.0)
+        
+        let randX = CGFloat( arc4random_uniform(UInt32(300)) )
+        let randY = CGFloat( arc4random_uniform(UInt32(maxYTransaltion)) )
+        let randDelay: Double = Double(arc4random_uniform(UInt32(12) + 4))
+        DispatchQueue.main.asyncAfter(deadline: .now() + randDelay) {
+            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: randX, y: randY).scaledBy(x: randY/maxYTransaltion + 1.0, y: (randY/(maxYTransaltion * 2)) + 1.0)
+            self.ivShark.loadGif(name: "dolphin")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {
+                // stop the gif from replay 
+                self.ivShark.image = nil
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let bottle = sender as? Bottle {
-
             let nav = segue.destination as! UINavigationController
             let findBottleVC = nav.topViewController as! FindBottleViewController
             findBottleVC.shoreName = self.navigationView.navTitle.text
             findBottleVC.bottle = bottle
         
-        } else if let type = sender as? filterType {
+        } else if segue.identifier == "shopSegue" {
             let vc = segue.destination as! ShopViewController
-            vc.fType = type
+            if let type = productType {
+                vc.fType = type
+            }
         }
     }
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
        
-        if let bCount = DataStore.shared.me?.bottlesCount, bCount>0 {
-            DataStore.shared.me?.bottlesCount = bCount - 1
+        //ActionRateUs.execute(hostViewController: self)
+        
+        if let bCount = DataStore.shared.me?.bottlesLeftToThrowCount, bCount > 0 {
+            //DataStore.shared.me?.bottlesCount = bCount - 1
             self.wiggleAnimate(view: self.ivThrowBtn)
             self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
         } else {
@@ -243,31 +326,28 @@ class HomeViewController: AbstractController {
     
     }
 
-    @IBAction func findBottlePressed(_ sender: UIButton) {
-        
+    @IBAction func findBottlePressed(_ sender: Any) {
        
-            self.ivFindBottle.loadGif(name: "find_bottle")
-            self.wiggleAnimate(view: self.ivFindBtn)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 5 second
-                self.ivFindBottle.image = nil
-                self.showActivityLoader(true)
-                
-                ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
-                    self.showActivityLoader(false)
-                    if error == nil && bottle != nil {
-                        //print("\(bottle?.bottle_id)")
-                        self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
-                    } else {
-                        print(error)
-                        let alertController = UIAlertController(title: "", message: error , preferredStyle: .alert)
-                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                        alertController.addAction(ok)
-                        self.present(alertController, animated: true, completion: nil)
-                    }
-                })
-            }
-        
-        
+        self.ivFindBottle.loadGif(name: "find_bottle")
+        self.wiggleAnimate(view: self.ivFindBtn)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // delay 5 second
+            self.ivFindBottle.image = nil
+            self.showActivityLoader(true)
+            
+            ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
+                self.showActivityLoader(false)
+                if error == nil && bottle != nil {
+                    //print("\(bottle?.bottle_id)")
+                    self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
+                } else {
+                    //print(error)
+                    let alertController = UIAlertController(title: "", message: error , preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
@@ -290,8 +370,21 @@ class HomeViewController: AbstractController {
                 goToMainShore()
             }
         
+            // optimistic update for user throwed bottles count
+            if let bottlesLeftCount = DataStore.shared.me?.bottlesLeftToThrowCount {
+                DataStore.shared.me?.bottlesLeftToThrowCount = bottlesLeftCount - 1
+                self.refreshViewData()
+            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 6 second
                 self.ivThrowBottle.image = nil
+                // update user infoafter throwing the bottle
+                ApiManager.shared.getMe(completionBlock: { (success, error, user) in
+                    // check the number of bottles thrown by user, and use it to determine 
+                    // if we should show the rate us dialog 
+                    ActionRateUs.execute(hostViewController: self)
+                    self.refreshViewData()
+                })
             }
         }
     }
@@ -529,7 +622,7 @@ class HomeViewController: AbstractController {
         })
     }
     
-    func showFilter () {
+    @IBAction func showFilter (_ sender: Any) {
         if self.filterViewVisible {
             // hide
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
@@ -543,6 +636,7 @@ class HomeViewController: AbstractController {
             panRecognizer?.isEnabled = true
         } else {
             // show
+            self.filterView.onFilterViewAppaer()
             self.filterView.isHidden = false
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.filterView.transform = CGAffineTransform.identity
@@ -556,7 +650,8 @@ class HomeViewController: AbstractController {
         }
     }
     
-    func showShopView() {
+    func showShopView(_ productType: ShopItemType?) {
+        self.productType = productType
         self.performSegue(withIdentifier:"shopSegue", sender: self)
     }
     
@@ -570,25 +665,34 @@ extension HomeViewController {
 
 extension HomeViewController: FilterViewDelegate {
     
-    func getFilterInfo(gender: String, country: String) {
+    func filterViewGet(_ filterView: FilterView, gender: String, country: String) {
+        
         self.gender = GenderType(rawValue: gender)!
         self.countryCode = country
-        print(gender)
-        print(country)
-        print("----------")
     }
     
-    func showBuyFilterMessage(type: filterType) {
+    func filterViewShowBuyFilterMessage(_ filterView: FilterView, type: ShopItemType) {
         
         let alertController = UIAlertController(title: "", message: "BUY_FILTER_WARNING".localized, preferredStyle: .alert)
         let ok = UIAlertAction(title: "GO_TO_SHOP".localized, style: .default, handler: { (alertAction) in
-            self.performSegue(withIdentifier:"shopSegue", sender: type)
+            //self.performSegue(withIdentifier:"shopSegue", sender: type)
+            self.showShopView(type)
         })
         alertController.addAction(ok)
         let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
         alertController.addAction(cancel)
         self.present(alertController, animated: true, completion: nil)
         
+    }
+    
+    func filterViewFindBottle(_ filterView: FilterView) {
+        // hide filters view is
+        self.showFilter(self)
+        self.findBottlePressed(self.ivFindBtn)
+    }
+    
+    func filterViewGoToShop(_ filterView: FilterView, productType: ShopItemType) {
+        self.showShopView(productType)
     }
 }
 

@@ -18,13 +18,20 @@ class ConversationViewController: AbstractController {
     @IBOutlet weak var waveSubView: WaveView!
     @IBOutlet weak var navigationView: VobbleNavigationBar!
     
+    @IBOutlet weak var lblUserName: UILabel!
+    
+    // empty placeholder
+    @IBOutlet weak var emptyPlaceHolderView: UIView!
+    @IBOutlet weak var emptyPlaceHolderLabel: UILabel!
+    
 //    fileprivate var currentUser: AppUser = AppUser()
     fileprivate var filteredConvArray: [Conversation] = [Conversation]()
     fileprivate var searchText: UITextField?
     fileprivate var searchString: String = ""
     public var tap: tapOption = .myBottles
     var imgLoading: UIActivityIndicatorView?
-    var userImageBtn:UIButton = UIButton()
+    var userImageView: UIImageView?
+    
     
     // MARK: - firebase Properties
     fileprivate var conversationRefHandle: DatabaseHandle?
@@ -40,9 +47,13 @@ class ConversationViewController: AbstractController {
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "conversationCollectionViewCellID")
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewHeader",bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "conversationCollectionViewHeaderID")
         
-        DataStore.shared.me?.myBottlesArray = [Conversation]()
-        DataStore.shared.me?.myRepliesArray = [Conversation]()
+        DataStore.shared.myBottles = [Conversation]()
+        DataStore.shared.myReplies = [Conversation]()
         observeConversation()
+        
+        emptyPlaceHolderView.isHidden = true
+        emptyPlaceHolderLabel.font = AppFonts.normal
+        emptyPlaceHolderLabel.text = "MY_BOTTLES_EMPTY_PLACEHOLDER".localized
         
     }
     
@@ -57,6 +68,28 @@ class ConversationViewController: AbstractController {
         waveSubView.showWave()
     }
     
+    override func customizeView() {
+        super.customizeView()
+        
+        navigationView.title = "MY_BOTTLES_TITLE".localized
+    }
+    
+    func refreshView () {
+        if tap == .myBottles {
+            if DataStore.shared.myBottles.count > 0 {
+                self.emptyPlaceHolderView.isHidden = true
+            } else {
+                self.emptyPlaceHolderView.isHidden = false
+            }
+        } else {
+            if DataStore.shared.myReplies.count > 0 {
+                self.emptyPlaceHolderView.isHidden = true
+            } else {
+                self.emptyPlaceHolderView.isHidden = false
+            }
+        }
+        self.bottleCollectionView.reloadData()
+    }
     
 }
 // MARK: - UICollectionViewDataSource
@@ -69,10 +102,10 @@ extension ConversationViewController: UICollectionViewDataSource {
             // string contains non-whitespace characters
             return self.filteredConvArray.count
         } else if tap == .myBottles {
-            return DataStore.shared.me?.myBottlesArray.count ?? 0
+            return DataStore.shared.myBottles.count
         }
         
-       return DataStore.shared.me?.myRepliesArray.count ?? 0
+       return DataStore.shared.myReplies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,10 +116,10 @@ extension ConversationViewController: UICollectionViewDataSource {
             let obj = self.filteredConvArray[indexPath.row]
             convCell.configCell(convObj: obj,tap: tap )
         } else if tap == .myBottles {
-            let obj = (DataStore.shared.me?.myBottlesArray[indexPath.row])!
+            let obj = (DataStore.shared.myBottles[indexPath.row])
             convCell.configCell(convObj: obj,tap: tap)
         } else if tap == .myReplies {
-            let obj = (DataStore.shared.me?.myRepliesArray[indexPath.row])!
+            let obj = (DataStore.shared.myReplies[indexPath.row])
             convCell.configCell(convObj: obj,tap: tap)
         }
         
@@ -100,8 +133,12 @@ extension ConversationViewController: UICollectionViewDataSource {
         headerView.searchTetField.text = searchString
         headerView.searchTetField.delegate = self
         headerView.convVC = self
-        
+        headerView.awakeFromNib()
         self.searchText =  headerView.searchTetField
+        self.userImageView = headerView.userImageView
+        if let me = DataStore.shared.me {
+            headerView.configCell(userObj: me)
+        }
         
         return headerView
     }
@@ -134,10 +171,10 @@ extension ConversationViewController: UICollectionViewDelegate {
             conversation = self.filteredConvArray[indexPath.row]
             
         } else if tap == .myBottles {
-            conversation = (DataStore.shared.me?.myBottlesArray[indexPath.row])!
+            conversation = DataStore.shared.myBottles[indexPath.row]
             
         } else if tap == .myReplies {
-            conversation = (DataStore.shared.me?.myRepliesArray[indexPath.row])!
+            conversation = DataStore.shared.myReplies[indexPath.row]
             
         }
         
@@ -162,17 +199,21 @@ extension ConversationViewController: UICollectionViewDelegate {
             chatVc.senderDisplayName = "test"
             
             if tap == .myBottles {
-                chatVc.convTitle = conversation.bottle?.owner?.firstName ?? ""
+                chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
                 //if is_seen == false --> hide chat tool bar so we can't send any message
                 chatVc.isHideInputToolBar = true
                 
             } else if tap == .myReplies {
-                chatVc.convTitle = conversation.user?.firstName ?? ""
+                chatVc.convTitle = conversation.user?.userName ?? ""
                 if let is_seen = conversation.is_seen, is_seen == 0 {
                     convRef.updateChildValues(["is_seen": 1])
                     convRef.updateChildValues(["startTime": ServerValue.timestamp()])
                     chatVc.isHideInputToolBar = false
                     chatVc.seconds = 24.0*60.0*60.0
+                  
+                    // send push notification to peer to let him know that the chat is open now
+                    let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
+                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: conversation.getPeer!, completionBlock: { (success, error) in })
                  }
             }
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
@@ -186,9 +227,11 @@ extension ConversationViewController: UICollectionViewDelegate {
                 }
             }
             
-            if let userName = conversation.bottle?.owner?.firstName {
+            if let userName = conversation.getPeer?.userName {
                 chatVc.navUserName = userName
             }
+            chatVc.conversationOriginalObject = conversation
+            
             if let shore_id = conversation.bottle?.shoreId {
                 for sh in  DataStore.shared.shores {
                     if sh.shore_id == shore_id {
@@ -205,16 +248,14 @@ extension ConversationViewController: UICollectionViewDelegate {
           showActionSheet()
     }
     
-    func camera()
-    {
+    func camera() {
         let picker = UIImagePickerController()
         picker.delegate = self;
         picker.sourceType = .camera
         present(picker, animated: true, completion:nil)
     }
     
-    func photoLibrary()
-    {
+    func photoLibrary() {
         let picker = UIImagePickerController()
         picker.delegate = self;
         picker.sourceType = .photoLibrary
@@ -238,7 +279,6 @@ extension ConversationViewController: UICollectionViewDelegate {
         present(actionSheet, animated: true, completion: nil)
         
     }
-    
 }
 
 // MARK: - textfield delegate
@@ -256,9 +296,9 @@ extension ConversationViewController {
         }
         
         if tap == .myBottles {
-            filteredConvArray = (DataStore.shared.me?.myBottlesArray.filter{(($0.bottle?.owner?.firstName)!.lowercased().contains(searchString.lowercased()))})!
+            filteredConvArray = DataStore.shared.myBottles.filter{(($0.bottle?.owner?.userName)!.lowercased().contains(searchString.lowercased()))}
         } else if tap == .myReplies {
-            filteredConvArray = (DataStore.shared.me?.myRepliesArray.filter{(($0.user?.firstName)!.lowercased().contains(searchString.lowercased()))})!
+            filteredConvArray = DataStore.shared.myReplies.filter{(($0.user?.userName)!.lowercased().contains(searchString.lowercased()))}
         }
 //        filteredConvArray = currentUser.conversationArray.filter{(($0.user2?.firstName)!.lowercased().contains(searchString.lowercased()))}
         
@@ -268,8 +308,6 @@ extension ConversationViewController {
         
         return true
     }
-    
-    
 }
 
 extension ConversationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -279,37 +317,37 @@ extension ConversationViewController: UIImagePickerControllerDelegate, UINavigat
         picker.dismiss(animated: true, completion:nil)
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.userImageBtn.setImage(pickedImage, for: .normal)
+            self.userImageView?.image = pickedImage
             
             self.imgLoading?.isHidden = false
             self.imgLoading?.hidesWhenStopped = true
             self.imgLoading?.activityIndicatorViewStyle = .gray
             self.imgLoading?.startAnimating()
             
-            let photoUrl = info[UIImagePickerControllerReferenceURL] as? URL
-            let assets = PHAsset.fetchAssets(withALAssetURLs: [photoUrl!], options: nil)
-            let asset = assets.firstObject
-            asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
+            let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            
+            ApiManager.shared.uploadImage(imageData: chosenImage) { (files, errorMessage) in
                 
-                let urls:[URL] = [(contentEditingInput?.fullSizeImageURL)!]
-                
-                ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
-                    
-                    if errorMessage == nil {
-                        
-                        DataStore.shared.me?.imageUrl = files[0].fileUrl
+                if errorMessage == nil {
+                    // update user object
+                    var userCopy = DataStore.shared.me?.copy() as! AppUser
+                    userCopy.profilePic = files[0].fileUrl
+                    ApiManager.shared.updateUser(user: userCopy, completionBlock: { (success, error, newUser) in
                         self.imgLoading?.stopAnimating()
-                        
-                    } else {
-                        print("error")
-                        self.imgLoading?.stopAnimating()
-                    }
+                        if error == nil {
+                            DataStore.shared.me?.profilePic = files[0].fileUrl
+                        } else {
+                            
+                        }
+                    })
+                    DataStore.shared.me?.profilePic = files[0].fileUrl
                     
+                } else {
+                    self.imgLoading?.stopAnimating()
+                    print("error")
                 }
-            })
-
+            }
         }
-        
     }
 }
 
@@ -321,11 +359,10 @@ extension ConversationViewController {
         // We can use the observe method to listen for new
         // conversations being written to the Firebase DB
         
-        self.showActivityLoader(true)
-        
+        self.navigationView.showProgressIndicator(show: true)
         conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
                 
-                self.showActivityLoader(false)
+                self.navigationView.showProgressIndicator(show: false)
                 let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 conversation.idString = snapshot.key
                 if let is_seen = conversation.is_seen, is_seen == 1 {
@@ -341,31 +378,32 @@ extension ConversationViewController {
                     //(My replies)
                     if let currentUserID = DataStore.shared.me?.objectId, let convUserID = conversation.user?.objectId,currentUserID == convUserID {
                         print("my bottles")
-                        DataStore.shared.me?.myBottlesArray.append(conversation)
-                        DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
+                        DataStore.shared.myBottles.append(conversation)
+                        DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
                             return (obj1.createdAt! > obj2.createdAt!)
                         })
-                        self.bottleCollectionView.reloadData()
+                        
+                        self.refreshView()
                     } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID { // (My replies)
                         print("my replies")
-                        DataStore.shared.me?.myRepliesArray.append(conversation)
-                        DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
+                        DataStore.shared.myReplies.append(conversation)
+                        DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
                             return (obj1.createdAt! > obj2.createdAt!)
                         })
-                        self.bottleCollectionView.reloadData()
+                        self.refreshView()
                     }
                 }
                 
             }) { (error) in
                 print("****************")
                 print(error)
-                self.showActivityLoader(false)
-                
+                self.navigationView.showProgressIndicator(show: false)
+                self.emptyPlaceHolderView.isHidden = true
             }
         
         conversationRef.observe(.childChanged, with: { (snapshot) in
         
-            self.showActivityLoader(false)
+            self.navigationView.showProgressIndicator(show: false)
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             conversation.idString = snapshot.key
             if let is_seen = conversation.is_seen, is_seen == 1 {
@@ -380,47 +418,39 @@ extension ConversationViewController {
             if let is_active = conversation.isActive, !is_active {
                 //(My replies)
                 if let currentUserID = DataStore.shared.me?.objectId, let convUserID = conversation.user?.objectId,currentUserID == convUserID {
-                    print("my bottles")
                     
-                    if let myBottlesArray = DataStore.shared.me?.myBottlesArray {
-                        var i = 0
-                        for conv in myBottlesArray {
-                            
-                            if conv.idString == conversation.idString {
-                                DataStore.shared.me?.myBottlesArray[i] = conversation
-                                DataStore.shared.me?.myBottlesArray.sort(by: { (obj1, obj2) -> Bool in
-                                    return (obj1.createdAt! > obj2.createdAt!)
-                                })
-                                self.bottleCollectionView.reloadData()
-                                break
-                            } else {
-                                i = i + 1
-                            }
+                    let myBottlesArray = DataStore.shared.myBottles
+                    var i = 0
+                    for conv in myBottlesArray {
+                        if conv.idString == conversation.idString {
+                            DataStore.shared.myBottles[i] = conversation
+                            DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
+                                return (obj1.createdAt! > obj2.createdAt!)
+                            })
+                            self.refreshView()
+                            break
+                        } else {
+                            i = i + 1
                         }
-                        
                     }
                     
                 } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID { // (My replies)
                     print("my replies")
 
-                    if let myBottlesArray = DataStore.shared.me?.myRepliesArray {
-                        var i = 0
-                        for conv in myBottlesArray {
-                            
-                            if conv.idString == conversation.idString {
-                                DataStore.shared.me?.myRepliesArray[i] = conversation
-                                DataStore.shared.me?.myRepliesArray.sort(by: { (obj1, obj2) -> Bool in
-                                    return (obj1.createdAt! > obj2.createdAt!)
-                                })
-                                self.bottleCollectionView.reloadData()
-                                break
-                            } else {
-                                i = i + 1
-                            }
+                    let myBottlesArray = DataStore.shared.myReplies
+                    var i = 0
+                    for conv in myBottlesArray {
+                        if conv.idString == conversation.idString {
+                            DataStore.shared.myReplies[i] = conversation
+                            DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
+                                return (obj1.createdAt! > obj2.createdAt!)
+                            })
+                            self.refreshView()
+                            break
+                        } else {
+                            i = i + 1
                         }
-                        
                     }
-                    
                 }
             }
         })

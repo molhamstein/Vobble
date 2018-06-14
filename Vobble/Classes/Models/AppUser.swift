@@ -15,17 +15,18 @@ enum GenderType: String {
     case allGender = "allGender"
 }
 
-// MARK: User account type
-enum AccountType: String {
-    case normal = "normal"
-    case celebrity = "celebrity"
+enum Status: String {
+    case pending = "pending"
+    case active = "active"
+    case deactivated = "deactivated"
 }
 
 // MARK: User login type
 enum LoginType: String {
-    case vobble = "vobble"
+    case vobble = "registration"
     case facebook = "facebook"
     case twitter = "twitter"
+    case google = "google"
     case instagram = "instagram"
     /// check current login state (Social - Normal)
     var isSocial:Bool {
@@ -38,29 +39,28 @@ enum LoginType: String {
     }
 }
 
-class AppUser: BaseModel {
+class AppUser: BaseModel, NSCopying {
     // MARK: Keys
     private let kUserObjectIdKey = "id"
     private let kUserFirstNameKey = "username"
-    private let kUserLastNameKey = "lastName"
     private let kUserEmailKey = "email"
-    private let kUserProfilePicKey = "avatar"
-    private let kUserBirthdayKey = "birthday"
+    private let kUserProfilePicKey = "image"
     private let kUserGenderKey = "gender"
     private let kUserCountryKey = "country"
-    private let kUserFollowingCountKey = "followingCount"
-    private let kUserFollowersCountKey = "followersCount"
-    private let kUserCategoriesKey = "categories"
-    private let kUserLoginTypeKey = "loginType"
-    private let kUserAccountTypeKey = "type"
-    private let kUserIsVerifiedKey = "isVerified"
+    private let kUserCountryISOKey = "ISOCode"
+    private let kUserLoginTypeKey = "typeLogIn"
+    private let kUserStateKey = "status"
     private let kUserTokenKey = "token"
     private let kUserImage = "image"
     private let kUserBottles = "myBottles"
     private let kUserReplies = "myReplies"
-    private let kUserShopItems = "shopItems"
+    private let kUserSocialId = "socialId"
+    private let kUserSocialToken = "token"
+    private let kUserNextRefill = "nextRefill"
+    
     
     private let kUserBottlesCount = "bottlesCount"
+    private let kUserBottlesLeftToday = "bottlesCountToday"
     
     private let kBottleFirstColor: String = "fcolor"
     private let kBottleSecondColor: String = "lcolor"
@@ -68,29 +68,27 @@ class AppUser: BaseModel {
 
     
     // MARK: Properties
-    public var objectId: Int?
-    public var firstName: String?
-    public var lastName: String?
+    public var objectId: String?
+    public var userName: String?
     public var email: String?
     public var profilePic: String?
-    public var birthday: Date?
     public var gender: GenderType?
     public var country: String?
-    public var followingCount: Int?
-    public var followersCount: Int?
-    public var categories: [String]?
+    public var countryISOCode: String?
     public var loginType: LoginType?
-    public var accountType: AccountType?
-    public var isVerified: Bool?
+    public var status: Status?
     public var token: String?
     public var bottlesCount: Int?
+    public var bottlesLeftToThrowCount: Int?
+    public var socialId: String?
+    public var socialToken: String?
+    public var nextRefillDate: Date?
     
     public var firstColor : UIColor?
     public var secondColor : UIColor?
-//    public var imageUrl : UIImage?
-    public var imageUrl : String?
-    public var myBottlesArray:[Conversation] = [Conversation]()
-    public var myRepliesArray:[Conversation] = [Conversation]()
+    //public var imageUrl : String?
+    //public var myBottlesArray:[Conversation] = [Conversation]()
+    //public var myRepliesArray:[Conversation] = [Conversation]()
 //    public var shopItems:[ShopItem] = [ShopItem]()
     
     
@@ -101,31 +99,31 @@ class AppUser: BaseModel {
     
     public required init(json: JSON) {
         super.init(json: json)
-        objectId = json[kUserObjectIdKey].int
-        firstName = json[kUserFirstNameKey].string
-        lastName = json[kUserLastNameKey].string
+        objectId = json[kUserObjectIdKey].string
+        userName = json[kUserFirstNameKey].string
         email = json[kUserEmailKey].string
         profilePic = json[kUserProfilePicKey].string
-        if let dateString = json[kUserBirthdayKey].string {
-            birthday = DateHelper.getDateFromISOString(dateString)
-        }
+        
         if let genderString = json[kUserGenderKey].string {
             gender = GenderType(rawValue: genderString)
         }
         country = json[kUserCountryKey].string
-        followingCount = json[kUserFollowingCountKey].intValue
-        followersCount = json[kUserFollowersCountKey].intValue
-        categories = json[kUserCategoriesKey].map{$1.stringValue}
+        countryISOCode = json[kUserCountryISOKey].string
         if let loginTypeString = json[kUserLoginTypeKey].string {
             loginType = LoginType(rawValue: loginTypeString)
         }
-        if let accountTypeString = json[kUserAccountTypeKey].string {
-            accountType = AccountType(rawValue: accountTypeString)
+        if let accountStatus = json[kUserStateKey].string {
+            status = Status(rawValue: accountStatus)
         }
-        isVerified = json[kUserIsVerifiedKey].boolValue
+        if let nextRefill = json[kUserNextRefill].string {
+            nextRefillDate = DateHelper.getDateFromISOString(nextRefill)
+        }
         token = json[kUserTokenKey].string
-//        bottlesCount = json[kUserBottlesCount].int
-         bottlesCount = 3
+        bottlesCount = json[kUserBottlesCount].int
+        bottlesLeftToThrowCount = json[kUserBottlesLeftToday].int
+        
+        socialId = json[kUserSocialId].string
+        socialToken = json[kUserSocialToken].string
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -135,12 +133,8 @@ class AppUser: BaseModel {
             dictionary[kUserObjectIdKey] = value
         }
         // first name
-        if let value = firstName {
+        if let value = userName {
             dictionary[kUserFirstNameKey] = value
-        }
-        // last name
-        if let value = lastName {
-            dictionary[kUserLastNameKey] = value
         }
         // email
         if let value = email {
@@ -150,10 +144,6 @@ class AppUser: BaseModel {
         if let value = profilePic {
             dictionary[kUserProfilePicKey] = value
         }
-        // birthday
-        if let value = birthday {
-            dictionary[kUserBirthdayKey] = DateHelper.getISOStringFromDate(value)
-        }
         // gender
         if let value = gender?.rawValue {
             dictionary[kUserGenderKey] = value
@@ -162,29 +152,16 @@ class AppUser: BaseModel {
         if let value = country {
             dictionary[kUserCountryKey] = value
         }
-        // following count
-        if let value = followingCount {
-            dictionary[kUserFollowingCountKey] = value
-        }
-        // followers count
-        if let value = followersCount {
-            dictionary[kUserFollowersCountKey] = value
-        }
-        // categories
-        if let value = categories {
-            dictionary[kUserCategoriesKey] = value.map{$0}
+        if let value = countryISOCode {
+            dictionary[kUserCountryISOKey] = value
         }
         // login type
         if let value = loginType?.rawValue {
             dictionary[kUserLoginTypeKey] = value
         }
         // account type
-        if let value = accountType?.rawValue {
-            dictionary[kUserAccountTypeKey] = value
-        }
-        // is verified
-        if let value = isVerified {
-            dictionary[kUserIsVerifiedKey] = value
+        if let value = status?.rawValue {
+            dictionary[kUserStateKey] = value
         }
         // token
         if let value = token {
@@ -194,11 +171,45 @@ class AppUser: BaseModel {
         if let value = bottlesCount {
             dictionary[kUserBottlesCount] = value
         }
-        dictionary[kUserBottles] = myBottlesArray.map{$0}
-        dictionary[kUserReplies] = myRepliesArray.map{$0}
+        // bottles left to throw count
+        if let value = bottlesLeftToThrowCount {
+            dictionary[kUserBottlesLeftToday] = value
+        }
+        
+        if let value = socialToken {
+            dictionary[kUserSocialToken] = value
+        }
+        if let value = socialId {
+            dictionary[kUserSocialId] = value
+        }
+        if let value = nextRefillDate {
+            dictionary[kUserNextRefill] = DateHelper.getISOStringFromDate(value)
+        }
+        
+        //dictionary[kUserBottles] = myBottlesArray.map{$0}
+        //dictionary[kUserReplies] = myRepliesArray.map{$0}
 //        dictionary[kUserShopItems] = shopItems.map{$0}
         
         return dictionary
+    }
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = AppUser()
+        copy.objectId = objectId
+        copy.userName = userName
+        copy.email = email
+        copy.profilePic = profilePic
+        copy.gender = gender
+        copy.countryISOCode = countryISOCode
+        copy.loginType = loginType
+        copy.status = status
+        copy.token = token
+        copy.bottlesCount = bottlesCount
+        copy.bottlesLeftToThrowCount = bottlesLeftToThrowCount
+        copy.socialId = socialId
+        copy.socialToken = socialToken
+        copy.nextRefillDate = nextRefillDate
+        return copy
     }
     
 }

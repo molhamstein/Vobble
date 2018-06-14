@@ -21,6 +21,7 @@ class VobbleNavigationBar : AbstractNibView {
     @IBOutlet weak var navTitle: UILabel!
     @IBOutlet weak var rightIcon: UIButton!
     public var viewcontroller : UIViewController?
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     var mode:NavBarMode = .normal
     
@@ -46,10 +47,27 @@ class VobbleNavigationBar : AbstractNibView {
     }
     
     // MARK: - Initializers
-    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    public required override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    func setupView () {
+        navTitle.font = AppFonts.bigBold
+        progressIndicator.isHidden = true
         
+        if AppConfig.currentLanguage == .arabic {
+            rightIcon.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -5)
+            leftIcon.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 8)
+        } else {
+            leftIcon.transform = CGAffineTransform.identity
+            rightIcon.transform = CGAffineTransform.identity
+        }
     }
     
     // MARK: -  Private Methods
@@ -75,6 +93,15 @@ class VobbleNavigationBar : AbstractNibView {
         }
     }
     
+    func showProgressIndicator(show: Bool){
+        if show {
+            progressIndicator.startAnimating()
+        } else {
+            progressIndicator.stopAnimating()
+        }
+        progressIndicator.isHidden = !show
+    }
+    
     @IBAction func leftIconPressed(_ sender: Any) {
         if mode != .home {
             if let nc = viewcontroller?.navigationController, viewcontroller == nc.viewControllers[0] {
@@ -84,16 +111,15 @@ class VobbleNavigationBar : AbstractNibView {
             }
         } else if mode == .home {
             let vc = viewcontroller as! HomeViewController
-            vc.showFilter()
+            vc.showFilter(self)
         }
     }
     
     @IBAction func rightIconPressed(_ sender: Any) {
         
         if let vc = viewcontroller as? HomeViewController {
-            vc.showShopView()
+            vc.showShopView(.bottlesPack)
         }
     }
-    
     
 }

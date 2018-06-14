@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,6 +19,7 @@
             <connections>
                 <outlet property="leftIcon" destination="gN4-5k-Fqc" id="EXg-GK-Neb"/>
                 <outlet property="navTitle" destination="1DC-up-vPY" id="vkm-6f-Yvp"/>
+                <outlet property="progressIndicator" destination="gaE-aq-7Iy" id="IlO-Fo-vf8"/>
                 <outlet property="rightIcon" destination="yuD-6v-FJa" id="Jqa-PN-CTi"/>
             </connections>
         </placeholder>
@@ -53,13 +55,24 @@
                                 <action selector="rightIconPressed:" destination="-1" eventType="touchUpInside" id="g2l-N9-qdg"/>
                             </connections>
                         </button>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gaE-aq-7Iy">
+                            <rect key="frame" x="314.5" y="309.5" width="42" height="42"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="drB-8j-fTM"/>
+                                <constraint firstAttribute="width" constant="42" id="rVa-Az-MII"/>
+                            </constraints>
+                            <color key="color" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </activityIndicatorView>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="gaE-aq-7Iy" secondAttribute="trailing" constant="18.5" id="2qO-yA-Bz8"/>
                         <constraint firstItem="yuD-6v-FJa" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="0.99" id="5Dd-EB-P2J"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" id="ERp-gD-ZM4"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="M8h-2l-Xzs"/>
-                        <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="0.17" id="Vmk-yN-LUn"/>
-                        <constraint firstItem="yuD-6v-FJa" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" multiplier="1.82" id="d6Y-ih-y8W"/>
+                        <constraint firstAttribute="trailing" secondItem="yuD-6v-FJa" secondAttribute="trailing" constant="18.5" id="PKi-PO-bDZ"/>
+                        <constraint firstItem="gaE-aq-7Iy" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="0.99" id="dTW-hN-gfX"/>
+                        <constraint firstItem="gN4-5k-Fqc" firstAttribute="leading" secondItem="iuT-R4-wzv" secondAttribute="leading" constant="17" id="gqu-ZD-9o0"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="yFe-D9-Pvs"/>
                     </constraints>
                 </view>

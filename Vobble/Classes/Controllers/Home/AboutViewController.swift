@@ -14,6 +14,8 @@ class AboutViewController: AbstractController, MFMailComposeViewControllerDelega
     // MARK: Properties
     @IBOutlet var lblContactUs: UILabel!
     @IBOutlet var lblTerms: UILabel!
+    @IBOutlet var lblShare: UILabel!
+    @IBOutlet var lblRate: UILabel!
     @IBOutlet var btnLogout: UIButton!
     @IBOutlet var navigationView: VobbleNavigationBar!
 
@@ -35,7 +37,15 @@ class AboutViewController: AbstractController, MFMailComposeViewControllerDelega
         
         lblContactUs.text = "SETTINGS_CONTACT".localized
         lblTerms.text = "SETTINGS_TERMS".localized
+        lblRate.text = "SETTINGS_RATE".localized
+        lblShare.text = "SETTINGS_SHARE".localized
         btnLogout.setTitle("SETTINGS_LOGOUT".localized, for: .normal)
+        
+        lblContactUs.font = AppFonts.normalBold
+        lblTerms.font = AppFonts.normalBold
+        lblRate.font = AppFonts.normalBold
+        lblShare.font = AppFonts.normalBold
+        btnLogout.titleLabel?.font = AppFonts.normalBold
         
         self.showNavBackButton = true
     }
@@ -70,7 +80,18 @@ class AboutViewController: AbstractController, MFMailComposeViewControllerDelega
     @IBAction func viewTermsAction(_ sender: UIView) {
         performSegue(withIdentifier: "aboutTermsSegue", sender: self)
     }
-    
+
+    @IBAction func rateUsAction(_ sender: UIView) {
+        ActionRateUs.execute(hostViewController: self)
+        //performSegue(withIdentifier: "aboutTermsSegue", sender: self)
+    }
+
+    @IBAction func ShareViboAction(_ sender: UIView) {
+        
+        ActionShareText.execute(viewController: self, text: "SETTINGS_SHARE_MSG".localized, sourceView: lblShare)
+        //performSegue(withIdentifier: "aboutTermsSegue", sender: self)
+    }
+
     @IBAction func viewPartnersAction(_ sender: UIView) {
 //        let vc = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "FloristViewController") as! FloristViewController
 //        vc.enableSelectFlorist = false

@@ -7,6 +7,7 @@
 //
 
 import SwiftyJSON
+import OneSignal
 
 /**This class handle all data needed by view controllers and other app classes
  
@@ -22,13 +23,23 @@ class DataStore :NSObject {
     private let CACHE_KEY_CATEGORIES = "categories"
     private let CACHE_KEY_SHORES = "SHORES"
     private let CACHE_KEY_SHOPITEM = "SHOPITEM"
+    private let CACHE_KEY_INVENTORY = "INVENTORY_ITEMS"
+    private let CACHE_KEY_REPORT_TYPES = "REPORT_TYPES"
     private let CACHE_KEY_USER = "user"
     private let CACHE_KEY_TOKEN = "token"
+    private let CACHE_KEY_MY_BOTTLES = "myBottles"
+    private let CACHE_KEY_MY_REPLIES = "myReplies"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
     private var _categories: [Category] = []
     private var _shopItems: [ShopItem] = [ShopItem]()
+    private var _inventoryItems: [InventoryItem] = [InventoryItem]()
+    private var _reportTypes: [ReportType] = [ReportType]()
+    
+    private var _myBottles: [Conversation] = [Conversation]()
+    private var _myReplies: [Conversation] = [Conversation]()
+    
     private var _shores: [Shore] = []
     private var _token: String?
     
@@ -80,6 +91,31 @@ class DataStore :NSObject {
         }
     }
     
+    public var inventoryItems: [InventoryItem] {
+        set {
+            _inventoryItems = newValue
+            saveBaseModelArray(array: _inventoryItems, withKey: CACHE_KEY_INVENTORY)
+        }
+        get {
+            if(_inventoryItems.isEmpty){
+                _inventoryItems = loadBaseModelArrayForKey(key: CACHE_KEY_INVENTORY)
+            }
+            return _inventoryItems
+        }
+    }
+    
+    public var reportTypes: [ReportType] {
+        set {
+            _reportTypes = newValue
+            saveBaseModelArray(array: _reportTypes, withKey: CACHE_KEY_REPORT_TYPES)
+        }
+        get {
+            if(_reportTypes.isEmpty){
+                _reportTypes = loadBaseModelArrayForKey(key: CACHE_KEY_REPORT_TYPES)
+            }
+            return _reportTypes
+        }
+    }
     public var me:AppUser?{
         set {
             _me = newValue
@@ -106,6 +142,32 @@ class DataStore :NSObject {
                 _token = loadStringForKey(key: CACHE_KEY_TOKEN)
             }
             return _token
+        }
+    }
+    
+    public var myBottles: [Conversation] {
+        set {
+            _myBottles = newValue
+            saveBaseModelArray(array: _myBottles, withKey: CACHE_KEY_MY_BOTTLES)
+        }
+        get {
+            if(_myBottles.isEmpty){
+                _myBottles = loadBaseModelArrayForKey(key: CACHE_KEY_MY_BOTTLES)
+            }
+            return _myBottles
+        }
+    }
+    
+    public var myReplies: [Conversation] {
+        set {
+            _myReplies = newValue
+            saveBaseModelArray(array: _myReplies, withKey: CACHE_KEY_MY_REPLIES)
+        }
+        get {
+            if(_myReplies.isEmpty){
+                _myReplies = loadBaseModelArrayForKey(key: CACHE_KEY_MY_REPLIES)
+            }
+            return _myReplies
         }
     }
     
@@ -173,6 +235,12 @@ class DataStore :NSObject {
         UserDefaults.standard.synchronize();
     }
     
+    public func onUserLogin(){
+        if let meId = me?.objectId, let name = me?.userName {
+            OneSignal.sendTags(["user_id": meId, "user_name": name])
+        }
+    }
+    
     public func clearCache()
     {
         if let bundle = Bundle.main.bundleIdentifier {
@@ -180,12 +248,20 @@ class DataStore :NSObject {
         }
     }
     
+    public func fetchBaseData() {
+        ApiManager.shared.getShores(completionBlock: { (shores, error) in})
+        ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
+        ApiManager.shared.requesReportTypes { (reports, error) in}
+    }
+    
     public func logout() {
         clearCache()
         me = nil
         token = nil
         categories = [Category]()
-        shopItems = [ShopItem]()
+        //shopItems = [ShopItem]()
+        inventoryItems = [InventoryItem]()
+        OneSignal.deleteTags(["user_id","user_name"])
     }
 }
 

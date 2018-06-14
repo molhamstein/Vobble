@@ -16,6 +16,7 @@ class ResetPasswordViewController: AbstractController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var resetPswView: UIView!
     @IBOutlet weak var navigationView: VobbleNavigationBar!
+    @IBOutlet weak var waveSubView: WaveView!
     
     // stages containers
     @IBOutlet weak var resetStage1: UIView!
@@ -34,6 +35,7 @@ class ResetPasswordViewController: AbstractController {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var resetButton: UIButton!
     
     @IBOutlet weak var nextButton: RNLoadingButton!
     @IBOutlet weak var footerView: UIView!
@@ -52,6 +54,8 @@ class ResetPasswordViewController: AbstractController {
     var userCode: String = ""
     var userPassword: String = ""
     
+    var isInitialized = false
+    
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,16 +68,29 @@ class ResetPasswordViewController: AbstractController {
         super.viewDidLayoutSubviews()
         resetPswView.dropShadow()
         backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
-        submitButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+        nextButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !isInitialized {
+            waveSubView.awakeFromNib()
+            waveSubView.showWave()
+            isInitialized = true
+        }
+        
     }
     
     // Customize all view members (fonts - style - text)
     override func customizeView() {
         super.customizeView()
 //        // set fonts
-//        stage1Label.font = AppFonts.big
+        emailLabel.font = AppFonts.big
+        emailTextField.font = AppFonts.xBigBold
+        
 //        stage1Desc.font = AppFonts.small
-//        emailLabel.font = AppFonts.xSmallBold
 //        stage2Label.font = AppFonts.big
 //        stage2Desc.font = AppFonts.small
 //        codeLabel.font = AppFonts.xSmallBold
@@ -83,7 +100,12 @@ class ResetPasswordViewController: AbstractController {
 //        stage1Label.text = "RESET_STEP1_TITLE".localized
 //        stage1Desc.text = "RESET_STEP1_DESC".localized
 //        emailLabel.text = "SINGUP_EMAIL_TITLE".localized
-//        emailTextField.placeholder = "SINGUP_EMAIL_PLACEHOLDER".localized
+        navigationView.title = "RESET_STEP1_TITLE".localized
+        emailLabel.text = "LOGIN_EMAIL_TITLE".localized
+        emailTextField.placeholder = "LOGIN_EMAIL_PLACEHOLDER".localized
+        nextButton.setTitle("RESET_ACTION_NEXT".localized, for: .normal)
+        nextButton.setTitle("RESET_ACTION_NEXT".localized, for: .highlighted)
+
 //        stage2Label.text = "RESET_STEP1_TITLE".localized
 //        stage2Desc.text = "RESET_STEP2_DESC".localized
 //        codeLabel.text = "RESET_CODE_TITLE".localized

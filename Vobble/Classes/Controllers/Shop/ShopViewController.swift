@@ -19,7 +19,7 @@ class ShopViewController: AbstractController {
     
     @IBOutlet weak var waveSubView: WaveView!
     
-    public var fType:filterType = filterType.bottlesFilter
+    public var fType:ShopItemType = .bottlesPack
     
     private var _shopItemsArray:[ShopItem] = [ShopItem]()
     fileprivate var shopItemsArray:[ShopItem] {
@@ -41,17 +41,28 @@ class ShopViewController: AbstractController {
         self.navigationView.viewcontroller = self
          self.shopCollectionView.register(UINib(nibName: "ShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ShopCollectionViewCellID")
         
-        if fType == .bottlesFilter {
+        bottlesButton.titleLabel?.font = AppFonts.bigBold
+        genderFilterButton.titleLabel?.font = AppFonts.bigBold
+        countryFilterButton.titleLabel?.font = AppFonts.bigBold
+        
+        bottlesButton.setTitle("TAB_BOTTLES".localized, for: .normal)
+        genderFilterButton.setTitle("TAB_GENDER".localized, for: .normal)
+        countryFilterButton.setTitle("TAB_COUNTRY".localized, for: .normal)
+        self.navigationView.navTitle.text = "SHOP_TITLE".localized
+        
+        if fType == .bottlesPack {
             bottlesButton.isSelected = true
             self.initBottleArray()
         } else if fType == .countryFilter {
             countryFilterButton.isSelected = true
-            self.initGenderFilterArray()
+            self.initCountryFilterArray()
         } else if fType == .genderFilter {
             genderFilterButton.isSelected = true
             self.initGenderFilterArray()
         }
+        self.shopCollectionView.reloadData()
         
+        ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
     }
     
     override func viewDidLayoutSubviews() {
@@ -78,122 +89,130 @@ class ShopViewController: AbstractController {
     }
    
     @IBAction func countryFilterBtnPressed(_ sender: Any) {
+        self.initCountryFilterArray()
+        self.shopCollectionView.reloadData()
         
         bottlesButton.isSelected = false
         genderFilterButton.isSelected = false
         countryFilterButton.isSelected = true
     }
     
-    
     private func initGenderFilterArray() {
         var genderFilterArray:[ShopItem] = [ShopItem]()
+        genderFilterArray = DataStore.shared.shopItems.filter({$0.type == .genderFilter})
         
-        let date = Date().timeIntervalSince1970 * 1000 + (24*60*60*1000)
-        
-        let obj1:ShopItem = ShopItem()
-        obj1.firstColor = AppColors.blueXDark
-        obj1.secondColor = AppColors.blueXLight
-        obj1.title = "Gender Filter"
-        obj1.price = "1.5$"
-        obj1.type = "genderFilter"
-        obj1.imageUrl = UIImage(named: "gender")
-        obj1.endDate = date
-        obj1.description = "buy 1 bottle so you dont have to wait for the automatic refill"
-        genderFilterArray.append(obj1)
-        
-        let obj2:ShopItem = ShopItem()
-        obj2.firstColor = AppColors.grayXLight
-        obj2.secondColor = AppColors.grayXDark
-        obj2.title = "Gender Filter"
-        obj2.price = "5$"
-        obj2.type = "genderFilter"
-        obj2.endDate = date
-        obj2.imageUrl = UIImage(named: "gender")
-        obj2.description = "buy 3 bottles so you dont have to wait for the automatic refill"
-        genderFilterArray.append(obj2)
-        
-        let obj3:ShopItem = ShopItem()
-        obj3.firstColor = AppColors.grayXLight
-        obj3.secondColor = AppColors.grayXDark
-        obj3.title = "Gender Filter"
-        obj3.price = "4.5$"
-        obj3.type = "genderFilter"
-        obj3.endDate = date
-        obj3.imageUrl = UIImage(named: "gender")
-        obj3.description = "buy 5 bottles so you dont have to wait for the automatic refill"
-        genderFilterArray.append(obj3)
-        
-        let obj4:ShopItem = ShopItem()
-        obj4.firstColor = AppColors.grayXLight
-        obj4.secondColor = AppColors.grayXDark
-        obj4.title = "Gender Filter"
-        obj4.price = "1.5$"
-        obj4.type = "genderFilter"
-        obj4.endDate = date
-        obj4.imageUrl = UIImage(named: "gender")
-        obj4.description = "buy 3 bottles so you dont have to wait for the automatic refill"
-        genderFilterArray.append(obj4)
+//        let date = Date().timeIntervalSince1970 * 1000 + (24*60*60*1000)
+//
+//        let obj1:ShopItem = ShopItem()
+//        obj1.firstColor = AppColors.blueXDark
+//        obj1.secondColor = AppColors.blueXLight
+//        obj1.title = "Gender Filter"
+//        obj1.price = "1.5$"
+//        obj1.type = "genderFilter"
+//        obj1.imageUrl = UIImage(named: "gender")
+//        obj1.endDate = date
+//        obj1.description = "buy 1 bottle so you dont have to wait for the automatic refill"
+//        genderFilterArray.append(obj1)
+//
+//        let obj2:ShopItem = ShopItem()
+//        obj2.firstColor = AppColors.grayXLight
+//        obj2.secondColor = AppColors.grayXDark
+//        obj2.title = "Gender Filter"
+//        obj2.price = "5$"
+//        obj2.type = "genderFilter"
+//        obj2.endDate = date
+//        obj2.imageUrl = UIImage(named: "gender")
+//        obj2.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+//        genderFilterArray.append(obj2)
+//
+//        let obj3:ShopItem = ShopItem()
+//        obj3.firstColor = AppColors.grayXLight
+//        obj3.secondColor = AppColors.grayXDark
+//        obj3.title = "Gender Filter"
+//        obj3.price = "4.5$"
+//        obj3.type = "genderFilter"
+//        obj3.endDate = date
+//        obj3.imageUrl = UIImage(named: "gender")
+//        obj3.description = "buy 5 bottles so you dont have to wait for the automatic refill"
+//        genderFilterArray.append(obj3)
+//
+//        let obj4:ShopItem = ShopItem()
+//        obj4.firstColor = AppColors.grayXLight
+//        obj4.secondColor = AppColors.grayXDark
+//        obj4.title = "Gender Filter"
+//        obj4.price = "1.5$"
+//        obj4.type = "genderFilter"
+//        obj4.endDate = date
+//        obj4.imageUrl = UIImage(named: "gender")
+//        obj4.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+//        genderFilterArray.append(obj4)
         
         _shopItemsArray = genderFilterArray.map{$0}
-        
+    }
+    
+    private func initCountryFilterArray() {
+        var countryFilterArray:[ShopItem] = [ShopItem]()
+        countryFilterArray = DataStore.shared.shopItems.filter({$0.type == .countryFilter})
+        _shopItemsArray = countryFilterArray.map{$0}
     }
     
     private func initBottleArray() {
-        var bottlrArray:[ShopItem] = [ShopItem]()
-        let date = Date().timeIntervalSince1970 * 1000 + (24*60*60*1000)
+        var bottlsArray:[ShopItem] = [ShopItem]()
+        bottlsArray = DataStore.shared.shopItems.filter({$0.type == .bottlesPack})
         
-        let obj1:ShopItem = ShopItem()
-        obj1.firstColor = AppColors.blueXDark
-        obj1.secondColor = AppColors.blueXLight
-        obj1.title = "3 Bottles"
-        obj1.type = "bottlesPackage"
-        obj1.price = "1.5$"
-        obj1.endDate = date
-        obj1.imageUrl = UIImage(named: "bottles2")
+//        let date = Date().timeIntervalSince1970 * 1000 + (24*60*60*1000)
+//
+//        let obj1:ShopItem = ShopItem()
+//        obj1.firstColor = AppColors.blueXDark
+//        obj1.secondColor = AppColors.blueXLight
+//        obj1.title = "3 Bottles"
+//        obj1.type = "bottlesPackage"
+//        obj1.price = "1.5$"
+//        obj1.endDate = date
+//        obj1.imageUrl = UIImage(named: "bottles2")
+//
+//        obj1.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+//        bottlrArray.append(obj1)
+//
+//        let obj2:ShopItem = ShopItem()
+//        obj2.firstColor = AppColors.grayXLight
+//        obj2.secondColor = AppColors.grayXDark
+//        obj2.title = "3 Bottles"
+//        obj2.price = "5$"
+//        obj2.endDate = date
+//        obj2.type = "bottlesPackage"
+//        obj2.imageUrl = UIImage(named: "bottles")
+//        obj2.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+//        bottlrArray.append(obj2)
+//
+//        let obj3:ShopItem = ShopItem()
+//        obj3.firstColor = AppColors.grayXLight
+//        obj3.secondColor = AppColors.grayXDark
+//        obj3.title = "3 Bottles"
+//        obj3.price = "4.5$"
+//        obj3.endDate = date
+//        obj3.type = "bottlesPackage"
+//        obj3.imageUrl = UIImage(named: "bottles2")
+//        obj3.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+//        bottlrArray.append(obj3)
+//
+//        let obj4:ShopItem = ShopItem()
+//        obj4.firstColor = AppColors.grayXLight
+//        obj4.secondColor = AppColors.grayXDark
+//        obj4.title = "3 Bottles"
+//        obj4.price = "1.5$"
+//        obj4.endDate = date
+//        obj4.type = "bottlesPackage"
+//        obj4.imageUrl = UIImage(named: "bottles")
+//        obj4.description = "buy 3 bottles so you dont have to wait for the automatic refill"
+//        bottlrArray.append(obj4)
         
-        obj1.description = "buy 3 bottles so you dont have to wait for the automatic refill"
-        bottlrArray.append(obj1)
-        
-        let obj2:ShopItem = ShopItem()
-        obj2.firstColor = AppColors.grayXLight
-        obj2.secondColor = AppColors.grayXDark
-        obj2.title = "3 Bottles"
-        obj2.price = "5$"
-        obj2.endDate = date
-        obj2.type = "bottlesPackage"
-        obj2.imageUrl = UIImage(named: "bottles")
-        obj2.description = "buy 3 bottles so you dont have to wait for the automatic refill"
-        bottlrArray.append(obj2)
-        
-        let obj3:ShopItem = ShopItem()
-        obj3.firstColor = AppColors.grayXLight
-        obj3.secondColor = AppColors.grayXDark
-        obj3.title = "3 Bottles"
-        obj3.price = "4.5$"
-        obj3.endDate = date
-        obj3.type = "bottlesPackage"
-        obj3.imageUrl = UIImage(named: "bottles2")
-        obj3.description = "buy 3 bottles so you dont have to wait for the automatic refill"
-        bottlrArray.append(obj3)
-        
-        let obj4:ShopItem = ShopItem()
-        obj4.firstColor = AppColors.grayXLight
-        obj4.secondColor = AppColors.grayXDark
-        obj4.title = "3 Bottles"
-        obj4.price = "1.5$"
-        obj4.endDate = date
-        obj4.type = "bottlesPackage"
-        obj4.imageUrl = UIImage(named: "bottles")
-        obj4.description = "buy 3 bottles so you dont have to wait for the automatic refill"
-        bottlrArray.append(obj4)
-        
-        _shopItemsArray = bottlrArray.map{$0}
+        _shopItemsArray = bottlsArray.map{$0}
     }
     
 }
 // MARK: - UICollectionViewDataSource
 extension ShopViewController: UICollectionViewDataSource {
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -210,7 +229,6 @@ extension ShopViewController: UICollectionViewDataSource {
         
         return shopCell
     }
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -219,7 +237,7 @@ extension ShopViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemW = (UIScreen.main.bounds.size.width)
-        let itemh = CGFloat(160)
+        let itemh = CGFloat(170)
         
         return CGSize(width: itemW, height: itemh)
     }
@@ -236,8 +254,8 @@ extension ShopViewController: UICollectionViewDelegate {
             
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
-                if let count = DataStore.shared.me?.bottlesCount {
-                    DataStore.shared.me?.bottlesCount = count + 1
+                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 1
                 }
             })
             alertController.addAction(ok)
@@ -246,11 +264,11 @@ extension ShopViewController: UICollectionViewDelegate {
             self.present(alertController, animated: true, completion: nil)
             
         } else {
-            var items:[ShopItem] = [ShopItem]()
+            var items:[InventoryItem] = [InventoryItem]()
             if genderFilterButton.isSelected {
-                items = DataStore.shared.shopItems.filter({$0.type == "genderFilter"})
+                items = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})
             } else if countryFilterButton.isSelected {
-                items = DataStore.shared.shopItems.filter({$0.type == "countryFilter"})
+                items = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})
             }
             
             if items.count == 0 {

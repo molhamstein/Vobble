@@ -49,6 +49,12 @@ class Conversation: BaseModel {
         }
     }
     
+    public var getPeer: AppUser? {
+        get {
+            return user?.objectId == DataStore.shared.me?.objectId ? bottle?.owner : user
+        }
+    }
+    
     // MARK: Initializers
     override init() {
         super.init()

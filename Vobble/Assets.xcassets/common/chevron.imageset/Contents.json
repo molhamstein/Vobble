@@ -2,7 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "chevron.pdf"
+      "filename" : "chevron.pdf",
+      "language-direction" : "left-to-right"
     }
   ],
   "info" : {

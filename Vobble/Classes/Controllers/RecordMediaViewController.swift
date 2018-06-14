@@ -9,7 +9,7 @@
 import LLSimpleCamera
 import SDRecordButton
 
-let MAX_VIDEO_LENGTH:Float = 12
+let MAX_VIDEO_LENGTH:Float = 60
 
 enum typeOfController {
     case findBottle
@@ -31,7 +31,6 @@ class RecordMediaViewController: AbstractController {
     @IBOutlet weak var vOverlay:UIView!
     @IBOutlet weak var btnPhotoLibrary:UIButton!
     
-    
     var videoImageTimer: Timer?
     var recordTimer: Timer?
     var captureMediaType:MEDIA_TYPE = .IMAGE
@@ -42,6 +41,7 @@ class RecordMediaViewController: AbstractController {
     var timeOut: Float = 0.0
     
     var isAnimating: Bool = false
+    var isRecording: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,6 @@ class RecordMediaViewController: AbstractController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         prepareForRecording()
-        
         
         // animate in 
         recordButton.animateIn(mode: .animateInFromBottom, delay: 0.45)
@@ -175,11 +174,13 @@ class RecordMediaViewController: AbstractController {
         }
         
         // Configure record button
-        let panRec : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(RecordMediaViewController.didPressRecord(gestureRecognizer:)))
-        panRec.cancelsTouchesInView = false
-        panRec.delegate = self
-        panRec.minimumPressDuration = 0.3
-        self.recordButton.addGestureRecognizer(panRec)
+//        let panRec : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(RecordMediaViewController.didPressRecord(gestureRecognizer:)))
+//        panRec.cancelsTouchesInView = false
+//        panRec.delegate = self
+//        panRec.minimumPressDuration = 0.3
+//        self.recordButton.addGestureRecognizer(panRec)
+        
+        self.recordButton.addTarget(self, action: #selector(RecordMediaViewController.toggleRecord), for: .touchUpInside)
         
         // no capture image
 //        let tapRec : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didPressCapture(gestureRecognizer:)))
@@ -297,8 +298,8 @@ extension RecordMediaViewController
     
     func stopRecording() {
         
-        videoImageTimer?.invalidate()
-        videoImageTimer = nil
+        recordTimer?.invalidate()
+        recordTimer = nil
         
         if(self.camera.position == LLCameraPositionRear && self.flashButton.isHidden){
             self.flashButton.isHidden = false;
@@ -306,17 +307,20 @@ extension RecordMediaViewController
         
         self.switchButton.isHidden = false
         self.camera.stopRecording()
+        isRecording = false
     }
     
     func prepareForRecording(){
         // start the camera
         self.camera.start()
+        isRecording = false
         recordButton.isEnabled = true
         timeOut = 0.0
         isAnimating = false
         recordTimeLabel.text = String(format: "%02d", Int(timeOut))
         recordTimeView.isHidden = true
-        recordButton.sendActions(for: .touchUpInside)
+        //recordButton.sendActions(for: .touchUpInside)
+        recordButton.setProgress(CGFloat(0))
         //recordTimeLabel.text = String(format: "00:%2d / 00:%i", Int(timeOut) , MAX_VIDEO_LENGTH)
     }
     
@@ -328,6 +332,18 @@ extension RecordMediaViewController
             stopRecording()
             prepareForRecording()
             recordButton.sendActions(for: .touchUpInside)
+        }
+    }
+    
+    func toggleRecord(){
+        if isRecording {
+            stopRecording()
+            prepareForRecording()
+            //recordButton.sendActions(for: .touchUpInside)
+        } else {
+            isRecording = true
+            recordButton.sendActions(for: .touchDown)
+            startVideoImageTimer()
         }
     }
     
@@ -370,6 +386,7 @@ extension RecordMediaViewController
         // video type
         captureMediaType = .VIDEO
         recordTimeView.isHidden = false
+        self.recordButton.isEnabled = true
         
         // start recording
         if (!self.camera.isRecording){
@@ -385,10 +402,10 @@ extension RecordMediaViewController
         recordTimeView.isHidden = true
         
         // reset the timer
-        videoImageTimer?.invalidate()
-        videoImageTimer = nil
+        recordTimer?.invalidate()
+        recordTimer = nil
         // run the timer
-        videoImageTimer = Timer.scheduledTimer(timeInterval: 0.5,
+        recordTimer = Timer.scheduledTimer(timeInterval: 0.5,
                                                target: self,
                                                selector: #selector(RecordMediaViewController.startRecording(timer:)),
                                                userInfo: nil,
@@ -396,8 +413,8 @@ extension RecordMediaViewController
         
         
         // run the timer
-        let runner: RunLoop = RunLoop.current
-        runner.add(videoImageTimer!, forMode: .defaultRunLoopMode)
+        //let runner: RunLoop = RunLoop.current
+//        runner.add(videoImageTimer!, forMode: .defaultRunLoopMode)
     }
     
     // Start record timer
@@ -414,8 +431,8 @@ extension RecordMediaViewController
                                            repeats: true)
         
         // run the timer
-        let runner: RunLoop = RunLoop.current
-        runner.add(recordTimer!, forMode: .defaultRunLoopMode)
+//        let runner: RunLoop = RunLoop.current
+//        runner.add(recordTimer!, forMode: .defaultRunLoopMode)
         
         // start  video recorder
         if(self.camera.position == LLCameraPositionRear && !self.flashButton.isHidden){
@@ -482,7 +499,7 @@ extension RecordMediaViewController
             // stop play image media
             stopRecorderTimer()
             
-        }else{// reduce counter
+        } else {// reduce counter
             if (!isAnimating){
                 isAnimating = true
                 
@@ -510,12 +527,12 @@ extension RecordMediaViewController
         redImageView.isHidden = false
         self.redImageView.alpha = 1.0
         // stop recording
-        self.recordButton.setProgress(0)
+        self.recordButton.setProgress(CGFloat(0))
         recordTimeView.isHidden = true
         
         // stop recording
-        videoImageTimer?.invalidate()
-        videoImageTimer = nil
+        recordTimer?.invalidate()
+        recordTimer = nil
         
         if(self.camera.position == LLCameraPositionRear && self.flashButton.isHidden){
             self.flashButton.isHidden = false;
@@ -523,6 +540,7 @@ extension RecordMediaViewController
         self.btnPhotoLibrary.isHidden = false
         self.switchButton.isHidden = false
         self.camera.stopRecording()
+        isRecording = false
         prepareForRecording()
     }
     

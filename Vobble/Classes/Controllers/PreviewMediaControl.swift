@@ -62,7 +62,6 @@ class PreviewMediaControl : AbstractController {
             submitButton.isHidden = true
         }
         
-        
         // itro animation 
         cvShorePicker.animateIn(mode: .animateInFromBottom, delay: 0.3)
         backButton.animateIn(mode: .animateInFromTop, delay: 0.2)
@@ -154,18 +153,19 @@ class PreviewMediaControl : AbstractController {
         return true
     }
     
-    @IBAction func throwInSea (shoreId: Int) {
+    func throwInSea (shoreId: String) {
      
         let urls:[URL] = [self.videoUrl as URL]
         showActivityLoader(true)
-        ApiManager.shared.uploadMedia(urls: urls) { (files, errorMessage) in
+        ApiManager.shared.uploadMedia(urls: urls, mediaType: .video) { (files, errorMessage) in
 //        
             if errorMessage == nil {
         
                 let bottle = Bottle()
                 bottle.attachment = files[0].fileUrl ?? " "
+                bottle.thumb = files[0].thumbUrl ?? " "
                 //bottle.attachment = "http://104.217.253.15:9999/api/uploads/videos/download/1523169457577_0261BAEB-C40E-49DE-A148-2E62190B43F8.MOV"
-                bottle.ownerId = DataStore.shared.me?.id
+                bottle.ownerId = DataStore.shared.me?.objectId
                 bottle.owner = DataStore.shared.me
                 bottle.status = "active"
                 bottle.shoreId = shoreId
@@ -186,6 +186,10 @@ class PreviewMediaControl : AbstractController {
                     } else {
                         self.showActivityLoader(false)
                         
+                        let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                        alertController.addAction(ok)
+                        self.present(alertController, animated: true, completion: nil)
                         //print(error?.type.errorMessage)
                     }
                 })

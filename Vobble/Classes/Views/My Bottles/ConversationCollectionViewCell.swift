@@ -18,6 +18,7 @@ class ConversationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var timerLabel: TimerLabel!
+    @IBOutlet weak var timeLeftTitleLabel: UILabel!
     
     var shadowApplied: Bool! = false
     
@@ -26,7 +27,13 @@ class ConversationCollectionViewCell: UICollectionViewCell {
         // Initialization
         // mainView.dropShadow()
         chatButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
-        mainView.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+        //mainView.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+        
+        timeLeftTitleLabel.font = AppFonts.normalBold
+        timerLabel.font = AppFonts.normalBold
+        chatButton.titleLabel?.font = AppFonts.normalBold
+        
+        chatButton.setTitle("MY_BOTTLES_BTN_CHAT".localized, for: .normal)
     }
     
     override func layoutSubviews() {
@@ -42,17 +49,27 @@ class ConversationCollectionViewCell: UICollectionViewCell {
 //        mainView.applyGradient(colours: [(convObj.user2?.firstColor)!, (convObj.user2?.secondColor)!], direction: .horizontal)
         
         if tap == .myBottles {
-            bottleNameLabel.text = convObj.bottle?.owner?.firstName
+            bottleNameLabel.text = convObj.bottle?.owner?.userName
         } else {
-            bottleNameLabel.text = convObj.user?.firstName
+            bottleNameLabel.text = convObj.user?.userName
         }
 //        timeLabel.text = "Time left: "+convObj.timeLeft!
 //        countryLabel.text = convObj.user2?.country
-//        image.image = convObj.user2?.imageUrl
+        
+        if let peerImage = convObj.getPeer?.profilePic, peerImage.isValidLink() == true {
+            image.sd_setImage(with: URL(string:peerImage))
+        } else {
+            image.image = UIImage(named:"user_placeholder")
+        }
         
         if let fTime = convObj.finishTime {
             let currentDate = Date().timeIntervalSince1970 * 1000
             timerLabel.startTimer(seconds: TimeInterval((fTime - currentDate)/1000.0))
+            timeLeftTitleLabel.text = "MY_BOTTLES_TIME_LEFT".localized
+        } else {
+            timerLabel.resetTimer(seconds: 0)
+            timerLabel.text = "MY_BOTTLES_PEER_DIDNT_REPLY_YET".localized
+            timeLeftTitleLabel.text = ""
         }
         
         dispatch_main_after(0.2) {
