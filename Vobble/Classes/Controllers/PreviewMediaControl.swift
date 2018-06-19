@@ -8,6 +8,7 @@
 
 import AVFoundation
 import UIKit
+import Flurry_iOS_SDK
 
 enum MEDIA_TYPE {
     case IMAGE
@@ -153,7 +154,7 @@ class PreviewMediaControl : AbstractController {
         return true
     }
     
-    func throwInSea (shoreId: String) {
+    func throwInSea (shore: Shore) {
      
         let urls:[URL] = [self.videoUrl as URL]
         showActivityLoader(true)
@@ -161,6 +162,9 @@ class PreviewMediaControl : AbstractController {
 //        
             if errorMessage == nil {
         
+                let logEventParams = ["Shore": shore.name_en ?? ""];
+                Flurry.logEvent(AppConfig.throw_shore_selected, withParameters:logEventParams);
+                
                 let bottle = Bottle()
                 bottle.attachment = files[0].fileUrl ?? " "
                 bottle.thumb = files[0].thumbUrl ?? " "
@@ -168,7 +172,7 @@ class PreviewMediaControl : AbstractController {
                 bottle.ownerId = DataStore.shared.me?.objectId
                 bottle.owner = DataStore.shared.me
                 bottle.status = "active"
-                bottle.shoreId = shoreId
+                bottle.shoreId = shore.shore_id
         
                 ApiManager.shared.addBottle(bottle: bottle, completionBlock: { (success, error, bottle) in
                 
@@ -199,11 +203,13 @@ class PreviewMediaControl : AbstractController {
                 self.showActivityLoader(false)
                 print(errorMessage)
             }
-    
         }
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
+        
+        Flurry.logEvent(AppConfig.reply_shooted);
+        
         self.performSegue(withIdentifier: "unwindToFindBottleSegue", sender: self)
         self.popOrDismissViewControllerAnimated(animated: true)
     }
@@ -217,7 +223,6 @@ class PreviewMediaControl : AbstractController {
 //            let nav = segue.destination as! UINavigationController
             let findBottleVC = segue.destination  as! FindBottleViewController
             findBottleVC.myVideoUrl = self.videoUrl
-            
         }
     }
     
@@ -276,7 +281,7 @@ extension PreviewMediaControl:UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         selectedShoreIndex = indexPath.item;
-        throwInSea(shoreId: DataStore.shared.shores[indexPath.item].shore_id!)
+        throwInSea(shore: DataStore.shared.shores[indexPath.item])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

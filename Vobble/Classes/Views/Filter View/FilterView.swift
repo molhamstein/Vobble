@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Flurry_iOS_SDK
 
 protocol FilterViewDelegate {
     
@@ -157,7 +157,7 @@ class FilterView: AbstractNibView {
     @IBAction func maleBtnPressed(_ sender: Any) {
         
         if DataStore.shared.inventoryItems.filter({$0.type == .genderFilter}).count == 0 {
-            self.delegate?.filterViewShowBuyFilterMessage(self, type: .genderFilter)
+            self.delegate?.filterViewGoToShop(self, productType: .genderFilter)
         } else {
             maleButton.alpha = 1
             maleLabel.alpha = 1
@@ -173,7 +173,7 @@ class FilterView: AbstractNibView {
     @IBAction func femalePressed(_ sender: Any) {
         
         if DataStore.shared.inventoryItems.filter({$0.type == .genderFilter}).count == 0 {
-            self.delegate?.filterViewShowBuyFilterMessage(self, type: .genderFilter)
+            self.delegate?.filterViewGoToShop(self, productType: .genderFilter)
         } else {
             femaleButton.alpha = 1
             femaleLabel.alpha = 1
@@ -193,11 +193,11 @@ class FilterView: AbstractNibView {
     }
     
     @IBAction func countryFilterBtnPressed(_ sender: AnyObject) {
-        self.delegate?.filterViewShowBuyFilterMessage(self, type: .countryFilter)
+        self.delegate?.filterViewGoToShop(self, productType: .countryFilter)
     }
     
     @IBAction func genderFilterBtnPressed(_ sender: AnyObject) {
-        self.delegate?.filterViewShowBuyFilterMessage(self, type: .genderFilter)
+        self.delegate?.filterViewGoToShop(self, productType: .genderFilter)
     }
     
     @IBAction func findBottlePressed(_ sender: Any) {
@@ -218,7 +218,7 @@ extension FilterView: CountryPickerDelegate {
     
     func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
         if DataStore.shared.inventoryItems.filter({$0.type == .countryFilter}).count == 0 {
-             self.delegate?.filterViewShowBuyFilterMessage(self, type: .countryFilter)
+             self.delegate?.filterViewGoToShop(self, productType: .countryFilter)
         } else {
             self.selectedCountry = code
             self.delegate?.filterViewGet(self, gender: selectedGender, country: selectedCountry)

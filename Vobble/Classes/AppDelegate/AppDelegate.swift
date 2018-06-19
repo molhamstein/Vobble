@@ -11,6 +11,7 @@ import FBSDKLoginKit
 import TwitterKit
 import Firebase
 import OneSignal
+import Flurry_iOS_SDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,6 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.promptForPushNotifications(userResponse: { accepted in
             print("User accepted notifications: \(accepted)")
         })
+        
+        // flurry
+        Flurry.startSession("7B59N7DQJQKHKGVY9BJ8", with: FlurrySessionBuilder
+            .init()
+            .withCrashReporting(true)
+            .withLogLevel(FlurryLogLevelAll))
         
         return true
     }

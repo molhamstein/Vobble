@@ -119,6 +119,7 @@
 "love_shore"                            = "شاطئ الحب";
 "fadfed_shore"                          = "شاطئ الفضفضة";
 "THROW_BOTTLE_WARNING"                  = "ليس لديك زجاجات في عبوات الزجاجات";
+"THROW_BOTTLE_WARNING_ACTION"           = "الحصول على زجاجات";
 "HOME_THROW_BTN"                        = "رمي زجاجة";
 "HOME_FIND_BTN"                         = "ايجاد زجاجة";
 "HOME_MY_BOTTLES_BTN"                   = "زجاجاتي";
@@ -127,6 +128,7 @@
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد أنك تريد العودة؟ لن تتمكن بعد ذلك من تحميل الفيديو الخاص بك.";
 "CHAT_REPLY_SENT_MSG"                   = "تم ارسال ردك بنجاح, عندما يشاهد صاحب الزجاجه الفيديو الخاص بك سيكون امامكما ٢٤ ساعه للمحادثة";
+"CHAT_RECORDING"                        = "جاري التسجيل";
 
 // filter
 "FEMALE"                                = "انثى";
@@ -185,7 +187,8 @@
 "MY_BOTTLES_REPLIES_TITLE"             = "ردودي";
 "MY_BOTTLES_BOTTLES_TITLE"             = "زجاجاتي";
 "MY_BOTTLES_NEXT_REFILL"               = "شحن الزجاجات التالي";
-"MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "لا يوجد رد بعد";
+"MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "لم يتم الرد بعد";
+"MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "لم تقم بالرد بعد";
 "MY_BOTTLES_BTN_CHAT"                  = "المحادثة";
 "MY_BOTTLES_TIME_LEFT"                 = "الوقت المتبقي";
 "MY_BOTTLES_EMPTY_PLACEHOLDER"         = "لم يتم ايجاد اي محادثات \n هيا وقم بايجاد زجاجة و الرد عليها";

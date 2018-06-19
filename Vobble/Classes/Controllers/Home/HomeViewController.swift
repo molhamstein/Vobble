@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Flurry_iOS_SDK
 
 class HomeViewController: AbstractController {
     
@@ -204,8 +205,8 @@ class HomeViewController: AbstractController {
         
         let hour = calendar.component(.hour, from: date)
         
-        //let isNight = hour >= 18 || hour <= 5
-        let isNight = false
+        let isNight = hour >= 18 || hour <= 5
+        //let isNight = false
         
         //hours += 1
         if isNight {
@@ -317,10 +318,17 @@ class HomeViewController: AbstractController {
             //DataStore.shared.me?.bottlesCount = bCount - 1
             self.wiggleAnimate(view: self.ivThrowBtn)
             self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
+            
+            Flurry.logEvent(AppConfig.throw_bottle);
+            
         } else {
             let alertController = UIAlertController(title: "", message: "THROW_BOTTLE_WARNING".localized, preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+            let getBottlesAction = UIAlertAction(title: "THROW_BOTTLE_WARNING_ACTION".localized, style: .default,  handler: {(alert) in 
+                self.showShopView(.bottlesPack)
+                })
             alertController.addAction(ok)
+            alertController.addAction(getBottlesAction)
             self.present(alertController, animated: true, completion: nil)
        }
     
@@ -330,20 +338,45 @@ class HomeViewController: AbstractController {
        
         self.ivFindBottle.loadGif(name: "find_bottle")
         self.wiggleAnimate(view: self.ivFindBtn)
+        
+        // send tracking event
+        let logEventParams = ["Shore": DataStore.shared.shores[self.currentPageIndex].name_en ?? "Main Shore", "Gender": self.gender.rawValue, "Country": self.countryCode];
+        Flurry.logEvent(AppConfig.find_bottle, withParameters:logEventParams);
+        
+        // filters tracking events
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // delay 5 second
             self.ivFindBottle.image = nil
             self.showActivityLoader(true)
             
             ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
                 self.showActivityLoader(false)
-                if error == nil && bottle != nil {
-                    //print("\(bottle?.bottle_id)")
-                    self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
+                if error == nil  {
+                    if bottle != nil {
+                        //print("\(bottle?.bottle_id)")
+                        self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
+                    } else {
+                        // no bottles found
+                        let logEventParams = ["Shore": (DataStore.shared.shores[self.currentPageIndex].name_en) ?? "", "Gender": self.gender.rawValue, "Country": self.countryCode];
+                        Flurry.logEvent(AppConfig.find_bottle_not_found, withParameters:logEventParams);
+                        
+                        let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                        alertController.addAction(ok)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
                 } else {
-                    //print(error)
-                    let alertController = UIAlertController(title: "", message: error , preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                    alertController.addAction(ok)
+                    // error ex. Authoriaztion error
+                    let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                    if error?.type == .authorization {
+                        let actionCancel = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                        alertController.addAction(actionCancel)
+                        let actionLogout = UIAlertAction(title: "LOGIN_LOGIN_BTN".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                        alertController.addAction(actionLogout)
+                    } else {
+                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                        alertController.addAction(ok)
+                    }
                     self.present(alertController, animated: true, completion: nil)
                 }
             })
@@ -549,6 +582,8 @@ class HomeViewController: AbstractController {
             self.ivShore1Shore.transform = CGAffineTransform.identity
             self.ivShore2Shore.transform = CGAffineTransform.identity
             self.ivShore3Shore.transform = CGAffineTransform.identity
+            self.shore3Friends.transform = CGAffineTransform.identity
+            self.ivFire.transform = CGAffineTransform.identity
             self.shore2Lovers.transform = CGAffineTransform.identity
             self.ivMountains.transform = CGAffineTransform.identity
             self.ivSun.transform = CGAffineTransform.identity
@@ -648,6 +683,7 @@ class HomeViewController: AbstractController {
             // disable shores navigation as the gesture is interferring with the countries picker
             panRecognizer?.isEnabled = false
         }
+        Flurry.logEvent(AppConfig.filter_click);
     }
     
     func showShopView(_ productType: ShopItemType?) {
@@ -675,7 +711,10 @@ extension HomeViewController: FilterViewDelegate {
         
         let alertController = UIAlertController(title: "", message: "BUY_FILTER_WARNING".localized, preferredStyle: .alert)
         let ok = UIAlertAction(title: "GO_TO_SHOP".localized, style: .default, handler: { (alertAction) in
-            //self.performSegue(withIdentifier:"shopSegue", sender: type)
+            // flurriny event
+            let logEventParams = ["From": "filter"];
+            Flurry.logEvent(AppConfig.shop_enter, withParameters:logEventParams);
+            
             self.showShopView(type)
         })
         alertController.addAction(ok)
@@ -692,6 +731,8 @@ extension HomeViewController: FilterViewDelegate {
     }
     
     func filterViewGoToShop(_ filterView: FilterView, productType: ShopItemType) {
+        let logEventParams = ["From": "filter"];
+        Flurry.logEvent(AppConfig.shop_enter, withParameters:logEventParams);
         self.showShopView(productType)
     }
 }

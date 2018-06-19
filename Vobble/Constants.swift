@@ -31,6 +31,34 @@ struct AppConfig {
     
     static let PlaceHolderImage = UIImage(named: "bottle-1")
     
+    // tracking events
+    // find
+    static let find_bottle = "Find_Bottle"
+    static let find_bottle_not_found = "Find_Bottle_Not_Found"
+    // reply
+    static let reply_pressed = "Reply_Pressed"
+    static let reply_shooted = "Reply_Shooted"
+    static let reply_submitted = "Reply_Submitted"
+    static let reply_ignored = "Reply_Ignored"
+    
+    // throw
+    static let throw_bottle = "Throw_Clicked"
+    static let throw_shore_selected = "Throw_Shore_Selected"
+    
+    // record. works for both reply_record and for throw_record
+    static let recorded_video = "Recorded_video"
+    
+    // shop
+    static let shop_enter = "Enter_Shop"
+    // shop select product, select product properties
+    static let shop_select_product = "Select_Shop_Product"
+    // Shop purchase
+    static let shop_purchase_click = "Shop_Purchase_Clicked"
+    static let shop_purchase_complete = "Shop_Purchase_Complete"
+    
+    // Filter
+    static let filter_click = "Filter_Click"
+    
     // validation
     static let passwordLength = 6
     
@@ -45,12 +73,15 @@ struct AppConfig {
     
     /// Set navigation bar style, text and color
     static func setNavigationStyle() {
-        // set text title attributes
-        let attrs = [NSForegroundColorAttributeName : AppColors.grayXDark,
-                     NSFontAttributeName : AppFonts.xBig]
-        UINavigationBar.appearance().titleTextAttributes = attrs
+        
         // set background color
-        UINavigationBar.appearance().barTintColor = AppColors.blueXDark
+        UINavigationBar.appearance().barTintColor = UIColor.white
+        
+        UINavigationBar.appearance().backgroundColor = UIColor.white
+        UIBarButtonItem.appearance().tintColor = AppColors.blueXDark
+        //Since iOS 7.0 UITextAttributeTextColor was replaced by NSForegroundColorAttributeName
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: AppColors.blueXDark]
+        UITabBar.appearance().backgroundColor = UIColor.white
     }
 }
 

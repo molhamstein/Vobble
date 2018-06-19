@@ -25,7 +25,6 @@ class ConversationCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization
-        // mainView.dropShadow()
         chatButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
         //mainView.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
         
@@ -38,20 +37,16 @@ class ConversationCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        dispatch_main_after(2.2) {
-//            self.mainView.dropShadow()
-//        }
     }
     
     func configCell(convObj: Conversation,tap: tapOption) {
         
-        //        mainView.dropShadow()
 //        mainView.applyGradient(colours: [(convObj.user2?.firstColor)!, (convObj.user2?.secondColor)!], direction: .horizontal)
         
         if tap == .myBottles {
-            bottleNameLabel.text = convObj.bottle?.owner?.userName
-        } else {
             bottleNameLabel.text = convObj.user?.userName
+        } else {
+            bottleNameLabel.text = convObj.bottle?.owner?.userName
         }
 //        timeLabel.text = "Time left: "+convObj.timeLeft!
 //        countryLabel.text = convObj.user2?.country
@@ -68,7 +63,11 @@ class ConversationCollectionViewCell: UICollectionViewCell {
             timeLeftTitleLabel.text = "MY_BOTTLES_TIME_LEFT".localized
         } else {
             timerLabel.resetTimer(seconds: 0)
-            timerLabel.text = "MY_BOTTLES_PEER_DIDNT_REPLY_YET".localized
+            if convObj.isMyBottle {
+                timerLabel.text = "MY_BOTTLES_YOU_DIDNT_REPLY_YET".localized
+            } else {
+                timerLabel.text = "MY_BOTTLES_PEER_DIDNT_REPLY_YET".localized
+            }
             timeLeftTitleLabel.text = ""
         }
         

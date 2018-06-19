@@ -121,13 +121,52 @@ class ApiManager: NSObject {
     /// User instagram login request
     func userInstagramLogin(user: AppUser, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user:AppUser?) -> Void) {
         // url & parameters
-        let signInURL = "\(baseURL)/users/loginInstegram"
+        let signInURL = "\(baseURL)/users/instegramLogin"
         let parameters : [String : Any] = [
             "socialId": user.socialId!,
             "token": user.socialToken!,
             "gender": user.gender!.rawValue,
             "image": user.profilePic!,
             "name": user.userName!
+        ]
+        // build request
+        Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError, nil)
+                } else {
+                    // parse response to data model >> user object
+                    let user = AppUser(json: jsonResponse["user"])
+                    DataStore.shared.token = jsonResponse["id"].string
+                    DataStore.shared.onUserLogin()
+                    completionBlock(true , nil, user)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                print(nsError.localizedDescription)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError, nil)
+                } else {
+                    completionBlock(false, ServerError.connectionError, nil)
+                }
+            }
+        }
+    }
+    
+    func userGoogleLogin(user: AppUser, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user:AppUser?) -> Void) {
+        // url & parameters
+        let signInURL = "\(baseURL)/users/googleLogin"
+        let parameters : [String : Any] = [
+            "socialId": user.socialId!,
+            "token": user.socialToken!,
+            "gender": user.gender!.rawValue,
+            "image": user.profilePic!,
+            "name": user.userName!,
+            "email": user.email!
         ]
         // build request
         Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
@@ -206,7 +245,7 @@ class ApiManager: NSObject {
         
         let signUpURL = "\(baseURL)/users"
         
-        var parameters : [String : String] = [
+        let parameters : [String : String] = [
             "username": user.userName!,
             "gender": user.gender?.rawValue ?? "male",
             "ISOCode" : user.countryISOCode!,
@@ -243,7 +282,6 @@ class ApiManager: NSObject {
             }
         }
     }
-    
     
     /// User Signup request
     func updateUser(user: AppUser, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user:AppUser?) -> Void) {
@@ -325,7 +363,6 @@ class ApiManager: NSObject {
             }
         }
     }
-    
     
     func userVerify(code: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user:AppUser?) -> Void) {
         
@@ -547,26 +584,25 @@ class ApiManager: NSObject {
         var mediaURL = "\(baseURL)/uploadFiles/videos/upload"
         if mediaType == .image {
             mediaURL = "\(baseURL)/uploadFiles/images/upload"
-        } else if mediaType == .audio{
+        } else if mediaType == .audio {
             mediaURL = "\(baseURL)/uploadFiles/audios/upload"
         }
         
         let payload : Payload = /*@escaping*/{ multipartFormData in
-            
             for url in urls {
                 if mediaType == .image {
                     do {
-                        let imageData = try Data(contentsOf: url)
+                        let imageData = try Data(contentsOf: url.absoluteURL)
                         if let img = UIImage(data: imageData), let compressedImg = UIImageJPEGRepresentation(img, 0.65) {
                             multipartFormData.append(compressedImg, withName: "file", fileName: "file", mimeType: "image/png")
                         }
-                    } catch {
+                    } catch let error as NSError  {
+                        print(error.localizedDescription)
                     }
                 } else {
                     multipartFormData.append(url, withName: "file")
                 }
             }
-        
         }
         
         Alamofire.upload(multipartFormData: payload, to: mediaURL, method: .post, headers: headers,
@@ -604,7 +640,7 @@ class ApiManager: NSObject {
         })
     }
     
-    // MARK: Upload Video
+    // MARK: Upload UIImage
     func uploadImage(imageData:UIImage, completionBlock: @escaping (_ files: [Media], _ errorMessage: String?) -> Void) {
         
         var mediaURL = "\(baseURL)/uploadFiles/images/upload"
@@ -744,7 +780,7 @@ class ApiManager: NSObject {
     }
     
     // MARK: -  find bottles
-    func findBottle(gender:String, countryCode:String, shoreId:String, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: String?) -> Void) {
+    func findBottle(gender:String, countryCode:String, shoreId:String, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
         
 //        var findhBottleURL = "\(baseURL)/bottles?filter[where][ownerId][neq]="
 //
@@ -786,10 +822,20 @@ class ApiManager: NSObject {
                 
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     let serverError = ServerError(json: resJson["error"]) ?? ServerError.unknownError
-                    completionBlock(nil , serverError.type.errorMessage)
+                    completionBlock(nil , serverError)
                 } else {
+                    
                     let bottle = Bottle(json: resJson)
                     completionBlock(bottle, nil)
+                    
+                    //
+//                    if let data = resJson.array, data.count > 0 {
+//                        let bottle = Bottle(json: data[0])
+//                        completionBlock(bottle, nil)
+//                    } else {
+//                        // no bottle found
+//                        completionBlock(nil, ServerError.noBottleFoundError)
+//                    }
 //                    if resJson == nil {
 //                        completionBlock(nil, "ERROR_BOTTLE_NOT_FOUND".localized)
 //                    } else {
@@ -811,8 +857,8 @@ class ApiManager: NSObject {
                 //completionBlock(nil, "ERROR_BOTTLE_NOT_FOUND".localized)
             }
             if responseObject.result.isFailure {
-                let error : NSError = responseObject.result.error! as NSError
-                completionBlock(nil, error.localizedDescription)
+                let _ : NSError = responseObject.result.error! as NSError
+                completionBlock(nil, ServerError.connectionError)
             }
         }
     }
@@ -946,6 +992,14 @@ struct ServerError {
         get {
             var error = ServerError()
             error.code = ErrorType.socialLoginFailed.rawValue
+            return error
+        }
+    }
+    
+    public static var noBottleFoundError: ServerError{
+        get {
+            var error = ServerError()
+            error.code = ErrorType.noBottleFound.rawValue
             return error
         }
     }

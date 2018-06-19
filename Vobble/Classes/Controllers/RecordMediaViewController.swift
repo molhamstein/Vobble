@@ -8,6 +8,7 @@
 
 import LLSimpleCamera
 import SDRecordButton
+import Flurry_iOS_SDK
 
 let MAX_VIDEO_LENGTH:Float = 60
 
@@ -42,6 +43,7 @@ class RecordMediaViewController: AbstractController {
     
     var isAnimating: Bool = false
     var isRecording: Bool = false
+    var isCanceled: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +150,6 @@ class RecordMediaViewController: AbstractController {
         
         if(LLSimpleCamera.isFrontCameraAvailable() && LLSimpleCamera.isRearCameraAvailable()){
             
-            
             self.recordButton.bringToFront()
             
             //flash button
@@ -157,8 +158,7 @@ class RecordMediaViewController: AbstractController {
             //switch camera button
             self.switchButton.tintColor = UIColor.white
             
-        }
-        else{
+        } else {
             let label: UILabel = UILabel(frame: CGRect.zero)
             label.text = "You must have a camera to take video."
             label.numberOfLines = 2
@@ -193,7 +193,6 @@ class RecordMediaViewController: AbstractController {
         self.btnPhotoLibrary.bringToFront()
     }
     
-    
     func segmentedControlValueChanged(control: UISegmentedControl) {
         print("Segment value changed!")
     }
@@ -209,7 +208,7 @@ class RecordMediaViewController: AbstractController {
     @IBAction func presentLibraryPicker() {
         
         let imagePicker = UIImagePickerController()
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = ["public.movie"]
@@ -228,6 +227,8 @@ class RecordMediaViewController: AbstractController {
     }
     
     @IBAction func close() {
+        isCanceled = true
+        stopRecording()
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
@@ -254,7 +255,6 @@ class RecordMediaViewController: AbstractController {
     }
 }
 
-
 extension RecordMediaViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
@@ -263,7 +263,6 @@ extension RecordMediaViewController : UIImagePickerControllerDelegate, UINavigat
         
         if let videoURL = info[UIImagePickerControllerMediaURL] as? NSURL{
             self.gotToPreview(videoUrl: videoURL, image: nil)
-            
         }
 //        if let videoURL = info[UIImagePickerControllerMediaURL] as? NSURL, self.from == .throwBottle {
 //            self.gotToPreview(videoUrl: videoURL, image: nil)
@@ -314,6 +313,7 @@ extension RecordMediaViewController
         // start the camera
         self.camera.start()
         isRecording = false
+        isCanceled = false
         recordButton.isEnabled = true
         timeOut = 0.0
         isAnimating = false
@@ -370,7 +370,6 @@ extension RecordMediaViewController
                     self.prepareForRecording()
                 }
             }, exactSeenImage: true)
-            
         }
     }
     
@@ -378,8 +377,7 @@ extension RecordMediaViewController
     func startRecording(timer:Timer){
         if(self.camera.position == LLCameraPositionRear){
             self.camera.mirror = LLCameraMirrorOff
-        }
-        else{
+        } else {
             self.camera.mirror = LLCameraMirrorOn
         }
         
@@ -447,11 +445,11 @@ extension RecordMediaViewController
         let outputURL: URL = url.appendingPathExtension("mp4") as URL
         self.camera.startRecording(withOutputUrl: outputURL, didRecord: {(camera, outputFileUrl, error) -> Void in
             
-            if let videoURL = outputFileUrl{
+            if let videoURL = outputFileUrl, self.isCanceled == false {
                 let data = NSData(contentsOf: videoURL)!
                 print("File size before compression: \(Double(data.length / 1048576)) mb")
                 let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".m4v")
-                self.compressVideo(inputURL: videoURL, outputURL: compressedURL) { (exportSession) in
+                ActionCompressVideo.execute(inputURL: videoURL, outputURL: compressedURL) { (exportSession) in
                     guard let session = exportSession else {
                         return
                     }
@@ -549,25 +547,8 @@ extension RecordMediaViewController
         return true
     }
     
-    
-    //MARK: Compress recorded Video for upload
-    func compressVideo(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
-        let urlAsset = AVURLAsset(url: inputURL, options: nil)
-        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
-            handler(nil)
-            
-            return
-        }
-        
-        exportSession.outputURL = outputURL
-        exportSession.outputFileType = AVFileTypeQuickTimeMovie
-        exportSession.shouldOptimizeForNetworkUse = true
-        exportSession.exportAsynchronously { () -> Void in
-            handler(exportSession)
-        }
-    }
-    
     func gotToPreview(videoUrl: NSURL?, image: UIImage?) {
+        Flurry.logEvent(AppConfig.recorded_video);
         
         // animate Views out
         recordButton.animateIn(mode: .animateOutToBottom, delay: 0.3)
@@ -579,9 +560,8 @@ extension RecordMediaViewController
         closeButton.animateIn(mode: .animateOutToTop, delay: 0.2)
         btnPhotoLibrary.animateIn(mode: .animateOutToBottom, delay: 0.3)
         
-        
         // show preview 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 6 second
             let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
             if let img = image {
                 previewControl.type = .IMAGE
@@ -596,7 +576,6 @@ extension RecordMediaViewController
             
             self.navigationController?.pushViewController(previewControl, animated: false)
         }
-        
     }
 }
 

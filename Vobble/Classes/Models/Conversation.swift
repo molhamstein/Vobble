@@ -55,6 +55,15 @@ class Conversation: BaseModel {
         }
     }
     
+    public var isMyBottle: Bool {
+        get {
+            if let currentUserID = DataStore.shared.me?.objectId, let convUserID = self.bottle?.ownerId, currentUserID == convUserID {
+                return true
+            }
+            return false
+        }
+    }
+    
     // MARK: Initializers
     override init() {
         super.init()

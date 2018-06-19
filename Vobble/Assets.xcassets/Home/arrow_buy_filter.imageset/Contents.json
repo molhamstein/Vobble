@@ -2,7 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "arrow_buy_filter.pdf"
+      "filename" : "arrow_buy_filter.pdf",
+      "language-direction" : "left-to-right"
     }
   ],
   "info" : {

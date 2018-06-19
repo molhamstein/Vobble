@@ -12,13 +12,12 @@ import SwiftyJSON
 
 enum ShopItemType: String {
     
-    case bottlesPack = "5afc7b8683106e7603326ef0"
-    case genderFilter = "5afc7b8683106e7603326ef1"
-    case countryFilter = "5afc7b8683106e7603326ef2"
+    case bottlesPack = "5b13ee987fe59d9d184bfe3e"
+    case genderFilter = "5b13ee987fe59d9d184bfe3f"
+    case countryFilter = "5b13ee987fe59d9d184bfe40"
 }
 
 class ShopItem: BaseModel {
-    
     
     // MARK: Keys
     private let kShopItemId: String = "id"
@@ -137,6 +136,11 @@ class ShopItem: BaseModel {
         }
         if let value = json[kShopItemProdId].string {
             prodId = value
+        }
+        
+        // trating the goods id as an enum to define product type
+        if let value = json[kShopItemType].string {
+            type = ShopItemType(rawValue: value)
         }
         
 //        if let value = json[kShopItemFirstColor].string {

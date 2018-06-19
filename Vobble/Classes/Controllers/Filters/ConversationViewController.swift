@@ -139,13 +139,12 @@ extension ConversationViewController: UICollectionViewDataSource {
         if let me = DataStore.shared.me {
             headerView.configCell(userObj: me)
         }
-        
         return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: self.bottleCollectionView.bounds.width, height: 230)
+        return CGSize(width: self.bottleCollectionView.bounds.width, height: 190)
     }
 }
 
@@ -155,7 +154,7 @@ extension ConversationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemW = (UIScreen.main.bounds.size.width)
-        let itemh = CGFloat(155)
+        let itemh = CGFloat(125)
         
         return CGSize(width: itemW, height: itemh)
     }
@@ -196,25 +195,26 @@ extension ConversationViewController: UICollectionViewDelegate {
             
             let convRef = conversationRef.child(conversation.idString!)
             
-            chatVc.senderDisplayName = "test"
+            chatVc.senderDisplayName = conversation.getPeer?.userName
             
             if tap == .myBottles {
                 chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
                 //if is_seen == false --> hide chat tool bar so we can't send any message
-                chatVc.isHideInputToolBar = true
+                chatVc.isHideInputToolBar = false
                 
-            } else if tap == .myReplies {
-                chatVc.convTitle = conversation.user?.userName ?? ""
                 if let is_seen = conversation.is_seen, is_seen == 0 {
                     convRef.updateChildValues(["is_seen": 1])
                     convRef.updateChildValues(["startTime": ServerValue.timestamp()])
-                    chatVc.isHideInputToolBar = false
                     chatVc.seconds = 24.0*60.0*60.0
-                  
+                    
                     // send push notification to peer to let him know that the chat is open now
                     let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
                     ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: conversation.getPeer!, completionBlock: { (success, error) in })
-                 }
+                }
+                
+            } else if tap == .myReplies {
+                chatVc.convTitle = conversation.user?.userName ?? ""
+                
             }
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
            
@@ -362,7 +362,7 @@ extension ConversationViewController {
         self.navigationView.showProgressIndicator(show: true)
         conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
                 
-                self.navigationView.showProgressIndicator(show: false)
+            
                 let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 conversation.idString = snapshot.key
                 if let is_seen = conversation.is_seen, is_seen == 1 {
@@ -375,25 +375,35 @@ extension ConversationViewController {
                 }
                 
                 if let is_active = conversation.isActive, !is_active {
-                    //(My replies)
-                    if let currentUserID = DataStore.shared.me?.objectId, let convUserID = conversation.user?.objectId,currentUserID == convUserID {
+                    //(My Bottles)
+                    if conversation.isMyBottle {
                         print("my bottles")
                         DataStore.shared.myBottles.append(conversation)
                         DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                            return (obj1.createdAt! > obj2.createdAt!)
+                            // show open chats first
+                            // if chat is not open yet sort them by date from newest to olders
+                            if obj1.is_seen! != obj2.is_seen! {
+                                return (obj1.is_seen! >= 1)
+                            } else {
+                                return (obj1.createdAt! > obj2.createdAt!)
+                            }
                         })
                         
                         self.refreshView()
-                    } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID { // (My replies)
+                    } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.user?.objectId, currentUserID == convBottleOwnerID { // (My replies)
                         print("my replies")
                         DataStore.shared.myReplies.append(conversation)
                         DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                            return (obj1.createdAt! > obj2.createdAt!)
+                            if obj1.is_seen! != obj2.is_seen! {
+                                return (obj1.is_seen! >= 1)
+                            } else {
+                                return (obj1.createdAt! > obj2.createdAt!)
+                            }
                         })
                         self.refreshView()
                     }
                 }
-                
+                self.navigationView.showProgressIndicator(show: false)
             }) { (error) in
                 print("****************")
                 print(error)
@@ -403,7 +413,7 @@ extension ConversationViewController {
         
         conversationRef.observe(.childChanged, with: { (snapshot) in
         
-            self.navigationView.showProgressIndicator(show: false)
+            
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             conversation.idString = snapshot.key
             if let is_seen = conversation.is_seen, is_seen == 1 {
@@ -453,6 +463,7 @@ extension ConversationViewController {
                     }
                 }
             }
+            self.navigationView.showProgressIndicator(show: false)
         })
     }
 }

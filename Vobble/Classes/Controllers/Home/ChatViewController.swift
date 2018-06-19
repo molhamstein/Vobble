@@ -27,6 +27,7 @@ import JSQMessagesViewController
 import SwiftyJSON
 import NYTPhotoViewer
 import SDRecordButton
+import Flurry_iOS_SDK
 
 final class ChatViewController: JSQMessagesViewController {
     
@@ -53,13 +54,15 @@ final class ChatViewController: JSQMessagesViewController {
     
     @IBOutlet var customNavBar: VobbleChatNavigationBar!
     @IBOutlet var recordButton : SDRecordButton!
+    @IBOutlet var lblRecording : UILabel!
+    @IBOutlet var ivRecordingIcon : UIImageView!
     @IBOutlet var recordButtonContainer : UIView!
-    
     
     // notifications
     var lastNotificationSentDate: Date?
     
     //  private var localTyping = false
+    private var isInitialised = false
     
     var convTitle: String? {
         didSet {
@@ -80,7 +83,6 @@ final class ChatViewController: JSQMessagesViewController {
     var audioRec: AVAudioRecorder?
     var audioRecorder:AVAudioRecorder!
     var audioUrl: URL? = nil
-    
     
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
@@ -130,13 +132,24 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
+        self.topContentAdditionalInset = 30
+        
         if isHideInputToolBar {
             inputToolbar.isHidden = true
         } else {
             inputToolbar.isHidden = false
             initCustomToolBar()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
+        if isInitialised == false {
+            
+            
+            isInitialised = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,6 +171,28 @@ final class ChatViewController: JSQMessagesViewController {
             customNavBar.shoreNameLabel.text = navShoreName
             customNavBar.userNameLabel.text = navUserName
             customNavBar.viewcontroller = self
+            
+            // record audio view
+            lblRecording.font = AppFonts.bigBold
+            lblRecording.text = "CHAT_RECORDING".localized
+            self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: self.view.frame.width, height: self.view.frame.height - self.inputToolbar.frame.height)
+            self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 10, width: 120, height: 120)
+            self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
+            self.ivRecordingIcon.center = self.recordButton.center
+            self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
+            self.view.addSubview(self.recordButtonContainer)
+            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
+            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0).isActive = true
+            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0).isActive = true
+            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height - inputToolbar.frame.height).isActive = true
+            
+            self.recordButtonContainer.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+            //            recordButtonContainer.setNeedsLayout()
+            //            recordButton.setNeedsLayout()
+            //self.view.layoutIfNeeded()
+            //            recordButtonContainer.layoutIfNeeded()
+            //            recordButton.layoutIfNeeded()
+            recordButtonContainer.isHidden = true
         }
     }
     
@@ -338,7 +373,6 @@ final class ChatViewController: JSQMessagesViewController {
                     mediaItem.message = message
                     self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                 }
-                
             } else if let mediaURL = message.videoUrl {
              
                 if let mediaItem = self.videoMessageMap[message.idString!] {
@@ -356,7 +390,6 @@ final class ChatViewController: JSQMessagesViewController {
                     self.collectionView.reloadData()
                     self.audioMessageMap.removeValue(forKey: message.idString!)
                 }
-                
             }
         })
     }
@@ -543,7 +576,7 @@ final class ChatViewController: JSQMessagesViewController {
         if shouldSenPushNotification {
             lastNotificationSentDate = Date()
             if let peer = conversationOriginalObject?.getPeer {
-            let msgToSend = String(format: "NOTIFICATION_NEW_MSG".localized, (DataStore.shared.me?.userName)!)
+                let msgToSend = String(format: "NOTIFICATION_NEW_MSG".localized, (DataStore.shared.me?.userName)!)
                 ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: peer, completionBlock: { (success, error) in })
             }
         }
@@ -556,44 +589,78 @@ final class ChatViewController: JSQMessagesViewController {
         // If the text is not empty, the user is typing
         //    isTyping = textView.text != ""
     }
+    
 }
 
 // MARK: Image Picker Delegate
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         picker.dismiss(animated: true, completion:nil)
         
         let mediaType = info[UIImagePickerControllerMediaType] as? String
         if mediaType == "public.image" {
-            if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
-                uploadPhoto(photoUrl: mediaReferenceUrl)
+//            if let mediaReferenceUrl = info[UIImagePickerControllerImageURL] as? URL {
+//                uploadPhoto(photoUrl: mediaReferenceUrl)
+//            }else if let mediaReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
+//                uploadPhoto(photoUrl: mediaReferenceUrl)
+//            }
+
+            if let photo = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                
+                uploadPhoto(photo: photo)
+            }
+            
+            if let asset = info["UIImagePickerControllerPHAsset"] as? PHAsset{
+                if let fileName = asset.value(forKey: "filename") as? String{
+                    print(fileName)
+                }
             }
             
         } else if mediaType == "public.movie" {
-            if let mediaUrl = info[UIImagePickerControllerMediaURL] as? URL {
-                uploadVideo(videoUrl: mediaUrl)
+            if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
+                
+                let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".m4v")
+                ActionCompressVideo.execute(inputURL: videoURL, outputURL: compressedURL) { (exportSession) in
+                    guard let session = exportSession else {
+                        return
+                    }
+                    // use the original video captured by the camera as the deault Video to upload
+                    // and check if the compression successed then use the copressed video for upload
+                    var videoUrlForUpload = videoURL;
+                    
+                    switch session.status {
+                    case .completed:
+                        guard let compressedData = NSData(contentsOf: compressedURL) else {
+                            return
+                        }
+                        print("File size after compression: \(Double(compressedData.length / 1048576)) mb")
+                        videoUrlForUpload = compressedURL
+                    default:
+                        break
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.uploadVideo(videoUrl: videoUrlForUpload)
+                    }
+                }
             }
         }
-       
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion:nil)
     }
     
-    func uploadPhoto(photoUrl:URL) {
-        
+    func uploadPhoto(photo: UIImage) {
         if let key = sendMediaMessage(mediaType: .image) {
-            
-            let assets = PHAsset.fetchAssets(withALAssetURLs: [photoUrl], options: nil)
-            let asset = assets.firstObject
-            asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
-                
-                self.upload(url: (contentEditingInput?.fullSizeImageURL)!, key:key, mediaType: .image)
-            })
+//            let assets = PHAsset.fetchAssets(withALAssetURLs: [photoUrl], options: nil)
+//            let asset = assets.firstObject
+//            asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
+//                self.upload(url: (contentEditingInput?.fullSizeImageURL)!, key:key, mediaType: .image)
+//            })
+            self.upload(url: nil, photo:photo, key:key, mediaType: .image)
         }
     }
     
@@ -609,23 +676,22 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     func uploadVideo(videoUrl:URL) {
         if let key = sendMediaMessage(mediaType: .video)  {
-            self.upload(url: videoUrl, key:key, mediaType: .video)
+            self.upload(url: videoUrl, photo: nil, key:key, mediaType: .video)
         }
     }
     
     func uploadAudio(audioUrl:URL) {
-        
         if let key = sendMediaMessage(mediaType: .audio) {
-           self.upload(url: audioUrl, key:key, mediaType: .audio)
+            self.upload(url: audioUrl, photo: nil, key:key, mediaType: .audio)
         }
     }
     
-    func upload(url:URL, key:String, mediaType: AppMediaType) {
+    func upload(url:URL?, photo: UIImage?,  key:String, mediaType: AppMediaType) {
         
         self.isLoadedMedia = false
         self.numberOfSentMedia += 1
-        let urls:[URL] = [url]
-        ApiManager.shared.uploadMedia(urls: urls, mediaType: mediaType) { (files, errorMessage) in
+        
+        let uploadCompletionBlock: (_ files: [Media], _ errorMessage: String?) -> Void = { (files, errorMessage) in
             
             if errorMessage == nil {
                 self.numberOfSentMedia -= 1
@@ -642,12 +708,21 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
                     alertController.addAction(ok)
                     self.present(alertController, animated: true, completion: nil)
+                    
+                    Flurry.logEvent(AppConfig.reply_submitted);
                 }
                 
             } else {
                 self.isLoadedMedia = true
                 print("error")
             }
+        }
+        
+        if let imageObject = photo, mediaType == .image {
+            ApiManager.shared.uploadImage(imageData: imageObject, completionBlock: uploadCompletionBlock)
+        } else if let mediaURL = url {
+            let urls:[URL] = [mediaURL]
+            ApiManager.shared.uploadMedia(urls: urls, mediaType: mediaType, completionBlock: uploadCompletionBlock)
         }
     }
 }
@@ -669,9 +744,7 @@ extension ChatViewController: ChatNavigationDelegate {
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
         }
-        
     }
-    
 }
 
 //TODO: make custom chat toole bar class
@@ -711,23 +784,20 @@ extension ChatViewController: AVAudioRecorderDelegate {
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         present(actionSheet, animated: true, completion: nil)
-        
     }
     
-    func camera()
-    {
+    func camera() {
         let picker = UIImagePickerController()
         picker.delegate = self;
         picker.sourceType = .camera
         present(picker, animated: true, completion:nil)
     }
     
-    func photoLibrary()
-    {
+    func photoLibrary() {
         let picker = UIImagePickerController()
         picker.delegate = self;
+        picker.allowsEditing = false;
         picker.sourceType = .photoLibrary
         picker.mediaTypes = ["public.image","public.movie"]
         present(picker, animated: true, completion:nil)
@@ -736,10 +806,18 @@ extension ChatViewController: AVAudioRecorderDelegate {
     func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
         print("Long tap is handled")
         if sender.state == .began {
-            print("UILongPressGestureRecognizerStateBegan so start the recording voice here")
             //write the function for start recording the voice here
-            recordButtonContainer.frame = CGRect(x: self.view.frame.width/2 - 100, y: self.view.frame.height/2 - 120, width: 200, height: 240)
-            self.view.addSubview(recordButtonContainer)
+            
+            // show record audio view
+            recordButtonContainer.isHidden = false
+            self.recordButtonContainer.alpha = 0.0
+            self.recordButtonContainer.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 90)
+            UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
+                self.recordButtonContainer.transform = CGAffineTransform.identity
+                self.recordButtonContainer.alpha = 1.0
+            }, completion: {(finished: Bool) in })
+            
+            recordButton.setProgress(0.0)
             
             // reset the timer
             recordTimer?.invalidate()
@@ -759,7 +837,6 @@ extension ChatViewController: AVAudioRecorderDelegate {
         }
         else if sender.state == .ended {
             stopRecorderTimer()
-            print("UILongPressGestureRecognizerStateEnded so stop the recording voice here")
             //write the function for stop recording the voice here
             if let url = audioUrl {
                   uploadAudio(audioUrl:url)
@@ -775,15 +852,11 @@ extension ChatViewController: AVAudioRecorderDelegate {
         if (audioSession.responds(to: #selector(AVAudioSession.requestRecordPermission(_:)))) {
             AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
                 if granted {
-                    print("granted")
-                    
                     //set category and activate recorder session
                     do {
-                        
                         try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                         try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
                         self.soundRecorder.prepareToRecord()
-                        
                     } catch {
                         print("Error Recording");
                     }
@@ -809,7 +882,6 @@ extension ChatViewController: AVAudioRecorderDelegate {
             recordTimer?.invalidate()
             recordTimer = nil;
             stopRecorderTimer()
-            
         } else {
             timeOut += 0.05;
 //           recordTimeLabel.text = String(format: "%02d", Int(timeOut))
@@ -821,7 +893,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         // stop recording
         self.recordButton.setProgress(0)
         timeOut = 0.0
-        recordButtonContainer.removeFromSuperview()
+        recordButtonContainer.isHidden = true
         soundRecorder.stop()
     }
 }
@@ -836,12 +908,10 @@ class PreviewPhoto: NSObject, NYTPhoto {
     let attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.gray])
     let attributedCaptionCredit: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.darkGray])
     
-    
     init(image: UIImage? = nil, title: String) {
         self.image = image
         self.imageData = nil
         self.attributedCaptionTitle = NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.gray])
         super.init()
     }
-    
 }

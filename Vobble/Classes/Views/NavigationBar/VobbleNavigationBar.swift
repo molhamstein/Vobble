@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import Flurry_iOS_SDK
 
 class VobbleNavigationBar : AbstractNibView {
     
@@ -118,6 +118,8 @@ class VobbleNavigationBar : AbstractNibView {
     @IBAction func rightIconPressed(_ sender: Any) {
         
         if let vc = viewcontroller as? HomeViewController {
+            let logEventParams = ["From": "TopButton"];
+            Flurry.logEvent(AppConfig.shop_enter, withParameters:logEventParams);
             vc.showShopView(.bottlesPack)
         }
     }

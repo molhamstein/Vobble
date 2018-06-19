@@ -11,6 +11,7 @@ import BMPlayer
 import AVFoundation
 import NVActivityIndicatorView
 import Firebase
+import Flurry_iOS_SDK
 
 class FindBottleViewController: AbstractController {
     
@@ -54,7 +55,7 @@ class FindBottleViewController: AbstractController {
         super.viewDidLoad()
         shoreNameLabel.text = shoreName
         userNameLabel.text = bottle?.owner?.userName
-        videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
+        videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: nil)
         optionView.isHidden = true
         reportView.isHidden = true
         reportButton.setTitle("REPORT".localized, for: .normal)
@@ -149,6 +150,9 @@ class FindBottleViewController: AbstractController {
     
     @IBAction func replyBtnPressed(_ sender: Any) {
         
+        let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (bottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (bottle?.owner?.countryISOCode) ?? ""];
+        Flurry.logEvent(AppConfig.reply_pressed, withParameters:logEventParams);
+        
         if self.playButton.currentImage == UIImage(named: "pause") {
             videoView.playButtonPressed()
         }
@@ -164,13 +168,14 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func ignoreBtnPressed(_ sender: Any) {
+        let logEventParams :[String : String] = ["Shore": shoreName ?? "", "AuthorGender": (bottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (bottle?.owner?.countryISOCode) ?? ""];
+        Flurry.logEvent(AppConfig.reply_ignored, withParameters:logEventParams);
         self.dismiss(animated: true, completion: nil)
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
         
         if let newConvRef = sender as? DatabaseReference {
             let nav = segue.destination as! UINavigationController
@@ -236,8 +241,8 @@ class FindBottleViewController: AbstractController {
         let newConvRef = self.conversationRef.childByAutoId()
         
         let convlItem:[String : Any] = [
-            "bottle": self.bottle?.dictionaryRepresentation(),
-            "user": DataStore.shared.me?.dictionaryRepresentation(),
+            "bottle": (self.bottle?.dictionaryRepresentation()) ?? "",
+            "user": (DataStore.shared.me?.dictionaryRepresentation()) ?? "",
             "createdAt" : ServerValue.timestamp(),
             "is_seen" : 0,
             "startTime" : 0.0

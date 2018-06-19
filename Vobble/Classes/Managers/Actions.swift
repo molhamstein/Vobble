@@ -8,6 +8,7 @@
 
 import Foundation
 import StoreKit
+import AVFoundation
 
 /**
 Repeated and generic actions to be excuted from any context of the app such as show alert
@@ -73,4 +74,19 @@ class ActionShareText {
     }
 }
 
+class ActionCompressVideo {
+    class func execute(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
+        let urlAsset = AVURLAsset(url: inputURL, options: nil)
+        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
+            handler(nil)
+            return
+        }
+        exportSession.outputURL = outputURL
+        exportSession.outputFileType = AVFileTypeQuickTimeMovie
+        exportSession.shouldOptimizeForNetworkUse = true
+        exportSession.exportAsynchronously { () -> Void in
+            handler(exportSession)
+        }
+    }
+}
 

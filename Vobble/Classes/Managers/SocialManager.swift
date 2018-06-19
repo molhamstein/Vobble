@@ -166,7 +166,7 @@ class SocialManager: NSObject{
             userDataHolder.loginType = .google
             userDataHolder.countryISOCode = "CH"
             
-            ApiManager.shared.userInstagramLogin(user: userDataHolder) { (isSuccess, error, user) in
+            ApiManager.shared.userGoogleLogin(user: userDataHolder) { (isSuccess, error, user) in
                 // login success
                 if (isSuccess) {
                     completionBlock(user, true , nil)

@@ -36,7 +36,7 @@ class PickerViewController: AbstractController {
 extension PickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        videoURL = info["UIImagePickerControllerReferenceURL"] as? NSURL
+        videoURL = info[UIImagePickerControllerMediaURL] as? NSURL
         videoPickerController.dismiss(animated: true, completion: nil)
         if let url = videoURL?.absoluteString {
 //            vp.preparePlayer(videoURL: url)

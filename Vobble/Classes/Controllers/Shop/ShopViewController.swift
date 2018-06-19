@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import  Flurry_iOS_SDK
 
 class ShopViewController: AbstractController {
     
@@ -25,6 +26,7 @@ class ShopViewController: AbstractController {
     fileprivate var shopItemsArray:[ShopItem] {
         set {
             _shopItemsArray = newValue
+            shopCollectionView.reloadData()
         }
         get {
             if(_shopItemsArray.isEmpty){
@@ -60,6 +62,7 @@ class ShopViewController: AbstractController {
             genderFilterButton.isSelected = true
             self.initGenderFilterArray()
         }
+        
         self.shopCollectionView.reloadData()
         
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
@@ -147,13 +150,13 @@ class ShopViewController: AbstractController {
 //        obj4.description = "buy 3 bottles so you dont have to wait for the automatic refill"
 //        genderFilterArray.append(obj4)
         
-        _shopItemsArray = genderFilterArray.map{$0}
+        self.shopItemsArray = genderFilterArray.map{$0}
     }
     
     private func initCountryFilterArray() {
         var countryFilterArray:[ShopItem] = [ShopItem]()
         countryFilterArray = DataStore.shared.shopItems.filter({$0.type == .countryFilter})
-        _shopItemsArray = countryFilterArray.map{$0}
+        self.shopItemsArray = countryFilterArray.map{$0}
     }
     
     private func initBottleArray() {
@@ -207,7 +210,7 @@ class ShopViewController: AbstractController {
 //        obj4.description = "buy 3 bottles so you dont have to wait for the automatic refill"
 //        bottlrArray.append(obj4)
         
-        _shopItemsArray = bottlsArray.map{$0}
+        self.shopItemsArray = bottlsArray.map{$0}
     }
     
 }
@@ -276,7 +279,23 @@ extension ShopViewController: UICollectionViewDelegate {
                 let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
                 let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                     
+                    // flurry events
+                    var prodType = "bottles"
+                    if obj.type == ShopItemType.genderFilter {
+                        prodType = "gender"
+                    } else if obj.type == ShopItemType.countryFilter {
+                        prodType = "country"
+                    }
+                    let logEventParams = ["prodType": prodType, "ProdName": obj.title_en ?? ""];
+                    Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                    
+                    // do the purchase
                     DataStore.shared.shopItems.append(obj)
+                    
+                    // flurry events, on purchase done
+                    let logEventParams2 = ["prodType": prodType, "ProdName": obj.title_en ?? ""];
+                    Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
+                    
                 })
                 alertController.addAction(ok)
                 let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
@@ -289,8 +308,18 @@ extension ShopViewController: UICollectionViewDelegate {
                 alertController.addAction(ok)
                 self.present(alertController, animated: true, completion: nil)
             }
-            
         }
+        
+        // flurry events
+        var prodType = "bottles"
+        if obj.type == ShopItemType.genderFilter {
+            prodType = "gender"
+        } else if obj.type == ShopItemType.countryFilter {
+            prodType = "country"
+        }
+        let logEventParams = ["prodType": prodType];
+        Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

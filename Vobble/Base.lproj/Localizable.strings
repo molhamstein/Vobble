@@ -121,6 +121,7 @@
 "love_shore"                            = "Love shore";
 "fadfed_shore"                          = "FadFed shore";
 "THROW_BOTTLE_WARNING"                  = "you dont have bottles in Bottles Package";
+"THROW_BOTTLE_WARNING_ACTION"           = "Get Bottles";
 "HOME_THROW_BTN"                        = "Throw Bottle";
 "HOME_FIND_BTN"                         = "Find Bottle";
 "HOME_MY_BOTTLES_BTN"                   = "My Bottles";
@@ -128,6 +129,7 @@
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? you will no longer could upload your video.";
 "CHAT_REPLY_SENT_MSG"                   = "Your Reply was sent to the bottle owner, when he sees your reply you will 24 hours to chat together";
+"CHAT_RECORDING"                        = "Recording....";
 
 // filter
 "FEMALE"                                = "female";
@@ -187,6 +189,7 @@
 "MY_BOTTLES_BOTTLES_TITLE"             = "My Bottles";
 "MY_BOTTLES_NEXT_REFILL"               = "Next refill in:";
 "MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "Peer Didn't reply yet";
+"MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "You Didn't reply yet";
 "MY_BOTTLES_BTN_CHAT"                  = "Chat Now";
 "MY_BOTTLES_TIME_LEFT"                 = "Time left:";
 "MY_BOTTLES_EMPTY_PLACEHOLDER"         = "No Conversations Found!! \n go ahead and reply to a bottle";
