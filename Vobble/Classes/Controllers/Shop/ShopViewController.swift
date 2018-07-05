@@ -290,16 +290,22 @@ extension ShopViewController: UICollectionViewDelegate {
                     Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                     
                     // do the purchase
-                    DataStore.shared.shopItems.append(obj)
+                    let inventoryItem = InventoryItem()
+                    inventoryItem.isValid = true
+                    inventoryItem.isConsumed = false
+                    inventoryItem.shopItem = obj
+                    inventoryItem.startDate = Date().timeIntervalSince1970
+                    inventoryItem.endDate = Date().timeIntervalSince1970 + (24 * 60 * 60)
+                    DataStore.shared.inventoryItems.append(inventoryItem)
                     
                     // flurry events, on purchase done
                     let logEventParams2 = ["prodType": prodType, "ProdName": obj.title_en ?? ""];
                     Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
                     
                 })
-                alertController.addAction(ok)
                 let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
                 alertController.addAction(cancel)
+                alertController.addAction(ok)
                 self.present(alertController, animated: true, completion: nil)
                 
             } else {

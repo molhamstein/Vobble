@@ -169,6 +169,7 @@
 "SEXUAL_CONTENT"                       = "sexual content";
 "BLOCK_USER_WARNING"                   = "Are you sure you dont want to see content from %@ anymore?";
 "REPORT_SUCCESS_MSG"                   = "Ok We Got that one, Our team will be cehecking it";
+"BLOCK_USER_SUCCESS"                   = "We will make sure %@ will not bother you anymore";
 
 // shop
 "BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item and pay %@ ?";

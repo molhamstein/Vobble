@@ -13,6 +13,8 @@ struct DateHelper {
     /// Get date from iso string
     static func getDateFromISOString(_ dateStr: String) -> Date? {
         let dateFormater = DateFormatter()
+        dateFormater.locale = Locale.init(identifier: AppConfig.DATE_SERVER_DATES_LOCALE)
+        dateFormater.timeZone = TimeZone(identifier: "UTC")
         dateFormater.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return dateFormater.date(from: dateStr)
     }
@@ -20,6 +22,8 @@ struct DateHelper {
     /// Get iso date string from date object
     static func getISOStringFromDate(_ date: Date) -> String? {
         let dateFormater = DateFormatter()
+        dateFormater.locale = Locale.init(identifier: AppConfig.DATE_SERVER_DATES_LOCALE)
+        dateFormater.timeZone = TimeZone(identifier: "UTC")
         dateFormater.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return dateFormater.string(from: date)
     }

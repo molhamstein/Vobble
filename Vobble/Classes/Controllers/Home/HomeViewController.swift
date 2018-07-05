@@ -34,14 +34,17 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var lblThrowBtn: UILabel!
     @IBOutlet weak var ivThrowBtn: UIImageView!
     @IBOutlet weak var lblBottlesLeftBadge: UILabel!
+    @IBOutlet weak var vThrowBtnCircle: UIView!
     // my bottles
     @IBOutlet weak var vMyBottlesBtnContainer: UIView!
     @IBOutlet weak var lblMyBottlesBtn: UILabel!
     @IBOutlet weak var ivMyBottlesBtn: UIImageView!
+    @IBOutlet weak var vMyBottlesBtnCircle: UIView!
     // find
     @IBOutlet weak var vFindBtnContainer: UIView!
     @IBOutlet weak var lblFindBtn: UILabel!
     @IBOutlet weak var ivFindBtn: UIImageView!
+    @IBOutlet weak var vFindBtnCircle: UIView!
     
     // GIF images
     @IBOutlet var ivShore2Girl: UIImageView!
@@ -150,6 +153,10 @@ class HomeViewController: AbstractController {
             ivShore1Shore.animateIn(mode: .animateInFromLeft, delay: 0.5)
             navigationView.animateIn(mode: .animateInFromTop, delay: 0.8)
             ivCrap.animateIn(mode: .animateInFromBottom, delay: 0.6)
+            
+//            self.popAnimation(view: self.vMyBottlesBtnCircle)
+//            self.popAnimation(view: self.vFindBtnCircle)
+//            self.popAnimation(view: self.vThrowBtnCircle)
             introAnimationDone = true
         }
         
@@ -183,6 +190,10 @@ class HomeViewController: AbstractController {
         panRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan))
         panRecognizer?.delegate = self
         self.view.addGestureRecognizer(panRecognizer!)
+        
+        // tab on sea to find bottle
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(seaTapped(tapGestureRecognizer:)))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
         
         self.ivShore2Girl.loadGif(name: "girl")
         self.ivShore3Girl1.loadGif(name: "girl_3_1")
@@ -279,7 +290,7 @@ class HomeViewController: AbstractController {
 //        }, completion: nil)
         
         
-        let maxYTransaltion = CGFloat(180.0)
+        let maxYTransaltion = CGFloat(120.0)
         
         let randX = CGFloat( arc4random_uniform(UInt32(300)) )
         let randY = CGFloat( arc4random_uniform(UInt32(maxYTransaltion)) )
@@ -316,12 +327,20 @@ class HomeViewController: AbstractController {
         
         if let bCount = DataStore.shared.me?.bottlesLeftToThrowCount, bCount > 0 {
             //DataStore.shared.me?.bottlesCount = bCount - 1
-            self.wiggleAnimate(view: self.ivThrowBtn)
-            self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
+            //self.wiggleAnimate(view: self.ivThrowBtn)
+            self.popAnimation(view: self.vThrowBtnCircle)
+            
+            // add a delay to show button press animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
+            }
             
             Flurry.logEvent(AppConfig.throw_bottle);
             
         } else {
+            
+            self.wiggleAnimate(view: self.ivThrowBtn)
+            
             let alertController = UIAlertController(title: "", message: "THROW_BOTTLE_WARNING".localized, preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
             let getBottlesAction = UIAlertAction(title: "THROW_BOTTLE_WARNING_ACTION".localized, style: .default,  handler: {(alert) in 
@@ -331,13 +350,18 @@ class HomeViewController: AbstractController {
             alertController.addAction(getBottlesAction)
             self.present(alertController, animated: true, completion: nil)
        }
-    
     }
 
+    func seaTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        //let tappedImage = tapGestureRecognizer.view as! UIImageView
+        self.findBottlePressed(ivSea)
+    }
+    
     @IBAction func findBottlePressed(_ sender: Any) {
        
         self.ivFindBottle.loadGif(name: "find_bottle")
-        self.wiggleAnimate(view: self.ivFindBtn)
+        //self.wiggleAnimate(view: self.ivFindBtn)
+        self.popAnimation(view: self.vFindBtnCircle)
         
         // send tracking event
         let logEventParams = ["Shore": DataStore.shared.shores[self.currentPageIndex].name_en ?? "Main Shore", "Gender": self.gender.rawValue, "Country": self.countryCode];
@@ -384,8 +408,12 @@ class HomeViewController: AbstractController {
     }
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
-        self.wiggleAnimate(view: self.ivMyBottlesBtn)
-        self.performSegue(withIdentifier: "myBottlesSegue", sender: self)
+        //self.wiggleAnimate(view: self.ivMyBottlesBtn)
+        self.popAnimation(view: self.vMyBottlesBtnCircle)
+        // add a delay to show button press animation
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.performSegue(withIdentifier: "myBottlesSegue", sender: self)
+        }
     }
     
     @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {
@@ -427,10 +455,19 @@ class HomeViewController: AbstractController {
         animation.duration = 0.07
         animation.repeatCount = 4
         animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x - 10, y: view.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: view.center.x + 10, y: view.center.y))
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x - 15, y: view.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: view.center.x + 15, y: view.center.y))
         
         view.layer.add(animation, forKey: "position")
+    }
+    
+    func popAnimation(view: UIView) {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.repeat, .autoreverse], animations: {
+                UIView.setAnimationRepeatCount(2)
+                view.transform = CGAffineTransform.identity.scaledBy(x: 1.15, y: 1.15)
+        }) { (done) in
+            view.transform = CGAffineTransform.identity
+        }
     }
 
     func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {

@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		216A8F273382A71C79D2D207 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		5706C430204DC568006E7C9A /* RecordMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C42F204DC568006E7C9A /* RecordMediaViewController.swift */; };
 		5706C432204DCAA3006E7C9A /* Shore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C431204DCAA3006E7C9A /* Shore.swift */; };
 		5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5706C433204DDFE0006E7C9A /* ShoreCell.xib */; };
 		5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C435204DDFF4006E7C9A /* ShoreCell.swift */; };
 		570BB322208138ED00542EAD /* PassthroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570BB320208138ED00542EAD /* PassthroughView.m */; };
 		570BB3242081445C00542EAD /* crab.gif in Resources */ = {isa = PBXBuildFile; fileRef = 570BB3232081445C00542EAD /* crab.gif */; };
+		570D12A320D9A0C700A2A793 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D12A220D9A0C700A2A793 /* NotificationService.swift */; };
+		570D12A720D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 570D12A020D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		571084C720C01176001163EA /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C620C01176001163EA /* InventoryItem.swift */; };
 		571084C920C02262001163EA /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C820C02262001163EA /* ReportType.swift */; };
 		572F5A0B20A4216100355D7F /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 572F5A0A20A4216100355D7F /* find_bottle.gif */; };
@@ -23,6 +24,7 @@
 		5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5742C140205660B300A5402D /* VideoPlayerView.xib */; };
 		5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C14320573BC200A5402D /* UIImage+Gif.swift */; };
 		57521FC6205FE9210062A4A5 /* throwBottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57521FC5205FE9210062A4A5 /* throwBottle.gif */; };
+		5758907820D98F81007F5E00 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5758907720D98F80007F5E00 /* GoogleService-Info.plist */; };
 		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
 		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
 		576807B120AF1A500039E2C2 /* RateUsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */; };
@@ -42,8 +44,6 @@
 		B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B52442038ADC300C51EE8 /* WaveView.swift */; };
 		B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B52462038AE7700C51EE8 /* WaveView.xib */; };
 		B11B52492038B19700C51EE8 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B11B52482038B19700C51EE8 /* Start.storyboard */; };
-		B12288932091325E00AF225E /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12288922091325E00AF225E /* NotificationService.swift */; };
-		B12288972091325E00AF225E /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B12288902091325D00AF225E /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61C203DE93600755799 /* Antipasto_extrabold.otf */; };
 		B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61D203DE93600755799 /* Antipasto_regular.otf */; };
 		B135B622203DE97000755799 /* MullerBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B135B61E203DE93600755799 /* MullerBold.otf */; };
@@ -219,7 +219,6 @@
 		B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */; };
 		B193731920342D9F007B1E7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B193730F20342D9F007B1E7D /* Main.storyboard */; };
 		B1961240206199540065019D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B196123F206199540065019D /* ChatViewController.swift */; };
-		B19612462061CEC00065019D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B19612452061CEC00065019D /* GoogleService-Info.plist */; };
 		B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */; };
 		B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */; };
 		B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1A3743F204530160080A323 /* SystemConfiguration.framework */; };
@@ -242,11 +241,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B12288952091325E00AF225E /* PBXContainerItemProxy */ = {
+		570D12A520D9A0C700A2A793 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9234B5DD203356560085F9F7 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B122888F2091325D00AF225E;
+			remoteGlobalIDString = 570D129F20D9A0C700A2A793;
 			remoteInfo = OneSignalNotificationServiceExtension;
 		};
 /* End PBXContainerItemProxy section */
@@ -258,7 +257,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				B12288972091325E00AF225E /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+				570D12A720D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +273,9 @@
 		570BB320208138ED00542EAD /* PassthroughView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassthroughView.m; sourceTree = "<group>"; };
 		570BB321208138ED00542EAD /* PassthroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassthroughView.h; sourceTree = "<group>"; };
 		570BB3232081445C00542EAD /* crab.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = crab.gif; sourceTree = "<group>"; };
+		570D12A020D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		570D12A220D9A0C700A2A793 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		570D12A420D9A0C700A2A793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		571084C620C01176001163EA /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		571084C820C02262001163EA /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
 		572F5A0A20A4216100355D7F /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		5742C140205660B300A5402D /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoPlayerView.xib; path = VideoPlayer/VideoPlayerView.xib; sourceTree = "<group>"; };
 		5742C14320573BC200A5402D /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		57521FC5205FE9210062A4A5 /* throwBottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = throwBottle.gif; sourceTree = "<group>"; };
+		5758907720D98F80007F5E00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
 		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateUsPopupViewController.swift; sourceTree = "<group>"; };
@@ -308,7 +311,6 @@
 		B11B52442038ADC300C51EE8 /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		B11B52462038AE7700C51EE8 /* WaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveView.xib; sourceTree = "<group>"; };
 		B11B52482038B19700C51EE8 /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
-		B12288902091325D00AF225E /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12288922091325E00AF225E /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B12288942091325E00AF225E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B135B61C203DE93600755799 /* Antipasto_extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Antipasto_extrabold.otf; sourceTree = "<group>"; };
@@ -610,7 +612,6 @@
 		B193730E20342D9F007B1E7D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B193730F20342D9F007B1E7D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B196123F206199540065019D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = ../Home/ChatViewController.swift; sourceTree = "<group>"; };
-		B19612452061CEC00065019D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B19B16D6203DF5D1004D684F /* VobbleNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VobbleNavigationBar.xib; sourceTree = "<group>"; };
 		B19B16D8203DF60B004D684F /* VobbleNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VobbleNavigationBar.swift; sourceTree = "<group>"; };
 		B1A3743F204530160080A323 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -635,6 +636,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		570D129D20D9A0C700A2A793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9234B5E2203356560085F9F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -644,14 +652,6 @@
 				B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */,
 				B193730A20342BD5007B1E7D /* QuartzCore.framework in Frameworks */,
 				B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B122888D2091325D00AF225E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				216A8F273382A71C79D2D207 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +666,15 @@
 				575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */,
 			);
 			name = "Throw bottle";
+			sourceTree = "<group>";
+		};
+		570D12A120D9A0C700A2A793 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				570D12A220D9A0C700A2A793 /* NotificationService.swift */,
+				570D12A420D9A0C700A2A793 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 		57687D12204FE509007A5FFA /* gif */ = {
@@ -689,6 +698,7 @@
 			children = (
 				9234B5E7203356570085F9F7 /* Vobble */,
 				B12288912091325D00AF225E /* OneSignalNotificationServiceExtension */,
+				570D12A120D9A0C700A2A793 /* OneSignalNotificationServiceExtension */,
 				9234B5E6203356570085F9F7 /* Products */,
 				A47EB6CD7DD1AA20D86AA111 /* Pods */,
 				FE5F8BA41684F3115C60BED0 /* Frameworks */,
@@ -699,7 +709,7 @@
 			isa = PBXGroup;
 			children = (
 				9234B5E5203356570085F9F7 /* Vobble.app */,
-				B12288902091325D00AF225E /* OneSignalNotificationServiceExtension.appex */,
+				570D12A020D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -769,7 +779,7 @@
 				B19372F92034196A007B1E7D /* Constants.swift */,
 				B19372FF20342423007B1E7D /* Localizable.strings */,
 				9234B5F4203356570085F9F7 /* Info.plist */,
-				B19612452061CEC00065019D /* GoogleService-Info.plist */,
+				5758907720D98F80007F5E00 /* GoogleService-Info.plist */,
 				B19372FB203419C7007B1E7D /* Vobble-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
@@ -1433,6 +1443,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		570D129F20D9A0C700A2A793 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 570D12A820D9A0C800A2A793 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				570D129C20D9A0C700A2A793 /* Sources */,
+				570D129D20D9A0C700A2A793 /* Frameworks */,
+				570D129E20D9A0C700A2A793 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 570D12A020D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9234B5E4203356560085F9F7 /* Vobble */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9234B60D203356570085F9F7 /* Build configuration list for PBXNativeTarget "Vobble" */;
@@ -1448,31 +1475,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				B12288962091325E00AF225E /* PBXTargetDependency */,
+				570D12A620D9A0C700A2A793 /* PBXTargetDependency */,
 			);
 			name = Vobble;
 			productName = Vobble;
 			productReference = 9234B5E5203356570085F9F7 /* Vobble.app */;
 			productType = "com.apple.product-type.application";
-		};
-		B122888F2091325D00AF225E /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B122889A2091325E00AF225E /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
-			buildPhases = (
-				FEBC03D2456E943F1DFCCF86 /* [CP] Check Pods Manifest.lock */,
-				B122888C2091325D00AF225E /* Sources */,
-				B122888D2091325D00AF225E /* Frameworks */,
-				B122888E2091325D00AF225E /* Resources */,
-				6E37F5486F5AF8798B8C80F1 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OneSignalNotificationServiceExtension;
-			productName = OneSignalNotificationServiceExtension;
-			productReference = B12288902091325D00AF225E /* OneSignalNotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -1480,13 +1488,18 @@
 		9234B5DD203356560085F9F7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Brain-Socket";
 				TargetAttributes = {
+					570D129F20D9A0C700A2A793 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = U2DR46FA6M;
+						ProvisioningStyle = Automatic;
+					};
 					9234B5E4203356560085F9F7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BBSB6N9C9P;
+						DevelopmentTeam = U2DR46FA6M;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1496,11 +1509,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					B122888F2091325D00AF225E = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BBSB6N9C9P;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1519,12 +1527,19 @@
 			projectRoot = "";
 			targets = (
 				9234B5E4203356560085F9F7 /* Vobble */,
-				B122888F2091325D00AF225E /* OneSignalNotificationServiceExtension */,
+				570D129F20D9A0C700A2A793 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		570D129E20D9A0C700A2A793 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9234B5E3203356560085F9F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1546,11 +1561,11 @@
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
-				B19612462061CEC00065019D /* GoogleService-Info.plist in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				57DE7459207D77E00061CA2F /* fire.gif in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
+				5758907820D98F81007F5E00 /* GoogleService-Info.plist in Resources */,
 				B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */,
 				5773BDD820B6363F0011256A /* dolphin.gif in Resources */,
 				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
@@ -1564,13 +1579,6 @@
 				578A25122058771A00801F77 /* girl_3_2.gif in Resources */,
 				B11B52492038B19700C51EE8 /* Start.storyboard in Resources */,
 				B19372F62033E44E007B1E7D /* OpenSansSemiBold.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B122888E2091325D00AF225E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1671,21 +1679,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6E37F5486F5AF8798B8C80F1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D33A024EBB99BC00C780DC5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1704,27 +1697,17 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FEBC03D2456E943F1DFCCF86 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		570D129C20D9A0C700A2A793 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				570D12A320D9A0C700A2A793 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9234B5E1203356560085F9F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1921,21 +1904,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B122888C2091325D00AF225E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B12288932091325E00AF225E /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B12288962091325E00AF225E /* PBXTargetDependency */ = {
+		570D12A620D9A0C700A2A793 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B122888F2091325D00AF225E /* OneSignalNotificationServiceExtension */;
-			targetProxy = B12288952091325E00AF225E /* PBXContainerItemProxy */;
+			target = 570D129F20D9A0C700A2A793 /* OneSignalNotificationServiceExtension */;
+			targetProxy = 570D12A520D9A0C700A2A793 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1952,6 +1927,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		570D12A920D9A0C800A2A793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U2DR46FA6M;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yallavideo.Vibo.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		570D12AA20D9A0C800A2A793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U2DR46FA6M;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yallavideo.Vibo.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		9234B60B203356570085F9F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2054,11 +2083,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Vobble/Vobble.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BBSB6N9C9P;
+				DEVELOPMENT_TEAM = U2DR46FA6M;
 				INFOPLIST_FILE = Vobble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yallavideo.Vibo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2075,11 +2105,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Vobble/Vobble.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BBSB6N9C9P;
+				DEVELOPMENT_TEAM = U2DR46FA6M;
 				INFOPLIST_FILE = Vobble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yallavideo.Vibo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vobble/Vobble-Bridging-Header.h";
@@ -2088,39 +2119,18 @@
 			};
 			name = Release;
 		};
-		B12288982091325E00AF225E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E256E2B0997DBD0A356FD8B3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
-			buildSettings = {
-				DEVELOPMENT_TEAM = BBSB6N9C9P;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble.OneSignalNotificationServiceExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		B12288992091325E00AF225E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F393EA47B3719E4B728D2E0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
-			buildSettings = {
-				DEVELOPMENT_TEAM = BBSB6N9C9P;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.brain-socket.Vobble.OneSignalNotificationServiceExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		570D12A820D9A0C800A2A793 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				570D12A920D9A0C800A2A793 /* Debug */,
+				570D12AA20D9A0C800A2A793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9234B5E0203356560085F9F7 /* Build configuration list for PBXProject "Vobble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2135,15 +2145,6 @@
 			buildConfigurations = (
 				9234B60E203356570085F9F7 /* Debug */,
 				9234B60F203356570085F9F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B122889A2091325E00AF225E /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B12288982091325E00AF225E /* Debug */,
-				B12288992091325E00AF225E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

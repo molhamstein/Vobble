@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>82142364137-21s23clufpu4d0abp5ppa5na245tak1u.apps.googleusercontent.com</string>
+	<string>82142364137-tthd127aufg2ukthmvqffd1qcvnkma9m.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.82142364137-21s23clufpu4d0abp5ppa5na245tak1u</string>
+	<string>com.googleusercontent.apps.82142364137-tthd127aufg2ukthmvqffd1qcvnkma9m</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBhi5wkBd0a29K95QhxPJTZIdfypz9QOxI</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.brain-socket.Vobble</string>
+	<string>com.yallavideo.Vibo</string>
 	<key>PROJECT_ID</key>
 	<string>vobble-1521577974841</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:82142364137:ios:27ac27b4fef6a9d9</string>
+	<string>1:82142364137:ios:36c593eb694b371b</string>
 	<key>DATABASE_URL</key>
 	<string>https://vobble-1521577974841.firebaseio.com</string>
 </dict>

@@ -78,7 +78,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         lblBottlesLeftCount.text = "\(DataStore.shared.me?.bottlesLeftToThrowCount ?? 0)"
         lblBottlesThrownCount.text = "\(DataStore.shared.me?.bottlesCount ?? 0)"
         
-        if let nextRefillTime = DataStore.shared.me?.nextRefillDate{
+        if let nextRefillTime = DataStore.shared.me?.nextRefillDate {
             let currentDate = Date().timeIntervalSince1970
             lblNextRefillDate.startTimer(seconds: TimeInterval((nextRefillTime.timeIntervalSince1970 - currentDate)))
         } else {

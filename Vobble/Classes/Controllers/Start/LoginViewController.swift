@@ -100,6 +100,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        DataStore.shared.fetchBaseData()
 //        if let m = DataStore.shared.me {
 //             self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
 //        }
