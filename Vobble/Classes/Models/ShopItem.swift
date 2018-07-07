@@ -17,6 +17,60 @@ enum ShopItemType: String {
     case countryFilter = "5b13ee987fe59d9d184bfe40"
 }
 
+enum ShopItemID: String {
+    
+    case Bottels3 = "com.yallavideo.Vibo.bottels3"  //    3 bottels    Consumable    com.yallavideo.Vibo.bottels3    5b13ee987fe59d9d184bfe44
+    case Bottels5 = "com.yallavideo.Vibo.5bottels"  //    5 bottels    Consumable    com.yallavideo.Vibo.5bottels    5b13ee987fe59d9d184bfe45
+    
+    case CountryFilter24H = "com.yallavideo.Vibo.country24h"  //    Country filter 24H    Non-Renewing Subscription    com.yallavideo.Vibo.country24h    5b13ee987fe59d9d184bfe48
+    case CountryFilter48H = "com.yallavideo.Vibo.country48h"  //    Country filter 48H    Non-Renewing Subscription    com.yallavideo.Vibo.country48h    5b13ee987fe59d9d184bfe49
+    
+    case GenderFilter24H = "com.yallavideo.Vibo.gender24h" //    Gender filter 24H    Non-Renewing Subscription    com.yallavideo.Vibo.gender24h    5b13ee987fe59d9d184bfe46
+    case GenderFilter48H = "com.yallavideo.Vibo.gender48h" //    Gender filter 48H    Non-Renewing Subscription    com.yallavideo.Vibo.gender48h    5b13ee987fe59d9d184bfe47
+    
+    static func getIdFromKey(DBId: String) -> String {
+        
+        switch DBId {
+        case "5b13ee987fe59d9d184bfe44":
+            return Bottels3.rawValue
+            
+        case "5b13ee987fe59d9d184bfe45":
+            return Bottels5.rawValue
+            
+        case "5b13ee987fe59d9d184bfe48":
+            return CountryFilter24H.rawValue
+            
+        case "5b13ee987fe59d9d184bfe49":
+            return CountryFilter48H.rawValue
+            
+        case "5b13ee987fe59d9d184bfe46":
+            return GenderFilter24H.rawValue
+            
+        case "5b13ee987fe59d9d184bfe47":
+            return GenderFilter48H.rawValue
+            
+        default:
+            return ""
+        }
+    }
+    
+    static func getListId() -> [String] {
+        
+        var listId = [String]()
+        
+        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe44"))
+        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe45"))
+        
+        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe48"))
+        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe49"))
+        
+        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe46"))
+        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe47"))
+        
+        return listId
+    }
+}
+
 class ShopItem: BaseModel {
     
     // MARK: Keys
@@ -35,6 +89,9 @@ class ShopItem: BaseModel {
     private let kShopItemStartDate: String = "startDate"
     private let kShopItemEndDate: String = "EndDate"
     
+    private let kShopItemAppleProduct: String = "appleProduct"
+    
+    
     
     // MARK: Properties
     public var idString : String?
@@ -51,6 +108,8 @@ class ShopItem: BaseModel {
     public var startDate : Double?
     public var endDate : Double?
     public var type : ShopItemType?
+    
+    public var appleProduct : String?
     
     public var title: String? {
         get {
@@ -154,6 +213,10 @@ class ShopItem: BaseModel {
 //            imageUrl = value
 //        }
         
+        if let value = json[kShopItemAppleProduct].string {
+            appleProduct = value
+        }
+        
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -213,6 +276,10 @@ class ShopItem: BaseModel {
 //        if let value = imageUrl {
 //            dictionary[kShopItemImageUrl] = value
 //        }
+        
+        if let value = appleProduct {
+            dictionary[kShopItemAppleProduct] = value
+        }
         
         return dictionary
     }

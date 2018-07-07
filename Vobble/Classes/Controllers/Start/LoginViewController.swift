@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import StoreKit
 
 enum ViewType {
     case login
@@ -107,7 +108,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         //hideView(withType: .signup)
         //hideView(withType: .countryV)
         //loginView.dropShadow()
-        
     }
     
     override func viewDidLayoutSubviews() {
