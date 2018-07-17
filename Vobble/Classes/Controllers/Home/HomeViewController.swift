@@ -106,7 +106,6 @@ class HomeViewController: AbstractController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,7 +117,6 @@ class HomeViewController: AbstractController {
 //        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
 //            self.ivWaves?.transform = CGAffineTransform.identity.translatedBy(x: 2, y: -2)
 //        }, completion: nil)
-
         
         ivShore2Umbrella.setAnchorPoint(anchorPoint: CGPoint(x: 0.483 , y: 0.71))
         ivShore2Umbrella?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0))
@@ -216,8 +214,8 @@ class HomeViewController: AbstractController {
         
         let hour = calendar.component(.hour, from: date)
         
-        let isNight = hour >= 18 || hour <= 5
-        //let isNight = false
+        //let isNight = hour >= 18 || hour <= 5
+        let isNight = false
         
         //hours += 1
         if isNight {
@@ -296,7 +294,7 @@ class HomeViewController: AbstractController {
         let randY = CGFloat( arc4random_uniform(UInt32(maxYTransaltion)) )
         let randDelay: Double = Double(arc4random_uniform(UInt32(12) + 4))
         DispatchQueue.main.asyncAfter(deadline: .now() + randDelay) {
-            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: randX, y: randY).scaledBy(x: randY/maxYTransaltion + 1.0, y: (randY/(maxYTransaltion * 2)) + 1.0)
+            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: randX, y: randY).scaledBy(x: randY/(maxYTransaltion * 2) + 1.0, y: (randY/(maxYTransaltion * 2)) + 1.0)
             self.ivShark.loadGif(name: "dolphin")
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {
                 // stop the gif from replay 
@@ -326,7 +324,7 @@ class HomeViewController: AbstractController {
         //ActionRateUs.execute(hostViewController: self)
         
         if let bCount = DataStore.shared.me?.bottlesLeftToThrowCount, bCount > 0 {
-            //DataStore.shared.me?.bottlesCount = bCount - 1
+            //DataStore.shared.me?.thrownBottlesCount = bCount - 1
             //self.wiggleAnimate(view: self.ivThrowBtn)
             self.popAnimation(view: self.vThrowBtnCircle)
             
@@ -522,7 +520,7 @@ class HomeViewController: AbstractController {
                         // shore 3
                         self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
                         self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
-                        self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
+                        //self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: translation.x * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -559,7 +557,7 @@ class HomeViewController: AbstractController {
                         // shore 3
                         self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: trans * self.shore3ParallaxSpeed, y: 0)
                         self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
-                        self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
+                        //self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: trans * self.friendsParallaxSpeed, y: 0)
                         //self.discoverControl?.view.transform = CGAffineTransform.identity.translatedBy(x: (translation.x - self.screenWidth) * 0.4, y: 0)
                     }, completion: {(finished: Bool) in
                     })
@@ -620,7 +618,7 @@ class HomeViewController: AbstractController {
             self.ivShore2Shore.transform = CGAffineTransform.identity
             self.ivShore3Shore.transform = CGAffineTransform.identity
             self.shore3Friends.transform = CGAffineTransform.identity
-            self.ivFire.transform = CGAffineTransform.identity
+            //self.ivFire.transform = CGAffineTransform.identity
             self.shore2Lovers.transform = CGAffineTransform.identity
             self.ivMountains.transform = CGAffineTransform.identity
             self.ivSun.transform = CGAffineTransform.identity
@@ -652,7 +650,7 @@ class HomeViewController: AbstractController {
             self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore2ParallaxSpeed), y: 0)
             self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore3ParallaxSpeed), y: 0)
             self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.friendsParallaxSpeed), y: 0)
-            self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.friendsParallaxSpeed), y: 0)
+            //self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.friendsParallaxSpeed), y: 0)
             self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.loversParallaxSpeed), y: 0)
             self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.cloudsParallaxSpeed), y: 0)
@@ -682,7 +680,7 @@ class HomeViewController: AbstractController {
             self.ivShore2Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore2ParallaxSpeed), y: 0)
             self.ivShore3Shore.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore3ParallaxSpeed), y: 0)
             self.shore3Friends.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.friendsParallaxSpeed), y: 0)
-            self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.friendsParallaxSpeed), y: 0)
+            //self.ivFire.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.friendsParallaxSpeed), y: 0)
             self.shore2Lovers.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.loversParallaxSpeed), y: 0)
             self.ivSun.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.sunParallaxSpeed), y: 0)
             self.ivClouds.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.cloudsParallaxSpeed), y: 0)

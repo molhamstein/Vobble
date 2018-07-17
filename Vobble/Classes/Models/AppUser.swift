@@ -59,8 +59,9 @@ class AppUser: BaseModel, NSCopying {
     private let kUserNextRefill = "nextRefill"
     
     
-    private let kUserBottlesCount = "bottlesCount"
+    private let kUserBottlesCount = "bottles"
     private let kUserBottlesLeftToday = "bottlesCountToday"
+    private let kUserExtraBottles = "bottlesCountToday"
     
     private let kBottleFirstColor: String = "fcolor"
     private let kBottleSecondColor: String = "lcolor"
@@ -78,7 +79,7 @@ class AppUser: BaseModel, NSCopying {
     public var loginType: LoginType?
     public var status: Status?
     public var token: String?
-    public var bottlesCount: Int?
+    public var thrownBottlesCount: Int?
     public var bottlesLeftToThrowCount: Int?
     public var socialId: String?
     public var socialToken: String?
@@ -119,7 +120,7 @@ class AppUser: BaseModel, NSCopying {
             nextRefillDate = DateHelper.getDateFromISOString(nextRefill)
         }
         token = json[kUserTokenKey].string
-        bottlesCount = json[kUserBottlesCount].int
+        thrownBottlesCount = json[kUserBottlesCount].int
         bottlesLeftToThrowCount = json[kUserBottlesLeftToday].int
         
         socialId = json[kUserSocialId].string
@@ -168,7 +169,7 @@ class AppUser: BaseModel, NSCopying {
             dictionary[kUserTokenKey] = value
         }
         // bottle count
-        if let value = bottlesCount {
+        if let value = thrownBottlesCount {
             dictionary[kUserBottlesCount] = value
         }
         // bottles left to throw count
@@ -204,7 +205,7 @@ class AppUser: BaseModel, NSCopying {
         copy.loginType = loginType
         copy.status = status
         copy.token = token
-        copy.bottlesCount = bottlesCount
+        copy.thrownBottlesCount = thrownBottlesCount
         copy.bottlesLeftToThrowCount = bottlesLeftToThrowCount
         copy.socialId = socialId
         copy.socialToken = socialToken

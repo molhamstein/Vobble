@@ -538,7 +538,7 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Managers/SocialManager.swift"
-                  timestampString = "552471071.041113"
+                  timestampString = "552478874.632952"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
@@ -553,7 +553,7 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Managers/SocialManager.swift"
-                  timestampString = "552471071.043956"
+                  timestampString = "552478874.637867"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "124"
@@ -682,7 +682,7 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Managers/SocialManager.swift"
-                  timestampString = "552471071.084072"
+                  timestampString = "552478874.696612"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
@@ -697,7 +697,7 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Managers/SocialManager.swift"
-                  timestampString = "552471071.087186"
+                  timestampString = "552478874.700778"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "91"
@@ -792,11 +792,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
-            timestampString = "552471070.3589979"
+            timestampString = "552478872.04304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "747"
-            endingLineNumber = "747"
+            startingLineNumber = "745"
+            endingLineNumber = "745"
             landmarkName = "filterViewShowBuyFilterMessage(_:type:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -808,11 +808,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
-            timestampString = "552471070.359576"
+            timestampString = "552478872.044186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "752"
-            endingLineNumber = "752"
+            startingLineNumber = "750"
+            endingLineNumber = "750"
             landmarkName = "filterViewShowBuyFilterMessage(_:type:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -877,8 +877,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "254"
             endingLineNumber = "254"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1181,8 +1181,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
             endingLineNumber = "270"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1197,8 +1197,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "283"
             endingLineNumber = "283"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -76,7 +76,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     func configCell(userObj: AppUser) {
         userNameLabel.text = DataStore.shared.me?.userName
         lblBottlesLeftCount.text = "\(DataStore.shared.me?.bottlesLeftToThrowCount ?? 0)"
-        lblBottlesThrownCount.text = "\(DataStore.shared.me?.bottlesCount ?? 0)"
+        lblBottlesThrownCount.text = "\(DataStore.shared.me?.thrownBottlesCount ?? 0)"
         
         if let nextRefillTime = DataStore.shared.me?.nextRefillDate {
             let currentDate = Date().timeIntervalSince1970
