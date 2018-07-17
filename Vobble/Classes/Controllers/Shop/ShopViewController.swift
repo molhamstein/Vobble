@@ -8,8 +8,11 @@
 
 import Foundation
 import  Flurry_iOS_SDK
+import StoreKit
 
 class ShopViewController: AbstractController {
+    
+    var inAppPurchaseList = [SKProduct]()
     
     // MARK: Properties
     @IBOutlet weak var shopCollectionView: UICollectionView!
@@ -66,6 +69,16 @@ class ShopViewController: AbstractController {
         self.shopCollectionView.reloadData()
         
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
+        
+        if(SKPaymentQueue.canMakePayments()) {
+            print("IAP is enabled, loading")
+            let productID: NSSet = NSSet(array: ShopItemID.getListId())
+            let request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>)
+            request.delegate = self
+            request.start()
+        } else {
+            print("please enable IAPS")
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -257,9 +270,18 @@ extension ShopViewController: UICollectionViewDelegate {
             
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
-                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 1
+                
+                if obj.appleProduct != nil, let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
+                    
+                    let pay = SKPayment(product: selectedItem)
+                    SKPaymentQueue.default().add(self)
+                    SKPaymentQueue.default().add(pay as SKPayment)
                 }
+                
+                
+//                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+//                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 1
+//                }
             })
             alertController.addAction(ok)
             let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
@@ -331,5 +353,140 @@ extension ShopViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         
+    }
+}
+
+// MARK:- SKProductsRequestDelegate
+extension ShopViewController: SKProductsRequestDelegate {
+    
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        
+        print("product request")
+        
+        let myProduct = response.products
+        
+        for product in myProduct {
+            
+            print("product added")
+            print(product.productIdentifier)
+            print(product.localizedTitle)
+            print(product.localizedDescription)
+            print(product.price)
+            
+            inAppPurchaseList.append(product)
+        }
+    }
+    
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        
+        print("error")
+    }
+}
+
+// MARK: - SKPaymentTransactionObserver
+extension ShopViewController: SKPaymentTransactionObserver {
+    
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        
+        print("transactions restored")
+//        for transaction in queue.transactions {
+//
+//            let t: SKPaymentTransaction = transaction
+//
+//            let prodID = t.payment.productIdentifier as String
+//
+//            if prodID == ShopItemID.Bottels3.rawValue {
+//
+//                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+//                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 3
+//                } else {
+//
+//                    DataStore.shared.me?.bottlesLeftToThrowCount = 3
+//                }
+//            } else if prodID == ShopItemID.Bottels5.rawValue {
+//
+//                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+//                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 5
+//                } else {
+//
+//                    DataStore.shared.me?.bottlesLeftToThrowCount = 5
+//                }
+//            }
+//        }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        print("add payment")
+        
+//        for transaction: AnyObject in transactions {
+//
+//            let trans = transaction as! SKPaymentTransaction
+//            print(trans.error)
+//
+//            switch trans.transactionState {
+//
+//            case .purchased:
+//
+//                print("buy ok, unlock IAP HERE")
+//                print(p.productIdentifier)
+//
+//                let prodID = p.productIdentifier
+//
+//                if prodID == ShopItemID.Bottels3.rawValue {
+//
+//                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+//                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 3
+//                    } else {
+//
+//                        DataStore.shared.me?.bottlesLeftToThrowCount = 3
+//                    }
+//                } else if prodID == ShopItemID.Bottels5.rawValue {
+//
+//                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+//                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 5
+//                    } else {
+//
+//                        DataStore.shared.me?.bottlesLeftToThrowCount = 5
+//                    }
+//                }
+//
+//                switch prodID {
+//                case "seemu.iap.removeads":
+//                    print("remove ads")
+//                    removeAds()
+//                case "seemu.iap.addcoins":
+//                    print("add coins to account")
+//                    addCoins()
+//                default:
+//                    print("IAP not found")
+//                }
+//                queue.finishTransaction(trans)
+//            case .failed:
+//                print("buy error")
+//                queue.finishTransaction(trans)
+//                break
+//            default:
+//                print("Default")
+//                break
+//            }
+//        }
+    }
+}
+
+extension ShopViewController {
+    
+    func getProductById(itemId: String) -> SKProduct? {
+        
+        if self.inAppPurchaseList.count > 0 {
+            
+            for item in self.inAppPurchaseList {
+                
+                if item.productIdentifier == itemId {
+                    
+                    return item
+                }
+            }
+        }
+        return nil
     }
 }
