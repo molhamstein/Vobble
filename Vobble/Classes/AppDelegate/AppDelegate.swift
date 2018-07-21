@@ -34,12 +34,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // init notification
+        
+        let notificationOpenedBlock: OSHandleNotificationActionBlock = { result in
+            // This block gets called when the user reacts to a notification received
+            let payload: OSNotificationPayload? = result?.notification.payload
+            
+            print("Message = \(payload!.body)")
+            print("badge number = \(payload?.badge ?? 0)")
+            print("notification sound = \(payload?.sound ?? "None")")
+            
+            if let additionalData = result!.notification.payload!.additionalData {
+                print("additionalData = \(additionalData)")
+                if let chatId = additionalData["chatId"] as? String {
+                    
+                }
+                
+                if let actionSelected = payload?.actionButtons {
+                    print("actionSelected = \(actionSelected)")
+                }
+                
+                // DEEP LINK from action buttons
+                if let actionID = result?.action.actionID {
+                    
+                    // For presenting a ViewController from push notification action button
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let instantiateRedViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RedViewControllerID") as UIViewController
+                    let instantiatedGreenViewController: UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "GreenViewControllerID") as UIViewController
+                    self.window = UIWindow(frame: UIScreen.main.bounds)
+                    
+                    print("actionID = \(actionID)")
+                    
+                    if actionID == "id2" {
+                        print("do something when button 2 is pressed")
+                        self.window?.rootViewController = instantiateRedViewController
+                        self.window?.makeKeyAndVisible()
+                        
+                        
+                    } else if actionID == "id1" {
+                        print("do something when button 1 is pressed")
+                        self.window?.rootViewController = instantiatedGreenViewController
+                        self.window?.makeKeyAndVisible()
+                        
+                    }
+                }
+            }
+        }
+        
+        
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
         OneSignal.initWithLaunchOptions(launchOptions,
                                         appId: AppConfig.oneSingleID,
-                                        handleNotificationAction: nil,
+                                        handleNotificationAction: notificationOpenedBlock,
                                         settings: onesignalInitSettings)
         
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;

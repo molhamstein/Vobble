@@ -14,10 +14,10 @@
 "Ok"                                    = "Ok";
 
 // Generic erros
-"ERROR_NO_CONNECTION"                   = "No internet connection, please check your phone settings";
+"ERROR_NO_CONNECTION"                   = "No internet connection, please check your connection";
 "ERROR_SIGNUP_EMAIL_EXISTS"             = "Email address already registered";
 "ERROR_SIGNUP_EMAIL_INVALID"            = "Please enter a valid email address";
-"ERROR_SIGNIN_WRONG_CREDIST"     	    = "Please check your email and password";
+"ERROR_SIGNIN_WRONG_CREDIST"            = "Please check your email and password";
 "ERROR_RESET_WRONG_EMAIL"               = "Email address is not registered before";
 "ERROR_MISSING_INPUT_DATA"              = "Please fill in all required information";
 "ERROR_INVALID_VERIFY_CODE"             = "Verification code is not valid";
@@ -29,7 +29,7 @@
 
 // Connection errors messages
 "ERROR_NOT_AUTHORIZED"                  = "You are not authorized to access this data, please login again";
-"ERROR_UNKNOWN"                         = "Unknown error occured";
+"ERROR_UNKNOWN"                         = "Unknown error occurred";
 "ERROR_SOCIAL_FACEBOOK"                 = "Facebook login failed, please try again";
 "ERROR_SOCIAL_TWITTER"                  = "Twitter login failed, please try again";
 "ERROR_SOCIAL_INSTAGRAM"                = "Instagram login failed, please try again";
@@ -37,7 +37,7 @@
 
 // login screen
 "LOGIN_EMAIL_TITLE"                     = "EMAIL";
-"LOGIN_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"LOGIN_EMAIL_PLACEHOLDER"               = "Viboemail@gmail.com";
 "LOGIN_PSW_TITLE"                       = "PASSWORD";
 "LOGIN_PSW_PLACEHOLDER"                 = "********";
 "LOGIN_FORGOT_PSW"                      = "Forgot Password?";
@@ -48,9 +48,9 @@
 
 // Signup screen
 "SIGNUP_EMAIL_TITLE"                     = "EMAIL";
-"SIGNUP_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"SIGNUP_EMAIL_PLACEHOLDER"               = "Vibomail@gmail.com";
 "SIGNUP_NAME_TITLE"                      = "USERNAME";
-"SIGNUP_NAME_PLACEHOLDER"                = "Vobbler";
+"SIGNUP_NAME_PLACEHOLDER"                = "Viboer";
 "SIGNUP_PSW_TITLE"                       = "PASSWORD";
 "SIGNUP_PSW_PLACEHOLDER"                 = "********";
 "SIGNUP_SIGNUP_BTN"                      = "Signup";
@@ -64,13 +64,16 @@
 
 // Start screen
 "START_EMAIL_TITLE"                     = "ENTER EMAIL";
-"START_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"START_EMAIL_PLACEHOLDER"               = "Vibo@gmail.com";
 "START_PASSWORD_TITLE"                  = "ENTER PASSWORD";
 "START_PASSWORD_PLACEHOLDER"            = "********";
 "START_FORGET_PASSWORD"                 = "Forget password?";
 "START_NORMAL_LOGIN"                    = "LOG IN";
-"START_SOCIAL_LOGIN"                    = "Social Log In";
+"START_SOCIAL_LOGIN"                    = "Social Network Log In";
 "START_CREATE_ACCOUNT"                  = "CREATE AN ACCOUNT";
+
+// forgot password
+"FORGOT_PASSWORD_LINK_SENT"             = "We have sent you a link to your email to reset your password";
 
 // Date ago
 "YEARS_AGO"                             = "%@ years ago";
@@ -117,32 +120,32 @@
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "Are you sure you want to logout?";
 
 // home
-"main_shore"                            = "Main shore";
-"love_shore"                            = "Love shore";
-"fadfed_shore"                          = "FadFed shore";
-"THROW_BOTTLE_WARNING"                  = "you dont have bottles in Bottles Package";
+"main_shore"                            = "Explore";
+"love_shore"                            = "Dating";
+"fadfed_shore"                          = "Say your mind";
+"THROW_BOTTLE_WARNING"                  = "you don’t have bottles";
 "THROW_BOTTLE_WARNING_ACTION"           = "Get Bottles";
 "HOME_THROW_BTN"                        = "Throw Bottle";
 "HOME_FIND_BTN"                         = "Find Bottle";
 "HOME_MY_BOTTLES_BTN"                   = "My Bottles";
 
 // chat
-"UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? you will no longer could upload your video.";
-"CHAT_REPLY_SENT_MSG"                   = "Your Reply was sent to the bottle owner, when he sees your reply you will 24 hours to chat together";
+"UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? your video will not be uploaded.";
+"CHAT_REPLY_SENT_MSG"                   = "Your Reply was sent to the bottle owner, when he sees your reply you guys can chat for 24 hours";
 "CHAT_RECORDING"                        = "Recording....";
 
 // filter
-"FEMALE"                                = "female";
-"MALE"                                  = "male";
-"ALL_GENDER"                            = "all";
-"BUY_FILTER_WARNING"                    = "you should go to shop to buy this filter";
+"FEMALE"                                = "Female";
+"MALE"                                  = "Male";
+"ALL_GENDER"                            = "All";
+"BUY_FILTER_WARNING"                    = "Go to shop to buy this filter";
 "GO_TO_SHOP"                            = "Go To Shop";
 "FILTERS_PANEL_GENDER_TITLE"            = "Filter by Gender";
 "FILTERS_PANEL_COUNTRY_TITLE"           = "Filter by Country";
 "FILTERS_PANEL_GENDER_BUY_BTN"          = "Buy Filter";
 "FILTERS_PANEL_COUNTRY_BUY_BTN"         = "Buy Filter";
 "FILTERS_PANEL_FILTER_NOW_BTN"          = "Find Bottle Now";
-"FILTERS_PANEL_PLACEHOLDER_GENDER"     = "Want to find bottles from males or females only?";
+"FILTERS_PANEL_PLACEHOLDER_GENDER"      = "Want to find bottles from males or females only?";
 "FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "Find Bottles from specific country";
 
 
@@ -156,53 +159,53 @@
 "SETTINGS_LOGOUT_MSG"                   = "Are you sure you want to logout?";
 "SETTINGS_SHARE_MSG"                    = "Come over and try this cool App, \n http://brain-socket.com";
 
-"ABOUT_TITLE"                          = "About us";
-"TERMS_TITLE"                          = "Terms of Service";
+"ABOUT_TITLE"                           = "About us";
+"TERMS_TITLE"                           = "Terms of Service";
 
 // findBottle screen
-"REPORT"                               = "report";
-"BLOCK_USER"                           = "block user";
-"IGNORE"                               = "ignore";
-"REPLY"                                = "reply";
-"SPAM"                                 = "spam";
-"OFFENDING"                            = "offending";
-"SEXUAL_CONTENT"                       = "sexual content";
-"BLOCK_USER_WARNING"                   = "Are you sure you dont want to see content from %@ anymore?";
-"REPORT_SUCCESS_MSG"                   = "Ok We Got that one, Our team will be cehecking it";
-"BLOCK_USER_SUCCESS"                   = "We will make sure %@ will not bother you anymore";
+"REPORT"                               = "Report";
+"BLOCK_USER"                           = "Block user";
+"IGNORE"                               = "Ignore";
+"REPLY"                                = "Reply";
+"SPAM"                                 = "Spam";
+"OFFENDING"                            = "Offending";
+"SEXUAL_CONTENT"                       = "Sexual content";
+"BLOCK_USER_WARNING"                   = "Are you sure you don’t want to see Videos from %@ anymore?";
+"REPORT_SUCCESS_MSG"                   = "Ok We Got that, Our team will check..";
+"BLOCK_USER_SUCCESS"                   = "We will make sure %@ will never bother you again";
 
 // shop
-"BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item and pay %@ ?";
-"CANT_BUY_ITEM_WARNING"                = "you already have an active filter of this type";
+"BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item %@ ?";
+"CANT_BUY_ITEM_WARNING"                = "You have an active filter from the same type";
 "TAB_BOTTLES"                          = "Bottles";
 "TAB_GENDER"                           = "Gender Filters";
 "TAB_COUNTRY"                          = "Country Filters";
-"SHOP_TITLE"                           = "The Shop";
+"SHOP_TITLE"                           = "Shop";
 "SHOP_BTN_BUY"                         = "Buy Now";
 
 // My bottles
 "MY_BOTTLES_TITLE"                     = "My Bottles";
 "MY_BOTTLES_LEFT_TITLE"                = "You Have";
 "MY_BOTTLES_LEFT_SUBTITLE"             = "Bottles";
-"MY_BOTTLES_THROWN_TITLE"              = "You Throwed";
+"MY_BOTTLES_THROWN_TITLE"              = "You threw";
 "MY_BOTTLES_THROWN_SUBTITLE"           = "Bottles";
 "MY_BOTTLES_REPLIES_TITLE"             = "My Replies";
 "MY_BOTTLES_BOTTLES_TITLE"             = "My Bottles";
-"MY_BOTTLES_NEXT_REFILL"               = "Next refill in:";
-"MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "Peer Didn't reply yet";
+"MY_BOTTLES_NEXT_REFILL"               = "3 free bottles after:";
+"MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "%@ Didn't reply yet";
 "MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "You Didn't reply yet";
 "MY_BOTTLES_BTN_CHAT"                  = "Chat Now";
 "MY_BOTTLES_TIME_LEFT"                 = "Time left:";
 "MY_BOTTLES_EMPTY_PLACEHOLDER"         = "No Conversations Found!! \n go ahead and reply to a bottle";
 
 // rate us
-"RATE_US_TITLE"                         = "Liked Vibo?";
-"RATE_US_MSG"                           = "If you like Vibo give us some stars on iTunes store, it means a lot to us ;)";
+"RATE_US_TITLE"                         = "do you Like Vibo?";
+"RATE_US_MSG"                           = "If you like Vibo give us 5 stars on iTunes store, it means a lot to us ;)";
 "RATE_US_BTN"                           = "Rate Vibo on Itunes";
 "RATE_US_SKIP"                          = "No, I won't help";
 
 // notifications
-"NOTIFICATION_NEW_REPLY"                = "Hey, looks like %@ has found your bottle, come in and check his reply";
-"NOTIFICATION_CHAT_IS_ACTIVE"           = " %@ has Seen your reply, you can now chat together for 24 hours";
-"NOTIFICATION_NEW_MSG"                  = "seems like %@ has sent you a new message, dont keep him waiting";
+"NOTIFICATION_NEW_REPLY"                = "Hey, looks like %@ has found your bottle, come to check his reply";
+"NOTIFICATION_CHAT_IS_ACTIVE"           = " %@ has Seen your reply,you have 24h private chat, hurry!";
+"NOTIFICATION_NEW_MSG"                  = "Cool, %@ has sent you a new message";
 

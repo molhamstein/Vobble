@@ -49,6 +49,15 @@ class ActionShowProfile: Action {
     }
 }
 
+class ActionOpenChat{
+    class func execute(chatId: String, conversation: Conversation?) {
+        let chatViewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ChatViewControllerID") as! ChatViewController
+        chatViewController.conversationId = chatId
+        chatViewController.conversationOriginalObject = conversation
+        UIApplication.pushOrPresentViewController(viewController: chatViewController, animated: true)
+    }
+}
+
 class ActionRateUs {
     class func execute(hostViewController: UIViewController!) {
         if #available( iOS 10.3,*){

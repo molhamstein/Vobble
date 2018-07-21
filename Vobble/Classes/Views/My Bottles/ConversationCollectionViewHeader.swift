@@ -35,7 +35,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     @IBOutlet weak var lblBottlesThrownCountTitle: UILabel!
     @IBOutlet weak var lblBottlesThrownCountSubTitle: UILabel!
     
-    public var convVC: ConversationViewController?
+    public weak var convVC: ConversationViewController?
     
    
     override func awakeFromNib() {

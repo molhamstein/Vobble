@@ -66,7 +66,7 @@ class ConversationCollectionViewCell: UICollectionViewCell {
             if convObj.isMyBottle {
                 timerLabel.text = "MY_BOTTLES_YOU_DIDNT_REPLY_YET".localized
             } else {
-                timerLabel.text = "MY_BOTTLES_PEER_DIDNT_REPLY_YET".localized
+                timerLabel.text = String.init(format: "MY_BOTTLES_PEER_DIDNT_REPLY_YET".localized, convObj.getPeer?.userName ?? "")
             }
             timeLeftTitleLabel.text = ""
         }

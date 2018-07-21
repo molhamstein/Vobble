@@ -288,7 +288,7 @@ class HomeViewController: AbstractController {
 //        }, completion: nil)
         
         
-        let maxYTransaltion = CGFloat(120.0)
+        let maxYTransaltion = CGFloat(80.0)
         
         let randX = CGFloat( arc4random_uniform(UInt32(300)) )
         let randY = CGFloat( arc4random_uniform(UInt32(maxYTransaltion)) )
@@ -352,7 +352,12 @@ class HomeViewController: AbstractController {
 
     func seaTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         //let tappedImage = tapGestureRecognizer.view as! UIImageView
-        self.findBottlePressed(ivSea)
+        // make sure the tap is in the middle section of the view "where the sea is"
+        let translation: CGPoint = tapGestureRecognizer.location(in: self.view)
+        let tapLocationRatio = translation.y / self.view.frame.height
+        if tapLocationRatio > 0.25 && tapLocationRatio < 0.6 {
+            self.findBottlePressed(ivSea)
+        }
     }
     
     @IBAction func findBottlePressed(_ sender: Any) {
@@ -460,11 +465,16 @@ class HomeViewController: AbstractController {
     }
     
     func popAnimation(view: UIView) {
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.repeat, .autoreverse], animations: {
+        
+        view.transform = CGAffineTransform.identity.scaledBy(x: 1.15, y: 1.15)
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.repeat, .autoreverse], animations: {
                 UIView.setAnimationRepeatCount(2)
-                view.transform = CGAffineTransform.identity.scaledBy(x: 1.15, y: 1.15)
+                view.transform = CGAffineTransform.identity
         }) { (done) in
-            view.transform = CGAffineTransform.identity
+//            UIView.animate(withDuration: 2.0, delay: 0.0, options: [], animations: {
+//                view.transform = CGAffineTransform.identity
+//            }) { (done) in
+//            }
         }
     }
 

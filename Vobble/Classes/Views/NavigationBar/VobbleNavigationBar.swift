@@ -20,7 +20,7 @@ class VobbleNavigationBar : AbstractNibView {
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var navTitle: UILabel!
     @IBOutlet weak var rightIcon: UIButton!
-    public var viewcontroller : UIViewController?
+    public weak var viewcontroller : UIViewController?
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     var mode:NavBarMode = .normal

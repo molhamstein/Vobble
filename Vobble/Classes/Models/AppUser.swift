@@ -59,9 +59,9 @@ class AppUser: BaseModel, NSCopying {
     private let kUserNextRefill = "nextRefill"
     
     
-    private let kUserBottlesCount = "bottles"
-    private let kUserBottlesLeftToday = "bottlesCountToday"
-    private let kUserExtraBottles = "bottlesCountToday"
+    private let kUserBottlesCount = "totlalBottlesThrown"
+    private let kUserBottlesLeftToday = "bottlesCount"
+    private let kUserExtraBottles = "extraBottlesCount"
     
     private let kBottleFirstColor: String = "fcolor"
     private let kBottleSecondColor: String = "lcolor"

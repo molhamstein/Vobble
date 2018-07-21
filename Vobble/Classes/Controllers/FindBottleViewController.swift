@@ -107,7 +107,7 @@ class FindBottleViewController: AbstractController {
             videoView.playButtonPressed()
         }
         
-        let blockMessage = String(format: "BLOCK_USER_WARNING".localized, "\(DataStore.shared.me?.userName ?? " ")")
+        let blockMessage = String(format: "BLOCK_USER_WARNING".localized, "\(self.bottle?.owner?.userName ?? " ")")
         
         let alertController = UIAlertController(title: "", message: blockMessage , preferredStyle: .alert)
         //We add buttons to the alert controller by creating UIAlertActions:

@@ -432,7 +432,7 @@ class ApiManager: NSObject {
     /// User forget password
     func forgetPassword(email: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
         // url & parameters
-        let signInURL = "\(baseURL)auth/forgot_password"
+        let signInURL = "\(baseURL)/users/reset"
         let parameters : [String : Any] = [
             "email": email,
         ]
@@ -615,15 +615,21 @@ class ApiManager: NSObject {
                             if responseObject.result.isSuccess {
                                         
                                 let resJson = JSON(responseObject.result.value!)
-                                if let resArray = resJson.array {
-                                    var files: [Media] = []
-                                    for  i in 0 ..< resArray.count {
-                                        let media = Media(json:resArray[i])
-                                        media.type = mediaType
-                                        files.append(media)
+                                if let code = responseObject.response?.statusCode, code >= 400 {
+                                    let serverError = ServerError(json: resJson["error"]) ?? ServerError.unknownError
+                                    completionBlock([] , serverError.type.errorMessage)
+                                } else {
+                                    if let resArray = resJson.array {
+                                        var files: [Media] = []
+                                        for  i in 0 ..< resArray.count {
+                                            let media = Media(json:resArray[i])
+                                            media.type = mediaType
+                                            files.append(media)
+                                        }
+                                        completionBlock(files, nil)
+                                    } else {
+                                        completionBlock([] , ServerError.unknownError.type.errorMessage)
                                     }
-                                    completionBlock(files, nil)
-                                 
                                 }
                             } else { // failure
                                         
@@ -811,7 +817,7 @@ class ApiManager: NSObject {
         }
     }
     
-    // MARK: -  find bottles
+    // MARK: -  p  bottles
     func findBottle(gender:String, countryCode:String, shoreId:String, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
         
 //        var findhBottleURL = "\(baseURL)/bottles?filter[where][ownerId][neq]="
@@ -967,7 +973,7 @@ struct ServerError {
         case missingInputData = 104
         case expiredVerifyCode = 107
         case invalidVerifyCode = 108
-        case userNotFound = 109
+        case userNotFound = 404
         
         /// Handle generic error messages
         /// **Warning:** it is not localized string

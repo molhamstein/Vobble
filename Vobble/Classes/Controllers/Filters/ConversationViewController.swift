@@ -58,6 +58,10 @@ class ConversationViewController: AbstractController {
     }
     
     deinit {
+        
+    }
+    
+    func releaseFirebaseReferences(){
         if let refHandle = conversationRefHandle {
             conversationRef.removeObserver(withHandle: refHandle)
         }
@@ -177,7 +181,10 @@ extension ConversationViewController: UICollectionViewDelegate {
             
         }
         
-        self.performSegue(withIdentifier: "goToChat", sender: conversation)
+        //self.performSegue(withIdentifier: "goToChat", sender: conversation)
+        if let chatID = conversation.idString {
+            ActionOpenChat.execute(chatId: chatID, conversation: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -192,55 +199,57 @@ extension ConversationViewController: UICollectionViewDelegate {
            
             let nav = segue.destination as! UINavigationController
             let chatVc = nav.topViewController as! ChatViewController
-            
-            let convRef = conversationRef.child(conversation.idString!)
-            
-            chatVc.senderDisplayName = conversation.getPeer?.userName
-            
-            if tap == .myBottles {
-                chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
-                //if is_seen == false --> hide chat tool bar so we can't send any message
-                chatVc.isHideInputToolBar = false
-                
-                if let is_seen = conversation.is_seen, is_seen == 0 {
-                    convRef.updateChildValues(["is_seen": 1])
-                    convRef.updateChildValues(["startTime": ServerValue.timestamp()])
-                    chatVc.seconds = 24.0*60.0*60.0
-                    
-                    // send push notification to peer to let him know that the chat is open now
-                    let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
-                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: conversation.getPeer!, completionBlock: { (success, error) in })
-                }
-                
-            } else if tap == .myReplies {
-                chatVc.convTitle = conversation.user?.userName ?? ""
-                
-            }
-//            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
-           
-            if let is_seen = conversation.is_seen, is_seen == 1 {
-                
-                chatVc.isHideInputToolBar = false
-                if let fTime = conversation.finishTime {
-                    let currentDate = Date().timeIntervalSince1970 * 1000
-                    chatVc.seconds = (fTime - currentDate)/1000.0
-                }
-            }
-            
-            if let userName = conversation.getPeer?.userName {
-                chatVc.navUserName = userName
-            }
-            chatVc.conversationOriginalObject = conversation
-            
-            if let shore_id = conversation.bottle?.shoreId {
-                for sh in  DataStore.shared.shores {
-                    if sh.shore_id == shore_id {
-                        chatVc.navShoreName = sh.name ?? ""
-                        break
-                    }
-                }
-            }
-            chatVc.conversationRef = convRef
+            //chatVc.conversationOriginalObject = conversation
+            chatVc.conversationId = conversation.idString
+//
+//            let convRef = conversationRef.child(conversation.idString!)
+//
+//            chatVc.senderDisplayName = conversation.getPeer?.userName
+//
+//            if tap == .myBottles {
+//                chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
+//                //if is_seen == false --> hide chat tool bar so we can't send any message
+//                chatVc.isHideInputToolBar = false
+//
+//                if let is_seen = conversation.is_seen, is_seen == 0 {
+//                    convRef.updateChildValues(["is_seen": 1])
+//                    convRef.updateChildValues(["startTime": ServerValue.timestamp()])
+//                    chatVc.seconds = 24.0*60.0*60.0
+//
+//                    // send push notification to peer to let him know that the chat is open now
+//                    let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
+//                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: conversation.getPeer!, completionBlock: { (success, error) in })
+//                }
+//
+//            } else if tap == .myReplies {
+//                chatVc.convTitle = conversation.user?.userName ?? ""
+//
+//            }
+////            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
+//
+//            if let is_seen = conversation.is_seen, is_seen == 1 {
+//
+//                chatVc.isHideInputToolBar = false
+//                if let fTime = conversation.finishTime {
+//                    let currentDate = Date().timeIntervalSince1970 * 1000
+//                    chatVc.seconds = (fTime - currentDate)/1000.0
+//                }
+//            }
+//
+//            if let userName = conversation.getPeer?.userName {
+//                chatVc.navUserName = userName
+//            }
+//            chatVc.conversationOriginalObject = conversation
+//
+//            if let shore_id = conversation.bottle?.shoreId {
+//                for sh in  DataStore.shared.shores {
+//                    if sh.shore_id == shore_id {
+//                        chatVc.navShoreName = sh.name ?? ""
+//                        break
+//                    }
+//                }
+//            }
+//            chatVc.conversationRef = convRef
         }
     }
     
@@ -355,64 +364,85 @@ extension ConversationViewController: UIImagePickerControllerDelegate, UINavigat
 
 extension ConversationViewController {
     
+    func onfetchedConversation (conversation: Conversation) {
+        
+        if let is_seen = conversation.is_seen, is_seen == 1 {
+            
+            if let startTime = conversation.startTime {
+                conversation.finishTime = startTime + (24*60*60*1000)
+            }
+        } else {
+            conversation.isActive = false
+        }
+        
+        if let is_active = conversation.isActive, !is_active {
+            //(My Bottles)
+            if conversation.isMyBottle {
+                print("my bottles")
+                DataStore.shared.myBottles.append(conversation)
+                DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
+                    // show open chats first
+                    // if chat is not open yet sort them by date from newest to olders
+                    if obj1.is_seen! != obj2.is_seen! {
+                        return (obj1.is_seen! >= 1)
+                    } else {
+                        return (obj1.createdAt! > obj2.createdAt!)
+                    }
+                })
+                // (My replies)
+            } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.user?.objectId, currentUserID == convBottleOwnerID {
+                print("my replies")
+                DataStore.shared.myReplies.append(conversation)
+                DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
+                    if obj1.is_seen! != obj2.is_seen! {
+                        return (obj1.is_seen! >= 1)
+                    } else {
+                        return (obj1.createdAt! > obj2.createdAt!)
+                    }
+                })
+            }
+        }
+    }
+    
     fileprivate func observeConversation() {
         // We can use the observe method to listen for new
         // conversations being written to the Firebase DB
         
         self.navigationView.showProgressIndicator(show: true)
-        conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
-                
+        
+        let childref = Database.database().reference().child("conversations")
+        childref.queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value, with: { snapshot in
+            print(snapshot)
             
-                let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-                conversation.idString = snapshot.key
-                if let is_seen = conversation.is_seen, is_seen == 1 {
-                    
-                    if let startTime = conversation.startTime {
-                        conversation.finishTime = startTime + (24*60*60*1000)
-                    }
-                } else {
-                    conversation.isActive = false
-                }
-                
-                if let is_active = conversation.isActive, !is_active {
-                    //(My Bottles)
-                    if conversation.isMyBottle {
-                        print("my bottles")
-                        DataStore.shared.myBottles.append(conversation)
-                        DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                            // show open chats first
-                            // if chat is not open yet sort them by date from newest to olders
-                            if obj1.is_seen! != obj2.is_seen! {
-                                return (obj1.is_seen! >= 1)
-                            } else {
-                                return (obj1.createdAt! > obj2.createdAt!)
-                            }
-                        })
-                        
-                        self.refreshView()
-                    } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.user?.objectId, currentUserID == convBottleOwnerID { // (My replies)
-                        print("my replies")
-                        DataStore.shared.myReplies.append(conversation)
-                        DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                            if obj1.is_seen! != obj2.is_seen! {
-                                return (obj1.is_seen! >= 1)
-                            } else {
-                                return (obj1.createdAt! > obj2.createdAt!)
-                            }
-                        })
-                        self.refreshView()
-                    }
-                }
+            let enumerator = snapshot.children
+            while let rest = enumerator.nextObject() as? DataSnapshot {
+                //this is 1 single message here
+                let values = rest.value as? NSDictionary
+                let conversation = Conversation(json: JSON(rest.value as! Dictionary<String, AnyObject>))
+                conversation.idString = rest.key
+                self.onfetchedConversation(conversation: conversation)
                 self.navigationView.showProgressIndicator(show: false)
-            }) { (error) in
-                print("****************")
-                print(error)
-                self.navigationView.showProgressIndicator(show: false)
-                self.emptyPlaceHolderView.isHidden = true
             }
+            self.refreshView()
+        })
+        
+        
+//        self.navigationView.showProgressIndicator(show: true)
+//        conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
+//
+//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+//            conversation.idString = snapshot.key
+//            self.onfetchedConversation(conversation: conversation)
+//
+//            self.navigationView.showProgressIndicator(show: false)
+//        }) { (error) in
+//            print("****************")
+//            print(error)
+//            self.navigationView.showProgressIndicator(show: false)
+//            self.emptyPlaceHolderView.isHidden = true
+//        }
         
         conversationRef.observe(.childChanged, with: { (snapshot) in
-        
             
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             conversation.idString = snapshot.key

@@ -37,6 +37,9 @@ final class ChatViewController: JSQMessagesViewController {
     var conversationRef: DatabaseReference?
     var conversationOriginalObject: Conversation?
     
+    // passed by deeplinking
+    var conversationId: String?
+    
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
 //    fileprivate lazy var storageRef: StorageReference = Storage.storage().reference(forURL: "gs://vobble-1521577974841.appspot.com")
     //  private lazy var userIsTypingRef: DatabaseReference = self.conversationRef!.child("typingIndicator").child(self.senderId)
@@ -122,11 +125,22 @@ final class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.senderId = FIRAuth.auth()?.currentUser?.uid
+        
         if let userId = DataStore.shared.me?.objectId {
             self.senderId = "\(userId)"
+            self.senderDisplayName = ""
+        } else {
+            self.dismiss(animated: true, completion: nil)
         }
         customNavBar.delegate = self
-        observeMessages()
+        
+        if let conv = conversationOriginalObject {
+            initWithConversation(conversation: conv)
+            observeMessages()
+        } else if let convId = conversationId {
+            fetchConversationByid(convId: convId)
+        }
+        
         self.navigationItem.leftBarButtonItem = navBackButton
         // No avatars
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
@@ -147,7 +161,36 @@ final class ChatViewController: JSQMessagesViewController {
         
         if isInitialised == false {
             
-            
+            if customNavBar.superview == nil {
+                // re-add subiews connected from storyboard as the JSQM messages framewordk detaches them
+                customNavBar.frame = CGRect(x: 0, y: -10, width: self.view.frame.width, height: 110)
+                self.view.addSubview(customNavBar)
+                
+                // init nav bar
+                initNavBar()
+                
+                // record audio view
+                lblRecording.font = AppFonts.bigBold
+                lblRecording.text = "CHAT_RECORDING".localized
+                self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: self.view.frame.width, height: self.view.frame.height - self.inputToolbar.frame.height)
+                self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 10, width: 120, height: 120)
+                self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
+                self.ivRecordingIcon.center = self.recordButton.center
+                self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
+                self.view.addSubview(self.recordButtonContainer)
+                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
+                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0).isActive = true
+                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0).isActive = true
+                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height - inputToolbar.frame.height).isActive = true
+                
+                self.recordButtonContainer.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+                //            recordButtonContainer.setNeedsLayout()
+                //            recordButton.setNeedsLayout()
+                //self.view.layoutIfNeeded()
+                //            recordButtonContainer.layoutIfNeeded()
+                //            recordButton.layoutIfNeeded()
+                recordButtonContainer.isHidden = true
+            }
             isInitialised = true
         }
     }
@@ -155,45 +198,7 @@ final class ChatViewController: JSQMessagesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if customNavBar.superview == nil {
-            // re-add subiews connected from storyboard as the JSQM messages framewordk detaches them
-            customNavBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 110)
-            self.view.addSubview(customNavBar)
-            
-            // init nav bar
-//            customNavBar.title = convTitle ?? ""
-            if seconds != 0.0 {
-                customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
-            } else {
-                customNavBar.timerLabel.isHidden = true
-                customNavBar.leftLabel.isHidden = true
-            }
-            customNavBar.shoreNameLabel.text = navShoreName
-            customNavBar.userNameLabel.text = navUserName
-            customNavBar.viewcontroller = self
-            
-            // record audio view
-            lblRecording.font = AppFonts.bigBold
-            lblRecording.text = "CHAT_RECORDING".localized
-            self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: self.view.frame.width, height: self.view.frame.height - self.inputToolbar.frame.height)
-            self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 10, width: 120, height: 120)
-            self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
-            self.ivRecordingIcon.center = self.recordButton.center
-            self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
-            self.view.addSubview(self.recordButtonContainer)
-            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
-            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0).isActive = true
-            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0).isActive = true
-            //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height - inputToolbar.frame.height).isActive = true
-            
-            self.recordButtonContainer.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
-            //            recordButtonContainer.setNeedsLayout()
-            //            recordButton.setNeedsLayout()
-            //self.view.layoutIfNeeded()
-            //            recordButtonContainer.layoutIfNeeded()
-            //            recordButton.layoutIfNeeded()
-            recordButtonContainer.isHidden = true
-        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -203,6 +208,10 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     deinit {
+        disposeFirebaseReference()
+    }
+    
+    func disposeFirebaseReference() {
         if let refHandle = newMessageRefHandle {
             messageRef.removeObserver(withHandle: refHandle)
         }
@@ -211,8 +220,80 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    func initNavBar() {
+//        customNavBar.title = convTitle ?? ""
+        if seconds != 0.0 {
+            customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
+        } else {
+            customNavBar.timerLabel.isHidden = true
+            customNavBar.leftLabel.isHidden = true
+        }
+        customNavBar.shoreNameLabel.text = navShoreName
+        customNavBar.userNameLabel.text = navUserName
+        customNavBar.viewcontroller = self
+    }
+    
+    
+    // init
+    // this method is required
+    func initWithConversation (conversation: Conversation) {
+        let chatVc = self
+        
+        let convRef = Database.database().reference().child("conversations").child(conversation.idString ?? "")
+        
+        chatVc.senderDisplayName = conversation.getPeer?.userName
+        
+        if conversation.isMyBottle {
+            chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
+            //if is_seen == false --> hide chat tool bar so we can't send any message
+            chatVc.isHideInputToolBar = false
+            
+            if let is_seen = conversation.is_seen, is_seen == 0 {
+                convRef.updateChildValues(["is_seen": 1])
+                convRef.updateChildValues(["startTime": ServerValue.timestamp()])
+                chatVc.seconds = 24.0*60.0*60.0
+                
+                // send push notification to peer to let him know that the chat is open now
+                let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
+                ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: conversation.getPeer!, completionBlock: { (success, error) in })
+            }
+            
+        } else {
+            chatVc.convTitle = conversation.user?.userName ?? ""
+        }
+        //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
+        
+        if let is_seen = conversation.is_seen, is_seen == 1 {
+            
+            chatVc.isHideInputToolBar = false
+            if let fTime = conversation.finishTime {
+                let currentDate = Date().timeIntervalSince1970 * 1000
+                chatVc.seconds = (fTime - currentDate)/1000.0
+            }
+        }
+        
+        if let userName = conversation.getPeer?.userName {
+            chatVc.navUserName = userName
+        }
+        
+        
+        if let shore_id = conversation.bottle?.shoreId {
+            for sh in  DataStore.shared.shores {
+                if sh.shore_id == shore_id {
+                    chatVc.navShoreName = sh.name ?? ""
+                    break
+                }
+            }
+        }
+        chatVc.conversationRef = convRef
+        chatVc.conversationOriginalObject = conversation
+        chatVc.conversationId = conversationOriginalObject?.idString
+    }
+    
+    
     func backButtonAction(_ sender: AnyObject) {
         //        _ = self.navigationController?.popViewController(animated: true)
+        disposeFirebaseReference()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -285,7 +366,6 @@ final class ChatViewController: JSQMessagesViewController {
                     let images = [photo]
                     let photosViewController = NYTPhotosViewController(photos: images)
                     present(photosViewController, animated: true, completion: nil)
-                    
                 }
             }
             // Video Message
@@ -299,99 +379,159 @@ final class ChatViewController: JSQMessagesViewController {
                     previewControl.type = .VIDEO
                     previewControl.videoUrl = NSURL(string: videoUrl)!
                     
-                    self.navigationController?.pushViewController(previewControl, animated: false)
+                    present(previewControl, animated: false)
                 }
             }
         }
     }
     
+    func fetchConversationByid (convId: String) {
+//        messageRef = Database.database().reference().child("conversations").child(convId)
+        
+        
+//        let childref = Database.database().reference().child("conversations")
+//        childref.queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value, with: { snapshot in
+//            print(snapshot)
+//
+//            let enumerator = snapshot.children
+//            while let rest = enumerator.nextObject() as? DataSnapshot {
+//                //this is 1 single message here
+//                let values = rest.value as? NSDictionary
+//                let conversation = Conversation(json: JSON(rest.value as! Dictionary<String, AnyObject>))
+//                conversation.idString = rest.key
+//            }
+//        })
+        
+        
+        messageRef = Database.database().reference().child("conversations").child(convId)
+        messageRef.observeSingleEvent(of: .value, with: { snapshot in
+            print(snapshot)
+            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+            self.conversationOriginalObject = conversation
+            self.conversationOriginalObject?.idString = snapshot.key
+            self.initWithConversation(conversation: conversation)
+            self.observeMessages()
+            self.initNavBar()
+        })
+        
+        
+        //let values = convRef.value as? NSDictionary
+        //print(convRef)
+        
+        
+//        childref.queryEq.observeSingleEvent(of: .value, with: { snapshot in
+//            print(snapshot)
+//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+//            self.conversationOriginalObject = conversation
+//            self.conversationOriginalObject?.idString = snapshot.key
+//            self.initWithConversation(conversation: conversation)
+//            self.observeMessages()
+//        })
+    }
+    
     // MARK: Firebase related methods
     
     private func observeMessages() {
-        messageRef = conversationRef!.child("messages")
-        let messageQuery = messageRef.queryLimited(toLast:25)
         
-        // We can use the observe method to listen for new
-        // messages being written to the Firebase DB
-        newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
-//            let messageData = snapshot.value as! Dictionary<String, String>
-            
-            let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-            message.idString = snapshot.key
-            
-            if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
-                self.addMessage(withId: id, name: name, text: text)
-                self.finishReceivingMessage()
-            } else if let id = message.senderId, let mediaURL = message.photoUrl {
-                
-                let mediaItem = JSQCustomPhotoMediaItem(message: message, isOperator: id == self.senderId)
-                self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
-                
-                if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
-                    mediaItem.message = message
-                    self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
-                }
-                
-            } else if let id = message.senderId, let mediaURL = message.videoUrl {
-                
-                let mediaItem = JSQCustomVideoMediaItem(message: message, isOperator: id == self.senderId)
-                self.addVideoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
-                
-                if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
-                    mediaItem.message = message
-                    self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
-                }
-                
-            } else if let id = message.senderId, let mediaURL = message.audioUrl {
-                
-                let audioData = NSData(contentsOf: URL(string:mediaURL)!)
-                let audioItem = JSQAudioMediaItem(data: audioData as Data?)
-                self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
-               
-                if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
-                    self.collectionView.reloadData()
-                    self.videoMessageMap.removeValue(forKey: snapshot.key)
-                }
-                
-            } else {
-                print("Error! Could not decode message data")
-            }
-        })
+        // if we dont have a reference to the conversation yet
+        // then we need to fech it first
+        // ex when the chat is opened from push notification deep linking
+        if let convId = conversationId, conversationRef == nil  {
+            messageRef = Database.database().reference().child("conversations").child(convId)
+        } else {
         
-        // We can also use the observer method to listen for
-        // changes to existing messages.
-        // We use this to be notified when a photo has been stored
-        // to the Firebase Storage, so we can update the message data
-        updatedMessageRefHandle = messageRef.observe(.childChanged, with: { (snapshot) in
-       
-            let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-            message.idString = snapshot.key
+            // TODO here we are limiting the conversation messages count
+            // we should implement paging
+            messageRef = self.conversationRef!.child("messages")
+            let messageQuery = messageRef.queryLimited(toLast:2000)
             
-            if let mediaURL = message.photoUrl {
-                // The photo has been updated.
-                if let mediaItem = self.photoMessageMap[message.idString!] {
-                    mediaItem.message = message
-                    self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
-                }
-            } else if let mediaURL = message.videoUrl {
-             
-                if let mediaItem = self.videoMessageMap[message.idString!] {
-                    mediaItem.message = message
-                    self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
-                }
+            // We can use the observe method to listen for new
+            // messages being written to the Firebase DB
+            newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
+    //            let messageData = snapshot.value as! Dictionary<String, String>
                 
-            } else if let mediaURL = message.audioUrl {
+                let values = snapshot.value as? NSDictionary
+                print(values)
                 
-                if let mediaItem = self.audioMessageMap[message.idString!] {
+                let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+                message.idString = snapshot.key
+                
+                if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
+                    self.addMessage(withId: id, name: name, text: text)
+                    self.finishReceivingMessage()
+                } else if let id = message.senderId, let mediaURL = message.photoUrl {
+                    
+                    let mediaItem = JSQCustomPhotoMediaItem(message: message, isOperator: id == self.senderId)
+                    self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    
+                    if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                        mediaItem.message = message
+                        self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
+                    }
+                    
+                } else if let id = message.senderId, let mediaURL = message.videoUrl {
+                    
+                    let mediaItem = JSQCustomVideoMediaItem(message: message, isOperator: id == self.senderId)
+                    self.addVideoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    
+                    if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                        mediaItem.message = message
+                        self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
+                    }
+                    
+                } else if let id = message.senderId, let mediaURL = message.audioUrl {
                     
                     let audioData = NSData(contentsOf: URL(string:mediaURL)!)
+                    let audioItem = JSQAudioMediaItem(data: audioData as Data?)
+                    self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                   
+                    if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                        self.collectionView.reloadData()
+                        self.videoMessageMap.removeValue(forKey: snapshot.key)
+                    }
                     
-                    mediaItem.audioData = audioData as Data?
-                    self.collectionView.reloadData()
-                    self.audioMessageMap.removeValue(forKey: message.idString!)
+                } else {
+                    print("Error! Could not decode message data")
                 }
-            }
-        })
+                self.scrollToBottom(animated: true)
+            })
+            
+            // We can also use the observer method to listen for
+            // changes to existing messages.
+            // We use this to be notified when a photo has been stored
+            // to the Firebase Storage, so we can update the message data
+            updatedMessageRefHandle = messageRef.observe(.childChanged, with: { (snapshot) in
+           
+                let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+                message.idString = snapshot.key
+                
+                if let mediaURL = message.photoUrl {
+                    // The photo has been updated.
+                    if let mediaItem = self.photoMessageMap[message.idString!] {
+                        mediaItem.message = message
+                        self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
+                    }
+                } else if let mediaURL = message.videoUrl {
+                 
+                    if let mediaItem = self.videoMessageMap[message.idString!] {
+                        mediaItem.message = message
+                        self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
+                    }
+                    
+                } else if let mediaURL = message.audioUrl {
+                    
+                    if let mediaItem = self.audioMessageMap[message.idString!] {
+                        
+                        let audioData = NSData(contentsOf: URL(string:mediaURL)!)
+                        
+                        mediaItem.audioData = audioData as Data?
+                        self.collectionView.reloadData()
+                        self.audioMessageMap.removeValue(forKey: message.idString!)
+                    }
+                }
+                self.scrollToBottom(animated: true)
+            })
+        }
     }
     
     private func fetchImageDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQCustomPhotoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
@@ -677,12 +817,14 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func uploadVideo(videoUrl:URL) {
         if let key = sendMediaMessage(mediaType: .video)  {
             self.upload(url: videoUrl, photo: nil, key:key, mediaType: .video)
+            self.scrollToBottom(animated: true)
         }
     }
     
     func uploadAudio(audioUrl:URL) {
         if let key = sendMediaMessage(mediaType: .audio) {
             self.upload(url: audioUrl, photo: nil, key:key, mediaType: .audio)
+            self.scrollToBottom(animated: true)
         }
     }
     
@@ -837,6 +979,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         }
         else if sender.state == .ended {
             stopRecorderTimer()
+            recordButton.setProgress(0.0)
             //write the function for stop recording the voice here
             if let url = audioUrl {
                   uploadAudio(audioUrl:url)

@@ -14,31 +14,31 @@
 "Ok"                                    = "موافق";
 
 // Generic erros
-"ERROR_NO_CONNECTION"                   = "لايوجد اتصال، يرجى التأكد من إعدادات الجهاز";
+"ERROR_NO_CONNECTION"                   = "يرجى التأكد من اتصالك مع الانترنيت";
 "ERROR_SIGNUP_EMAIL_INVALID"            = "يرجى إدخال بريد الكتروني صحيح";
 "ERROR_SIGNUP_EMAIL_EXISTS"             = "البريد الالكتروني مسجل مسبقاً";
-"ERROR_SIGNIN_WRONG_CREDIST"     	    = "الرجاء التحقق من البريد الالكتروني و كلمة المرور";
+"ERROR_SIGNIN_WRONG_CREDIST"             = "الرجاء التحقق من البريد الالكتروني و كلمة المرور";
 "ERROR_RESET_WRONG_EMAIL"               = "البريد الالكتروني غير مسجل مسبقاً";
-"ERROR_MISSING_INPUT_DATA"              = "الرجاء إدخال جميع الحقول";
+"ERROR_MISSING_INPUT_DATA"              = "الرجاء إدخال جميع البيانات";
 "ERROR_INVALID_VERIFY_CODE"             = "رمز التحقق المدخل غير صحيح";
 "ERROR_EXPIRED_VERIFY_CODE"             = "رمز التحقق المدخل منتهي الصلاحية";
-"ERROR_BOTTLE_NOT_FOUND"                = "لا بوجد قنينه";
-"ERROR_UNACTIVATED_USER"                = "هذا الحساب غير مفعل بعد الرجاء التحق من ايميل التفعيل";
-"ERROR_INVALID_USERNAME"                = "Username already exists";
+"ERROR_BOTTLE_NOT_FOUND"                = "لا يوجد زجاجة فيديو";
+"ERROR_UNACTIVATED_USER"                = "هذا الحساب غير مفعل بعد الرجاء التحقق من بريد التفعيل";
+"ERROR_INVALID_USERNAME"                = "الاسم غير متاح";
 
 
 // connection errors messages
 "ERROR_NOT_AUTHORIZED"                  = "الرجاء التحقق من صلاحيات تسجيل الدخول الخاصة بك";
-"ERROR_UNKNOWN"                         = "حدث خطأ غير معروف";
+"ERROR_UNKNOWN"                         = "حدث خطأ غير معرف";
 "ERROR_SOCIAL_FACEBOOK"                 = "فشلت عملية تسجيل الدخول عبر الفيسبوك، يرجى إعادة المحاولة";
 "ERROR_SOCIAL_TWITTER"                  = "فشلت عملية تسجيل الدخول عبر التويتر، يرجى إعادة المحاولة";
 "ERROR_SOCIAL_INSTAGRAM"                = "فشلت عملية تسجيل الدخول عبر الانستغرام، يرجى إعادة المحاولة";
-"ERROR_SOCIAL_GOOGLE"                   = "فشلت عملية تسجيل الدخول عبر غوغل، يرجى إعادة المحاولة";
+"ERROR_SOCIAL_GOOGLE"                   = "فشلت عملية تسجيل الدخول عبر جوجل، يرجى إعادة المحاولة";
 
 // login screen
 "LOGIN_EMAIL_TITLE"                     = "البريد الاالكتروني";
-"LOGIN_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
-"LOGIN_PSW_TITLE"                       = "كلمة السر";
+"LOGIN_EMAIL_PLACEHOLDER"               = "vibomail@gmail.com";
+"LOGIN_PSW_TITLE"                       = "كلمة المرور";
 "LOGIN_PSW_PLACEHOLDER"                 = "********";
 "LOGIN_FORGOT_PSW"                      = "نسيت كلمه المرور؟";
 "LOGIN_LOGIN_BTN"                       = "تسجيل الدخول";
@@ -47,12 +47,12 @@
 "LOGIN_REGISTER_BTN_SUFFIX"             = "حساب جديد";
 
 "SIGNUP_EMAIL_TITLE"                     = "البريد الاالكتروني";
-"SIGNUP_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"SIGNUP_EMAIL_PLACEHOLDER"               = "vibomail@gmail.com";
 "SIGNUP_NAME_TITLE"                      = "اسم المستخدم";
-"SIGNUP_NAME_PLACEHOLDER"                = "Vobbler";
-"SIGNUP_PSW_TITLE"                       = "كلمة السر";
+"SIGNUP_NAME_PLACEHOLDER"                = "Vibor";
+"SIGNUP_PSW_TITLE"                       = "كلمة المرور";
 "SIGNUP_PSW_PLACEHOLDER"                 = "********";
-"SIGNUP_SIGNUP_BTN"                      = "تسجيل الحساب";
+"SIGNUP_SIGNUP_BTN"                      = "تسجيل حساب";
 "SIGNUP_LOGIN_BTN"                       = "تسجيل الدخول";
 "SIGNUP_LOGIN_BTN_PREFIX"                = "لديك حساب؟";
 "SIGNUP_COUNTRY_PLACEHOLDER"             = "اختر بلدك";
@@ -63,13 +63,17 @@
 
 // Start screen
 "START_EMAIL_TITLE"                     = "أدخل البريد الالكتروني";
-"START_EMAIL_PLACEHOLDER"               = "vobblemail@gmail.com";
+"START_EMAIL_PLACEHOLDER"               = "vibomail@gmail.com";
 "START_PASSWORD_TITLE"                  = "أدخل كلمة المرور";
 "START_PASSWORD_PLACEHOLDER"            = "********";
 "START_FORGET_PASSWORD"                 = "نسيت كلمة المرور؟";
 "START_NORMAL_LOGIN"                    = "تسجيل الدخول";
 "START_SOCIAL_LOGIN"                    = "تسجيل دخول عن طريق";
 "START_CREATE_ACCOUNT"                  = "إنشاء حساب جديد";
+
+// forgot password
+"FORGOT_PASSWORD_LINK_SENT"             = "لقد قمنا بارسال رابط اعاده تعيين كلمه السر الى بريدك الالكتروني";
+
 
 // Date ago
 "YEARS_AGO"                             = "منذ %@ سنين";
@@ -87,22 +91,22 @@
 "NOW"                                   = "الآن";
 
 // Signup
-"SINGUP_VALIDATION_FNAME"               = "رجاءً قم بادخال اسمك الاول";
-"SINGUP_VALIDATION_EMAIL"               = "رجاء قم بادخال بريدك الالكتروني";
+"SINGUP_VALIDATION_FNAME"               = "رجاءً قم بادخال الاسم ";
+"SINGUP_VALIDATION_EMAIL"               = "رجاءً قم بادخال البريد الالكتروني";
 "SINGUP_VALIDATION_EMAIL_FORMAT"        = "الرجاء ادخال بريد الكتروني صالح";
-"SINGUP_VALIDATION_DATE"                = "الرجاء اختيار تاريخ ميلادك بشكل صحيح";
-"SINGUP_VALIDATION_PASSWORD"            = "رجاء قم بادخال كلمة المرور";
-"SINGUP_VALIDATION_PASSWORD_LENGHTH"    = "كلمة المرور يجب ان تكون من ٦ محارف على الاقل";
+"SINGUP_VALIDATION_DATE"                = "الرجاء اختيار تاريخ الميلاد بشكل صحيح";
+"SINGUP_VALIDATION_PASSWORD"            = "رجاءً قم بادخال كلمة المرور";
+"SINGUP_VALIDATION_PASSWORD_LENGHTH"    = "كلمة المرور يجب ان تكون من ٦ خانات على الاقل";
 "SINGUP_VALIDATION_VERIF_CODE"          = "رجاء قم بادخال رمز التحقق";
 "SINGUP_VALIDATION_TERMS"               = "يجب ان توافق على شروط الاستخدام قبل التمكن من متابعة تسجيل الدخول";
-"SINGUP_VALIDATION_CHOOSE_COUNTRY"      = "الرجاء تحديد بلدك";
+"SINGUP_VALIDATION_CHOOSE_COUNTRY"      = "الرجاءاختيار البلد";
 
 "SINGUP_SOCIAL_WELCOM"                  = "اهلا بك %@ \n الرجاء ملئ المعلومات التاليه لاستكمال التسجيل";
 "SINGUP_EMAIL_TITLE"                    = "أدخل البريد الالكتروني";
 
 // Reset password
 "RESET_STEP1_TITLE"                     = "استعادة كلمة المرور";
-"RESET_STEP1_DESC"                      = "الرجاء إدخال البريد الالكتروني الخاص بك ليتم إرسال رمز التحقق إليه";
+"RESET_STEP1_DESC"                      = "الرجاء إدخال البريد الالكتروني الخاص بك ليتم إرسال رمز التحقق ";
 "RESET_STEP2_DESC"                      = "الرجاء ادخال الرمز الذي تم ارساله الى بريدك الالكتروني";
 "RESET_ACTION_NEXT"                     = "ارسال";
 "RESET_CODE_TITLE"                      = "أدخل الرمز";
@@ -115,44 +119,44 @@
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "هل تود تسجيل الخروج؟";
 
 // home
-"main_shore"                            = "الشاطئ الرئيسي";
-"love_shore"                            = "شاطئ الحب";
-"fadfed_shore"                          = "شاطئ الفضفضة";
-"THROW_BOTTLE_WARNING"                  = "ليس لديك زجاجات في عبوات الزجاجات";
-"THROW_BOTTLE_WARNING_ACTION"           = "الحصول على زجاجات";
-"HOME_THROW_BTN"                        = "رمي زجاجة";
-"HOME_FIND_BTN"                         = "ايجاد زجاجة";
+"main_shore"                            = "استكشف";
+"love_shore"                            = "تعارف";
+"fadfed_shore"                          = "فضفض";
+"THROW_BOTTLE_WARNING"                  = "لا يوجد لديك زجاجات كافية ";
+"THROW_BOTTLE_WARNING_ACTION"           = "المزيد من الزجاجات؟";
+"HOME_THROW_BTN"                        = "ارمي";
+"HOME_FIND_BTN"                         = "ابحث";
 "HOME_MY_BOTTLES_BTN"                   = "زجاجاتي";
 
 
 // chat
-"UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد أنك تريد العودة؟ لن تتمكن بعد ذلك من تحميل الفيديو الخاص بك.";
-"CHAT_REPLY_SENT_MSG"                   = "تم ارسال ردك بنجاح, عندما يشاهد صاحب الزجاجه الفيديو الخاص بك سيكون امامكما ٢٤ ساعه للمحادثة";
-"CHAT_RECORDING"                        = "جاري التسجيل";
+"UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد من العودة؟ عليك الانتظار ليتم رفع الملف الذي ارسلته ";
+"CHAT_REPLY_SENT_MSG"                   = "تم الارسال, عندما يشاهد صاحب الزجاجة ردك، سيتاح لكماالمحادثة لـ٢٤ ساعة";
+"CHAT_RECORDING"                        = "جاري التسجيل‫…‬";
 
 // filter
-"FEMALE"                                = "انثى";
-"MALE"                                  = "ذكر";
-"ALL_GENDER"                            = "الجميع";
-"BUY_FILTER_WARNING"                    = "يجب أن تذهب للتسوق لشراء هذا الفلتر";
-"GO_TO_SHOP"                            = "ذهاب الي التسوق";
-"FILTERS_PANEL_GENDER_TITLE"            = "البحث حسب جنس المرسل";
-"FILTERS_PANEL_COUNTRY_TITLE"           = "البحث حسب بلد المرسل";
-"FILTERS_PANEL_GENDER_BUY_BTN"          = "شراء الفلتر";
-"FILTERS_PANEL_COUNTRY_BUY_BTN"         = "شراء الفلتر";
-"FILTERS_PANEL_FILTER_NOW_BTN"          = "البحث الاّن";
-"FILTERS_PANEL_PLACEHOLDER_GENDER"      = "تبحث عن رسائل من جنس معين ؟";
-"FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "تبحث عن رسائل من بلد معين فقط؟";
+"FEMALE"                                = "بنت";
+"MALE"                                  = "ولد";
+"ALL_GENDER"                            = "الكل";
+"BUY_FILTER_WARNING"                    = "توجه الى المتجر لشراء هذا التفضيلات";
+"GO_TO_SHOP"                            = "اذهب الى المتجر";
+"FILTERS_PANEL_GENDER_TITLE"            = "تفضيلات الجنس";
+"FILTERS_PANEL_COUNTRY_TITLE"           = "تفضيلات البلد";
+"FILTERS_PANEL_GENDER_BUY_BTN"          = "شراء";
+"FILTERS_PANEL_COUNTRY_BUY_BTN"         = "شراء";
+"FILTERS_PANEL_FILTER_NOW_BTN"          = "فلترهاالاّن";
+"FILTERS_PANEL_PLACEHOLDER_GENDER"      = "تبحث عن فيديو من جنس معين ؟";
+"FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "تبحث عن فيديو من بلد معين ؟";
 
 // settings
 "SETTINGS_CONTACT"                      = "تواصل معنا";
 "SETTINGS_ABOUT"                        = "من نحن";
 "SETTINGS_TERMS"                        = "شروط الاستخدام";
-"SETTINGS_SHARE"                        = "مشاركه التطبيق";
+"SETTINGS_SHARE"                        = "شارك التطبيق مع الاصحاب";
 "SETTINGS_RATE"                         = "تقيم التطبيق على iTunes";
 "SETTINGS_LOGOUT"                       = "تسجيل الخروج";
 "SETTINGS_LOGOUT_MSG"                   = "هل انت متاكد انك تريد تسجل الخروج";
-"SETTINGS_SHARE_MSG"                    = "Come over and try this cool App, \n http://brain-socket.com";
+"SETTINGS_SHARE_MSG"                    = "فيبو ‫-‬ ارمي سرك في البحر واكتشف اسرار الاخرين, \n http://brain-socket.com";
 
 "ABOUT_TITLE"                          = "من نحن";
 "TERMS_TITLE"                          = "شروط الاستخدام";
@@ -162,21 +166,21 @@
 "BLOCK_USER"                           = "حظر";
 "IGNORE"                               = "تجاهل";
 "REPLY"                                = "رد";
-"SPAM"                                 = "عشوائي";
+"SPAM"                                 = "مزعج";
 "OFFENDING"                             = "مهين";
 "SEXUAL_CONTENT"                       = "محتوى جنسي";
-"BLOCK_USER_WARNING"                   = "هل أنت متأكد أنك لا تريد رؤية المحتوى من %@ بعد الآن؟";
-"REPORT_SUCCESS_MSG"                   = "حسناً, وصلنا طلبك وسوف نقوم بالتحقق من المشكلة";
-"BLOCK_USER_SUCCESS"                   = "سوف نكون حريصين على ان لا يزعجك %@ مجدداً";
+"BLOCK_USER_WARNING"                   = "متأكد أنك لا تريد مشاهدة محتوى من %@ بعد الآن؟";
+"REPORT_SUCCESS_MSG"                   = "شكرا ، تم استلام الطلب";
+"BLOCK_USER_SUCCESS"                   = "نحن حريصين على ان لا يزعجك %@ مجدداً";
 
 // shop
-"BUY_ITEM_WARNING"                     = "هل آنت متآكد من آنك تريد شراء هذا المنتج ودفع %@ ؟";
-"CANT_BUY_ITEM_WARNING"                = "لديك مسبقا فلتر نشط من هذا النوع";
-"TAB_BOTTLES"                          = "الزجاجات";
-"TAB_GENDER"                           = "فلترة الجنس";
-"TAB_COUNTRY"                          = "فلترة البلد";
+"BUY_ITEM_WARNING"                     = "هل آنت متآكد من عملية شراء%@ ؟";
+"CANT_BUY_ITEM_WARNING"                = "لديك تفضيل فعال مسبقاً من هذا النوع";
+"TAB_BOTTLES"                          = "زجاجات";
+"TAB_GENDER"                           = "تفضيلات الجنس";
+"TAB_COUNTRY"                          = "تفضيلات البلد";
 "SHOP_TITLE"                           = "المتجر";
-"SHOP_BTN_BUY"                         = "الشراء الاّن";
+"SHOP_BTN_BUY"                         = "شراءالاّن";
 
 
 // My bottles
@@ -187,12 +191,12 @@
 "MY_BOTTLES_THROWN_SUBTITLE"           = "زجاجات";
 "MY_BOTTLES_REPLIES_TITLE"             = "ردودي";
 "MY_BOTTLES_BOTTLES_TITLE"             = "زجاجاتي";
-"MY_BOTTLES_NEXT_REFILL"               = "شحن الزجاجات التالي";
-"MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "لم يتم الرد بعد";
+"MY_BOTTLES_NEXT_REFILL"               = "زجاجات مجانية بعد";
+"MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = " لم يقم %@ بالرد بعد";
 "MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "لم تقم بالرد بعد";
-"MY_BOTTLES_BTN_CHAT"                  = "المحادثة";
+"MY_BOTTLES_BTN_CHAT"                  = "دردش";
 "MY_BOTTLES_TIME_LEFT"                 = "الوقت المتبقي";
-"MY_BOTTLES_EMPTY_PLACEHOLDER"         = "لم يتم ايجاد اي محادثات \n هيا وقم بايجاد زجاجة و الرد عليها";
+"MY_BOTTLES_EMPTY_PLACEHOLDER"         = "لا يوجد اي محادثة \n ابحث عن زجاجة و رد عليها";
 
 // rate us
 "RATE_US_TITLE"                         = "اعجبك فيبو ؟";
@@ -201,7 +205,7 @@
 "RATE_US_SKIP"                          = "لا, لن أساعد";
 
 // notifications
-"NOTIFICATION_NEW_REPLY"                = "Hey, looks like %@ has found your bottle, come in and check his reply";
-"NOTIFICATION_CHAT_IS_ACTIVE"           = " %@ has Seen your reply, you can now chat together for 24 hours";
-"NOTIFICATION_NEW_MSG"                  = "seems like %@ has sent you a new message, dont keep him waiting";
+"NOTIFICATION_NEW_REPLY"                = "رهيب، يبدو ان %@ عثر على زجاجة لك، ادخل شوف رده";
+"NOTIFICATION_CHAT_IS_ACTIVE"           = " هلاولله، %@ شاهد ردك‫.‬ يمكنكم الدردشه معاً لمدة ٢٤ ساعة‫..‬ ادخل الآن";
+"NOTIFICATION_NEW_MSG"                  = "ياسلااام، وصلك رسالة جديدة من %@ لا تتأخر بالرد";
 

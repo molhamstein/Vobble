@@ -49,7 +49,7 @@ class ResetPasswordViewController: AbstractController {
     var arrayStagesBullets: [UIImageView] = [UIImageView]()
     
     // Data
-    var currentStageIndex: Int = -1
+    var currentStageIndex: Int = 0
     var userEmail: String = ""
     var userCode: String = ""
     var userPassword: String = ""
@@ -80,7 +80,6 @@ class ResetPasswordViewController: AbstractController {
             waveSubView.showWave()
             isInitialized = true
         }
-        
     }
     
     // Customize all view members (fonts - style - text)
@@ -128,24 +127,24 @@ class ResetPasswordViewController: AbstractController {
 //        nextStageAction(nextButton)
     }
     
-    override func backButtonAction(_ sender: AnyObject) {
-        // hide keyboard
-//        emailTextField.resignFirstResponder()
-//        codeTextField.resignFirstResponder()
-//        passwordTextField.resignFirstResponder()
-//        if currentStageIndex == 0 {
-//            _ = self.navigationController?.popViewController(animated: true)
-//        } else {
-//            backStage()
-//        }
-    }
+//    override func backButtonAction(_ sender: AnyObject) {
+//        // hide keyboard
+////        emailTextField.resignFirstResponder()
+////        codeTextField.resignFirstResponder()
+////        passwordTextField.resignFirstResponder()
+////        if currentStageIndex == 0 {
+////            _ = self.navigationController?.popViewController(animated: true)
+////        } else {
+////            backStage()
+////        }
+//    }
     
     // MARK: Actions
     @IBAction func nextStageAction (_ sender: AnyObject) {
         // hide keyboard
         emailTextField.resignFirstResponder()
-        codeTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
+//        codeTextField.resignFirstResponder()
+//        passwordTextField.resignFirstResponder()
         switch currentStageIndex {
         case -1:
             switchToStageIndex(0)
@@ -254,7 +253,7 @@ class ResetPasswordViewController: AbstractController {
         return false
     }
     
-    func forgetPassword () {
+    @IBAction func forgetPassword () {
         // start loader
         nextButton.isLoading = true
         self.view.isUserInteractionEnabled = false
@@ -263,8 +262,16 @@ class ResetPasswordViewController: AbstractController {
             self.nextButton.isLoading = false
             self.view.isUserInteractionEnabled = true
             if (success) {
-                let newStageIndex = self.currentStageIndex + 1
-                self.switchToStageIndex(newStageIndex)
+                //let newStageIndex = self.currentStageIndex + 1
+                //self.switchToStageIndex(newStageIndex)
+                let alertController = UIAlertController(title: "", message: "FORGOT_PASSWORD_LINK_SENT".localized, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK".localized, style: .default, handler: { (alertAction) in
+                    // back to login
+                    self.dismiss(animated: true, completion: nil)
+                })
+                alertController.addAction(ok)
+                self.present(alertController, animated: true, completion: nil)
+                
             } else {
                 self.showMessage(message:(err?.type.errorMessage)!, type: .error)
             }

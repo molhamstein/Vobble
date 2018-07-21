@@ -80,7 +80,8 @@ class PreviewMediaControl : AbstractController {
     
     override func viewDidLayoutSubviews() {
         if !isVOverlayApplyGradient {
-           self.vOverlay.applyGradient(colours: [ AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
+            self.vOverlay.applyGradient(colours: [ AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
+            self.submitButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
            isVOverlayApplyGradient = true
         }
     }
@@ -146,7 +147,7 @@ class PreviewMediaControl : AbstractController {
 //        if(!imgUrl.isEmpty) {
 //            self.dismiss(animated: true, completion: nil)
 //        } else {
-            self.navigationController?.popViewController(animated: true)
+            self.popOrDismissViewControllerAnimated(animated: true)
 //        }
     }
     
