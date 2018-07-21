@@ -162,12 +162,12 @@ final class ChatViewController: JSQMessagesViewController {
         if isInitialised == false {
             
             if customNavBar.superview == nil {
-                // re-add subiews connected from storyboard as the JSQM messages framewordk detaches them
-                customNavBar.frame = CGRect(x: 0, y: -10, width: self.view.frame.width, height: 110)
-                self.view.addSubview(customNavBar)
-                
                 // init nav bar
                 initNavBar()
+                
+                // re-add subiews connected from storyboard as the JSQM messages framewordk detaches them
+                customNavBar.frame = CGRect(x: 0, y: -10, width: UIScreen.main.bounds.width, height: 110)
+                self.view.addSubview(customNavBar)
                 
                 // record audio view
                 lblRecording.font = AppFonts.bigBold

@@ -119,9 +119,9 @@ class FindBottleViewController: AbstractController {
                 ApiManager.shared.blockUser(user: bottleOwner, completionBlock: { (success, err) in
                     self.showActivityLoader(false)
                     if err == nil {
-                        let blockMessage = String(format: "BLOCK_USER_SUCCESS".localized, "\(DataStore.shared.me?.userName ?? " ")")
+                        let blockMessage = String(format: "BLOCK_USER_SUCCESS".localized, "\(bottleOwner.userName ?? " ")")
                         let alertController = UIAlertController(title: "", message: blockMessage , preferredStyle: .alert)
-                        let ok = UIAlertAction(title: "ok".localized, style: .default, handler: nil)
+                        let ok = UIAlertAction(title: "ok".localized, style: .default, handler:{(alertAction) in self.dismiss(animated: true, completion: nil)} )
                         alertController.addAction(ok)
                         self.present(alertController, animated: true, completion: nil)
                     } else {

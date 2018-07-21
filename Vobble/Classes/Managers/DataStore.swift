@@ -259,6 +259,8 @@ class DataStore :NSObject {
         me = nil
         token = nil
         categories = [Category]()
+        myBottles = [Conversation]()
+        myReplies = [Conversation]()
         //shopItems = [ShopItem]()
         inventoryItems = [InventoryItem]()
         OneSignal.deleteTags(["user_id","user_name"])

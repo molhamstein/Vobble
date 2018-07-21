@@ -191,6 +191,8 @@
 "MY_BOTTLES_THROWN_SUBTITLE"           = "Bottles";
 "MY_BOTTLES_REPLIES_TITLE"             = "My Replies";
 "MY_BOTTLES_BOTTLES_TITLE"             = "My Bottles";
+"MY_BOTTLES_REPLIES_TITLE_With_count"  = "My Replies (%d)";
+"MY_BOTTLES_BOTTLES_TITLE_With_count"  = "My Bottles (%d)";
 "MY_BOTTLES_NEXT_REFILL"               = "3 free bottles after:";
 "MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "%@ Didn't reply yet";
 "MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "You Didn't reply yet";

@@ -90,6 +90,13 @@ class Conversation: BaseModel {
         if let value = json[kIsSeen].int {
             is_seen = value
         }
+        if let is_seen = is_seen, is_seen == 1 {
+            if let value = json[kFinishTime].double {
+                finishTime = value
+            }
+        } else {
+            isActive = false
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {

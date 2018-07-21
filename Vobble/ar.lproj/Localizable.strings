@@ -191,6 +191,8 @@
 "MY_BOTTLES_THROWN_SUBTITLE"           = "زجاجات";
 "MY_BOTTLES_REPLIES_TITLE"             = "ردودي";
 "MY_BOTTLES_BOTTLES_TITLE"             = "زجاجاتي";
+"MY_BOTTLES_REPLIES_TITLE_With_count"  = "ردودي (%d)";
+"MY_BOTTLES_BOTTLES_TITLE_With_count"  = "زجاجاتي (%d)";
 "MY_BOTTLES_NEXT_REFILL"               = "زجاجات مجانية بعد";
 "MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = " لم يقم %@ بالرد بعد";
 "MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "لم تقم بالرد بعد";

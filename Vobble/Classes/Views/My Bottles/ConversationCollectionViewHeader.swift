@@ -84,6 +84,22 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         } else {
             lblNextRefillDate.text = "-- : --"
         }
+        
+        // show count on bottles tabs
+        let bCount = DataStore.shared.myBottles.count
+        if  bCount > 0  {
+            btnMyBottles.setTitle(String.init(format: "MY_BOTTLES_BOTTLES_TITLE_With_count".localized, bCount), for: .normal)
+        } else {
+            btnMyBottles.setTitle("MY_BOTTLES_BOTTLES_TITLE".localized, for: .normal)
+        }
+        // replies
+        let rCount = DataStore.shared.myReplies.count
+        if rCount > 0 {
+            btnMyReplies.setTitle(String.init(format: "MY_BOTTLES_REPLIES_TITLE_With_count".localized, rCount), for: .normal)
+        } else {
+            btnMyReplies.setTitle("MY_BOTTLES_REPLIES_TITLE".localized, for: .normal)
+        }
+        
     }
     
     @IBAction func myBottlesButtonPressed(_ sender: Any) {

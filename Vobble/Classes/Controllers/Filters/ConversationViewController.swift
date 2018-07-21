@@ -49,7 +49,9 @@ class ConversationViewController: AbstractController {
         
         DataStore.shared.myBottles = [Conversation]()
         DataStore.shared.myReplies = [Conversation]()
+        
         observeConversation()
+        self.refreshView()
         
         emptyPlaceHolderView.isHidden = true
         emptyPlaceHolderLabel.font = AppFonts.normal
@@ -414,6 +416,9 @@ extension ConversationViewController {
         childref.queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value, with: { snapshot in
             print(snapshot)
             
+            DataStore.shared.myBottles = [Conversation]()
+            DataStore.shared.myReplies = [Conversation]()
+
             let enumerator = snapshot.children
             while let rest = enumerator.nextObject() as? DataSnapshot {
                 //this is 1 single message here
@@ -421,8 +426,12 @@ extension ConversationViewController {
                 let conversation = Conversation(json: JSON(rest.value as! Dictionary<String, AnyObject>))
                 conversation.idString = rest.key
                 self.onfetchedConversation(conversation: conversation)
-                self.navigationView.showProgressIndicator(show: false)
+
             }
+            // trigger data store set funnctions to cash the
+            self.navigationView.showProgressIndicator(show: false)
+            DataStore.shared.myBottles = DataStore.shared.myBottles
+            DataStore.shared.myReplies = DataStore.shared.myReplies
             self.refreshView()
         })
         
