@@ -446,6 +446,7 @@ extension RecordMediaViewController
         self.camera.startRecording(withOutputUrl: outputURL, didRecord: {(camera, outputFileUrl, error) -> Void in
             
             if let videoURL = outputFileUrl, self.isCanceled == false {
+                self.showActivityLoader(true)
                 let data = NSData(contentsOf: videoURL)!
                 print("File size before compression: \(Double(data.length / 1048576)) mb")
                 let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".m4v")
@@ -479,6 +480,7 @@ extension RecordMediaViewController
                     DispatchQueue.main.async {
                         self.gotToPreview(videoUrl: videoUrlForUpload as NSURL? , image: nil)
                     }
+                    self.showActivityLoader(false)
                 }
 
                 self.stopRecorderTimer()

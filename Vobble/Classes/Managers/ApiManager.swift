@@ -601,9 +601,11 @@ class ApiManager: NSObject {
                     }
                 } else {
                     multipartFormData.append(url, withName: "file")
+                    //print("File size after compression: \(Double(multipartFormData.contentLength / 1048576)) mb")
                 }
             }
         }
+        
         
         Alamofire.upload(multipartFormData: payload, to: mediaURL, method: .post, headers: headers,
                          encodingCompletion: { encodingResult in
