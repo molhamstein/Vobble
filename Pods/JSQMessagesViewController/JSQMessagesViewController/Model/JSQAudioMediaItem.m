@@ -29,13 +29,11 @@
 
 @property (strong, nonatomic) UIView *cachedMediaView;
 
-@property (strong, nonatomic) UIButton *playButton;
-
 @property (strong, nonatomic) UIProgressView *progressView;
-@property (strong, nonatomic) UILabel *progressLabel;
+
 @property (strong, nonatomic) NSTimer *progressTimer;
 
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+
 
 @end
 
@@ -97,7 +95,7 @@
 - (void)setAudioData:(NSData *)audioData
 {
     _audioData = [audioData copy];
-    [self clearCachedMediaViews];
+//    [self clearCachedMediaViews];
 }
 
 - (void)setAudioDataWithUrl:(NSURL *)audioURL

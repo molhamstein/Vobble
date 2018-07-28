@@ -256,10 +256,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                             
                                 Auth.auth().signInAnonymously(completion: { (user, error) in
                                     if let err:Error = error {
-//                                        print(err.localizedDescription)
-//                                        self.loginButton.isLoading = false
                                         self.showMessage(message:err.localizedDescription, type: .error)
-                                        
                                     }
                                     ApiManager.shared.getShores(completionBlock: { (shores, error) in
                                         

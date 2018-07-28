@@ -34,10 +34,10 @@ class ConversationViewController: AbstractController {
     
     
     // MARK: - firebase Properties
-    fileprivate var conversationRefHandle: DatabaseHandle?
-    
-    fileprivate lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
-    
+//    fileprivate var conversationRefHandle: DatabaseHandle?
+//
+//    fileprivate lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
+//
     
     override func viewDidLoad() {
         
@@ -64,9 +64,7 @@ class ConversationViewController: AbstractController {
     }
     
     func releaseFirebaseReferences(){
-        if let refHandle = conversationRefHandle {
-            conversationRef.removeObserver(withHandle: refHandle)
-        }
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -366,45 +364,45 @@ extension ConversationViewController: UIImagePickerControllerDelegate, UINavigat
 
 extension ConversationViewController {
     
-    func onfetchedConversation (conversation: Conversation) {
-        
-        if let is_seen = conversation.is_seen, is_seen == 1 {
-            
-            if let startTime = conversation.startTime {
-                conversation.finishTime = startTime + (24*60*60*1000)
-            }
-        } else {
-            conversation.isActive = false
-        }
-        
-        if let is_active = conversation.isActive, !is_active {
-            //(My Bottles)
-            if conversation.isMyBottle {
-                print("my bottles")
-                DataStore.shared.myBottles.append(conversation)
-                DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                    // show open chats first
-                    // if chat is not open yet sort them by date from newest to olders
-                    if obj1.is_seen! != obj2.is_seen! {
-                        return (obj1.is_seen! >= 1)
-                    } else {
-                        return (obj1.createdAt! > obj2.createdAt!)
-                    }
-                })
-                // (My replies)
-            } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.user?.objectId, currentUserID == convBottleOwnerID {
-                print("my replies")
-                DataStore.shared.myReplies.append(conversation)
-                DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                    if obj1.is_seen! != obj2.is_seen! {
-                        return (obj1.is_seen! >= 1)
-                    } else {
-                        return (obj1.createdAt! > obj2.createdAt!)
-                    }
-                })
-            }
-        }
-    }
+//    func onfetchedConversation (conversation: Conversation) {
+//
+//        if let is_seen = conversation.is_seen, is_seen == 1 {
+//
+//            if let startTime = conversation.startTime {
+//                conversation.finishTime = startTime + (24*60*60*1000)
+//            }
+//        } else {
+//            conversation.isActive = false
+//        }
+//
+//        if let is_active = conversation.isActive, !is_active {
+//            //(My Bottles)
+//            if conversation.isMyBottle {
+//                print("my bottles")
+//                DataStore.shared.myBottles.append(conversation)
+//                DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
+//                    // show open chats first
+//                    // if chat is not open yet sort them by date from newest to olders
+//                    if obj1.is_seen! != obj2.is_seen! {
+//                        return (obj1.is_seen! >= 1)
+//                    } else {
+//                        return (obj1.createdAt! > obj2.createdAt!)
+//                    }
+//                })
+//                // (My replies)
+//            } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.user?.objectId, currentUserID == convBottleOwnerID {
+//                print("my replies")
+//                DataStore.shared.myReplies.append(conversation)
+//                DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
+//                    if obj1.is_seen! != obj2.is_seen! {
+//                        return (obj1.is_seen! >= 1)
+//                    } else {
+//                        return (obj1.createdAt! > obj2.createdAt!)
+//                    }
+//                })
+//            }
+//        }
+//    }
     
     fileprivate func observeConversation() {
         // We can use the observe method to listen for new
@@ -412,87 +410,92 @@ extension ConversationViewController {
         
         self.navigationView.showProgressIndicator(show: true)
         
-        let childref = Database.database().reference().child("conversations")
-        childref.queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value, with: { snapshot in
-            print(snapshot)
-            
-            DataStore.shared.myBottles = [Conversation]()
-            DataStore.shared.myReplies = [Conversation]()
-
-            let enumerator = snapshot.children
-            while let rest = enumerator.nextObject() as? DataSnapshot {
-                //this is 1 single message here
-                let values = rest.value as? NSDictionary
-                let conversation = Conversation(json: JSON(rest.value as! Dictionary<String, AnyObject>))
-                conversation.idString = rest.key
-                self.onfetchedConversation(conversation: conversation)
-
-            }
-            // trigger data store set funnctions to cash the
+        FirebaseManager.shared.fetchMyBottlesConversations { (err) in
             self.navigationView.showProgressIndicator(show: false)
-            DataStore.shared.myBottles = DataStore.shared.myBottles
-            DataStore.shared.myReplies = DataStore.shared.myReplies
-            self.refreshView()
-        })
+            if let error = err {
+                print(error.localizedDescription)
+            } else {
+                self.refreshView()
+            }
+        }
         
+        FirebaseManager.shared.fetchMyRepliesConversations { (err) in
+            self.navigationView.showProgressIndicator(show: false)
+            if let error = err {
+                print(error.localizedDescription)
+            } else {
+                self.refreshView()
+            }
+        }
         
-//        self.navigationView.showProgressIndicator(show: true)
-//        conversationRef.observe(.childAdded, andPreviousSiblingKeyWith: { (snapshot, s) in
+//        let childref = Database.database().reference().child("conversations")
+//        childref.queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value, with: { (snapshot) in
+//            print(snapshot)
 //
-//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-//            conversation.idString = snapshot.key
-//            self.onfetchedConversation(conversation: conversation)
+//            DataStore.shared.myBottles = [Conversation]()
+//            DataStore.shared.myReplies = [Conversation]()
 //
+//            let enumerator = snapshot.children
+//            while let rest = enumerator.nextObject() as? DataSnapshot {
+//                //this is 1 single message here
+//                let values = rest.value as? NSDictionary
+//                let conversation = Conversation(json: JSON(rest.value as! Dictionary<String, AnyObject>))
+//                conversation.idString = rest.key
+//                self.onfetchedConversation(conversation: conversation)
+//
+//            }
+//            // trigger data store set funnctions to cash the
 //            self.navigationView.showProgressIndicator(show: false)
-//        }) { (error) in
-//            print("****************")
-//            print(error)
+//            DataStore.shared.myBottles = DataStore.shared.myBottles
+//            DataStore.shared.myReplies = DataStore.shared.myReplies
+//            self.refreshView()
+//        }) { (err) in
 //            self.navigationView.showProgressIndicator(show: false)
-//            self.emptyPlaceHolderView.isHidden = true
+//            print(err.localizedDescription)
 //        }
         
-        conversationRef.observe(.childChanged, with: { (snapshot) in
+        FirebaseManager.shared.conversationRef.observe(.childChanged, with: { (snapshot) in
             
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             conversation.idString = snapshot.key
-            if let is_seen = conversation.is_seen, is_seen == 1 {
-                
-                if let startTime = conversation.startTime {
-                    conversation.finishTime = startTime + (24*60*60*1000)
-                }
-            } else {
-                conversation.isActive = false
-            }
             
-            if let is_active = conversation.isActive, !is_active {
+            if !conversation.isExpired {
                 //(My replies)
                 if let currentUserID = DataStore.shared.me?.objectId, let convUserID = conversation.user?.objectId,currentUserID == convUserID {
                     
-                    let myBottlesArray = DataStore.shared.myBottles
-                    var i = 0
-                    for conv in myBottlesArray {
-                        if conv.idString == conversation.idString {
-                            DataStore.shared.myBottles[i] = conversation
-                            DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                                return (obj1.createdAt! > obj2.createdAt!)
-                            })
-                            self.refreshView()
-                            break
-                        } else {
-                            i = i + 1
-                        }
-                    }
-                    
-                } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID { // (My replies)
                     print("my replies")
-
                     let myBottlesArray = DataStore.shared.myReplies
                     var i = 0
                     for conv in myBottlesArray {
                         if conv.idString == conversation.idString {
                             DataStore.shared.myReplies[i] = conversation
                             DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                                return (obj1.createdAt! > obj2.createdAt!)
+                                if obj1.is_seen! != obj2.is_seen! {
+                                    return (obj1.is_seen! >= 1)
+                                } else {
+                                    return (obj1.createdAt! > obj2.createdAt!)
+                                }
+                            })
+                            self.refreshView()
+                            break
+                        } else {
+                            i = i + 1
+                        }
+                    }
+                    
+                } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID {
+                    // (My bottles)
+                    let myBottlesArray = DataStore.shared.myBottles
+                    var i = 0
+                    for conv in myBottlesArray {
+                        if conv.idString == conversation.idString {
+                            DataStore.shared.myBottles[i] = conversation
+                            DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
+                                if obj1.is_seen! != obj2.is_seen! {
+                                    return (obj1.is_seen! >= 1)
+                                } else {
+                                    return (obj1.createdAt! > obj2.createdAt!)
+                                }
                             })
                             self.refreshView()
                             break
@@ -502,7 +505,7 @@ extension ConversationViewController {
                     }
                 }
             }
-            self.navigationView.showProgressIndicator(show: false)
+            //self.navigationView.showProgressIndicator(show: false)
         })
     }
 }

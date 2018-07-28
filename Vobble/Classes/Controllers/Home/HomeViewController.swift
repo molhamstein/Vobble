@@ -32,17 +32,20 @@ class HomeViewController: AbstractController {
     // throw
     @IBOutlet weak var vThrowBtnContainer: UIView!
     @IBOutlet weak var lblThrowBtn: UILabel!
+    @IBOutlet weak var btnThrowBtn: UIButton!
     @IBOutlet weak var ivThrowBtn: UIImageView!
     @IBOutlet weak var lblBottlesLeftBadge: UILabel!
     @IBOutlet weak var vThrowBtnCircle: UIView!
     // my bottles
     @IBOutlet weak var vMyBottlesBtnContainer: UIView!
     @IBOutlet weak var lblMyBottlesBtn: UILabel!
+    @IBOutlet weak var btnMyBottlesBtn: UIButton!
     @IBOutlet weak var ivMyBottlesBtn: UIImageView!
     @IBOutlet weak var vMyBottlesBtnCircle: UIView!
     // find
     @IBOutlet weak var vFindBtnContainer: UIView!
     @IBOutlet weak var lblFindBtn: UILabel!
+    @IBOutlet weak var btnFindBtn: UIButton!
     @IBOutlet weak var ivFindBtn: UIImageView!
     @IBOutlet weak var vFindBtnCircle: UIView!
     
@@ -102,6 +105,9 @@ class HomeViewController: AbstractController {
         self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
         self.filterViewOverlay.alpha = 0.0
         
+        // prefetch the conversations to make sure they apear faster
+        FirebaseManager.shared.fetchMyBottlesConversations { (err) in}
+        FirebaseManager.shared.fetchMyRepliesConversations { (err) in}
     }
     
     override func didReceiveMemoryWarning() {
@@ -204,7 +210,6 @@ class HomeViewController: AbstractController {
     func refreshViewData () {
         
         lblBottlesLeftBadge.text = "\(DataStore.shared.me?.bottlesLeftToThrowCount ?? 0)"
-        
     }
     
     func setArtImages(){
@@ -214,8 +219,8 @@ class HomeViewController: AbstractController {
         
         let hour = calendar.component(.hour, from: date)
         
-        //let isNight = hour >= 18 || hour <= 5
-        let isNight = false
+        let isNight = hour >= 18 || hour <= 5
+        //let isNight = false
         
         //hours += 1
         if isNight {
@@ -252,6 +257,20 @@ class HomeViewController: AbstractController {
 //            self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 2, y: 0)
 //        }, completion: nil)
         
+    }
+    
+    func disableActions (disable: Bool) {
+        if disable {
+            self.view.isUserInteractionEnabled = false
+            btnMyBottlesBtn.isUserInteractionEnabled = false
+            btnFindBtn.isUserInteractionEnabled = false
+            btnThrowBtn.isUserInteractionEnabled = false
+        } else {
+            self.view.isUserInteractionEnabled = true
+            btnMyBottlesBtn.isUserInteractionEnabled = true
+            btnFindBtn.isUserInteractionEnabled = true
+            btnThrowBtn.isUserInteractionEnabled = true
+        }
     }
     
     func animateCrab() {
@@ -328,8 +347,10 @@ class HomeViewController: AbstractController {
             //self.wiggleAnimate(view: self.ivThrowBtn)
             self.popAnimation(view: self.vThrowBtnCircle)
             
+            self.disableActions(disable: true)
             // add a delay to show button press animation
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.disableActions(disable: false)
                 self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
             }
             
@@ -372,11 +393,14 @@ class HomeViewController: AbstractController {
         
         // filters tracking events
         
+        // make sure user wont move to other shores while playing animation 
+        self.disableActions(disable: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // delay 5 second
             self.ivFindBottle.image = nil
             self.showActivityLoader(true)
             
             ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
+                self.disableActions(disable: false)
                 self.showActivityLoader(false)
                 if error == nil  {
                     if bottle != nil {
@@ -413,10 +437,16 @@ class HomeViewController: AbstractController {
     @IBAction func myBottlesPressed(_ sender: UIButton) {
         //self.wiggleAnimate(view: self.ivMyBottlesBtn)
         self.popAnimation(view: self.vMyBottlesBtnCircle)
+        self.disableActions(disable: true)
         // add a delay to show button press animation
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.disableActions(disable: false)
             self.performSegue(withIdentifier: "myBottlesSegue", sender: self)
         }
+    }
+    
+    @IBAction func unwindSendReply(segue: UIStoryboardSegue) {
+        
     }
     
     @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {

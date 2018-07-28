@@ -113,7 +113,10 @@
                         </constraints>
                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                         <state key="normal" title="Chat">
-                            <color key="titleColor" red="0.85098039215686272" green="0.90196078431372551" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="disabled">
+                            <color key="titleColor" white="0.90479910715714296" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                     </button>
                 </subviews>

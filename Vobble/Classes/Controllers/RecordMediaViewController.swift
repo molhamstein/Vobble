@@ -229,7 +229,8 @@ class RecordMediaViewController: AbstractController {
     @IBAction func close() {
         isCanceled = true
         stopRecording()
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        //self.navigationController?.dismiss(animated: true, completion: nil)
+        self.popOrDismissViewControllerAnimated(animated: true)
     }
     
     override func viewWillLayoutSubviews() {

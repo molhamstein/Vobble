@@ -559,7 +559,7 @@ class ApiManager: NSObject {
     }
 
     func requesReportTypes(completionBlock: @escaping (_ items: Array<ReportType>?, _ error: NSError?) -> Void) {
-        let categoriesListURL = "\(baseURL)/report-types"
+        let categoriesListURL = "\(baseURL)/reportTypes"
         Alamofire.request(categoriesListURL).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
@@ -904,18 +904,26 @@ class ApiManager: NSObject {
     }
     
     // MARK: notifications
-    func sendPushNotification(msg: String, targetUser: AppUser, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+    func sendPushNotification(msg: String, msg_ar: String, targetUser: AppUser, chatId: String? ,completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
         // url & parameters
         let bottleURL = "\(baseURL)/notifications/sendNotification"
         
         let msgBodyParams : [String : Any] = [
-            "en": msg
+            "en": msg,
+            "ar": msg_ar
         ]
         
-        let parameters : [String : Any] = [
+        var parameters : [String : Any] = [
             "content": msgBodyParams,
             "userId": targetUser.objectId!,
             ]
+        
+        if let chatIdStr = chatId {
+            let data : [String : Any] = [
+                "chatId": chatIdStr
+            ]
+            parameters["data"] = data
+        }
         
         // build request
         Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in

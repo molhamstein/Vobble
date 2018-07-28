@@ -71,6 +71,16 @@ class ConversationCollectionViewCell: UICollectionViewCell {
             timeLeftTitleLabel.text = ""
         }
         
+        if convObj.isMyBottle {
+            chatButton.isEnabled = true
+        } else {
+            if let seen = convObj.is_seen, seen >= 1 {
+                chatButton.isEnabled = true
+            }else {
+                chatButton.isEnabled = false
+            }
+        }
+        
         dispatch_main_after(0.2) {
             if !self.shadowApplied {
                 self.shadowHolderView.dropShortShadow()

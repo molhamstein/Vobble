@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TWTRTwitter.sharedInstance().start(withConsumerKey: AppConfig.twitterConsumerKey, consumerSecret: AppConfig.twitterConsumerSecret)
         FirebaseApp.configure()
         
+        // init managers
+//        DataStore.shared
+//        FirebaseManager.shared
         
         // init notification
         
@@ -46,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let additionalData = result!.notification.payload!.additionalData {
                 print("additionalData = \(additionalData)")
                 if let chatId = additionalData["chatId"] as? String {
-                    
+                    ActionOpenChat.execute(chatId: chatId, conversation: nil)
                 }
                 
                 if let actionSelected = payload?.actionButtons {

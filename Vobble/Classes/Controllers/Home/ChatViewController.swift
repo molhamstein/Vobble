@@ -53,7 +53,7 @@ final class ChatViewController: JSQMessagesViewController {
     fileprivate var messages: [JSQMessage] = []
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
-    private var audioMessageMap = [String: JSQAudioMediaItem]()
+    private var audioMessageMap = [String: JSQCustomAudioMediaItem]()
     
     @IBOutlet var customNavBar: VobbleChatNavigationBar!
     @IBOutlet var recordButton : SDRecordButton!
@@ -73,8 +73,6 @@ final class ChatViewController: JSQMessagesViewController {
             title = convTitle ?? ""
         }
     }
-    
-    var isHideInputToolBar: Bool = false
     
     var selectedImage: UIImage?
     var seconds: Double = 0.0
@@ -97,6 +95,9 @@ final class ChatViewController: JSQMessagesViewController {
                           AVFormatIDKey : NSNumber(value: Int32(kAudioFormatMPEG4AAC) as Int32),
                           AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),
                           AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]
+    
+    var replyVideoUrlToUpload: URL?
+    var bottleToReplyTo: Bottle?
     
     //  var isTyping: Bool {
     //    get {
@@ -138,6 +139,12 @@ final class ChatViewController: JSQMessagesViewController {
             initWithConversation(conversation: conv)
             observeMessages()
         } else if let convId = conversationId {
+            
+            if let _ = bottleToReplyTo {
+                // this is the first reply on a bottle
+                initNewConversation()
+            }
+            
             fetchConversationByid(convId: convId)
         }
         
@@ -146,14 +153,7 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
-        self.topContentAdditionalInset = 30
-        
-        if isHideInputToolBar {
-            inputToolbar.isHidden = true
-        } else {
-            inputToolbar.isHidden = false
-            initCustomToolBar()
-        }
+        self.topContentAdditionalInset = 55
     }
     
     override func viewDidLayoutSubviews() {
@@ -172,7 +172,7 @@ final class ChatViewController: JSQMessagesViewController {
                 // record audio view
                 lblRecording.font = AppFonts.bigBold
                 lblRecording.text = "CHAT_RECORDING".localized
-                self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: self.view.frame.width, height: self.view.frame.height - self.inputToolbar.frame.height)
+                self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.inputToolbar.frame.height)
                 self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 10, width: 120, height: 120)
                 self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
                 self.ivRecordingIcon.center = self.recordButton.center
@@ -233,20 +233,17 @@ final class ChatViewController: JSQMessagesViewController {
         customNavBar.viewcontroller = self
     }
     
-    
     // init
     // this method is required
     func initWithConversation (conversation: Conversation) {
         let chatVc = self
         
-        let convRef = Database.database().reference().child("conversations").child(conversation.idString ?? "")
+        let convRef = FirebaseManager.shared.conversationRef.child(conversation.idString ?? "")
         
-        chatVc.senderDisplayName = conversation.getPeer?.userName
+        chatVc.senderDisplayName = DataStore.shared.me?.userName ?? ""
         
         if conversation.isMyBottle {
             chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
-            //if is_seen == false --> hide chat tool bar so we can't send any message
-            chatVc.isHideInputToolBar = false
             
             if let is_seen = conversation.is_seen, is_seen == 0 {
                 convRef.updateChildValues(["is_seen": 1])
@@ -255,17 +252,16 @@ final class ChatViewController: JSQMessagesViewController {
                 
                 // send push notification to peer to let him know that the chat is open now
                 let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
-                ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: conversation.getPeer!, completionBlock: { (success, error) in })
+                let msgToSendAr = String(format: "NOTIFICATION_CHAT_IS_ACTIVE_AR".localized, (DataStore.shared.me?.userName)!)
+                ApiManager.shared.sendPushNotification(msg: msgToSend, msg_ar: msgToSendAr, targetUser: conversation.getPeer!, chatId: self.conversationId, completionBlock: { (success, error) in })
             }
             
         } else {
             chatVc.convTitle = conversation.user?.userName ?? ""
         }
-        //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
         
         if let is_seen = conversation.is_seen, is_seen == 1 {
             
-            chatVc.isHideInputToolBar = false
             if let fTime = conversation.finishTime {
                 let currentDate = Date().timeIntervalSince1970 * 1000
                 chatVc.seconds = (fTime - currentDate)/1000.0
@@ -276,7 +272,6 @@ final class ChatViewController: JSQMessagesViewController {
             chatVc.navUserName = userName
         }
         
-        
         if let shore_id = conversation.bottle?.shoreId {
             for sh in  DataStore.shared.shores {
                 if sh.shore_id == shore_id {
@@ -285,16 +280,61 @@ final class ChatViewController: JSQMessagesViewController {
                 }
             }
         }
+        
+        //if is_seen == false --> hide chat tool bar so we can't send any message
+        if conversation.isMyBottle {
+            inputToolbar.isHidden = false
+            initCustomToolBar()
+        } else if let is_seen = conversation.is_seen, is_seen == 1 {
+                inputToolbar.isHidden = false
+                initCustomToolBar()
+        } else {
+            inputToolbar.isHidden = true
+        }
+        
         chatVc.conversationRef = convRef
         chatVc.conversationOriginalObject = conversation
         chatVc.conversationId = conversationOriginalObject?.idString
+    }
+    
+    func initNewConversation() {
+        
+        if let btl = bottleToReplyTo, let bottleOwnerId = btl.ownerId, let url = btl.attachment, let thumbUrl = btl.thumb {
+            // send the bottle video as the first message in this
+            // conversation on behalf of the peer, so we tomporary make the peer as the sender
+            self.senderId = "\(bottleOwnerId)"
+            self.submitMessageWithVideoURL(videoUrl: url, thumbURL: thumbUrl)
+            
+            // put the sender id to its correct state
+            if let userId = DataStore.shared.me?.objectId {
+                self.senderId = "\(userId)"
+            }
+            
+            if let replyVideoUrl = replyVideoUrlToUpload {
+                self.uploadVideo(videoUrl: replyVideoUrl)
+            }
+            
+            //send push notification to bottle owner to inform him about the new reply
+            if let peer = btl.owner {
+                let msgToSend = String(format: "NOTIFICATION_NEW_REPLY".localized, (DataStore.shared.me?.userName)!)
+                let msgToSendAr = String(format: "NOTIFICATION_NEW_REPLY_AR".localized, (DataStore.shared.me?.userName)!)
+                ApiManager.shared.sendPushNotification(msg: msgToSend, msg_ar: msgToSendAr, targetUser: peer, chatId: self.conversationId, completionBlock: { (success, error) in })
+            }
+        }
     }
     
     
     func backButtonAction(_ sender: AnyObject) {
         //        _ = self.navigationController?.popViewController(animated: true)
         disposeFirebaseReference()
-        self.dismiss(animated: true, completion: nil)
+        
+        //if we opened this chat from FindBottleViewContrller to reply to a
+        //bottle we should back to the home screen not to the previous screen
+        if let _ = bottleToReplyTo {
+            self.performSegue(withIdentifier: "unwindSendReply", sender: self)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     
@@ -365,13 +405,14 @@ final class ChatViewController: JSQMessagesViewController {
                     let photo: PreviewPhoto = PreviewPhoto(image: test, title: "")
                     let images = [photo]
                     let photosViewController = NYTPhotosViewController(photos: images)
+                    photosViewController.rightBarButtonItem = nil
                     present(photosViewController, animated: true, completion: nil)
                 }
             }
             // Video Message
             if mediaItem is JSQCustomVideoMediaItem {
                 let videoItem = mediaItem as! JSQCustomVideoMediaItem
-                print(videoItem.message.videoUrl)
+
                 if  let videoUrl = videoItem.message.videoUrl, (videoUrl.hasPrefix("http://") || videoUrl.hasPrefix("https://")) {
                     
                     let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
@@ -386,24 +427,8 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     func fetchConversationByid (convId: String) {
-//        messageRef = Database.database().reference().child("conversations").child(convId)
         
-        
-//        let childref = Database.database().reference().child("conversations")
-//        childref.queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value, with: { snapshot in
-//            print(snapshot)
-//
-//            let enumerator = snapshot.children
-//            while let rest = enumerator.nextObject() as? DataSnapshot {
-//                //this is 1 single message here
-//                let values = rest.value as? NSDictionary
-//                let conversation = Conversation(json: JSON(rest.value as! Dictionary<String, AnyObject>))
-//                conversation.idString = rest.key
-//            }
-//        })
-        
-        
-        messageRef = Database.database().reference().child("conversations").child(convId)
+        messageRef = FirebaseManager.shared.conversationRef.child(convId)
         messageRef.observeSingleEvent(of: .value, with: { snapshot in
             print(snapshot)
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
@@ -413,20 +438,6 @@ final class ChatViewController: JSQMessagesViewController {
             self.observeMessages()
             self.initNavBar()
         })
-        
-        
-        //let values = convRef.value as? NSDictionary
-        //print(convRef)
-        
-        
-//        childref.queryEq.observeSingleEvent(of: .value, with: { snapshot in
-//            print(snapshot)
-//            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-//            self.conversationOriginalObject = conversation
-//            self.conversationOriginalObject?.idString = snapshot.key
-//            self.initWithConversation(conversation: conversation)
-//            self.observeMessages()
-//        })
     }
     
     // MARK: Firebase related methods
@@ -437,7 +448,7 @@ final class ChatViewController: JSQMessagesViewController {
         // then we need to fech it first
         // ex when the chat is opened from push notification deep linking
         if let convId = conversationId, conversationRef == nil  {
-            messageRef = Database.database().reference().child("conversations").child(convId)
+            messageRef = FirebaseManager.shared.conversationRef.child(convId)
         } else {
         
             // TODO here we are limiting the conversation messages count
@@ -451,7 +462,6 @@ final class ChatViewController: JSQMessagesViewController {
     //            let messageData = snapshot.value as! Dictionary<String, String>
                 
                 let values = snapshot.value as? NSDictionary
-                print(values)
                 
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
@@ -481,8 +491,10 @@ final class ChatViewController: JSQMessagesViewController {
                     
                 } else if let id = message.senderId, let mediaURL = message.audioUrl {
                     
-                    let audioData = NSData(contentsOf: URL(string:mediaURL)!)
-                    let audioItem = JSQAudioMediaItem(data: audioData as Data?)
+                    //let audioData = NSData(contentsOf: URL(string:mediaURL)!)
+                    let audioData = Data()
+                    let audioItem = JSQCustomAudioMediaItem(data: audioData as! Data)
+                    audioItem.audioUrl = URL(string:mediaURL)!
                     self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
                    
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
@@ -522,9 +534,9 @@ final class ChatViewController: JSQMessagesViewController {
                     
                     if let mediaItem = self.audioMessageMap[message.idString!] {
                         
-                        let audioData = NSData(contentsOf: URL(string:mediaURL)!)
-                        
-                        mediaItem.audioData = audioData as Data?
+                        let audioData = Data() //NSData(contentsOf: URL(string:mediaURL)!)
+                        mediaItem.audioUrl = URL(string:mediaURL)!
+                        mediaItem.audioData = audioData
                         self.collectionView.reloadData()
                         self.audioMessageMap.removeValue(forKey: message.idString!)
                     }
@@ -660,7 +672,11 @@ final class ChatViewController: JSQMessagesViewController {
         } else {
             picker.sourceType = .photoLibrary
         }
-        picker.mediaTypes = ["public.image","public.movie"]
+        if let allMediaTypes = UIImagePickerController.availableMediaTypes(for: .camera) {
+            picker.mediaTypes = allMediaTypes
+        }else {
+            picker.mediaTypes = ["public.image","public.movie"]
+        }
         
         present(picker, animated: true, completion:nil)
     }
@@ -693,11 +709,11 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
-    private func addAudioMessage(withId id: String, key: String, mediaItem: JSQAudioMediaItem) {
+    private func addAudioMessage(withId id: String, key: String, mediaItem: JSQCustomAudioMediaItem) {
         if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
             messages.append(message)
             
-            if (mediaItem.audioData == nil ) {
+            if (mediaItem.audioData == nil || mediaItem.audioData?.count == 0) {
                 audioMessageMap[key] = mediaItem
             }
             collectionView.reloadData()
@@ -717,19 +733,18 @@ final class ChatViewController: JSQMessagesViewController {
             lastNotificationSentDate = Date()
             if let peer = conversationOriginalObject?.getPeer {
                 let msgToSend = String(format: "NOTIFICATION_NEW_MSG".localized, (DataStore.shared.me?.userName)!)
-                ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: peer, completionBlock: { (success, error) in })
+                let msgToSendAr = String(format: "NOTIFICATION_NEW_MSG_AR".localized, (DataStore.shared.me?.userName)!)
+                ApiManager.shared.sendPushNotification(msg: msgToSend, msg_ar: msgToSendAr, targetUser: peer, chatId: self.conversationId, completionBlock: { (success, error) in })
             }
         }
     }
     
     // MARK: UITextViewDelegate methods
-    
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
         // If the text is not empty, the user is typing
         //    isTyping = textView.text != ""
     }
-    
 }
 
 // MARK: Image Picker Delegate
@@ -853,7 +868,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     
                     Flurry.logEvent(AppConfig.reply_submitted);
                 }
-                
             } else {
                 self.isLoadedMedia = true
                 print("error")
@@ -874,12 +888,14 @@ extension ChatViewController: ChatNavigationDelegate {
     
     func navLeftBtnPressed() {
         if self.isLoadedMedia {
-          dismiss(animated: true, completion: nil)
+            self.backButtonAction(self)
+            //dismiss(animated: true, completion: nil)
         } else {
             let alertController = UIAlertController(title: "", message: "UPLOAD_MEDIA_WARNING".localized , preferredStyle: .alert)
             //We add buttons to the alert controller by creating UIAlertActions:
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
-                self.dismiss(animated: true, completion: nil)
+                //self.dismiss(animated: true, completion: nil)
+                self.backButtonAction(self)
             })
             alertController.addAction(ok)
             let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
@@ -900,15 +916,15 @@ extension ChatViewController: AVAudioRecorderDelegate {
         let mediaButton = UIButton(type: .custom)
         mediaButton.setImage(image, for: .normal)
         mediaButton.addTarget(self, action: #selector(self.showActionSheet), for: .touchUpInside)
-        mediaButton.frame = CGRect(x: 0, y: 0, width: 25, height: CGFloat(height))
+        mediaButton.frame = CGRect(x: 0, y: 0, width: 40, height: CGFloat(height))
         
         image = UIImage(named: "recordSoundMsg")
         let recordButton = UIButton(type: .custom)
         recordButton.setImage(image, for: .normal)
         let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
         recordButton.addGestureRecognizer(longGestureRecognizer)
-        recordButton.frame = CGRect(x: 30, y: 0, width: 25, height: CGFloat(height))
-        inputToolbar.contentView.leftBarButtonItemWidth = 55
+        recordButton.frame = CGRect(x: 45, y: 0, width: 40, height: CGFloat(height))
+        inputToolbar.contentView.leftBarButtonItemWidth = 85
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)
         inputToolbar.contentView.leftBarButtonItem.isHidden = true
@@ -933,6 +949,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         let picker = UIImagePickerController()
         picker.delegate = self;
         picker.sourceType = .camera
+        picker.mediaTypes = ["public.image","public.movie"]
         present(picker, animated: true, completion:nil)
     }
     

@@ -40,15 +40,7 @@ class FindBottleViewController: AbstractController {
     
     var isInitialized = false
     
-//    fileprivate let pickerArray = ["Bangladesh","India","Pakistan","USA"]
-    
-    // MARK: - firebase Properties
-    fileprivate var conversationRefHandle: DatabaseHandle?
     fileprivate var reportReasonIndex:Int = 0
-    
-    fileprivate lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
-
-//    private lazy var user1Ref: DatabaseReference = self.conversationRef.child("user1")
     
     override func viewDidLoad() {
         
@@ -151,7 +143,7 @@ class FindBottleViewController: AbstractController {
             ApiManager.shared.reportBottle(bottle: bottle, reportType: DataStore.shared.reportTypes[self.reportReasonIndex], completionBlock: { (success, error) in
                 if success {
                     let alertController = UIAlertController(title: "", message: "REPORT_SUCCESS_MSG".localized, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    let ok = UIAlertAction(title: "ok".localized, style: .default, handler:{(alertAction) in self.dismiss(animated: true, completion: nil)} )
                     alertController.addAction(ok)
                     self.present(alertController, animated: true, completion: nil)
                 } else {
@@ -163,9 +155,6 @@ class FindBottleViewController: AbstractController {
             })
         }
     }
-    
-    
-//    var newConvRef:DatabaseReference?
     
     @IBAction func replyBtnPressed(_ sender: Any) {
         
@@ -196,14 +185,19 @@ class FindBottleViewController: AbstractController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        if let newConvRef = sender as? DatabaseReference {
+        if let newConvRef = sender as? DatabaseReference, let btl = bottle {
             let nav = segue.destination as! UINavigationController
             let chatVc = nav.topViewController as! ChatViewController
             chatVc.senderDisplayName = DataStore.shared.me?.userName
+            chatVc.conversationRef = newConvRef
+            chatVc.conversationId = newConvRef.key
+            chatVc.bottleToReplyTo = btl
+            chatVc.replyVideoUrlToUpload = myVideoUrl as URL
+            
 //            chatVc.conversation = conversation
 //            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
 //            chatVc.uploadMedia(mediaReferenceUrl: bottle?.attachment!, mediaType: "public.movie", senderId: "\(bottle?.ownerId)")
-            chatVc.conversationRef = newConvRef
+            
           
 //            if let bottleOwnerId = bottle?.ownerId {
 //                chatVc.senderId = "\(bottleOwnerId)"
@@ -216,27 +210,27 @@ class FindBottleViewController: AbstractController {
 //            }
 
 //            chatVc.seconds = 24.0*60.0*60.0
+
             
-            if let btl = bottle, let bottleOwnerId = btl.ownerId, let url = btl.attachment, let thumbUrl = btl.thumb {
-                chatVc.senderId = "\(bottleOwnerId)"
-                chatVc.submitMessageWithVideoURL(videoUrl: url, thumbURL: thumbUrl)
-                
-                //send push notification to bottle owner to inform him about the new reply
-                if let peer = btl.owner {
-                    let msgToSend = String(format: "NOTIFICATION_NEW_REPLY".localized, (DataStore.shared.me?.userName)!)
-                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: peer, completionBlock: { (success, error) in })
-                }
-            }
-            
-            if let myId = DataStore.shared.me?.objectId {
-                chatVc.senderId = "\(myId)"
-                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
-            }
-            
-            chatVc.isHideInputToolBar = true
-            
+            ////////////
+//            if let btl = bottle, let bottleOwnerId = btl.ownerId, let url = btl.attachment, let thumbUrl = btl.thumb {
+//                chatVc.senderId = "\(bottleOwnerId)"
+//                chatVc.submitMessageWithVideoURL(videoUrl: url, thumbURL: thumbUrl)
+//
+//                //send push notification to bottle owner to inform him about the new reply
+//                if let peer = btl.owner {
+//                    let msgToSend = String(format: "NOTIFICATION_NEW_REPLY".localized, (DataStore.shared.me?.userName)!)
+//                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: peer, completionBlock: { (success, error) in })
+//                }
+//            }
+//
+//            if let myId = DataStore.shared.me?.objectId {
+//                chatVc.senderId = "\(myId)"
+//                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
+//            }
+//
+//            chatVc.isHideInputToolBar = true
         }
-        
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
@@ -256,21 +250,35 @@ class FindBottleViewController: AbstractController {
     }
     
     func goToChat() {
-
-        let newConvRef = self.conversationRef.childByAutoId()
+//
+//
+//        let newConvRef = self.conversationRef.childByAutoId()
+//
+//        let convlItem:[String : Any] = [
+//            "bottle": (self.bottle?.dictionaryRepresentation()) ?? "",
+//            "user": (DataStore.shared.me?.dictionaryRepresentation()) ?? "",
+//            "createdAt" : ServerValue.timestamp(),
+//            "is_seen" : 0,
+//            "startTime" : 0.0
+//        ]
+//
+//        self.showActivityLoader(true)
+//        newConvRef.setValue(convlItem) { (err, convReference) in
+//
+//        }
         
-        let convlItem:[String : Any] = [
-            "bottle": (self.bottle?.dictionaryRepresentation()) ?? "",
-            "user": (DataStore.shared.me?.dictionaryRepresentation()) ?? "",
-            "createdAt" : ServerValue.timestamp(),
-            "is_seen" : 0,
-            "startTime" : 0.0
-        ]
-        
-        newConvRef.setValue(convlItem)
-        
-        self.performSegue(withIdentifier: "goToChat", sender: newConvRef)
+        if let btl = self.bottle {
+            FirebaseManager.shared.createNewConversation(bottle: btl, completionBlock: { (err, databaseReference) in
+                if let error = err {
+                    self.showMessage(message: ServerError.unknownError.type.errorMessage, type: .error)
+                } else {
+                    self.showActivityLoader(false)
+                    self.performSegue(withIdentifier: "goToChat", sender: databaseReference)
+                    
+                }
+            })
         }
+    }
 }
 
 extension FindBottleViewController: UIPickerViewDelegate,UIPickerViewDataSource {
@@ -296,6 +304,7 @@ extension FindBottleViewController: UIPickerViewDelegate,UIPickerViewDataSource 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerArray[row].name
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.reportReasonIndex = row
         print(pickerArray[row])

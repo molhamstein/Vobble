@@ -11,6 +11,7 @@ import JSQMessagesViewController
 
 class JSQCustomPhotoMediaItem: JSQPhotoMediaItem {
     
+    var containerView: UIView!
     var asyncImageView: UIImageView!
     var message: Message = Message()
     
@@ -23,14 +24,25 @@ class JSQCustomPhotoMediaItem: JSQPhotoMediaItem {
     init(message:Message, isOperator: Bool) {
         super.init()
         appliesMediaViewMaskAsOutgoing = (isOperator == false)
+        
+        containerView = UIView()
+        containerView.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
+        containerView.clipsToBounds = true
+        containerView.layer.cornerRadius = 5
+        containerView.backgroundColor = UIColor.jsq_messageBubbleLightGray()
+        
         asyncImageView = UIImageView()
         asyncImageView.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         asyncImageView.contentMode = .scaleAspectFit
         asyncImageView.clipsToBounds = true
         asyncImageView.layer.cornerRadius = 5
         asyncImageView.backgroundColor = UIColor.jsq_messageBubbleLightGray()
+        containerView.addSubview(asyncImageView)
+        
         activityIndicator?.frame = asyncImageView.frame
-        asyncImageView.addSubview(activityIndicator!)
+        activityIndicator?.activityIndicatorView.isHidden = false
+        activityIndicator?.activityIndicatorView.startAnimating()
+        containerView.addSubview(activityIndicator!)
         
         self.message = message
     }
@@ -40,16 +52,15 @@ class JSQCustomPhotoMediaItem: JSQPhotoMediaItem {
         if let photoUrl = self.message.photoUrl, (photoUrl.hasPrefix("http://") || photoUrl.hasPrefix("https://")) {
             
             self.asyncImageView.sd_setShowActivityIndicatorView(true)
-            self.asyncImageView.sd_setIndicatorStyle(.gray)
+            self.asyncImageView.sd_setIndicatorStyle(.white)
             self.asyncImageView.sd_setImage(with: URL(string:photoUrl))
             self.asyncImageView.contentMode = .scaleAspectFill
             activityIndicator?.removeFromSuperview()
         }
     }
     
-    
     override func mediaView() -> UIView! {
-        return asyncImageView
+        return containerView
     }
     
     override func mediaViewDisplaySize() -> CGSize {

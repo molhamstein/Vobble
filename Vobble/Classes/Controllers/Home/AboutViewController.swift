@@ -12,6 +12,7 @@ import MessageUI
 class AboutViewController: AbstractController, MFMailComposeViewControllerDelegate {
     
     // MARK: Properties
+    @IBOutlet var lblSlogan: UILabel!
     @IBOutlet var lblContactUs: UILabel!
     @IBOutlet var lblTerms: UILabel!
     @IBOutlet var lblShare: UILabel!
@@ -35,12 +36,14 @@ class AboutViewController: AbstractController, MFMailComposeViewControllerDelega
         self.navigationView.viewcontroller = self
         self.navigationView.title = "ABOUT_TITLE".localized
         
+        lblSlogan.text = "SETTINGS_SLOGAN".localized
         lblContactUs.text = "SETTINGS_CONTACT".localized
         lblTerms.text = "SETTINGS_TERMS".localized
         lblRate.text = "SETTINGS_RATE".localized
         lblShare.text = "SETTINGS_SHARE".localized
         btnLogout.setTitle("SETTINGS_LOGOUT".localized, for: .normal)
         
+        lblSlogan.font = AppFonts.normal
         lblContactUs.font = AppFonts.normalBold
         lblTerms.font = AppFonts.normalBold
         lblRate.font = AppFonts.normalBold

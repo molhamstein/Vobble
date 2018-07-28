@@ -28,6 +28,7 @@ pod 'NYTPhotoViewer', '~> 1.1.0'
 pod 'JSQMessagesViewController'
 pod 'OneSignal', '>= 2.6.2', '< 3.0'
 pod 'Flurry-iOS-SDK/FlurrySDK' #Analytics Pod
+pod 'SwiftyGif'
 
 end
 

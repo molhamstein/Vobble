@@ -61,6 +61,8 @@ didChangeAudioCategory:(NSString *)category
  */
 @property (nonatomic, strong, nullable) NSData *audioData;
 
+@property (strong, nonatomic) UIButton *playButton;
+
 /**
  *  Initializes and returns a audio media item having the given audioData.
  *
@@ -113,6 +115,11 @@ didChangeAudioCategory:(NSString *)category
  *  @param audioURL A File URL containing the location of the audio data.
  */
 - (void)setAudioDataWithUrl:(nonnull NSURL *)audioURL;
+
+
+- (void)onPlayButton:(UIButton *)sender;
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) UILabel *progressLabel;
 
 @end
 

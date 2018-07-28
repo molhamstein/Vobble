@@ -28,24 +28,19 @@ class Conversation: BaseModel {
     public var createdAt: Double?
     public var startTime: Double?
     public var finishTime: Double?
-    private var _isActive: Bool?
     public var is_seen: Int?
     
-    
-    public var isActive:Bool? {
-        set{
-            _isActive = newValue
-        }
+    public var isExpired:Bool {
         get {
             let currentDate = Date().timeIntervalSince1970 * 1000
             if let ft = finishTime {
                 if  currentDate >= ft {
-                    _isActive = true
+                    return true
                 } else {
-                    _isActive = false
+                    return false
                 }
             }
-            return _isActive
+            return false
         }
     }
     
@@ -90,12 +85,9 @@ class Conversation: BaseModel {
         if let value = json[kIsSeen].int {
             is_seen = value
         }
-        if let is_seen = is_seen, is_seen == 1 {
-            if let value = json[kFinishTime].double {
-                finishTime = value
-            }
-        } else {
-            isActive = false
+        
+        if let sTime = startTime, sTime > 0.0 {
+            finishTime = sTime + AppConfig.chatValidityafterSeen
         }
     }
     

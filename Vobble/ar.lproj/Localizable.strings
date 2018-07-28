@@ -117,6 +117,7 @@
 // Settings
 "SETTINGS_USER_LOGOUT"                  = "تسجيل خروج";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "هل تود تسجيل الخروج؟";
+"SETTINGS_SLOGAN"                       = "INTO THE BLUE";
 
 // home
 "main_shore"                            = "استكشف";
@@ -207,7 +208,10 @@
 "RATE_US_SKIP"                          = "لا, لن أساعد";
 
 // notifications
-"NOTIFICATION_NEW_REPLY"                = "رهيب، يبدو ان %@ عثر على زجاجة لك، ادخل شوف رده";
-"NOTIFICATION_CHAT_IS_ACTIVE"           = " هلاولله، %@ شاهد ردك‫.‬ يمكنكم الدردشه معاً لمدة ٢٤ ساعة‫..‬ ادخل الآن";
-"NOTIFICATION_NEW_MSG"                  = "ياسلااام، وصلك رسالة جديدة من %@ لا تتأخر بالرد";
+"NOTIFICATION_NEW_REPLY"                = "Hey, looks like %@ has found your bottle, come to check his reply";
+"NOTIFICATION_NEW_REPLY_AR"             = "رهيب، يبدو ان %@ عثر على زجاجة لك، ادخل شوف رده";
+"NOTIFICATION_CHAT_IS_ACTIVE"           = " %@ has Seen your reply,you have 24h private chat, hurry!";
+"NOTIFICATION_CHAT_IS_ACTIVE_AR"        = " هلاولله، %@ شاهد ردك‫.‬ يمكنكم الدردشه معاً لمدة ٢٤ ساعة‫..‬ ادخل الآن";
+"NOTIFICATION_NEW_MSG"                  = "Cool, %@ has sent you a new message";
+"NOTIFICATION_NEW_MSG_AR"               = "ياسلااام، وصلك رسالة جديدة من %@ لا تتأخر بالرد";
 

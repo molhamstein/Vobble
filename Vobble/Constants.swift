@@ -63,6 +63,8 @@ struct AppConfig {
     // Filter
     static let filter_click = "Filter_Click"
     
+    static let chatValidityafterSeen: Double = 24.0*60.0*60.0*1000.0 // 24 hours
+    
     // validation
     static let passwordLength = 6
     
