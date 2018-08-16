@@ -21,6 +21,7 @@ class Bottle: BaseModel {
     private let kShoreId: String = "shoreId"
     private let kattachment: String = "file"
     private let kThumb: String = "thumbnail"
+    private let kShore: String = "shore"
     
     
     // MARK: Properties
@@ -33,6 +34,7 @@ class Bottle: BaseModel {
     public var attachment: String?
     public var thumb: String?
     public var owner: AppUser?
+    public var shore: Shore?
     
     
     // MARK: Initializers
@@ -69,6 +71,9 @@ class Bottle: BaseModel {
         }
         if json[kOwner] != JSON.null {
             owner = AppUser(json: json[kOwner])
+        }
+        if json[kShore] != JSON.null {
+            shore = Shore(json: json[kShore])
         }
     }
     
@@ -110,6 +115,10 @@ class Bottle: BaseModel {
         
         if let value = owner {
             dictionary[kOwner] = value.dictionaryRepresentation()
+        }
+        
+        if let value = shore {
+            dictionary[kShore] = value.dictionaryRepresentation()
         }
         
         return dictionary

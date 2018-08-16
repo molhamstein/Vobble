@@ -15,7 +15,7 @@ struct AppConfig {
     //static let appBaseDevURL = "https://brain-socket.com/dev"
     //static let appBaseDevURL = "https://vobble.herokuapp.com/api"
     static let appBaseDevURL = "http://104.217.253.15:7000/api"
-    static let appBaseLiveURL = "https://brain-socket.com/live"
+    static let appBaseLiveURL = "http://159.65.202.38:3000/api"
     static let useLiveAPI: Bool = false
     static let useCurrentLocation: Bool = false
     static let contactUsEmail: String = "hey@vobble.com"

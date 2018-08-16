@@ -19,6 +19,7 @@ class ConversationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var timerLabel: TimerLabel!
     @IBOutlet weak var timeLeftTitleLabel: UILabel!
+    @IBOutlet weak var ivNewMessageIcon: UIImageView!
     
     var shadowApplied: Bool! = false
     
@@ -81,12 +82,33 @@ class ConversationCollectionViewCell: UICollectionViewCell {
             }
         }
         
+        if let convId = convObj.idString, let messagesCount = DataStore.shared.conversationsUnseenMesssages[convId], messagesCount > 0 {
+            ivNewMessageIcon.isHidden = false
+            wiggleAnimate(view: ivNewMessageIcon)
+        } else {
+            ivNewMessageIcon.isHidden = true
+            ivNewMessageIcon.layer.removeAllAnimations()
+        }
+        
         dispatch_main_after(0.2) {
             if !self.shadowApplied {
                 self.shadowHolderView.dropShortShadow()
                 self.shadowApplied = true
             }
         }
+    }
+    
+    func wiggleAnimate(view: UIView) {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.duration = 0.3
+        animation.repeatCount = Float.greatestFiniteMagnitude
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.autoreverses = true
+        animation.fromValue = NSNumber(value: 0.98)
+        animation.toValue = NSNumber(value: 1.07)
+        //animation.fromValue = NSValue(cgPoint: CGPoint(x: 0.98, y: 0.98))
+        //animation.toValue = NSValue(cgPoint: CGPoint(x: 1.05, y: 1.05))
+        view.layer.add(animation, forKey: "transform.scale")
     }
     
 }

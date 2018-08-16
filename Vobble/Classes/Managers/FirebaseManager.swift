@@ -17,6 +17,7 @@ class FirebaseManager :NSObject {
     
     lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
     
+    
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     
@@ -25,16 +26,16 @@ class FirebaseManager :NSObject {
     
     private override init(){
         super.init()
+        observeUnseenConversatins()
     }
     
     func createNewConversation (bottle: Bottle, completionBlock: @escaping (_ err: Error?, _ reference: DatabaseReference?) -> Void) {
         let newConvRef = self.conversationRef.childByAutoId()
         let conversationBlankDict = newConverastionDictionary(bottle: bottle)
-        print(conversationBlankDict)
-        newConvRef.setValue(conversationBlankDict) { (err, ref) in
-            print("we are in block")
+        //print(conversationBlankDict)
+        newConvRef.setValue(conversationBlankDict, withCompletionBlock: { (err, ref) in
             completionBlock(err, ref)
-        }
+        })
     }
     
     func newConverastionDictionary(bottle: Bottle) -> [String : Any] {
@@ -46,7 +47,9 @@ class FirebaseManager :NSObject {
             "expired" : 0,
             "user1ID" : bottle.ownerId ?? "",
             "user2ID" : DataStore.shared.me?.objectId ?? "",
-            "startTime" : 0.0
+            "startTime" : 0.0,
+            "user1_unseen": 1.0,
+            "user2_unseen": 0.0
         ]
         return convlItem
     }
@@ -66,6 +69,9 @@ class FirebaseManager :NSObject {
                 
                 if !conversation.isExpired {
                     DataStore.shared.myBottles.append(conversation)
+                    DataStore.shared.conversationsUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                } else {
+                    DataStore.shared.conversationsUnseenMesssages[rest.key] = 0
                 }
             }
             
@@ -82,10 +88,48 @@ class FirebaseManager :NSObject {
             // trigger data store set funnctions to cash the
             DataStore.shared.myBottles = DataStore.shared.myBottles
             completionBlock(nil)
+            // broadcast
+            NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
             
         }) { (err) in
             print(err.localizedDescription)
             completionBlock(err)
+        }
+    }
+    
+    func observeUnseenConversatins () {
+        let childref = conversationRef
+        childref.queryOrdered(byChild: "user2ID").queryEqual(toValue: DataStore.shared.me?.objectId ?? "").observe(.childChanged, with: { (snapshot) in
+            // my replies
+            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+            conversation.idString = snapshot.key
+            
+            if !conversation.isExpired {
+                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+            } else {
+                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = 0
+            }
+            // broadcast
+            NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
+        }) { (err) in
+            print(err.localizedDescription)
+        }
+        
+        //
+        childref.queryOrdered(byChild: "user1ID").queryEqual(toValue: DataStore.shared.me?.objectId ?? "").observe(.childChanged, with: { (snapshot) in
+            // my bottles
+            let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
+            conversation.idString = snapshot.key
+            
+            if !conversation.isExpired {
+                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+            } else {
+                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = 0
+            }
+            // broadcast
+            NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
+        }) { (err) in
+            print(err.localizedDescription)
         }
     }
     
@@ -103,6 +147,9 @@ class FirebaseManager :NSObject {
                 
                 if !conversation.isExpired {
                     DataStore.shared.myReplies.append(conversation)
+                    DataStore.shared.conversationsUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                } else {
+                    DataStore.shared.conversationsUnseenMesssages[rest.key] = 0
                 }
             }
             
@@ -118,6 +165,8 @@ class FirebaseManager :NSObject {
             // trigger data store set funnctions to cash the
             DataStore.shared.myReplies = DataStore.shared.myReplies
             completionBlock(nil)
+            // broadcast
+            NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
         }) { (err) in
             print(err.localizedDescription)
             completionBlock(err)

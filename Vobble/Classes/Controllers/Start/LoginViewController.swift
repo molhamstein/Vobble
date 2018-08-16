@@ -19,7 +19,6 @@ enum ViewType {
 
 class LoginViewController: AbstractController, CountryPickerDelegate {
     
-    
     @IBOutlet weak var emailtest: UILabel!
     
     // MARK: Properties
@@ -230,11 +229,11 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     // MARK: Actions
     @IBAction func termsOfServiceAction(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "loginTermsSegue", sender: nil)
+        self.performSegue(withIdentifier: "loginTermsSegue", sender: termsButton)
     }
     
     @IBAction func privacyPolicyAction(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "loginTermsSegue", sender: nil)
+        self.performSegue(withIdentifier: "loginTermsSegue", sender: privacyButton)
     }
     
     @IBAction func loginAction(_ sender: RNLoadingButton) {
@@ -723,5 +722,15 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         
     }
-    
+ 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loginTermsSegue" {
+            let vc = segue.destination as! TermsViewController
+            if let senderButton = sender as? UIButton, senderButton == privacyButton {
+                vc.termsType = .privacyPolicy
+            } else {
+                vc.termsType = .userAgreement
+            }
+        }
+    }
 }

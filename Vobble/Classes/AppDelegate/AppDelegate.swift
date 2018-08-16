@@ -49,7 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let additionalData = result!.notification.payload!.additionalData {
                 print("additionalData = \(additionalData)")
                 if let chatId = additionalData["chatId"] as? String {
-                    ActionOpenChat.execute(chatId: chatId, conversation: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        ActionOpenChat.execute(chatId: chatId, conversation: nil)
+                    }
                 }
                 
                 if let actionSelected = payload?.actionButtons {

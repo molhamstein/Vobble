@@ -43,6 +43,8 @@ class DataStore :NSObject {
     private var _shores: [Shore] = []
     private var _token: String?
     
+    public var conversationsUnseenMesssages: [String: Int] = [:]
+    
     // user loggedin flag
     var isLoggedin: Bool {
         if let id = token, !id.isEmpty {
@@ -184,6 +186,17 @@ class DataStore :NSObject {
         super.init()
     }
    
+    // conversations
+    func getConversationsWithUnseenMessagesCount () -> Int {
+        var convCount = 0
+        for (_, count) in conversationsUnseenMesssages {
+            if count > 0 {
+                convCount += 1
+            }
+        }
+        return convCount
+    }
+    
     //MARK: Cache Utils
     private func saveBaseModelArray(array: [BaseModel] , withKey key:String){
         let array : [[String:Any]] = array.map{$0.dictionaryRepresentation()}

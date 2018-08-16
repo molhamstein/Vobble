@@ -21,11 +21,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="conversationCollectionViewHeaderID" id="eUA-Pv-khb" customClass="ConversationCollectionViewHeader" customModule="Vobble" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2p-3x-HAy" userLabel="userinfo View">
-                    <rect key="frame" x="0.0" y="11" width="375" height="100"/>
+                    <rect key="frame" x="0.0" y="11" width="375" height="90"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xE6-y1-bfD" userLabel="Stack View1">
                             <rect key="frame" x="130" y="4" width="230" height="13.5"/>
@@ -51,10 +51,10 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="FlQ-vp-Lg5">
-                            <rect key="frame" x="120" y="32.5" width="245" height="52.5"/>
+                            <rect key="frame" x="120" y="32.5" width="245" height="36"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="jMV-1b-yX9">
-                                    <rect key="frame" x="0.0" y="0.0" width="81.5" height="52.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="81.5" height="36"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Throwed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx6-j1-vgs">
                                             <rect key="frame" x="0.0" y="0.0" width="81.5" height="13.5"/>
@@ -68,16 +68,10 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bou-d0-RSB">
-                                            <rect key="frame" x="0.0" y="39" width="81.5" height="13.5"/>
-                                            <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
-                                            <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rb1-xp-9kr">
-                                    <rect key="frame" x="81.5" y="0.0" width="82" height="52.5"/>
+                                    <rect key="frame" x="81.5" y="0.0" width="82" height="36"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MII-u1-n5f">
                                             <rect key="frame" x="0.0" y="0.0" width="82" height="13.5"/>
@@ -89,12 +83,6 @@
                                             <rect key="frame" x="0.0" y="16.5" width="82" height="19.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                             <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYo-Na-I7H">
-                                            <rect key="frame" x="0.0" y="39" width="82" height="13.5"/>
-                                            <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
-                                            <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -162,13 +150,13 @@
                         <constraint firstItem="4QV-9r-3Bm" firstAttribute="leading" secondItem="Rx6-j1-vgs" secondAttribute="leading" constant="10" id="bi5-aR-o18"/>
                         <constraint firstItem="gma-mX-Kdl" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" id="dFe-2a-AaK"/>
                         <constraint firstItem="xE6-y1-bfD" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" constant="4" id="k4u-6y-Bot"/>
-                        <constraint firstAttribute="height" constant="100" id="lL4-aa-Lzt"/>
+                        <constraint firstAttribute="height" constant="90" id="lL4-aa-Lzt"/>
                         <constraint firstItem="wwn-rf-iZW" firstAttribute="bottom" secondItem="gma-mX-Kdl" secondAttribute="bottom" id="nVy-Es-5cb"/>
                         <constraint firstItem="mOv-gc-f5s" firstAttribute="centerX" secondItem="gma-mX-Kdl" secondAttribute="centerX" id="qi0-VM-toP"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="n6G-Uv-rjN">
-                    <rect key="frame" x="0.0" y="111" width="375" height="39"/>
+                    <rect key="frame" x="0.0" y="101" width="375" height="39"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMt-1h-1lb">
                             <rect key="frame" x="0.0" y="0.0" width="187.5" height="39"/>
@@ -201,10 +189,10 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhp-pX-jzS" userLabel="search View">
-                    <rect key="frame" x="0.0" y="150" width="375" height="40"/>
+                    <rect key="frame" x="0.0" y="140" width="375" height="40"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KGh-qf-l8K" userLabel="search textfield">
-                            <rect key="frame" x="55" y="10" width="320" height="17"/>
+                            <rect key="frame" x="55" y="10" width="290" height="17"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -232,7 +220,7 @@
                         <constraint firstItem="guC-gC-Sxb" firstAttribute="leading" secondItem="hhp-pX-jzS" secondAttribute="leading" constant="30" id="rEV-Xd-Dov"/>
                         <constraint firstAttribute="trailing" secondItem="Pqb-2y-XHG" secondAttribute="trailing" constant="30" id="rii-Lz-LDl"/>
                         <constraint firstItem="KGh-qf-l8K" firstAttribute="top" secondItem="hhp-pX-jzS" secondAttribute="top" constant="10" id="uei-Nb-C0b"/>
-                        <constraint firstAttribute="trailing" secondItem="KGh-qf-l8K" secondAttribute="trailing" id="w31-p3-gLb"/>
+                        <constraint firstAttribute="trailing" secondItem="KGh-qf-l8K" secondAttribute="trailing" constant="30" id="w31-p3-gLb"/>
                     </constraints>
                 </view>
             </subviews>
@@ -254,10 +242,8 @@
                 <outlet property="btnMyReplies" destination="x8H-lq-tCX" id="71t-7c-dbC"/>
                 <outlet property="btnSettings" destination="pTn-GQ-HE7" id="vWw-mA-5sa"/>
                 <outlet property="lblBottlesLeftCount" destination="vy0-tu-vcm" id="fTd-IS-uQu"/>
-                <outlet property="lblBottlesLeftCountSubTitle" destination="cYo-Na-I7H" id="4DB-E1-RV3"/>
                 <outlet property="lblBottlesLeftCountTitle" destination="MII-u1-n5f" id="oUL-Cu-a7v"/>
                 <outlet property="lblBottlesThrownCount" destination="GXm-mA-oE3" id="JOG-mZ-k8m"/>
-                <outlet property="lblBottlesThrownCountSubTitle" destination="bou-d0-RSB" id="bpj-WH-na7"/>
                 <outlet property="lblBottlesThrownCountTitle" destination="Rx6-j1-vgs" id="oda-8K-G5q"/>
                 <outlet property="lblNextRefillDate" destination="Neb-5c-Epb" id="hix-5D-iyJ"/>
                 <outlet property="lblNextRefillTitle" destination="MJc-XL-Slh" id="9x4-H6-dYS"/>

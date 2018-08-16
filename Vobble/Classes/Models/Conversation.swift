@@ -19,7 +19,8 @@ class Conversation: BaseModel {
     private let kStartTime: String = "startTime"
     private let kFinishTime: String = "finishTime"
     private let kIsSeen: String = "is_seen"
-    
+    private let kUser1UnseenMessagesCount: String = "user1_unseen"
+    private let kUser2UnseenMessagesCount: String = "user2_unseen"
     
     // MARK: Properties
     public var idString : String?
@@ -29,6 +30,8 @@ class Conversation: BaseModel {
     public var startTime: Double?
     public var finishTime: Double?
     public var is_seen: Int?
+    public var user1UnseenMessagesCount: Int?
+    public var user2UnseenMessagesCount: Int?
     
     public var isExpired:Bool {
         get {
@@ -41,6 +44,16 @@ class Conversation: BaseModel {
                 }
             }
             return false
+        }
+    }
+    
+    public var myUnseenMessagesCount: Int {
+        get {
+            if DataStore.shared.me?.objectId == user?.objectId {
+              return user2UnseenMessagesCount ?? 0
+            } else {
+              return user1UnseenMessagesCount ?? 0
+            }
         }
     }
     
@@ -85,6 +98,12 @@ class Conversation: BaseModel {
         if let value = json[kIsSeen].int {
             is_seen = value
         }
+        if let value = json[kUser1UnseenMessagesCount].int {
+            user1UnseenMessagesCount = value
+        }
+        if let value = json[kUser2UnseenMessagesCount].int {
+            user2UnseenMessagesCount = value
+        }
         
         if let sTime = startTime, sTime > 0.0 {
             finishTime = sTime + AppConfig.chatValidityafterSeen
@@ -121,6 +140,14 @@ class Conversation: BaseModel {
         
         if let value = is_seen {
             dictionary[kIsSeen] = value
+        }
+        
+        if let value = user1UnseenMessagesCount {
+            dictionary[kUser1UnseenMessagesCount] = value
+        }
+        
+        if let value = user2UnseenMessagesCount {
+            dictionary[kUser2UnseenMessagesCount] = value
         }
         
         return dictionary

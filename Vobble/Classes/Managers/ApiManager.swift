@@ -237,7 +237,7 @@ class ApiManager: NSObject {
     /// User Signup request
     func userSignup(user: AppUser, password: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user:AppUser?) -> Void) {
         // url & parameters
-        guard password.length>0,
+        guard password.length > 0,
             let _ = user.email
             else {
                 return

@@ -136,6 +136,7 @@ extension ConversationViewController: UICollectionViewDataSource {
         
         headerView.searchTetField.text = searchString
         headerView.searchTetField.delegate = self
+        headerView.searchTetField.addTarget(self, action:#selector(onSearchTextFieldChanged(_:)), for: .editingChanged)
         headerView.convVC = self
         headerView.awakeFromNib()
         self.searchText =  headerView.searchTetField
@@ -148,7 +149,7 @@ extension ConversationViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: self.bottleCollectionView.bounds.width, height: 190)
+        return CGSize(width: self.bottleCollectionView.bounds.width, height: 180)
     }
 }
 
@@ -293,28 +294,34 @@ extension ConversationViewController: UICollectionViewDelegate {
 // MARK: - textfield delegate
 extension ConversationViewController {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let string1 = string
-        let string2 = (self.searchText?.text)!
-
-        if string.characters.count > 0 { // if it was not delete character
-            searchString = string2 + string1
-        } else if string2.characters.count > 0 { // if it was a delete character
-            
-            searchString = String(string2.characters.dropLast())
+    func onSearchTextFieldChanged(_ textField: UITextField) -> Bool {
+//        let string1 = string
+//        let string2 = (self.searchText?.text)!
+//
+//        if string.characters.count > 0 { // if it was not delete character
+//            searchString = string2 + string1
+//        } else if string2.characters.count > 0 { // if it was a delete character
+//
+//            searchString = String(string2.characters.dropLast())
+//        }
+        
+        if let str = textField.text {
+            searchString = str
+            if tap == .myBottles {
+                filteredConvArray = DataStore.shared.myBottles.filter{(($0.bottle?.owner?.userName)!.lowercased().contains(searchString.lowercased()))}
+            } else if tap == .myReplies {
+                filteredConvArray = DataStore.shared.myReplies.filter{(($0.user?.userName)!.lowercased().contains(searchString.lowercased()))}
+            }
+        } else {
+            searchString = ""
+            if tap == .myBottles {
+                filteredConvArray = DataStore.shared.myBottles
+            } else if tap == .myReplies {
+                filteredConvArray = DataStore.shared.myReplies
+            }
         }
-        
-        if tap == .myBottles {
-            filteredConvArray = DataStore.shared.myBottles.filter{(($0.bottle?.owner?.userName)!.lowercased().contains(searchString.lowercased()))}
-        } else if tap == .myReplies {
-            filteredConvArray = DataStore.shared.myReplies.filter{(($0.user?.userName)!.lowercased().contains(searchString.lowercased()))}
-        }
-//        filteredConvArray = currentUser.conversationArray.filter{(($0.user2?.firstName)!.lowercased().contains(searchString.lowercased()))}
-        
-        print(filteredConvArray.count)
-        
         bottleCollectionView.reloadData()
-        
+
         return true
     }
 }

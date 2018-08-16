@@ -17,16 +17,13 @@
 		570D12A720D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 570D12A020D9A0C700A2A793 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		571084C720C01176001163EA /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C620C01176001163EA /* InventoryItem.swift */; };
 		571084C920C02262001163EA /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C820C02262001163EA /* ReportType.swift */; };
-		57190C892105F48D00E88F38 /* girl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57190C882105F48D00E88F38 /* girl.gif */; };
 		57190C8B2105F4E700E88F38 /* girl_3_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57190C8A2105F4E600E88F38 /* girl_3_2.gif */; };
-		57190C8D2105F93000E88F38 /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57190C8C2105F92F00E88F38 /* find_bottle.gif */; };
 		57413D55204D3B5700450A42 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 57413D54204D3B5700450A42 /* GCD.m */; };
 		5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C13F205660B300A5402D /* VideoPlayerView.swift */; };
 		5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5742C140205660B300A5402D /* VideoPlayerView.xib */; };
 		5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C14320573BC200A5402D /* UIImage+Gif.swift */; };
 		57439D3320FE06D100343FCE /* girl_3_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57439D3120FE06CB00343FCE /* girl_3_1.gif */; };
 		57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57439D3220FE06CE00343FCE /* girl_3_1_night.gif */; };
-		57439D3620FE0AA600343FCE /* throwBottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57439D3520FE0AA200343FCE /* throwBottle.gif */; };
 		5758907820D98F81007F5E00 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5758907720D98F80007F5E00 /* GoogleService-Info.plist */; };
 		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
 		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
@@ -35,8 +32,12 @@
 		5796242F20793B790005292A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242D20793B790005292A /* TermsViewController.swift */; };
 		5796243020793B790005292A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242E20793B790005292A /* AboutViewController.swift */; };
 		579F9508210B57C200E3F7F7 /* JSQCustomAudioMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F9507210B57C200E3F7F7 /* JSQCustomAudioMediaItem.swift */; };
+		57A8129B210CE3AB003D738E /* throwBottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57A8129A210CE3AB003D738E /* throwBottle.gif */; };
+		57A8129D210CE63F003D738E /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57A8129C210CE63E003D738E /* find_bottle.gif */; };
+		57A8129F210CEA13003D738E /* girl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57A8129E210CEA12003D738E /* girl.gif */; };
 		57D64E65210707AC00A22B52 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D64E64210707AB00A22B52 /* FirebaseManager.swift */; };
 		57DE7459207D77E00061CA2F /* fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57DE7458207D77E00061CA2F /* fire.gif */; };
+		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
 		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
@@ -280,9 +281,7 @@
 		570D12A420D9A0C700A2A793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		571084C620C01176001163EA /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		571084C820C02262001163EA /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
-		57190C882105F48D00E88F38 /* girl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl.gif; sourceTree = "<group>"; };
 		57190C8A2105F4E600E88F38 /* girl_3_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_2.gif; sourceTree = "<group>"; };
-		57190C8C2105F92F00E88F38 /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
 		57413D53204D3B5700450A42 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		57413D54204D3B5700450A42 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 		5742C13F205660B300A5402D /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerView.swift; path = VideoPlayer/VideoPlayerView.swift; sourceTree = "<group>"; };
@@ -290,7 +289,6 @@
 		5742C14320573BC200A5402D /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		57439D3120FE06CB00343FCE /* girl_3_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_1.gif; sourceTree = "<group>"; };
 		57439D3220FE06CE00343FCE /* girl_3_1_night.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_1_night.gif; sourceTree = "<group>"; };
-		57439D3520FE0AA200343FCE /* throwBottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = throwBottle.gif; sourceTree = "<group>"; };
 		5758907720D98F80007F5E00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
 		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
@@ -299,6 +297,9 @@
 		5796242D20793B790005292A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsViewController.swift; path = ../Home/TermsViewController.swift; sourceTree = "<group>"; };
 		5796242E20793B790005292A /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ../Home/AboutViewController.swift; sourceTree = "<group>"; };
 		579F9507210B57C200E3F7F7 /* JSQCustomAudioMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQCustomAudioMediaItem.swift; sourceTree = "<group>"; };
+		57A8129A210CE3AB003D738E /* throwBottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = throwBottle.gif; sourceTree = "<group>"; };
+		57A8129C210CE63E003D738E /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
+		57A8129E210CEA12003D738E /* girl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl.gif; sourceTree = "<group>"; };
 		57D64E64210707AB00A22B52 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		57DE7458207D77E00061CA2F /* fire.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fire.gif; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -642,6 +643,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,14 +685,14 @@
 			isa = PBXGroup;
 			children = (
 				570BB3232081445C00542EAD /* crab.gif */,
-				57190C8C2105F92F00E88F38 /* find_bottle.gif */,
 				57DE7458207D77E00061CA2F /* fire.gif */,
+				57A8129C210CE63E003D738E /* find_bottle.gif */,
 				57439D3220FE06CE00343FCE /* girl_3_1_night.gif */,
+				57A8129E210CEA12003D738E /* girl.gif */,
 				57439D3120FE06CB00343FCE /* girl_3_1.gif */,
 				5787DEC321008786009C2A43 /* dolphin.gif */,
-				57190C882105F48D00E88F38 /* girl.gif */,
+				57A8129A210CE3AB003D738E /* throwBottle.gif */,
 				57190C8A2105F4E600E88F38 /* girl_3_2.gif */,
-				57439D3520FE0AA200343FCE /* throwBottle.gif */,
 			);
 			name = gif;
 			sourceTree = "<group>";
@@ -1441,9 +1443,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 570D12A820D9A0C800A2A793 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
 			buildPhases = (
+				0ACB53423AF85F24C17A2143 /* [CP] Check Pods Manifest.lock */,
 				570D129C20D9A0C700A2A793 /* Sources */,
 				570D129D20D9A0C700A2A793 /* Frameworks */,
 				570D129E20D9A0C700A2A793 /* Resources */,
+				C8B1CD079953BDF39E758057 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1545,9 +1549,9 @@
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
-				57190C8D2105F93000E88F38 /* find_bottle.gif in Resources */,
+				57A8129D210CE63F003D738E /* find_bottle.gif in Resources */,
+				57A8129B210CE3AB003D738E /* throwBottle.gif in Resources */,
 				5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */,
-				57439D3620FE0AA600343FCE /* throwBottle.gif in Resources */,
 				B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */,
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
@@ -1563,9 +1567,9 @@
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				57DE7459207D77E00061CA2F /* fire.gif in Resources */,
 				57190C8B2105F4E700E88F38 /* girl_3_2.gif in Resources */,
+				57A8129F210CEA13003D738E /* girl.gif in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
 				5758907820D98F81007F5E00 /* GoogleService-Info.plist in Resources */,
-				57190C892105F48D00E88F38 /* girl.gif in Resources */,
 				5787DEC421008787009C2A43 /* dolphin.gif in Resources */,
 				B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */,
 				57439D3320FE06D100343FCE /* girl_3_1.gif in Resources */,
@@ -1582,6 +1586,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0ACB53423AF85F24C17A2143 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1684F4B8AAA584DE47866C40 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1631,6 +1653,7 @@
 				"${BUILT_PRODUCTS_DIR}/SDRecordButton/SDRecordButton.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
@@ -1662,6 +1685,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDRecordButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
@@ -1674,6 +1698,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8B1CD079953BDF39E758057 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D33A024EBB99BC00C780DC5C /* [CP] Check Pods Manifest.lock */ = {
@@ -1928,6 +1967,7 @@
 /* Begin XCBuildConfiguration section */
 		570D12A920D9A0C800A2A793 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E256E2B0997DBD0A356FD8B3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1955,6 +1995,7 @@
 		};
 		570D12AA20D9A0C800A2A793 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F393EA47B3719E4B728D2E0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

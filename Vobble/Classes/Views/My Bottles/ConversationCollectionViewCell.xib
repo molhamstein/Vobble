@@ -86,6 +86,13 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_new_msg" translatesAutoresizingMaskIntoConstraints="NO" id="CfM-ep-j3z">
+                        <rect key="frame" x="694" y="18" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Tke-Ru-mHx"/>
+                            <constraint firstAttribute="height" constant="30" id="kaV-ta-4JE"/>
+                        </constraints>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="o4r-cb-ySB">
                         <rect key="frame" x="10" y="0.0" width="65" height="65"/>
                         <constraints>
@@ -125,6 +132,8 @@
                 <constraint firstItem="8mu-6Q-eaw" firstAttribute="bottom" secondItem="wLE-hh-eIy" secondAttribute="bottom" constant="8" id="BPj-Zb-9Kx"/>
                 <constraint firstAttribute="trailing" secondItem="wLE-hh-eIy" secondAttribute="trailing" constant="5" id="E8T-HI-Vxu"/>
                 <constraint firstAttribute="trailing" secondItem="8mu-6Q-eaw" secondAttribute="trailing" constant="15" id="EbU-k7-qgl"/>
+                <constraint firstItem="CfM-ep-j3z" firstAttribute="top" secondItem="3U4-LW-FaO" secondAttribute="top" constant="10" id="HgI-QX-KG6"/>
+                <constraint firstItem="CfM-ep-j3z" firstAttribute="trailing" secondItem="3U4-LW-FaO" secondAttribute="trailing" constant="10" id="Ja8-Kk-lEU"/>
                 <constraint firstItem="o4r-cb-ySB" firstAttribute="top" secondItem="e28-4a-zkR" secondAttribute="top" id="Jfg-zA-VnS"/>
                 <constraint firstItem="o4r-cb-ySB" firstAttribute="leading" secondItem="e28-4a-zkR" secondAttribute="leading" constant="10" id="Mm2-l9-kDS"/>
                 <constraint firstItem="8mu-6Q-eaw" firstAttribute="top" secondItem="e28-4a-zkR" secondAttribute="top" constant="8" id="Rfn-M9-KOm"/>
@@ -143,6 +152,7 @@
                 <outlet property="chatButton" destination="wLE-hh-eIy" id="dHz-pb-MFt"/>
                 <outlet property="countryLabel" destination="sRf-uB-hXk" id="tui-4D-0Vl"/>
                 <outlet property="image" destination="o4r-cb-ySB" id="Gl2-by-k0V"/>
+                <outlet property="ivNewMessageIcon" destination="CfM-ep-j3z" id="eyt-dj-dnb"/>
                 <outlet property="mainView" destination="8mu-6Q-eaw" id="DTA-id-YKE"/>
                 <outlet property="shadowHolderView" destination="3U4-LW-FaO" id="EHg-sY-mao"/>
                 <outlet property="timeLeftTitleLabel" destination="EZl-O4-pSJ" id="PSc-IV-sdF"/>
@@ -152,6 +162,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_new_msg" width="40" height="40"/>
         <image name="user_placeholder" width="1024" height="1024"/>
     </resources>
 </document>

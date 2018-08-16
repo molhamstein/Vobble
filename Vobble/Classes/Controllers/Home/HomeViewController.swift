@@ -8,6 +8,7 @@
 
 import UIKit
 import Flurry_iOS_SDK
+import SwiftyGif
 
 class HomeViewController: AbstractController {
     
@@ -36,12 +37,14 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var ivThrowBtn: UIImageView!
     @IBOutlet weak var lblBottlesLeftBadge: UILabel!
     @IBOutlet weak var vThrowBtnCircle: UIView!
+    
     // my bottles
     @IBOutlet weak var vMyBottlesBtnContainer: UIView!
     @IBOutlet weak var lblMyBottlesBtn: UILabel!
     @IBOutlet weak var btnMyBottlesBtn: UIButton!
     @IBOutlet weak var ivMyBottlesBtn: UIImageView!
     @IBOutlet weak var vMyBottlesBtnCircle: UIView!
+    @IBOutlet weak var lblUnreadConversationsBadge: UILabel!
     // find
     @IBOutlet weak var vFindBtnContainer: UIView!
     @IBOutlet weak var lblFindBtn: UILabel!
@@ -58,6 +61,8 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivCrap: UIImageView!
     @IBOutlet var ivShark: UIImageView!
     @IBOutlet var ivBoat: UIImageView!
+    
+    @IBOutlet var sonTopConstraint: NSLayoutConstraint!
     
     var screenWidth: CGFloat = 0.0;
     var blockPageTransitions: Bool = false;
@@ -108,6 +113,17 @@ class HomeViewController: AbstractController {
         // prefetch the conversations to make sure they apear faster
         FirebaseManager.shared.fetchMyBottlesConversations { (err) in}
         FirebaseManager.shared.fetchMyRepliesConversations { (err) in}
+        
+        // move the sun up to make sure no edges show when the navigations bar is flipped in arabic
+        if AppConfig.currentLanguage == .arabic {
+            sonTopConstraint.constant = -38
+        } else {
+            sonTopConstraint.constant = -16
+        }
+        
+        // observe any change in the unread notifications count
+        lblUnreadConversationsBadge.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -199,12 +215,16 @@ class HomeViewController: AbstractController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(seaTapped(tapGestureRecognizer:)))
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
-        self.ivShore2Girl.loadGif(name: "girl")
-        self.ivShore3Girl1.loadGif(name: "girl_3_1")
-        self.ivShore3Girl2.loadGif(name: "girl_3_2")
+        self.ivShore2Girl.setGifImage(UIImage(gifName: "girl.gif"))
+        self.ivShore3Girl1.setGifImage(UIImage(gifName: "girl_3_1.gif"))
+        self.ivShore3Girl2.setGifImage(UIImage(gifName: "girl_3_2.gif"))
+        //self.ivThrowBottle.loopCount = 1
+        
+//        self.ivShore2Girl.loadGif(name: "girl")
+//        self.ivShore3Girl1.loadGif(name: "girl_3_1")
+//        self.ivShore3Girl2.loadGif(name: "girl_3_2")
         
         filterView.delegate = self
-        //ivShore2Girl.loadGif(asset: "girl")
     }
     
     func refreshViewData () {
@@ -233,7 +253,7 @@ class HomeViewController: AbstractController {
             ivShore1Shore.image = UIImage(named:"shore1_night")
             ivShore2Shore.image = UIImage(named:"shore2_night")
             ivShore3Shore.image = UIImage(named:"shore3_night")
-            ivFire.loadGif(name: "fire")
+            ivFire.setGifImage(UIImage(gifName: "fire.gif"))
             
             //ivWaves.image = nil
         } else {
@@ -251,7 +271,8 @@ class HomeViewController: AbstractController {
             //ivWaves.image = nil
         }
         
-        ivCrap.loadGif(name: "crab")
+        ivCrap.setGifImage(UIImage(gifName: "crab.gif"))
+        ivCrap.loopCount = -1
 //        ivCrap?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: 0, y: 0)
 //        UIView.animate(withDuration: 35.0, delay: 0, options: [.repeat, .autoreverse, .curveLinear], animations: {
 //            self.ivCrap?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 2, y: 0)
@@ -314,7 +335,9 @@ class HomeViewController: AbstractController {
         let randDelay: Double = Double(arc4random_uniform(UInt32(12) + 4))
         DispatchQueue.main.asyncAfter(deadline: .now() + randDelay) {
             self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: randX, y: randY).scaledBy(x: randY/(maxYTransaltion * 2) + 1.0, y: (randY/(maxYTransaltion * 2)) + 1.0)
-            self.ivShark.loadGif(name: "dolphin")
+            let dolphinGif = UIImage(gifName: "dolphin.gif")
+            self.ivShark.setGifImage(dolphinGif)
+            self.ivShark.loopCount = 1
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {
                 // stop the gif from replay 
                 self.ivShark.image = nil
@@ -322,12 +345,23 @@ class HomeViewController: AbstractController {
         }
     }
     
+    func unreadMessagesCountChange (notification: NSNotification) {
+        let count = DataStore.shared.getConversationsWithUnseenMessagesCount()
+        if count > 0{
+            lblUnreadConversationsBadge.text = "\(DataStore.shared.getConversationsWithUnseenMessagesCount())"
+            lblUnreadConversationsBadge.isHidden = false
+        } else {
+            lblUnreadConversationsBadge.isHidden = true
+        }
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let bottle = sender as? Bottle {
             let nav = segue.destination as! UINavigationController
             let findBottleVC = nav.topViewController as! FindBottleViewController
-            findBottleVC.shoreName = self.navigationView.navTitle.text
+            //findBottleVC.shoreName = self.navigationView.navTitle.text
             findBottleVC.bottle = bottle
         
         } else if segue.identifier == "shopSegue" {
@@ -383,7 +417,9 @@ class HomeViewController: AbstractController {
     
     @IBAction func findBottlePressed(_ sender: Any) {
        
-        self.ivFindBottle.loadGif(name: "find_bottle")
+        let findBottleGif = UIImage(gifName: "find_bottle.gif")
+        self.ivFindBottle.setGifImage(findBottleGif)
+        self.ivFindBottle.loopCount = 1
         //self.wiggleAnimate(view: self.ivFindBtn)
         self.popAnimation(view: self.vFindBtnCircle)
         
@@ -451,7 +487,10 @@ class HomeViewController: AbstractController {
     
     @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {
         
-        self.ivThrowBottle.loadGif(name: "throwBottle")
+        let throwBottleGif = UIImage(gifName: "throwBottle.gif")
+        self.ivThrowBottle.setGifImage(throwBottleGif)
+        self.ivThrowBottle.loopCount = 1
+        
         if let sourceController = segue.source as? PreviewMediaControl {
             switch sourceController.selectedShoreIndex {
             case 0:

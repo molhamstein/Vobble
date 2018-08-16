@@ -29,11 +29,9 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     // bottles thrown
     @IBOutlet weak var lblBottlesLeftCount: UILabel!
     @IBOutlet weak var lblBottlesLeftCountTitle: UILabel!
-    @IBOutlet weak var lblBottlesLeftCountSubTitle: UILabel!
     // bottles thrown
     @IBOutlet weak var lblBottlesThrownCount: UILabel!
     @IBOutlet weak var lblBottlesThrownCountTitle: UILabel!
-    @IBOutlet weak var lblBottlesThrownCountSubTitle: UILabel!
     
     public weak var convVC: ConversationViewController?
     
@@ -44,18 +42,14 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         
         // wording 
         lblBottlesLeftCountTitle.text = "MY_BOTTLES_LEFT_TITLE".localized
-        lblBottlesLeftCountSubTitle.text = "MY_BOTTLES_LEFT_SUBTITLE".localized
         lblBottlesThrownCountTitle.text = "MY_BOTTLES_THROWN_TITLE".localized
-        lblBottlesThrownCountSubTitle.text = "MY_BOTTLES_THROWN_SUBTITLE".localized
         btnMyReplies.setTitle("MY_BOTTLES_REPLIES_TITLE".localized, for: .normal)
         btnMyBottles.setTitle("MY_BOTTLES_BOTTLES_TITLE".localized, for: .normal)
         lblNextRefillTitle.text = "MY_BOTTLES_NEXT_REFILL".localized
         
         // font
         lblBottlesLeftCountTitle.font = AppFonts.xSmall
-        lblBottlesLeftCountSubTitle.font = AppFonts.xSmall
         lblBottlesThrownCountTitle.font = AppFonts.xSmall
-        lblBottlesThrownCountSubTitle.font = AppFonts.xSmall
         btnMyReplies.titleLabel?.font = AppFonts.bigBold
         btnMyBottles.titleLabel?.font = AppFonts.bigBold
         lblNextRefillTitle.font = AppFonts.xSmall

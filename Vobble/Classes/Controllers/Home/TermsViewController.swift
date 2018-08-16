@@ -8,10 +8,19 @@
 
 import Foundation
 
+enum Terms_type{
+    case userAgreement
+    case privacyPolicy
+}
+
 class TermsViewController: AbstractController {
     
-    let TERMS_URL_AR: String! = "https://dev.alpha-apps.ae/warda/public/tc_ar.html"
-    let TERMS_URL_EN: String! = "https://dev.alpha-apps.ae/warda/public/tc_en.html"
+    let PRIVACY_URL_AR: String! = "http://159.65.202.38/terms/privacy_policy.html"
+    let PRIVACY_URL_EN: String! = "http://159.65.202.38/terms/privacy_policy.html"
+    let TERMS_URL_AR: String! = "http://159.65.202.38/terms/agreement.html"
+    let TERMS_URL_EN: String! = "http://159.65.202.38/terms/agreement.html"
+    
+    var termsType: Terms_type = .privacyPolicy
     
     // MARK: Properties
     @IBOutlet var webView: UIWebView!
@@ -31,10 +40,14 @@ class TermsViewController: AbstractController {
         super.customizeView()
 
         self.navigationView.viewcontroller = self
-        self.navigationView.title = "TERMS_TITLE".localized
+        self.navigationView.title = ""
         self.showNavBackButton = true
-        
-        let url: String! = (AppConfig.currentLanguage == .arabic) ? self.TERMS_URL_AR : self.TERMS_URL_EN
+        let url: String!
+        if termsType == .privacyPolicy{
+            url = (AppConfig.currentLanguage == .arabic) ? self.PRIVACY_URL_AR : self.PRIVACY_URL_EN
+        } else {
+            url = (AppConfig.currentLanguage == .arabic) ? self.TERMS_URL_AR : self.TERMS_URL_EN
+        }
         webView.loadRequest(URLRequest(url: URL(string: url)!))
     }
     

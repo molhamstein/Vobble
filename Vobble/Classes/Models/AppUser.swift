@@ -27,7 +27,7 @@ enum LoginType: String {
     case facebook = "facebook"
     case twitter = "twitter"
     case google = "google"
-    case instagram = "instagram"
+    case instagram = "instegram"
     /// check current login state (Social - Normal)
     var isSocial:Bool {
         switch self {
@@ -57,9 +57,10 @@ class AppUser: BaseModel, NSCopying {
     private let kUserSocialId = "socialId"
     private let kUserSocialToken = "token"
     private let kUserNextRefill = "nextRefill"
+    private let kAccountInfoCompleted = "registrationCompleted"
     
     
-    private let kUserBottlesCount = "totlalBottlesThrown"
+    private let kUserBottlesCount = "totalBottlesThrown"
     private let kUserBottlesLeftToday = "bottlesCount"
     private let kUserExtraBottles = "extraBottlesCount"
     
@@ -119,6 +120,7 @@ class AppUser: BaseModel, NSCopying {
         if let nextRefill = json[kUserNextRefill].string {
             nextRefillDate = DateHelper.getDateFromISOString(nextRefill)
         }
+        
         token = json[kUserTokenKey].string
         thrownBottlesCount = json[kUserBottlesCount].int
         bottlesLeftToThrowCount = json[kUserBottlesLeftToday].int
@@ -186,6 +188,10 @@ class AppUser: BaseModel, NSCopying {
         if let value = nextRefillDate {
             dictionary[kUserNextRefill] = DateHelper.getISOStringFromDate(value)
         }
+        
+//        if let value = accountInfoCompleted {
+//            dictionary[kAccountInfoCompleted] = value
+//        }
         
         //dictionary[kUserBottles] = myBottlesArray.map{$0}
         //dictionary[kUserReplies] = myRepliesArray.map{$0}

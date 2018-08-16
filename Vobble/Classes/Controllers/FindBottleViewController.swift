@@ -21,6 +21,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var shoreNameLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var userimage: UIImageView!
+    @IBOutlet weak var moreOptionsOverlayButton: UIButton!
     
     @IBOutlet var videoView: VideoPlayerView!
     
@@ -45,10 +46,11 @@ class FindBottleViewController: AbstractController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        shoreNameLabel.text = shoreName
+        shoreNameLabel.text = bottle?.shore?.name
         userNameLabel.text = bottle?.owner?.userName
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: nil)
         optionView.isHidden = true
+        moreOptionsOverlayButton.isHidden = true
         reportView.isHidden = true
         reportButton.setTitle("REPORT".localized, for: .normal)
         blockButton.setTitle("BLOCK_USER".localized, for: .normal)
@@ -81,8 +83,10 @@ class FindBottleViewController: AbstractController {
     @IBAction func moreOptionBtnPressed(_ sender: Any) {
         if optionView.isHidden == true {
             optionView.isHidden = false
+            moreOptionsOverlayButton.isHidden = false
         } else {
             optionView.isHidden = true
+            moreOptionsOverlayButton.isHidden = true
         }
     }
     

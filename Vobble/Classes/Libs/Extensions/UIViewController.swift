@@ -34,7 +34,11 @@ extension UIViewController{
         if (self.isPresentedModally()) {
             self.dismiss(animated: animated, completion: nil)
         } else if (self.navigationController != nil) {
+//            if self.navigationController?.viewControllers[0] == self {
+//                self.navigationController?.dismiss(animated: true, completion: {})
+//            } else {
             self.navigationController?.popViewController(animated: animated)
+//            }
         }
     }
 }

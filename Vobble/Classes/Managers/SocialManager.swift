@@ -52,7 +52,7 @@ class SocialManager: NSObject{
                                         if let picObj = dict["picture"] as? [String : AnyObject], let innerPicObj = picObj["data"] as? [String : AnyObject] {
                                             pictureLink = innerPicObj["url"] as! String
                                         }
-                                        
+                                        // TODO: counreyCode is not being used in the signup api
                                         // send facebook ID to start login process
                                         ApiManager.shared.userFacebookLogin(facebookId: facebookId, fbName: userName, fbToken: FBSDKAccessToken.current().tokenString, email: email, fbGender: gender, imageLink: pictureLink) { (isSuccess, error, user) in
                                             // login success

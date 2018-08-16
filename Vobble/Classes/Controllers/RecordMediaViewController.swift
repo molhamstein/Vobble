@@ -218,18 +218,16 @@ class RecordMediaViewController: AbstractController {
     @IBAction func switchButtonPressed(button: UIButton) {
         if(camera.position == LLCameraPositionRear){
             self.flashButton.isHidden = false;
-        }
-        else{
+        } else {
             self.flashButton.isHidden = true;
         }
-        
         self.camera.togglePosition()
     }
     
     @IBAction func close() {
         isCanceled = true
         stopRecording()
-        //self.navigationController?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         self.popOrDismissViewControllerAnimated(animated: true)
     }
     
@@ -495,10 +493,13 @@ extension RecordMediaViewController
         // count down 0
         if (timeOut >= MAX_VIDEO_LENGTH){
             // stop image timer
-            recordTimer?.invalidate()
-            recordTimer = nil;
+//            recordTimer?.invalidate()
+//            recordTimer = nil;
+            
             // stop play image media
-            stopRecorderTimer()
+            stopRecording()
+            prepareForRecording()
+            recordButton.sendActions(for: .touchUpInside)
             
         } else {// reduce counter
             if (!isAnimating){

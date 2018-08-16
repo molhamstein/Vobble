@@ -41,12 +41,11 @@ final class ChatViewController: JSQMessagesViewController {
     var conversationId: String?
     
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
-//    fileprivate lazy var storageRef: StorageReference = Storage.storage().reference(forURL: "gs://vobble-1521577974841.appspot.com")
-    //  private lazy var userIsTypingRef: DatabaseReference = self.conversationRef!.child("typingIndicator").child(self.senderId)
-    //  private lazy var usersTypingQuery: DatabaseQuery = self.conversationRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
+    private var unseenCountRef: DatabaseReference?
     
     private var newMessageRefHandle: DatabaseHandle?
     private var updatedMessageRefHandle: DatabaseHandle?
+    private var unseenMessagesCountRefHandle: DatabaseHandle?
     
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
@@ -218,6 +217,10 @@ final class ChatViewController: JSQMessagesViewController {
         if let refHandle = updatedMessageRefHandle {
             messageRef.removeObserver(withHandle: refHandle)
         }
+        if let refHandle = unseenMessagesCountRefHandle {
+            unseenCountRef?.removeObserver(withHandle: refHandle)
+        }
+        
     }
     
     func initNavBar() {
@@ -461,7 +464,7 @@ final class ChatViewController: JSQMessagesViewController {
             newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
     //            let messageData = snapshot.value as! Dictionary<String, String>
                 
-                let values = snapshot.value as? NSDictionary
+                //let values = snapshot.value as? NSDictionary
                 
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
@@ -499,7 +502,7 @@ final class ChatViewController: JSQMessagesViewController {
                    
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
                         self.collectionView.reloadData()
-                        self.videoMessageMap.removeValue(forKey: snapshot.key)
+                        self.audioMessageMap.removeValue(forKey: snapshot.key)
                     }
                     
                 } else {
@@ -544,6 +547,20 @@ final class ChatViewController: JSQMessagesViewController {
                 self.scrollToBottom(animated: true)
             })
         }
+        
+        // handle seen messages
+        if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+            unseenCountRef = self.conversationRef!.child("user1_unseen")
+            unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { (snapshot) -> Void in
+                self.conversationRef?.updateChildValues(["user1_unseen": 0])
+            })
+        } else {
+            unseenCountRef = self.conversationRef!.child("user2_unseen")
+            unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { (snapshot) -> Void in
+                self.conversationRef?.updateChildValues(["user2_unseen": 0])
+            })
+        }
+        
     }
     
     private func fetchImageDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQCustomPhotoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
@@ -736,6 +753,14 @@ final class ChatViewController: JSQMessagesViewController {
                 let msgToSendAr = String(format: "NOTIFICATION_NEW_MSG_AR".localized, (DataStore.shared.me?.userName)!)
                 ApiManager.shared.sendPushNotification(msg: msgToSend, msg_ar: msgToSendAr, targetUser: peer, chatId: self.conversationId, completionBlock: { (success, error) in })
             }
+        }
+        
+        // mark the other user as unread
+        // if i"m the sender increase the unread count for the peer
+        if self.conversationOriginalObject?.bottle?.owner?.objectId == self.senderId {
+            self.conversationRef?.updateChildValues(["user2_unseen": 1])
+        } else {
+            self.conversationRef?.updateChildValues(["user1_unseen": 1])
         }
     }
     
