@@ -138,7 +138,7 @@ extension ConversationViewController: UICollectionViewDataSource {
         headerView.searchTetField.delegate = self
         headerView.searchTetField.addTarget(self, action:#selector(onSearchTextFieldChanged(_:)), for: .editingChanged)
         headerView.convVC = self
-        headerView.awakeFromNib()
+        //headerView.awakeFromNib()
         self.searchText =  headerView.searchTetField
         self.userImageView = headerView.userImageView
         if let me = DataStore.shared.me {
@@ -276,15 +276,15 @@ extension ConversationViewController: UICollectionViewDelegate {
     func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Camera".localized, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.camera()
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Gallery".localized, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.photoLibrary()
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
         
         present(actionSheet, animated: true, completion: nil)
         
@@ -320,8 +320,15 @@ extension ConversationViewController {
                 filteredConvArray = DataStore.shared.myReplies
             }
         }
+        // make sure we only update the items not the header so we dont loose the text field
+        var itemCountToUpdate = self.collectionView(bottleCollectionView, numberOfItemsInSection: 0)
+        var itemsIndexesToUpdate = [IndexPath]()
+//        for i in 0..<itemCountToUpdate {
+//            itemsIndexesToUpdate.append(IndexPath(index:i))
+//        }
+        //itemsIndexesToUpdate.append(IndexPath(index:1))
         bottleCollectionView.reloadData()
-
+        
         return true
     }
 }
@@ -477,7 +484,9 @@ extension ConversationViewController {
                         if conv.idString == conversation.idString {
                             DataStore.shared.myReplies[i] = conversation
                             DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                                if obj1.is_seen! != obj2.is_seen! {
+                                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
+                                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
+                                }else if obj1.is_seen! != obj2.is_seen! {
                                     return (obj1.is_seen! >= 1)
                                 } else {
                                     return (obj1.createdAt! > obj2.createdAt!)
@@ -498,7 +507,9 @@ extension ConversationViewController {
                         if conv.idString == conversation.idString {
                             DataStore.shared.myBottles[i] = conversation
                             DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                                if obj1.is_seen! != obj2.is_seen! {
+                                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
+                                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
+                                }else if obj1.is_seen! != obj2.is_seen! {
                                     return (obj1.is_seen! >= 1)
                                 } else {
                                     return (obj1.createdAt! > obj2.createdAt!)

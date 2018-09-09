@@ -58,7 +58,7 @@ class VobbleNavigationBar : AbstractNibView {
     }
     
     func setupView () {
-        navTitle.font = AppFonts.bigBold
+        navTitle.font = AppFonts.xBigBold
         progressIndicator.isHidden = true
         
         if AppConfig.currentLanguage == .arabic {

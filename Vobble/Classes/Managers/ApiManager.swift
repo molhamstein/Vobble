@@ -820,7 +820,7 @@ class ApiManager: NSObject {
     }
     
     // MARK: -  p  bottles
-    func findBottle(gender:String, countryCode:String, shoreId:String, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
+    func findBottle(gender:String, countryCode:String, shoreId:String?, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
         
 //        var findhBottleURL = "\(baseURL)/bottles?filter[where][ownerId][neq]="
 //
@@ -842,7 +842,11 @@ class ApiManager: NSObject {
 
         var findBottleURL = "\(baseURL)/bottles/getOneBottle"
         // shore
-        findBottleURL += "?shoreId=\(shoreId)"
+        if let shore = shoreId {
+            findBottleURL += "?shoreId=\(shore)"
+        } else {
+            findBottleURL += "?dummyParam=d"
+        }
         // country
         if countryCode != "" {
             findBottleURL += "&ISOCode=\(countryCode)"
@@ -977,6 +981,7 @@ struct ServerError {
         case userNotActivated = 403
         case invalidUserName = 405
         case noBottleFound = 406
+        case emailAlreadyExists = 413
         case alreadyExists = 101
         case socialLoginFailed = -110
 		case notRegistred = 102
@@ -1013,6 +1018,8 @@ struct ServerError {
                     return "ERROR_INVALID_USERNAME".localized
                 case .noBottleFound:
                     return "ERROR_BOTTLE_NOT_FOUND".localized
+                case .emailAlreadyExists:
+                    return "ERROR_EMAIL_EXISTS".localized
                 
                 default:
                     return "ERROR_UNKNOWN".localized

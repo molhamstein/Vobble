@@ -78,7 +78,9 @@ class FirebaseManager :NSObject {
             // show open chats first
             // if chat is not open yet sort them by date from newest to olders
             DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                if obj1.is_seen! != obj2.is_seen! {
+                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
+                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
+                }else if obj1.is_seen! != obj2.is_seen! {
                     return (obj1.is_seen! >= 1)
                 } else {
                     return (obj1.createdAt! > obj2.createdAt!)
@@ -155,7 +157,9 @@ class FirebaseManager :NSObject {
             
             // sort data to show on going conversations first
             DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                if obj1.is_seen! != obj2.is_seen! {
+                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
+                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
+                }else if obj1.is_seen! != obj2.is_seen! {
                     return (obj1.is_seen! >= 1)
                 } else {
                     return (obj1.createdAt! > obj2.createdAt!)

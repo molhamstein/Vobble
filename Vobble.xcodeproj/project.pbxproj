@@ -28,6 +28,7 @@
 		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
 		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
 		576807B120AF1A500039E2C2 /* RateUsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */; };
+		57771F5D21270B1900A9C884 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57771F5C21270B1800A9C884 /* AnnotationViewController.swift */; };
 		5787DEC421008787009C2A43 /* dolphin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5787DEC321008786009C2A43 /* dolphin.gif */; };
 		5796242F20793B790005292A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242D20793B790005292A /* TermsViewController.swift */; };
 		5796243020793B790005292A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242E20793B790005292A /* AboutViewController.swift */; };
@@ -35,8 +36,10 @@
 		57A8129B210CE3AB003D738E /* throwBottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57A8129A210CE3AB003D738E /* throwBottle.gif */; };
 		57A8129D210CE63F003D738E /* find_bottle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57A8129C210CE63E003D738E /* find_bottle.gif */; };
 		57A8129F210CEA13003D738E /* girl.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57A8129E210CEA12003D738E /* girl.gif */; };
+		57BC6C3F2141DAD7005C4E7B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BC6C3E2141DAD7005C4E7B /* URL.swift */; };
 		57D64E65210707AC00A22B52 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D64E64210707AB00A22B52 /* FirebaseManager.swift */; };
 		57DE7459207D77E00061CA2F /* fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57DE7458207D77E00061CA2F /* fire.gif */; };
+		57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 57DED21A2126AFCE00514FBE /* loginVideo.mp4 */; };
 		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
@@ -293,6 +296,7 @@
 		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
 		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateUsPopupViewController.swift; sourceTree = "<group>"; };
+		57771F5C21270B1800A9C884 /* AnnotationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		5787DEC321008786009C2A43 /* dolphin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dolphin.gif; sourceTree = "<group>"; };
 		5796242D20793B790005292A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsViewController.swift; path = ../Home/TermsViewController.swift; sourceTree = "<group>"; };
 		5796242E20793B790005292A /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ../Home/AboutViewController.swift; sourceTree = "<group>"; };
@@ -300,8 +304,10 @@
 		57A8129A210CE3AB003D738E /* throwBottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = throwBottle.gif; sourceTree = "<group>"; };
 		57A8129C210CE63E003D738E /* find_bottle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = find_bottle.gif; sourceTree = "<group>"; };
 		57A8129E210CEA12003D738E /* girl.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl.gif; sourceTree = "<group>"; };
+		57BC6C3E2141DAD7005C4E7B /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		57D64E64210707AB00A22B52 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		57DE7458207D77E00061CA2F /* fire.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fire.gif; sourceTree = "<group>"; };
+		57DED21A2126AFCE00514FBE /* loginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.mp4; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -769,6 +775,7 @@
 			isa = PBXGroup;
 			children = (
 				B19372F72033E48F007B1E7D /* AppColors.swift */,
+				57DED21A2126AFCE00514FBE /* loginVideo.mp4 */,
 				B19372E92033E44E007B1E7D /* AppFonts.swift */,
 				B19372EA2033E44E007B1E7D /* Fonts */,
 			);
@@ -940,6 +947,7 @@
 				57413D54204D3B5700450A42 /* GCD.m */,
 				B18A5C4F20348E4200F139B7 /* Collection.swift */,
 				B18A5C5020348E4200F139B7 /* String.swift */,
+				57BC6C3E2141DAD7005C4E7B /* URL.swift */,
 				B18A5C5120348E4200F139B7 /* UIApplication.swift */,
 				B18A5C5220348E4200F139B7 /* UIColor.swift */,
 				B18A5C5320348E4200F139B7 /* UIStoryBoard.swift */,
@@ -1310,6 +1318,7 @@
 			isa = PBXGroup;
 			children = (
 				B1F7A455205A0F39009B18AB /* ShopViewController.swift */,
+				57771F5C21270B1800A9C884 /* AnnotationViewController.swift */,
 				B19371162033D8FC007B1E7D /* HomeViewController.swift */,
 				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
 				B1508CD520461F630048123F /* FindBottleViewController.swift */,
@@ -1545,6 +1554,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */,
 				B18719CB2079952800861B45 /* jsq_messages_sample.m4a in Resources */,
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
@@ -1643,6 +1653,7 @@
 				"${BUILT_PRODUCTS_DIR}/Flurry-iOS-SDK/Flurry_iOS_SDK.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/Gecco/Gecco.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
@@ -1675,6 +1686,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flurry_iOS_SDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gecco.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
@@ -1764,6 +1776,7 @@
 				B18A5DAF20348E4300F139B7 /* UICollectionReusableView+RACSignalSupport.m in Sources */,
 				B18A5D6520348E4300F139B7 /* NSArray+RACSequenceAdditions.m in Sources */,
 				B156A44320587E8000654E2A /* ConversationCollectionViewHeader.swift in Sources */,
+				57BC6C3F2141DAD7005C4E7B /* URL.swift in Sources */,
 				B19372B22033E27B007B1E7D /* DataStore.swift in Sources */,
 				B18A5DC520348E4300F139B7 /* NSObject+SimpleAuthAdditions.m in Sources */,
 				B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */,
@@ -1895,6 +1908,7 @@
 				B18A5D5520348E4300F139B7 /* UIStoryBoard.swift in Sources */,
 				B18A5D6A20348E4300F139B7 /* NSIndexSet+RACSequenceAdditions.m in Sources */,
 				B1EA39D120562673008AADC9 /* ConversationViewController.swift in Sources */,
+				57771F5D21270B1900A9C884 /* AnnotationViewController.swift in Sources */,
 				B18A5D9020348E4300F139B7 /* RACKVOTrampoline.m in Sources */,
 				B18A5DAD20348E4300F139B7 /* UIBarButtonItem+RACCommandSupport.m in Sources */,
 				B193711B2033D92F007B1E7D /* LoginViewController.swift in Sources */,

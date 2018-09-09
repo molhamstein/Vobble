@@ -9,8 +9,10 @@
 import UIKit
 import Firebase
 import StoreKit
+import AVFoundation
 
 enum ViewType {
+    case welcome
     case login
     case signup
     case countryV
@@ -26,6 +28,10 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     //main view
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var waveSubView: WaveView!
+    
+    // welcome view
+    private var player: AVPlayer?
+    @IBOutlet weak var welcomeView: UIView!
     
     // login view
     @IBOutlet weak var loginView: UIView!
@@ -107,11 +113,15 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         //hideView(withType: .signup)
         //hideView(withType: .countryV)
         //loginView.dropShadow()
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidBecomeActive),
+                                               name: .UIApplicationDidBecomeActive,
+                                               object: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         
     }
     
@@ -127,11 +137,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             self.socialInfoView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.socialInfoView.frame.height)
             
             waveSubView.awakeFromNib()
-            waveSubView.showWave()
+            waveSubView.isHidden = true
             
             dispatch_main_after(0.7) {
-                self.showView(withType: .login)
+                self.showView(withType: .welcome)
+                self.preparePlayer()
+                self.player?.play()
             }
+            
         }
         //lvEmailLabel.font = AppFonts.big
     }
@@ -145,6 +158,28 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             self.signupButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
         }
         self.isInitialized = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.player?.pause()
+    }
+    
+    func applicationDidBecomeActive() {
+        DispatchQueue.main.async {
+            self.player?.play()
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        self.player = nil
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        self.player = nil
     }
     
     // Customize all view members (fonts - style - text)
@@ -207,6 +242,9 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         selectCountryButton.setTitle("SIGNUP_COUNTRY_PLACEHOLDER".localized, for: .normal)
         
         btnSocialInfoSelectCountry.setTitle("SIGNUP_COUNTRY_PLACEHOLDER".localized, for: .normal)
+        lblSocialInfoMale.text = "male".localized
+        lblSocialInfoFemale.text = "female".localized
+        btnSocialInfoSubmit.setTitle("SOCIAL_USER_INFO_DONE".localized, for: .normal)
 
 //        loginButton.setTitle("START_NORMAL_LOGIN".localized, for: .normal)
 //        loginButton.setTitle("START_NORMAL_LOGIN".localized, for: .highlighted)
@@ -227,6 +265,33 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
 //        footerView.animateIn(mode: .animateInFromBottom, delay: 0.4)
     }
     
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        
+        player = nil
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+    }
+    
+    private func preparePlayer() {
+        if let fileURL = Bundle.main.url(forResource: "loginVideo", withExtension: "mp4"){
+            // the video player
+            self.player = AVPlayer(url: fileURL as URL)
+            self.player?.actionAtItemEnd = .none
+            let avPlayerLayer = AVPlayerLayer(player: self.player);
+            avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            avPlayerLayer.frame = self.view.frame
+            self.welcomeView.layer.insertSublayer(avPlayerLayer, at: 0)
+            self.player?.play()
+            // Loop video.
+            NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        }
+    }
+    
+    func loopVideo() {
+        self.player?.seek(to: kCMTimeZero)
+        self.player?.play()
+    }
+    
     // MARK: Actions
     @IBAction func termsOfServiceAction(_ sender: UIButton) {
         self.performSegue(withIdentifier: "loginTermsSegue", sender: termsButton)
@@ -234,6 +299,24 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBAction func privacyPolicyAction(_ sender: UIButton) {
         self.performSegue(withIdentifier: "loginTermsSegue", sender: privacyButton)
+    }
+    
+    @IBAction func goToLoginAction(_ sender: UIButton) {
+        self.hideView(withType: .welcome)
+        dispatch_main_after(0.3) {
+            self.showView(withType: .login)
+            self.waveSubView.isHidden = false
+            self.waveSubView.showWave()
+        }
+    }
+    
+    @IBAction func goToSignupAction(_ sender: UIButton) {
+        self.hideView(withType: .welcome)
+        dispatch_main_after(0.3) {
+            self.showView(withType: .signup)
+            self.waveSubView.isHidden = false
+            self.waveSubView.showWave()
+        }
     }
     
     @IBAction func loginAction(_ sender: RNLoadingButton) {
@@ -408,6 +491,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                                     self.showMessage(message:err.localizedDescription, type: .error)
                                 }
                                 self.loginButton.isLoading = false
+                                self.dismiss(animated: true, completion: { })
                                 self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                             })
                         
@@ -583,6 +667,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     func showView(withType:ViewType) {
         switch withType {
+        case .welcome :
+            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.welcomeView.transform = CGAffineTransform.identity
+            }, completion: {(finished: Bool) in
+                self.player?.play() 
+            })
         case .login :
             loginView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
@@ -616,6 +706,13 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     func hideView(withType:ViewType) {
         switch withType {
+        case .welcome :
+            UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.welcomeView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.welcomeView.frame.height)
+            }, completion: {(finished: Bool) in
+                
+            })
+            self.player?.pause()
         case .login :
             UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.loginView.frame.height)
@@ -664,6 +761,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 self.view.isUserInteractionEnabled = true
                 self.btnSocialInfoSubmit.isLoading = false
                 if success {
+                    self.dismiss(animated: true, completion: { })
                     self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                 } else {
                     self.showMessage(message:(err?.type.errorMessage)!, type: .error)

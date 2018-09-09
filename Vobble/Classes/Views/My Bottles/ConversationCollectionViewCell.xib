@@ -34,7 +34,7 @@
                         <rect key="frame" x="15" y="8" width="699" height="107"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiS-Rs-mAy" userLabel="timeleft Stack View">
-                                <rect key="frame" x="15" y="75" width="554" height="17"/>
+                                <rect key="frame" x="15" y="75" width="163.5" height="17"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Left: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZl-O4-pSJ">
                                         <rect key="frame" x="0.0" y="0.0" width="83.5" height="17"/>
@@ -42,8 +42,8 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZQ-XC-qVb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
-                                        <rect key="frame" x="83.5" y="0.0" width="470.5" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="5ZQ-XC-qVb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
+                                        <rect key="frame" x="83.5" y="0.0" width="80" height="17"/>
                                         <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -54,7 +54,6 @@
                         <color key="backgroundColor" red="0.0" green="0.4850566275" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="hiS-Rs-mAy" firstAttribute="leading" secondItem="8mu-6Q-eaw" secondAttribute="leading" constant="15" id="6jh-fP-X6t"/>
-                            <constraint firstAttribute="trailing" secondItem="hiS-Rs-mAy" secondAttribute="trailing" constant="130" id="fOs-j3-VRu"/>
                             <constraint firstAttribute="bottom" secondItem="hiS-Rs-mAy" secondAttribute="bottom" constant="15" id="jzb-HV-Wch"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -137,6 +136,7 @@
                 <constraint firstItem="o4r-cb-ySB" firstAttribute="top" secondItem="e28-4a-zkR" secondAttribute="top" id="Jfg-zA-VnS"/>
                 <constraint firstItem="o4r-cb-ySB" firstAttribute="leading" secondItem="e28-4a-zkR" secondAttribute="leading" constant="10" id="Mm2-l9-kDS"/>
                 <constraint firstItem="8mu-6Q-eaw" firstAttribute="top" secondItem="e28-4a-zkR" secondAttribute="top" constant="8" id="Rfn-M9-KOm"/>
+                <constraint firstItem="wLE-hh-eIy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hiS-Rs-mAy" secondAttribute="trailing" constant="5" id="Tlc-S7-0F6"/>
                 <constraint firstItem="gdF-JE-hcS" firstAttribute="top" secondItem="e28-4a-zkR" secondAttribute="top" constant="20" id="Vxn-UQ-hT3"/>
                 <constraint firstItem="3U4-LW-FaO" firstAttribute="bottom" secondItem="8mu-6Q-eaw" secondAttribute="bottom" id="XzA-JO-tWX"/>
                 <constraint firstItem="8mu-6Q-eaw" firstAttribute="leading" secondItem="e28-4a-zkR" secondAttribute="leading" constant="15" id="YTW-Z8-gKv"/>

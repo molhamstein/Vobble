@@ -53,12 +53,16 @@ final class ChatViewController: JSQMessagesViewController {
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
     private var audioMessageMap = [String: JSQCustomAudioMediaItem]()
+    var retryUploadAttemptsLeft = 2
     
     @IBOutlet var customNavBar: VobbleChatNavigationBar!
     @IBOutlet var recordButton : SDRecordButton!
     @IBOutlet var lblRecording : UILabel!
     @IBOutlet var ivRecordingIcon : UIImageView!
     @IBOutlet var recordButtonContainer : UIView!
+    
+    @IBOutlet var chatBlockedContainer : UIView!
+    @IBOutlet var chatBlockedLabel : UILabel!
     
     // notifications
     var lastNotificationSentDate: Date?
@@ -189,6 +193,13 @@ final class ChatViewController: JSQMessagesViewController {
                 //            recordButtonContainer.layoutIfNeeded()
                 //            recordButton.layoutIfNeeded()
                 recordButtonContainer.isHidden = true
+                
+                // chat blocked view
+                self.chatBlockedContainer.frame = CGRect(x: 0 , y: UIScreen.main.bounds.height - 70, width: UIScreen.main.bounds.width, height: 70)
+                self.chatBlockedLabel.frame = CGRect(x: 20 , y: 10, width: UIScreen.main.bounds.width - 40, height: 50)
+                chatBlockedLabel.font = AppFonts.normal
+                chatBlockedLabel.text = "CHAT_BLOCKED".localized
+                self.view.addSubview(self.chatBlockedContainer)
             }
             isInitialised = true
         }
@@ -225,6 +236,7 @@ final class ChatViewController: JSQMessagesViewController {
     
     func initNavBar() {
 //        customNavBar.title = convTitle ?? ""
+        customNavBar.leftLabel.text = "CHAT_NAV_TIME_LEFT".localized
         if seconds != 0.0 {
             customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
         } else {
@@ -287,12 +299,15 @@ final class ChatViewController: JSQMessagesViewController {
         //if is_seen == false --> hide chat tool bar so we can't send any message
         if conversation.isMyBottle {
             inputToolbar.isHidden = false
+            chatBlockedContainer.isHidden = true
             initCustomToolBar()
         } else if let is_seen = conversation.is_seen, is_seen == 1 {
-                inputToolbar.isHidden = false
-                initCustomToolBar()
+            inputToolbar.isHidden = false
+            chatBlockedContainer.isHidden = true
+            initCustomToolBar()
         } else {
             inputToolbar.isHidden = true
+            chatBlockedContainer.isHidden = false
         }
         
         chatVc.conversationRef = convRef
@@ -498,7 +513,16 @@ final class ChatViewController: JSQMessagesViewController {
                     let audioData = Data()
                     let audioItem = JSQCustomAudioMediaItem(data: audioData as! Data)
                     audioItem.audioUrl = URL(string:mediaURL)!
-                    self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                    
+                    if id != DataStore.shared.me?.objectId {
+                        if let url = audioItem.audioUrl, url.isValidUrl() {
+                            self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                        } else {
+                            // dont add the message if its not mine and the url is not valid
+                        }
+                    } else {
+                        self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                    }
                    
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
                         self.collectionView.reloadData()
@@ -542,6 +566,26 @@ final class ChatViewController: JSQMessagesViewController {
                         mediaItem.audioData = audioData
                         self.collectionView.reloadData()
                         self.audioMessageMap.removeValue(forKey: message.idString!)
+                    } else if let id = message.senderId {
+                        // the audio message migh not have been added cuz it was not uploaded yet
+                        let audioData = Data()
+                        let audioItem = JSQCustomAudioMediaItem(data: audioData as! Data)
+                        audioItem.audioUrl = URL(string:mediaURL)!
+                        
+                        if id != DataStore.shared.me?.objectId {
+                            if let url = audioItem.audioUrl, url.isValidUrl() {
+                                self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                            } else {
+                                // dont add the message if its not mine and the url is not valid
+                            }
+                        } else {
+                            self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                        }
+                        
+                        if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
+                            self.collectionView.reloadData()
+                            self.audioMessageMap.removeValue(forKey: snapshot.key)
+                        }
                     }
                 }
                 self.scrollToBottom(animated: true)
@@ -880,6 +924,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 if self.numberOfSentMedia == 0 {
                     self.isLoadedMedia = true
                 }
+                self.retryUploadAttemptsLeft = 2
                 self.setMediaURL(files[0], forPhotoMessageWithKey: key)
                 
                 self.onNewMessageSent()
@@ -896,6 +941,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             } else {
                 self.isLoadedMedia = true
                 print("error")
+                self.retryUploadAttemptsLeft -= 1
+                if self.retryUploadAttemptsLeft > 0 {
+                    self.upload(url:url, photo: photo,  key: key, mediaType: mediaType)
+                }
             }
         }
         
@@ -958,15 +1007,15 @@ extension ChatViewController: AVAudioRecorderDelegate {
     func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Camera".localized, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.camera()
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Gallery".localized, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.photoLibrary()
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
         present(actionSheet, animated: true, completion: nil)
     }
     
@@ -1020,6 +1069,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
             soundRecorder.record()
         }
         else if sender.state == .ended {
+            recordTimer?.invalidate()
             stopRecorderTimer()
             recordButton.setProgress(0.0)
             //write the function for stop recording the voice here

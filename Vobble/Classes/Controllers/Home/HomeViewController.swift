@@ -124,6 +124,18 @@ class HomeViewController: AbstractController {
         // observe any change in the unread notifications count
         lblUnreadConversationsBadge.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
+        
+        // tutorial
+        if let tutShowedBefore = DataStore.shared.tutorial1Showed, !tutShowedBefore{
+            dispatch_main_after(2) {
+                let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
+                viewController.alpha = 0.5
+                viewController.homeViewController = self
+                self.present(viewController, animated: true, completion: nil)
+                
+                DataStore.shared.tutorial1Showed = true
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -410,7 +422,7 @@ class HomeViewController: AbstractController {
         // make sure the tap is in the middle section of the view "where the sea is"
         let translation: CGPoint = tapGestureRecognizer.location(in: self.view)
         let tapLocationRatio = translation.y / self.view.frame.height
-        if tapLocationRatio > 0.25 && tapLocationRatio < 0.6 {
+        if tapLocationRatio > 0.25 && tapLocationRatio < 0.6 && !self.filterViewVisible {
             self.findBottlePressed(ivSea)
         }
     }
@@ -435,7 +447,8 @@ class HomeViewController: AbstractController {
             self.ivFindBottle.image = nil
             self.showActivityLoader(true)
             
-            ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: DataStore.shared.shores[self.currentPageIndex].shore_id!, completionBlock: { (bottle, error) in
+            let shoreId = self.currentPageIndex == 0 ? nil : DataStore.shared.shores[self.currentPageIndex].shore_id!
+            ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: { (bottle, error) in
                 self.disableActions(disable: false)
                 self.showActivityLoader(false)
                 if error == nil  {
@@ -849,6 +862,25 @@ extension HomeViewController: FilterViewDelegate {
         Flurry.logEvent(AppConfig.shop_enter, withParameters:logEventParams);
         self.showShopView(productType)
     }
+}
+
+// tutorial
+extension HomeViewController {
+
+    func tutorialActon1() {
+        self.goToLoveShore()
+    }
+    
+    func tutorialActon2() {
+        self.goToMainShore()
+        dispatch_main_after(2) {
+            let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
+            viewController.alpha = 0.7
+            viewController.stepIndex = 3
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
 }
 
 

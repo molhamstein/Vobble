@@ -28,7 +28,7 @@ class JSQCustomAudioMediaItem: JSQAudioMediaItem {
             super.onPlay(sender)
         } else {
             // download the data first
-            if let url = audioUrl {
+            if let url = audioUrl, url.isValidUrl() {
                 self.LoadingAudioSpinner?.isHidden = false
                 self.LoadingAudioSpinner?.startAnimating()
                 self.playButton.isHidden = true

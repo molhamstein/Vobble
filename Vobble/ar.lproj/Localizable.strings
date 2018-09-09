@@ -25,6 +25,7 @@
 "ERROR_BOTTLE_NOT_FOUND"                = "لا يوجد زجاجة فيديو";
 "ERROR_UNACTIVATED_USER"                = "هذا الحساب غير مفعل بعد الرجاء التحقق من بريد التفعيل";
 "ERROR_INVALID_USERNAME"                = "الاسم غير متاح";
+"ERROR_EMAIL_EXISTS"                    = "البريد الالكتروني مسجل مسبقا";
 
 
 // connection errors messages
@@ -60,6 +61,9 @@
 "SIGNUP_PRIVACY"                         = "سياسه الخصوصية";
 "SIGNUP_TERMS"                           = "شروط الاستخدام";
 "SIGNUP_AND"                             = " و ";
+
+// social user info screen
+"SOCIAL_USER_INFO_DONE"                  = "تم";
 
 // Start screen
 "START_EMAIL_TITLE"                     = "أدخل البريد الالكتروني";
@@ -114,6 +118,11 @@
 "RESET_PASSWORD_TITLE"                  = "كلمة المرور الجديدة";
 "RESET_PASSWORD_PLACEHOLDER"            = "******";
 
+// media picker
+"Camera"                                = "الكاميرا";
+"Gallery"                               = "معرض الصور";
+"Cancel"                                = "إلغاء الأمر";
+
 // Settings
 "SETTINGS_USER_LOGOUT"                  = "تسجيل خروج";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "هل تود تسجيل الخروج؟";
@@ -134,6 +143,8 @@
 "UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد من العودة؟ عليك الانتظار ليتم رفع الملف الذي ارسلته ";
 "CHAT_REPLY_SENT_MSG"                   = "تم الارسال, عندما يشاهد صاحب الزجاجة ردك، سيتاح لكماالمحادثة لـ٢٤ ساعة";
 "CHAT_RECORDING"                        = "جاري التسجيل‫…‬";
+"CHAT_BLOCKED"                          = "المحادثة مغلقه حتى يقوم الطرف الاخر بالرد";
+"CHAT_NAV_TIME_LEFT"                    = "متبقي";
 
 // filter
 "FEMALE"                                = "بنت";
@@ -215,3 +226,9 @@
 "NOTIFICATION_NEW_MSG"                  = "Cool, %@ has sent you a new message";
 "NOTIFICATION_NEW_MSG_AR"               = "ياسلااام، وصلك رسالة جديدة من %@ لا تتأخر بالرد";
 
+// tut
+"tut1_step1"                            = "أهلا بك في Vibo يمكنك ان تقوم بتصوير فيديوهات و رميها بالبحر, لا تقلق سيكون هذا سرنا الصغير";
+"tut1_step2"                            = "يوجد مجموعه من الشطاّن المختلفة, ستجد فيديهات بمواضيع مختلفة في كل شاطئ";
+
+"tut2_title"                            = "هب أنت مستعد!!!";
+"tut2_desc"                               = "لما لا تبدأ بايجاد زجاجاجة من البحر";

@@ -29,6 +29,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_TOKEN = "token"
     private let CACHE_KEY_MY_BOTTLES = "myBottles"
     private let CACHE_KEY_MY_REPLIES = "myReplies"
+    private let CACHE_KEY_TUT_1 = "tutorial1"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
@@ -42,6 +43,8 @@ class DataStore :NSObject {
     
     private var _shores: [Shore] = []
     private var _token: String?
+    
+    private var _tutorial1Showed: Bool?
     
     public var conversationsUnseenMesssages: [String: Int] = [:]
     
@@ -170,6 +173,21 @@ class DataStore :NSObject {
                 _myReplies = loadBaseModelArrayForKey(key: CACHE_KEY_MY_REPLIES)
             }
             return _myReplies
+        }
+    }
+    
+    public var tutorial1Showed:Bool? {
+        set{
+            _tutorial1Showed = newValue
+            if let tutShowed = _tutorial1Showed {
+                saveIntWithKey(intToStore: tutShowed ? 1 : 0, key: CACHE_KEY_TUT_1)
+            }
+        }
+        get {
+            if (_tutorial1Showed == nil) {
+                _tutorial1Showed = (loadIntForKey(key: CACHE_KEY_TUT_1) >= 1) ? true : false
+            }
+            return _tutorial1Showed
         }
     }
     

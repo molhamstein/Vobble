@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A531D564CA18F42C52DCB6AE215F2D55"
+               BlueprintIdentifier = "E851C87520BD3ACFC1D5CFCD6AEF96A9"
                BlueprintName = "SDRecordButton"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "SDRecordButton.framework">

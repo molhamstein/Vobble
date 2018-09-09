@@ -221,7 +221,7 @@ extension UIView {
         
         self.alpha = initialAlpha
         self.transform = initialTransform
-        UIView.animate(withDuration: 1, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.6, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 2.2, options: .curveEaseInOut, animations: {
             self.alpha = finalAlpha
             self.transform = finalTransform
         }) { _ in

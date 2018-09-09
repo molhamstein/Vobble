@@ -54,6 +54,7 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.1)
   - FLAnimatedImage (1.0.12)
   - Flurry-iOS-SDK/FlurrySDK (8.6.1)
+  - Gecco (1.0.0)
   - GoogleSignIn (4.1.2):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -146,6 +147,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - Flurry-iOS-SDK/FlurrySDK
+  - Gecco
   - GoogleSignIn
   - JSQMessagesViewController
   - LLSimpleCamera
@@ -176,6 +178,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: 9a863a2bb96c406958eeff7c2f1dfa9f44c44a13
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Flurry-iOS-SDK: daffe3d0afa95b7b0f1a803f2b708a926ecbf833
+  Gecco: e662f949821e742997787bad7b730ccc0052e43c
   GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
@@ -200,6 +203,6 @@ SPEC CHECKSUMS:
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
   YXWaveView: 3570d7244b08effd077a5c63b0693aa44b7cd369
 
-PODFILE CHECKSUM: 48baa482dd8212be33dbc84502931f335fbe6edf
+PODFILE CHECKSUM: 626fab6f6d4b7b7186768267b657572bf4129915
 
 COCOAPODS: 1.4.0

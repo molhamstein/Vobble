@@ -25,6 +25,7 @@
 "ERROR_BOTTLE_NOT_FOUND"                = "there is no bottle";
 "ERROR_UNACTIVATED_USER"                = "Your Account is not activated yet, please check your email";
 "ERROR_INVALID_USERNAME"                = "Username already exists";
+"ERROR_EMAIL_EXISTS"                    = "Email Already exists, please try to login";
 
 
 // Connection errors messages
@@ -61,6 +62,9 @@
 "SIGNUP_PRIVACY"                         = "Privacy Policy";
 "SIGNUP_TERMS"                           = "Terms Of Service";
 "SIGNUP_AND"                             = " and ";
+
+// social user info screen
+"SOCIAL_USER_INFO_DONE"                  = "DONE";
 
 // Start screen
 "START_EMAIL_TITLE"                     = "ENTER EMAIL";
@@ -115,6 +119,11 @@
 "RESET_PASSWORD_TITLE"                  = "NEW PASSWORD";
 "RESET_PASSWORD_PLACEHOLDER"            = "******";
 
+// media picker
+"Camera"                                = "Camera";
+"Gallery"                               = "Gallery";
+"Cancel"                                = "Cancel";
+
 // Settings
 "SETTINGS_USER_LOGOUT"                  = "Logout";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "Are you sure you want to logout?";
@@ -134,6 +143,8 @@
 "UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? your video will not be uploaded.";
 "CHAT_REPLY_SENT_MSG"                   = "Your Reply was sent to the bottle owner, when he sees your reply you guys can chat for 24 hours";
 "CHAT_RECORDING"                        = "Recording....";
+"CHAT_BLOCKED"                          = "Chat is blocked untill the peer replies";
+"CHAT_NAV_TIME_LEFT"                    = "left";
 
 // filter
 "FEMALE"                                = "Female";
@@ -214,4 +225,11 @@
 "NOTIFICATION_CHAT_IS_ACTIVE_AR"        = " هلاولله، %@ شاهد ردك‫.‬ يمكنكم الدردشه معاً لمدة ٢٤ ساعة‫..‬ ادخل الآن";
 "NOTIFICATION_NEW_MSG"                  = "Cool, %@ has sent you a new message";
 "NOTIFICATION_NEW_MSG_AR"               = "ياسلااام، وصلك رسالة جديدة من %@ لا تتأخر بالرد";
+
+// tut
+"tut1_step1"                            = "Welcome to vibo, here you can shoot a video and throw it in the sea, it would be your own little secret";
+"tut1_step2"                            = "In vibo we have multiple shores and in each shore you can find different videos with diffrent topics";
+
+"tut2_title"                            = "Are You ready!!!";
+"tut2_desc"                            = "Why don't you start by looking for a thrown bottle from the main shore ?";
 
