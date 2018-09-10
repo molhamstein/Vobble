@@ -140,9 +140,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             waveSubView.isHidden = true
             
             dispatch_main_after(0.7) {
-                self.showView(withType: .welcome)
-                self.preparePlayer()
-                self.player?.play()
+                self.hideView(withType: .welcome)
+                self.hideView(withType: .signup)
+                self.hideView(withType: .countryV)
+                self.showView(withType: .login)
+                self.loginView.backgroundColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:0.0)
+                self.signupView.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:0.0)
+                self.socialInfoView.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:0.9)
+                
             }
             
         }
@@ -153,9 +158,11 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         super.viewDidAppear(animated)
         
         if !self.isInitialized {
-            self.backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+            //self.backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
             self.loginButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
             self.signupButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+            self.preparePlayer()
+            self.player?.play()
         }
         self.isInitialized = true
     }
@@ -246,6 +253,10 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         lblSocialInfoFemale.text = "female".localized
         btnSocialInfoSubmit.setTitle("SOCIAL_USER_INFO_DONE".localized, for: .normal)
 
+        
+        lvEmailTextField.tintColor = UIColor.white
+        lvPasswordTextField.tintColor = UIColor.white
+        
 //        loginButton.setTitle("START_NORMAL_LOGIN".localized, for: .normal)
 //        loginButton.setTitle("START_NORMAL_LOGIN".localized, for: .highlighted)
 //        loginButton.hideTextWhenLoading = true
@@ -280,7 +291,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             let avPlayerLayer = AVPlayerLayer(player: self.player);
             avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
             avPlayerLayer.frame = self.view.frame
-            self.welcomeView.layer.insertSublayer(avPlayerLayer, at: 0)
+            self.backgroundView.layer.insertSublayer(avPlayerLayer, at: 3)
             self.player?.play()
             // Loop video.
             NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
@@ -671,31 +682,31 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.welcomeView.transform = CGAffineTransform.identity
             }, completion: {(finished: Bool) in
-                self.player?.play() 
+                //self.player?.play()
             })
         case .login :
-            loginView.dropShadow()
+            //loginView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
             }, completion: {(finished: Bool) in
                 
             })
         case .signup :
-            signupView.dropShadow()
+            //signupView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.signupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
             }, completion: {(finished: Bool) in
                 
             })
         case .countryV :
-            signupView.dropShadow()
+            //signupView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.countryView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
             }, completion: {(finished: Bool) in
                 
             })
         case .socialLoginStep2 :
-            socialInfoView.dropShadow()
+            //socialInfoView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.socialInfoView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
             }, completion: {(finished: Bool) in
@@ -712,13 +723,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             }, completion: {(finished: Bool) in
                 
             })
-            self.player?.pause()
+            //self.player?.pause()
         case .login :
             UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.loginView.frame.height)
             }, completion: {(finished: Bool) in
                 
             })
+            //self.player?.pause()
         case .signup :
             UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.signupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.signupView.frame.height)
