@@ -31,6 +31,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     // welcome view
     private var player: AVPlayer?
+    private var audioPlayer: AVAudioPlayer?
     @IBOutlet weak var welcomeView: UIView!
     
     // login view
@@ -143,10 +144,11 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 self.hideView(withType: .welcome)
                 self.hideView(withType: .signup)
                 self.hideView(withType: .countryV)
+                self.hideView(withType: .socialLoginStep2)
                 self.showView(withType: .login)
                 self.loginView.backgroundColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:0.0)
                 self.signupView.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:0.0)
-                self.socialInfoView.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:0.9)
+                self.socialInfoView.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:0.0)
                 
             }
             
@@ -162,7 +164,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             self.loginButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
             self.signupButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
             self.preparePlayer()
+            self.playSound()
             self.player?.play()
+            self.audioPlayer?.play()
+        } else {
+            self.player?.play()
+            self.audioPlayer?.play()
         }
         self.isInitialized = true
     }
@@ -170,23 +177,27 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.player?.pause()
+        self.audioPlayer?.pause()
     }
     
     func applicationDidBecomeActive() {
         DispatchQueue.main.async {
             self.player?.play()
+            self.audioPlayer?.play()
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         self.player = nil
+        self.audioPlayer = nil
         NotificationCenter.default.removeObserver(self)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
         self.player = nil
+        self.audioPlayer = nil
     }
     
     // Customize all view members (fonts - style - text)
@@ -280,21 +291,35 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         super.dismiss(animated: flag, completion: completion)
         
         player = nil
+        audioPlayer = nil
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
     private func preparePlayer() {
-        if let fileURL = Bundle.main.url(forResource: "loginVideo", withExtension: "mp4"){
+        if let fileURL = Bundle.main.url(forResource: "loginVideo", withExtension: "m4v"){
             // the video player
             self.player = AVPlayer(url: fileURL as URL)
             self.player?.actionAtItemEnd = .none
             let avPlayerLayer = AVPlayerLayer(player: self.player);
             avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-            avPlayerLayer.frame = self.view.frame
+            let layerFrame = CGRect.init(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height + 8)
+            avPlayerLayer.frame = layerFrame
             self.backgroundView.layer.insertSublayer(avPlayerLayer, at: 3)
             self.player?.play()
             // Loop video.
             NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        }
+    }
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "introSound", withExtension: "mp3") else { return }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
@@ -392,6 +417,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 if let tempRegistredUser = user, let name = tempRegistredUser.userName {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
+                    self.hideView(withType: .login)
                     self.showView(withType: .socialLoginStep2)
                 }
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
@@ -418,6 +444,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 if let tempRegistredUser = user, let name = tempRegistredUser.userName {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
+                    self.hideView(withType: .login)
                     self.showView(withType: .socialLoginStep2)
                 }
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
@@ -810,6 +837,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                 if let tempRegistredUser = user, let name = tempRegistredUser.userName {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
+                    self.hideView(withType: .login)
                     self.showView(withType: .socialLoginStep2)
                 }
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)

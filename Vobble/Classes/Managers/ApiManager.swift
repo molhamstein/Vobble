@@ -65,6 +65,7 @@ class ApiManager: NSObject {
                     // parse response to data model >> user object
                     let user = AppUser(json: jsonResponse["user"])
                     DataStore.shared.token = jsonResponse["id"].string
+                    DataStore.shared.me = user
                     DataStore.shared.onUserLogin()
                     completionBlock(true , nil, user)
                 }
@@ -140,6 +141,7 @@ class ApiManager: NSObject {
                     // parse response to data model >> user object
                     let user = AppUser(json: jsonResponse["user"])
                     DataStore.shared.token = jsonResponse["id"].string
+                    DataStore.shared.me = user
                     DataStore.shared.onUserLogin()
                     completionBlock(true , nil, user)
                 }
@@ -179,6 +181,7 @@ class ApiManager: NSObject {
                     // parse response to data model >> user object
                     let user = AppUser(json: jsonResponse["user"])
                     DataStore.shared.token = jsonResponse["id"].string
+                    DataStore.shared.me = user
                     DataStore.shared.onUserLogin()
                     completionBlock(true , nil, user)
                 }
@@ -601,7 +604,7 @@ class ApiManager: NSObject {
                     }
                 } else {
                     multipartFormData.append(url, withName: "file")
-                    //print("File size after compression: \(Double(multipartFormData.contentLength / 1048576)) mb")
+                    print("File size after compression: \(Double( Double(multipartFormData.contentLength) / 1048576.0)) mb")
                 }
             }
         }
@@ -627,6 +630,10 @@ class ApiManager: NSObject {
                                             let media = Media(json:resArray[i])
                                             media.type = mediaType
                                             files.append(media)
+                                            
+//                                            if media.type == .audio {
+//                                                print("--------- audioUrl: " + media.fileUrl ?? "empty")
+//                                            }
                                         }
                                         completionBlock(files, nil)
                                     } else {
@@ -989,6 +996,7 @@ struct ServerError {
         case expiredVerifyCode = 107
         case invalidVerifyCode = 108
         case userNotFound = 404
+        case loginFailed = 601 // temp code
         
         /// Handle generic error messages
         /// **Warning:** it is not localized string
@@ -1000,6 +1008,8 @@ struct ServerError {
                     return "ERROR_NO_CONNECTION".localized
                 case .authorization:
                     return "ERROR_NOT_AUTHORIZED".localized
+                case .loginFailed:
+                    return "ERROR_LOGIN_FAILED".localized
                 case .alreadyExists:
                     return "ERROR_SIGNUP_EMAIL_EXISTS".localized
 				case .notRegistred:
@@ -1069,6 +1079,10 @@ struct ServerError {
         code = errorCode
         if let errorString = json["message"].string{ errorName = errorString}
         if let statusCode = json["statusCode"].int{ status = statusCode}
+        
+        if let codeString = json["code"].string, codeString == "LOGIN_FAILED" {
+            self.code = ErrorType.loginFailed.rawValue
+        }
     }
 }
 

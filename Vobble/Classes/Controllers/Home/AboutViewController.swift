@@ -54,7 +54,6 @@ class AboutViewController: AbstractController, MFMailComposeViewControllerDelega
     }
     
     override func backButtonAction(_ sender: AnyObject) {
-        // hide keyboard
         self.navigationController?.dismiss(animated: true, completion: {})
     }
     

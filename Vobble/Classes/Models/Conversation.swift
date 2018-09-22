@@ -16,6 +16,7 @@ class Conversation: BaseModel {
     private let kuser: String = "user"
     private let kBottle: String = "bottle"
     private let kCreatedAt: String = "createdAt"
+    private let kUpdatedAt: String = "updatedAt"
     private let kStartTime: String = "startTime"
     private let kFinishTime: String = "finishTime"
     private let kIsSeen: String = "is_seen"
@@ -27,6 +28,7 @@ class Conversation: BaseModel {
     public var user : AppUser?
     public var bottle: Bottle?
     public var createdAt: Double?
+    public var updatedAt: Double?
     public var startTime: Double?
     public var finishTime: Double?
     public var is_seen: Int?
@@ -92,6 +94,9 @@ class Conversation: BaseModel {
         if let value = json[kCreatedAt].double {
             createdAt = value
         }
+        if let value = json[kUpdatedAt].double {
+            updatedAt = value
+        }
         if let value = json[kStartTime].double {
             startTime = value
         }
@@ -128,6 +133,10 @@ class Conversation: BaseModel {
         
         if let value = createdAt {
             dictionary[kCreatedAt] = value
+        }
+        
+        if let value = updatedAt {
+            dictionary[kUpdatedAt] = value
         }
         
         if let value = startTime {

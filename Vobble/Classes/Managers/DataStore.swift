@@ -46,7 +46,9 @@ class DataStore :NSObject {
     
     private var _tutorial1Showed: Bool?
     
-    public var conversationsUnseenMesssages: [String: Int] = [:]
+    //public var conversationsUnseenMesssages: [String: Int] = [:]
+    public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
+    public var conversationsMyRepliesUnseenMesssages: [String: Int] = [:]
     
     // user loggedin flag
     var isLoggedin: Bool {
@@ -205,14 +207,29 @@ class DataStore :NSObject {
     }
    
     // conversations
-    func getConversationsWithUnseenMessagesCount () -> Int {
+    func getMyBottlesConversationsWithUnseenMessagesCount () -> Int {
         var convCount = 0
-        for (_, count) in conversationsUnseenMesssages {
+        for (_, count) in conversationsMyBottlesUnseenMesssages {
             if count > 0 {
                 convCount += 1
             }
         }
         return convCount
+    }
+    
+    func getMyRepliesConversationsWithUnseenMessagesCount () -> Int {
+        var convCount = 0
+        for (_, count) in conversationsMyRepliesUnseenMesssages {
+            if count > 0 {
+                convCount += 1
+            }
+        }
+        return convCount
+    }
+    
+    func getConversationsWithUnseenMessagesCount () -> Int {
+        
+        return getMyRepliesConversationsWithUnseenMessagesCount() + getMyBottlesConversationsWithUnseenMessagesCount()
     }
     
     //MARK: Cache Utils

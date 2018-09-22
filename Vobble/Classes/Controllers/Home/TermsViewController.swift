@@ -52,7 +52,6 @@ class TermsViewController: AbstractController {
     }
     
     override func backButtonAction(_ sender: AnyObject) {
-        // hide keyboard
         self.navigationController?.popViewController(animated: true)
     }
     

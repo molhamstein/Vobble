@@ -9,7 +9,7 @@
 import UIKit
 import Gecco
 
-class AnnotationViewController: SpotlightViewController {
+class AnnotationViewController: SpotlightViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var annotationViews: [UIView]!
     
@@ -21,6 +21,10 @@ class AnnotationViewController: SpotlightViewController {
     @IBOutlet var ivStep3: UIImageView!
     @IBOutlet var btnClose: UIButton!
     
+    // used to detect if the user pressed the find bottle action
+    // to trigger the action in the home viewcontroller
+    @IBOutlet var btnStep3ActionReciever: UIButton!
+    
     var homeViewController: HomeViewController?
     
     var stepIndex: Int = 0
@@ -29,6 +33,11 @@ class AnnotationViewController: SpotlightViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         delegate = self
+        
+        // make tutorial repond to pan too
+        let panRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan))
+        panRecognizer.delegate = self
+        self.view.addGestureRecognizer(panRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +68,8 @@ class AnnotationViewController: SpotlightViewController {
             //spotlightView.move(Spotlight.Oval(center: CGPoint(x: 26, y: 42), diameter: 50), moveType: .disappear)
         case 3:
             self.spotlightView.appear(Spotlight.Oval(center: CGPoint(x: 55, y: screenSize.height - 50), diameter: 105))
+            self.btnStep3ActionReciever.frame = CGRect.init(x: 0, y: screenSize.height - 105, width: 110, height: 110)
+            self.btnStep3ActionReciever.bringToFront()
             //spotlightView.move(Spotlight.Oval(center: CGPoint(x: 26, y: 42), diameter: 50), moveType: .disappear)
             //dismiss(animated: true, completion: nil)
         case 4:
@@ -68,6 +79,12 @@ class AnnotationViewController: SpotlightViewController {
         }
         
         stepIndex += 1
+    }
+    
+    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == .ended {
+            self.next(true)
+        }
     }
     
     func updateAnnotationView(_ animated: Bool) {
@@ -88,6 +105,7 @@ class AnnotationViewController: SpotlightViewController {
                 self.ivStep1.alpha = 0
                 self.ivStep3.alpha = 1
                 self.ivStep1.image = nil
+                self.btnStep3ActionReciever.isHidden = true
                 //self.ivStep1.transform = CGAffineTransform.identity.translatedBy(x: 70, y: 0)
             case 1:
                 self.lblStep1.alpha = 0
@@ -100,6 +118,7 @@ class AnnotationViewController: SpotlightViewController {
                 self.ivStep1.alpha = 1
                 self.ivStep1.image = UIImage(named:"inst_fav");
                 self.ivStep1.transform = CGAffineTransform.identity.translatedBy(x: 70, y: 0)
+                self.btnStep3ActionReciever.isHidden = true
             case 2:
                 // this is an empty step
                 // closing the first tutorial
@@ -108,6 +127,7 @@ class AnnotationViewController: SpotlightViewController {
                 self.lblStep3.alpha = 0
                 self.ivStep3.alpha = 0
                 self.ivStep1.alpha = 0
+                self.btnStep3ActionReciever.isHidden = true
             case 3:
                 self.lblStep1.alpha = 0
                 self.lblStep2.alpha = 0
@@ -118,12 +138,14 @@ class AnnotationViewController: SpotlightViewController {
                 self.ivStep3.alpha = 0
                 self.ivStep3.image = UIImage(named:"try_finding_bottle");
                 self.ivStep3.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+                self.btnStep3ActionReciever.isHidden = false
             case 4:
                 self.lblStep1.alpha = 0
                 self.lblStep2.alpha = 0
                 self.lblStep3.alpha = 0
                 self.ivStep1.alpha = 0
                 self.ivStep1.transform = CGAffineTransform.identity
+                self.btnStep3ActionReciever.isHidden = true
             default:
                 break
             }
@@ -133,9 +155,12 @@ class AnnotationViewController: SpotlightViewController {
     @IBAction func actionClose(_ sender: AnyObject){
         dismiss(animated: true, completion: nil)
     }
-
+    
+    @IBAction func actionStep3FindBottle(_ sender: AnyObject){
+        homeViewController?.tutorialActon3FindBottle()
+        dismiss(animated: true, completion: nil)
+    }
 }
-
 
 extension AnnotationViewController: SpotlightViewControllerDelegate {
     func spotlightViewControllerWillPresent(_ viewController: SpotlightViewController, animated: Bool) {
@@ -148,5 +173,11 @@ extension AnnotationViewController: SpotlightViewControllerDelegate {
     
     func spotlightViewControllerWillDismiss(_ viewController: SpotlightViewController, animated: Bool) {
         spotlightView.disappear()
+    }
+}
+
+extension AnnotationViewController {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

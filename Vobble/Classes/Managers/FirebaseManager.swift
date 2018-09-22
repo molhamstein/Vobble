@@ -43,6 +43,7 @@ class FirebaseManager :NSObject {
             "bottle": bottle.dictionaryRepresentation(),
             "user": (DataStore.shared.me?.dictionaryRepresentation()) ?? "",
             "createdAt" : ServerValue.timestamp(),
+            "updatedAt" : ServerValue.timestamp(),
             "is_seen" : 0,
             "expired" : 0,
             "user1ID" : bottle.ownerId ?? "",
@@ -57,7 +58,7 @@ class FirebaseManager :NSObject {
     func fetchMyBottlesConversations (completionBlock: @escaping (_ err: Error?) -> Void) {
         let childref = conversationRef
         childref.queryOrdered(byChild: "user1ID").queryEqual(toValue: DataStore.shared.me?.objectId ?? "").observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot)
+            //print(snapshot)
             
             DataStore.shared.myBottles = [Conversation]()
             
@@ -69,22 +70,17 @@ class FirebaseManager :NSObject {
                 
                 if !conversation.isExpired {
                     DataStore.shared.myBottles.append(conversation)
-                    DataStore.shared.conversationsUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                    DataStore.shared.conversationsMyBottlesUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
                 } else {
-                    DataStore.shared.conversationsUnseenMesssages[rest.key] = 0
+                    DataStore.shared.conversationsMyBottlesUnseenMesssages[rest.key] = 0
                 }
             }
             
-            // show open chats first
-            // if chat is not open yet sort them by date from newest to olders
             DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
-                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
-                }else if obj1.is_seen! != obj2.is_seen! {
-                    return (obj1.is_seen! >= 1)
-                } else {
-                    return (obj1.createdAt! > obj2.createdAt!)
+                if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+                    return date1 > date2
                 }
+                return true
             })
             
             // trigger data store set funnctions to cash the
@@ -107,10 +103,20 @@ class FirebaseManager :NSObject {
             conversation.idString = snapshot.key
             
             if !conversation.isExpired {
-                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+                DataStore.shared.conversationsMyRepliesUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
             } else {
-                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = 0
+                DataStore.shared.conversationsMyRepliesUnseenMesssages[snapshot.key] = 0
             }
+            
+//            // update the conversation last updateDate
+//            if let index = DataStore.shared.myReplies.index(where: { (item) -> Bool in
+//                item.idString == conversation.idString // test if this is the conversation we're looking for
+//            }) {
+//                let dataStoreConversation = DataStore.shared.myReplies[index]
+//                dataStoreConversation.updatedAt = conversation.updatedAt
+//                self.sortConversations()
+//            }
+            
             // broadcast
             NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
         }) { (err) in
@@ -124,10 +130,20 @@ class FirebaseManager :NSObject {
             conversation.idString = snapshot.key
             
             if !conversation.isExpired {
-                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+                DataStore.shared.conversationsMyBottlesUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
             } else {
-                DataStore.shared.conversationsUnseenMesssages[snapshot.key] = 0
+                DataStore.shared.conversationsMyBottlesUnseenMesssages[snapshot.key] = 0
             }
+            
+//            // update the conversation last updateTime
+//            if let index = DataStore.shared.myBottles.index(where: { (item) -> Bool in
+//                item.idString == conversation.idString // test if this is the conversation we're looking for
+//            }) {
+//                let dataStoreConversation = DataStore.shared.myBottles[index]
+//                dataStoreConversation.updatedAt = conversation.updatedAt
+//                self.sortConversations()
+//            }
+            
             // broadcast
             NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
         }) { (err) in
@@ -138,7 +154,7 @@ class FirebaseManager :NSObject {
     func fetchMyRepliesConversations (completionBlock: @escaping (_ err: Error?) -> Void) {
         let childref = conversationRef
         childref.queryOrdered(byChild: "user2ID").queryEqual(toValue: DataStore.shared.me?.objectId ?? "").observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot)
+            //print(snapshot)
             
             DataStore.shared.myReplies = [Conversation]()
             
@@ -149,21 +165,17 @@ class FirebaseManager :NSObject {
                 
                 if !conversation.isExpired {
                     DataStore.shared.myReplies.append(conversation)
-                    DataStore.shared.conversationsUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                    DataStore.shared.conversationsMyRepliesUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
                 } else {
-                    DataStore.shared.conversationsUnseenMesssages[rest.key] = 0
+                    DataStore.shared.conversationsMyRepliesUnseenMesssages[rest.key] = 0
                 }
             }
             
-            // sort data to show on going conversations first
             DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
-                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
-                }else if obj1.is_seen! != obj2.is_seen! {
-                    return (obj1.is_seen! >= 1)
-                } else {
-                    return (obj1.createdAt! > obj2.createdAt!)
+                if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+                    return date1 > date2
                 }
+                return true
             })
             
             // trigger data store set funnctions to cash the
@@ -175,6 +187,26 @@ class FirebaseManager :NSObject {
             print(err.localizedDescription)
             completionBlock(err)
         }
+    }
+    
+    func sortConversations () {
+        // sort my replies
+        DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
+            if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+                return date1 > date2
+            }
+            return true
+        })
+        
+        // sort my bottles
+        DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
+            if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+                return date1 > date2
+            }
+            return true
+        })
+        
+        //NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
     }
 }
 

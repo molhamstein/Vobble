@@ -28,6 +28,7 @@
 		575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */; };
 		575A16D1204EC30100F4B510 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A16D0204EC30100F4B510 /* UIImageView.swift */; };
 		576807B120AF1A500039E2C2 /* RateUsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */; };
+		576993952153FF83001211CF /* introSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 576993942153FF82001211CF /* introSound.mp3 */; };
 		57771F5D21270B1900A9C884 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57771F5C21270B1800A9C884 /* AnnotationViewController.swift */; };
 		5787DEC421008787009C2A43 /* dolphin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5787DEC321008786009C2A43 /* dolphin.gif */; };
 		5796242F20793B790005292A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242D20793B790005292A /* TermsViewController.swift */; };
@@ -40,6 +41,7 @@
 		57D64E65210707AC00A22B52 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D64E64210707AB00A22B52 /* FirebaseManager.swift */; };
 		57DE7459207D77E00061CA2F /* fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57DE7458207D77E00061CA2F /* fire.gif */; };
 		57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 57DED21A2126AFCE00514FBE /* loginVideo.mp4 */; };
+		57E611D72151B24200E0B307 /* loginVideo.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 57E611D62151B21300E0B307 /* loginVideo.m4v */; };
 		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
@@ -296,6 +298,7 @@
 		575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewMediaControl.swift; sourceTree = "<group>"; };
 		575A16D0204EC30100F4B510 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateUsPopupViewController.swift; sourceTree = "<group>"; };
+		576993942153FF82001211CF /* introSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = introSound.mp3; sourceTree = "<group>"; };
 		57771F5C21270B1800A9C884 /* AnnotationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		5787DEC321008786009C2A43 /* dolphin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dolphin.gif; sourceTree = "<group>"; };
 		5796242D20793B790005292A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsViewController.swift; path = ../Home/TermsViewController.swift; sourceTree = "<group>"; };
@@ -308,6 +311,7 @@
 		57D64E64210707AB00A22B52 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		57DE7458207D77E00061CA2F /* fire.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fire.gif; sourceTree = "<group>"; };
 		57DED21A2126AFCE00514FBE /* loginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.mp4; sourceTree = "<group>"; };
+		57E611D62151B21300E0B307 /* loginVideo.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.m4v; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -776,6 +780,8 @@
 			children = (
 				B19372F72033E48F007B1E7D /* AppColors.swift */,
 				57DED21A2126AFCE00514FBE /* loginVideo.mp4 */,
+				576993942153FF82001211CF /* introSound.mp3 */,
+				57E611D62151B21300E0B307 /* loginVideo.m4v */,
 				B19372E92033E44E007B1E7D /* AppFonts.swift */,
 				B19372EA2033E44E007B1E7D /* Fonts */,
 			);
@@ -1554,6 +1560,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57E611D72151B24200E0B307 /* loginVideo.m4v in Resources */,
 				57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */,
 				B18719CB2079952800861B45 /* jsq_messages_sample.m4a in Resources */,
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
@@ -1572,6 +1579,7 @@
 				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
+				576993952153FF83001211CF /* introSound.mp3 in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,

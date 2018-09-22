@@ -91,7 +91,7 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func reportBtnPressed(_ sender: Any) {
-        if self.playButton.currentImage == UIImage(named: "pause") {
+        if self.videoView.player.isPlaying {
             videoView.playButtonPressed()
         }
         reportView.isHidden = false
@@ -99,7 +99,7 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func blockBtnPressed(_ sender: Any) {
-        if self.playButton.currentImage == UIImage(named: "pause") {
+        if self.videoView.player.isPlaying {
             videoView.playButtonPressed()
         }
         
@@ -165,7 +165,7 @@ class FindBottleViewController: AbstractController {
         let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (bottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (bottle?.owner?.countryISOCode) ?? ""];
         Flurry.logEvent(AppConfig.reply_pressed, withParameters:logEventParams);
         
-        if self.playButton.currentImage == UIImage(named: "pause") {
+        if videoView.player.isPlaying {
             videoView.playButtonPressed()
         }
         
@@ -238,9 +238,9 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
-        if self.playButton.currentImage == UIImage(named: "ic_play") {
+        if !self.videoView.player.isPlaying {
             self.playButton.setImage(UIImage(named: "pause"), for: .normal)
-        } else if self.playButton.currentImage == UIImage(named: "pause") {
+        } else {
             self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
         }
         videoView.playButtonPressed()

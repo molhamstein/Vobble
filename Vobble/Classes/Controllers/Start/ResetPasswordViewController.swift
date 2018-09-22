@@ -265,7 +265,7 @@ class ResetPasswordViewController: AbstractController {
                 //let newStageIndex = self.currentStageIndex + 1
                 //self.switchToStageIndex(newStageIndex)
                 let alertController = UIAlertController(title: "", message: "FORGOT_PASSWORD_LINK_SENT".localized, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "OK".localized, style: .default, handler: { (alertAction) in
+                let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                     // back to login
                     self.dismiss(animated: true, completion: nil)
                 })

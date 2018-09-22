@@ -134,12 +134,12 @@ extension ConversationViewController: UICollectionViewDataSource {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "conversationCollectionViewHeaderID", for: indexPath) as! ConversationCollectionViewHeader
         
-        headerView.searchTetField.text = searchString
-        headerView.searchTetField.delegate = self
-        headerView.searchTetField.addTarget(self, action:#selector(onSearchTextFieldChanged(_:)), for: .editingChanged)
+//        headerView.searchTetField.text = searchString
+//        headerView.searchTetField.delegate = self
+//        headerView.searchTetField.addTarget(self, action:#selector(onSearchTextFieldChanged(_:)), for: .editingChanged)
         headerView.convVC = self
         //headerView.awakeFromNib()
-        self.searchText =  headerView.searchTetField
+//        self.searchText =  headerView.searchTetField
         self.userImageView = headerView.userImageView
         if let me = DataStore.shared.me {
             headerView.configCell(userObj: me)
@@ -477,21 +477,13 @@ extension ConversationViewController {
                 //(My replies)
                 if let currentUserID = DataStore.shared.me?.objectId, let convUserID = conversation.user?.objectId,currentUserID == convUserID {
                     
-                    print("my replies")
+                    //print("my replies")
                     let myBottlesArray = DataStore.shared.myReplies
                     var i = 0
                     for conv in myBottlesArray {
                         if conv.idString == conversation.idString {
                             DataStore.shared.myReplies[i] = conversation
-                            DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-                                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
-                                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
-                                }else if obj1.is_seen! != obj2.is_seen! {
-                                    return (obj1.is_seen! >= 1)
-                                } else {
-                                    return (obj1.createdAt! > obj2.createdAt!)
-                                }
-                            })
+                            FirebaseManager.shared.sortConversations()
                             self.refreshView()
                             break
                         } else {
@@ -506,15 +498,7 @@ extension ConversationViewController {
                     for conv in myBottlesArray {
                         if conv.idString == conversation.idString {
                             DataStore.shared.myBottles[i] = conversation
-                            DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-                                if obj1.myUnseenMessagesCount != obj2.myUnseenMessagesCount {
-                                    return obj1.myUnseenMessagesCount > obj2.myUnseenMessagesCount
-                                }else if obj1.is_seen! != obj2.is_seen! {
-                                    return (obj1.is_seen! >= 1)
-                                } else {
-                                    return (obj1.createdAt! > obj2.createdAt!)
-                                }
-                            })
+                            FirebaseManager.shared.sortConversations()
                             self.refreshView()
                             break
                         } else {

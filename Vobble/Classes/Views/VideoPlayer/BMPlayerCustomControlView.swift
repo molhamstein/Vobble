@@ -149,6 +149,10 @@ class BMPlayerCustomControlView: BMPlayerControlView {
             make.right.bottom.equalTo(bottomMaskView).offset(-10)
         }
         
+        self.semanticContentAttribute = .forceLeftToRight
+        timeSlider.semanticContentAttribute = .forceLeftToRight
+        progressView.semanticContentAttribute = .forceLeftToRight
+        seekToView.semanticContentAttribute = .forceLeftToRight
     }
     
     override func playStateDidChange(isPlaying: Bool) {

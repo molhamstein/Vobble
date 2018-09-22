@@ -64,6 +64,7 @@ class RecordMediaViewController: AbstractController {
         flashButton.animateIn(mode: .animateInFromTop, delay: 0.33)
         closeButton.animateIn(mode: .animateInFromTop, delay: 0.4)
         
+        self.btnPhotoLibrary.isHidden = AppConfig.isProductionBuild
     }
     
     func applicationDocumentsDirectory()-> NSURL {
@@ -468,7 +469,7 @@ extension RecordMediaViewController
                         guard let compressedData = NSData(contentsOf: compressedURL) else {
                             return
                         }
-                        print("File size after compression: \(Double(compressedData.length / 1048576)) mb")
+                        print("File size after compression: \(Double(Double(compressedData.length) / 1048576.0)) mb")
                         videoUrlForUpload = compressedURL
                     case .failed:
                         break
@@ -539,7 +540,7 @@ extension RecordMediaViewController
         if(self.camera.position == LLCameraPositionRear && self.flashButton.isHidden){
             self.flashButton.isHidden = false;
         }
-        self.btnPhotoLibrary.isHidden = false
+        self.btnPhotoLibrary.isHidden = AppConfig.isProductionBuild ? true:false
         self.switchButton.isHidden = false
         self.camera.stopRecording()
         isRecording = false

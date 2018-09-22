@@ -1667,6 +1667,32 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ofP-ls-m1G">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="410"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_chat_blocked" translatesAutoresizingMaskIntoConstraints="NO" id="Gro-kt-WQE">
+                                        <rect key="frame" x="40" y="141" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JII-Ux-3xP">
+                                        <rect key="frame" x="20" y="90" width="280" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8P-9n-oXx">
+                                        <rect key="frame" x="280" y="34" width="20" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="ic_close_white"/>
+                                        <connections>
+                                            <action selector="cloesPandingChatViewAction:" destination="UjY-mq-EFz" eventType="touchUpInside" id="KVd-Kr-1yF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OP6-5C-XvV">
                                 <rect key="frame" x="0.0" y="410" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1721,6 +1747,10 @@
                     <connections>
                         <outlet property="chatBlockedContainer" destination="OP6-5C-XvV" id="K9z-Ie-Hga"/>
                         <outlet property="chatBlockedLabel" destination="7r0-t6-80N" id="WkD-C0-9BI"/>
+                        <outlet property="chatPendingCloseButton" destination="I8P-9n-oXx" id="i7F-R2-ONh"/>
+                        <outlet property="chatPendingContainer" destination="ofP-ls-m1G" id="eq4-4k-NkH"/>
+                        <outlet property="chatPendingImageView" destination="Gro-kt-WQE" id="Hm3-5y-cPd"/>
+                        <outlet property="chatPendingLabel" destination="JII-Ux-3xP" id="qGc-gD-tZW"/>
                         <outlet property="customNavBar" destination="ASE-1h-xxO" id="Ltm-Op-spL"/>
                         <outlet property="ivRecordingIcon" destination="k70-Lb-YQI" id="zGL-bS-EUI"/>
                         <outlet property="lblRecording" destination="mAS-w3-Alr" id="BAh-CM-m9s"/>
@@ -2280,6 +2310,14 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                     <constraint firstAttribute="height" constant="140" id="vxH-oU-62i"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YgF-ey-9x2">
+                                <rect key="frame" x="50" y="400" width="105" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="actionStep3FindBottle:" destination="cN2-gQ-IPn" eventType="touchUpInside" id="VoK-dM-Ed7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -2299,6 +2337,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnStep3ActionReciever" destination="YgF-ey-9x2" id="foh-BQ-XUL"/>
                         <outlet property="ivStep1" destination="3dh-m3-H7p" id="f40-2f-2Ca"/>
                         <outlet property="ivStep3" destination="8r6-Rr-Ogk" id="dSM-e7-KfP"/>
                         <outlet property="lblStep1" destination="vlh-2q-c1L" id="xKZ-IA-Wy6"/>
@@ -2321,6 +2360,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="clouds" width="2000" height="662"/>
         <image name="emptyListPlaceholder" width="50" height="50"/>
         <image name="filters" width="23" height="23"/>
+        <image name="ic_chat_blocked" width="300" height="457"/>
         <image name="ic_close_white" width="20" height="20"/>
         <image name="ic_find_bottle" width="27" height="27"/>
         <image name="ic_my_bottles" width="26" height="23"/>

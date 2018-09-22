@@ -11,7 +11,7 @@
 "GLOBAL_SUCCESS_TITLE"                  = "SUCCESS";
 "GLOBAL_WARNING_TITLE"                  = "WARNING!";
 "CANCEL"                                = "Cancel";
-"Ok"                                    = "Ok";
+"ok"                                    = "Ok";
 
 // Generic erros
 "ERROR_NO_CONNECTION"                   = "No internet connection, please check your connection";
@@ -35,6 +35,7 @@
 "ERROR_SOCIAL_TWITTER"                  = "Twitter login failed, please try again";
 "ERROR_SOCIAL_INSTAGRAM"                = "Instagram login failed, please try again";
 "ERROR_SOCIAL_GOOGLE"                   = "Google login failed, please try again";
+"ERROR_LOGIN_FAILED"                    = "Login failed, Please check you email and password";
 
 // login screen
 "LOGIN_EMAIL_TITLE"                     = "EMAIL";
@@ -145,6 +146,7 @@
 "CHAT_RECORDING"                        = "Recording....";
 "CHAT_BLOCKED"                          = "Chat is blocked untill the peer replies";
 "CHAT_NAV_TIME_LEFT"                    = "left";
+"RECORD_FAILED_ERROR"                   = "Sorry, there seems an issue recording your message";
 
 // filter
 "FEMALE"                                = "Female";
@@ -160,6 +162,8 @@
 "FILTERS_PANEL_PLACEHOLDER_GENDER"      = "Want to find bottles from males or females only?";
 "FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "Find Bottles from specific country";
 
+// preview
+"PREVIEW_THROW_NOW"                     = "Throw Now";
 
 // settings
 "SETTINGS_CONTACT"                      = "Contact Us";

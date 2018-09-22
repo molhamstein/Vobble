@@ -71,8 +71,14 @@ class JSQCustomAudioMediaItem: JSQAudioMediaItem {
         self.LoadingAudioSpinner = UIActivityIndicatorView()
         self.LoadingAudioSpinner?.frame = self.playButton.frame
         self.LoadingAudioSpinner?.activityIndicatorViewStyle = .white
-        self.LoadingAudioSpinner?.isHidden = true
         view?.addSubview(self.LoadingAudioSpinner!)
+        
+        // if url is not set set this mean the pee is still uploading the message and we should show a spinner
+        if let url = audioUrl, url.isValidUrl() {
+            self.LoadingAudioSpinner?.isHidden = true
+        } else {
+            self.LoadingAudioSpinner?.isHidden = false
+        }
         
         return view
     }

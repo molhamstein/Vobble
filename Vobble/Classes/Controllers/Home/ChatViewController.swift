@@ -29,7 +29,7 @@ import NYTPhotoViewer
 import SDRecordButton
 import Flurry_iOS_SDK
 
-final class ChatViewController: JSQMessagesViewController {
+final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate {
     
     // MARK: Properties
     private let imageURLNotSetKey = "NOTSET"
@@ -55,6 +55,8 @@ final class ChatViewController: JSQMessagesViewController {
     private var audioMessageMap = [String: JSQCustomAudioMediaItem]()
     var retryUploadAttemptsLeft = 2
     
+    fileprivate var isRTL:Bool = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
+    
     @IBOutlet var customNavBar: VobbleChatNavigationBar!
     @IBOutlet var recordButton : SDRecordButton!
     @IBOutlet var lblRecording : UILabel!
@@ -63,6 +65,11 @@ final class ChatViewController: JSQMessagesViewController {
     
     @IBOutlet var chatBlockedContainer : UIView!
     @IBOutlet var chatBlockedLabel : UILabel!
+    
+    @IBOutlet var chatPendingContainer : UIView!
+    @IBOutlet var chatPendingLabel : UILabel!
+    @IBOutlet var chatPendingImageView : UIImageView!
+    @IBOutlet var chatPendingCloseButton : UIButton!
     
     // notifications
     var lastNotificationSentDate: Date?
@@ -91,12 +98,12 @@ final class ChatViewController: JSQMessagesViewController {
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
     var isAnimating: Bool = false
-    var AudioFileName = "sound.m4a"
+    //var AudioFileName = "sound.m4a"
     var timeOut: Float = 0.0
     var recordTimer: Timer?
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
                           AVFormatIDKey : NSNumber(value: Int32(kAudioFormatMPEG4AAC) as Int32),
-                          AVNumberOfChannelsKey : NSNumber(value: 1 as Int32),
+                          AVNumberOfChannelsKey : NSNumber(value: 2 as Int32),
                           AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]
     
     var replyVideoUrlToUpload: URL?
@@ -157,6 +164,12 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
         self.topContentAdditionalInset = 55
+        
+        // dismiss keyboard on press
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.delegate = self
+        self.collectionView.addGestureRecognizer(tapGesture)
     }
     
     override func viewDidLayoutSubviews() {
@@ -195,11 +208,22 @@ final class ChatViewController: JSQMessagesViewController {
                 recordButtonContainer.isHidden = true
                 
                 // chat blocked view
-                self.chatBlockedContainer.frame = CGRect(x: 0 , y: UIScreen.main.bounds.height - 70, width: UIScreen.main.bounds.width, height: 70)
-                self.chatBlockedLabel.frame = CGRect(x: 20 , y: 10, width: UIScreen.main.bounds.width - 40, height: 50)
+                self.chatBlockedContainer.frame = CGRect(x: 0 , y: UIScreen.main.bounds.height - 50, width: UIScreen.main.bounds.width, height: 50)
+                self.chatBlockedLabel.frame = CGRect(x: 20 , y: 5, width: UIScreen.main.bounds.width - 40, height: 40)
                 chatBlockedLabel.font = AppFonts.normal
                 chatBlockedLabel.text = "CHAT_BLOCKED".localized
                 self.view.addSubview(self.chatBlockedContainer)
+                
+                // chat pending view
+                self.chatPendingContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.chatBlockedContainer.frame.height)
+                self.chatPendingLabel.frame = CGRect(x: 20 , y: 160, width: UIScreen.main.bounds.width - 40, height: 80)
+                self.chatPendingImageView.frame = CGRect(x: 25 , y: 300, width: UIScreen.main.bounds.width - 50, height: self.chatPendingContainer.frame.height - 400)
+                self.chatPendingCloseButton.frame = CGRect(x: UIScreen.main.bounds.width - 45 , y: 45, width: 35, height: 35)
+                chatPendingLabel.font = AppFonts.normalBold
+                chatPendingLabel.text = "CHAT_REPLY_SENT_MSG".localized
+                self.view.addSubview(self.chatPendingContainer)
+                
+                //chatPendingContainer.isHidden = true
             }
             isInitialised = true
         }
@@ -300,14 +324,17 @@ final class ChatViewController: JSQMessagesViewController {
         if conversation.isMyBottle {
             inputToolbar.isHidden = false
             chatBlockedContainer.isHidden = true
+            chatPendingContainer.isHidden = true
             initCustomToolBar()
         } else if let is_seen = conversation.is_seen, is_seen == 1 {
             inputToolbar.isHidden = false
             chatBlockedContainer.isHidden = true
+            chatPendingContainer.isHidden = true
             initCustomToolBar()
         } else {
             inputToolbar.isHidden = true
             chatBlockedContainer.isHidden = false
+            chatPendingContainer.isHidden = false
         }
         
         chatVc.conversationRef = convRef
@@ -355,6 +382,9 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    @IBAction func cloesPandingChatViewAction(_ sender: AnyObject) {
+        chatPendingContainer.isHidden = true
+    }
     
     // MARK: Collection view data source (and related) methods
     
@@ -368,10 +398,19 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         let message = messages[indexPath.item] // 1
-        if message.senderId == senderId { // 2
-            return outgoingBubbleImageView
-        } else { // 3
-            return incomingBubbleImageView
+        if isRTL {
+            if message.senderId == senderId { // 2
+                return incomingBubbleImageView
+            } else { // 3
+                return outgoingBubbleImageView
+            }
+        } else {
+            // The app is in right-to-left mode
+            if message.senderId == senderId { // 2
+                return outgoingBubbleImageView
+            } else { // 3
+                return incomingBubbleImageView
+            }
         }
     }
     
@@ -380,10 +419,18 @@ final class ChatViewController: JSQMessagesViewController {
         
         let message = messages[indexPath.item]
         
-        if message.senderId == senderId { // 1
-            cell.textView?.textColor = UIColor.white // 2
+        if isRTL {
+            if message.senderId == senderId { // 1
+                cell.textView?.textColor = UIColor.black // 3
+            } else {
+                cell.textView?.textColor = UIColor.white // 2
+            }
         } else {
-            cell.textView?.textColor = UIColor.black // 3
+            if message.senderId == senderId { // 1
+                cell.textView?.textColor = UIColor.white // 2
+            } else {
+                cell.textView?.textColor = UIColor.black // 3
+            }
         }
         
         return cell
@@ -442,13 +489,25 @@ final class ChatViewController: JSQMessagesViewController {
                 }
             }
         }
+        
+        // hide keyboard
+        //self.inputToolbar.contentView.textView.resignFirstResponder()
+        //self.view.endEditing(true)
+    }
+    
+    func closeKeyboard() {
+        self.inputToolbar.contentView.textView.resignFirstResponder()
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func fetchConversationByid (convId: String) {
         
         messageRef = FirebaseManager.shared.conversationRef.child(convId)
         messageRef.observeSingleEvent(of: .value, with: { snapshot in
-            print(snapshot)
+            //print(snapshot)
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             self.conversationOriginalObject = conversation
             self.conversationOriginalObject?.idString = snapshot.key
@@ -512,6 +571,7 @@ final class ChatViewController: JSQMessagesViewController {
                     //let audioData = NSData(contentsOf: URL(string:mediaURL)!)
                     let audioData = Data()
                     let audioItem = JSQCustomAudioMediaItem(data: audioData as! Data)
+                    audioItem.appliesMediaViewMaskAsOutgoing = (id == self.senderId) == (!self.isRTL)
                     audioItem.audioUrl = URL(string:mediaURL)!
                     
                     if id != DataStore.shared.me?.objectId {
@@ -570,6 +630,7 @@ final class ChatViewController: JSQMessagesViewController {
                         // the audio message migh not have been added cuz it was not uploaded yet
                         let audioData = Data()
                         let audioItem = JSQCustomAudioMediaItem(data: audioData as! Data)
+                        audioItem.appliesMediaViewMaskAsOutgoing = id == self.senderId
                         audioItem.audioUrl = URL(string:mediaURL)!
                         
                         if id != DataStore.shared.me?.objectId {
@@ -806,6 +867,9 @@ final class ChatViewController: JSQMessagesViewController {
         } else {
             self.conversationRef?.updateChildValues(["user1_unseen": 1])
         }
+        
+        // update the lastUpdate date of the conversation
+        self.conversationRef?.updateChildValues(["updatedAt": ServerValue.timestamp()])
     }
     
     // MARK: UITextViewDelegate methods
@@ -930,17 +994,30 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 self.onNewMessageSent()
                 if self.messages.count <= 2 {
                     // this means this was the first reply messsage in the conversation and the chat is not open yet
+                    
                     // show explanation message
-                    let alertController = UIAlertController(title: "", message: "CHAT_REPLY_SENT_MSG".localized, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                    alertController.addAction(ok)
-                    self.present(alertController, animated: true, completion: nil)
+                    self.chatPendingContainer.isHidden = false
+//
+//                    let alertController = UIAlertController(title: "", message: "CHAT_REPLY_SENT_MSG".localized, preferredStyle: .alert)
+//                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+//                    alertController.addAction(ok)
+//                    self.present(alertController, animated: true, completion: nil)
                     
                     Flurry.logEvent(AppConfig.reply_submitted);
                 }
+                
+//                if let audioUrl = self.audioUrl, mediaType == .audio {
+//                    let fileManager = FileManager.default
+//                    do {
+//                        try fileManager.removeItem(at: audioUrl)
+//                    } catch {
+//                        print("Error clearing record file");
+//                    }
+//                }
+                
             } else {
                 self.isLoadedMedia = true
-                print("error")
+                print("error uploading")
                 self.retryUploadAttemptsLeft -= 1
                 if self.retryUploadAttemptsLeft > 0 {
                     self.upload(url:url, photo: photo,  key: key, mediaType: mediaType)
@@ -1037,7 +1114,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
     }
     
     func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
-        print("Long tap is handled")
+        //print("Long tap is handled")
         if sender.state == .began {
             //write the function for start recording the voice here
             
@@ -1066,6 +1143,21 @@ extension ChatViewController: AVAudioRecorderDelegate {
             let runner: RunLoop = RunLoop.current
             runner.add(recordTimer!, forMode: .defaultRunLoopMode)
             
+            // we clear sound recorder after every recording session
+            // so make sure we have a valid one before recording
+            if  self.soundRecorder == nil {
+                do {
+                    // todo: handle recording permission not granted
+                    let audioSession:AVAudioSession = AVAudioSession.sharedInstance()
+                    try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                    try audioSession.setActive(true)
+                    try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
+                    self.soundRecorder.prepareToRecord()
+                } catch {
+                    print("Error Recording");
+                }
+            }
+            soundRecorder.delegate = self
             soundRecorder.record()
         }
         else if sender.state == .ended {
@@ -1073,9 +1165,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
             stopRecorderTimer()
             recordButton.setProgress(0.0)
             //write the function for stop recording the voice here
-            if let url = audioUrl {
-                  uploadAudio(audioUrl:url)
-            }
+            
         }
     }
     
@@ -1090,6 +1180,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
                     //set category and activate recorder session
                     do {
                         try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                        try audioSession.setActive(true)
                         try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
                         self.soundRecorder.prepareToRecord()
                     } catch {
@@ -1100,11 +1191,25 @@ extension ChatViewController: AVAudioRecorderDelegate {
         }
     }
     
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            let alertController = UIAlertController(title: "", message: "RECORD_FAILED_ERROR".localized, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            if let url = audioUrl {
+                uploadAudio(audioUrl:url)
+            }
+        }
+        soundRecorder = nil
+    }
+    
     func directoryURL() -> URL? {
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound.m4a")
+        let soundURL = documentDirectory.appendingPathComponent("reqsound.m4a")
         audioUrl = soundURL
         return soundURL
     }

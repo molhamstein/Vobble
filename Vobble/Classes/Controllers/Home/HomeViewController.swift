@@ -877,7 +877,15 @@ extension HomeViewController {
             let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
             viewController.alpha = 0.7
             viewController.stepIndex = 3
+            viewController.homeViewController = self
             self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func tutorialActon3FindBottle() {
+        self.goToMainShore()
+        dispatch_main_after(0.5) {
+            self.findBottlePressed(self.ivFindBtn)
         }
     }
     

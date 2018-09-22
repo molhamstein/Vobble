@@ -82,7 +82,17 @@ class ConversationCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        if let convId = convObj.idString, let messagesCount = DataStore.shared.conversationsUnseenMesssages[convId], messagesCount > 0 {
+        // the unread mesages count for this conversation
+        var unreadMessagesCount = 0
+        if let convId = convObj.idString {
+            if let messagesCount = DataStore.shared.conversationsMyBottlesUnseenMesssages[convId], messagesCount > 0 {
+                unreadMessagesCount = messagesCount
+            } else if let messagesCount = DataStore.shared.conversationsMyRepliesUnseenMesssages[convId], messagesCount > 0 {
+                unreadMessagesCount = messagesCount
+            }
+        }
+        
+        if unreadMessagesCount > 0 {
             ivNewMessageIcon.isHidden = false
             wiggleAnimate(view: ivNewMessageIcon)
         } else {

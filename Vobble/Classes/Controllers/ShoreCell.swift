@@ -30,8 +30,9 @@ class ShoreCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        btnThrow.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .horizontal)
-//        btnThrow.dropShadow()
+        btnThrow.setTitle("PREVIEW_THROW_NOW".localized, for: .normal)
+        //btnThrow.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .horizontal)
+        //btnThrow.dropShadow()
 //        ivCover.dropShadow()
         //backGroundView.makeRounded()
         //checkImage.isHidden = true

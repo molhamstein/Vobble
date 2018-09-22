@@ -17,8 +17,9 @@ struct AppConfig {
     static let appBaseDevURL = "http://104.217.253.15:7000/api"
     static let appBaseLiveURL = "http://159.65.202.38:3000/api"
     static let useLiveAPI: Bool = true
+    static let isProductionBuild: Bool = true
     static let useCurrentLocation: Bool = false
-    static let contactUsEmail: String = "hey@vobble.com"
+    static let contactUsEmail: String = "hey@vibo.com"
     
     // social
     static let instagramClienID = "99366a1b59984cffb7e99bb8c9c7fda8"

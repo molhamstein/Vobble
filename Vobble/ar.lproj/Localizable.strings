@@ -11,7 +11,7 @@
 "GLOBAL_SUCCESS_TITLE"                  = "نجاح";
 "GLOBAL_WARNING_TITLE"                  = "تنبيه!";
 "CANCEL"                                = "الغاء";
-"Ok"                                    = "موافق";
+"ok"                                    = "موافق";
 
 // Generic erros
 "ERROR_NO_CONNECTION"                   = "يرجى التأكد من اتصالك مع الانترنيت";
@@ -35,6 +35,7 @@
 "ERROR_SOCIAL_TWITTER"                  = "فشلت عملية تسجيل الدخول عبر التويتر، يرجى إعادة المحاولة";
 "ERROR_SOCIAL_INSTAGRAM"                = "فشلت عملية تسجيل الدخول عبر الانستغرام، يرجى إعادة المحاولة";
 "ERROR_SOCIAL_GOOGLE"                   = "فشلت عملية تسجيل الدخول عبر جوجل، يرجى إعادة المحاولة";
+"ERROR_LOGIN_FAILED"                    = "فشل تسجيل الدخول, الرجاء التحقق من اسم المستخدم و كلمه السر";
 
 // login screen
 "LOGIN_EMAIL_TITLE"                     = "البريد الاالكتروني";
@@ -141,10 +142,11 @@
 
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد من العودة؟ عليك الانتظار ليتم رفع الملف الذي ارسلته ";
-"CHAT_REPLY_SENT_MSG"                   = "تم الارسال, عندما يشاهد صاحب الزجاجة ردك، سيتاح لكماالمحادثة لـ٢٤ ساعة";
+"CHAT_REPLY_SENT_MSG"                   = "تم ارسال ردك, عندما يشاهد صاحب الزجاجة ردك، سيتاح لكما المحادثة لـ٢٤ ساعة";
 "CHAT_RECORDING"                        = "جاري التسجيل‫…‬";
 "CHAT_BLOCKED"                          = "المحادثة مغلقه حتى يقوم الطرف الاخر بالرد";
 "CHAT_NAV_TIME_LEFT"                    = "متبقي";
+"RECORD_FAILED_ERROR"                   = "للأسف يبدو ان هنالك مشكلة في تسجيل رسالتك";
 
 // filter
 "FEMALE"                                = "بنت";
@@ -159,6 +161,9 @@
 "FILTERS_PANEL_FILTER_NOW_BTN"          = "فلترهاالاّن";
 "FILTERS_PANEL_PLACEHOLDER_GENDER"      = "تبحث عن فيديو من جنس معين ؟";
 "FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "تبحث عن فيديو من بلد معين ؟";
+
+// preview
+"PREVIEW_THROW_NOW"                     = "إرم الاّن";
 
 // settings
 "SETTINGS_CONTACT"                      = "تواصل معنا";

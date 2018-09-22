@@ -33,6 +33,9 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     @IBOutlet weak var lblBottlesThrownCount: UILabel!
     @IBOutlet weak var lblBottlesThrownCountTitle: UILabel!
     
+    @IBOutlet weak var lblUnreadMyBottlesConversationsBadge: UILabel!
+    @IBOutlet weak var lblUnreadMyRepliesConversationsBadge: UILabel!
+    
     public weak var convVC: ConversationViewController?
     
    
@@ -65,6 +68,9 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         } else {
             userImageView.image = UIImage(named:"user_placeholder")
         }
+        
+        lblUnreadMyBottlesConversationsBadge.isHidden = true
+        lblUnreadMyRepliesConversationsBadge.isHidden = true
     }
     
     func configCell(userObj: AppUser) {
@@ -94,6 +100,8 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
             btnMyReplies.setTitle("MY_BOTTLES_REPLIES_TITLE".localized, for: .normal)
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange), name: Notification.Name("unreadMessagesChange"), object: nil)
+        self.unreadMessagesCountChange ()
     }
     
     @IBAction func myBottlesButtonPressed(_ sender: Any) {
@@ -123,6 +131,27 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         convVC?.imgLoading = self.activityIndicator
         convVC?.userImageView = self.userImageView
         convVC?.setUserImage()
+        
+    }
+    
+    func unreadMessagesCountChange () {
+        // my replies
+        let countReplies = DataStore.shared.getMyRepliesConversationsWithUnseenMessagesCount()
+        if countReplies > 0{
+            lblUnreadMyRepliesConversationsBadge.text = "\(countReplies)"
+            lblUnreadMyRepliesConversationsBadge.isHidden = false
+        } else {
+            lblUnreadMyRepliesConversationsBadge.isHidden = true
+        }
+        
+        // my bottles
+        let countBottles = DataStore.shared.getMyBottlesConversationsWithUnseenMessagesCount()
+        if countBottles > 0{
+            lblUnreadMyBottlesConversationsBadge.text = "\(countBottles)"
+            lblUnreadMyBottlesConversationsBadge.isHidden = false
+        } else {
+            lblUnreadMyBottlesConversationsBadge.isHidden = true
+        }
         
     }
 }

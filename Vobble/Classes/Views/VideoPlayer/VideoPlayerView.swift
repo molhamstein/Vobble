@@ -59,9 +59,9 @@ class VideoPlayerView: AbstractNibView {
         // loader type, see detail：https://github.com/ninjaprox/NVActivityIndicatorView
        // BMPlayerConf.loaderType  = NVActivityIndicatorType.ballRotateChase
         // enable setting the brightness by touch gesture in the player
-        BMPlayerConf.enableBrightnessGestures = true
+        BMPlayerConf.enableBrightnessGestures = false
         // enable setting the volume by touch gesture in the player
-        BMPlayerConf.enableVolumeGestures = true
+        BMPlayerConf.enableVolumeGestures = false
         // enable setting the playtime by touch gesture in the player
         BMPlayerConf.enablePlaytimeGestures = true
     }
