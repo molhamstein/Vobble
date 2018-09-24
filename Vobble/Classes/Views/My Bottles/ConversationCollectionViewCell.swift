@@ -101,7 +101,7 @@ class ConversationCollectionViewCell: UICollectionViewCell {
         }
         
         dispatch_main_after(0.2) {
-            if !self.shadowApplied {
+            if self.shadowHolderView != nil && !self.shadowApplied {
                 self.shadowHolderView.dropShortShadow()
                 self.shadowApplied = true
             }

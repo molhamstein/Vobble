@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F1CF304046607C1EDDA2B2C238D5D0D"
+               BlueprintIdentifier = "FB14F41944A42AA8FB39EAF27779ED61"
                BlueprintName = "YXWaveView"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "YXWaveView.framework">

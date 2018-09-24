@@ -30,6 +30,7 @@ pod 'OneSignal', '>= 2.6.2', '< 3.0'
 pod 'Flurry-iOS-SDK/FlurrySDK' #Analytics Pod
 pod 'SwiftyGif'
 pod 'Gecco'
+pod 'CountryPickerView', '~> 1.0.0'
 
 end
 

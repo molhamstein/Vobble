@@ -126,7 +126,7 @@ class HomeViewController: AbstractController {
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
         
         // tutorial
-        if let tutShowedBefore = DataStore.shared.tutorial1Showed, !tutShowedBefore{
+        //if let tutShowedBefore = DataStore.shared.tutorial1Showed, !tutShowedBefore{
             dispatch_main_after(2) {
                 let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
                 viewController.alpha = 0.5
@@ -135,7 +135,7 @@ class HomeViewController: AbstractController {
                 
                 DataStore.shared.tutorial1Showed = true
             }
-        }
+        //}
     }
     
     override func didReceiveMemoryWarning() {
