@@ -13,6 +13,7 @@ class JSQCustomAudioMediaItem: JSQAudioMediaItem {
     
     var audioUrl: URL?
     var LoadingAudioSpinner: UIActivityIndicatorView?
+    var uploadingImageView: UIImageView?
     
 //    override var audioData: Data? {
 //        set {
@@ -68,16 +69,34 @@ class JSQCustomAudioMediaItem: JSQAudioMediaItem {
         self.playButton.addTarget(self, action: #selector(self.onPlayButton(sender:)), for: .touchUpInside)
         self.progressLabel.text = "--:--"
         
+        // if url is not set set this mean the pee is still uploading the message and we should show a spinner
+        if let url = audioUrl, url.isValidUrl() {
+            self.uploadingImageView?.isHidden = true
+            self.playButton.isHidden = false
+        } else {
+            self.uploadingImageView = UIImageView()
+            self.uploadingImageView?.frame = self.playButton.frame
+            //self.uploadingImageViewr?.type = .white
+            self.uploadingImageView?.image = UIImage(named:"ic_uploading_audio")
+            self.uploadingImageView?.contentMode = .scaleAspectFit
+            view?.addSubview(self.uploadingImageView!)
+            self.uploadingImageView?.isHidden = false
+            self.playButton.isHidden = true
+        }
+        
         self.LoadingAudioSpinner = UIActivityIndicatorView()
         self.LoadingAudioSpinner?.frame = self.playButton.frame
-        self.LoadingAudioSpinner?.activityIndicatorViewStyle = .white
+        self.LoadingAudioSpinner?.activityIndicatorViewStyle = .gray
         view?.addSubview(self.LoadingAudioSpinner!)
+
         
         // if url is not set set this mean the pee is still uploading the message and we should show a spinner
         if let url = audioUrl, url.isValidUrl() {
+            self.LoadingAudioSpinner?.stopAnimating()
             self.LoadingAudioSpinner?.isHidden = true
         } else {
             self.LoadingAudioSpinner?.isHidden = false
+            self.LoadingAudioSpinner?.startAnimating()
         }
         
         return view

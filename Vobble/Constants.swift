@@ -17,9 +17,9 @@ struct AppConfig {
     static let appBaseDevURL = "http://104.217.253.15:7000/api"
     static let appBaseLiveURL = "http://159.65.202.38:3000/api"
     static let useLiveAPI: Bool = true
-    static let isProductionBuild: Bool = true
+    static let isProductionBuild: Bool = false
     static let useCurrentLocation: Bool = false
-    static let contactUsEmail: String = "hey@vibo.com"
+    static let contactUsEmail: String = "yallavideoapp@gmail.com"
     
     // social
     static let instagramClienID = "99366a1b59984cffb7e99bb8c9c7fda8"
@@ -35,6 +35,8 @@ struct AppConfig {
     static let PlaceHolderImage = UIImage(named: "bottle-1")
     
     static let DATE_SERVER_DATES_LOCALE = "en_US_POSIX"
+    
+    static let NO_COUNTRY_SELECTED = "none"
     
     // tracking events
     // find

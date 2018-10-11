@@ -126,7 +126,7 @@ class HomeViewController: AbstractController {
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
         
         // tutorial
-        //if let tutShowedBefore = DataStore.shared.tutorial1Showed, !tutShowedBefore{
+        if let tutShowedBefore = DataStore.shared.tutorial1Showed, !tutShowedBefore{
             dispatch_main_after(2) {
                 let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
                 viewController.alpha = 0.5
@@ -135,7 +135,7 @@ class HomeViewController: AbstractController {
                 
                 DataStore.shared.tutorial1Showed = true
             }
-        //}
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -171,6 +171,7 @@ class HomeViewController: AbstractController {
         
         ApiManager.shared.getMe(completionBlock: { (success, error, user) in})
         ApiManager.shared.requestUserInventoryItems { (items, error) in}
+        ApiManager.shared.markUserAsActive { (success, error) in}
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -240,8 +241,11 @@ class HomeViewController: AbstractController {
     }
     
     func refreshViewData () {
-        
-        lblBottlesLeftBadge.text = "\(DataStore.shared.me?.bottlesLeftToThrowCount ?? 0)"
+        if let totalBottlesLeft = DataStore.shared.me?.totalBottlesLeftToThrowCount {
+            lblBottlesLeftBadge.text = "\(totalBottlesLeft)"
+        } else {
+            lblBottlesLeftBadge.text = "0"
+        }
     }
     
     func setArtImages(){
@@ -314,31 +318,6 @@ class HomeViewController: AbstractController {
     }
     
     func animateShark() {
-//        ivShark?.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
-        
-//        UIView.animate(withDuration: 18.0, delay: 5, options: [.repeat, .curveLinear], animations: {
-//            self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth * 3, y: 0)
-//        }, completion: nil)
-        
-//        UIView.animateKeyframes(withDuration: 18, delay: 3, options: [.repeat], animations: {
-//            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33) {
-//                self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth/3 , y: 8).rotated(by: 0.1).scaledBy(x: 1.08, y: 1.08)
-//            }
-//            UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 0.33) {
-//                self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth/2, y: 0)
-//            }
-//            UIView.addKeyframe(withRelativeStartTime: 0.66, relativeDuration: 0.34) {
-//                self.ivShark?.transform = CGAffineTransform.identity.translatedBy(x: self.screenWidth , y: -8)
-//            }
-//        }) { (done) in
-//            
-//        }
-        
-//        ivShark?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0)).translatedBy(x: 0, y: 0)
-//        UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
-//            self.ivShark?.transform = CGAffineTransform.identity.rotated(by: CGFloat(0.0)).translatedBy(x: 0, y: 10)
-//        }, completion: nil)
-        
         
         let maxYTransaltion = CGFloat(80.0)
         
@@ -553,10 +532,6 @@ class HomeViewController: AbstractController {
                 UIView.setAnimationRepeatCount(2)
                 view.transform = CGAffineTransform.identity
         }) { (done) in
-//            UIView.animate(withDuration: 2.0, delay: 0.0, options: [], animations: {
-//                view.transform = CGAffineTransform.identity
-//            }) { (done) in
-//            }
         }
     }
 
@@ -566,14 +541,11 @@ class HomeViewController: AbstractController {
             
         } else if gestureRecognizer.state == .changed {
             
-            print("gest changing")
             if blockPageTransitions {
-                print("gest blocked")
                 return
             }
             
             let translation: CGPoint = gestureRecognizer.translation(in: view)
-            //print("gest pan right \(fabs(translation.x/translation.y))")
             // min threshold for swipe
             if fabs(translation.x) < 30  || fabs(translation.y/translation.x) > 0.9{
                 return
@@ -845,7 +817,7 @@ extension HomeViewController: FilterViewDelegate {
             self.showShopView(type)
         })
         alertController.addAction(ok)
-        let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+        let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
         alertController.addAction(cancel)
         self.present(alertController, animated: true, completion: nil)
         

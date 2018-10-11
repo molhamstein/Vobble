@@ -59,7 +59,6 @@ class AppUser: BaseModel, NSCopying {
     private let kUserNextRefill = "nextRefill"
     private let kAccountInfoCompleted = "registrationCompleted"
     
-    
     private let kUserBottlesCount = "totalBottlesThrown"
     private let kUserBottlesLeftToday = "bottlesCount"
     private let kUserExtraBottles = "extraBottlesCount"
@@ -82,16 +81,24 @@ class AppUser: BaseModel, NSCopying {
     public var token: String?
     public var thrownBottlesCount: Int?
     public var bottlesLeftToThrowCount: Int?
+    public var extraBottlesLeftToThrowCount: Int?
+    
     public var socialId: String?
     public var socialToken: String?
     public var nextRefillDate: Date?
     
     public var firstColor : UIColor?
     public var secondColor : UIColor?
-    //public var imageUrl : String?
-    //public var myBottlesArray:[Conversation] = [Conversation]()
-    //public var myRepliesArray:[Conversation] = [Conversation]()
-//    public var shopItems:[ShopItem] = [ShopItem]()
+    
+
+    public var totalBottlesLeftToThrowCount: Int {
+        get {
+            if let bottlesLeft = bottlesLeftToThrowCount, let extraBottles = extraBottlesLeftToThrowCount {
+                return bottlesLeft + extraBottles
+            }
+            return 0
+        }
+    }
     
     
     // MARK: User initializer
@@ -119,6 +126,10 @@ class AppUser: BaseModel, NSCopying {
         }
         if let nextRefill = json[kUserNextRefill].string {
             nextRefillDate = DateHelper.getDateFromISOString(nextRefill)
+        }
+        
+        if let value = json[kUserExtraBottles].int {
+            extraBottlesLeftToThrowCount = value
         }
         
         token = json[kUserTokenKey].string
@@ -179,6 +190,10 @@ class AppUser: BaseModel, NSCopying {
             dictionary[kUserBottlesLeftToday] = value
         }
         
+        if let value = extraBottlesLeftToThrowCount {
+            dictionary[kUserExtraBottles] = value
+        }
+        
         if let value = socialToken {
             dictionary[kUserSocialToken] = value
         }
@@ -213,6 +228,7 @@ class AppUser: BaseModel, NSCopying {
         copy.token = token
         copy.thrownBottlesCount = thrownBottlesCount
         copy.bottlesLeftToThrowCount = bottlesLeftToThrowCount
+        copy.extraBottlesLeftToThrowCount = extraBottlesLeftToThrowCount
         copy.socialId = socialId
         copy.socialToken = socialToken
         copy.nextRefillDate = nextRefillDate

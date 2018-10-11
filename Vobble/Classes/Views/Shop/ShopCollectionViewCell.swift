@@ -47,12 +47,12 @@ class ShopCollectionViewCell: UICollectionViewCell {
             image.sd_setImage(with: URL(string:iconUrl))
         }
         
-        dispatch_main_after(0.2) {
-            if self.shadowHolderView != nil && !self.shadowApplied {
-                self.shadowHolderView.dropShortShadow()
-                self.shadowApplied = true
-            }
-        }
+//        dispatch_main_after(0.1) {
+//            if self.shadowHolderView != nil && !self.shadowApplied {
+//                self.shadowHolderView.dropShortShadow()
+//                self.shadowApplied = true
+//            }
+//        }
         
     }
 

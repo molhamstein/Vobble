@@ -26,6 +26,7 @@
 "ERROR_UNACTIVATED_USER"                = "Your Account is not activated yet, please check your email";
 "ERROR_INVALID_USERNAME"                = "Username already exists";
 "ERROR_EMAIL_EXISTS"                    = "Email Already exists, please try to login";
+"ERROR_WRONG_LOGIN_METHOD"              = "This email is registered before, please login with your usual login method";
 
 
 // Connection errors messages
@@ -147,6 +148,7 @@
 "CHAT_BLOCKED"                          = "Chat is blocked untill the peer replies";
 "CHAT_NAV_TIME_LEFT"                    = "left";
 "RECORD_FAILED_ERROR"                   = "Sorry, there seems an issue recording your message";
+"RECORD_LONG_PRESS"                     = "Please hold the record botton while talking";
 
 // filter
 "FEMALE"                                = "Female";
@@ -161,6 +163,8 @@
 "FILTERS_PANEL_FILTER_NOW_BTN"          = "Find Bottle Now";
 "FILTERS_PANEL_PLACEHOLDER_GENDER"      = "Want to find bottles from males or females only?";
 "FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "Find Bottles from specific country";
+"FILTERS_PANEL_NO_COUNTRY_SELECTED"     = "Select Country";
+"PREFERED_COUNTRIES_TITLE"              = "Most used";
 
 // preview
 "PREVIEW_THROW_NOW"                     = "Throw Now";
@@ -174,6 +178,8 @@
 "SETTINGS_LOGOUT"                       = "Logout";
 "SETTINGS_LOGOUT_MSG"                   = "Are you sure you want to logout?";
 "SETTINGS_SHARE_MSG"                    = "Come over and try this cool App, \n https://www.yallavideo.tv";
+"SETTINGS_MAIN_NOT_CONFIGURED"          = "Your Device is not configured to send emails";
+
 
 "ABOUT_TITLE"                           = "About us";
 "TERMS_TITLE"                           = "Terms of Service";
@@ -191,7 +197,7 @@
 "BLOCK_USER_SUCCESS"                   = "We will make sure %@ will never bother you again";
 
 // shop
-"BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item %@ ?";
+"BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item with %@ ?";
 "CANT_BUY_ITEM_WARNING"                = "You have an active filter from the same type";
 "TAB_BOTTLES"                          = "Bottles";
 "TAB_GENDER"                           = "Gender Filters";

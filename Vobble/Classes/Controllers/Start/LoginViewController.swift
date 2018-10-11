@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import StoreKit
 import AVFoundation
+import CountryPickerView
 
 enum ViewType {
     case welcome
@@ -93,6 +94,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var twitterButton: UIButton!
     @IBOutlet weak var instagramButton: UIButton!
+    
+    let countryPickerView = CountryPickerView()
     
     // Data
     var tempUserInfoHolder: AppUser = AppUser()
@@ -267,6 +270,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         
         lvEmailTextField.tintColor = UIColor.white
         lvPasswordTextField.tintColor = UIColor.white
+        
+        // init country picker
+        countryPickerView.showPhoneCodeInView = false
+        countryPickerView.showCountryCodeInView = true
+        countryPickerView.delegate = self
+        countryPickerView.dataSource = self
         
 //        loginButton.setTitle("START_NORMAL_LOGIN".localized, for: .normal)
 //        loginButton.setTitle("START_NORMAL_LOGIN".localized, for: .highlighted)
@@ -541,6 +550,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     DataStore.shared.fetchBaseData()
                 
               } else {
+                    self.signupButton.isLoading = false
+                    self.view.isUserInteractionEnabled = true
                     self.showMessage(message:(err?.type.errorMessage)!, type: .error)
               }
           }
@@ -726,12 +737,13 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 
             })
         case .countryV :
+            countryPickerView.showCountriesList(from: self)
             //signupView.dropShadow()
-            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
-                self.countryView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
-            }, completion: {(finished: Bool) in
-                
-            })
+//            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+//                self.countryView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+//            }, completion: {(finished: Bool) in
+//
+//            })
         case .socialLoginStep2 :
             //socialInfoView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
@@ -870,5 +882,54 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                 vc.termsType = .userAgreement
             }
         }
+    }
+}
+
+// MARK:- CountryPickerDelegate
+extension LoginViewController: CountryPickerViewDelegate, CountryPickerViewDataSource {
+    func closeButtonNavigationItem(in countryPickerView: CountryPickerView) -> UIBarButtonItem? {
+        return nil
+    }
+    
+    func searchBarPosition(in countryPickerView: CountryPickerView) -> SearchBarPosition {
+        return .tableViewHeader
+    }
+    
+    func showOnlyPreferredSection(in countryPickerView: CountryPickerView) -> Bool? {
+        return false
+    }
+    
+    func navigationTitle(in countryPickerView: CountryPickerView) -> String? {
+        return " "
+    }
+    
+    func showPhoneCodeInList(in countryPickerView: CountryPickerView) -> Bool? {
+        return false
+    }
+    
+    
+    //    func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
+    //
+    //    }
+    
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+        self.countryName = country.name
+        self.countryCode = country.code
+        selectCountryButton.setTitle(countryName, for: .normal)
+        btnSocialInfoSelectCountry.setTitle(countryName, for: .normal)
+    }
+    
+    func preferredCountries(in countryPickerView: CountryPickerView) -> [Country]? {
+        var countries = [Country]()
+        ["SA", "AE", "LB", "SY", "IQ", "KW", "OM", "DZ", "BH", "EG", "JO", "LY", "PS", "QA", "SD"].forEach { code in
+            if let country = countryPickerView.getCountryByCode(code) {
+                countries.append(country)
+            }
+        }
+        return countries
+    }
+    
+    func sectionTitleForPreferredCountries(in countryPickerView: CountryPickerView) -> String? {
+        return "PREFERED_COUNTRIES_TITLE".localized
     }
 }

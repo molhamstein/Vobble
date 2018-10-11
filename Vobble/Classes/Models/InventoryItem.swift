@@ -77,7 +77,7 @@ class InventoryItem: BaseModel {
         }
         
         if let value = shopItem {
-            dictionary[kInventoryItemId] = value.dictionaryRepresentation()
+            dictionary[kInventoryPorduct] = value.dictionaryRepresentation()
         }
         
         if let value = endDate {

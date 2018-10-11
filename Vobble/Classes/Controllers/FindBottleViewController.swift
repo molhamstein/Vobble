@@ -131,7 +131,7 @@ class FindBottleViewController: AbstractController {
             
         })
         alertController.addAction(ok)
-        let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+        let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
         alertController.addAction(cancel)
         self.present(alertController, animated: true, completion: nil)
     }

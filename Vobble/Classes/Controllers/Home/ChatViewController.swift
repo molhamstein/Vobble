@@ -28,6 +28,7 @@ import SwiftyJSON
 import NYTPhotoViewer
 import SDRecordButton
 import Flurry_iOS_SDK
+import SDWebImage
 
 final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate {
     
@@ -189,7 +190,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 lblRecording.font = AppFonts.bigBold
                 lblRecording.text = "CHAT_RECORDING".localized
                 self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.inputToolbar.frame.height)
-                self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 10, width: 120, height: 120)
+                self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 90, width: 120, height: 120)
                 self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
                 self.ivRecordingIcon.center = self.recordButton.center
                 self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
@@ -213,6 +214,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 chatBlockedLabel.font = AppFonts.normal
                 chatBlockedLabel.text = "CHAT_BLOCKED".localized
                 self.view.addSubview(self.chatBlockedContainer)
+                self.chatBlockedContainer.isHidden = true
                 
                 // chat pending view
                 self.chatPendingContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.chatBlockedContainer.frame.height)
@@ -221,6 +223,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 self.chatPendingCloseButton.frame = CGRect(x: UIScreen.main.bounds.width - 45 , y: 45, width: 35, height: 35)
                 chatPendingLabel.font = AppFonts.normalBold
                 chatPendingLabel.text = "CHAT_REPLY_SENT_MSG".localized
+                //self.chatPendingContainer.isHidden = true
                 self.view.addSubview(self.chatPendingContainer)
                 
                 //chatPendingContainer.isHidden = true
@@ -269,6 +272,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         customNavBar.shoreNameLabel.text = navShoreName
         customNavBar.userNameLabel.text = navUserName
+        if let peerPicString = conversationOriginalObject?.getPeer?.profilePic, let picUrl = URL(string:peerPicString), picUrl.isValidUrl(){
+            customNavBar.userImageView.sd_setImage(with: picUrl)
+        }
+        customNavBar.userImageButton.addTarget(self, action: #selector(self.didTapPeerImage(_:)), for: .touchUpInside)
         customNavBar.viewcontroller = self
     }
     
@@ -385,6 +392,30 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     @IBAction func cloesPandingChatViewAction(_ sender: AnyObject) {
         chatPendingContainer.isHidden = true
     }
+
+    @IBAction func didTapPeerImage(_ sender: AnyObject) {
+        if let peerImageUrl = conversationOriginalObject?.getPeer?.profilePic {
+            let photo: PreviewPhoto = PreviewPhoto(image: UIImage.init(named: "user_placeholder"), title: "")
+            let images = [photo]
+            let photosViewController = NYTPhotosViewController(photos: images)
+            photosViewController.rightBarButtonItem = nil
+            present(photosViewController, animated: true, completion: nil)
+            
+            SDWebImageDownloader.shared().downloadImage(
+                with: URL(string: peerImageUrl),
+                options: SDWebImageDownloaderOptions(rawValue: 7),
+                progress: nil,
+                completed: { (image, data, error, bool) -> Void in
+                    DispatchQueue.main.async() {
+                      photo.image = image
+                        photosViewController.updateImage(for: photo)
+                    }
+            })
+        }
+    }
+
+    
+    
     
     // MARK: Collection view data source (and related) methods
     
@@ -1029,7 +1060,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             ApiManager.shared.uploadImage(imageData: imageObject, completionBlock: uploadCompletionBlock)
         } else if let mediaURL = url {
             let urls:[URL] = [mediaURL]
-            ApiManager.shared.uploadMedia(urls: urls, mediaType: mediaType, completionBlock: uploadCompletionBlock)
+            ApiManager.shared.uploadMedia(urls: urls, mediaType: mediaType, completionBlock: uploadCompletionBlock, progressBlock: {(progress) in })
         }
     }
 }
@@ -1049,7 +1080,7 @@ extension ChatViewController: ChatNavigationDelegate {
                 self.backButtonAction(self)
             })
             alertController.addAction(ok)
-            let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
         }
@@ -1071,9 +1102,14 @@ extension ChatViewController: AVAudioRecorderDelegate {
         
         image = UIImage(named: "recordSoundMsg")
         let recordButton = UIButton(type: .custom)
+        // record button gesture recognizers
         recordButton.setImage(image, for: .normal)
         let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
         recordButton.addGestureRecognizer(longGestureRecognizer)
+        // used to show a tip for the user when cliking on the record button
+        let tabGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTabRecordAudio(_:)))
+        recordButton.addGestureRecognizer(tabGestureRecognizer)
+        
         recordButton.frame = CGRect(x: 45, y: 0, width: 40, height: CGFloat(height))
         inputToolbar.contentView.leftBarButtonItemWidth = 85
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
@@ -1111,6 +1147,13 @@ extension ChatViewController: AVAudioRecorderDelegate {
         picker.sourceType = .photoLibrary
         picker.mediaTypes = ["public.image","public.movie"]
         present(picker, animated: true, completion:nil)
+    }
+    
+    func didTabRecordAudio(_ sender: UITapGestureRecognizer) {
+        let alertController = UIAlertController(title: "", message: "RECORD_LONG_PRESS".localized, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
@@ -1234,7 +1277,9 @@ extension ChatViewController: AVAudioRecorderDelegate {
         self.recordButton.setProgress(0)
         timeOut = 0.0
         recordButtonContainer.isHidden = true
-        soundRecorder.stop()
+        if soundRecorder != nil {
+            soundRecorder.stop()
+        }
     }
 }
 

@@ -83,6 +83,8 @@ class ShopItem: BaseModel {
     private let kShopItemFirstColor: String = "fcolor"
     private let kShopItemSecondColor: String = "lcolor"
     private let kShopItemImageUrl: String = "icon"
+    private let kShopItemValidity: String = "validity"
+    private let kShopItemBottlesCount: String = "bottleCount"
     
     private let kShopItemType: String = "typeGoodsId"
     private let kShopItemProdId: String = "ProdId"
@@ -107,6 +109,8 @@ class ShopItem: BaseModel {
     public var prodId : String?
     public var startDate : Double?
     public var endDate : Double?
+    public var validity : Double?
+    public var bottlesCount : Double?
     public var type : ShopItemType?
     
     public var appleProduct : String?
@@ -181,6 +185,12 @@ class ShopItem: BaseModel {
         if let value = json[kShopItemPrice].string {
             price = value
         }
+        if let value = json[kShopItemValidity].double {
+            validity = value
+        }
+        if let value = json[kShopItemBottlesCount].double {
+            bottlesCount = value
+        }
         if let value = json[kShopItemImageUrl].string {
             icon = value
         }
@@ -243,6 +253,14 @@ class ShopItem: BaseModel {
         
         if let value = price {
             dictionary[kShopItemPrice] = value
+        }
+        
+        if let value = validity {
+            dictionary[kShopItemValidity] = value
+        }
+        
+        if let value = bottlesCount {
+            dictionary[kShopItemBottlesCount] = value
         }
         
         if let value = icon {

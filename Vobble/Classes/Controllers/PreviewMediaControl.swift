@@ -25,6 +25,11 @@ class PreviewMediaControl : AbstractController {
     @IBOutlet var vp: VideoPlayerView!
     @IBOutlet weak var playButton: UIButton!
     
+    // upload progress
+    @IBOutlet weak var uploadProgressWater: UIView!
+    @IBOutlet weak var uploadProgressLabel: UILabel!
+    @IBOutlet weak var uploadProgressWave: WaveView!
+    
     var type:MEDIA_TYPE!
     var isShorePickerVisible: Bool = false
     var from: typeOfController = .chatView
@@ -82,6 +87,12 @@ class PreviewMediaControl : AbstractController {
         if !isVOverlayApplyGradient {
             self.vOverlay.applyGradient(colours: [ AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
             self.submitButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+            
+            uploadProgressWave.awakeFromNib()
+            uploadProgressWave.showWave()
+            uploadProgressWave.isHidden = true
+            uploadProgressWater.isHidden = true
+            
            isVOverlayApplyGradient = true
         }
     }
@@ -159,7 +170,19 @@ class PreviewMediaControl : AbstractController {
      
         let urls:[URL] = [self.videoUrl as URL]
         showActivityLoader(true)
-        ApiManager.shared.uploadMedia(urls: urls, mediaType: .video) { (files, errorMessage) in
+        
+        // show progresss view
+        self.uploadProgressWave.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height + self.uploadProgressWave.frame.height)
+        self.uploadProgressWater.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height)
+        self.uploadProgressWater.isHidden = false
+        self.uploadProgressWave.isHidden = false
+        UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+            self.uploadProgressWave.alpha = 1.0
+            self.uploadProgressWave.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height)
+        }, completion: {(finished: Bool) in
+        })
+        
+        ApiManager.shared.uploadMedia(urls: urls, mediaType: .video, completionBlock: { (files, errorMessage) in
 //        
             if errorMessage == nil {
         
@@ -177,6 +200,9 @@ class PreviewMediaControl : AbstractController {
         
                 ApiManager.shared.addBottle(bottle: bottle, completionBlock: { (success, error, bottle) in
                 
+                    self.uploadProgressWater.isHidden = true
+                    self.uploadProgressWave.isHidden = true
+                    
                     if error == nil {
                         self.showActivityLoader(false)
                         
@@ -198,13 +224,19 @@ class PreviewMediaControl : AbstractController {
                         //print(error?.type.errorMessage)
                     }
                 })
-                
-            }
-            else {
+            } else {
                 self.showActivityLoader(false)
-                print(errorMessage)
+                print(errorMessage ?? "unknown error occured in upload bottle")
+                // hide progress view
+                self.uploadProgressWater.isHidden = true
+                self.uploadProgressWave.isHidden = true
             }
-        }
+        }, progressBlock:{ (progressPercent) in
+            if let percent = progressPercent {
+                self.uploadProgressWater.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height * CGFloat(1.0 - percent))
+                self.uploadProgressWave.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height * CGFloat(1.0 - percent))
+            }
+        })
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {

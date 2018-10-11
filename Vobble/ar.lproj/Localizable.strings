@@ -26,6 +26,7 @@
 "ERROR_UNACTIVATED_USER"                = "هذا الحساب غير مفعل بعد الرجاء التحقق من بريد التفعيل";
 "ERROR_INVALID_USERNAME"                = "الاسم غير متاح";
 "ERROR_EMAIL_EXISTS"                    = "البريد الالكتروني مسجل مسبقا";
+"ERROR_WRONG_LOGIN_METHOD"              = "الحساب موجود مسبقا الرجاء تسجيل الدخول بطريقتك المعتادة";
 
 
 // connection errors messages
@@ -147,6 +148,7 @@
 "CHAT_BLOCKED"                          = "المحادثة مغلقه حتى يقوم الطرف الاخر بالرد";
 "CHAT_NAV_TIME_LEFT"                    = "متبقي";
 "RECORD_FAILED_ERROR"                   = "للأسف يبدو ان هنالك مشكلة في تسجيل رسالتك";
+"RECORD_LONG_PRESS"                     = "استمر بالضغط على زر التسجيل خلال حديثك";
 
 // filter
 "FEMALE"                                = "بنت";
@@ -161,6 +163,8 @@
 "FILTERS_PANEL_FILTER_NOW_BTN"          = "فلترهاالاّن";
 "FILTERS_PANEL_PLACEHOLDER_GENDER"      = "تبحث عن فيديو من جنس معين ؟";
 "FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "تبحث عن فيديو من بلد معين ؟";
+"FILTERS_PANEL_NO_COUNTRY_SELECTED"     = "حدد البلد";
+"PREFERED_COUNTRIES_TITLE"              = "الأكثر تداولا";
 
 // preview
 "PREVIEW_THROW_NOW"                     = "إرم الاّن";
@@ -174,6 +178,7 @@
 "SETTINGS_LOGOUT"                       = "تسجيل الخروج";
 "SETTINGS_LOGOUT_MSG"                   = "هل انت متاكد انك تريد تسجل الخروج";
 "SETTINGS_SHARE_MSG"                    = "فيبو ‫-‬ ارمي سرك في البحر واكتشف اسرار الاخرين, \n https://www.yallavideo.tv";
+"SETTINGS_MAIN_NOT_CONFIGURED"          = "هذا الجهاز غير مهيئ لارسال ال رسائل الالكترونيه";
 
 "ABOUT_TITLE"                          = "من نحن";
 "TERMS_TITLE"                          = "شروط الاستخدام";

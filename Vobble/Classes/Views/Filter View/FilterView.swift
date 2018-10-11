@@ -8,6 +8,7 @@
 
 import Foundation
 import Flurry_iOS_SDK
+import CountryPickerView
 
 protocol FilterViewDelegate {
     
@@ -43,7 +44,11 @@ class FilterView: AbstractNibView {
     @IBOutlet weak var countryLeftLabel: UILabel!
     @IBOutlet weak var countryFilterTitle: UILabel!
     @IBOutlet weak var countryBuyFilterButton: UIButton!
-    @IBOutlet weak var countryPicker: CountryPicker!
+    //@IBOutlet weak var countryPicker: CountryPicker!
+    @IBOutlet weak var countryPicker: CountryPickerView!
+    @IBOutlet weak var countryPickerOverlay: UIView!
+    @IBOutlet weak var countryPickerLabel: UILabel!
+    @IBOutlet weak var countryPickerClear: UIButton!
     @IBOutlet weak var genderPicker: UIView!
     
     @IBOutlet weak var vCountryPlaceholder: UIView!
@@ -52,7 +57,7 @@ class FilterView: AbstractNibView {
     @IBOutlet weak var btnFindBottle: UIButton!
     
     fileprivate var selectedGender: String = GenderType.allGender.rawValue
-    fileprivate var selectedCountry: String = "Afghanistan"
+    fileprivate var selectedCountry: String = AppConfig.NO_COUNTRY_SELECTED
     
     // MARK: - Initializers
     
@@ -78,6 +83,7 @@ class FilterView: AbstractNibView {
         btnFindBottle.setTitle("FILTERS_PANEL_FILTER_NOW_BTN".localized, for: .normal)
         lblCountryPlaceholder.text = "FILTERS_PANEL_PLACEHOLDER_COUNTRY".localized
         lblGenderPlaceholder.text = "FILTERS_PANEL_PLACEHOLDER_GENDER".localized
+        countryPickerLabel.text = "FILTERS_PANEL_NO_COUNTRY_SELECTED".localized
         
         // fonts
         allGenderLabel.font = AppFonts.normal
@@ -89,9 +95,17 @@ class FilterView: AbstractNibView {
         countryBuyFilterButton.titleLabel?.font = AppFonts.xSmall
         lblCountryPlaceholder.font = AppFonts.normal
         lblGenderPlaceholder.font = AppFonts.normal
+        countryPickerLabel.font = AppFonts.xBigBold
         
         allGenderButton.alpha = 1
         allGenderLabel.alpha = 1
+        
+        countryPicker.showPhoneCodeInView = false
+        countryPicker.showCountryCodeInView = true
+        countryPicker.delegate = self
+        countryPicker.dataSource = self
+        countryPickerOverlay.isHidden = selectedCountry != AppConfig.NO_COUNTRY_SELECTED
+        
         refreshFilterView()
     }
     
@@ -99,8 +113,6 @@ class FilterView: AbstractNibView {
         genderTimerStackView.isHidden = true
         countryTimerStackView.isHidden = true
         
-        //countryPicker.isUserInteractionEnabled = false
-        //genderPicker.isUserInteractionEnabled = false
         btnFindBottle.isEnabled = false
         btnFindBottle.alpha = 0.5
         
@@ -109,8 +121,8 @@ class FilterView: AbstractNibView {
             genderFilterStackView.isHidden = true
             
             if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})[0].endDate {
-                let currentDate = Date().timeIntervalSince1970 * 1000
-                let seconds = (fTime - currentDate)/1000.0
+                let currentDate = Date().timeIntervalSince1970
+                let seconds = (fTime - currentDate)
                 genderTimer.startTimer(seconds: TimeInterval(seconds))
                 //genderPicker.isUserInteractionEnabled = true
                 vGenderPlaceholder.isHidden = true
@@ -128,10 +140,9 @@ class FilterView: AbstractNibView {
             countryFilterStackView.isHidden = true
             
             if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})[0].endDate {
-                let currentDate = Date().timeIntervalSince1970 * 1000
-                let seconds = (fTime - currentDate)/1000.0
+                let currentDate = Date().timeIntervalSince1970
+                let seconds = (fTime - currentDate)
                 countryTimer.startTimer(seconds: TimeInterval(seconds))
-                //countryPicker.isUserInteractionEnabled = true
                 vCountryPlaceholder.isHidden = true
                 countryTimerStackView.isHidden = false
                 btnFindBottle.isEnabled = true
@@ -211,17 +222,68 @@ class FilterView: AbstractNibView {
     @IBAction func buyCountryFilterAction(_ sender: Any) {
         delegate?.filterViewGoToShop(self, productType: .countryFilter)
     }
+    
+    @IBAction func clearSlectedCountryAction(_ sender: Any) {
+        self.selectedCountry = AppConfig.NO_COUNTRY_SELECTED
+        self.countryPickerOverlay.isHidden = false
+        self.delegate?.filterViewGet(self, gender: selectedGender, country: selectedCountry)
+    }
+    
+    @IBAction func countryPickerOverlayAction(_ sender: Any) {
+        if let viewController = delegate as? UIViewController {
+            self.countryPicker.showCountriesList(from: viewController)
+        }
+    }
 }
 
 // MARK:- CountryPickerDelegate
-extension FilterView: CountryPickerDelegate {
+extension FilterView: CountryPickerViewDelegate, CountryPickerViewDataSource {
+    func closeButtonNavigationItem(in countryPickerView: CountryPickerView) -> UIBarButtonItem? {
+        return nil
+    }
     
-    func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
+    func searchBarPosition(in countryPickerView: CountryPickerView) -> SearchBarPosition {
+        return .tableViewHeader
+    }
+    
+    func showOnlyPreferredSection(in countryPickerView: CountryPickerView) -> Bool? {
+        return false
+    }
+    
+    func navigationTitle(in countryPickerView: CountryPickerView) -> String? {
+        return " "
+    }
+        
+    func showPhoneCodeInList(in countryPickerView: CountryPickerView) -> Bool? {
+        return false
+    }
+    
+    
+//    func countryPicker(_ picker: CountryPicker!, didSelectCountryWithName name: String!, code: String!) {
+//
+//    }
+    
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
         if DataStore.shared.inventoryItems.filter({$0.type == .countryFilter}).count == 0 {
-             self.delegate?.filterViewGoToShop(self, productType: .countryFilter)
+            self.delegate?.filterViewGoToShop(self, productType: .countryFilter)
         } else {
-            self.selectedCountry = code
+            self.selectedCountry = country.code
+            self.countryPickerOverlay.isHidden = true
             self.delegate?.filterViewGet(self, gender: selectedGender, country: selectedCountry)
         }
+    }
+    
+    func preferredCountries(in countryPickerView: CountryPickerView) -> [Country]? {
+        var countries = [Country]()
+        ["SA", "AE", "SY", "LB", "IQ", "KW", "OM", "DZ", "BH", "EG", "JO", "LY", "PS", "QA", "SD"].forEach { code in
+            if let country = countryPickerView.getCountryByCode(code) {
+                countries.append(country)
+            }
+        }
+        return countries
+    }
+    
+    func sectionTitleForPreferredCountries(in countryPickerView: CountryPickerView) -> String? {
+        return "PREFERED_COUNTRIES_TITLE".localized
     }
 }

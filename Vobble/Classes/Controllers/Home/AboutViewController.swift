@@ -75,7 +75,7 @@ class AboutViewController: AbstractController, MFMailComposeViewControllerDelega
             // Present the view controller modally.
             self.present(composeVC, animated: true, completion: nil)
         } else {
-            showMessage(message: "mail_not_configured".localized, type: .warning)
+            showMessage(message: "SETTINGS_MAIN_NOT_CONFIGURED".localized, type: .warning)
         }
     }
     

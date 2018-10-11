@@ -500,6 +500,37 @@ class ApiManager: NSObject {
         }
     }
     
+    func markUserAsActive(completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+        // url & parameters
+        let bottleURL = "\(baseURL)/userActive"
+        
+        let parameters : [String : Any] = [
+            "ownerId": (DataStore.shared.me?.objectId)!
+        ]
+        
+        // build request
+        Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError)
+                } else {
+                    completionBlock(true , nil)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError)
+                } else {
+                    completionBlock(false, ServerError.connectionError)
+                }
+            }
+        }
+    }
+    
     // MARK: Categories
     func requestCategories(completionBlock: @escaping (_ categories: Array<Category>?, _ error: NSError?) -> Void) {
         let categoriesListURL = "\(baseURL)categories"
@@ -560,6 +591,57 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+    /// create bottle request
+    func purchaseItem(shopItem: ShopItem, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ item:InventoryItem?) -> Void) {
+        // url & parameters
+        let bottleURL = "\(baseURL)/items"
+        
+        let now = Date()
+        let startDateStr = DateHelper.getISOStringFromDate(now)
+        var endDate = now
+        if let validity = shopItem.validity, validity > 0 {
+            let calendar = Calendar.current
+            endDate = endDate.addingTimeInterval(validity * 60.0 * 60.0)
+        }
+        let endDateStr = DateHelper.getISOStringFromDate(endDate)
+        
+        let parameters : [String : Any] = [
+            "storeType": "iTunes",
+            "storeToken": "tempStoreToken",
+            "isConsumed": true,
+            "startAt": startDateStr,
+            "endAt": endDateStr,
+            "valid": true,
+            "ownerId": (DataStore.shared.me?.objectId)!,
+            "productId": shopItem.idString
+        ]
+        
+        // build request
+        Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError, nil)
+                } else {
+                    // parse response to data model >> user object
+                    let item = InventoryItem(json: jsonResponse)
+                    completionBlock(true , nil, item)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                print(nsError.localizedDescription)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError, nil)
+                } else {
+                    completionBlock(false, ServerError.connectionError, nil)
+                }
+            }
+        }
+    }
 
     func requesReportTypes(completionBlock: @escaping (_ items: Array<ReportType>?, _ error: NSError?) -> Void) {
         let categoriesListURL = "\(baseURL)/reportTypes"
@@ -581,7 +663,7 @@ class ApiManager: NSObject {
     }
     
     // MARK: Upload Video
-    func uploadMedia(urls:[URL], mediaType: AppMediaType, completionBlock: @escaping (_ files: [Media], _ errorMessage: String?) -> Void) {
+    func uploadMedia(urls:[URL], mediaType: AppMediaType, completionBlock: @escaping (_ files: [Media], _ errorMessage: String?) -> Void, progressBlock: @escaping (_ percent: Double?) -> Void ) {
         
 //        let mediaURL = "\(baseURL)/uploads/videos/upload"
         var mediaURL = "\(baseURL)/uploadFiles/videos/upload"
@@ -615,6 +697,12 @@ class ApiManager: NSObject {
                             
                 switch encodingResult {
                     case .success(let upload, _, _):
+                        
+                        upload.uploadProgress(closure: { (Progress) in
+                            print("Upload Progress: \(Progress.fractionCompleted)")
+                            progressBlock(Progress.fractionCompleted)
+                        })
+                        
                         upload.responseJSON { responseObject in
                                     
                             if responseObject.result.isSuccess {
@@ -855,7 +943,7 @@ class ApiManager: NSObject {
             findBottleURL += "?dummyParam=d"
         }
         // country
-        if countryCode != "" {
+        if countryCode != "" && countryCode != AppConfig.NO_COUNTRY_SELECTED{
             findBottleURL += "&ISOCode=\(countryCode)"
         }
         // gender
@@ -989,6 +1077,7 @@ struct ServerError {
         case invalidUserName = 405
         case noBottleFound = 406
         case emailAlreadyExists = 413
+        case emailAlreadyRegisteredWithDifferentMedia = 412
         case alreadyExists = 101
         case socialLoginFailed = -110
 		case notRegistred = 102
@@ -1030,6 +1119,8 @@ struct ServerError {
                     return "ERROR_BOTTLE_NOT_FOUND".localized
                 case .emailAlreadyExists:
                     return "ERROR_EMAIL_EXISTS".localized
+            case .emailAlreadyRegisteredWithDifferentMedia:
+                return "ERROR_WRONG_LOGIN_METHOD".localized
                 
                 default:
                     return "ERROR_UNKNOWN".localized

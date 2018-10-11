@@ -276,15 +276,22 @@ extension ShopViewController: UICollectionViewDelegate {
                     let pay = SKPayment(product: selectedItem)
                     SKPaymentQueue.default().add(self)
                     SKPaymentQueue.default().add(pay as SKPayment)
+                    
                 }
-                
+                // purchase request
+                ApiManager.shared.purchaseItem(shopItem: obj, completionBlock: { (success, err, item) in
+                    print ("res \(success)")
+                    ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                        self.dismiss(animated: true, completion: {})
+                    })
+                })
                 
 //                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
 //                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 1
 //                }
             })
             alertController.addAction(ok)
-            let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
             
@@ -317,15 +324,24 @@ extension ShopViewController: UICollectionViewDelegate {
                     inventoryItem.isConsumed = false
                     inventoryItem.shopItem = obj
                     inventoryItem.startDate = Date().timeIntervalSince1970
-                    inventoryItem.endDate = Date().timeIntervalSince1970 + (24 * 60 * 60)
+                    inventoryItem.endDate = Date().timeIntervalSince1970 + ((obj.validity ?? 1) * 60 * 60)
                     DataStore.shared.inventoryItems.append(inventoryItem)
                     
                     // flurry events, on purchase done
                     let logEventParams2 = ["prodType": prodType, "ProdName": obj.title_en ?? ""];
                     Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
                     
+                    // purchase request
+                    // purchase request
+                    ApiManager.shared.purchaseItem(shopItem: obj, completionBlock: { (success, err, item) in
+                        print ("res \(success)")
+                        ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                            self.dismiss(animated: true, completion: {})
+                        })
+                    })
+                    
                 })
-                let cancel = UIAlertAction(title: "cancel".localized, style: .default,  handler: nil)
+                let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
                 alertController.addAction(cancel)
                 alertController.addAction(ok)
                 self.present(alertController, animated: true, completion: nil)
@@ -337,6 +353,7 @@ extension ShopViewController: UICollectionViewDelegate {
                 self.present(alertController, animated: true, completion: nil)
             }
         }
+        
         
         // flurry events
         var prodType = "bottles"
