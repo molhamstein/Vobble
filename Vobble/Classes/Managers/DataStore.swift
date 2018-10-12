@@ -30,6 +30,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_MY_BOTTLES = "myBottles"
     private let CACHE_KEY_MY_REPLIES = "myReplies"
     private let CACHE_KEY_TUT_1 = "tutorial1"
+    private let CACHE_KEY_TUT_CHAT = "tutorialChat"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
@@ -45,6 +46,7 @@ class DataStore :NSObject {
     private var _token: String?
     
     private var _tutorial1Showed: Bool?
+    private var _tutorialChatShowed: Bool?
     
     //public var conversationsUnseenMesssages: [String: Int] = [:]
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
@@ -193,6 +195,21 @@ class DataStore :NSObject {
         }
     }
     
+    public var tutorialChatShowed:Bool? {
+        set{
+            _tutorialChatShowed = newValue
+            if let tutShowed = _tutorialChatShowed {
+                saveIntWithKey(intToStore: tutShowed ? 1 : 0, key: CACHE_KEY_TUT_CHAT)
+            }
+        }
+        get {
+            if (_tutorialChatShowed == nil) {
+                _tutorialChatShowed = (loadIntForKey(key: CACHE_KEY_TUT_CHAT) >= 1) ? true : false
+            }
+            return _tutorialChatShowed
+        }
+    }
+    
     public var currentUTCTime:TimeInterval {
         get {
             return Date().timeIntervalSince1970 * 1000
@@ -300,6 +317,10 @@ class DataStore :NSObject {
         ApiManager.shared.getShores(completionBlock: { (shores, error) in})
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
         ApiManager.shared.requesReportTypes { (reports, error) in}
+        
+        if let meId = me?.objectId, let name = me?.userName {
+            OneSignal.sendTags(["user_id": meId, "user_name": name])
+        }
     }
     
     public func logout() {
@@ -309,6 +330,10 @@ class DataStore :NSObject {
         categories = [Category]()
         myBottles = [Conversation]()
         myReplies = [Conversation]()
+        tutorial1Showed = false
+        tutorialChatShowed = false
+        conversationsMyBottlesUnseenMesssages = [:]
+        conversationsMyRepliesUnseenMesssages = [:]
         //shopItems = [ShopItem]()
         inventoryItems = [InventoryItem]()
         OneSignal.deleteTags(["user_id","user_name"])

@@ -92,8 +92,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     public var navUserName: String?
     public var navShoreName: String?
     
-    var audioRec: AVAudioRecorder?
-    var audioRecorder:AVAudioRecorder!
     var audioUrl: URL? = nil
     
     var soundRecorder : AVAudioRecorder!
@@ -342,6 +340,16 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             inputToolbar.isHidden = true
             chatBlockedContainer.isHidden = false
             chatPendingContainer.isHidden = false
+        }
+        
+        // show chat tutorial on first opening of an unblocked chat
+        if let tutShowedBefore = DataStore.shared.tutorialChatShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
+            dispatch_main_after(2) {
+                let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ChatTutorial") as! ChatTutorialViewController
+                viewController.alpha = 0.5
+                self.present(viewController, animated: true, completion: nil)
+                DataStore.shared.tutorialChatShowed = true
+            }
         }
         
         chatVc.conversationRef = convRef
@@ -1087,7 +1095,7 @@ extension ChatViewController: ChatNavigationDelegate {
     }
 }
 
-//TODO: make custom chat toole bar class
+//TODO: make custom chat tool bar class
 // MARK:- AVAudioRecorderDelegate
 extension ChatViewController: AVAudioRecorderDelegate {
     
@@ -1186,6 +1194,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
             let runner: RunLoop = RunLoop.current
             runner.add(recordTimer!, forMode: .defaultRunLoopMode)
             
+            var recordingValid = true
             // we clear sound recorder after every recording session
             // so make sure we have a valid one before recording
             if  self.soundRecorder == nil {
@@ -1195,13 +1204,22 @@ extension ChatViewController: AVAudioRecorderDelegate {
                     try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                     try audioSession.setActive(true)
                     try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
-                    self.soundRecorder.prepareToRecord()
-                } catch {
-                    print("Error Recording");
+                    recordingValid = true
+                } catch let error {
+                    let errstr = "Error Recording \(error)"
+                    print(errstr)
+                    let alertController = UIAlertController(title: "", message: errstr, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                    recordingValid = false
                 }
             }
-            soundRecorder.delegate = self
-            soundRecorder.record()
+            if recordingValid {
+                self.soundRecorder.prepareToRecord()
+                soundRecorder.delegate = self
+                soundRecorder.record()
+            }
         }
         else if sender.state == .ended {
             recordTimer?.invalidate()

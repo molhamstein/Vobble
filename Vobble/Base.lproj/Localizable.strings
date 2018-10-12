@@ -241,5 +241,7 @@
 "tut1_step2"                            = "In vibo we have multiple shores and in each shore you can find different videos with diffrent topics";
 
 "tut2_title"                            = "Are You ready!!!";
-"tut2_desc"                            = "Why don't you start by looking for a thrown bottle from the main shore ?";
+"tut2_desc"                             = "Why don't you start by looking for a thrown bottle from the main shore ?";
+
+"TUT_CHAT_1"                            = "Here you can find a countdown for how much time you have left to chat";
 
