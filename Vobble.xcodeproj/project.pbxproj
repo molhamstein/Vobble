@@ -955,11 +955,11 @@
 				B18A5C5020348E4200F139B7 /* String.swift */,
 				57BC6C3E2141DAD7005C4E7B /* URL.swift */,
 				B18A5C5120348E4200F139B7 /* UIApplication.swift */,
+				575A16D0204EC30100F4B510 /* UIImageView.swift */,
 				B18A5C5220348E4200F139B7 /* UIColor.swift */,
 				B18A5C5320348E4200F139B7 /* UIStoryBoard.swift */,
 				B18A5C5420348E4200F139B7 /* UITextField.swift */,
 				B18A5C5520348E4200F139B7 /* UIView.swift */,
-				575A16D0204EC30100F4B510 /* UIImageView.swift */,
 				B18A5C5620348E4200F139B7 /* UIViewController.swift */,
 			);
 			path = Extensions;
