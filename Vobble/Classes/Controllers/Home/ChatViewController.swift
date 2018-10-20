@@ -43,6 +43,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
     private var unseenCountRef: DatabaseReference?
+    private lazy var userIsTypingRef: DatabaseReference = self.conversationRef!.child("typingIndicator").child(self.senderId)
+    private lazy var usersTypingQuery: DatabaseQuery = self.conversationRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
     
     private var newMessageRefHandle: DatabaseHandle?
     private var updatedMessageRefHandle: DatabaseHandle?
@@ -75,7 +77,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     // notifications
     var lastNotificationSentDate: Date?
     
-    //  private var localTyping = false
+    private var localTyping = false
     private var isInitialised = false
     
     var convTitle: String? {
@@ -108,15 +110,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var replyVideoUrlToUpload: URL?
     var bottleToReplyTo: Bottle?
     
-    //  var isTyping: Bool {
-    //    get {
-    //      return localTyping
-    //    }
-    //    set {
-    //      localTyping = newValue
-    //      userIsTypingRef.setValue(newValue)
-    //    }
-    //  }
+    var isTyping: Bool {
+        get {
+            return localTyping
+        }
+        set {
+            localTyping = newValue
+            userIsTypingRef.setValue(newValue)
+        }
+    }
     
     /// Navigation bar custome back button
     var navBackButton : UIBarButtonItem  {
@@ -232,14 +234,14 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //    observeTyping()
+        observeTyping()
+        
     }
     
     deinit {
@@ -256,7 +258,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let refHandle = unseenMessagesCountRefHandle {
             unseenCountRef?.removeObserver(withHandle: refHandle)
         }
-        
     }
     
     func initNavBar() {
@@ -352,6 +353,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             }
         }
         
+        if let convId = conversationOriginalObject?.idString, let unsentText = DataStore.shared.getConversationsUnsentTextMesssage(key: convId) {
+            self.inputToolbar.contentView.textView.text = unsentText
+            DataStore.shared.setConversationUnsentMessage(key: convId, text: "")
+        }
+        
         chatVc.conversationRef = convRef
         chatVc.conversationOriginalObject = conversation
         chatVc.conversationId = conversationOriginalObject?.idString
@@ -386,6 +392,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     func backButtonAction(_ sender: AnyObject) {
         //        _ = self.navigationController?.popViewController(animated: true)
+        
+        if let unsentText = self.inputToolbar.contentView.textView.text, let convId = conversationOriginalObject?.idString {
+            DataStore.shared.setConversationUnsentMessage(key: convId, text: unsentText)
+        }
         disposeFirebaseReference()
         
         //if we opened this chat from FindBottleViewContrller to reply to a
@@ -729,24 +739,24 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
     }
     
-    //  private func observeTyping() {
-    //    let typingIndicatorRef = conversationRef!.child("typingIndicator")
-    //    userIsTypingRef = typingIndicatorRef.child(senderId)
-    //    userIsTypingRef.onDisconnectRemoveValue()
-    //    usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
-    //
-    //    usersTypingQuery.observe(.value) { (data: DataSnapshot) in
-    //
-    //      // You're the only typing, don't show the indicator
-    //      if data.childrenCount == 1 && self.isTyping {
-    //        return
-    //      }
-    //
-    //      // Are there others typing?
-    //      self.showTypingIndicator = data.childrenCount > 0
-    //      self.scrollToBottom(animated: true)
-    //    }
-    //  }
+      private func observeTyping() {
+        let typingIndicatorRef = conversationRef!.child("typingIndicator")
+        userIsTypingRef = typingIndicatorRef.child(senderId)
+        userIsTypingRef.onDisconnectRemoveValue()
+        usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
+    
+        usersTypingQuery.observe(.value) { (data: DataSnapshot) in
+    
+          // You're the only typing, don't show the indicator
+          if data.childrenCount == 1 && self.isTyping {
+            return
+          }
+    
+          // Are there others typing?
+          self.showTypingIndicator = data.childrenCount > 0
+          self.scrollToBottom(animated: true)
+        }
+      }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         // 1
@@ -769,7 +779,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // 5
         finishSendingMessage()
-        //    isTyping = false
+        isTyping = false
     }
     
     func sendMediaMessage(mediaType: AppMediaType) -> String? {
@@ -915,7 +925,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
         // If the text is not empty, the user is typing
-        //    isTyping = textView.text != ""
+        isTyping = textView.text != ""
     }
 }
 

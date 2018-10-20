@@ -31,6 +31,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_MY_REPLIES = "myReplies"
     private let CACHE_KEY_TUT_1 = "tutorial1"
     private let CACHE_KEY_TUT_CHAT = "tutorialChat"
+    private let CACHE_KEY_UNSENT_TEXTS = "ChatUnsentTexts"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
@@ -51,6 +52,8 @@ class DataStore :NSObject {
     //public var conversationsUnseenMesssages: [String: Int] = [:]
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
     public var conversationsMyRepliesUnseenMesssages: [String: Int] = [:]
+    
+    public var conversationsUnsentTextMesssages: [String: String]?
     
     // user loggedin flag
     var isLoggedin: Bool {
@@ -249,6 +252,28 @@ class DataStore :NSObject {
         return getMyRepliesConversationsWithUnseenMessagesCount() + getMyBottlesConversationsWithUnseenMessagesCount()
     }
     
+    func getConversationsUnsentTextMesssage (key: String) -> String? {
+        if conversationsUnsentTextMesssages == nil {
+            conversationsUnsentTextMesssages = loadDictionaryForKey(key: CACHE_KEY_UNSENT_TEXTS)
+        }
+        
+        if let text = conversationsUnsentTextMesssages?[key] {
+            return text
+        }
+        return nil
+    }
+    
+    func setConversationUnsentMessage(key:String, text: String) {
+        if conversationsUnsentTextMesssages == nil {
+            conversationsUnsentTextMesssages = loadDictionaryForKey(key: CACHE_KEY_UNSENT_TEXTS)
+        }
+        
+        conversationsUnsentTextMesssages?[key] = text
+        if let messagesDict = conversationsUnsentTextMesssages {
+            saveDictionary(dict: messagesDict, withKey: CACHE_KEY_UNSENT_TEXTS)
+        }
+    }
+    
     //MARK: Cache Utils
     private func saveBaseModelArray(array: [BaseModel] , withKey key:String){
         let array : [[String:Any]] = array.map{$0.dictionaryRepresentation()}
@@ -263,6 +288,18 @@ class DataStore :NSObject {
             result = arr.map{T(json: JSON($0))}
         }
         return result
+    }
+    
+    private func saveDictionary(dict: [String:String] , withKey key:String){
+        UserDefaults.standard.set(dict, forKey: key)
+        UserDefaults.standard.synchronize()
+    }
+    
+    private func loadDictionaryForKey(key: String)->[String:String]{
+        if let dict = UserDefaults.standard.dictionary(forKey: key) as? [String:String] {
+            return dict
+        }
+        return [:]
     }
     
     public func saveBaseModelObject<T:BaseModel>(object:T?, withKey key:String)

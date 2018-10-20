@@ -186,6 +186,8 @@ extension ConversationViewController: UICollectionViewDelegate {
         if let chatID = conversation.idString {
             ActionOpenChat.execute(chatId: chatID, conversation: nil)
         }
+        
+        assert(false)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
