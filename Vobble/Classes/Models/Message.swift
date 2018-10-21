@@ -15,6 +15,7 @@ class Message: BaseModel {
     private let kSenderId: String = "senderId"
     private let kSenderName: String = "senderName"
     private let kText: String = "text"
+    private let kIsSeen: String = "isSeen"
     private let kPhotoUrl: String = "photoURL"
     private let kVideoUrl: String = "videoURL"
     private let kAudioUrl: String = "audioURL"
@@ -26,6 +27,7 @@ class Message: BaseModel {
     public var senderId : String?
     public var senderName : String?
     public var text : String?
+    public var isSeen : String?
     public var photoUrl: String?
     public var videoUrl: String?
     public var audioUrl: String?
@@ -48,6 +50,9 @@ class Message: BaseModel {
         }
         if let value = json[kText].string {
             text = value
+        }
+        if let value = json[kIsSeen].string {
+            isSeen = value
         }
         if let value = json[kPhotoUrl].string {
             photoUrl = value
@@ -75,6 +80,9 @@ class Message: BaseModel {
         }
         if let value = text {
             dictionary[kText] = value
+        }
+        if let value = isSeen {
+            dictionary[kIsSeen] = value
         }
         if let value = photoUrl {
             dictionary[kPhotoUrl] = value

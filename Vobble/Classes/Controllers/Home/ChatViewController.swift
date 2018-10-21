@@ -132,6 +132,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = self.setupOutgoingBubble()
     lazy var incomingBubbleImageView: JSQMessagesBubbleImage = self.setupIncomingBubble()
     
+    /// isSeen
+    var isLastMessageSeen : Bool = false
+    
     // MARK: View Lifecycle
     
     override func viewDidLoad() {
@@ -453,6 +456,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if isRTL {
             if message.senderId == senderId { // 1
                 cell.textView?.textColor = UIColor.black // 3
+                
             } else {
                 cell.textView?.textColor = UIColor.white // 2
             }
@@ -475,6 +479,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         return 15
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
+        return 15
+    }
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString? {
         let message = messages[indexPath.item]
         switch message.senderId {
@@ -486,6 +494,26 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 return nil
             }
             return NSAttributedString(string: senderDisplayName)
+        }
+       
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        let message = messages[indexPath.item]
+        
+        if indexPath.row == messages.count - 1 {
+            switch message.senderId {
+            case senderId:
+                if self.isLastMessageSeen {
+                    return NSAttributedString(string: "SEEN".localized)
+                }else {
+                    return nil
+                }
+            default:
+                return nil
+            }
+        }else{
+            return nil
         }
     }
     
@@ -574,13 +602,19 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
                 
+                // check seen messages
+                self.observeSeen(message: message)
+                
                 if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
                     self.addMessage(withId: id, name: name, text: text)
+                    
                     self.finishReceivingMessage()
+                    
                 } else if let id = message.senderId, let mediaURL = message.photoUrl {
                     
                     let mediaItem = JSQCustomPhotoMediaItem(message: message, isOperator: id == self.senderId)
                     self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    
                     
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
                         mediaItem.message = message
@@ -634,6 +668,17 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
            
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
+                
+                // Recieving seen status
+                if let id = message.senderId, let isSeen = message.isSeen {
+                    if id == DataStore.shared.me?.objectId {
+                        if isSeen == "1" {
+                            self.isLastMessageSeen = true
+                            self.collectionView.reloadData()
+                        }
+                    }
+                    
+                }
                 
                 if let mediaURL = message.photoUrl {
                     // The photo has been updated.
@@ -721,6 +766,19 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
     }
     
+    private func observeSeen(message : Message) {
+        if message.senderId != DataStore.shared.me?.objectId {
+            if message.isSeen == "0" {
+                self.messageRef.child(message.idString ?? "").updateChildValues(["isSeen" : "1"])
+                self.isLastMessageSeen = false
+            }
+        }else{
+            if message.isSeen == "1" {
+                self.isLastMessageSeen = true
+            }
+        }
+    }
+    
     //  private func observeTyping() {
     //    let typingIndicatorRef = conversationRef!.child("typingIndicator")
     //    userIsTypingRef = typingIndicatorRef.child(senderId)
@@ -744,11 +802,14 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // 1
         let itemRef = messageRef.childByAutoId()
         
+        self.isLastMessageSeen = false
+        
         // 2
         let messageItem = [
             "senderId": senderId!,
             "senderName": senderDisplayName!,
-            "text": text!
+            "text": text!,
+            "isSeen": "0"
             ]
         
         // 3
@@ -762,13 +823,18 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // 5
         finishSendingMessage()
         //    isTyping = false
+        
+        
     }
     
     func sendMediaMessage(mediaType: AppMediaType) -> String? {
         let itemRef = messageRef.childByAutoId()
         
+        self.isLastMessageSeen = false
+        
         var messageItem = [
-            "senderId": senderId!
+            "senderId": senderId!,
+            "isSeen": "0"
             ]
         if mediaType == .video {
             messageItem["videoURL"] = imageURLNotSetKey
@@ -791,6 +857,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     func setMediaURL(_ media: Media, forPhotoMessageWithKey key: String) {
         let itemRef = messageRef.child(key)
+        
+        self.isLastMessageSeen = false
+        
         if media.type == .image {
             itemRef.updateChildValues(["photoURL": media.fileUrl!])
         } else if media.type == .video {
@@ -814,6 +883,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     private func setupIncomingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
+    
         return bubbleImageFactory!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
     }
     
@@ -839,6 +909,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             messages.append(message)
         }
     }
+
     
     private func addPhotoMessage(withId id: String, key: String, mediaItem: JSQCustomPhotoMediaItem) {
         if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
