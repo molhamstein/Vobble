@@ -816,19 +816,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
       }
     
-        usersTypingQuery.observe(.value) { (data: DataSnapshot) in
-    
-          // You're the only typing, don't show the indicator
-          if data.childrenCount == 1 && self.isTyping {
-            return
-          }
-    
-          // Are there others typing?
-          self.showTypingIndicator = data.childrenCount > 0
-          self.scrollToBottom(animated: true)
-        }
-      }
-    
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         // 1
         let itemRef = messageRef.childByAutoId()
