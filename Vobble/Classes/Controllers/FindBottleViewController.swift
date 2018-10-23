@@ -12,6 +12,7 @@ import AVFoundation
 import NVActivityIndicatorView
 import Firebase
 import Flurry_iOS_SDK
+import WCLShineButton
 
 class FindBottleViewController: AbstractController {
     
@@ -26,7 +27,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet var videoView: VideoPlayerView!
     
     @IBOutlet weak var ignoreButton: VobbleButton!
-    @IBOutlet weak var replyButton: VobbleButton!
+    @IBOutlet weak var replyButton: WCLShineButton!
     @IBOutlet weak var playButton: UIButton!
     
     public var bottle:Bottle?
@@ -55,7 +56,7 @@ class FindBottleViewController: AbstractController {
         reportButton.setTitle("REPORT".localized, for: .normal)
         blockButton.setTitle("BLOCK_USER".localized, for: .normal)
         ignoreButton.setTitle("IGNORE".localized, for: .normal)
-        replyButton.setTitle("REPLY".localized, for: .normal)
+        //replyButton.setTitle("REPLY".localized, for: .normal)
         
         if let imgUrl = bottle?.owner?.profilePic, imgUrl.isValidLink() {
             userimage.sd_setShowActivityIndicatorView(true)

@@ -29,6 +29,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_TOKEN = "token"
     private let CACHE_KEY_MY_BOTTLES = "myBottles"
     private let CACHE_KEY_MY_REPLIES = "myReplies"
+    private let CACHE_KEY_THROWN_BOTTLES = "thrownBottles"
     private let CACHE_KEY_TUT_1 = "tutorial1"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
@@ -40,6 +41,8 @@ class DataStore :NSObject {
     
     private var _myBottles: [Conversation] = [Conversation]()
     private var _myReplies: [Conversation] = [Conversation]()
+    
+    private var _thrownBottles: [Bottle] = [Bottle]()
     
     private var _shores: [Shore] = []
     private var _token: String?
@@ -175,6 +178,19 @@ class DataStore :NSObject {
                 _myReplies = loadBaseModelArrayForKey(key: CACHE_KEY_MY_REPLIES)
             }
             return _myReplies
+        }
+    }
+    
+    public var thrownBottles: [Bottle] {
+        set {
+            _thrownBottles = newValue
+            saveBaseModelArray(array: _thrownBottles, withKey: CACHE_KEY_THROWN_BOTTLES)
+        }
+        get {
+            if(_thrownBottles.isEmpty){
+                _thrownBottles = loadBaseModelArrayForKey(key: CACHE_KEY_THROWN_BOTTLES)
+            }
+            return _thrownBottles
         }
     }
     

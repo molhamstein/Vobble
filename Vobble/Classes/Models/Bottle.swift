@@ -13,9 +13,11 @@ class Bottle: BaseModel {
     
     // MARK: Keys
     private let kBottleId: String = "id"
+    private let kFile: String = "file"
     private let kStatus: String = "status"
     private let kViewsCount: String = "viewsCount"
     private let kRepliesCount: String = "repliesCount"
+    private let kRepliesUserCount: String = "repliesUserCount"
     private let kOwnerId: String = "ownerId"
     private let kOwner: String = "owner"
     private let kShoreId: String = "shoreId"
@@ -26,9 +28,11 @@ class Bottle: BaseModel {
     
     // MARK: Properties
     public var bottle_id : String?
+    public var file : String?
     public var status : String?
     public var viewsCount : Int?
     public var repliesCount : Int?
+    public var repliesUserCount : Int?
     public var ownerId : String?
     public var shoreId : String?
     public var attachment: String?
@@ -47,6 +51,12 @@ class Bottle: BaseModel {
         
         if let value = json[kBottleId].string {
             bottle_id = value
+        }
+        if let value = json[kFile].string {
+            file = value
+        }
+        if let value = json[kRepliesUserCount].int {
+            repliesUserCount = value
         }
         if let value = json[kStatus].string {
             status = value
@@ -85,6 +95,10 @@ class Bottle: BaseModel {
             dictionary[kBottleId] = value
         }
         
+        if let value = file {
+            dictionary[kFile] = value
+        }
+        
         if let value = status {
             dictionary[kStatus] = value
         }
@@ -95,6 +109,10 @@ class Bottle: BaseModel {
         
         if let value = repliesCount {
             dictionary[kRepliesCount] = value
+        }
+        
+        if let value = repliesUserCount {
+            dictionary[kRepliesUserCount] = value
         }
         
         if let value = ownerId {

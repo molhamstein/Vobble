@@ -573,6 +573,8 @@ class ApiManager: NSObject {
         }
     }
     
+    
+    
     func requestUserInventoryItems(completionBlock: @escaping (_ items: Array<InventoryItem>?, _ error: NSError?) -> Void) {
         let categoriesListURL = "\(baseURL)/items/\(DataStore.shared.me?.objectId)"
         Alamofire.request(categoriesListURL).responseJSON { (responseObject) -> Void in
@@ -618,6 +620,7 @@ class ApiManager: NSObject {
         ]
         
         // build request
+        print(headers)
         Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
@@ -1047,6 +1050,28 @@ class ApiManager: NSObject {
         }
     }
 
+    
+    // MARK: Get thrown bottles
+    func requestThwonBottles(completionBlock: @escaping (_ bottles: Array<Bottle>?, _ error: NSError?) -> Void) {
+        let thrownBottlesListURL = "\(baseURL)/users/\(DataStore.shared.me?.objectId ?? "")/myBottles"
+        Alamofire.request(thrownBottlesListURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers ).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                
+                let resJson = JSON(responseObject.result.value!)
+                print(resJson)
+                if let data = resJson.array {
+                    let bottles: [Bottle] = data.map{Bottle(json: $0)}
+                    //save to cache
+                    DataStore.shared.thrownBottles = bottles
+                    completionBlock(bottles, nil)
+                }
+            }
+            if responseObject.result.isFailure {
+                let error : NSError = responseObject.result.error! as NSError
+                completionBlock(nil, error)
+            }
+        }
+    }
     
 }
 

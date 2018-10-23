@@ -71,6 +71,10 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         
         lblUnreadMyBottlesConversationsBadge.isHidden = true
         lblUnreadMyRepliesConversationsBadge.isHidden = true
+        
+        lblBottlesThrownCountTitle.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.thrownBottlesBtnPressed(_:)))
+        lblBottlesThrownCountTitle.addGestureRecognizer(tap)
     }
     
     func configCell(userObj: AppUser) {
@@ -153,6 +157,10 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
             lblUnreadMyBottlesConversationsBadge.isHidden = true
         }
         
+    }
+    
+    @objc func thrownBottlesBtnPressed(_ sender: Any) {
+        self.convVC?.performSegue(withIdentifier: "goToThrownBottles", sender: self)
     }
 }
 

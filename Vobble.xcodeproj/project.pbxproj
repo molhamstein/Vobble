@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04F7477F217DDDEA002A5F2B /* ThrownBottlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */; };
+		04F74783217DFA91002A5F2B /* ThrownBottleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F74781217DFA91002A5F2B /* ThrownBottleCollectionViewCell.swift */; };
+		04F74784217DFA91002A5F2B /* ThrownBottleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F74782217DFA91002A5F2B /* ThrownBottleCollectionViewCell.xib */; };
 		5706C430204DC568006E7C9A /* RecordMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C42F204DC568006E7C9A /* RecordMediaViewController.swift */; };
 		5706C432204DCAA3006E7C9A /* Shore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706C431204DCAA3006E7C9A /* Shore.swift */; };
 		5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5706C433204DDFE0006E7C9A /* ShoreCell.xib */; };
@@ -273,6 +276,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrownBottlesViewController.swift; sourceTree = "<group>"; };
+		04F74781217DFA91002A5F2B /* ThrownBottleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrownBottleCollectionViewCell.swift; sourceTree = "<group>"; };
+		04F74782217DFA91002A5F2B /* ThrownBottleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThrownBottleCollectionViewCell.xib; sourceTree = "<group>"; };
 		3F393EA47B3719E4B728D2E0 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		5706C42F204DC568006E7C9A /* RecordMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordMediaViewController.swift; sourceTree = "<group>"; };
 		5706C431204DCAA3006E7C9A /* Shore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shore.swift; sourceTree = "<group>"; };
@@ -672,6 +678,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04F74780217DF98B002A5F2B /* Thrown Bottles */ = {
+			isa = PBXGroup;
+			children = (
+				04F74781217DFA91002A5F2B /* ThrownBottleCollectionViewCell.swift */,
+				04F74782217DFA91002A5F2B /* ThrownBottleCollectionViewCell.xib */,
+			);
+			path = "Thrown Bottles";
+			sourceTree = "<group>";
+		};
 		5706C42E204DC557006E7C9A /* Throw bottle */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +890,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04F74780217DF98B002A5F2B /* Thrown Bottles */,
 				B1F7A459205A114E009B18AB /* Shop */,
 				B1EA39C920560694008AADC9 /* My Bottles */,
 				B17DE5B12055BB8600DC349B /* Filter View */,
@@ -1328,6 +1344,7 @@
 				B19371162033D8FC007B1E7D /* HomeViewController.swift */,
 				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
 				B1508CD520461F630048123F /* FindBottleViewController.swift */,
+				04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1462,7 +1479,6 @@
 				570D129C20D9A0C700A2A793 /* Sources */,
 				570D129D20D9A0C700A2A793 /* Frameworks */,
 				570D129E20D9A0C700A2A793 /* Resources */,
-				C8B1CD079953BDF39E758057 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1584,6 +1600,7 @@
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				57DE7459207D77E00061CA2F /* fire.gif in Resources */,
+				04F74784217DFA91002A5F2B /* ThrownBottleCollectionViewCell.xib in Resources */,
 				57190C8B2105F4E700E88F38 /* girl_3_2.gif in Resources */,
 				57A8129F210CEA13003D738E /* girl.gif in Resources */,
 				B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */,
@@ -1678,6 +1695,7 @@
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/WCLShineButton/WCLShineButton.framework",
 				"${BUILT_PRODUCTS_DIR}/YXWaveView/YXWaveView.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
@@ -1712,6 +1730,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCLShineButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YXWaveView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
@@ -1720,21 +1739,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C8B1CD079953BDF39E758057 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D33A024EBB99BC00C780DC5C /* [CP] Check Pods Manifest.lock */ = {
@@ -1824,6 +1828,7 @@
 				B18A5DAE20348E4300F139B7 /* UIButton+RACCommandSupport.m in Sources */,
 				B18A5D8D20348E4300F139B7 /* RACIndexSetSequence.m in Sources */,
 				B18A5D7920348E4300F139B7 /* NSUserDefaults+RACSupport.m in Sources */,
+				04F74783217DFA91002A5F2B /* ThrownBottleCollectionViewCell.swift in Sources */,
 				B1AE405320699A52006B38FD /* Media.swift in Sources */,
 				B19372E72033E3FC007B1E7D /* Reply.swift in Sources */,
 				B18A5D7A20348E4300F139B7 /* RACArraySequence.m in Sources */,
@@ -1896,6 +1901,7 @@
 				B18A5DA320348E4300F139B7 /* RACSubscriptionScheduler.m in Sources */,
 				B18A5D7220348E4300F139B7 /* NSObject+RACSelectorSignal.m in Sources */,
 				B19372E02033E3FC007B1E7D /* BaseModel.swift in Sources */,
+				04F7477F217DDDEA002A5F2B /* ThrownBottlesViewController.swift in Sources */,
 				B18A5D5E20348E4300F139B7 /* CMDQueryStringValueTransformer.m in Sources */,
 				B19372F82033E48F007B1E7D /* AppColors.swift in Sources */,
 				B18A5DA220348E4300F139B7 /* RACSubscriptingAssignmentTrampoline.m in Sources */,
@@ -2151,7 +2157,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = U2DR46FA6M;
 				INFOPLIST_FILE = Vobble/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yallavideo.Vibo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2173,7 +2179,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = U2DR46FA6M;
 				INFOPLIST_FILE = Vobble/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yallavideo.Vibo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

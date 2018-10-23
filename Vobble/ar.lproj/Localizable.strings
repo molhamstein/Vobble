@@ -222,6 +222,7 @@
 "MY_BOTTLES_BTN_CHAT"                  = "دردش";
 "MY_BOTTLES_TIME_LEFT"                 = "الوقت المتبقي";
 "MY_BOTTLES_EMPTY_PLACEHOLDER"         = "لا يوجد اي محادثة \n ابحث عن زجاجة و رد عليها";
+"MY_THROWN_BOTTLES_REPLIES_COUNT"      = "(%d) رد";
 
 // rate us
 "RATE_US_TITLE"                         = "اعجبك فيبو ؟";
