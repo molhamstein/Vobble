@@ -1,9 +1,9 @@
 //
 //  FindBottleViewController.swift
-//  BMPlayer
+//  Vobble
 //
-//  Created by BrikerMan on 16/4/28.
-//  Copyright © 2016年 CocoaPods. All rights reserved.
+//  Created by BrainSocet on 18/4/28.
+//  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
 import UIKit
@@ -198,42 +198,6 @@ class FindBottleViewController: AbstractController {
             chatVc.bottleToReplyTo = btl
             chatVc.replyVideoUrlToUpload = myVideoUrl as URL
             
-//            chatVc.conversation = conversation
-//            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
-//            chatVc.uploadMedia(mediaReferenceUrl: bottle?.attachment!, mediaType: "public.movie", senderId: "\(bottle?.ownerId)")
-            
-          
-//            if let bottleOwnerId = bottle?.ownerId {
-//                chatVc.senderId = "\(bottleOwnerId)"
-//                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(bottleOwnerId)")
-//            }
-            
-//            if let uid = DataStore.shared.me?.objectId {
-//                chatVc.senderId = "\(uid)"
-//                chatVc.uploadMedia(mediaReferenceUrl: self.myVideoUrl as URL, mediaType: "public.movie", senderId: "\(uid)")
-//            }
-
-//            chatVc.seconds = 24.0*60.0*60.0
-
-            
-            ////////////
-//            if let btl = bottle, let bottleOwnerId = btl.ownerId, let url = btl.attachment, let thumbUrl = btl.thumb {
-//                chatVc.senderId = "\(bottleOwnerId)"
-//                chatVc.submitMessageWithVideoURL(videoUrl: url, thumbURL: thumbUrl)
-//
-//                //send push notification to bottle owner to inform him about the new reply
-//                if let peer = btl.owner {
-//                    let msgToSend = String(format: "NOTIFICATION_NEW_REPLY".localized, (DataStore.shared.me?.userName)!)
-//                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: peer, completionBlock: { (success, error) in })
-//                }
-//            }
-//
-//            if let myId = DataStore.shared.me?.objectId {
-//                chatVc.senderId = "\(myId)"
-//                chatVc.uploadVideo(videoUrl: self.myVideoUrl as URL)
-//            }
-//
-//            chatVc.isHideInputToolBar = true
         }
     }
     
@@ -254,22 +218,6 @@ class FindBottleViewController: AbstractController {
     }
     
     func goToChat() {
-//
-//
-//        let newConvRef = self.conversationRef.childByAutoId()
-//
-//        let convlItem:[String : Any] = [
-//            "bottle": (self.bottle?.dictionaryRepresentation()) ?? "",
-//            "user": (DataStore.shared.me?.dictionaryRepresentation()) ?? "",
-//            "createdAt" : ServerValue.timestamp(),
-//            "is_seen" : 0,
-//            "startTime" : 0.0
-//        ]
-//
-//        self.showActivityLoader(true)
-//        newConvRef.setValue(convlItem) { (err, convReference) in
-//
-//        }
         
         if let btl = self.bottle {
             FirebaseManager.shared.createNewConversation(bottle: btl, completionBlock: { (err, databaseReference) in
@@ -277,8 +225,8 @@ class FindBottleViewController: AbstractController {
                     self.showMessage(message: ServerError.unknownError.type.errorMessage, type: .error)
                 } else {
                     self.showActivityLoader(false)
+                    ApiManager.shared.replyToBottle(bottle: btl, completionBlock: { (success, err) in })
                     self.performSegue(withIdentifier: "goToChat", sender: databaseReference)
-                    
                 }
             })
         }

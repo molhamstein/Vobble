@@ -190,21 +190,26 @@ class FirebaseManager :NSObject {
     }
     
     func sortConversations () {
-        // sort my replies
-        DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-            if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
-                return date1 > date2
-            }
-            return true
-        })
+        // this will force the conversations to be sorted again
+        DataStore.shared.allConversations = []
         
-        // sort my bottles
-        DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-            if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
-                return date1 > date2
-            }
-            return true
-        })
+        // sort my replies
+        
+//
+//        DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
+//            if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+//                return date1 > date2
+//            }
+//            return true
+//        })
+//
+//        // sort my bottles
+//        DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
+//            if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+//                return date1 > date2
+//            }
+//            return true
+//        })
         
         //NotificationCenter.default.post(name: Notification.Name("unreadMessagesChange"), object: nil)
     }

@@ -42,6 +42,7 @@ class DataStore :NSObject {
     
     private var _myBottles: [Conversation] = [Conversation]()
     private var _myReplies: [Conversation] = [Conversation]()
+    private var _allConversations: [Conversation]?
     
     private var _shores: [Shore] = []
     private var _token: String?
@@ -161,6 +162,8 @@ class DataStore :NSObject {
         set {
             _myBottles = newValue
             saveBaseModelArray(array: _myBottles, withKey: CACHE_KEY_MY_BOTTLES)
+            // force refresh all conversations
+            _allConversations = nil
         }
         get {
             if(_myBottles.isEmpty){
@@ -174,12 +177,35 @@ class DataStore :NSObject {
         set {
             _myReplies = newValue
             saveBaseModelArray(array: _myReplies, withKey: CACHE_KEY_MY_REPLIES)
+            // force refresh all conversations
+            _allConversations = nil
         }
         get {
             if(_myReplies.isEmpty){
                 _myReplies = loadBaseModelArrayForKey(key: CACHE_KEY_MY_REPLIES)
             }
             return _myReplies
+        }
+    }
+    
+    public var allConversations: [Conversation]? {
+        set {
+            _allConversations = newValue
+        }
+        get {
+            if _allConversations == nil || (_allConversations?.isEmpty ?? true) {
+                _allConversations = []
+                _allConversations?.append(contentsOf: _myReplies)
+                _allConversations?.append(contentsOf: _myBottles)
+                /// sort conversations so that most recently updated conversation commes first
+                _allConversations?.sort(by: { (obj1, obj2) -> Bool in
+                    if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+                        return date1 > date2
+                    }
+                    return true
+                })
+            }
+            return _allConversations
         }
     }
     
@@ -367,6 +393,7 @@ class DataStore :NSObject {
         categories = [Category]()
         myBottles = [Conversation]()
         myReplies = [Conversation]()
+        allConversations = []
         tutorial1Showed = false
         tutorialChatShowed = false
         conversationsMyBottlesUnseenMesssages = [:]

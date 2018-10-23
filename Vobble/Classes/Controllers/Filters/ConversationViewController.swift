@@ -28,7 +28,6 @@ class ConversationViewController: AbstractController {
     fileprivate var filteredConvArray: [Conversation] = [Conversation]()
     fileprivate var searchText: UITextField?
     fileprivate var searchString: String = ""
-    public var tap: tapOption = .myBottles
     var imgLoading: UIActivityIndicatorView?
     var userImageView: UIImageView?
     
@@ -79,18 +78,10 @@ class ConversationViewController: AbstractController {
     }
     
     func refreshView () {
-        if tap == .myBottles {
-            if DataStore.shared.myBottles.count > 0 {
-                self.emptyPlaceHolderView.isHidden = true
-            } else {
-                self.emptyPlaceHolderView.isHidden = false
-            }
+        if let convs = DataStore.shared.allConversations, convs.count > 0 {
+            self.emptyPlaceHolderView.isHidden = true
         } else {
-            if DataStore.shared.myReplies.count > 0 {
-                self.emptyPlaceHolderView.isHidden = true
-            } else {
-                self.emptyPlaceHolderView.isHidden = false
-            }
+            self.emptyPlaceHolderView.isHidden = false
         }
         self.bottleCollectionView.reloadData()
     }
@@ -105,11 +96,10 @@ extension ConversationViewController: UICollectionViewDataSource {
         if self.filteredConvArray.count > 0 {
             // string contains non-whitespace characters
             return self.filteredConvArray.count
-        } else if tap == .myBottles {
-            return DataStore.shared.myBottles.count
+        } else if let convs = DataStore.shared.allConversations {
+            return convs.count
         }
-        
-       return DataStore.shared.myReplies.count
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,13 +108,10 @@ extension ConversationViewController: UICollectionViewDataSource {
 
         if self.filteredConvArray.count > 0 {
             let obj = self.filteredConvArray[indexPath.row]
-            convCell.configCell(convObj: obj,tap: tap )
-        } else if tap == .myBottles {
-            let obj = (DataStore.shared.myBottles[indexPath.row])
-            convCell.configCell(convObj: obj,tap: tap)
-        } else if tap == .myReplies {
-            let obj = (DataStore.shared.myReplies[indexPath.row])
-            convCell.configCell(convObj: obj,tap: tap)
+            convCell.configCell(convObj: obj)
+        } else if let convs = DataStore.shared.allConversations, convs.count > indexPath.row {
+            let obj = convs[indexPath.row]
+            convCell.configCell(convObj: obj)
         }
         
         return convCell
@@ -149,7 +136,7 @@ extension ConversationViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: self.bottleCollectionView.bounds.width, height: 180)
+        return CGSize(width: self.bottleCollectionView.bounds.width, height: 130)
     }
 }
 
@@ -174,12 +161,8 @@ extension ConversationViewController: UICollectionViewDelegate {
         if self.filteredConvArray.count > 0 {
             conversation = self.filteredConvArray[indexPath.row]
             
-        } else if tap == .myBottles {
-            conversation = DataStore.shared.myBottles[indexPath.row]
-            
-        } else if tap == .myReplies {
-            conversation = DataStore.shared.myReplies[indexPath.row]
-            
+        } else if let convs = DataStore.shared.allConversations, convs.count > indexPath.row {
+            conversation = convs[indexPath.row]
         }
         
         //self.performSegue(withIdentifier: "goToChat", sender: conversation)
@@ -187,7 +170,7 @@ extension ConversationViewController: UICollectionViewDelegate {
             ActionOpenChat.execute(chatId: chatID, conversation: nil)
         }
         
-        assert(false)
+        //assert(false)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -204,55 +187,6 @@ extension ConversationViewController: UICollectionViewDelegate {
             let chatVc = nav.topViewController as! ChatViewController
             //chatVc.conversationOriginalObject = conversation
             chatVc.conversationId = conversation.idString
-//
-//            let convRef = conversationRef.child(conversation.idString!)
-//
-//            chatVc.senderDisplayName = conversation.getPeer?.userName
-//
-//            if tap == .myBottles {
-//                chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
-//                //if is_seen == false --> hide chat tool bar so we can't send any message
-//                chatVc.isHideInputToolBar = false
-//
-//                if let is_seen = conversation.is_seen, is_seen == 0 {
-//                    convRef.updateChildValues(["is_seen": 1])
-//                    convRef.updateChildValues(["startTime": ServerValue.timestamp()])
-//                    chatVc.seconds = 24.0*60.0*60.0
-//
-//                    // send push notification to peer to let him know that the chat is open now
-//                    let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
-//                    ApiManager.shared.sendPushNotification(msg: msgToSend, targetUser: conversation.getPeer!, completionBlock: { (success, error) in })
-//                }
-//
-//            } else if tap == .myReplies {
-//                chatVc.convTitle = conversation.user?.userName ?? ""
-//
-//            }
-////            chatVc.conversationRef = conversationRef.child("-L86Uca5m1JySQFqoqWP")
-//
-//            if let is_seen = conversation.is_seen, is_seen == 1 {
-//
-//                chatVc.isHideInputToolBar = false
-//                if let fTime = conversation.finishTime {
-//                    let currentDate = Date().timeIntervalSince1970 * 1000
-//                    chatVc.seconds = (fTime - currentDate)/1000.0
-//                }
-//            }
-//
-//            if let userName = conversation.getPeer?.userName {
-//                chatVc.navUserName = userName
-//            }
-//            chatVc.conversationOriginalObject = conversation
-//
-//            if let shore_id = conversation.bottle?.shoreId {
-//                for sh in  DataStore.shared.shores {
-//                    if sh.shore_id == shore_id {
-//                        chatVc.navShoreName = sh.name ?? ""
-//                        break
-//                    }
-//                }
-//            }
-//            chatVc.conversationRef = convRef
         }
     }
     
@@ -309,22 +243,18 @@ extension ConversationViewController {
         
         if let str = textField.text {
             searchString = str
-            if tap == .myBottles {
-                filteredConvArray = DataStore.shared.myBottles.filter{(($0.bottle?.owner?.userName)!.lowercased().contains(searchString.lowercased()))}
-            } else if tap == .myReplies {
-                filteredConvArray = DataStore.shared.myReplies.filter{(($0.user?.userName)!.lowercased().contains(searchString.lowercased()))}
+            if let convs = DataStore.shared.allConversations {
+                filteredConvArray = convs.filter{(($0.bottle?.owner?.userName)!.lowercased().contains(searchString.lowercased()))}
             }
         } else {
             searchString = ""
-            if tap == .myBottles {
-                filteredConvArray = DataStore.shared.myBottles
-            } else if tap == .myReplies {
-                filteredConvArray = DataStore.shared.myReplies
+            if let convs = DataStore.shared.allConversations {
+                filteredConvArray = convs
             }
         }
         // make sure we only update the items not the header so we dont loose the text field
-        var itemCountToUpdate = self.collectionView(bottleCollectionView, numberOfItemsInSection: 0)
-        var itemsIndexesToUpdate = [IndexPath]()
+//        var itemCountToUpdate = self.collectionView(bottleCollectionView, numberOfItemsInSection: 0)
+//        var itemsIndexesToUpdate = [IndexPath]()
 //        for i in 0..<itemCountToUpdate {
 //            itemsIndexesToUpdate.append(IndexPath(index:i))
 //        }
@@ -380,46 +310,6 @@ extension ConversationViewController: UIImagePickerControllerDelegate, UINavigat
 
 extension ConversationViewController {
     
-//    func onfetchedConversation (conversation: Conversation) {
-//
-//        if let is_seen = conversation.is_seen, is_seen == 1 {
-//
-//            if let startTime = conversation.startTime {
-//                conversation.finishTime = startTime + (24*60*60*1000)
-//            }
-//        } else {
-//            conversation.isActive = false
-//        }
-//
-//        if let is_active = conversation.isActive, !is_active {
-//            //(My Bottles)
-//            if conversation.isMyBottle {
-//                print("my bottles")
-//                DataStore.shared.myBottles.append(conversation)
-//                DataStore.shared.myBottles.sort(by: { (obj1, obj2) -> Bool in
-//                    // show open chats first
-//                    // if chat is not open yet sort them by date from newest to olders
-//                    if obj1.is_seen! != obj2.is_seen! {
-//                        return (obj1.is_seen! >= 1)
-//                    } else {
-//                        return (obj1.createdAt! > obj2.createdAt!)
-//                    }
-//                })
-//                // (My replies)
-//            } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.user?.objectId, currentUserID == convBottleOwnerID {
-//                print("my replies")
-//                DataStore.shared.myReplies.append(conversation)
-//                DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
-//                    if obj1.is_seen! != obj2.is_seen! {
-//                        return (obj1.is_seen! >= 1)
-//                    } else {
-//                        return (obj1.createdAt! > obj2.createdAt!)
-//                    }
-//                })
-//            }
-//        }
-//    }
-    
     fileprivate func observeConversation() {
         // We can use the observe method to listen for new
         // conversations being written to the Firebase DB
@@ -443,32 +333,6 @@ extension ConversationViewController {
                 self.refreshView()
             }
         }
-        
-//        let childref = Database.database().reference().child("conversations")
-//        childref.queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value, with: { (snapshot) in
-//            print(snapshot)
-//
-//            DataStore.shared.myBottles = [Conversation]()
-//            DataStore.shared.myReplies = [Conversation]()
-//
-//            let enumerator = snapshot.children
-//            while let rest = enumerator.nextObject() as? DataSnapshot {
-//                //this is 1 single message here
-//                let values = rest.value as? NSDictionary
-//                let conversation = Conversation(json: JSON(rest.value as! Dictionary<String, AnyObject>))
-//                conversation.idString = rest.key
-//                self.onfetchedConversation(conversation: conversation)
-//
-//            }
-//            // trigger data store set funnctions to cash the
-//            self.navigationView.showProgressIndicator(show: false)
-//            DataStore.shared.myBottles = DataStore.shared.myBottles
-//            DataStore.shared.myReplies = DataStore.shared.myReplies
-//            self.refreshView()
-//        }) { (err) in
-//            self.navigationView.showProgressIndicator(show: false)
-//            print(err.localizedDescription)
-//        }
         
         FirebaseManager.shared.conversationRef.observe(.childChanged, with: { (snapshot) in
             
