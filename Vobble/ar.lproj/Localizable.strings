@@ -149,6 +149,7 @@
 "CHAT_NAV_TIME_LEFT"                    = "متبقي";
 "RECORD_FAILED_ERROR"                   = "للأسف يبدو ان هنالك مشكلة في تسجيل رسالتك";
 "RECORD_LONG_PRESS"                     = "استمر بالضغط على زر التسجيل خلال حديثك";
+"SEEN"                                  = "شوهد";
 
 // filter
 "FEMALE"                                = "بنت";

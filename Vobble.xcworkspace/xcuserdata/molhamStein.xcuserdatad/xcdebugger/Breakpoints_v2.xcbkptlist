@@ -223,7 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1082"
             endingLineNumber = "1082"
-            landmarkName = "upload(url:photo:key:mediaType:)"
+            landmarkName = "uploadPhoto(photo:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -511,8 +511,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
             endingLineNumber = "246"
-            landmarkName = "ChatViewController"
-            landmarkType = "3">
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -527,7 +527,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1150"
             endingLineNumber = "1150"
-            landmarkName = "showActionSheet()"
+            landmarkName = "upload(url:photo:key:mediaType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -559,8 +559,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "963"
             endingLineNumber = "963"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
-            landmarkType = "7">
+            landmarkName = "addVideoMessage(withId:key:mediaItem:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -575,8 +575,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "951"
             endingLineNumber = "951"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
-            landmarkType = "7">
+            landmarkName = "addPhotoMessage(withId:key:mediaItem:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -607,8 +607,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "982"
             endingLineNumber = "982"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
-            landmarkType = "7">
+            landmarkName = "onNewMessageSent()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -879,8 +879,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "929"
             endingLineNumber = "929"
-            landmarkName = "textViewDidChange(_:)"
-            landmarkType = "7">
+            landmarkName = "didPressAccessoryButton(_:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -895,8 +895,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "839"
             endingLineNumber = "839"
-            landmarkName = "didPressAccessoryButton(_:)"
-            landmarkType = "7">
+            landmarkName = "didPressSend(_:withMessageText:senderId:senderDisplayName:date:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -911,7 +911,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1154"
             endingLineNumber = "1154"
-            landmarkName = "camera()"
+            landmarkName = "upload(url:photo:key:mediaType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1071,7 +1071,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1281"
             endingLineNumber = "1281"
-            landmarkName = "directoryURL()"
+            landmarkName = "didPressRecordAudio(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1134,8 +1134,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1168"
             endingLineNumber = "1168"
-            landmarkName = "photoLibrary()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1582,7 +1582,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1209"
             endingLineNumber = "1209"
-            landmarkName = "didPressRecordAudio(_:)"
+            landmarkName = "initCustomToolBar()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

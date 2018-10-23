@@ -23,7 +23,7 @@ class ShopViewController: AbstractController {
     
     @IBOutlet weak var waveSubView: WaveView!
     
-    public var fType:ShopItemType = .bottlesPack
+    public var fType: ShopItemType = .bottlesPack
     
     private var _shopItemsArray:[ShopItem] = [ShopItem]()
     fileprivate var shopItemsArray:[ShopItem] {
@@ -38,6 +38,8 @@ class ShopViewController: AbstractController {
             return _shopItemsArray
         }
     }
+    
+    var selectedProduct : ShopItem!
     
     override func viewDidLoad() {
         
@@ -70,6 +72,11 @@ class ShopViewController: AbstractController {
         
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
         
+        //IAP Setup
+        /// finish up all cached transactions
+        for transaction: AnyObject in SKPaymentQueue.default().transactions {
+            SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
+        }
         if(SKPaymentQueue.canMakePayments()) {
             print("IAP is enabled, loading")
             let productID: NSSet = NSSet(array: ShopItemID.getListId())
@@ -78,6 +85,7 @@ class ShopViewController: AbstractController {
             request.start()
         } else {
             print("please enable IAPS")
+            self.shopItemsArray = []
         }
     }
     
@@ -240,8 +248,9 @@ extension ShopViewController: UICollectionViewDataSource {
         let obj = self.shopItemsArray[indexPath.row]
         
         let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShopCollectionViewCellID", for: indexPath) as! ShopCollectionViewCell
-                
-        shopCell.configCell(shopItemObj: obj )
+        
+        
+        shopCell.configCell(shopItemObj: obj)
         
         return shopCell
     }
@@ -271,31 +280,27 @@ extension ShopViewController: UICollectionViewDelegate {
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                 
-                if obj.appleProduct != nil, let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
+            
+                if  obj.appleProduct != nil {
                     
-                    let pay = SKPayment(product: selectedItem)
-                    SKPaymentQueue.default().add(self)
-                    SKPaymentQueue.default().add(pay as SKPayment)
-                    
+                    if let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
+                        self.selectedProduct = obj
+                        let pay = SKPayment(product: selectedItem)
+                        SKPaymentQueue.default().add(self)
+                        SKPaymentQueue.default().add(pay)
+                    }
+
                 }
-                // purchase request
-                ApiManager.shared.purchaseItem(shopItem: obj, completionBlock: { (success, err, item) in
-                    print ("res \(success)")
-                    ApiManager.shared.getMe(completionBlock: { (success, err, user) in
-                        self.dismiss(animated: true, completion: {})
-                    })
-                })
                 
-//                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-//                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 1
-//                }
             })
+            
             alertController.addAction(ok)
             let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
             
-        } else {
+        }else {
+            
             var items:[InventoryItem] = [InventoryItem]()
             if genderFilterButton.isSelected {
                 items = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})
@@ -308,39 +313,19 @@ extension ShopViewController: UICollectionViewDelegate {
                 let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
                 let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                     
-                    // flurry events
-                    var prodType = "bottles"
-                    if obj.type == ShopItemType.genderFilter {
-                        prodType = "gender"
-                    } else if obj.type == ShopItemType.countryFilter {
-                        prodType = "country"
+                    if  obj.appleProduct != nil {
+                        if let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
+                            self.selectedProduct = obj
+                            let pay = SKPayment(product: selectedItem)
+                            SKPaymentQueue.default().add(self)
+                            SKPaymentQueue.default().add(pay)
+                            
+                        }
+
                     }
-                    let logEventParams = ["prodType": prodType, "ProdName": obj.title_en ?? ""];
-                    Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
-                    
-                    // do the purchase
-                    let inventoryItem = InventoryItem()
-                    inventoryItem.isValid = true
-                    inventoryItem.isConsumed = false
-                    inventoryItem.shopItem = obj
-                    inventoryItem.startDate = Date().timeIntervalSince1970
-                    inventoryItem.endDate = Date().timeIntervalSince1970 + ((obj.validity ?? 1) * 60 * 60)
-                    DataStore.shared.inventoryItems.append(inventoryItem)
-                    
-                    // flurry events, on purchase done
-                    let logEventParams2 = ["prodType": prodType, "ProdName": obj.title_en ?? ""];
-                    Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
-                    
-                    // purchase request
-                    // purchase request
-                    ApiManager.shared.purchaseItem(shopItem: obj, completionBlock: { (success, err, item) in
-                        print ("res \(success)")
-                        ApiManager.shared.getMe(completionBlock: { (success, err, user) in
-                            self.dismiss(animated: true, completion: {})
-                        })
-                    })
                     
                 })
+                
                 let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
                 alertController.addAction(cancel)
                 alertController.addAction(ok)
@@ -367,126 +352,158 @@ extension ShopViewController: UICollectionViewDelegate {
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        
-    }
 }
 
 // MARK:- SKProductsRequestDelegate
 extension ShopViewController: SKProductsRequestDelegate {
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        
-        print("product request")
-        
-        let myProduct = response.products
-        
-        for product in myProduct {
-            
-            print("product added")
-            print(product.productIdentifier)
-            print(product.localizedTitle)
-            print(product.localizedDescription)
-            print(product.price)
-            
+
+        for product in response.products {
             inAppPurchaseList.append(product)
         }
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
         
-        print("error")
+        let failAlert = UIAlertController(title: "Error", message: "Something went wrong, please try again later", preferredStyle: .alert)
+        failAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: {_ in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(failAlert, animated: true, completion: nil)
     }
 }
 
 // MARK: - SKPaymentTransactionObserver
 extension ShopViewController: SKPaymentTransactionObserver {
     
-    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        
-        print("transactions restored")
-//        for transaction in queue.transactions {
+//    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
 //
-//            let t: SKPaymentTransaction = transaction
-//
-//            let prodID = t.payment.productIdentifier as String
-//
-//            if prodID == ShopItemID.Bottels3.rawValue {
-//
-//                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-//                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 3
-//                } else {
-//
-//                    DataStore.shared.me?.bottlesLeftToThrowCount = 3
-//                }
-//            } else if prodID == ShopItemID.Bottels5.rawValue {
-//
-//                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-//                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 5
-//                } else {
-//
-//                    DataStore.shared.me?.bottlesLeftToThrowCount = 5
-//                }
-//            }
-//        }
-    }
+//        print("transactions restored")
+////        for transaction in queue.transactions {
+////
+////            let t: SKPaymentTransaction = transaction
+////
+////            let prodID = t.payment.productIdentifier as String
+////
+////            if prodID == ShopItemID.Bottels3.rawValue {
+////
+////                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+////                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 3
+////                } else {
+////
+////                    DataStore.shared.me?.bottlesLeftToThrowCount = 3
+////                }
+////            } else if prodID == ShopItemID.Bottels5.rawValue {
+////
+////                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+////                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 5
+////                } else {
+////
+////                    DataStore.shared.me?.bottlesLeftToThrowCount = 5
+////                }
+////            }
+////        }
+//    }
+    
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        print("add payment")
-        
-//        for transaction: AnyObject in transactions {
-//
-//            let trans = transaction as! SKPaymentTransaction
-//            print(trans.error)
-//
-//            switch trans.transactionState {
-//
-//            case .purchased:
-//
-//                print("buy ok, unlock IAP HERE")
-//                print(p.productIdentifier)
-//
-//                let prodID = p.productIdentifier
-//
-//                if prodID == ShopItemID.Bottels3.rawValue {
-//
-//                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-//                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 3
-//                    } else {
-//
-//                        DataStore.shared.me?.bottlesLeftToThrowCount = 3
-//                    }
-//                } else if prodID == ShopItemID.Bottels5.rawValue {
-//
-//                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-//                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 5
-//                    } else {
-//
-//                        DataStore.shared.me?.bottlesLeftToThrowCount = 5
-//                    }
-//                }
-//
-//                switch prodID {
-//                case "seemu.iap.removeads":
-//                    print("remove ads")
-//                    removeAds()
-//                case "seemu.iap.addcoins":
-//                    print("add coins to account")
-//                    addCoins()
-//                default:
-//                    print("IAP not found")
-//                }
-//                queue.finishTransaction(trans)
-//            case .failed:
-//                print("buy error")
-//                queue.finishTransaction(trans)
-//                break
-//            default:
-//                print("Default")
-//                break
-//            }
-//        }
+        for transaction in transactions {
+            switch transaction.transactionState {
+                
+            case .purchasing :
+                print("purchasing")
+                
+            case .purchased:
+                
+                let prodID = transaction.payment.productIdentifier
+
+                // purchase request
+                ApiManager.shared.purchaseItem(shopItem: self.selectedProduct, completionBlock: {(success, err, item) in
+                    if success {
+                        
+                        // Bottles Purchase
+                        if self.selectedProduct.type == ShopItemType.bottlesPack {
+                            ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                                self.dismiss(animated: true, completion: {})
+                            })
+                            
+                        }else{
+                            
+                            // flurry events
+                            var prodType = "bottles"
+                            if self.selectedProduct.type == ShopItemType.genderFilter {
+                                prodType = "gender"
+                            } else if self.selectedProduct.type == ShopItemType.countryFilter {
+                                prodType = "country"
+                            }
+                            let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+                            Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                            
+                            // do the purchase
+                            let inventoryItem = InventoryItem()
+                            inventoryItem.isValid = true
+                            inventoryItem.isConsumed = false
+                            inventoryItem.shopItem = self.selectedProduct
+                            inventoryItem.startDate = Date().timeIntervalSince1970
+                            inventoryItem.endDate = Date().timeIntervalSince1970 + ((self.selectedProduct.validity ?? 1) * 60 * 60)
+                            DataStore.shared.inventoryItems.append(inventoryItem)
+                            
+                            // flurry events, on purchase done
+                            let logEventParams2 = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+                            Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
+                        }
+                       
+                        
+                       
+                    }else{
+                        let alert = UIAlertController(title: "Error", message: err?.errorName , preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    
+                })
+                
+                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 1
+                }
+                
+                if prodID == ShopItemID.Bottels3.rawValue {
+
+                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 3
+                    } else {
+
+                        DataStore.shared.me?.bottlesLeftToThrowCount = 3
+                    }
+                } else if prodID == ShopItemID.Bottels5.rawValue {
+
+                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
+                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 5
+                    } else {
+
+                        DataStore.shared.me?.bottlesLeftToThrowCount = 5
+                    }
+                }
+
+                
+                queue.finishTransaction(transaction)
+                queue.remove(self)
+                
+            case .failed:
+                print("buy error")
+                
+            case .deferred :
+                print("deferred")
+                
+                
+            default:
+                print("Default")
+                
+                //queue.finishTransaction(transaction)
+                
+            }
+        }
     }
 }
 

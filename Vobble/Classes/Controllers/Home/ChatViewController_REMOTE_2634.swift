@@ -43,8 +43,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
     private var unseenCountRef: DatabaseReference?
-    private lazy var userIsTypingRef: DatabaseReference = self.conversationRef!.child("typingIndicator").child(self.senderId)
-    private lazy var usersTypingQuery: DatabaseQuery = self.conversationRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
     
     private var newMessageRefHandle: DatabaseHandle?
     private var updatedMessageRefHandle: DatabaseHandle?
@@ -77,7 +75,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     // notifications
     var lastNotificationSentDate: Date?
     
-    private var localTyping = false
+    //  private var localTyping = false
     private var isInitialised = false
     
     var convTitle: String? {
@@ -94,6 +92,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     public var navUserName: String?
     public var navShoreName: String?
     
+    var audioRec: AVAudioRecorder?
+    var audioRecorder:AVAudioRecorder!
     var audioUrl: URL? = nil
     
     var soundRecorder : AVAudioRecorder!
@@ -110,15 +110,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var replyVideoUrlToUpload: URL?
     var bottleToReplyTo: Bottle?
     
-    var isTyping: Bool {
-        get {
-            return localTyping
-        }
-        set {
-            localTyping = newValue
-            userIsTypingRef.setValue(newValue)
-        }
-    }
+    //  var isTyping: Bool {
+    //    get {
+    //      return localTyping
+    //    }
+    //    set {
+    //      localTyping = newValue
+    //      userIsTypingRef.setValue(newValue)
+    //    }
+    //  }
     
     /// Navigation bar custome back button
     var navBackButton : UIBarButtonItem  {
@@ -237,14 +237,14 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        observeTyping()
-        
+        //    observeTyping()
     }
     
     deinit {
@@ -261,6 +261,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let refHandle = unseenMessagesCountRefHandle {
             unseenCountRef?.removeObserver(withHandle: refHandle)
         }
+        
     }
     
     func initNavBar() {
@@ -346,21 +347,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             chatPendingContainer.isHidden = false
         }
         
-        // show chat tutorial on first opening of an unblocked chat
-        if let tutShowedBefore = DataStore.shared.tutorialChatShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
-            dispatch_main_after(2) {
-                let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ChatTutorial") as! ChatTutorialViewController
-                viewController.alpha = 0.5
-                self.present(viewController, animated: true, completion: nil)
-                DataStore.shared.tutorialChatShowed = true
-            }
-        }
-        
-        if let convId = conversationOriginalObject?.idString, let unsentText = DataStore.shared.getConversationsUnsentTextMesssage(key: convId) {
-            self.inputToolbar.contentView.textView.text = unsentText
-            DataStore.shared.setConversationUnsentMessage(key: convId, text: "")
-        }
-        
         chatVc.conversationRef = convRef
         chatVc.conversationOriginalObject = conversation
         chatVc.conversationId = conversationOriginalObject?.idString
@@ -395,10 +381,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     func backButtonAction(_ sender: AnyObject) {
         //        _ = self.navigationController?.popViewController(animated: true)
-        
-        if let unsentText = self.inputToolbar.contentView.textView.text, let convId = conversationOriginalObject?.idString {
-            DataStore.shared.setConversationUnsentMessage(key: convId, text: unsentText)
-        }
         disposeFirebaseReference()
         
         //if we opened this chat from FindBottleViewContrller to reply to a
@@ -797,37 +779,24 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
     }
     
-      private func observeTyping() {
-        let typingIndicatorRef = conversationRef!.child("typingIndicator")
-        userIsTypingRef = typingIndicatorRef.child(senderId)
-        userIsTypingRef.onDisconnectRemoveValue()
-        usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
-    
-        usersTypingQuery.observe(.value) { (data: DataSnapshot) in
-    
-          // You're the only typing, don't show the indicator
-          if data.childrenCount == 1 && self.isTyping {
-            return
-          }
-    
-          // Are there others typing?
-          self.showTypingIndicator = data.childrenCount > 0
-          self.scrollToBottom(animated: true)
-        }
-      }
-    
-        usersTypingQuery.observe(.value) { (data: DataSnapshot) in
-    
-          // You're the only typing, don't show the indicator
-          if data.childrenCount == 1 && self.isTyping {
-            return
-          }
-    
-          // Are there others typing?
-          self.showTypingIndicator = data.childrenCount > 0
-          self.scrollToBottom(animated: true)
-        }
-      }
+    //  private func observeTyping() {
+    //    let typingIndicatorRef = conversationRef!.child("typingIndicator")
+    //    userIsTypingRef = typingIndicatorRef.child(senderId)
+    //    userIsTypingRef.onDisconnectRemoveValue()
+    //    usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
+    //
+    //    usersTypingQuery.observe(.value) { (data: DataSnapshot) in
+    //
+    //      // You're the only typing, don't show the indicator
+    //      if data.childrenCount == 1 && self.isTyping {
+    //        return
+    //      }
+    //
+    //      // Are there others typing?
+    //      self.showTypingIndicator = data.childrenCount > 0
+    //      self.scrollToBottom(animated: true)
+    //    }
+    //  }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         // 1
@@ -853,7 +822,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // 5
         finishSendingMessage()
-        isTyping = false
+        //    isTyping = false
+        
+        
     }
     
     func sendMediaMessage(mediaType: AppMediaType) -> String? {
@@ -1007,7 +978,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
         // If the text is not empty, the user is typing
-        isTyping = textView.text != ""
+        //    isTyping = textView.text != ""
     }
 }
 
@@ -1187,7 +1158,7 @@ extension ChatViewController: ChatNavigationDelegate {
     }
 }
 
-//TODO: make custom chat tool bar class
+//TODO: make custom chat toole bar class
 // MARK:- AVAudioRecorderDelegate
 extension ChatViewController: AVAudioRecorderDelegate {
     
@@ -1286,7 +1257,6 @@ extension ChatViewController: AVAudioRecorderDelegate {
             let runner: RunLoop = RunLoop.current
             runner.add(recordTimer!, forMode: .defaultRunLoopMode)
             
-            var recordingValid = true
             // we clear sound recorder after every recording session
             // so make sure we have a valid one before recording
             if  self.soundRecorder == nil {
@@ -1296,22 +1266,13 @@ extension ChatViewController: AVAudioRecorderDelegate {
                     try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                     try audioSession.setActive(true)
                     try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
-                    recordingValid = true
-                } catch let error {
-                    let errstr = "Error Recording \(error)"
-                    print(errstr)
-                    let alertController = UIAlertController(title: "", message: errstr, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                    alertController.addAction(ok)
-                    self.present(alertController, animated: true, completion: nil)
-                    recordingValid = false
+                    self.soundRecorder.prepareToRecord()
+                } catch {
+                    print("Error Recording");
                 }
             }
-            if recordingValid {
-                self.soundRecorder.prepareToRecord()
-                soundRecorder.delegate = self
-                soundRecorder.record()
-            }
+            soundRecorder.delegate = self
+            soundRecorder.record()
         }
         else if sender.state == .ended {
             recordTimer?.invalidate()

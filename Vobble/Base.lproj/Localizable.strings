@@ -149,6 +149,7 @@
 "CHAT_NAV_TIME_LEFT"                    = "left";
 "RECORD_FAILED_ERROR"                   = "Sorry, there seems an issue recording your message";
 "RECORD_LONG_PRESS"                     = "Please hold the record botton while talking";
+"SEEN"                                  = "Seen";
 
 // filter
 "FEMALE"                                = "Female";

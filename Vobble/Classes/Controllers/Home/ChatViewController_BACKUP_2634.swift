@@ -784,19 +784,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
     }
     
-    private func observeSeen(message : Message) {
-        if message.senderId != DataStore.shared.me?.objectId {
-            if message.isSeen == "0" {
-                self.messageRef.child(message.idString ?? "").updateChildValues(["isSeen" : "1"])
-                self.isLastMessageSeen = false
-            }
-        }else{
-            if message.isSeen == "1" {
-                self.isLastMessageSeen = true
-            }
-        }
-    }
-    
+<<<<<<< HEAD
       private func observeTyping() {
         let typingIndicatorRef = conversationRef!.child("typingIndicator")
         userIsTypingRef = typingIndicatorRef.child(senderId)
@@ -815,19 +803,39 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
           self.scrollToBottom(animated: true)
         }
       }
-    
-        usersTypingQuery.observe(.value) { (data: DataSnapshot) in
-    
-          // You're the only typing, don't show the indicator
-          if data.childrenCount == 1 && self.isTyping {
-            return
-          }
-    
-          // Are there others typing?
-          self.showTypingIndicator = data.childrenCount > 0
-          self.scrollToBottom(animated: true)
+=======
+    private func observeSeen(message : Message) {
+        if message.senderId != DataStore.shared.me?.objectId {
+            if message.isSeen == "0" {
+                self.messageRef.child(message.idString ?? "").updateChildValues(["isSeen" : "1"])
+                self.isLastMessageSeen = false
+            }
+        }else{
+            if message.isSeen == "1" {
+                self.isLastMessageSeen = true
+            }
         }
-      }
+    }
+    
+    //  private func observeTyping() {
+    //    let typingIndicatorRef = conversationRef!.child("typingIndicator")
+    //    userIsTypingRef = typingIndicatorRef.child(senderId)
+    //    userIsTypingRef.onDisconnectRemoveValue()
+    //    usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
+    //
+    //    usersTypingQuery.observe(.value) { (data: DataSnapshot) in
+    //
+    //      // You're the only typing, don't show the indicator
+    //      if data.childrenCount == 1 && self.isTyping {
+    //        return
+    //      }
+    //
+    //      // Are there others typing?
+    //      self.showTypingIndicator = data.childrenCount > 0
+    //      self.scrollToBottom(animated: true)
+    //    }
+    //  }
+>>>>>>> b741126329083dbcfec4eb0b52ab6f75d451d90c
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         // 1
@@ -853,7 +861,13 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // 5
         finishSendingMessage()
+<<<<<<< HEAD
         isTyping = false
+=======
+        //    isTyping = false
+        
+        
+>>>>>>> b741126329083dbcfec4eb0b52ab6f75d451d90c
     }
     
     func sendMediaMessage(mediaType: AppMediaType) -> String? {
