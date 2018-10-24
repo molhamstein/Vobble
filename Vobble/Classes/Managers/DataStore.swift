@@ -29,6 +29,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_TOKEN = "token"
     private let CACHE_KEY_MY_BOTTLES = "myBottles"
     private let CACHE_KEY_MY_REPLIES = "myReplies"
+    private let CACHE_KEY_THROWN_BOTTLES = "thrownBottles"
     private let CACHE_KEY_TUT_1 = "tutorial1"
     private let CACHE_KEY_TUT_CHAT = "tutorialChat"
     private let CACHE_KEY_UNSENT_TEXTS = "ChatUnsentTexts"
@@ -43,6 +44,7 @@ class DataStore :NSObject {
     private var _myBottles: [Conversation] = [Conversation]()
     private var _myReplies: [Conversation] = [Conversation]()
     private var _allConversations: [Conversation]?
+    private var _thrownBottles: [Bottle] = [Bottle]()
     
     private var _shores: [Shore] = []
     private var _token: String?

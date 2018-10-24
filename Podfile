@@ -34,6 +34,7 @@ pod 'CountryPickerView', '~> 1.0.0'
 pod 'Fabric', '~> 1.7.11'
 pod 'Crashlytics', '~> 3.10.7'
 pod 'Firebase/Performance', '~> 4.13.0'
+pod 'WCLShineButton'
 
 end
 

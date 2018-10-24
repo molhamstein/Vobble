@@ -45,10 +45,10 @@ PODS:
     - nanopb (~> 0.3)
   - FirebaseAuth (4.6.1):
     - FirebaseAnalytics (~> 4.2)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (4.0.20):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseDatabase (4.1.5):
     - FirebaseAnalytics (~> 4.1)
     - FirebaseCore (~> 4.0)
@@ -61,7 +61,7 @@ PODS:
     - FirebaseSwizzlingUtilities/ISASwizzling (~> 1.0)
     - FirebaseSwizzlingUtilities/MethodSwizzling (~> 1.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
     - Protobuf (~> 3.5)
   - FirebaseStorage (2.2.0):
@@ -84,7 +84,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/Logger (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3)":
     - GoogleToolboxForMac/DebugUtils (= 2.1.3)
@@ -196,6 +196,8 @@ SPEC REPOS:
     - BMPlayer
     - Bolts
     - CountryPickerView
+    - Crashlytics
+    - Fabric
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
@@ -205,7 +207,9 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseDatabase
     - FirebaseInstanceID
+    - FirebasePerformance
     - FirebaseStorage
+    - FirebaseSwizzlingUtilities
     - FLAnimatedImage
     - Flurry-iOS-SDK
     - Gecco
@@ -223,6 +227,7 @@ SPEC REPOS:
     - NYTPhotoViewer
     - OneSignal
     - PIDatePicker
+    - Protobuf
     - SDRecordButton
     - SDWebImage
     - SnapKit
@@ -282,6 +287,6 @@ SPEC CHECKSUMS:
   WCLShineButton: d8b979b6f6f9f6709f9e241e6e1a4712a1a9b36b
   YXWaveView: 3570d7244b08effd077a5c63b0693aa44b7cd369
 
-PODFILE CHECKSUM: d322391530ea9015232e3cdadc1bbad527ff5917
+PODFILE CHECKSUM: b9d8558dc5cc5b8036eb3f43663d0bfbebdfc54b
 
 COCOAPODS: 1.5.3

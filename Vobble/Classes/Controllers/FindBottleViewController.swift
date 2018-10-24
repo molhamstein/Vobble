@@ -28,6 +28,7 @@ class FindBottleViewController: AbstractController {
     
     @IBOutlet weak var ignoreButton: VobbleButton!
     @IBOutlet weak var replyButton: WCLShineButton!
+    @IBOutlet weak var replyLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     
     public var bottle:Bottle?
@@ -63,6 +64,15 @@ class FindBottleViewController: AbstractController {
             userimage.sd_setIndicatorStyle(.gray)
             userimage.sd_setImage(with: URL(string: imgUrl))
         }
+        
+        // Reply button animation setup
+        var parameters = WCLShineParams()
+        parameters.bigShineColor = AppColors.blueXLight
+        parameters.animDuration = 2
+        replyButton.image = .defaultAndSelect(#imageLiteral(resourceName: "replay_circle"), #imageLiteral(resourceName: "replay_circle"))
+        replyButton.params = parameters
+
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -72,10 +82,13 @@ class FindBottleViewController: AbstractController {
             topView.applyGradient(colours: [AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
             //bottomView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
             ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
-            replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+            //replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+            replyLabel.text = "REPLY".localized
+            
             isInitialized = true
         }
     }
+    
     
     @IBAction func exitButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

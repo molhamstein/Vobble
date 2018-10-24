@@ -1060,25 +1060,37 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ZZ-T5-aNn">
                                         <rect key="frame" x="160" y="0.0" width="160" height="130"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-Xy-Jtd">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F82-xd-Sqh" userLabel="Replay button view" customClass="WCLShineButton" customModule="WCLShineButton">
                                                 <rect key="frame" x="24" y="12" width="80" height="80"/>
-                                                <color key="backgroundColor" red="0.0" green="0.4850566275" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="8jJ-cl-Jxp"/>
-                                                    <constraint firstAttribute="height" constant="80" id="NBD-KN-QRn"/>
+                                                    <constraint firstAttribute="width" constant="80" id="4lq-rk-OVA"/>
+                                                    <constraint firstAttribute="height" constant="80" id="rpn-VZ-kHA"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                                <state key="normal" title="Reply">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                                        <color key="value" red="0.2474412383" green="0.62938354419999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="replyBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="7qC-i2-ghu"/>
+                                                    <action selector="replyBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="9b8-wb-8UD"/>
                                                 </connections>
-                                            </button>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Reply" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7e-GD-lzc">
+                                                <rect key="frame" x="43" y="42" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="zuW-Xy-Jtd" firstAttribute="centerY" secondItem="2ZZ-T5-aNn" secondAttribute="centerY" multiplier="0.8" id="ANq-WD-JRx"/>
-                                            <constraint firstItem="zuW-Xy-Jtd" firstAttribute="centerX" secondItem="2ZZ-T5-aNn" secondAttribute="centerX" multiplier="0.8" id="zog-cW-0I4"/>
+                                            <constraint firstItem="F82-xd-Sqh" firstAttribute="centerY" secondItem="2ZZ-T5-aNn" secondAttribute="centerY" multiplier="0.8" id="7GK-Qo-Hd6"/>
+                                            <constraint firstItem="g7e-GD-lzc" firstAttribute="centerY" secondItem="F82-xd-Sqh" secondAttribute="centerY" id="YZX-GY-HYt"/>
+                                            <constraint firstItem="g7e-GD-lzc" firstAttribute="centerX" secondItem="F82-xd-Sqh" secondAttribute="centerX" id="ctn-59-paq"/>
+                                            <constraint firstItem="F82-xd-Sqh" firstAttribute="centerX" secondItem="2ZZ-T5-aNn" secondAttribute="centerX" multiplier="0.8" id="z7H-0z-uV5"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRM-BQ-2qY">
@@ -1243,7 +1255,8 @@
                         <outlet property="moreOptionsOverlayButton" destination="DCn-Ia-GpG" id="LuP-Ej-AeR"/>
                         <outlet property="optionView" destination="zjl-AZ-sn8" id="D6K-fg-OLV"/>
                         <outlet property="playButton" destination="fRM-BQ-2qY" id="SFM-UB-O6l"/>
-                        <outlet property="replyButton" destination="zuW-Xy-Jtd" id="G4i-DU-bkN"/>
+                        <outlet property="replyButton" destination="F82-xd-Sqh" id="0Cs-qe-0gG"/>
+                        <outlet property="replyLabel" destination="g7e-GD-lzc" id="cRy-m5-TaA"/>
                         <outlet property="reportButton" destination="AxF-xB-GSs" id="2Fb-rd-75m"/>
                         <outlet property="reportPicker" destination="XI8-B3-PCF" id="VDz-rP-aZt"/>
                         <outlet property="reportView" destination="hny-Og-jaY" id="875-Z3-Dn2"/>
@@ -2464,17 +2477,17 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                         <viewControllerLayoutGuide type="bottom" id="TsR-e9-MDv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sh8-Ry-wgp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe right if you LIKE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKp-MD-CoG">
-                                <rect key="frame" x="56" y="170" width="208" height="23"/>
+                                <rect key="frame" x="56" y="170" width="208" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommend and earn CASH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCH-bb-vfR">
-                                <rect key="frame" x="40" y="90" width="240" height="23"/>
+                                <rect key="frame" x="40" y="90" width="240" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
