@@ -8,10 +8,6 @@
 
 import UIKit
 
-enum tapOption {
-    case myBottles
-    case myReplies
-}
 
 class ConversationCollectionViewHeader: UICollectionReusableView {
     
@@ -79,7 +75,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     
     func configCell(userObj: AppUser) {
         userNameLabel.text = DataStore.shared.me?.userName
-        lblBottlesLeftCount.text = "\(DataStore.shared.me?.bottlesLeftToThrowCount ?? 0)"
+        lblBottlesLeftCount.text = "\(DataStore.shared.me?.totalBottlesLeftToThrowCount ?? 0)"
         lblBottlesThrownCount.text = "\(DataStore.shared.me?.thrownBottlesCount ?? 0)"
         
         if let nextRefillTime = DataStore.shared.me?.nextRefillDate {
@@ -90,26 +86,25 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         }
         
         // show count on bottles tabs
-        let bCount = DataStore.shared.myBottles.count
-        if  bCount > 0  {
-            btnMyBottles.setTitle(String.init(format: "MY_BOTTLES_BOTTLES_TITLE_With_count".localized, bCount), for: .normal)
-        } else {
-            btnMyBottles.setTitle("MY_BOTTLES_BOTTLES_TITLE".localized, for: .normal)
-        }
-        // replies
-        let rCount = DataStore.shared.myReplies.count
-        if rCount > 0 {
-            btnMyReplies.setTitle(String.init(format: "MY_BOTTLES_REPLIES_TITLE_With_count".localized, rCount), for: .normal)
-        } else {
-            btnMyReplies.setTitle("MY_BOTTLES_REPLIES_TITLE".localized, for: .normal)
-        }
+//        let bCount = DataStore.shared.myBottles.count
+//        if  bCount > 0  {
+//            btnMyBottles.setTitle(String.init(format: "MY_BOTTLES_BOTTLES_TITLE_With_count".localized, bCount), for: .normal)
+//        } else {
+//            btnMyBottles.setTitle("MY_BOTTLES_BOTTLES_TITLE".localized, for: .normal)
+//        }
+//        // replies
+//        let rCount = DataStore.shared.myReplies.count
+//        if rCount > 0 {
+//            btnMyReplies.setTitle(String.init(format: "MY_BOTTLES_REPLIES_TITLE_With_count".localized, rCount), for: .normal)
+//        } else {
+//            btnMyReplies.setTitle("MY_BOTTLES_REPLIES_TITLE".localized, for: .normal)
+//        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange), name: Notification.Name("unreadMessagesChange"), object: nil)
         self.unreadMessagesCountChange ()
     }
     
     @IBAction func myBottlesButtonPressed(_ sender: Any) {
-        convVC?.tap = .myBottles
         convVC?.refreshView()
         btnMyReplies.isSelected = false
         btnMyBottles.isSelected = true
@@ -118,7 +113,6 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     }
     
     @IBAction func MyRepliesButtonPressed(_ sender: Any) {
-        convVC?.tap = .myReplies
         convVC?.refreshView()
         btnMyReplies.isSelected = true
         btnMyBottles.isSelected = false

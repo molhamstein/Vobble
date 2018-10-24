@@ -9,6 +9,7 @@
 import AVFoundation
 import UIKit
 import Flurry_iOS_SDK
+import Firebase
 
 enum MEDIA_TYPE {
     case IMAGE
@@ -182,6 +183,9 @@ class PreviewMediaControl : AbstractController {
         }, completion: {(finished: Bool) in
         })
         
+        // monitoring throw a bottle performance
+        let trace = Performance.startTrace(name: "Upload & Create new bottle")
+        
         ApiManager.shared.uploadMedia(urls: urls, mediaType: .video, completionBlock: { (files, errorMessage) in
 //        
             if errorMessage == nil {
@@ -203,6 +207,7 @@ class PreviewMediaControl : AbstractController {
                     self.uploadProgressWater.isHidden = true
                     self.uploadProgressWave.isHidden = true
                     
+                    trace?.stop()
                     if error == nil {
                         self.showActivityLoader(false)
                         
@@ -227,14 +232,19 @@ class PreviewMediaControl : AbstractController {
             } else {
                 self.showActivityLoader(false)
                 print(errorMessage ?? "unknown error occured in upload bottle")
+                trace?.stop()
                 // hide progress view
                 self.uploadProgressWater.isHidden = true
                 self.uploadProgressWave.isHidden = true
             }
         }, progressBlock:{ (progressPercent) in
             if let percent = progressPercent {
-                self.uploadProgressWater.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height * CGFloat(1.0 - percent))
-                self.uploadProgressWave.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height * CGFloat(1.0 - percent))
+                
+                UIView.animate(withDuration: 0.5, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                    self.uploadProgressWater.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height * CGFloat(1.0 - percent))
+                    self.uploadProgressWave.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.uploadProgressWater.frame.height * CGFloat(1.0 - percent))
+                }, completion: {(finished: Bool) in
+                })
             }
         })
     }

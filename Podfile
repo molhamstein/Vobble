@@ -31,19 +31,11 @@ pod 'Flurry-iOS-SDK/FlurrySDK' #Analytics Pod
 pod 'SwiftyGif'
 pod 'Gecco'
 pod 'CountryPickerView', '~> 1.0.0'
-pod 'WCLShineButton'
-
-post_install do |installer|
-    installer.pods_project.build_configurations.each do |config|
-        config.build_settings.delete('CODE_SIGNING_ALLOWED')
-        config.build_settings.delete('CODE_SIGNING_REQUIRED')
-    end
-end
+pod 'Fabric', '~> 1.7.11'
+pod 'Crashlytics', '~> 3.10.7'
+pod 'Firebase/Performance', '~> 4.13.0'
 
 end
-
-
-
 
 target 'OneSignalNotificationServiceExtension' do
     pod 'OneSignal', '>= 2.6.2', '< 3.0'

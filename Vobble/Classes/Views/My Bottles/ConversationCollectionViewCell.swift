@@ -40,11 +40,11 @@ class ConversationCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
     }
     
-    func configCell(convObj: Conversation,tap: tapOption) {
+    func configCell(convObj: Conversation) {
         
 //        mainView.applyGradient(colours: [(convObj.user2?.firstColor)!, (convObj.user2?.secondColor)!], direction: .horizontal)
         
-        if tap == .myBottles {
+        if convObj.isMyBottle {
             bottleNameLabel.text = convObj.user?.userName
         } else {
             bottleNameLabel.text = convObj.bottle?.owner?.userName

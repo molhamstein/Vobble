@@ -29,8 +29,9 @@ class DataStore :NSObject {
     private let CACHE_KEY_TOKEN = "token"
     private let CACHE_KEY_MY_BOTTLES = "myBottles"
     private let CACHE_KEY_MY_REPLIES = "myReplies"
-    private let CACHE_KEY_THROWN_BOTTLES = "thrownBottles"
     private let CACHE_KEY_TUT_1 = "tutorial1"
+    private let CACHE_KEY_TUT_CHAT = "tutorialChat"
+    private let CACHE_KEY_UNSENT_TEXTS = "ChatUnsentTexts"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
@@ -41,17 +42,19 @@ class DataStore :NSObject {
     
     private var _myBottles: [Conversation] = [Conversation]()
     private var _myReplies: [Conversation] = [Conversation]()
-    
-    private var _thrownBottles: [Bottle] = [Bottle]()
+    private var _allConversations: [Conversation]?
     
     private var _shores: [Shore] = []
     private var _token: String?
     
     private var _tutorial1Showed: Bool?
+    private var _tutorialChatShowed: Bool?
     
     //public var conversationsUnseenMesssages: [String: Int] = [:]
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
     public var conversationsMyRepliesUnseenMesssages: [String: Int] = [:]
+    
+    public var conversationsUnsentTextMesssages: [String: String]?
     
     // user loggedin flag
     var isLoggedin: Bool {
@@ -159,6 +162,8 @@ class DataStore :NSObject {
         set {
             _myBottles = newValue
             saveBaseModelArray(array: _myBottles, withKey: CACHE_KEY_MY_BOTTLES)
+            // force refresh all conversations
+            _allConversations = nil
         }
         get {
             if(_myBottles.isEmpty){
@@ -172,6 +177,8 @@ class DataStore :NSObject {
         set {
             _myReplies = newValue
             saveBaseModelArray(array: _myReplies, withKey: CACHE_KEY_MY_REPLIES)
+            // force refresh all conversations
+            _allConversations = nil
         }
         get {
             if(_myReplies.isEmpty){
@@ -194,6 +201,29 @@ class DataStore :NSObject {
         }
     }
     
+    
+    public var allConversations: [Conversation]? {
+        set {
+            _allConversations = newValue
+        }
+        get {
+            if _allConversations == nil || (_allConversations?.isEmpty ?? true) {
+                _allConversations = []
+                _allConversations?.append(contentsOf: _myReplies)
+                _allConversations?.append(contentsOf: _myBottles)
+                /// sort conversations so that most recently updated conversation commes first
+                _allConversations?.sort(by: { (obj1, obj2) -> Bool in
+                    if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
+                        return date1 > date2
+                    }
+                    return true
+                })
+            }
+            return _allConversations
+        }
+    }
+    
+    
     public var tutorial1Showed:Bool? {
         set{
             _tutorial1Showed = newValue
@@ -206,6 +236,21 @@ class DataStore :NSObject {
                 _tutorial1Showed = (loadIntForKey(key: CACHE_KEY_TUT_1) >= 1) ? true : false
             }
             return _tutorial1Showed
+        }
+    }
+    
+    public var tutorialChatShowed:Bool? {
+        set{
+            _tutorialChatShowed = newValue
+            if let tutShowed = _tutorialChatShowed {
+                saveIntWithKey(intToStore: tutShowed ? 1 : 0, key: CACHE_KEY_TUT_CHAT)
+            }
+        }
+        get {
+            if (_tutorialChatShowed == nil) {
+                _tutorialChatShowed = (loadIntForKey(key: CACHE_KEY_TUT_CHAT) >= 1) ? true : false
+            }
+            return _tutorialChatShowed
         }
     }
     
@@ -248,6 +293,28 @@ class DataStore :NSObject {
         return getMyRepliesConversationsWithUnseenMessagesCount() + getMyBottlesConversationsWithUnseenMessagesCount()
     }
     
+    func getConversationsUnsentTextMesssage (key: String) -> String? {
+        if conversationsUnsentTextMesssages == nil {
+            conversationsUnsentTextMesssages = loadDictionaryForKey(key: CACHE_KEY_UNSENT_TEXTS)
+        }
+        
+        if let text = conversationsUnsentTextMesssages?[key] {
+            return text
+        }
+        return nil
+    }
+    
+    func setConversationUnsentMessage(key:String, text: String) {
+        if conversationsUnsentTextMesssages == nil {
+            conversationsUnsentTextMesssages = loadDictionaryForKey(key: CACHE_KEY_UNSENT_TEXTS)
+        }
+        
+        conversationsUnsentTextMesssages?[key] = text
+        if let messagesDict = conversationsUnsentTextMesssages {
+            saveDictionary(dict: messagesDict, withKey: CACHE_KEY_UNSENT_TEXTS)
+        }
+    }
+    
     //MARK: Cache Utils
     private func saveBaseModelArray(array: [BaseModel] , withKey key:String){
         let array : [[String:Any]] = array.map{$0.dictionaryRepresentation()}
@@ -262,6 +329,18 @@ class DataStore :NSObject {
             result = arr.map{T(json: JSON($0))}
         }
         return result
+    }
+    
+    private func saveDictionary(dict: [String:String] , withKey key:String){
+        UserDefaults.standard.set(dict, forKey: key)
+        UserDefaults.standard.synchronize()
+    }
+    
+    private func loadDictionaryForKey(key: String)->[String:String]{
+        if let dict = UserDefaults.standard.dictionary(forKey: key) as? [String:String] {
+            return dict
+        }
+        return [:]
     }
     
     public func saveBaseModelObject<T:BaseModel>(object:T?, withKey key:String)
@@ -316,6 +395,10 @@ class DataStore :NSObject {
         ApiManager.shared.getShores(completionBlock: { (shores, error) in})
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
         ApiManager.shared.requesReportTypes { (reports, error) in}
+        
+        if let meId = me?.objectId, let name = me?.userName {
+            OneSignal.sendTags(["user_id": meId, "user_name": name])
+        }
     }
     
     public func logout() {
@@ -325,6 +408,11 @@ class DataStore :NSObject {
         categories = [Category]()
         myBottles = [Conversation]()
         myReplies = [Conversation]()
+        allConversations = []
+        tutorial1Showed = false
+        tutorialChatShowed = false
+        conversationsMyBottlesUnseenMesssages = [:]
+        conversationsMyRepliesUnseenMesssages = [:]
         //shopItems = [ShopItem]()
         inventoryItems = [InventoryItem]()
         OneSignal.deleteTags(["user_id","user_name"])

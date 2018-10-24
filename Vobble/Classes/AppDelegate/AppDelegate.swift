@@ -10,6 +10,8 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 import Firebase
+import Crashlytics
+import Fabric
 import OneSignal
 import Flurry_iOS_SDK
 
@@ -32,7 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         TWTRTwitter.sharedInstance().start(withConsumerKey: AppConfig.twitterConsumerKey, consumerSecret: AppConfig.twitterConsumerSecret)
         FirebaseApp.configure()
-        
+        Fabric.sharedSDK().debug = !AppConfig.isProductionBuild
+        //FirebaseCrash
+        //FirebaseConfiguration.sharedInstance().crashCollectionEnabled = AppConfig.isProductionBuild
         // init managers
 //        DataStore.shared
 //        FirebaseManager.shared

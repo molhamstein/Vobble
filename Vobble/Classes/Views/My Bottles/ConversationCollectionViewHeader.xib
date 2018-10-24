@@ -24,7 +24,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="conversationCollectionViewHeaderID" id="eUA-Pv-khb" customClass="ConversationCollectionViewHeader" customModule="Vobble" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2p-3x-HAy" userLabel="userinfo View">
@@ -159,7 +159,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzW-QB-RcU">
-                    <rect key="frame" x="0.0" y="101" width="375" height="40"/>
+                    <rect key="frame" x="0.0" y="131" width="375" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMt-1h-1lb">
                             <rect key="frame" x="30" y="4" width="151" height="32"/>
@@ -243,7 +243,7 @@
                 <constraint firstItem="mzW-QB-RcU" firstAttribute="leading" secondItem="eUA-Pv-khb" secondAttribute="leading" id="7H4-VJ-dgR"/>
                 <constraint firstAttribute="trailing" secondItem="W2p-3x-HAy" secondAttribute="trailing" id="Xjb-h6-zUP"/>
                 <constraint firstItem="W2p-3x-HAy" firstAttribute="leading" secondItem="eUA-Pv-khb" secondAttribute="leading" id="Zha-J2-5DW"/>
-                <constraint firstItem="mzW-QB-RcU" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="bottom" id="lB1-5n-vCM"/>
+                <constraint firstItem="mzW-QB-RcU" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="bottom" constant="30" id="lB1-5n-vCM"/>
                 <constraint firstItem="W2p-3x-HAy" firstAttribute="top" secondItem="eUA-Pv-khb" secondAttribute="top" constant="11" id="wds-VO-DMb"/>
             </constraints>
             <connections>
