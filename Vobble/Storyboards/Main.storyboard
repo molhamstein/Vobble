@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="AlNile.ttc">
+            <string>AlNile</string>
+        </array>
         <array key="Antipasto_extrabold.otf">
             <string>Antipasto-ExtraBold</string>
         </array>
         <array key="Antipasto_regular.otf">
             <string>Antipasto</string>
+        </array>
+        <array key="Futura.ttc">
+            <string>Futura-Medium</string>
         </array>
         <array key="OpenSansBold.ttf">
             <string>OpenSans-Bold</string>
@@ -39,7 +48,7 @@
                                 <rect key="frame" x="-10" y="142" width="533" height="426"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wave" translatesAutoresizingMaskIntoConstraints="NO" id="SmX-cY-bzy">
-                                <rect key="frame" x="-10" y="213" width="970" height="323"/>
+                                <rect key="frame" x="-10" y="212.5" width="970" height="323.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SmX-cY-bzy" secondAttribute="height" multiplier="4500:1500" id="K5K-hR-zFq"/>
@@ -195,7 +204,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXf-ox-frh">
                                 <rect key="frame" x="15" y="470" width="90" height="90"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiQ-9T-sDq">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiQ-9T-sDq">
                                         <rect key="frame" x="15" y="13" width="60" height="60"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -208,8 +217,14 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_find_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-41-nJO">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_find_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-41-nJO">
                                         <rect key="frame" x="31.5" y="12" width="27" height="62"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_find_bottle2" translatesAutoresizingMaskIntoConstraints="NO" id="Icf-xW-4vV">
+                                        <rect key="frame" x="-75" y="-19" width="240" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Icf-xW-4vV" secondAttribute="height" multiplier="1:1" id="p79-9H-1AQ"/>
+                                        </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Bottle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qa-2n-Th5">
                                         <rect key="frame" x="0.0" y="74" width="90" height="16"/>
@@ -231,13 +246,16 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="5YS-Pb-apK" secondAttribute="trailing" id="4C6-0U-Sho"/>
                                     <constraint firstItem="5YS-Pb-apK" firstAttribute="leading" secondItem="VXf-ox-frh" secondAttribute="leading" id="4HZ-TO-l2N"/>
+                                    <constraint firstItem="5Qa-2n-Th5" firstAttribute="top" secondItem="Icf-xW-4vV" secondAttribute="bottom" constant="4" id="4nI-xI-AFG"/>
                                     <constraint firstAttribute="width" constant="90" id="9yV-Op-4g0"/>
                                     <constraint firstAttribute="bottom" secondItem="5YS-Pb-apK" secondAttribute="bottom" id="AXX-aj-8Az"/>
                                     <constraint firstItem="2zZ-41-nJO" firstAttribute="centerX" secondItem="hiQ-9T-sDq" secondAttribute="centerX" id="GIa-CK-20U"/>
+                                    <constraint firstItem="Icf-xW-4vV" firstAttribute="top" secondItem="VXf-ox-frh" secondAttribute="top" constant="-10" id="TGS-oM-Afd"/>
                                     <constraint firstAttribute="bottom" secondItem="hiQ-9T-sDq" secondAttribute="bottom" constant="17" id="XhI-pY-qwo"/>
                                     <constraint firstAttribute="trailing" secondItem="5Qa-2n-Th5" secondAttribute="trailing" id="Xnk-SL-PUB"/>
                                     <constraint firstAttribute="bottom" secondItem="5Qa-2n-Th5" secondAttribute="bottom" id="gUo-JA-uZ9"/>
                                     <constraint firstItem="5YS-Pb-apK" firstAttribute="top" secondItem="VXf-ox-frh" secondAttribute="top" id="ina-Cw-fOb"/>
+                                    <constraint firstItem="Icf-xW-4vV" firstAttribute="centerX" secondItem="VXf-ox-frh" secondAttribute="centerX" id="k4J-lM-90M"/>
                                     <constraint firstItem="2zZ-41-nJO" firstAttribute="centerY" secondItem="hiQ-9T-sDq" secondAttribute="centerY" id="lRh-u4-x5e"/>
                                     <constraint firstItem="5Qa-2n-Th5" firstAttribute="leading" secondItem="VXf-ox-frh" secondAttribute="leading" id="oWT-eB-Ats"/>
                                     <constraint firstItem="hiQ-9T-sDq" firstAttribute="centerX" secondItem="VXf-ox-frh" secondAttribute="centerX" id="oep-Lu-btd"/>
@@ -248,7 +266,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mx4-tz-u8b">
                                 <rect key="frame" x="115" y="470" width="90" height="90"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYU-Uy-TDn">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYU-Uy-TDn">
                                         <rect key="frame" x="15" y="13" width="60" height="60"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -261,8 +279,14 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_my_bottles" translatesAutoresizingMaskIntoConstraints="NO" id="1TE-ow-wWW">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_my_bottles" translatesAutoresizingMaskIntoConstraints="NO" id="1TE-ow-wWW">
                                         <rect key="frame" x="32" y="12" width="26" height="62"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_my_bottles2" translatesAutoresizingMaskIntoConstraints="NO" id="SqJ-A9-Hhb">
+                                        <rect key="frame" x="-75" y="-19" width="240" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="SqJ-A9-Hhb" secondAttribute="height" multiplier="1:1" id="Iea-yM-X6C"/>
+                                        </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Bottles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mev-RJ-pbR">
                                         <rect key="frame" x="0.0" y="74" width="90" height="16"/>
@@ -304,10 +328,13 @@
                                     <constraint firstItem="hD2-1k-mJB" firstAttribute="top" secondItem="1TE-ow-wWW" secondAttribute="top" constant="-5" id="Fdx-DY-Bhh"/>
                                     <constraint firstAttribute="width" constant="90" id="NsL-xB-0oK"/>
                                     <constraint firstItem="YYU-Uy-TDn" firstAttribute="centerX" secondItem="mx4-tz-u8b" secondAttribute="centerX" id="Qlf-Zp-nYJ"/>
+                                    <constraint firstItem="SqJ-A9-Hhb" firstAttribute="top" secondItem="mx4-tz-u8b" secondAttribute="top" constant="-4" id="S04-M2-bdU"/>
                                     <constraint firstItem="1TE-ow-wWW" firstAttribute="centerY" secondItem="YYU-Uy-TDn" secondAttribute="centerY" id="XiQ-3R-9hX"/>
+                                    <constraint firstItem="mev-RJ-pbR" firstAttribute="top" secondItem="SqJ-A9-Hhb" secondAttribute="bottom" constant="4" id="YVq-CB-B8N"/>
                                     <constraint firstAttribute="trailing" secondItem="fG3-1V-oRw" secondAttribute="trailing" id="bcH-I6-FxJ"/>
                                     <constraint firstItem="hD2-1k-mJB" firstAttribute="centerX" secondItem="mx4-tz-u8b" secondAttribute="centerX" multiplier="1.31" id="dNL-qs-Z8U"/>
                                     <constraint firstAttribute="trailing" secondItem="mev-RJ-pbR" secondAttribute="trailing" id="eqh-hx-SzD"/>
+                                    <constraint firstItem="SqJ-A9-Hhb" firstAttribute="centerX" secondItem="mx4-tz-u8b" secondAttribute="centerX" id="mgC-b2-wEt"/>
                                     <constraint firstItem="fG3-1V-oRw" firstAttribute="leading" secondItem="mx4-tz-u8b" secondAttribute="leading" id="sa1-D5-1Fm"/>
                                     <constraint firstAttribute="bottom" secondItem="mev-RJ-pbR" secondAttribute="bottom" id="upE-Ct-jx6"/>
                                     <constraint firstItem="fG3-1V-oRw" firstAttribute="top" secondItem="mx4-tz-u8b" secondAttribute="top" id="xH2-9v-Es5"/>
@@ -318,7 +345,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohl-cV-N1S">
                                 <rect key="frame" x="215" y="470" width="90" height="90"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeK-Hn-i2k">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeK-Hn-i2k">
                                         <rect key="frame" x="15" y="13" width="60" height="60"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -331,8 +358,14 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_throw_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-sx-okP">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_throw_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-sx-okP">
                                         <rect key="frame" x="33" y="12" width="24" height="62"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_throw_bottle2" translatesAutoresizingMaskIntoConstraints="NO" id="x5U-O0-CwX">
+                                        <rect key="frame" x="-75" y="-19" width="240" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="x5U-O0-CwX" secondAttribute="height" multiplier="1:1" id="nfK-Ja-Nji"/>
+                                        </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Throw Bottle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9JU-fi-wIx">
                                         <rect key="frame" x="0.0" y="74" width="90" height="16"/>
@@ -343,7 +376,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qzh-lr-3sk">
-                                        <rect key="frame" x="45" y="7" width="28" height="28"/>
+                                        <rect key="frame" x="0.0" y="7" width="28" height="28"/>
                                         <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.090589985957142863" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="VbG-LJ-hAl"/>
@@ -371,12 +404,15 @@
                                     <constraint firstItem="DeK-Hn-i2k" firstAttribute="centerX" secondItem="ohl-cV-N1S" secondAttribute="centerX" id="FwM-Cs-xnx"/>
                                     <constraint firstItem="Cnq-sx-okP" firstAttribute="centerY" secondItem="DeK-Hn-i2k" secondAttribute="centerY" id="JBG-td-WbO"/>
                                     <constraint firstAttribute="trailing" secondItem="9JU-fi-wIx" secondAttribute="trailing" id="KRK-Ik-Kc4"/>
+                                    <constraint firstItem="9JU-fi-wIx" firstAttribute="top" secondItem="x5U-O0-CwX" secondAttribute="bottom" constant="4" id="LYA-GZ-vh4"/>
                                     <constraint firstItem="qzh-lr-3sk" firstAttribute="top" secondItem="Cnq-sx-okP" secondAttribute="top" constant="-5" id="NmL-mP-mIe"/>
-                                    <constraint firstItem="qzh-lr-3sk" firstAttribute="centerX" secondItem="ohl-cV-N1S" secondAttribute="centerX" multiplier="1.31" id="X6n-w1-jdJ"/>
+                                    <constraint firstItem="qzh-lr-3sk" firstAttribute="centerX" secondItem="ohl-cV-N1S" secondAttribute="centerX" multiplier="0.31" id="X6n-w1-jdJ"/>
                                     <constraint firstAttribute="bottom" secondItem="DeK-Hn-i2k" secondAttribute="bottom" constant="17" id="Yk3-LU-V93"/>
                                     <constraint firstAttribute="bottom" secondItem="9JU-fi-wIx" secondAttribute="bottom" id="a7s-hO-hzP"/>
                                     <constraint firstAttribute="width" constant="90" id="cCp-CP-sS6"/>
+                                    <constraint firstItem="x5U-O0-CwX" firstAttribute="centerX" secondItem="ohl-cV-N1S" secondAttribute="centerX" id="eoF-9W-hqz"/>
                                     <constraint firstItem="9tU-zj-PvG" firstAttribute="leading" secondItem="ohl-cV-N1S" secondAttribute="leading" id="fov-Ha-3Am"/>
+                                    <constraint firstItem="x5U-O0-CwX" firstAttribute="top" secondItem="ohl-cV-N1S" secondAttribute="top" id="hiZ-3h-Oic"/>
                                     <constraint firstAttribute="height" constant="90" id="iSr-Ir-nM7"/>
                                     <constraint firstAttribute="trailing" secondItem="9tU-zj-PvG" secondAttribute="trailing" id="mke-LV-2Ue"/>
                                     <constraint firstItem="9JU-fi-wIx" firstAttribute="top" secondItem="Cnq-sx-okP" secondAttribute="bottom" id="nHL-2a-Mdi"/>
@@ -2527,10 +2563,13 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="ic_chat_blocked" width="300" height="457"/>
         <image name="ic_close_white" width="20" height="20"/>
         <image name="ic_find_bottle" width="27" height="27"/>
+        <image name="ic_find_bottle2" width="80" height="94"/>
         <image name="ic_my_bottles" width="26" height="23"/>
+        <image name="ic_my_bottles2" width="60" height="63"/>
         <image name="ic_record_audio_big" width="24" height="45"/>
         <image name="ic_shop" width="26" height="21"/>
         <image name="ic_throw_bottle" width="24" height="24"/>
+        <image name="ic_throw_bottle2" width="80" height="80"/>
         <image name="inst_fav" width="305" height="275"/>
         <image name="island" width="753" height="613"/>
         <image name="montains" width="4500" height="80"/>

@@ -229,6 +229,16 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 //self.chatPendingContainer.isHidden = true
                 self.view.addSubview(self.chatPendingContainer)
                 
+                // chat background
+                let bgImage = UIImageView()
+                bgImage.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                bgImage.image = UIImage(named: "chat_bg")
+                bgImage.contentMode = .scaleAspectFill
+                bgImage.backgroundColor = UIColor(red:242/255, green:234/255, blue:220/255, alpha:0.0)
+                self.collectionView.backgroundColor = UIColor.clear
+                self.view.insertSubview(bgImage, belowSubview: self.collectionView)
+                
+                
                 //chatPendingContainer.isHidden = true
             }
             isInitialised = true
@@ -1197,7 +1207,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         let tabGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTabRecordAudio(_:)))
         recordButton.addGestureRecognizer(tabGestureRecognizer)
         
-        recordButton.frame = CGRect(x: 45, y: 0, width: 40, height: CGFloat(height))
+        recordButton.frame = CGRect(x: 35, y: -5, width: 60, height: CGFloat(height + 10.0))
         inputToolbar.contentView.leftBarButtonItemWidth = 85
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)

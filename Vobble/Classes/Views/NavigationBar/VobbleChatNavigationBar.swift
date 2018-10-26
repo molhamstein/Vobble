@@ -25,7 +25,7 @@ class VobbleChatNavigationBar: AbstractNibView {
     @IBOutlet weak var userImageButton: UIButton!
     @IBOutlet weak var leftLabel: UILabel!
     
-    var delegate:ChatNavigationDelegate?
+    weak var delegate:ChatNavigationDelegate?
 
     /// set left image icon when image_name is visible.
     @IBInspectable open var left_image: UIImage? {

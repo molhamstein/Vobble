@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import BMPlayer
 import AVFoundation
 import NVActivityIndicatorView
 import Firebase
@@ -72,6 +71,17 @@ class FindBottleViewController: AbstractController {
         replyButton.image = .defaultAndSelect(#imageLiteral(resourceName: "replay_circle"), #imageLiteral(resourceName: "replay_circle"))
         replyButton.params = parameters
 
+        // a workarround that I'm not sure of it yet to resolve the issue of the video sound comming from the ear speaker sometimes
+        do {
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            } else {
+                AVAudioSession.sharedInstance().perform(NSSelectorFromString("setCategory:error:"), with: AVAudioSessionCategoryPlayback)
+            }
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
 
     }
     

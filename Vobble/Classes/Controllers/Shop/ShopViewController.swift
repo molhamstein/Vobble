@@ -288,6 +288,16 @@ extension ShopViewController: UICollectionViewDelegate {
                         let pay = SKPayment(product: selectedItem)
                         SKPaymentQueue.default().add(self)
                         SKPaymentQueue.default().add(pay)
+                        
+                        // flurry events
+                        var prodType = "bottles"
+                        if self.selectedProduct.type == ShopItemType.genderFilter {
+                            prodType = "gender"
+                        } else if self.selectedProduct.type == ShopItemType.countryFilter {
+                            prodType = "country"
+                        }
+                        let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+                        Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                     }
 
                 }
@@ -319,6 +329,16 @@ extension ShopViewController: UICollectionViewDelegate {
                             let pay = SKPayment(product: selectedItem)
                             SKPaymentQueue.default().add(self)
                             SKPaymentQueue.default().add(pay)
+                            
+                            // flurry events
+                            var prodType = "bottles"
+                            if self.selectedProduct.type == ShopItemType.genderFilter {
+                                prodType = "gender"
+                            } else if self.selectedProduct.type == ShopItemType.countryFilter {
+                                prodType = "country"
+                            }
+                            let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+                            Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                             
                         }
 
@@ -437,8 +457,6 @@ extension ShopViewController: SKPaymentTransactionObserver {
                             } else if self.selectedProduct.type == ShopItemType.countryFilter {
                                 prodType = "country"
                             }
-                            let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
-                            Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                             
                             // do the purchase
                             let inventoryItem = InventoryItem()
