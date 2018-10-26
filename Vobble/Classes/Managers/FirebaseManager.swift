@@ -50,7 +50,9 @@ class FirebaseManager :NSObject {
             "user2ID" : DataStore.shared.me?.objectId ?? "",
             "startTime" : 0.0,
             "user1_unseen": 1.0,
-            "user2_unseen": 0.0
+            "user2_unseen": 0.0,
+            "user1LastSeenMessageId": "",
+            "user2LastSeenMessageId": ""
         ]
         return convlItem
     }

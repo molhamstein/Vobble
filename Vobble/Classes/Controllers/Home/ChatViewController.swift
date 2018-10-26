@@ -43,12 +43,14 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
     private var unseenCountRef: DatabaseReference?
+    private var lastSeenMessageRef: DatabaseReference?
     private lazy var userIsTypingRef: DatabaseReference = self.conversationRef!.child("typingIndicator").child(self.senderId)
     private lazy var usersTypingQuery: DatabaseQuery = self.conversationRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
     
     private var newMessageRefHandle: DatabaseHandle?
     private var updatedMessageRefHandle: DatabaseHandle?
     private var unseenMessagesCountRefHandle: DatabaseHandle?
+    private var updateLastSeenMessageRefHandle: DatabaseHandle?
     
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
@@ -134,6 +136,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     /// isSeen
     var isLastMessageSeen : Bool = false
+    var lastSeenMessageId : String = "0"
+    var messagesCount: Int = 0
+    var currentMessage: Int = 1
+    
     
     // MARK: View Lifecycle
     
@@ -270,6 +276,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         if let refHandle = unseenMessagesCountRefHandle {
             unseenCountRef?.removeObserver(withHandle: refHandle)
+        }
+        if let refHandle = updateLastSeenMessageRefHandle {
+            lastSeenMessageRef?.removeObserver(withHandle: refHandle)
         }
     }
     
@@ -620,6 +629,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             messageRef = self.conversationRef!.child("messages")
             let messageQuery = messageRef.queryLimited(toLast:2000)
             
+            // get messages count
+            self.conversationRef!.child("messages").observe(.value, with: {(snapshot) in
+                self.messagesCount = Int(snapshot.childrenCount)
+            } )
+            
             // We can use the observe method to listen for new
             // messages being written to the Firebase DB
             newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
@@ -631,7 +645,18 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 message.idString = snapshot.key
                 
                 // check seen messages
-                self.observeSeen(message: message)
+                if self.currentMessage == self.messagesCount ||
+                    self.currentMessage == self.messagesCount - 1 {
+                    
+                    if self.currentMessage == self.messagesCount - 1 {
+                        self.currentMessage += 1
+                    }
+                    self.checkLastSeenMessage(message: message)
+                }else {
+                    self.currentMessage += 1
+                    
+                }
+                
                 
                 if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
                     self.addMessage(withId: id, name: name, text: text)
@@ -697,16 +722,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
                 
-                // Recieving seen status
-                if let id = message.senderId, let isSeen = message.isSeen {
-                    if id == DataStore.shared.me?.objectId {
-                        if isSeen == "1" {
-                            self.isLastMessageSeen = true
-                            self.collectionView.reloadData()
-                        }
-                    }
-                    
-                }
                 
                 if let mediaURL = message.photoUrl {
                     // The photo has been updated.
@@ -759,16 +774,32 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // handle seen messages
         if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+            lastSeenMessageRef = self.conversationRef!.child("user2LastSeenMessageId")
             unseenCountRef = self.conversationRef!.child("user1_unseen")
             unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { (snapshot) -> Void in
                 self.conversationRef?.updateChildValues(["user1_unseen": 0])
             })
+            
+            
+            
         } else {
+            lastSeenMessageRef = self.conversationRef!.child("user1LastSeenMessageId")
             unseenCountRef = self.conversationRef!.child("user2_unseen")
             unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { (snapshot) -> Void in
                 self.conversationRef?.updateChildValues(["user2_unseen": 0])
             })
+            
+
         }
+        
+        // hande seen message update
+        updateLastSeenMessageRefHandle = self.lastSeenMessageRef!.observe(.value, with: {(snapshot) -> Void in
+            self.isLastMessageSeen = true
+            self.collectionView.reloadData()
+
+        })
+        
+        
         
     }
     
@@ -794,15 +825,31 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
     }
     
-    private func observeSeen(message : Message) {
-        if message.senderId != DataStore.shared.me?.objectId {
-            if message.isSeen == "0" {
-                self.messageRef.child(message.idString ?? "").updateChildValues(["isSeen" : "1"])
-                self.isLastMessageSeen = false
-            }
-        }else{
-            if message.isSeen == "1" {
-                self.isLastMessageSeen = true
+    private func checkLastSeenMessage(message : Message) {
+        if let id = message.idString , let senderId = message.senderId {
+            if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+                if senderId == DataStore.shared.me?.objectId {
+                    if id == self.conversationOriginalObject?.user2LastSeenMessageId {
+                        self.isLastMessageSeen = true
+                    }else{
+                        self.isLastMessageSeen = false
+                    }
+                }else {
+                    self.lastSeenMessageId = id
+                    self.conversationRef?.updateChildValues(["user1LastSeenMessageId" : self.lastSeenMessageId])
+                    
+                }
+            }else{
+                if senderId == DataStore.shared.me?.objectId {
+                    if id == self.conversationOriginalObject?.user1LastSeenMessageId {
+                        self.isLastMessageSeen = true
+                    }else{
+                        self.isLastMessageSeen = false
+                    }
+                }else {
+                    self.lastSeenMessageId = id
+                    self.conversationRef?.updateChildValues(["user2LastSeenMessageId" : self.lastSeenMessageId])
+                }
             }
         }
     }
@@ -837,7 +884,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             "senderId": senderId!,
             "senderName": senderDisplayName!,
             "text": text!,
-            "isSeen": "0"
             ]
         
         // 3
@@ -860,7 +906,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         var messageItem = [
             "senderId": senderId!,
-            "isSeen": "0"
             ]
         if mediaType == .video {
             messageItem["videoURL"] = imageURLNotSetKey
