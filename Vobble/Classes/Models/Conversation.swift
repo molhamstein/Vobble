@@ -22,6 +22,8 @@ class Conversation: BaseModel {
     private let kIsSeen: String = "is_seen"
     private let kUser1UnseenMessagesCount: String = "user1_unseen"
     private let kUser2UnseenMessagesCount: String = "user2_unseen"
+    private let kUser1LastSeenMessageId: String = "user1LastSeenMessageId"
+    private let kUser2LastSeenMessageId: String = "user2LastSeenMessageId"
     
     // MARK: Properties
     public var idString : String?
@@ -34,6 +36,8 @@ class Conversation: BaseModel {
     public var is_seen: Int?
     public var user1UnseenMessagesCount: Int?
     public var user2UnseenMessagesCount: Int?
+    public var user1LastSeenMessageId: String?
+    public var user2LastSeenMessageId: String?
     
     public var isExpired:Bool {
         get {
@@ -110,6 +114,14 @@ class Conversation: BaseModel {
             user2UnseenMessagesCount = value
         }
         
+        if let value = json[kUser1LastSeenMessageId].string {
+            user1LastSeenMessageId = value
+        }
+        
+        if let value = json[kUser2LastSeenMessageId].string {
+            user2LastSeenMessageId = value
+        }
+        
         if let sTime = startTime, sTime > 0.0 {
             finishTime = sTime + AppConfig.chatValidityafterSeen
         }
@@ -157,6 +169,14 @@ class Conversation: BaseModel {
         
         if let value = user2UnseenMessagesCount {
             dictionary[kUser2UnseenMessagesCount] = value
+        }
+        
+        if let value = user1LastSeenMessageId {
+            dictionary[kUser1LastSeenMessageId] = value
+        }
+        
+        if let value = user2LastSeenMessageId {
+            dictionary[kUser2LastSeenMessageId] = value
         }
         
         return dictionary
