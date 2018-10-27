@@ -50,11 +50,15 @@ class ActionShowProfile: Action {
 }
 
 class ActionOpenChat{
-    class func execute(chatId: String, conversation: Conversation?) {
+    class func execute(chatId: String, conversation: Conversation?, inNavigationController: UINavigationController? = nil) {
         let chatViewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ChatViewControllerID") as! ChatViewController
         chatViewController.conversationId = chatId
         chatViewController.conversationOriginalObject = conversation
-        UIApplication.pushOrPresentViewController(viewController: chatViewController, animated: true)
+        if let navController = inNavigationController {
+            navController.pushViewController(chatViewController, animated: true)
+        } else {
+            UIApplication.pushOrPresentViewController(viewController: chatViewController, animated: true)
+        }
     }
 }
 

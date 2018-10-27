@@ -855,21 +855,23 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     }
     
       private func observeTyping() {
-        let typingIndicatorRef = conversationRef!.child("typingIndicator")
-        userIsTypingRef = typingIndicatorRef.child(senderId)
-        userIsTypingRef.onDisconnectRemoveValue()
-        usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
-    
-        usersTypingQuery.observe(.value) { (data: DataSnapshot) in
-    
-          // You're the only typing, don't show the indicator
-          if data.childrenCount == 1 && self.isTyping {
-            return
-          }
-    
-          // Are there others typing?
-          self.showTypingIndicator = data.childrenCount > 0
-          self.scrollToBottom(animated: true)
+        if let convRef = conversationRef {
+            let typingIndicatorRef = convRef.child("typingIndicator")
+            userIsTypingRef = typingIndicatorRef.child(senderId)
+            userIsTypingRef.onDisconnectRemoveValue()
+            usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
+        
+            usersTypingQuery.observe(.value) { (data: DataSnapshot) in
+        
+              // You're the only typing, don't show the indicator
+              if data.childrenCount == 1 && self.isTyping {
+                return
+              }
+        
+              // Are there others typing?
+              self.showTypingIndicator = data.childrenCount > 0
+              self.scrollToBottom(animated: true)
+            }
         }
       }
     

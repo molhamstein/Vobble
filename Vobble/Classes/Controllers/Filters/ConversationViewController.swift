@@ -167,7 +167,7 @@ extension ConversationViewController: UICollectionViewDelegate {
         
         //self.performSegue(withIdentifier: "goToChat", sender: conversation)
         if let chatID = conversation.idString {
-            ActionOpenChat.execute(chatId: chatID, conversation: nil)
+            ActionOpenChat.execute(chatId: chatID, conversation: nil, inNavigationController: self.navigationController)
         }
         
         //assert(false)

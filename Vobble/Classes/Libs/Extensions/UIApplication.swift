@@ -30,7 +30,7 @@ extension UIApplication
     }
     
     static func visibleNavigationController() -> UINavigationController?{
-    return self.visibleViewController()?.navigationController
+        return self.visibleViewController()?.navigationController
     }
     
     static func visibleTabBarController() -> UITabBarController? {
@@ -44,9 +44,9 @@ extension UIApplication
     static func pushOrPresentViewController(viewController: UIViewController, animated:Bool) {
         if let nav:UINavigationController = self.visibleNavigationController() {
             nav.pushViewController(viewController, animated: animated)
-    } else {
+        } else {
             self.visibleViewController()?.present(viewController, animated: animated, completion: nil)
-    }
+        }
     }
 
 }
