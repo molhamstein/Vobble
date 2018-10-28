@@ -283,7 +283,13 @@ extension ShopViewController: UICollectionViewDelegate {
             
                 if  obj.appleProduct != nil {
                     
+                    
                     if let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
+                        /// Make sure user doesn't interrupt purchase operation
+                        self.view.isUserInteractionEnabled = false
+                        self.navBackButton.isEnabled = false
+                        
+                        //prepare payment
                         self.selectedProduct = obj
                         let pay = SKPayment(product: selectedItem)
                         SKPaymentQueue.default().add(self)
@@ -435,6 +441,8 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 print("purchasing")
                 
             case .purchased:
+                self.view.isUserInteractionEnabled = true
+                self.navBackButton.isEnabled = true
                 
                 let prodID = transaction.payment.productIdentifier
 
@@ -510,6 +518,10 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 
             case .failed:
                 print("buy error")
+                queue.finishTransaction(transaction)
+                queue.remove(self)
+                self.view.isUserInteractionEnabled = true
+                self.navBackButton.isEnabled = true
                 
             case .deferred :
                 print("deferred")
@@ -517,6 +529,10 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 
             default:
                 print("Default")
+                queue.finishTransaction(transaction)
+                queue.remove(self)
+                self.view.isUserInteractionEnabled = true
+                self.navBackButton.isEnabled = true
                 
                 //queue.finishTransaction(transaction)
                 
