@@ -413,7 +413,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     
     func backButtonAction(_ sender: AnyObject) {
-        //        _ = self.navigationController?.popViewController(animated: true)
         
         if let unsentText = self.inputToolbar.contentView.textView.text, let convId = conversationOriginalObject?.idString {
             DataStore.shared.setConversationUnsentMessage(key: convId, text: unsentText)
@@ -427,6 +426,18 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         } else {
             self.dismiss(animated: true, completion: nil)
         }
+        
+        customNavBar.removeFromSuperview()
+        recordButton.removeFromSuperview()
+        lblRecording.removeFromSuperview()
+        ivRecordingIcon.removeFromSuperview()
+        recordButtonContainer.removeFromSuperview()
+        chatBlockedContainer.removeFromSuperview()
+        chatBlockedLabel.removeFromSuperview()
+        chatPendingContainer.removeFromSuperview()
+        chatPendingLabel.removeFromSuperview()
+        chatPendingImageView.removeFromSuperview()
+        chatPendingCloseButton.removeFromSuperview()
     }
     
     @IBAction func cloesPandingChatViewAction(_ sender: AnyObject) {

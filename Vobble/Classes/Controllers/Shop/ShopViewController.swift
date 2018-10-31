@@ -74,7 +74,7 @@ class ShopViewController: AbstractController {
         
         //IAP Setup
         /// finish up all cached transactions
-        for transaction: AnyObject in SKPaymentQueue.default().transactions {
+        for transaction: SKPaymentTransaction in SKPaymentQueue.default().transactions {
             SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
         }
         if(SKPaymentQueue.canMakePayments()) {
