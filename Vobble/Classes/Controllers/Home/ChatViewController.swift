@@ -137,6 +137,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     /// isSeen
     var isLastMessageSeen : Bool = false
     var lastSeenMessageId : String = "0"
+    var lastSentMessageId : String = "000"
     var messagesCount: Int = 0
     var currentMessage: Int = 1
     
@@ -805,7 +806,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // hande seen message update
         updateLastSeenMessageRefHandle = self.lastSeenMessageRef!.observe(.value, with: {(snapshot) -> Void in
-            self.isLastMessageSeen = true
+        
+            if let value = snapshot.value as? String {
+                if self.lastSentMessageId == value {
+                    self.isLastMessageSeen = true
+                }else{
+                    self.isLastMessageSeen = false
+                }
+            }
+
             self.collectionView.reloadData()
 
         })
@@ -840,6 +849,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let id = message.idString , let senderId = message.senderId {
             if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
                 if senderId == DataStore.shared.me?.objectId {
+                    self.lastSentMessageId = id
                     if id == self.conversationOriginalObject?.user2LastSeenMessageId {
                         self.isLastMessageSeen = true
                     }else{
@@ -852,6 +862,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 }
             }else{
                 if senderId == DataStore.shared.me?.objectId {
+                    self.lastSentMessageId = id
                     if id == self.conversationOriginalObject?.user1LastSeenMessageId {
                         self.isLastMessageSeen = true
                     }else{
