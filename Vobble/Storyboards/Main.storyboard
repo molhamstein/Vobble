@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="AlNile.ttc">
+            <string>AlNile</string>
+        </array>
         <array key="Antipasto_extrabold.otf">
             <string>Antipasto-ExtraBold</string>
         </array>
         <array key="Antipasto_regular.otf">
             <string>Antipasto</string>
+        </array>
+        <array key="Futura.ttc">
+            <string>Futura-Medium</string>
         </array>
         <array key="OpenSansBold.ttf">
             <string>OpenSans-Bold</string>
@@ -39,7 +48,7 @@
                                 <rect key="frame" x="-10" y="142" width="533" height="426"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wave" translatesAutoresizingMaskIntoConstraints="NO" id="SmX-cY-bzy">
-                                <rect key="frame" x="-10" y="213" width="970" height="323"/>
+                                <rect key="frame" x="-10" y="212.5" width="970" height="323.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SmX-cY-bzy" secondAttribute="height" multiplier="4500:1500" id="K5K-hR-zFq"/>
@@ -446,7 +455,6 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Main Shore"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="filters"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="filters"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="right_image" value="ic_shop"/>
                                 </userDefinedRuntimeAttributes>
@@ -1502,7 +1510,6 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="My Bottles"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="navBackIcon"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -1658,7 +1665,6 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Shop"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="navBackIcon"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -1713,7 +1719,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Shop"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="navBackIcon"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -1785,7 +1790,7 @@
                                         <rect key="frame" x="156.66666666666666" y="376" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5T-ZN-zV6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5T-ZN-zV6">
                                         <rect key="frame" x="154" y="28" width="42" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1841,7 +1846,6 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="My Bottles"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="navBackIcon"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -2204,7 +2208,6 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="About Us"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="navBackIcon"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -2270,7 +2273,6 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Terms of Service"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="imageName" value="navBackIcon"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="left_image" value="navBackIcon"/>
                                 </userDefinedRuntimeAttributes>
                             </view>

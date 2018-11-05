@@ -144,7 +144,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var currentMessage: Int = 1
     
     /// Record beep
-    var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "record-beep", ofType: "mp3")!)
+    var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")!)
     var beepPlayer = AVAudioPlayer()
     
     /// Audio messages
@@ -817,14 +817,14 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     }
                 } else if let mediaURL = message.videoUrl {
                  
-                    if let mediaItem = self.videoMessageMap[message.idString!] {
+                    if let mediaItem = self?.videoMessageMap[message.idString!] {
                         
                         /// Check input tool bar on first reply
-                        if self.inputToolbar.isHidden {
-                            self.inputToolbar.isHidden = false
-                            self.chatBlockedContainer.isHidden = true
-                            self.chatPendingContainer.isHidden = true
-                            self.initCustomToolBar()
+                        if let isHidden = self?.inputToolbar.isHidden, isHidden{
+                            self?.inputToolbar.isHidden = false
+                            self?.chatBlockedContainer.isHidden = true
+                            self?.chatPendingContainer.isHidden = true
+                            self?.initCustomToolBar()
                         }
                         
                         mediaItem.message = message
@@ -1396,27 +1396,13 @@ extension ChatViewController: AVAudioRecorderDelegate {
         alertController.addAction(ok)
         self.present(alertController, animated: true, completion: nil)
         
-        ActionPlayBeep.execute()
+        self.playBeepSound()
     }
     
     func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
         //print("Long tap is handled")
         if sender.state == .began {
             //write the function for start recording the voice here
-            
-            // play beep sound
-            do {
-                // Prepare beep player
-                self.beepPlayer = try AVAudioPlayer(contentsOf: beepSound as URL)
-                
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-                try AVAudioSession.sharedInstance().setActive(true)
-                
-                self.beepPlayer.prepareToPlay()
-                self.beepPlayer.play()
-                
-            }catch {}
-            
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // show record audio view
@@ -1480,7 +1466,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
             recordTimer?.invalidate()
             stopRecorderTimer()
             recordButton.setProgress(0.0)
-            ActionPlayBeep.execute()
+            self.playBeepSound()
             //write the function for stop recording the voice here
             
         }
@@ -1611,9 +1597,7 @@ extension ChatViewController : AudioCollectionViewCellIncomingDelegate  {
             AudioManager.shared.playAudio(data: cell.data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
         }
     }
-    
 }
-
 
 extension ChatViewController : AudioCollectionViewCellOutgoingDelegate  {
     func didPressPlayButtonOutgoing(_ cell: AudioCollectionViewCellOutgoing) {
@@ -1633,12 +1617,9 @@ extension ChatViewController : AudioCollectionViewCellOutgoingDelegate  {
                     startNewOutgoingAudio(cell)
                 }
             }
-            
-            
         }else{
             startNewOutgoingAudio( cell)
         }
-        
     }
     
     func startNewOutgoingAudio(_ cell: AudioCollectionViewCellOutgoing) {
@@ -1660,12 +1641,27 @@ extension ChatViewController : AudioCollectionViewCellOutgoingDelegate  {
                         AudioManager.shared.playAudio(data: data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
                     }
                 }
-                
             })
-        }else{
+        } else {
             self.currentAudioIndex = cell.index
             AudioManager.shared.playAudio(data: cell.data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
         }
+    }
+}
+
+// beep sound
+extension ChatViewController {
+    func playBeepSound () {
+        // play beep sound
+        do {
+            // Prepare beep player
+            self.beepPlayer = try AVAudioPlayer(contentsOf: beepSound as URL)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            self.beepPlayer.prepareToPlay()
+            self.beepPlayer.play()
+            
+        }catch {}
     }
 }
 // MARK:- class PreviewPhoto
