@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AudioCollectionViewCellOutgoing_id" id="gTV-IL-0wX" customClass="AudioCollectionViewCellOutgoing" customModule="Vobble" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-xa-PtZ">
+                        <rect key="frame" x="56" y="4" width="180" height="42"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLk-TI-vgy">
+                                <rect key="frame" x="8" y="5" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="YWt-qK-cuG"/>
+                                    <constraint firstAttribute="height" constant="32" id="a6B-by-dhc"/>
+                                </constraints>
+                                <state key="normal" image="ic_play"/>
+                                <connections>
+                                    <action selector="playButtonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="e0r-Ee-Xjc"/>
+                                </connections>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NB9-uB-qyX">
+                                <rect key="frame" x="48" y="20" width="90" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="HJz-ZG-3gu"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-:-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aQ0-ND-weU">
+                                <rect key="frame" x="146" y="13" width="26" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JUG-s5-mdN">
+                                <rect key="frame" x="14" y="11" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.85486577181208057" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hLk-TI-vgy" firstAttribute="leading" secondItem="rPg-xa-PtZ" secondAttribute="leading" constant="8" id="3E3-49-YZn"/>
+                            <constraint firstItem="NB9-uB-qyX" firstAttribute="centerY" secondItem="rPg-xa-PtZ" secondAttribute="centerY" id="84R-hB-Dcm"/>
+                            <constraint firstItem="hLk-TI-vgy" firstAttribute="centerY" secondItem="rPg-xa-PtZ" secondAttribute="centerY" id="Jjh-A3-Njf"/>
+                            <constraint firstItem="JUG-s5-mdN" firstAttribute="centerY" secondItem="rPg-xa-PtZ" secondAttribute="centerY" id="Lpz-RD-vyY"/>
+                            <constraint firstAttribute="width" constant="180" id="X6r-rr-VAW"/>
+                            <constraint firstItem="aQ0-ND-weU" firstAttribute="centerY" secondItem="rPg-xa-PtZ" secondAttribute="centerY" id="btK-1U-GQK"/>
+                            <constraint firstItem="aQ0-ND-weU" firstAttribute="leading" secondItem="NB9-uB-qyX" secondAttribute="trailing" constant="8" id="exY-zq-3ep"/>
+                            <constraint firstItem="NB9-uB-qyX" firstAttribute="leading" secondItem="hLk-TI-vgy" secondAttribute="trailing" constant="8" id="hpX-jD-6Ua"/>
+                            <constraint firstAttribute="trailing" secondItem="aQ0-ND-weU" secondAttribute="trailing" constant="8" id="htR-lv-Ai6"/>
+                            <constraint firstAttribute="height" constant="42" id="hxN-h9-rk0"/>
+                            <constraint firstItem="JUG-s5-mdN" firstAttribute="leading" secondItem="rPg-xa-PtZ" secondAttribute="leading" constant="14" id="pFE-4k-H8c"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="rPg-xa-PtZ" secondAttribute="trailing" constant="4" id="SQt-eV-BJS"/>
+                <constraint firstItem="rPg-xa-PtZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="XRh-Xr-Wga"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="338" height="50"/>
+            <connections>
+                <outlet property="audioProgressLabel" destination="aQ0-ND-weU" id="QEV-QX-Kd3"/>
+                <outlet property="audioProgressView" destination="NB9-uB-qyX" id="CJz-st-0a6"/>
+                <outlet property="cellBackgroundView" destination="rPg-xa-PtZ" id="pUy-fh-Jk9"/>
+                <outlet property="indicatorView" destination="JUG-s5-mdN" id="WJo-kC-5gJ"/>
+                <outlet property="playButton" destination="hLk-TI-vgy" id="8H3-0v-gXh"/>
+            </connections>
+            <point key="canvasLocation" x="-75.200000000000003" y="194.30284857571215"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ic_play" width="40" height="40"/>
+    </resources>
+</document>
