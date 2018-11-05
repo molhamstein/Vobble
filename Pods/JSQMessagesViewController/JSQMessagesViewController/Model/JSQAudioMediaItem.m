@@ -161,7 +161,7 @@
 {
     NSString *category = [AVAudioSession sharedInstance].category;
     AVAudioSessionCategoryOptions options = [AVAudioSession sharedInstance].categoryOptions;
-
+    
     if (category != self.audioViewAttributes.audioCategory || options != self.audioViewAttributes.audioCategoryOptions) {
         NSError *error = nil;
         [[AVAudioSession sharedInstance] setCategory:self.audioViewAttributes.audioCategory
@@ -179,6 +179,7 @@
     }
     else {
         // fade the button from play to pause
+        
         [UIView transitionWithView:self.playButton
                           duration:.2
                            options:UIViewAnimationOptionTransitionCrossDissolve

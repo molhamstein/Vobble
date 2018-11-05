@@ -14,7 +14,7 @@ extension Collection {
     /// Return a copy of `self` with its elements shuffled
     func shuffle() -> [Iterator.Element] {
         var list = Array(self)
-        list.shuffle()
+        //list.shuffle()
         return list
     }
 }

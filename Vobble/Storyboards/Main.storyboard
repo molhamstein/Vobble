@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="AlNile.ttc">
-            <string>AlNile</string>
-        </array>
         <array key="Antipasto_extrabold.otf">
             <string>Antipasto-ExtraBold</string>
         </array>
         <array key="Antipasto_regular.otf">
             <string>Antipasto</string>
-        </array>
-        <array key="Futura.ttc">
-            <string>Futura-Medium</string>
         </array>
         <array key="OpenSansBold.ttf">
             <string>OpenSans-Bold</string>
@@ -48,7 +39,7 @@
                                 <rect key="frame" x="-10" y="142" width="533" height="426"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wave" translatesAutoresizingMaskIntoConstraints="NO" id="SmX-cY-bzy">
-                                <rect key="frame" x="-10" y="212.5" width="970" height="323.5"/>
+                                <rect key="frame" x="-10" y="213" width="970" height="323"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SmX-cY-bzy" secondAttribute="height" multiplier="4500:1500" id="K5K-hR-zFq"/>
@@ -1794,6 +1785,13 @@
                                         <rect key="frame" x="156.66666666666666" y="376" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5T-ZN-zV6">
+                                        <rect key="frame" x="154" y="28" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -1813,6 +1811,7 @@
                         <outlet property="customNavBar" destination="ASE-1h-xxO" id="Ltm-Op-spL"/>
                         <outlet property="ivRecordingIcon" destination="k70-Lb-YQI" id="zGL-bS-EUI"/>
                         <outlet property="lblRecording" destination="mAS-w3-Alr" id="BAh-CM-m9s"/>
+                        <outlet property="lblTimerRecording" destination="z5T-ZN-zV6" id="lzr-m1-Jdx"/>
                         <outlet property="recordButton" destination="Z6n-nY-fK0" id="Rv2-aJ-Zt2"/>
                         <outlet property="recordButtonContainer" destination="ZCY-V4-c3l" id="eIk-iJ-ag3"/>
                         <segue destination="dB1-pa-ISF" kind="unwind" identifier="unwindSendReply" unwindAction="unwindSendReplyWithSegue:" id="s3Y-8H-sNM"/>

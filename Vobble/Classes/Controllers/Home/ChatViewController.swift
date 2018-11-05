@@ -29,6 +29,7 @@ import NYTPhotoViewer
 import SDRecordButton
 import Flurry_iOS_SDK
 import SDWebImage
+import AVFoundation
 
 final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate {
     
@@ -65,6 +66,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     @IBOutlet var customNavBar: VobbleChatNavigationBar!
     @IBOutlet var recordButton : SDRecordButton!
     @IBOutlet var lblRecording : UILabel!
+    @IBOutlet var lblTimerRecording : UILabel!
     @IBOutlet var ivRecordingIcon : UIImageView!
     @IBOutlet var recordButtonContainer : UIView!
     
@@ -141,6 +143,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var messagesCount: Int = 0
     var currentMessage: Int = 1
     
+    /// Record beep
+    var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "record-beep", ofType: "mp3")!)
+    var beepPlayer = AVAudioPlayer()
+    
+    /// Audio messages
+    var currentAudioIndex: Int!
     
     // MARK: View Lifecycle
     
@@ -181,6 +189,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         tapGesture.cancelsTouchesInView = false
         tapGesture.delegate = self
         self.collectionView.addGestureRecognizer(tapGesture)
+        
+        // Register new audio cells
+        super.collectionView.register(UINib(nibName: "AudioCollectionViewCellOutgoing", bundle: nil), forCellWithReuseIdentifier: "AudioCollectionViewCellOutgoing_id")
+        super.collectionView.register(UINib(nibName: "AudioCollectionViewCellIncoming", bundle: nil), forCellWithReuseIdentifier: "AudioCollectionViewCellIncoming_id")
     }
     
     override func viewDidLayoutSubviews() {
@@ -201,10 +213,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 lblRecording.text = "CHAT_RECORDING".localized
                 self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.inputToolbar.frame.height)
                 self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 90, width: 120, height: 120)
+                self.lblTimerRecording.frame = CGRect(x: self.view.frame.width/2 - 60 , y: 32, width: 40, height: 40)
                 self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
                 self.ivRecordingIcon.center = self.recordButton.center
                 self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
                 self.view.addSubview(self.recordButtonContainer)
+                self.view.addSubview(self.lblTimerRecording)
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0).isActive = true
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0).isActive = true
@@ -367,7 +381,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         
         // show chat tutorial on first opening of an unblocked chat
-        
         if let tutShowedBefore = DataStore.shared.tutorialChatShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
             dispatch_main_after(2) {
                 let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ChatTutorial") as! ChatTutorialViewController
@@ -432,6 +445,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         } else {
             self.dismiss(animated: true, completion: nil)
         }
+        
+        if let _ = AudioManager.shared.audioPlayer {
+            AudioManager.shared.stopAudio()
+        }
+        
         
         customNavBar.removeFromSuperview()
         recordButton.removeFromSuperview()
@@ -503,9 +521,57 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
         let message = messages[indexPath.item]
+        
+        if message.isMediaMessage {
+            if message.media is JSQAudioMediaItem {
+                let audioItem = message.media as! JSQCustomAudioMediaItem
+                
+                if message.senderId == senderId {
+                    let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellOutgoing_id", for: indexPath) as! AudioCollectionViewCellOutgoing
+                    
+                    cell.index = indexPath.row
+                    cell.url = audioItem.audioUrl
+                    cell.data = audioItem.audioData
+                    cell.audioDelegate = self
+                    
+                    if (audioItem.audioUrl?.isValidUrl())! {
+                        cell.indicatorView.stopAnimating()
+                        cell.indicatorView.isHidden = true
+                        cell.playButton.isHidden = false
+                    }else{
+                        cell.indicatorView.startAnimating()
+                        cell.indicatorView.isHidden = false
+                        cell.playButton.isHidden = true
+                    }
+                    
+                    return cell
+                    
+                } else {
+                    let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellIncoming_id", for: indexPath) as! AudioCollectionViewCellIncoming
+                    
+                    cell.index = indexPath.row
+                    cell.url = audioItem.audioUrl
+                    cell.data = audioItem.audioData
+                    cell.audioDelegate = self
+                    
+                    if (audioItem.audioUrl?.isValidUrl())! {
+                        cell.indicatorView.stopAnimating()
+                        cell.indicatorView.isHidden = true
+                        cell.playButton.isHidden = false
+                    }else{
+                        cell.indicatorView.startAnimating()
+                        cell.indicatorView.isHidden = false
+                        cell.playButton.isHidden = true
+                    }
+                    
+                    return cell
+                }
+            }
+        }
         
         if isRTL {
             if message.senderId == senderId { // 1
@@ -524,6 +590,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         return cell
     }
+    
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return nil
@@ -711,6 +778,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     }
                     audioItem.audioUrl = URL(string:mediaURL)!
                     
+                    
                     if id != DataStore.shared.me?.objectId {
                         if let url = audioItem.audioUrl, url.isValidUrl() {
                             self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
@@ -749,7 +817,16 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     }
                 } else if let mediaURL = message.videoUrl {
                  
-                    if let mediaItem = self?.videoMessageMap[message.idString!] {
+                    if let mediaItem = self.videoMessageMap[message.idString!] {
+                        
+                        /// Check input tool bar on first reply
+                        if self.inputToolbar.isHidden {
+                            self.inputToolbar.isHidden = false
+                            self.chatBlockedContainer.isHidden = true
+                            self.chatPendingContainer.isHidden = true
+                            self.initCustomToolBar()
+                        }
+                        
                         mediaItem.message = message
                         self?.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                     }
@@ -1313,6 +1390,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
     }
     
     func didTabRecordAudio(_ sender: UITapGestureRecognizer) {
+        
         let alertController = UIAlertController(title: "", message: "RECORD_LONG_PRESS".localized, preferredStyle: .alert)
         let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
         alertController.addAction(ok)
@@ -1326,59 +1404,77 @@ extension ChatViewController: AVAudioRecorderDelegate {
         if sender.state == .began {
             //write the function for start recording the voice here
             
-            // show record audio view
-            recordButtonContainer.isHidden = false
-            self.recordButtonContainer.alpha = 0.0
-            self.recordButtonContainer.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 90)
-            UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
-                self.recordButtonContainer.transform = CGAffineTransform.identity
-                self.recordButtonContainer.alpha = 1.0
-            }, completion: {(finished: Bool) in })
+            // play beep sound
+            do {
+                // Prepare beep player
+                self.beepPlayer = try AVAudioPlayer(contentsOf: beepSound as URL)
+                
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                try AVAudioSession.sharedInstance().setActive(true)
+                
+                self.beepPlayer.prepareToPlay()
+                self.beepPlayer.play()
+                
+            }catch {}
             
-            recordButton.setProgress(0.0)
             
-            // reset the timer
-            recordTimer?.invalidate()
-            recordTimer = nil;
-            // run the timer
-            recordTimer = Timer.scheduledTimer(timeInterval: 0.05,
-                                               target: self,
-                                               selector: #selector(RecordMediaViewController.tickRecorder(timer:)),
-                                               userInfo: nil,
-                                               repeats: true)
-            
-            // run the timer
-            let runner: RunLoop = RunLoop.current
-            runner.add(recordTimer!, forMode: .defaultRunLoopMode)
-            
-            var recordingValid = true
-            // we clear sound recorder after every recording session
-            // so make sure we have a valid one before recording
-            if  self.soundRecorder == nil {
-                do {
-                    // todo: handle recording permission not granted
-                    let audioSession:AVAudioSession = AVAudioSession.sharedInstance()
-                    try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-                    try audioSession.setActive(true)
-                    try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
-                    recordingValid = true
-                } catch let error {
-                    let errstr = "Error Recording \(error)"
-                    print(errstr)
-                    let alertController = UIAlertController(title: "", message: errstr, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                    alertController.addAction(ok)
-                    self.present(alertController, animated: true, completion: nil)
-                    recordingValid = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                // show record audio view
+                
+                self.recordButtonContainer.isHidden = false
+                self.recordButtonContainer.alpha = 0.0
+                self.recordButtonContainer.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 90)
+                UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
+                    self.recordButtonContainer.transform = CGAffineTransform.identity
+                    self.recordButtonContainer.alpha = 1.0
+                }, completion: {(finished: Bool) in })
+                
+                self.recordButton.setProgress(0.0)
+                
+                // reset the timer
+                self.recordTimer?.invalidate()
+                self.recordTimer = nil;
+                // run the timer
+                self.recordTimer = Timer.scheduledTimer(timeInterval: 0.05,
+                                                   target: self,
+                                                   selector: #selector(self.tickRecorder(timer:)),
+                                                   userInfo: nil,
+                                                   repeats: true)
+                
+                // run the timer
+                let runner: RunLoop = RunLoop.current
+                runner.add(self.recordTimer!, forMode: .defaultRunLoopMode)
+                
+                var recordingValid = true
+                // we clear sound recorder after every recording session
+                // so make sure we have a valid one before recording
+                if  self.soundRecorder == nil {
+                    do {
+                        // todo: handle recording permission not granted
+                        let audioSession:AVAudioSession = AVAudioSession.sharedInstance()
+                        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                        try audioSession.setActive(true)
+                        
+                        try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
+                        recordingValid = true
+                    } catch let error {
+                        let errstr = "Error Recording \(error)"
+                        print(errstr)
+                        let alertController = UIAlertController(title: "", message: errstr, preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                        alertController.addAction(ok)
+                        self.present(alertController, animated: true, completion: nil)
+                        recordingValid = false
+                    }
+                }
+                if recordingValid {
+                    self.soundRecorder.prepareToRecord()
+                    self.soundRecorder.delegate = self
+                    self.soundRecorder.record()
                 }
             }
-            if recordingValid {
-                self.soundRecorder.prepareToRecord()
-                soundRecorder.delegate = self
-                soundRecorder.record()
-                
-                ActionPlayBeep.execute()
-            }
+            
+            
         }
         else if sender.state == .ended {
             recordTimer?.invalidate()
@@ -1390,6 +1486,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         }
     }
     
+  
     func setupRecorder(){
         
         let audioSession:AVAudioSession = AVAudioSession.sharedInstance()
@@ -1447,7 +1544,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
             stopRecorderTimer()
         } else {
             timeOut += 0.05;
-//           recordTimeLabel.text = String(format: "%02d", Int(timeOut))
+            self.lblTimerRecording.text = String(format: "%02d", Int(timeOut))
             self.recordButton.setProgress(CGFloat(timeOut/MAX_VIDEO_LENGTH))
         }
     }
@@ -1463,6 +1560,114 @@ extension ChatViewController: AVAudioRecorderDelegate {
     }
 }
 
+extension ChatViewController : AudioCollectionViewCellIncomingDelegate  {
+    func didPressPlayButtonIncoming(_ cell: AudioCollectionViewCellIncoming) {
+        if let audioPlayer = AudioManager.shared.audioPlayer {
+            if audioPlayer.isPlaying {
+                if self.currentAudioIndex == cell.index {
+                    AudioManager.shared.stopAudio()
+                }else{
+                    AudioManager.shared.stopAudio()
+                    
+                    startNewIncomingAudio(cell)
+                }
+            }else{
+                if self.currentAudioIndex == cell.index {
+                    AudioManager.shared.resumeAudio()
+                }else{
+                    startNewIncomingAudio(cell)
+                }
+            }
+            
+            
+        }else{
+            startNewIncomingAudio(cell)
+        }
+
+    }
+    func startNewIncomingAudio(_ cell: AudioCollectionViewCellIncoming) {
+        if cell.data == nil || cell.data.count <= 0 {
+            cell.playButton.isHidden = true
+            cell.indicatorView.isHidden = false
+            cell.indicatorView.startAnimating()
+            AudioManager.shared.getDataFromUrl(url: cell.url, completion: {(data , response , error) in
+                DispatchQueue.main.async {
+                    
+                    cell.playButton.isHidden = false
+                    cell.indicatorView.isHidden = true
+                    cell.indicatorView.stopAnimating()
+                    
+                    if error == nil {
+                        cell.data = data!
+                        (self.messages[cell.index].media as! JSQCustomAudioMediaItem).audioData = data!
+                        self.currentAudioIndex = cell.index
+                        AudioManager.shared.playAudio(data: data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
+                    }
+                }
+                
+            })
+        }else{
+            self.currentAudioIndex = cell.index
+            AudioManager.shared.playAudio(data: cell.data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
+        }
+    }
+    
+}
+
+
+extension ChatViewController : AudioCollectionViewCellOutgoingDelegate  {
+    func didPressPlayButtonOutgoing(_ cell: AudioCollectionViewCellOutgoing) {
+        if let audioPlayer = AudioManager.shared.audioPlayer {
+            if audioPlayer.isPlaying {
+                if self.currentAudioIndex == cell.index {
+                    AudioManager.shared.stopAudio()
+                }else{
+                    AudioManager.shared.stopAudio()
+                    
+                    startNewOutgoingAudio(cell)
+                }
+            }else{
+                if self.currentAudioIndex == cell.index {
+                    AudioManager.shared.resumeAudio()
+                }else{
+                    startNewOutgoingAudio(cell)
+                }
+            }
+            
+            
+        }else{
+            startNewOutgoingAudio( cell)
+        }
+        
+    }
+    
+    func startNewOutgoingAudio(_ cell: AudioCollectionViewCellOutgoing) {
+        if cell.data == nil  || cell.data.count <= 0 {
+            cell.playButton.isHidden = true
+            cell.indicatorView.isHidden = false
+            cell.indicatorView.startAnimating()
+            AudioManager.shared.getDataFromUrl(url: cell.url, completion: {(data , response , error) in
+                DispatchQueue.main.async {
+                    
+                    cell.playButton.isHidden = false
+                    cell.indicatorView.isHidden = true
+                    cell.indicatorView.stopAnimating()
+                    
+                    if error == nil {
+                        cell.data = data!
+                        (self.messages[cell.index].media as! JSQCustomAudioMediaItem).audioData = data!
+                        self.currentAudioIndex = cell.index
+                        AudioManager.shared.playAudio(data: data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
+                    }
+                }
+                
+            })
+        }else{
+            self.currentAudioIndex = cell.index
+            AudioManager.shared.playAudio(data: cell.data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
+        }
+    }
+}
 // MARK:- class PreviewPhoto
 class PreviewPhoto: NSObject, NYTPhoto {
     
