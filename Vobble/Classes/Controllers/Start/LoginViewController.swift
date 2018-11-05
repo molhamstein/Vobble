@@ -427,7 +427,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
-                    self.showView(withType: .socialLoginStep2)
+                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == true {
+                        self.showView(withType: .socialLoginStep2)
+                    } else {
+                        self.dismiss(animated: true, completion: { })
+                        self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                    }
                 }
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
             } else {
@@ -454,7 +459,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
-                    self.showView(withType: .socialLoginStep2)
+                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == true {
+                        self.showView(withType: .socialLoginStep2)
+                    } else {
+                        self.dismiss(animated: true, completion: { })
+                        self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                    }
                 }
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
             } else {
@@ -807,6 +817,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
 
             tempUserInfoHolder.countryISOCode = countryCode
             tempUserInfoHolder.gender = isMale ? .male : .female
+            tempUserInfoHolder.accountInfoCompleted = true
             
             ApiManager.shared.updateUser(user: tempUserInfoHolder) { (success: Bool, err: ServerError?, user: AppUser?) in
                 self.view.isUserInteractionEnabled = true
@@ -850,7 +861,12 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
-                    self.showView(withType: .socialLoginStep2)
+                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == true {
+                        self.showView(withType: .socialLoginStep2)
+                    } else {
+                        self.dismiss(animated: true, completion: { })
+                        self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                    }
                 }
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
             } else {

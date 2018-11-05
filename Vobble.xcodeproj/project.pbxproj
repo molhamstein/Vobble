@@ -21,6 +21,8 @@
 		571084C720C01176001163EA /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C620C01176001163EA /* InventoryItem.swift */; };
 		571084C920C02262001163EA /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571084C820C02262001163EA /* ReportType.swift */; };
 		57190C8B2105F4E700E88F38 /* girl_3_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57190C8A2105F4E600E88F38 /* girl_3_2.gif */; };
+		57348470218F7B9E00F4707B /* AppCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734846F218F7B9E00F4707B /* AppCountry.swift */; };
+		57348472218FA36C00F4707B /* audio_msg_beeb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */; };
 		57413D55204D3B5700450A42 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 57413D54204D3B5700450A42 /* GCD.m */; };
 		5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C13F205660B300A5402D /* VideoPlayerView.swift */; };
 		5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5742C140205660B300A5402D /* VideoPlayerView.xib */; };
@@ -213,10 +215,8 @@
 		B19372E02033E3FC007B1E7D /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372D62033E3FC007B1E7D /* BaseModel.swift */; };
 		B19372E12033E3FC007B1E7D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372D72033E3FC007B1E7D /* Category.swift */; };
 		B19372E22033E3FC007B1E7D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372D82033E3FC007B1E7D /* Comment.swift */; };
-		B19372E32033E3FC007B1E7D /* HashTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372D92033E3FC007B1E7D /* HashTag.swift */; };
 		B19372E42033E3FC007B1E7D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372DA2033E3FC007B1E7D /* Location.swift */; };
 		B19372E52033E3FC007B1E7D /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372DB2033E3FC007B1E7D /* Mention.swift */; };
-		B19372E62033E3FC007B1E7D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372DC2033E3FC007B1E7D /* Post.swift */; };
 		B19372E72033E3FC007B1E7D /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372DD2033E3FC007B1E7D /* Reply.swift */; };
 		B19372F12033E44E007B1E7D /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19372E92033E44E007B1E7D /* AppFonts.swift */; };
 		B19372F22033E44E007B1E7D /* DroidKufiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B19372EB2033E44E007B1E7D /* DroidKufiBold.ttf */; };
@@ -294,6 +294,8 @@
 		571084C620C01176001163EA /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		571084C820C02262001163EA /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
 		57190C8A2105F4E600E88F38 /* girl_3_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_2.gif; sourceTree = "<group>"; };
+		5734846F218F7B9E00F4707B /* AppCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCountry.swift; sourceTree = "<group>"; };
+		57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio_msg_beeb.mp3; sourceTree = "<group>"; };
 		57413D53204D3B5700450A42 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		57413D54204D3B5700450A42 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
 		5742C13F205660B300A5402D /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerView.swift; path = VideoPlayer/VideoPlayerView.swift; sourceTree = "<group>"; };
@@ -612,10 +614,8 @@
 		B19372D62033E3FC007B1E7D /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		B19372D72033E3FC007B1E7D /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B19372D82033E3FC007B1E7D /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		B19372D92033E3FC007B1E7D /* HashTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTag.swift; sourceTree = "<group>"; };
 		B19372DA2033E3FC007B1E7D /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		B19372DB2033E3FC007B1E7D /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
-		B19372DC2033E3FC007B1E7D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B19372DD2033E3FC007B1E7D /* Reply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reply.swift; sourceTree = "<group>"; };
 		B19372E92033E44E007B1E7D /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		B19372EB2033E44E007B1E7D /* DroidKufiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidKufiBold.ttf; sourceTree = "<group>"; };
@@ -798,6 +798,7 @@
 				B19372F72033E48F007B1E7D /* AppColors.swift */,
 				57DED21A2126AFCE00514FBE /* loginVideo.mp4 */,
 				576993942153FF82001211CF /* introSound.mp3 */,
+				57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */,
 				57E611D62151B21300E0B307 /* loginVideo.m4v */,
 				B19372E92033E44E007B1E7D /* AppFonts.swift */,
 				B19372EA2033E44E007B1E7D /* Fonts */,
@@ -873,12 +874,11 @@
 				B19372D62033E3FC007B1E7D /* BaseModel.swift */,
 				B19372D72033E3FC007B1E7D /* Category.swift */,
 				B19372DA2033E3FC007B1E7D /* Location.swift */,
-				B19372DC2033E3FC007B1E7D /* Post.swift */,
 				B19372DB2033E3FC007B1E7D /* Mention.swift */,
 				B19372D52033E3FC007B1E7D /* Attachment.swift */,
 				B19372D82033E3FC007B1E7D /* Comment.swift */,
+				5734846F218F7B9E00F4707B /* AppCountry.swift */,
 				B19372DD2033E3FC007B1E7D /* Reply.swift */,
-				B19372D92033E3FC007B1E7D /* HashTag.swift */,
 				5706C431204DCAA3006E7C9A /* Shore.swift */,
 				B1EA39CE20560824008AADC9 /* Bottle.swift */,
 				B156A4442058952300654E2A /* Conversation.swift */,
@@ -1593,6 +1593,7 @@
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				570BB3242081445C00542EAD /* crab.gif in Resources */,
+				57348472218FA36C00F4707B /* audio_msg_beeb.mp3 in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				045120232180952900F4EC9D /* ThrownBottleCollectionViewCell.xib in Resources */,
 				B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */,
@@ -1869,9 +1870,9 @@
 				B1508CD620461F630048123F /* FindBottleViewController.swift in Sources */,
 				B18A5D7020348E4300F139B7 /* NSObject+RACLifting.m in Sources */,
 				B18A5D7520348E4300F139B7 /* NSString+RACKeyPathUtilities.m in Sources */,
+				57348470218F7B9E00F4707B /* AppCountry.swift in Sources */,
 				B19372D22033E36C007B1E7D /* AbstractNibView.swift in Sources */,
 				B18A5D8020348E4300F139B7 /* RACCompoundDisposableProvider.d in Sources */,
-				B19372E32033E3FC007B1E7D /* HashTag.swift in Sources */,
 				B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */,
 				B18A5D8F20348E4300F139B7 /* RACKVOProxy.m in Sources */,
 				B18A5DBF20348E4300F139B7 /* Result.swift in Sources */,
@@ -1898,7 +1899,6 @@
 				B11406D1207EB6AB003CEF96 /* ChatInputToolbar.swift in Sources */,
 				B18A5DC220348E4300F139B7 /* SimpleAuthWebViewController.m in Sources */,
 				B18A5DC820348E4300F139B7 /* SimpleAuthProvider.m in Sources */,
-				B19372E62033E3FC007B1E7D /* Post.swift in Sources */,
 				5706C430204DC568006E7C9A /* RecordMediaViewController.swift in Sources */,
 				B18A5DA620348E4300F139B7 /* RACTuple.m in Sources */,
 				B18A5DB220348E4300F139B7 /* UIDatePicker+RACSignalSupport.m in Sources */,

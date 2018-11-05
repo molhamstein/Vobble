@@ -367,12 +367,17 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         
         // show chat tutorial on first opening of an unblocked chat
+        
         if let tutShowedBefore = DataStore.shared.tutorialChatShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
             dispatch_main_after(2) {
                 let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ChatTutorial") as! ChatTutorialViewController
                 viewController.alpha = 0.5
                 self.present(viewController, animated: true, completion: nil)
                 DataStore.shared.tutorialChatShowed = true
+                DataStore.shared.me?.chatTutShowed = true
+                if let me = DataStore.shared.me {
+                    ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }
+                }
             }
         }
         
@@ -614,14 +619,14 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     func fetchConversationByid (convId: String) {
         
         messageRef = FirebaseManager.shared.conversationRef.child(convId)
-        messageRef.observeSingleEvent(of: .value, with: { snapshot in
+        messageRef.observeSingleEvent(of: .value, with: { [weak self] snapshot in
             //print(snapshot)
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
-            self.conversationOriginalObject = conversation
-            self.conversationOriginalObject?.idString = snapshot.key
-            self.initWithConversation(conversation: conversation)
-            self.observeMessages()
-            self.initNavBar()
+            self?.conversationOriginalObject = conversation
+            self?.conversationOriginalObject?.idString = snapshot.key
+            self?.initWithConversation(conversation: conversation)
+            self?.observeMessages()
+            self?.initNavBar()
         })
     }
     
@@ -642,58 +647,58 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             let messageQuery = messageRef.queryLimited(toLast:2000)
             
             // get messages count
-            self.conversationRef!.child("messages").observe(.value, with: {(snapshot) in
-                self.messagesCount = Int(snapshot.childrenCount)
+            self.conversationRef!.child("messages").observe(.value, with: { [weak self] (snapshot) in
+                self?.messagesCount = Int(snapshot.childrenCount)
             } )
             
             // We can use the observe method to listen for new
             // messages being written to the Firebase DB
-            newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
+            newMessageRefHandle = messageQuery.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
     //            let messageData = snapshot.value as! Dictionary<String, String>
                 
                 //let values = snapshot.value as? NSDictionary
                 
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
-                
+
                 // check seen messages
-                if self.currentMessage == self.messagesCount ||
-                    self.currentMessage == self.messagesCount - 1 {
-                    
-                    if self.currentMessage == self.messagesCount - 1 {
-                        self.currentMessage += 1
+                if let selfRef = self {
+                    if selfRef.currentMessage == selfRef.messagesCount ||
+                        selfRef.currentMessage == selfRef.messagesCount - 1 {
+                        
+                        if selfRef.currentMessage == selfRef.messagesCount - 1 {
+                            self?.currentMessage += 1
+                        }
+                        self?.checkLastSeenMessage(message: message)
+                    }else {
+                        self?.currentMessage += 1
                     }
-                    self.checkLastSeenMessage(message: message)
-                }else {
-                    self.currentMessage += 1
-                    
                 }
                 
-                
                 if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
-                    self.addMessage(withId: id, name: name, text: text)
+                    self?.addMessage(withId: id, name: name, text: text)
                     
-                    self.finishReceivingMessage()
+                    self?.finishReceivingMessage()
                     
                 } else if let id = message.senderId, let mediaURL = message.photoUrl {
                     
-                    let mediaItem = JSQCustomPhotoMediaItem(message: message, isOperator: id == self.senderId)
-                    self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    let mediaItem = JSQCustomPhotoMediaItem(message: message, isOperator: id == self?.senderId)
+                    self?.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                     
                     
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
                         mediaItem.message = message
-                        self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
+                        self?.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
                     }
                     
                 } else if let id = message.senderId, let mediaURL = message.videoUrl {
                     
-                    let mediaItem = JSQCustomVideoMediaItem(message: message, isOperator: id == self.senderId)
-                    self.addVideoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    let mediaItem = JSQCustomVideoMediaItem(message: message, isOperator: id == self?.senderId)
+                    self?.addVideoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
                     
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
                         mediaItem.message = message
-                        self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
+                        self?.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
                     }
                     
                 } else if let id = message.senderId, let mediaURL = message.audioUrl {
@@ -701,86 +706,89 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     //let audioData = NSData(contentsOf: URL(string:mediaURL)!)
                     let audioData = Data()
                     let audioItem = JSQCustomAudioMediaItem(data: audioData as! Data)
-                    audioItem.appliesMediaViewMaskAsOutgoing = (id == self.senderId) == (!self.isRTL)
+                    if let selfRef = self {
+                        audioItem.appliesMediaViewMaskAsOutgoing = (id == self?.senderId) == (!selfRef.isRTL)
+                    }
                     audioItem.audioUrl = URL(string:mediaURL)!
                     
                     if id != DataStore.shared.me?.objectId {
                         if let url = audioItem.audioUrl, url.isValidUrl() {
-                            self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                            self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
                         } else {
                             // dont add the message if its not mine and the url is not valid
                         }
                     } else {
-                        self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                        self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
                     }
                    
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
-                        self.collectionView.reloadData()
-                        self.audioMessageMap.removeValue(forKey: snapshot.key)
+                        self?.collectionView.reloadData()
+                        self?.audioMessageMap.removeValue(forKey: snapshot.key)
                     }
                     
                 } else {
                     print("Error! Could not decode message data")
                 }
-                self.scrollToBottom(animated: true)
+                self?.scrollToBottom(animated: true)
             })
             
             // We can also use the observer method to listen for
             // changes to existing messages.
             // We use this to be notified when a photo has been stored
             // to the Firebase Storage, so we can update the message data
-            updatedMessageRefHandle = messageRef.observe(.childChanged, with: { (snapshot) in
+            updatedMessageRefHandle = messageRef.observe(.childChanged, with: { [weak self] (snapshot) in
            
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
                 
-                
                 if let mediaURL = message.photoUrl {
                     // The photo has been updated.
-                    if let mediaItem = self.photoMessageMap[message.idString!] {
+                    if let mediaItem = self?.photoMessageMap[message.idString!] {
                         mediaItem.message = message
-                        self.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
+                        self?.fetchImageDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                     }
                 } else if let mediaURL = message.videoUrl {
                  
-                    if let mediaItem = self.videoMessageMap[message.idString!] {
+                    if let mediaItem = self?.videoMessageMap[message.idString!] {
                         mediaItem.message = message
-                        self.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
+                        self?.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                     }
                     
                 } else if let mediaURL = message.audioUrl {
                     
-                    if let mediaItem = self.audioMessageMap[message.idString!] {
+                    if let mediaItem = self?.audioMessageMap[message.idString!] {
                         
                         let audioData = Data() //NSData(contentsOf: URL(string:mediaURL)!)
                         mediaItem.audioUrl = URL(string:mediaURL)!
                         mediaItem.audioData = audioData
-                        self.collectionView.reloadData()
-                        self.audioMessageMap.removeValue(forKey: message.idString!)
+                        self?.collectionView.reloadData()
+                        self?.audioMessageMap.removeValue(forKey: message.idString!)
                     } else if let id = message.senderId {
                         // the audio message migh not have been added cuz it was not uploaded yet
                         let audioData = Data()
                         let audioItem = JSQCustomAudioMediaItem(data: audioData as! Data)
-                        audioItem.appliesMediaViewMaskAsOutgoing = id == self.senderId
+                        if let selfRef = self {
+                            audioItem.appliesMediaViewMaskAsOutgoing = id == selfRef.senderId
+                        }
                         audioItem.audioUrl = URL(string:mediaURL)!
                         
                         if id != DataStore.shared.me?.objectId {
                             if let url = audioItem.audioUrl, url.isValidUrl() {
-                                self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                                self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
                             } else {
                                 // dont add the message if its not mine and the url is not valid
                             }
                         } else {
-                            self.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
+                            self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
                         }
                         
                         if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
-                            self.collectionView.reloadData()
-                            self.audioMessageMap.removeValue(forKey: snapshot.key)
+                            self?.collectionView.reloadData()
+                            self?.audioMessageMap.removeValue(forKey: snapshot.key)
                         }
                     }
                 }
-                self.scrollToBottom(animated: true)
+                self?.scrollToBottom(animated: true)
             })
         }
         
@@ -788,39 +796,30 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
             lastSeenMessageRef = self.conversationRef!.child("user2LastSeenMessageId")
             unseenCountRef = self.conversationRef!.child("user1_unseen")
-            unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { (snapshot) -> Void in
-                self.conversationRef?.updateChildValues(["user1_unseen": 0])
+            unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { [weak self] (snapshot) -> Void in
+                self?.conversationRef?.updateChildValues(["user1_unseen": 0])
             })
-            
-            
             
         } else {
             lastSeenMessageRef = self.conversationRef!.child("user1LastSeenMessageId")
             unseenCountRef = self.conversationRef!.child("user2_unseen")
-            unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { (snapshot) -> Void in
-                self.conversationRef?.updateChildValues(["user2_unseen": 0])
+            unseenMessagesCountRefHandle = self.unseenCountRef?.observe(.value, with: { [weak self] (snapshot) -> Void in
+                self?.conversationRef?.updateChildValues(["user2_unseen": 0])
             })
-            
-
         }
         
         // hande seen message update
-        updateLastSeenMessageRefHandle = self.lastSeenMessageRef!.observe(.value, with: {(snapshot) -> Void in
+        updateLastSeenMessageRefHandle = self.lastSeenMessageRef!.observe(.value, with: { [weak self] (snapshot) -> Void in
         
             if let value = snapshot.value as? String {
-                if self.lastSentMessageId == value {
-                    self.isLastMessageSeen = true
+                if let selfRef = self, selfRef.lastSentMessageId == value {
+                    self?.isLastMessageSeen = true
                 }else{
-                    self.isLastMessageSeen = false
+                    self?.isLastMessageSeen = false
                 }
             }
-
-            self.collectionView.reloadData()
-
+            self?.collectionView.reloadData()
         })
-        
-        
-        
     }
     
     private func fetchImageDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQCustomPhotoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
@@ -842,7 +841,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             return
         }
         self.videoMessageMap.removeValue(forKey: key!)
-        
     }
     
     private func checkLastSeenMessage(message : Message) {
@@ -858,7 +856,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 }else {
                     self.lastSeenMessageId = id
                     self.conversationRef?.updateChildValues(["user1LastSeenMessageId" : self.lastSeenMessageId])
-                    
                 }
             }else{
                 if senderId == DataStore.shared.me?.objectId {
@@ -883,16 +880,16 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             userIsTypingRef.onDisconnectRemoveValue()
             usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
         
-            usersTypingQuery.observe(.value) { (data: DataSnapshot) in
+            usersTypingQuery.observe(.value) { [weak self] (data: DataSnapshot) in
         
               // You're the only typing, don't show the indicator
-              if data.childrenCount == 1 && self.isTyping {
+              if let selfRef = self, data.childrenCount == 1 && selfRef.isTyping {
                 return
               }
         
               // Are there others typing?
-              self.showTypingIndicator = data.childrenCount > 0
-              self.scrollToBottom(animated: true)
+              self?.showTypingIndicator = data.childrenCount > 0
+              self?.scrollToBottom(animated: true)
             }
         }
       }
@@ -1178,22 +1175,22 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.isLoadedMedia = false
         self.numberOfSentMedia += 1
         
-        let uploadCompletionBlock: (_ files: [Media], _ errorMessage: String?) -> Void = { (files, errorMessage) in
+        let uploadCompletionBlock: (_ files: [Media], _ errorMessage: String?) -> Void = { [weak self] (files, errorMessage) in
             
             if errorMessage == nil {
-                self.numberOfSentMedia -= 1
-                if self.numberOfSentMedia == 0 {
-                    self.isLoadedMedia = true
+                self?.numberOfSentMedia -= 1
+                if let selfRef = self, selfRef.numberOfSentMedia == 0 {
+                    self?.isLoadedMedia = true
                 }
-                self.retryUploadAttemptsLeft = 2
-                self.setMediaURL(files[0], forPhotoMessageWithKey: key)
+                self?.retryUploadAttemptsLeft = 2
+                self?.setMediaURL(files[0], forPhotoMessageWithKey: key)
                 
-                self.onNewMessageSent()
-                if self.messages.count <= 2 {
+                self?.onNewMessageSent()
+                if let selfRef = self, selfRef.messages.count <= 2 {
                     // this means this was the first reply messsage in the conversation and the chat is not open yet
                     
                     // show explanation message
-                    self.chatPendingContainer.isHidden = false
+                    self?.chatPendingContainer.isHidden = false
 //
 //                    let alertController = UIAlertController(title: "", message: "CHAT_REPLY_SENT_MSG".localized, preferredStyle: .alert)
 //                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
@@ -1213,11 +1210,11 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 //                }
                 
             } else {
-                self.isLoadedMedia = true
+                self?.isLoadedMedia = true
                 print("error uploading")
-                self.retryUploadAttemptsLeft -= 1
-                if self.retryUploadAttemptsLeft > 0 {
-                    self.upload(url:url, photo: photo,  key: key, mediaType: mediaType)
+                self?.retryUploadAttemptsLeft -= 1
+                if let selfRef = self, selfRef.retryUploadAttemptsLeft > 0 {
+                    self?.upload(url:url, photo: photo,  key: key, mediaType: mediaType)
                 }
             }
         }
@@ -1320,6 +1317,8 @@ extension ChatViewController: AVAudioRecorderDelegate {
         let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
         alertController.addAction(ok)
         self.present(alertController, animated: true, completion: nil)
+        
+        ActionPlayBeep.execute()
     }
     
     func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
@@ -1377,12 +1376,15 @@ extension ChatViewController: AVAudioRecorderDelegate {
                 self.soundRecorder.prepareToRecord()
                 soundRecorder.delegate = self
                 soundRecorder.record()
+                
+                ActionPlayBeep.execute()
             }
         }
         else if sender.state == .ended {
             recordTimer?.invalidate()
             stopRecorderTimer()
             recordButton.setProgress(0.0)
+            ActionPlayBeep.execute()
             //write the function for stop recording the voice here
             
         }
@@ -1394,14 +1396,16 @@ extension ChatViewController: AVAudioRecorderDelegate {
         
         //ask for permission
         if (audioSession.responds(to: #selector(AVAudioSession.requestRecordPermission(_:)))) {
-            AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
+            AVAudioSession.sharedInstance().requestRecordPermission({ [weak self] (granted: Bool)-> Void in
                 if granted {
                     //set category and activate recorder session
                     do {
                         try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                         try audioSession.setActive(true)
-                        try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
-                        self.soundRecorder.prepareToRecord()
+                        if let selfRef = self {
+                            try selfRef.soundRecorder = AVAudioRecorder(url: selfRef.directoryURL()!, settings: selfRef.recordSettings)
+                        }
+                        self?.soundRecorder.prepareToRecord()
                     } catch {
                         print("Error Recording");
                     }

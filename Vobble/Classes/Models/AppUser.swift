@@ -59,6 +59,9 @@ class AppUser: BaseModel, NSCopying {
     private let kUserNextRefill = "nextRefill"
     private let kAccountInfoCompleted = "registrationCompleted"
     
+    private let kHomeTutShowed = "homeTutShowed"
+    private let kChatTutShowed = "ChatTutShowed"
+    
     private let kUserBottlesCount = "totalBottlesThrown"
     private let kUserBottlesLeftToday = "bottlesCount"
     private let kUserExtraBottles = "extraBottlesCount"
@@ -74,7 +77,7 @@ class AppUser: BaseModel, NSCopying {
     public var email: String?
     public var profilePic: String?
     public var gender: GenderType?
-    public var country: String?
+    public var country: AppCountry?
     public var countryISOCode: String?
     public var loginType: LoginType?
     public var status: Status?
@@ -82,6 +85,7 @@ class AppUser: BaseModel, NSCopying {
     public var thrownBottlesCount: Int?
     public var bottlesLeftToThrowCount: Int?
     public var extraBottlesLeftToThrowCount: Int?
+    public var accountInfoCompleted: Bool?
     
     public var socialId: String?
     public var socialToken: String?
@@ -90,6 +94,8 @@ class AppUser: BaseModel, NSCopying {
     public var firstColor : UIColor?
     public var secondColor : UIColor?
     
+    public var homeTutShowed : Bool?
+    public var chatTutShowed : Bool?
 
     public var totalBottlesLeftToThrowCount: Int {
         get {
@@ -116,7 +122,9 @@ class AppUser: BaseModel, NSCopying {
         if let genderString = json[kUserGenderKey].string {
             gender = GenderType(rawValue: genderString)
         }
-        country = json[kUserCountryKey].string
+        if json[kUserCountryKey] != JSON.null {
+            country = AppCountry(json: json[kUserCountryKey])
+        }
         countryISOCode = json[kUserCountryISOKey].string
         if let loginTypeString = json[kUserLoginTypeKey].string {
             loginType = LoginType(rawValue: loginTypeString)
@@ -130,6 +138,14 @@ class AppUser: BaseModel, NSCopying {
         
         if let value = json[kUserExtraBottles].int {
             extraBottlesLeftToThrowCount = value
+        }
+        
+        if let value = json[kHomeTutShowed].bool {
+            homeTutShowed = value
+        }
+        
+        if let value = json[kChatTutShowed].bool {
+            chatTutShowed = value
         }
         
         token = json[kUserTokenKey].string
@@ -164,7 +180,7 @@ class AppUser: BaseModel, NSCopying {
         }
         // country
         if let value = country {
-            dictionary[kUserCountryKey] = value
+            dictionary[kUserCountryKey] = value.dictionaryRepresentation()
         }
         if let value = countryISOCode {
             dictionary[kUserCountryISOKey] = value
@@ -204,9 +220,17 @@ class AppUser: BaseModel, NSCopying {
             dictionary[kUserNextRefill] = DateHelper.getISOStringFromDate(value)
         }
         
-//        if let value = accountInfoCompleted {
-//            dictionary[kAccountInfoCompleted] = value
-//        }
+        // tutorials flags
+        if let value = homeTutShowed {
+            dictionary[kHomeTutShowed] = value
+        }
+        if let value = chatTutShowed {
+            dictionary[kChatTutShowed] = value
+        }
+        
+        if let value = accountInfoCompleted {
+            dictionary[kAccountInfoCompleted] = value
+        }
         
         //dictionary[kUserBottles] = myBottlesArray.map{$0}
         //dictionary[kUserReplies] = myRepliesArray.map{$0}

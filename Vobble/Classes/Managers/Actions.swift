@@ -103,3 +103,18 @@ class ActionCompressVideo {
     }
 }
 
+class ActionPlayBeep{
+    class func execute() {
+        do {
+            var ding:AVAudioPlayer = AVAudioPlayer()
+            let path = Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")
+            ding = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path!))
+            ding.prepareToPlay()
+            ding.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+

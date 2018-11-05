@@ -25,7 +25,7 @@ class TimerLabel: UILabel {
     private var timer = Timer()
     private var isTimerRunning = false
     private var resumeTapped = false
-    public var delegate:TimerLabelDelegate?
+    public weak var delegate:TimerLabelDelegate?
     
     
     func startTimer(seconds:TimeInterval) {

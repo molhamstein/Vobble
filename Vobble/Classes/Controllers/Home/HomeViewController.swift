@@ -126,7 +126,7 @@ class HomeViewController: AbstractController {
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
         
         // tutorial
-        if let tutShowedBefore = DataStore.shared.tutorial1Showed, !tutShowedBefore{
+        if let tutShowedBefore = DataStore.shared.me?.homeTutShowed, !tutShowedBefore{
             dispatch_main_after(2) {
                 let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
                 viewController.alpha = 0.5
@@ -134,6 +134,10 @@ class HomeViewController: AbstractController {
                 self.present(viewController, animated: true, completion: nil)
                 
                 DataStore.shared.tutorial1Showed = true
+                DataStore.shared.me?.homeTutShowed = true
+                if let me = DataStore.shared.me {
+                    ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }
+                }
             }
         }
     }

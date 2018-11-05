@@ -316,25 +316,25 @@ extension ConversationViewController {
         
         self.navigationView.showProgressIndicator(show: true)
         
-        FirebaseManager.shared.fetchMyBottlesConversations { (err) in
-            self.navigationView.showProgressIndicator(show: false)
+        FirebaseManager.shared.fetchMyBottlesConversations { [weak self] (err) in
+            self?.navigationView.showProgressIndicator(show: false)
             if let error = err {
                 print(error.localizedDescription)
             } else {
-                self.refreshView()
+                self?.refreshView()
             }
         }
         
-        FirebaseManager.shared.fetchMyRepliesConversations { (err) in
-            self.navigationView.showProgressIndicator(show: false)
+        FirebaseManager.shared.fetchMyRepliesConversations { [weak self] (err) in
+            self?.navigationView.showProgressIndicator(show: false)
             if let error = err {
                 print(error.localizedDescription)
             } else {
-                self.refreshView()
+                self?.refreshView()
             }
         }
         
-        FirebaseManager.shared.conversationRef.observe(.childChanged, with: { (snapshot) in
+        FirebaseManager.shared.conversationRef.observe(.childChanged, with: { [weak self] (snapshot) in
             
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             conversation.idString = snapshot.key
@@ -350,7 +350,7 @@ extension ConversationViewController {
                         if conv.idString == conversation.idString {
                             DataStore.shared.myReplies[i] = conversation
                             FirebaseManager.shared.sortConversations()
-                            self.refreshView()
+                            self?.refreshView()
                             break
                         } else {
                             i = i + 1
@@ -365,7 +365,7 @@ extension ConversationViewController {
                         if conv.idString == conversation.idString {
                             DataStore.shared.myBottles[i] = conversation
                             FirebaseManager.shared.sortConversations()
-                            self.refreshView()
+                            self?.refreshView()
                             break
                         } else {
                             i = i + 1

@@ -50,7 +50,7 @@ class ConversationCollectionViewCell: UICollectionViewCell {
             bottleNameLabel.text = convObj.bottle?.owner?.userName
         }
 //        timeLabel.text = "Time left: "+convObj.timeLeft!
-//        countryLabel.text = convObj.user2?.country
+        countryLabel.text = convObj.getPeer?.country?.name
         
         if let peerImage = convObj.getPeer?.profilePic, peerImage.isValidLink() == true {
             image.sd_setImage(with: URL(string:peerImage))
@@ -100,10 +100,11 @@ class ConversationCollectionViewCell: UICollectionViewCell {
             ivNewMessageIcon.layer.removeAllAnimations()
         }
         
+        weak var selfWeakRef = self
         dispatch_main_after(0.2) {
-            if self.shadowHolderView != nil && !self.shadowApplied {
-                self.shadowHolderView.dropShortShadow()
-                self.shadowApplied = true
+            if let selfRef = selfWeakRef, selfRef.shadowHolderView != nil && !selfRef.shadowApplied {
+                selfRef.shadowHolderView.dropShortShadow()
+                selfRef.shadowApplied = true
             }
         }
     }

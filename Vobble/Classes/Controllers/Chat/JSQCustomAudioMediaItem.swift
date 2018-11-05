@@ -90,7 +90,7 @@ class JSQCustomAudioMediaItem: JSQAudioMediaItem {
         view?.addSubview(self.LoadingAudioSpinner!)
 
         
-        // if url is not set set this mean the pee is still uploading the message and we should show a spinner
+        // if url is not set set this mean the peer is still uploading the message and we should show a spinner
         if let url = audioUrl, url.isValidUrl() {
             self.LoadingAudioSpinner?.stopAnimating()
             self.LoadingAudioSpinner?.isHidden = true
