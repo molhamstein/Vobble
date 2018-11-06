@@ -2,7 +2,7 @@
 //  AudioCollectionViewCell.swift
 //  Vobble
 //
-//  Created by Emessa Group on 11/3/18.
+//  Created by ِAbd hayek on 11/3/18.
 //  Copyright © 2018 Brain-Socket. All rights reserved.
 //
 

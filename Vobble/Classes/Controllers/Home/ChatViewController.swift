@@ -450,7 +450,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             AudioManager.shared.stopAudio()
         }
         
-        
         customNavBar.removeFromSuperview()
         recordButton.removeFromSuperview()
         lblRecording.removeFromSuperview()

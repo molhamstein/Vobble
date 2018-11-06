@@ -2,7 +2,7 @@
 //  ThrownBottlesViewController.swift
 //  Vobble
 //
-//  Created by Emessa Group on 10/22/18.
+//  Created by Abd hayek on 10/22/18.
 //  Copyright © 2018 Brain-Socket. All rights reserved.
 //
 

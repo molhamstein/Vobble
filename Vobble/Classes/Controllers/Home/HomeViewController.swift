@@ -371,7 +371,7 @@ class HomeViewController: AbstractController {
        
         //ActionRateUs.execute(hostViewController: self)
         
-        if let bCount = DataStore.shared.me?.bottlesLeftToThrowCount, bCount > 0 {
+        if let bCount = DataStore.shared.me?.totalBottlesLeftToThrowCount, bCount > 0 {
             //DataStore.shared.me?.thrownBottlesCount = bCount - 1
             //self.wiggleAnimate(view: self.ivThrowBtn)
             self.popAnimation(view: self.vThrowBtnCircle)
