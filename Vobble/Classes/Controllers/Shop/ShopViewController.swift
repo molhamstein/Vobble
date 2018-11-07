@@ -441,8 +441,6 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 print("purchasing")
                 
             case .purchased:
-                self.view.isUserInteractionEnabled = true
-                self.navBackButton.isEnabled = true
                 
                 let prodID = transaction.payment.productIdentifier
 
@@ -478,6 +476,8 @@ extension ShopViewController: SKPaymentTransactionObserver {
                             // flurry events, on purchase done
                             let logEventParams2 = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
                             Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
+                            
+                            self.dismiss(animated: true, completion: {})
                         }
                        
                         
@@ -490,38 +490,11 @@ extension ShopViewController: SKPaymentTransactionObserver {
                     
                 })
                 
-                if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-                    DataStore.shared.me?.bottlesLeftToThrowCount = count + 1
-                }
-                
-                if prodID == ShopItemID.Bottels3.rawValue {
-
-                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 3
-                    } else {
-
-                        DataStore.shared.me?.bottlesLeftToThrowCount = 3
-                    }
-                } else if prodID == ShopItemID.Bottels5.rawValue {
-
-                    if let count = DataStore.shared.me?.bottlesLeftToThrowCount {
-                        DataStore.shared.me?.bottlesLeftToThrowCount = count + 5
-                    } else {
-
-                        DataStore.shared.me?.bottlesLeftToThrowCount = 5
-                    }
-                }
-
-                
-                queue.finishTransaction(transaction)
-                queue.remove(self)
+                finishTransaction(queue, transaction)
                 
             case .failed:
                 print("buy error")
-                queue.finishTransaction(transaction)
-                queue.remove(self)
-                self.view.isUserInteractionEnabled = true
-                self.navBackButton.isEnabled = true
+                finishTransaction(queue, transaction)
                 
             case .deferred :
                 print("deferred")
@@ -529,12 +502,8 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 
             default:
                 print("Default")
-                queue.finishTransaction(transaction)
-                queue.remove(self)
-                self.view.isUserInteractionEnabled = true
-                self.navBackButton.isEnabled = true
+                finishTransaction(queue, transaction)
                 
-                //queue.finishTransaction(transaction)
                 
             }
         }
@@ -556,5 +525,13 @@ extension ShopViewController {
             }
         }
         return nil
+    }
+    
+    func finishTransaction(_ queue: SKPaymentQueue , _ transaction: SKPaymentTransaction) {
+        queue.finishTransaction(transaction)
+        queue.remove(self)
+        
+        self.view.isUserInteractionEnabled = true
+        self.navBackButton.isEnabled = true
     }
 }
