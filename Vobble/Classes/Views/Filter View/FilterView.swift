@@ -123,12 +123,20 @@ class FilterView: AbstractNibView {
             if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})[0].endDate {
                 let currentDate = Date().timeIntervalSince1970
                 let seconds = (fTime - currentDate)
-                genderTimer.startTimer(seconds: TimeInterval(seconds))
-                //genderPicker.isUserInteractionEnabled = true
-                vGenderPlaceholder.isHidden = true
-                genderTimerStackView.isHidden = false
-                btnFindBottle.isEnabled = true
-                btnFindBottle.alpha = 1.0
+                
+                if seconds >= 0 {
+                    genderTimer.startTimer(seconds: TimeInterval(seconds))
+                    genderTimer.delegate = self
+                    //genderPicker.isUserInteractionEnabled = true
+                    vGenderPlaceholder.isHidden = true
+                    genderTimerStackView.isHidden = false
+                    btnFindBottle.isEnabled = true
+                    btnFindBottle.alpha = 1.0
+                }else{
+                    vGenderPlaceholder.isHidden = false
+                    genderTimerStackView.isHidden = true
+                }
+                
             } else {
                 vGenderPlaceholder.isHidden = false
                 genderTimerStackView.isHidden = true
@@ -142,11 +150,18 @@ class FilterView: AbstractNibView {
             if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})[0].endDate {
                 let currentDate = Date().timeIntervalSince1970
                 let seconds = (fTime - currentDate)
-                countryTimer.startTimer(seconds: TimeInterval(seconds))
-                vCountryPlaceholder.isHidden = true
-                countryTimerStackView.isHidden = false
-                btnFindBottle.isEnabled = true
-                btnFindBottle.alpha = 1.0
+                if seconds >= 0 {
+                    countryTimer.startTimer(seconds: TimeInterval(seconds))
+                    countryTimer.delegate = self
+                    vCountryPlaceholder.isHidden = true
+                    countryTimerStackView.isHidden = false
+                    btnFindBottle.isEnabled = true
+                    btnFindBottle.alpha = 1.0
+                }else{
+                    vCountryPlaceholder.isHidden = false
+                    countryTimerStackView.isHidden = true
+                }
+                
             } else {
                 vCountryPlaceholder.isHidden = false
                 countryTimerStackView.isHidden = true
@@ -285,5 +300,12 @@ extension FilterView: CountryPickerViewDelegate, CountryPickerViewDataSource {
     
     func sectionTitleForPreferredCountries(in countryPickerView: CountryPickerView) -> String? {
         return "PREFERED_COUNTRIES_TITLE".localized
+    }
+}
+
+
+extension FilterView: TimerLabelDelegate {
+    func timerFinished() {
+        refreshFilterView()
     }
 }
