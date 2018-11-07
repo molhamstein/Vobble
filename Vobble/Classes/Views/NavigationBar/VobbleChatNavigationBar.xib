@@ -103,6 +103,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-8L-ytb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="52" height="11"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="11"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>

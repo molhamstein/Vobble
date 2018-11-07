@@ -238,7 +238,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 chatBlockedLabel.font = AppFonts.normal
                 chatBlockedLabel.text = "CHAT_BLOCKED".localized
                 self.view.addSubview(self.chatBlockedContainer)
-                self.chatBlockedContainer.isHidden = true
+                //self.chatBlockedContainer.isHidden = true
                 
                 // chat pending view
                 self.chatPendingContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.chatBlockedContainer.frame.height)
@@ -1401,9 +1401,11 @@ extension ChatViewController: AVAudioRecorderDelegate {
     func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
         //print("Long tap is handled")
         if sender.state == .began {
-            //write the function for start recording the voice here
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.playBeepSound()
+            
+            //write the function for start recording the voice here
+            //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // show record audio view
                 
                 self.recordButtonContainer.isHidden = false
@@ -1457,9 +1459,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
                     self.soundRecorder.delegate = self
                     self.soundRecorder.record()
                 }
-            }
-            
-            
+            //}
         }
         else if sender.state == .ended {
             recordTimer?.invalidate()
