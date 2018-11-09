@@ -40,6 +40,7 @@ class ShopViewController: AbstractController {
     }
     
     var selectedProduct : ShopItem!
+    var request: SKProductsRequest!
     
     override func viewDidLoad() {
         
@@ -70,6 +71,7 @@ class ShopViewController: AbstractController {
         
         self.shopCollectionView.reloadData()
         
+    
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
         
         //IAP Setup
@@ -80,7 +82,7 @@ class ShopViewController: AbstractController {
         if(SKPaymentQueue.canMakePayments()) {
             print("IAP is enabled, loading")
             let productID: NSSet = NSSet(array: ShopItemID.getListId())
-            let request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>)
+            request = SKProductsRequest(productIdentifiers: productID as! Set<String>)
             request.delegate = self
             request.start()
         } else {
@@ -234,6 +236,12 @@ class ShopViewController: AbstractController {
         self.shopItemsArray = bottlsArray.map{$0}
     }
     
+    override func backButtonAction(_ sender: AnyObject) {
+        if request != nil {
+            request.cancel()
+        }
+    }
+    
 }
 // MARK: - UICollectionViewDataSource
 extension ShopViewController: UICollectionViewDataSource {
@@ -280,15 +288,12 @@ extension ShopViewController: UICollectionViewDelegate {
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                 
-            
+                
                 if  obj.appleProduct != nil {
-                    
+                    self.navigationView.showProgressIndicator(show: true)
+                    self.view.isUserInteractionEnabled = false
                     
                     if let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
-                        /// Make sure user doesn't interrupt purchase operation
-                        self.view.isUserInteractionEnabled = false
-                        self.navBackButton.isEnabled = false
-                        
                         //prepare payment
                         self.selectedProduct = obj
                         let pay = SKPayment(product: selectedItem)
@@ -304,6 +309,9 @@ extension ShopViewController: UICollectionViewDelegate {
                         }
                         let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
                         Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                    }else {
+                        self.navigationView.showProgressIndicator(show: false)
+                        self.view.isUserInteractionEnabled = true
                     }
 
                 }
@@ -498,7 +506,7 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 
             case .deferred :
                 print("deferred")
-                
+                finishTransaction(queue, transaction)
                 
             default:
                 print("Default")
@@ -531,7 +539,10 @@ extension ShopViewController {
         queue.finishTransaction(transaction)
         queue.remove(self)
         
+        self.navigationView.showProgressIndicator(show: false)
         self.view.isUserInteractionEnabled = true
-        self.navBackButton.isEnabled = true
     }
+    
+    
+    
 }
