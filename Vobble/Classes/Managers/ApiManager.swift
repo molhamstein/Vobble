@@ -291,11 +291,14 @@ class ApiManager: NSObject {
         // url & parameters
         let signUpURL = "\(baseURL)/users/\(user.objectId!)"
         
-        var parameters : [String : String] = [
+        var parameters : [String : Any] = [
             "username": user.userName!,
             "gender": user.gender?.rawValue ?? "male",
             "ISOCode" : user.countryISOCode!,
-            "typeLogIn": (user.loginType?.rawValue)!
+            "typeLogIn": (user.loginType?.rawValue)!,
+            "registrationCompleted": (user.accountInfoCompleted) ?? false,
+            "homeTutShowed": (user.homeTutShowed) ?? false,
+            "ChatTutShowed": (user.chatTutShowed) ?? false
         ]
         
         if let email = user.email {

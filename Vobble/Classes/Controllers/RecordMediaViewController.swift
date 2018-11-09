@@ -507,15 +507,15 @@ extension RecordMediaViewController
                 isAnimating = true
                 
                 UIView.animateKeyframes(withDuration: 1.0, delay: 0.0, options: [.calculationModeLinear,.repeat], animations: {
-                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: { 
+                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
                         self.redImageView.alpha = 1.0
                     })
                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
                         self.redImageView.alpha = 0.0
                     })
-                }, completion: { (finished) in
-                    self.isAnimating = false
-                    self.redImageView.layer.removeAllAnimations()
+                }, completion: { [weak self] (finished) in
+                    self?.isAnimating = false
+                    self?.redImageView.layer.removeAllAnimations()
                 })
             }
             timeOut += 0.05;
@@ -556,8 +556,9 @@ extension RecordMediaViewController
         Flurry.logEvent(AppConfig.recorded_video);
         
         // animate Views out
+        redImageView.layer.removeAllAnimations()
         recordButton.animateIn(mode: .animateOutToBottom, delay: 0.3)
-        redImageView.animateIn(mode: .animateOutToTop, delay: 0.2)
+        //redImageView.animateIn(mode: .animateOutToTop, delay: 0.2)
         recordTimeLabel.animateIn(mode: .animateOutToTop, delay: 0.2)
         
         switchButton.animateIn(mode: .animateOutToTop, delay: 0.2)
