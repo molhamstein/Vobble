@@ -42,6 +42,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     // passed by deeplinking
     var conversationId: String?
     
+    private lazy var firstReplyRef: DatabaseReference = self.conversationRef!.child("is_seen")
     private lazy var messageRef: DatabaseReference = self.conversationRef!.child("messages")
     private var unseenCountRef: DatabaseReference?
     private var lastSeenMessageRef: DatabaseReference?
@@ -52,6 +53,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     private var updatedMessageRefHandle: DatabaseHandle?
     private var unseenMessagesCountRefHandle: DatabaseHandle?
     private var updateLastSeenMessageRefHandle: DatabaseHandle?
+    private var updateFirstReplyRefHandle: DatabaseHandle?
+    
     
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
@@ -211,9 +214,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 // record audio view
                 lblRecording.font = AppFonts.bigBold
                 lblRecording.text = "CHAT_RECORDING".localized
+                lblTimerRecording.font = AppFonts.bigBold
+                lblTimerRecording.textAlignment = .center
+                
                 self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.inputToolbar.frame.height)
                 self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 90, width: 120, height: 120)
-                self.lblTimerRecording.frame = CGRect(x: self.view.frame.width/2 - 60 , y: 32, width: 40, height: 40)
+                self.lblTimerRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: 32, width: 200, height: 30)
                 self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
                 self.ivRecordingIcon.center = self.recordButton.center
                 self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
@@ -294,6 +300,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         if let refHandle = updateLastSeenMessageRefHandle {
             lastSeenMessageRef?.removeObserver(withHandle: refHandle)
+        }
+        if let refHandle = updateFirstReplyRefHandle {
+            firstReplyRef.removeObserver(withHandle: refHandle)
         }
     }
     
@@ -419,6 +428,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             
             if let replyVideoUrl = replyVideoUrlToUpload {
                 self.uploadVideo(videoUrl: replyVideoUrl)
+                self.observeFirstReply()
             }
             
             //send push notification to bottle owner to inform him about the new reply
@@ -818,14 +828,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                  
                     if let mediaItem = self?.videoMessageMap[message.idString!] {
                         
-                        /// Check input tool bar on first reply
-                        if let isHidden = self?.inputToolbar.isHidden, isHidden{
-                            self?.inputToolbar.isHidden = false
-                            self?.chatBlockedContainer.isHidden = true
-                            self?.chatPendingContainer.isHidden = true
-                            self?.initCustomToolBar()
-                        }
-                        
                         mediaItem.message = message
                         self?.fetchVideoDataAtURL(mediaURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: message.idString)
                     }
@@ -895,6 +897,21 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 }
             }
             self?.collectionView.reloadData()
+        })
+    }
+    
+    private func observeFirstReply() {
+        updateFirstReplyRefHandle = self.firstReplyRef.observe(.value, with: { [weak self] (snapshot) -> Void in
+            
+            if self?.conversationOriginalObject?.bottle?.owner?.objectId != DataStore.shared.me?.objectId {
+                print(snapshot.value as! Int)
+                if let is_seen = snapshot.value as? Int ,is_seen  == 1 {
+                    self?.inputToolbar.isHidden = false
+                    self?.chatBlockedContainer.isHidden = true
+                    self?.chatPendingContainer.isHidden = true
+                    self?.initCustomToolBar()
+                }
+            }
         })
     }
     

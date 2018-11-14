@@ -36,7 +36,9 @@ class ThrownBottlesViewController: AbstractController {
         emptyPlaceHolderLabel.text = "MY_BOTTLES_EMPTY_PLACEHOLDER".localized
         
         // Get thrown bottles
+        self.navigationView.showProgressIndicator(show: true)
         ApiManager.shared.requestThwonBottles(completionBlock: { bottles , error in
+            self.navigationView.showProgressIndicator(show: false)
             if error == nil {
                 self.bottles = DataStore.shared.thrownBottles
                 
