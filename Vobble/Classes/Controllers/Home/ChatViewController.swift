@@ -109,8 +109,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     //var AudioFileName = "sound.m4a"
     var timeOut: Float = 0.0
     var recordTimer: Timer?
-    let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
-                          AVFormatIDKey : NSNumber(value: Int32(kAudioFormatMPEG4AAC) as Int32),
+    let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0)),
+                          AVFormatIDKey : NSNumber(value: Int32(kAudioFormatMPEG4AAC)),
                           AVNumberOfChannelsKey : NSNumber(value: 2 as Int32),
                           AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]
     
@@ -304,6 +304,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let refHandle = updateFirstReplyRefHandle {
             firstReplyRef.removeObserver(withHandle: refHandle)
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        let alertController = UIAlertController(title: "MemoryWarning", message: "Memory Warning recieved", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func initNavBar() {
@@ -1526,6 +1535,14 @@ extension ChatViewController: AVAudioRecorderDelegate {
         }
         soundRecorder = nil
     }
+
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        
+        let alertController = UIAlertController(title: "Audio recording error", message: error?.localizedDescription, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     func directoryURL() -> URL? {
         let fileManager = FileManager.default
@@ -1606,7 +1623,6 @@ extension ChatViewController : AudioCollectionViewCellIncomingDelegate  {
                         AudioManager.shared.playAudio(data: data!, progressView: cell.audioProgressView, progressLabel: cell.audioProgressLabel, playButton: cell.playButton)
                     }
                 }
-                
             })
         }else{
             self.currentAudioIndex = cell.index
