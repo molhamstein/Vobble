@@ -30,6 +30,7 @@ import SDRecordButton
 import Flurry_iOS_SDK
 import SDWebImage
 import AVFoundation
+import FillableLoaders
 
 final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate {
     
@@ -54,7 +55,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     private var unseenMessagesCountRefHandle: DatabaseHandle?
     private var updateLastSeenMessageRefHandle: DatabaseHandle?
     private var updateFirstReplyRefHandle: DatabaseHandle?
-    
     
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
@@ -81,6 +81,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     @IBOutlet var chatPendingLabel : UILabel!
     @IBOutlet var chatPendingImageView : UIImageView!
     @IBOutlet var chatPendingCloseButton : UIButton!
+    
+    var videoUploadLoader: WavesLoader?
     
     // notifications
     var lastNotificationSentDate: Date?
@@ -264,7 +266,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 self.collectionView.backgroundColor = UIColor.clear
                 self.view.insertSubview(bgImage, belowSubview: self.collectionView)
                 
-                
                 //chatPendingContainer.isHidden = true
             }
             isInitialised = true
@@ -438,6 +439,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 self.senderId = "\(userId)"
             }
             
+            // upload the reply video here to make sure we can show the loader
             if let replyVideoUrl = replyVideoUrlToUpload {
                 self.uploadVideo(videoUrl: replyVideoUrl)
             }
@@ -1288,9 +1290,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         self.isLoadedMedia = false
         self.numberOfSentMedia += 1
+        if mediaType != .audio {
+            videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath())
+        }
         
         let uploadCompletionBlock: (_ files: [Media], _ errorMessage: String?) -> Void = { [weak self] (files, errorMessage) in
-            
+            self?.videoUploadLoader?.removeLoader(true)
             if errorMessage == nil {
                 self?.numberOfSentMedia -= 1
                 if let selfRef = self, selfRef.numberOfSentMedia == 0 {
@@ -1337,7 +1342,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             ApiManager.shared.uploadImage(imageData: imageObject, completionBlock: uploadCompletionBlock)
         } else if let mediaURL = url {
             let urls:[URL] = [mediaURL]
-            ApiManager.shared.uploadMedia(urls: urls, mediaType: mediaType, completionBlock: uploadCompletionBlock, progressBlock: {(progress) in })
+            
+            ApiManager.shared.uploadMedia(urls: urls, mediaType: mediaType, completionBlock: uploadCompletionBlock, progressBlock: {(progress) in
+                if let progressPercent = progress  {
+                    self.videoUploadLoader?.progress = CGFloat(progressPercent)
+                }
+            })
         }
     }
 }

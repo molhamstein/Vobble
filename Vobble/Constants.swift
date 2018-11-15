@@ -92,6 +92,50 @@ struct AppConfig {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: AppColors.blueXDark]
         UITabBar.appearance().backgroundColor = UIColor.white
     }
+    
+    static func getBottlePath() -> CGPath {
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 115.3, y: 46.6))
+        bezierPath.addCurve(to: CGPoint(x: 111, y: 33.6), controlPoint1: CGPoint(x: 111.8, y: 44), controlPoint2: CGPoint(x: 111, y: 33.6))
+        bezierPath.addLine(to: CGPoint(x: 110.4, y: 17))
+        bezierPath.addLine(to: CGPoint(x: 110.4, y: 17))
+        bezierPath.addLine(to: CGPoint(x: 110.4, y: 17))
+        bezierPath.addLine(to: CGPoint(x: 110.4, y: 16.5))
+        bezierPath.addCurve(to: CGPoint(x: 111, y: 15.3), controlPoint1: CGPoint(x: 110.4, y: 16.5), controlPoint2: CGPoint(x: 111, y: 16.4))
+        bezierPath.addCurve(to: CGPoint(x: 110.1, y: 12.6), controlPoint1: CGPoint(x: 111, y: 14), controlPoint2: CGPoint(x: 111.2, y: 12.6))
+        bezierPath.addCurve(to: CGPoint(x: 110, y: 10.7), controlPoint1: CGPoint(x: 110, y: 12.6), controlPoint2: CGPoint(x: 110, y: 10.7))
+        bezierPath.addCurve(to: CGPoint(x: 109.3, y: 9.8), controlPoint1: CGPoint(x: 110, y: 10.1), controlPoint2: CGPoint(x: 109.6, y: 9.9))
+        bezierPath.addLine(to: CGPoint(x: 109.3, y: 5.8))
+        bezierPath.addLine(to: CGPoint(x: 109.3, y: 5.8))
+        bezierPath.addLine(to: CGPoint(x: 109.3, y: 5))
+        bezierPath.addLine(to: CGPoint(x: 109.3, y: 1.5))
+        bezierPath.addCurve(to: CGPoint(x: 104.3, y: 0.1), controlPoint1: CGPoint(x: 109.3, y: 0.7), controlPoint2: CGPoint(x: 107, y: 0.1))
+        bezierPath.addCurve(to: CGPoint(x: 99.2, y: 1.5), controlPoint1: CGPoint(x: 101.5, y: 0.1), controlPoint2: CGPoint(x: 99.2, y: 0.7))
+        bezierPath.addLine(to: CGPoint(x: 99.2, y: 10))
+        bezierPath.addCurve(to: CGPoint(x: 98.8, y: 10.7), controlPoint1: CGPoint(x: 98.8, y: 10.3), controlPoint2: CGPoint(x: 98.8, y: 10.7))
+        bezierPath.addCurve(to: CGPoint(x: 98.8, y: 12.6), controlPoint1: CGPoint(x: 98.8, y: 10.7), controlPoint2: CGPoint(x: 98.8, y: 11.7))
+        bezierPath.addCurve(to: CGPoint(x: 97.8, y: 13.3), controlPoint1: CGPoint(x: 97.9, y: 12.6), controlPoint2: CGPoint(x: 97.8, y: 13.3))
+        bezierPath.addCurve(to: CGPoint(x: 97.8, y: 15.4), controlPoint1: CGPoint(x: 97.8, y: 13.3), controlPoint2: CGPoint(x: 97.8, y: 14.3))
+        bezierPath.addCurve(to: CGPoint(x: 98.5, y: 16.7), controlPoint1: CGPoint(x: 97.8, y: 16.5), controlPoint2: CGPoint(x: 98.5, y: 16.7))
+        bezierPath.addLine(to: CGPoint(x: 98.5, y: 16.7))
+        bezierPath.addLine(to: CGPoint(x: 98.5, y: 17.2))
+        bezierPath.addLine(to: CGPoint(x: 98.5, y: 17.2))
+        bezierPath.addLine(to: CGPoint(x: 98.4, y: 33.7))
+        bezierPath.addCurve(to: CGPoint(x: 93.7, y: 46.7), controlPoint1: CGPoint(x: 98.5, y: 42.1), controlPoint2: CGPoint(x: 95.9, y: 44.7))
+        bezierPath.addCurve(to: CGPoint(x: 85.9, y: 60), controlPoint1: CGPoint(x: 87.8, y: 50.8), controlPoint2: CGPoint(x: 85.9, y: 60))
+        bezierPath.addLine(to: CGPoint(x: 85.9, y: 137.5))
+        bezierPath.addCurve(to: CGPoint(x: 103.6, y: 140.1), controlPoint1: CGPoint(x: 85.9, y: 137.5), controlPoint2: CGPoint(x: 90, y: 140))
+        bezierPath.addCurve(to: CGPoint(x: 104, y: 140.1), controlPoint1: CGPoint(x: 103.8, y: 140.1), controlPoint2: CGPoint(x: 104, y: 140.1))
+        bezierPath.addCurve(to: CGPoint(x: 104.2, y: 140.1), controlPoint1: CGPoint(x: 104, y: 140.1), controlPoint2: CGPoint(x: 104, y: 140.1))
+        bezierPath.addCurve(to: CGPoint(x: 104.5, y: 140.1), controlPoint1: CGPoint(x: 104.3, y: 140.1), controlPoint2: CGPoint(x: 104.4, y: 140.1))
+        bezierPath.addCurve(to: CGPoint(x: 123.4, y: 137.5), controlPoint1: CGPoint(x: 120.3, y: 140.1), controlPoint2: CGPoint(x: 123.4, y: 137.5))
+        bezierPath.addCurve(to: CGPoint(x: 123.4, y: 60), controlPoint1: CGPoint(x: 123.4, y: 137.5), controlPoint2: CGPoint(x: 123.4, y: 66.3))
+        bezierPath.addCurve(to: CGPoint(x: 115.3, y: 46.6), controlPoint1: CGPoint(x: 123.5, y: 53.6), controlPoint2: CGPoint(x: 120.2, y: 50.2))
+        bezierPath.close()
+        bezierPath.miterLimit = 4;
+        return bezierPath.cgPath
+    }
+    
 }
 
 

@@ -35,6 +35,7 @@ pod 'Fabric', '~> 1.7.11'
 pod 'Crashlytics', '~> 3.10.7'
 pod 'Firebase/Performance', '~> 4.13.0'
 pod 'WCLShineButton'
+pod 'FillableLoaders', '~>1.3.0'
 
 end
 
