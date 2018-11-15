@@ -69,6 +69,7 @@ class ConversationViewController: AbstractController {
     override func viewDidLayoutSubviews() {
         waveSubView.awakeFromNib()
         waveSubView.showWave()
+        waveSubView.isUserInteractionEnabled = false
     }
     
     override func customizeView() {

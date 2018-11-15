@@ -63,6 +63,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
     private var audioMessageMap = [String: JSQCustomAudioMediaItem]()
     var retryUploadAttemptsLeft = 2
+    private var isChatBlockedShowedBefore = false // used to make sure we show the chat blocked screen only once
     
     fileprivate var isRTL:Bool = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
     
@@ -170,13 +171,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let conv = conversationOriginalObject {
             initWithConversation(conversation: conv)
             observeMessages()
+            observeFirstReply()
         } else if let convId = conversationId {
-            
             if let _ = bottleToReplyTo {
                 // this is the first reply on a bottle
                 initNewConversation()
             }
-            
             fetchConversationByid(convId: convId)
         }
         
@@ -219,12 +219,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 
                 self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.inputToolbar.frame.height)
                 self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 90, width: 120, height: 120)
-                self.lblTimerRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: 32, width: 200, height: 30)
                 self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
                 self.ivRecordingIcon.center = self.recordButton.center
                 self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
+                self.lblTimerRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: recordButton.frame.maxY + 10, width: 200, height: 30)
                 self.view.addSubview(self.recordButtonContainer)
-                self.view.addSubview(self.lblTimerRecording)
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0).isActive = true
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0).isActive = true
@@ -338,7 +337,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     func initWithConversation (conversation: Conversation) {
         let chatVc = self
         
-        let convRef = FirebaseManager.shared.conversationRef.child(conversation.idString ?? "")
+        if chatVc.conversationRef == nil {
+            chatVc.conversationRef = FirebaseManager.shared.conversationRef.child(conversation.idString ?? "")
+        }
         
         chatVc.senderDisplayName = DataStore.shared.me?.userName ?? ""
         
@@ -346,8 +347,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
             
             if let is_seen = conversation.is_seen, is_seen == 0 {
-                convRef.updateChildValues(["is_seen": 1])
-                convRef.updateChildValues(["startTime": ServerValue.timestamp()])
+                chatVc.conversationRef?.updateChildValues(["is_seen": 1])
+                chatVc.conversationRef?.updateChildValues(["startTime": ServerValue.timestamp()])
                 chatVc.seconds = 24.0*60.0*60.0
                 
                 // send push notification to peer to let him know that the chat is open now
@@ -393,19 +394,22 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             chatPendingContainer.isHidden = true
             initCustomToolBar()
         } else {
-            inputToolbar.isHidden = true
-            chatBlockedContainer.isHidden = false
-            chatPendingContainer.isHidden = false
+            if !isChatBlockedShowedBefore {
+                inputToolbar.isHidden = true
+                chatBlockedContainer.isHidden = false
+                chatPendingContainer.isHidden = false
+                isChatBlockedShowedBefore = true
+            }
         }
         
         // show chat tutorial on first opening of an unblocked chat
         if let tutShowedBefore = DataStore.shared.tutorialChatShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
+            DataStore.shared.tutorialChatShowed = true
+            DataStore.shared.me?.chatTutShowed = true
             dispatch_main_after(2) {
                 let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ChatTutorial") as! ChatTutorialViewController
                 viewController.alpha = 0.5
                 self.present(viewController, animated: true, completion: nil)
-                DataStore.shared.tutorialChatShowed = true
-                DataStore.shared.me?.chatTutShowed = true
                 if let me = DataStore.shared.me {
                     ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }
                 }
@@ -417,7 +421,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             DataStore.shared.setConversationUnsentMessage(key: convId, text: "")
         }
         
-        chatVc.conversationRef = convRef
         chatVc.conversationOriginalObject = conversation
         chatVc.conversationId = conversationOriginalObject?.idString
     }
@@ -437,7 +440,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             
             if let replyVideoUrl = replyVideoUrlToUpload {
                 self.uploadVideo(videoUrl: replyVideoUrl)
-                self.observeFirstReply()
             }
             
             //send push notification to bottle owner to inform him about the new reply
@@ -640,18 +642,24 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
         
-        if indexPath.row == messages.count - 1 {
-            switch message.senderId {
-            case senderId:
-                if self.isLastMessageSeen {
-                    return NSAttributedString(string: "SEEN".localized)
-                }else {
-                    return nil
-                }
-            default:
+        switch message.senderId {
+        case senderId:
+            if self.isLastMessageSeen {
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .center
+                paragraphStyle.firstLineHeadIndent = 5.0
+                
+                let attributes: [String: Any] = [
+                    NSForegroundColorAttributeName: UIColor.blue,
+                    NSParagraphStyleAttributeName: paragraphStyle
+                ]
+                
+                let seenStr = NSAttributedString(string: "SEEN".localized, attributes: attributes)
+                return seenStr
+            }else {
                 return nil
             }
-        }else{
+        default:
             return nil
         }
     }
@@ -711,6 +719,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             self?.conversationOriginalObject?.idString = snapshot.key
             self?.initWithConversation(conversation: conversation)
             self?.observeMessages()
+            self?.observeFirstReply()
             self?.initNavBar()
         })
     }
@@ -915,10 +924,13 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             if self?.conversationOriginalObject?.bottle?.owner?.objectId != DataStore.shared.me?.objectId {
                 print(snapshot.value as! Int)
                 if let is_seen = snapshot.value as? Int ,is_seen  == 1 {
-                    self?.inputToolbar.isHidden = false
-                    self?.chatBlockedContainer.isHidden = true
-                    self?.chatPendingContainer.isHidden = true
-                    self?.initCustomToolBar()
+                    if let oldValue = self?.conversationOriginalObject?.is_seen, oldValue != is_seen {
+                        // this means that the isSeen value has changed
+                        self?.inputToolbar.isHidden = false
+                        self?.chatBlockedContainer.isHidden = true
+                        self?.chatPendingContainer.isHidden = true
+                        self?.initCustomToolBar()
+                    }
                 }
             }
         })
