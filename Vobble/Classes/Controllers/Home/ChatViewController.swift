@@ -967,13 +967,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let id = message.idString , let senderId = message.senderId {
             if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
                 if senderId != DataStore.shared.me?.objectId {
-                    self.lastSeenMessageId = id
-                    self.conversationRef?.updateChildValues(["user1LastSeenMessageId" : self.lastSeenMessageId])
+                    self.conversationRef?.updateChildValues(["user1LastSeenMessageId" : id])
                 }
             }else{
                 if senderId != DataStore.shared.me?.objectId {
-                    self.lastSeenMessageId = id
-                    self.conversationRef?.updateChildValues(["user2LastSeenMessageId" : self.lastSeenMessageId])
+                    self.conversationRef?.updateChildValues(["user2LastSeenMessageId" : id])
                 }
             }
             
@@ -1102,7 +1100,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     private func addMessage(withId id: String, name: String, text: String) {
         if let message = JSQMessage(senderId: id, displayName: name, text: text) {
-            messages.append(message)
+            messages.append(message)  
         }
     }
 
