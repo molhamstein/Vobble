@@ -30,14 +30,7 @@ class ConversationViewController: AbstractController {
     fileprivate var searchString: String = ""
     var imgLoading: UIActivityIndicatorView?
     var userImageView: UIImageView?
-    
-    
-    // MARK: - firebase Properties
-//    fileprivate var conversationRefHandle: DatabaseHandle?
-//
-//    fileprivate lazy var conversationRef: DatabaseReference = Database.database().reference().child("conversations")
-//
-    
+        
     override func viewDidLoad() {
         
         super.viewDidLoad()

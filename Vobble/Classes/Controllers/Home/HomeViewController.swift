@@ -37,6 +37,7 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var ivThrowBtn: UIImageView!
     @IBOutlet weak var lblBottlesLeftBadge: UILabel!
     @IBOutlet weak var vThrowBtnCircle: UIView!
+    @IBOutlet weak var vThrowBtnImg: UIView!
     
     // my bottles
     @IBOutlet weak var vMyBottlesBtnContainer: UIView!
@@ -44,6 +45,7 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var btnMyBottlesBtn: UIButton!
     @IBOutlet weak var ivMyBottlesBtn: UIImageView!
     @IBOutlet weak var vMyBottlesBtnCircle: UIView!
+    @IBOutlet weak var vMyBottlesBtnImg: UIView!
     @IBOutlet weak var lblUnreadConversationsBadge: UILabel!
     // find
     @IBOutlet weak var vFindBtnContainer: UIView!
@@ -51,6 +53,7 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var btnFindBtn: UIButton!
     @IBOutlet weak var ivFindBtn: UIImageView!
     @IBOutlet weak var vFindBtnCircle: UIView!
+    @IBOutlet weak var vFindBtnImg: UIView!
     
     // GIF images
     @IBOutlet var ivShore2Girl: UIImageView!
@@ -374,7 +377,8 @@ class HomeViewController: AbstractController {
         if let bCount = DataStore.shared.me?.totalBottlesLeftToThrowCount, bCount > 0 {
             //DataStore.shared.me?.thrownBottlesCount = bCount - 1
             //self.wiggleAnimate(view: self.ivThrowBtn)
-            self.popAnimation(view: self.vThrowBtnCircle)
+            //self.popAnimation(view: self.vThrowBtnCircle)
+            self.popAnimation(view: self.vThrowBtnImg)
             
             self.disableActions(disable: true)
             // add a delay to show button press animation
@@ -416,7 +420,8 @@ class HomeViewController: AbstractController {
         self.ivFindBottle.setGifImage(findBottleGif)
         self.ivFindBottle.loopCount = 1
         //self.wiggleAnimate(view: self.ivFindBtn)
-        self.popAnimation(view: self.vFindBtnCircle)
+        //self.popAnimation(view: self.vFindBtnCircle)
+        self.popAnimation(view: self.vFindBtnImg)
         
         // send tracking event
         let logEventParams = ["Shore": DataStore.shared.shores[self.currentPageIndex].name_en ?? "Main Shore", "Gender": self.gender.rawValue, "Country": self.countryCode];
@@ -468,7 +473,8 @@ class HomeViewController: AbstractController {
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
         //self.wiggleAnimate(view: self.ivMyBottlesBtn)
-        self.popAnimation(view: self.vMyBottlesBtnCircle)
+        //self.popAnimation(view: self.vMyBottlesBtnCircle)
+        self.popAnimation(view: self.vMyBottlesBtnImg)
         self.disableActions(disable: true)
         // add a delay to show button press animation
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {

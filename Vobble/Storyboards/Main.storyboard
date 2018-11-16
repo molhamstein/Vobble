@@ -361,8 +361,8 @@
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_throw_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-sx-okP">
                                         <rect key="frame" x="33" y="12" width="24" height="62"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_throw_bottle2" translatesAutoresizingMaskIntoConstraints="NO" id="x5U-O0-CwX">
-                                        <rect key="frame" x="-75" y="-19" width="240" height="28"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_throw_bottle2" translatesAutoresizingMaskIntoConstraints="NO" id="x5U-O0-CwX">
+                                        <rect key="frame" x="10" y="0.0" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="x5U-O0-CwX" secondAttribute="height" multiplier="1:1" id="nfK-Ja-Nji"/>
                                         </constraints>
@@ -574,10 +574,13 @@
                         <outlet property="sonTopConstraint" destination="ScL-Bu-6CQ" id="bG0-Hm-6vt"/>
                         <outlet property="vFindBtnCircle" destination="hiQ-9T-sDq" id="hxX-tL-JPM"/>
                         <outlet property="vFindBtnContainer" destination="VXf-ox-frh" id="tq5-qn-0Fx"/>
+                        <outlet property="vFindBtnImg" destination="Icf-xW-4vV" id="h85-QX-fJw"/>
                         <outlet property="vMyBottlesBtnCircle" destination="YYU-Uy-TDn" id="wQl-KO-GvF"/>
                         <outlet property="vMyBottlesBtnContainer" destination="mx4-tz-u8b" id="mAZ-jB-QQ1"/>
+                        <outlet property="vMyBottlesBtnImg" destination="SqJ-A9-Hhb" id="EyU-vW-0WG"/>
                         <outlet property="vThrowBtnCircle" destination="DeK-Hn-i2k" id="DzF-mb-Nze"/>
                         <outlet property="vThrowBtnContainer" destination="ohl-cV-N1S" id="PGW-FS-tgA"/>
+                        <outlet property="vThrowBtnImg" destination="x5U-O0-CwX" id="AcG-04-Yo3"/>
                         <segue destination="9aW-Lr-Rgh" kind="presentation" identifier="homeRecrodSegue" id="nLz-PW-Ry2"/>
                         <segue destination="jSj-sV-840" kind="show" identifier="findBottleSegue" id="iBc-ms-v9Z"/>
                         <segue destination="JHw-gh-lbH" kind="show" identifier="myBottlesSegue" id="iv4-15-2aj"/>
