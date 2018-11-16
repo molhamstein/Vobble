@@ -59,7 +59,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
     fileprivate var messages: [JSQMessage] = []
-    private var messagesWithId: [String] = []
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
     private var audioMessageMap = [String: JSQCustomAudioMediaItem]()
@@ -144,8 +143,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     lazy var incomingBubbleImageView: JSQMessagesBubbleImage = self.setupIncomingBubble()
     
     /// isSeen
+    var isLastMessageSeen : Bool = false
     var lastSeenMessageId : String = "0"
-    var messageCounter: Int = 0
+    var lastSentMessageId : String = "000"
+    var messagesCount: Int = 0
+    var currentMessage: Int = 1
     
     /// Record beep
     var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")!)
@@ -641,15 +643,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
-        let messageWithId = messagesWithId[indexPath.item]
         
-        if message.senderId == DataStore.shared.me?.objectId {
-            if messageWithId == self.lastSeenMessageId {
+        switch message.senderId {
+        case senderId:
+            if self.isLastMessageSeen {
                 let paragraphStyle = NSMutableParagraphStyle()
                 if isRTL {
-                    paragraphStyle.alignment = .left
-                }else{
                     paragraphStyle.alignment = .right
+                }else{
+                    paragraphStyle.alignment = .left
                 }
                 paragraphStyle.firstLineHeadIndent = 5.0
                 
@@ -663,7 +665,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             }else {
                 return nil
             }
-        }else{
+        default:
             return nil
         }
     }
@@ -748,9 +750,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             let messageQuery = messageRef.queryLimited(toLast:2000)
             
             // get messages count
-            var messagesCount = 0
             self.conversationRef!.child("messages").observe(.value, with: { [weak self] (snapshot) in
-                messagesCount = Int(snapshot.childrenCount)
+                self?.messagesCount = Int(snapshot.childrenCount)
             } )
             
             // We can use the observe method to listen for new
@@ -762,26 +763,23 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
-                
-                
+
                 // check seen messages
                 if let selfRef = self {
-                    if selfRef.messageCounter == messagesCount ||
-                        selfRef.messageCounter == messagesCount - 1 {
+                    if selfRef.currentMessage == selfRef.messagesCount ||
+                        selfRef.currentMessage == selfRef.messagesCount - 1 {
                         
-                        if selfRef.messageCounter == messagesCount - 1 {
-                            self?.messageCounter += 1
+                        if selfRef.currentMessage == selfRef.messagesCount - 1 {
+                            self?.currentMessage += 1
                         }
                         self?.checkLastSeenMessage(message: message)
                     }else {
-                        self?.messageCounter += 1
+                        self?.currentMessage += 1
                     }
                 }
                 
-                
                 if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
                     self?.addMessage(withId: id, name: name, text: text)
-                    self?.messagesWithId.append(message.idString!)
                     
                     self?.finishReceivingMessage()
                     
@@ -789,7 +787,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     
                     let mediaItem = JSQCustomPhotoMediaItem(message: message, isOperator: id == self?.senderId)
                     self?.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
-                    self?.messagesWithId.append(message.idString!)
+                    
                     
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
                         mediaItem.message = message
@@ -800,7 +798,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     
                     let mediaItem = JSQCustomVideoMediaItem(message: message, isOperator: id == self?.senderId)
                     self?.addVideoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
-                    self?.messagesWithId.append(message.idString!)
                     
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
                         mediaItem.message = message
@@ -821,13 +818,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     if id != DataStore.shared.me?.objectId {
                         if let url = audioItem.audioUrl, url.isValidUrl() {
                             self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
-                            self?.messagesWithId.append(message.idString!)
                         } else {
                             // dont add the message if its not mine and the url is not valid
                         }
                     } else {
                         self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
-                        self?.messagesWithId.append(message.idString!)
                     }
                    
                     if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
@@ -885,13 +880,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         if id != DataStore.shared.me?.objectId {
                             if let url = audioItem.audioUrl, url.isValidUrl() {
                                 self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
-                                self?.messagesWithId.append(message.idString!)
                             } else {
                                 // dont add the message if its not mine and the url is not valid
                             }
                         } else {
                             self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
-                            self?.messagesWithId.append(message.idString!)
                         }
                         
                         if mediaURL.hasPrefix("http://") || mediaURL.hasPrefix("https://") {
@@ -924,10 +917,13 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         updateLastSeenMessageRefHandle = self.lastSeenMessageRef!.observe(.value, with: { [weak self] (snapshot) -> Void in
         
             if let value = snapshot.value as? String {
-                self?.lastSeenMessageId = value
-                self?.collectionView.reloadData()
+                if let selfRef = self, selfRef.lastSentMessageId == value {
+                    self?.isLastMessageSeen = true
+                }else{
+                    self?.isLastMessageSeen = false
+                }
             }
-           
+            self?.collectionView.reloadData()
         })
     }
     
@@ -973,17 +969,30 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     private func checkLastSeenMessage(message : Message) {
         if let id = message.idString , let senderId = message.senderId {
             if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
-                if senderId != DataStore.shared.me?.objectId {
+                if senderId == DataStore.shared.me?.objectId {
+                    self.lastSentMessageId = id
+                    if id == self.conversationOriginalObject?.user2LastSeenMessageId {
+                        self.isLastMessageSeen = true
+                    }else{
+                        self.isLastMessageSeen = false
+                    }
+                }else {
                     self.lastSeenMessageId = id
                     self.conversationRef?.updateChildValues(["user1LastSeenMessageId" : self.lastSeenMessageId])
                 }
             }else{
-                if senderId != DataStore.shared.me?.objectId {
+                if senderId == DataStore.shared.me?.objectId {
+                    self.lastSentMessageId = id
+                    if id == self.conversationOriginalObject?.user1LastSeenMessageId {
+                        self.isLastMessageSeen = true
+                    }else{
+                        self.isLastMessageSeen = false
+                    }
+                }else {
                     self.lastSeenMessageId = id
                     self.conversationRef?.updateChildValues(["user2LastSeenMessageId" : self.lastSeenMessageId])
                 }
             }
-            
         }
     }
     
@@ -1012,7 +1021,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // 1
         let itemRef = messageRef.childByAutoId()
         
-
+        self.isLastMessageSeen = false
         
         // 2
         let messageItem = [
@@ -1037,6 +1046,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     func sendMediaMessage(mediaType: AppMediaType) -> String? {
         let itemRef = messageRef.childByAutoId()
         
+        self.isLastMessageSeen = false
         
         var messageItem = [
             "senderId": senderId!,
@@ -1062,6 +1072,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     func setMediaURL(_ media: Media, forPhotoMessageWithKey key: String) {
         let itemRef = messageRef.child(key)
+        
+        self.isLastMessageSeen = false
         
         if media.type == .image {
             itemRef.updateChildValues(["photoURL": media.fileUrl!])

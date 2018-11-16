@@ -264,11 +264,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 self.collectionView.backgroundColor = UIColor.clear
                 self.view.insertSubview(bgImage, belowSubview: self.collectionView)
                 
-                // upload the reply video here to make sure we can show the loader
-                if let replyVideoUrl = replyVideoUrlToUpload {
-                    self.uploadVideo(videoUrl: replyVideoUrl)
-                }
-                setupRecorder()
                 //chatPendingContainer.isHidden = true
             }
             isInitialised = true
@@ -440,6 +435,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             // put the sender id to its correct state
             if let userId = DataStore.shared.me?.objectId {
                 self.senderId = "\(userId)"
+            }
+            
+            // upload the reply video here to make sure we can show the loader
+            if let replyVideoUrl = replyVideoUrlToUpload {
+                self.uploadVideo(videoUrl: replyVideoUrl)
             }
             
             //send push notification to bottle owner to inform him about the new reply
@@ -646,11 +646,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if message.senderId == DataStore.shared.me?.objectId {
             if messageWithId == self.lastSeenMessageId {
                 let paragraphStyle = NSMutableParagraphStyle()
-                if isRTL {
-                    paragraphStyle.alignment = .left
-                }else{
-                    paragraphStyle.alignment = .right
-                }
+                paragraphStyle.alignment = .center
                 paragraphStyle.firstLineHeadIndent = 5.0
                 
                 let attributes: [String: Any] = [
@@ -715,8 +711,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     func fetchConversationByid (convId: String) {
         
-        self.conversationRef = FirebaseManager.shared.conversationRef.child(convId)
-        self.conversationRef?.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+        messageRef = FirebaseManager.shared.conversationRef.child(convId)
+        messageRef.observeSingleEvent(of: .value, with: { [weak self] snapshot in
             //print(snapshot)
             let conversation = Conversation(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
             self?.conversationOriginalObject = conversation
@@ -736,10 +732,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // then we need to fech it first
         // ex when the chat is opened from push notification deep linking
         if let convId = conversationId, conversationRef == nil  {
-            conversationRef = FirebaseManager.shared.conversationRef.child(convId)
-            if let convRef = conversationRef{
-                messageRef = convRef.child("messages")
-            }
+            messageRef = FirebaseManager.shared.conversationRef.child(convId)
         } else {
         
             // TODO here we are limiting the conversation messages count
@@ -1286,8 +1279,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.isLoadedMedia = false
         self.numberOfSentMedia += 1
         if mediaType != .audio {
-            videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath(), on: self.view)
-            videoUploadLoader?.rectSize = 200
+            //videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath())
         }
         
         let uploadCompletionBlock: (_ files: [Media], _ errorMessage: String?) -> Void = { [weak self] (files, errorMessage) in
@@ -1375,7 +1367,7 @@ extension ChatViewController: ChatNavigationDelegate {
 extension ChatViewController: AVAudioRecorderDelegate {
     
     fileprivate func initCustomToolBar() {
-
+        setupRecorder()
         let height: Float = Float(inputToolbar.contentView.leftBarButtonContainerView.frame.size.height)
         var image = UIImage(named: "chatMoreOptions")
         let mediaButton = UIButton(type: .custom)
@@ -1528,10 +1520,10 @@ extension ChatViewController: AVAudioRecorderDelegate {
                     do {
                         try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                         try audioSession.setActive(true)
-//                        if let selfRef = self {
-//                            try selfRef.soundRecorder = AVAudioRecorder(url: selfRef.directoryURL()!, settings: selfRef.recordSettings)
-//                        }
-//                        self?.soundRecorder.prepareToRecord()
+                        if let selfRef = self {
+                            try selfRef.soundRecorder = AVAudioRecorder(url: selfRef.directoryURL()!, settings: selfRef.recordSettings)
+                        }
+                        self?.soundRecorder.prepareToRecord()
                     } catch {
                         print("Error Recording");
                     }

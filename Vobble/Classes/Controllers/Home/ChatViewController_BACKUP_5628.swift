@@ -647,9 +647,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             if messageWithId == self.lastSeenMessageId {
                 let paragraphStyle = NSMutableParagraphStyle()
                 if isRTL {
-                    paragraphStyle.alignment = .left
-                }else{
                     paragraphStyle.alignment = .right
+                }else{
+                    paragraphStyle.alignment = .left
                 }
                 paragraphStyle.firstLineHeadIndent = 5.0
                 
@@ -1286,8 +1286,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.isLoadedMedia = false
         self.numberOfSentMedia += 1
         if mediaType != .audio {
+<<<<<<< HEAD
             videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath(), on: self.view)
             videoUploadLoader?.rectSize = 200
+=======
+            //videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath())
+>>>>>>> 1c90997afe1195b9deaee3adf1c12fdc3d7d5846
         }
         
         let uploadCompletionBlock: (_ files: [Media], _ errorMessage: String?) -> Void = { [weak self] (files, errorMessage) in
