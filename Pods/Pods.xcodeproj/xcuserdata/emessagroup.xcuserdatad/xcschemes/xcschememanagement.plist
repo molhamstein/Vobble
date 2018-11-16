@@ -67,6 +67,11 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>FillableLoaders.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>37</integer>
+		</dict>
 		<key>Flurry-iOS-SDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
