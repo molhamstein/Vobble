@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AudioCollectionViewCellOutgoing_id" id="gTV-IL-0wX" customClass="AudioCollectionViewCellOutgoing" customModule="Vobble" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="240" height="74"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="240" height="74"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-xa-PtZ">
@@ -64,22 +64,37 @@
                             <constraint firstItem="JUG-s5-mdN" firstAttribute="leading" secondItem="rPg-xa-PtZ" secondAttribute="leading" constant="14" id="pFE-4k-H8c"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="seen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJZ-XZ-NIw" customClass="JSQMessagesLabel">
+                        <rect key="frame" x="0.0" y="48" width="240" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="GRX-8S-3xu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="VJZ-XZ-NIw" firstAttribute="top" secondItem="rPg-xa-PtZ" secondAttribute="bottom" constant="2" id="JGc-2Y-xWS"/>
+                <constraint firstAttribute="trailing" secondItem="VJZ-XZ-NIw" secondAttribute="trailing" id="PnC-Sl-br3"/>
+                <constraint firstItem="VJZ-XZ-NIw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Q3M-40-KBr"/>
                 <constraint firstAttribute="trailing" secondItem="rPg-xa-PtZ" secondAttribute="trailing" constant="4" id="SQt-eV-BJS"/>
                 <constraint firstItem="rPg-xa-PtZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="XRh-Xr-Wga"/>
+                <constraint firstAttribute="bottom" secondItem="VJZ-XZ-NIw" secondAttribute="bottom" constant="2" id="zwT-2y-D7T"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="338" height="50"/>
+            <size key="customSize" width="338" height="74"/>
             <connections>
                 <outlet property="audioProgressLabel" destination="aQ0-ND-weU" id="QEV-QX-Kd3"/>
                 <outlet property="audioProgressView" destination="NB9-uB-qyX" id="CJz-st-0a6"/>
                 <outlet property="cellBackgroundView" destination="rPg-xa-PtZ" id="pUy-fh-Jk9"/>
+                <outlet property="cellBottomLabel" destination="VJZ-XZ-NIw" id="dph-tc-87b"/>
+                <outlet property="cellBottomLabelHeightConstraint" destination="GRX-8S-3xu" id="Gwc-PY-i3q"/>
                 <outlet property="indicatorView" destination="JUG-s5-mdN" id="WJo-kC-5gJ"/>
                 <outlet property="playButton" destination="hLk-TI-vgy" id="8H3-0v-gXh"/>
             </connections>
-            <point key="canvasLocation" x="-75.200000000000003" y="194.30284857571215"/>
+            <point key="canvasLocation" x="-75.200000000000003" y="205.09745127436284"/>
         </collectionViewCell>
     </objects>
     <resources>

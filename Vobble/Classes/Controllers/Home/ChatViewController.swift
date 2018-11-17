@@ -146,6 +146,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     /// isSeen
     var lastSeenMessageId : String = "0"
     var messageCounter: Int = 0
+    var seenStr: NSAttributedString?
     
     /// Record beep
     var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")!)
@@ -196,6 +197,18 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // Register new audio cells
         super.collectionView.register(UINib(nibName: "AudioCollectionViewCellOutgoing", bundle: nil), forCellWithReuseIdentifier: "AudioCollectionViewCellOutgoing_id")
         super.collectionView.register(UINib(nibName: "AudioCollectionViewCellIncoming", bundle: nil), forCellWithReuseIdentifier: "AudioCollectionViewCellIncoming_id")
+        
+        // Setup Attribute for seen bottom label
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.firstLineHeadIndent = 5.0
+        
+        let attributes: [String: Any] = [
+            NSForegroundColorAttributeName: UIColor.blue,
+            NSParagraphStyleAttributeName: paragraphStyle
+        ]
+        
+        seenStr = NSAttributedString(string: "SEEN".localized, attributes: attributes)
     }
     
     override func viewDidLayoutSubviews() {
@@ -545,6 +558,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
         let message = messages[indexPath.item]
+        let messageWithId = messagesWithId[indexPath.item]
         
         if message.isMediaMessage {
             if message.media is JSQAudioMediaItem {
@@ -557,6 +571,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     cell.url = audioItem.audioUrl
                     cell.data = audioItem.audioData
                     cell.audioDelegate = self
+                
+                    if messageWithId == self.lastSeenMessageId {
+                        cell.cellBottomLabel.attributedText = seenStr
+                    }else {
+                        cell.cellBottomLabel.text = ""
+                    }
                     
                     if (audioItem.audioUrl?.isValidUrl())! {
                         cell.indicatorView.stopAnimating()
@@ -645,17 +665,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         if message.senderId == DataStore.shared.me?.objectId {
             if messageWithId == self.lastSeenMessageId {
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.alignment = .center
-                paragraphStyle.firstLineHeadIndent = 5.0
-                
-                let attributes: [String: Any] = [
-                    NSForegroundColorAttributeName: UIColor.blue,
-                    NSParagraphStyleAttributeName: paragraphStyle
-                ]
-                
-                let seenStr = NSAttributedString(string: "SEEN".localized, attributes: attributes)
                 return seenStr
+                
             }else {
                 return nil
             }

@@ -33,6 +33,8 @@ class AudioCollectionViewCellOutgoing: JSQMessagesCollectionViewCellOutgoing {
         self.cellBackgroundView.layer.cornerRadius = 21
         self.indicatorView.isHidden = true
         self.backgroundColor = UIColor.clear
+        self.cellBottomLabel.textAlignment = .center
+        
     }
 }
 
