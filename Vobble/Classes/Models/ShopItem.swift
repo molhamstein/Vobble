@@ -21,10 +21,13 @@ enum ShopItemID: String {
     
     case Bottels3 = "com.yallavideo.Vibo.bottels3"  //    3 bottels    Consumable    com.yallavideo.Vibo.bottels3    5b13ee987fe59d9d184bfe44
     case Bottels5 = "com.yallavideo.Vibo.5bottels"  //    5 bottels    Consumable    com.yallavideo.Vibo.5bottels    5b13ee987fe59d9d184bfe45
+    case Bottels10 = "com.yallavideo.Vibo.bottels10"  //    10 bottels    Consumable    com.yallavideo.Vibo.5bottels
     
+    case CountryFilter1H = "com.yallavideo.Vibo.country1h"
     case CountryFilter24H = "com.yallavideo.Vibo.country24h"  //    Country filter 24H    Non-Renewing Subscription    com.yallavideo.Vibo.country24h    5b13ee987fe59d9d184bfe48
     case CountryFilter48H = "com.yallavideo.Vibo.country48h"  //    Country filter 48H    Non-Renewing Subscription    com.yallavideo.Vibo.country48h    5b13ee987fe59d9d184bfe49
     
+    case GenderFilter1H = "com.yallavideo.Vibo.gender1h"
     case GenderFilter24H = "com.yallavideo.Vibo.gender24h" //    Gender filter 24H    Non-Renewing Subscription    com.yallavideo.Vibo.gender24h    5b13ee987fe59d9d184bfe46
     case GenderFilter48H = "com.yallavideo.Vibo.gender48h" //    Gender filter 48H    Non-Renewing Subscription    com.yallavideo.Vibo.gender48h    5b13ee987fe59d9d184bfe47
     
@@ -58,14 +61,26 @@ enum ShopItemID: String {
         
         var listId = [String]()
         
-        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe44"))
-        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe45"))
+//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe44"))
+//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe45"))
+//
+//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe48"))
+//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe49"))
+//
+//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe46"))
+//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe47"))
         
-        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe48"))
-        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe49"))
+        listId.append(ShopItemID.Bottels3.rawValue)
+        listId.append(ShopItemID.Bottels5.rawValue)
+        listId.append(ShopItemID.Bottels10.rawValue)
         
-        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe46"))
-        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe47"))
+        listId.append(ShopItemID.CountryFilter1H.rawValue)
+        listId.append(ShopItemID.CountryFilter24H.rawValue)
+        listId.append(ShopItemID.CountryFilter48H.rawValue)
+        
+        listId.append(ShopItemID.GenderFilter1H.rawValue)
+        listId.append(ShopItemID.GenderFilter24H.rawValue)
+        listId.append(ShopItemID.GenderFilter48H.rawValue)
         
         return listId
     }

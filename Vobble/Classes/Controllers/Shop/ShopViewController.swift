@@ -296,7 +296,7 @@ extension ShopViewController: UICollectionViewDelegate {
                 if  obj.appleProduct != nil {
                     self.navigationView.showProgressIndicator(show: true)
                     self.view.isUserInteractionEnabled = false
-                    
+                    print(obj.appleProduct!)
                     if let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
                         //prepare payment
                         self.selectedProduct = obj
@@ -396,8 +396,11 @@ extension ShopViewController: UICollectionViewDelegate {
 extension ShopViewController: SKProductsRequestDelegate {
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-
+        for faild in response.invalidProductIdentifiers {
+            print(faild)
+        }
         for product in response.products {
+            print(product.productIdentifier)
             inAppPurchaseList.append(product)
         }
     }
