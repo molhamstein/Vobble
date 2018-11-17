@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.529624"
+            timestampString = "564104056.590106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1104"
@@ -410,12 +410,12 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Managers/SocialManager.swift"
-                  timestampString = "564101049.11075"
+                  timestampString = "564104056.749789"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
                   endingLineNumber = "89"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "27">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -425,12 +425,12 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Managers/SocialManager.swift"
-                  timestampString = "564101049.112223"
+                  timestampString = "564104056.752874"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "91"
                   endingLineNumber = "91"
-                  offsetFromSymbolStart = "32">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -442,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.538519"
+            timestampString = "564104056.590693"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "704"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Shop/ShopViewController.swift"
-            timestampString = "562265757.531356"
+            timestampString = "564104056.591056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "254"
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.5392751"
+            timestampString = "564104056.5911421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1172"
@@ -698,7 +698,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.5398411"
+            timestampString = "564104056.591591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "687"
@@ -810,7 +810,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
-            timestampString = "564101047.540339"
+            timestampString = "564104056.591977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "372"
@@ -954,13 +954,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.541003"
+            timestampString = "564104056.5921021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1190"
             endingLineNumber = "1190"
-            landmarkName = "ChatViewController"
-            landmarkType = "21">
+            landmarkName = "textViewDidChange(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -986,12 +986,12 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Controllers/Start/LoginViewController.swift"
-                  timestampString = "564101049.16215"
+                  timestampString = "564104056.8329411"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "873"
                   endingLineNumber = "873"
-                  offsetFromSymbolStart = "1616">
+                  offsetFromSymbolStart = "1972">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1001,12 +1001,12 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Controllers/Start/LoginViewController.swift"
-                  timestampString = "564101049.164031"
+                  timestampString = "564104056.836082"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "873"
                   endingLineNumber = "873"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1226,7 +1226,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Shop/ShopViewController.swift"
-            timestampString = "562265757.534016"
+            timestampString = "564104056.5924931"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "341"
@@ -1242,12 +1242,12 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Controllers/Shop/ShopViewController.swift"
-                  timestampString = "564101049.186532"
+                  timestampString = "564104056.871381"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "341"
                   endingLineNumber = "341"
-                  offsetFromSymbolStart = "3620">
+                  offsetFromSymbolStart = "4795">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1257,12 +1257,12 @@
                   moduleName = "Vobble"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Vobble/Classes/Controllers/Shop/ShopViewController.swift"
-                  timestampString = "564101049.188042"
+                  timestampString = "564104056.873528"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "341"
                   endingLineNumber = "341"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "4">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1274,7 +1274,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Shop/ShopViewController.swift"
-            timestampString = "562265757.534065"
+            timestampString = "564104056.592541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "335"
@@ -1290,7 +1290,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Shop/ShopViewController.swift"
-            timestampString = "562265757.534106"
+            timestampString = "564104056.592584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "339"
@@ -1322,12 +1322,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.541536"
+            timestampString = "564104056.592643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "439"
             endingLineNumber = "439"
-            landmarkName = "initNewConversation()"
+            landmarkName = "initWithConversation(conversation:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1338,44 +1338,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.541921"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1279"
-            endingLineNumber = "1279"
-            landmarkName = "uploadAudio(audioUrl:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.542213"
+            timestampString = "564104056.592934"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1269"
             endingLineNumber = "1269"
-            landmarkName = "ChatViewController"
-            landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.542625"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1490"
-            endingLineNumber = "1490"
-            landmarkName = "didPressRecordAudio(_:)"
+            landmarkName = "submitMessageWithVideoURL(videoUrl:thumbURL:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1386,125 +1354,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.543061"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1552"
-            endingLineNumber = "1552"
-            landmarkName = "audioRecorderDidFinishRecording(_:successfully:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.543479"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1567"
-            endingLineNumber = "1567"
-            landmarkName = "directoryURL()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.544118"
+            timestampString = "564104056.593197"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1579"
             endingLineNumber = "1579"
-            landmarkName = "tickRecorder(timer:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.54474"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1574"
-            endingLineNumber = "1574"
             landmarkName = "ChatViewController"
             landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "564101047.54522"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1297"
-            endingLineNumber = "1297"
-            landmarkName = "upload(url:photo:key:mediaType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/FillableLoaders/Source/FillableLoader.swift"
-            timestampString = "564101047.545552"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "add(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FillableLoaders.FillableLoader.add(__ObjC.CGPath) -&gt; ()"
-                  moduleName = "FillableLoaders"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Pods/FillableLoaders/Source/FillableLoader.swift"
-                  timestampString = "564101049.801071"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
-                  offsetFromSymbolStart = "25">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FillableLoaders.FillableLoader.add(__ObjC.CGPath) -&gt; ()"
-                  moduleName = "FillableLoaders"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/molhamStein/Documents/iOS%20Dev/Vobble/Pods/FillableLoaders/Source/FillableLoader.swift"
-                  timestampString = "564101052.657196"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "209"
-                  endingLineNumber = "209"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1514,12 +1370,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Shop/ShopViewController.swift"
-            timestampString = "564101140.867504"
+            timestampString = "564104056.5934941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "101"
             endingLineNumber = "101"
             landmarkName = "dismiss(animated:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
+            timestampString = "564104056.5935431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "644"
+            endingLineNumber = "644"
+            landmarkName = "collectionView(_:layout:heightForCellBottomLabelAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
+            timestampString = "564104056.5938621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "648"
+            endingLineNumber = "648"
+            landmarkName = "collectionView(_:attributedTextForMessageBubbleTopLabelAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

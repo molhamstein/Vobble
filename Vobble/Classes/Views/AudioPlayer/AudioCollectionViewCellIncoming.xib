@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AudioCollectionViewCellIncoming_id" id="Ugl-G0-ptu" customClass="AudioCollectionViewCellIncoming" customModule="Vobble" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="250" height="74"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="250" height="74"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tff-jR-W1E">
@@ -71,7 +71,7 @@
                 <constraint firstItem="Tff-jR-W1E" firstAttribute="top" secondItem="Ugl-G0-ptu" secondAttribute="top" constant="4" id="gpj-aE-rgz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="mE8-tu-Fdi"/>
-            <size key="customSize" width="292" height="50"/>
+            <size key="customSize" width="292" height="74"/>
             <connections>
                 <outlet property="audioProgressLabel" destination="ZAU-UN-b0V" id="A86-Q5-dqe"/>
                 <outlet property="audioProgressView" destination="hxK-bI-dTb" id="1ij-7a-vqI"/>
@@ -79,7 +79,7 @@
                 <outlet property="indicatorView" destination="mdP-qt-WKp" id="D5v-l5-tts"/>
                 <outlet property="playButton" destination="ZmJ-64-0BH" id="Fx4-Fk-75g"/>
             </connections>
-            <point key="canvasLocation" x="-19" y="166"/>
+            <point key="canvasLocation" x="-19.199999999999999" y="176.31184407796104"/>
         </collectionViewCell>
     </objects>
     <resources>
