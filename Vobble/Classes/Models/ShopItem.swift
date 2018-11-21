@@ -19,17 +19,19 @@ enum ShopItemType: String {
 
 enum ShopItemID: String {
     
-    case Bottels3 = "com.yallavideo.Vibo.bottels3"  //    3 bottels    Consumable    com.yallavideo.Vibo.bottels3    5b13ee987fe59d9d184bfe44
-    case Bottels5 = "com.yallavideo.Vibo.5bottels"  //    5 bottels    Consumable    com.yallavideo.Vibo.5bottels    5b13ee987fe59d9d184bfe45
-    case Bottels10 = "com.yallavideo.Vibo.bottels10"  //    10 bottels    Consumable    com.yallavideo.Vibo.5bottels
+    case Bottels3 = "com.yallavideo.Vibo.bottels3"
+    case Bottels5 = "com.yallavideo.Vibo.5bottels"
+    case Bottels10 = "com.yallavideo.Vibo.bottels10"
     
-    case CountryFilter1H = "com.yallavideo.Vibo.country1h"
-    case CountryFilter24H = "com.yallavideo.Vibo.country24h"  //    Country filter 24H    Non-Renewing Subscription    com.yallavideo.Vibo.country24h    5b13ee987fe59d9d184bfe48
-    case CountryFilter48H = "com.yallavideo.Vibo.country48h"  //    Country filter 48H    Non-Renewing Subscription    com.yallavideo.Vibo.country48h    5b13ee987fe59d9d184bfe49
+    case CountryFilter1H = "com.yallavideo.Vibo.1hcountry"
+    case CountryFilter12H = "com.yallavideo.Vibo.country12h"
+    case CountryFilter24H = "com.yallavideo.Vibo.24hcountry"
+    case CountryFilter48H = "com.yallavideo.Vibo.48hcountry"
     
-    case GenderFilter1H = "com.yallavideo.Vibo.gender1h"
-    case GenderFilter24H = "com.yallavideo.Vibo.gender24h" //    Gender filter 24H    Non-Renewing Subscription    com.yallavideo.Vibo.gender24h    5b13ee987fe59d9d184bfe46
-    case GenderFilter48H = "com.yallavideo.Vibo.gender48h" //    Gender filter 48H    Non-Renewing Subscription    com.yallavideo.Vibo.gender48h    5b13ee987fe59d9d184bfe47
+    case GenderFilter1H = "com.yallavideo.Vibo.1hgender"
+    case GenderFilter12H = "com.yallavideo.Vibo.gender12h"
+    case GenderFilter24H = "com.yallavideo.Vibo.24hgender"
+    case GenderFilter48H = "com.yallavideo.Vibo.48hgender"
     
     static func getIdFromKey(DBId: String) -> String {
         
@@ -75,10 +77,12 @@ enum ShopItemID: String {
         listId.append(ShopItemID.Bottels10.rawValue)
         
         listId.append(ShopItemID.CountryFilter1H.rawValue)
+        listId.append(ShopItemID.CountryFilter12H.rawValue)
         listId.append(ShopItemID.CountryFilter24H.rawValue)
         listId.append(ShopItemID.CountryFilter48H.rawValue)
         
         listId.append(ShopItemID.GenderFilter1H.rawValue)
+        listId.append(ShopItemID.GenderFilter12H.rawValue)
         listId.append(ShopItemID.GenderFilter24H.rawValue)
         listId.append(ShopItemID.GenderFilter48H.rawValue)
         

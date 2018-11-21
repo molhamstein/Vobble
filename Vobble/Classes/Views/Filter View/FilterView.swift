@@ -112,19 +112,21 @@ class FilterView: AbstractNibView {
     func refreshFilterView() {
         genderTimerStackView.isHidden = true
         countryTimerStackView.isHidden = true
-        
+
         btnFindBottle.isEnabled = false
         btnFindBottle.alpha = 0.5
         
         if DataStore.shared.inventoryItems.filter({$0.type == .genderFilter}).count > 0 {
+            let items = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})
             genderTimerStackView.isHidden = false
             genderFilterStackView.isHidden = true
             
-            if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})[0].endDate {
+            if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})[items.count - 1].endDate {
                 let currentDate = Date().timeIntervalSince1970
                 let seconds = (fTime - currentDate)
                 
                 if seconds >= 0 {
+                    genderTimer.resetTimer(seconds: seconds)
                     genderTimer.startTimer(seconds: TimeInterval(seconds))
                     genderTimer.delegate = self
                     //genderPicker.isUserInteractionEnabled = true
@@ -132,6 +134,7 @@ class FilterView: AbstractNibView {
                     genderTimerStackView.isHidden = false
                     btnFindBottle.isEnabled = true
                     btnFindBottle.alpha = 1.0
+                    
                 }else{
                     vGenderPlaceholder.isHidden = false
                     genderTimerStackView.isHidden = true
@@ -144,13 +147,15 @@ class FilterView: AbstractNibView {
         }
         
         if DataStore.shared.inventoryItems.filter({$0.type == .countryFilter}).count > 0 {
+            let items = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})
             countryTimerStackView.isHidden = false
             countryFilterStackView.isHidden = true
             
-            if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})[0].endDate {
+            if let fTime = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})[items.count - 1].endDate {
                 let currentDate = Date().timeIntervalSince1970
                 let seconds = (fTime - currentDate)
                 if seconds >= 0 {
+                    countryTimer.resetTimer(seconds: seconds)
                     countryTimer.startTimer(seconds: TimeInterval(seconds))
                     countryTimer.delegate = self
                     vCountryPlaceholder.isHidden = true

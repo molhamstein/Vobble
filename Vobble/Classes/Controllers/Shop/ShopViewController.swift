@@ -336,12 +336,23 @@ extension ShopViewController: UICollectionViewDelegate {
                 items = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})
             }
             
-            if items.count == 0 {
-                
+            var fTime : TimeInterval = 0
+            let currentDate = Date().timeIntervalSince1970
+            var seconds = 0.0
+            
+            if items.count > 0 {
+                fTime = items[items.count - 1].endDate ?? 0
+                seconds = (fTime - currentDate)
+            }
+            
+            
+            if seconds <= 0 {
                 let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
                 let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                     
                     if  obj.appleProduct != nil {
+                        self.navigationView.showProgressIndicator(show: true)
+                        self.view.isUserInteractionEnabled = false
                         if let selectedItem = self.getProductById(itemId: obj.appleProduct!) {
                             self.selectedProduct = obj
                             let pay = SKPayment(product: selectedItem)
@@ -358,8 +369,11 @@ extension ShopViewController: UICollectionViewDelegate {
                             let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
                             Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                             
+                        }else{
+                            self.navigationView.showProgressIndicator(show: false)
+                            self.view.isUserInteractionEnabled = true
                         }
-
+                        
                     }
                     
                 })
@@ -369,7 +383,7 @@ extension ShopViewController: UICollectionViewDelegate {
                 alertController.addAction(ok)
                 self.present(alertController, animated: true, completion: nil)
                 
-            } else {
+            }else{
                 let alertController = UIAlertController(title: "", message: "CANT_BUY_ITEM_WARNING".localized, preferredStyle: .alert)
                 let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
                 alertController.addAction(ok)
