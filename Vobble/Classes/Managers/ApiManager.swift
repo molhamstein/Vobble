@@ -294,11 +294,12 @@ class ApiManager: NSObject {
         var parameters : [String : Any] = [
             "username": user.userName!,
             "gender": user.gender?.rawValue ?? "male",
-            "ISOCode" : user.countryISOCode!,
+            "ISOCode" : user.countryISOCode ?? "SY",
             "typeLogIn": (user.loginType?.rawValue)!,
             "registrationCompleted": (user.accountInfoCompleted) ?? false,
             "homeTutShowed": (user.homeTutShowed) ?? false,
-            "ChatTutShowed": (user.chatTutShowed) ?? false
+            "ChatTutShowed": (user.chatTutShowed) ?? false,
+            "tut3Showed": (user.replyTutShowed) ?? false
         ]
         
         if let email = user.email {

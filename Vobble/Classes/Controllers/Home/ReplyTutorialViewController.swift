@@ -44,8 +44,8 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
         let screenSize = UIScreen.main.bounds.size
         switch stepIndex {
         case 0:
-            let xPos = (AppConfig.currentLanguage == .arabic) ? 70 : UIScreen.main.bounds.width - 70
-            spotlightView.appear(Spotlight.Oval(center: CGPoint(x: xPos, y: 60), diameter: 100))
+            let xPos = (AppConfig.currentLanguage == .arabic) ? 100 : UIScreen.main.bounds.width - 100
+            spotlightView.appear(Spotlight.Oval(center: CGPoint(x: xPos, y: UIScreen.main.bounds.height - 110), diameter: 130))
         case 1:
             dismiss(animated: true, completion: nil)
         default:

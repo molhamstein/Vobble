@@ -61,7 +61,7 @@ class AppUser: BaseModel, NSCopying {
     
     private let kHomeTutShowed = "homeTutShowed"
     private let kChatTutShowed = "ChatTutShowed"
-    private let kReplyTutShowed = "replyTutShowed"
+    private let kReplyTutShowed = "tut3Showed"
     
     private let kUserBottlesCount = "totalBottlesThrown"
     private let kUserBottlesLeftToday = "bottlesCount"
@@ -151,6 +151,10 @@ class AppUser: BaseModel, NSCopying {
         
         if let value = json[kReplyTutShowed].bool {
             replyTutShowed = value
+        }
+        
+        if let value = json[kAccountInfoCompleted].bool {
+            accountInfoCompleted = value
         }
         
         token = json[kUserTokenKey].string
@@ -267,6 +271,7 @@ class AppUser: BaseModel, NSCopying {
         copy.homeTutShowed = homeTutShowed
         copy.chatTutShowed = chatTutShowed
         copy.replyTutShowed = replyTutShowed
+        copy.accountInfoCompleted = accountInfoCompleted
         return copy
     }
 }

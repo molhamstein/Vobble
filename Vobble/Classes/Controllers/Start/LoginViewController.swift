@@ -427,7 +427,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
-                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == true {
+                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
                     } else {
                         self.dismiss(animated: true, completion: { })
@@ -459,7 +459,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
-                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == true {
+                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
                     } else {
                         self.dismiss(animated: true, completion: { })
@@ -861,7 +861,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
-                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == true {
+                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
                     } else {
                         self.dismiss(animated: true, completion: { })

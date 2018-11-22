@@ -377,8 +377,8 @@ class HomeViewController: AbstractController {
         if let bCount = DataStore.shared.me?.totalBottlesLeftToThrowCount, bCount > 0 {
             //DataStore.shared.me?.thrownBottlesCount = bCount - 1
             //self.wiggleAnimate(view: self.ivThrowBtn)
-            //self.popAnimation(view: self.vThrowBtnCircle)
-            self.popAnimation(view: self.vThrowBtnImg)
+            self.popAnimation(view: self.vThrowBtnCircle)
+            //self.popAnimation(view: self.vThrowBtnImg)
             
             self.disableActions(disable: true)
             // add a delay to show button press animation
@@ -421,8 +421,8 @@ class HomeViewController: AbstractController {
         self.ivFindBottle.setGifImage(findBottleGif)
         self.ivFindBottle.loopCount = 1
         //self.wiggleAnimate(view: self.ivFindBtn)
-        //self.popAnimation(view: self.vFindBtnCircle)
-        self.popAnimation(view: self.vFindBtnImg)
+        self.popAnimation(view: self.vFindBtnCircle)
+        //self.popAnimation(view: self.vFindBtnImg)
         
         // send tracking event
         let logEventParams = ["Shore": DataStore.shared.shores[self.currentPageIndex].name_en ?? "Main Shore", "Gender": self.gender.rawValue, "Country": self.countryCode];
@@ -474,8 +474,8 @@ class HomeViewController: AbstractController {
     
     @IBAction func myBottlesPressed(_ sender: UIButton) {
         //self.wiggleAnimate(view: self.ivMyBottlesBtn)
-        //self.popAnimation(view: self.vMyBottlesBtnCircle)
-        self.popAnimation(view: self.vMyBottlesBtnImg)
+        self.popAnimation(view: self.vMyBottlesBtnCircle)
+        //self.popAnimation(view: self.vMyBottlesBtnImg)
         self.disableActions(disable: true)
         // add a delay to show button press animation
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
