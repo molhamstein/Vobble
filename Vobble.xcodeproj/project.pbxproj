@@ -42,6 +42,7 @@
 		576993952153FF83001211CF /* introSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 576993942153FF82001211CF /* introSound.mp3 */; };
 		576B2AD02170A352001F42C4 /* ChatTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576B2ACF2170A352001F42C4 /* ChatTutorialViewController.swift */; };
 		57771F5D21270B1900A9C884 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57771F5C21270B1800A9C884 /* AnnotationViewController.swift */; };
+		57776E7921A46D9F002A102A /* ReplyTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57776E7821A46D9F002A102A /* ReplyTutorialViewController.swift */; };
 		5787DEC421008787009C2A43 /* dolphin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5787DEC321008786009C2A43 /* dolphin.gif */; };
 		5796242F20793B790005292A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242D20793B790005292A /* TermsViewController.swift */; };
 		5796243020793B790005292A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242E20793B790005292A /* AboutViewController.swift */; };
@@ -322,6 +323,7 @@
 		576993942153FF82001211CF /* introSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = introSound.mp3; sourceTree = "<group>"; };
 		576B2ACF2170A352001F42C4 /* ChatTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTutorialViewController.swift; sourceTree = "<group>"; };
 		57771F5C21270B1800A9C884 /* AnnotationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
+		57776E7821A46D9F002A102A /* ReplyTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyTutorialViewController.swift; sourceTree = "<group>"; };
 		5787DEC321008786009C2A43 /* dolphin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dolphin.gif; sourceTree = "<group>"; };
 		5796242D20793B790005292A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsViewController.swift; path = ../Home/TermsViewController.swift; sourceTree = "<group>"; };
 		5796242E20793B790005292A /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ../Home/AboutViewController.swift; sourceTree = "<group>"; };
@@ -1370,6 +1372,7 @@
 				B1F7A455205A0F39009B18AB /* ShopViewController.swift */,
 				57771F5C21270B1800A9C884 /* AnnotationViewController.swift */,
 				576B2ACF2170A352001F42C4 /* ChatTutorialViewController.swift */,
+				57776E7821A46D9F002A102A /* ReplyTutorialViewController.swift */,
 				B19371162033D8FC007B1E7D /* HomeViewController.swift */,
 				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
 				B1508CD520461F630048123F /* FindBottleViewController.swift */,
@@ -1884,6 +1887,7 @@
 				570BB322208138ED00542EAD /* PassthroughView.m in Sources */,
 				5796242F20793B790005292A /* TermsViewController.swift in Sources */,
 				B18A5DA920348E4300F139B7 /* RACUnit.m in Sources */,
+				57776E7921A46D9F002A102A /* ReplyTutorialViewController.swift in Sources */,
 				0445EF3E218E61860029A6FB /* AudioManager.swift in Sources */,
 				5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */,
 				B193711D2033D943007B1E7D /* SignupViewController.swift in Sources */,

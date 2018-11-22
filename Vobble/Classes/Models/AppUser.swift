@@ -61,6 +61,7 @@ class AppUser: BaseModel, NSCopying {
     
     private let kHomeTutShowed = "homeTutShowed"
     private let kChatTutShowed = "ChatTutShowed"
+    private let kReplyTutShowed = "replyTutShowed"
     
     private let kUserBottlesCount = "totalBottlesThrown"
     private let kUserBottlesLeftToday = "bottlesCount"
@@ -69,7 +70,6 @@ class AppUser: BaseModel, NSCopying {
     private let kBottleFirstColor: String = "fcolor"
     private let kBottleSecondColor: String = "lcolor"
     private let kBottleImageUrl: String = "imgurl"
-
     
     // MARK: Properties
     public var objectId: String?
@@ -96,6 +96,7 @@ class AppUser: BaseModel, NSCopying {
     
     public var homeTutShowed : Bool?
     public var chatTutShowed : Bool?
+    public var replyTutShowed : Bool?
 
     public var totalBottlesLeftToThrowCount: Int {
         get {
@@ -146,6 +147,10 @@ class AppUser: BaseModel, NSCopying {
         
         if let value = json[kChatTutShowed].bool {
             chatTutShowed = value
+        }
+        
+        if let value = json[kReplyTutShowed].bool {
+            replyTutShowed = value
         }
         
         token = json[kUserTokenKey].string
@@ -227,6 +232,9 @@ class AppUser: BaseModel, NSCopying {
         if let value = chatTutShowed {
             dictionary[kChatTutShowed] = value
         }
+        if let value = replyTutShowed {
+            dictionary[kReplyTutShowed] = value
+        }
         
         if let value = accountInfoCompleted {
             dictionary[kAccountInfoCompleted] = value
@@ -256,7 +264,9 @@ class AppUser: BaseModel, NSCopying {
         copy.socialId = socialId
         copy.socialToken = socialToken
         copy.nextRefillDate = nextRefillDate
+        copy.homeTutShowed = homeTutShowed
+        copy.chatTutShowed = chatTutShowed
+        copy.replyTutShowed = replyTutShowed
         return copy
     }
-    
 }

@@ -553,6 +553,14 @@ extension RecordMediaViewController
     }
     
     func gotToPreview(videoUrl: NSURL?, image: UIImage?) {
+        
+        if self.from == .findBottle {
+            let logEventParams = ["recordType": "reply"];
+            Flurry.logEvent(AppConfig.recorded_video, withParameters:logEventParams);
+        } else {
+            let logEventParams = ["recordType": "new"];
+            Flurry.logEvent(AppConfig.recorded_video, withParameters:logEventParams);
+        }
         Flurry.logEvent(AppConfig.recorded_video);
         
         // animate Views out

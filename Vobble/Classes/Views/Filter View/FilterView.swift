@@ -220,10 +220,12 @@ class FilterView: AbstractNibView {
     
     @IBAction func countryFilterBtnPressed(_ sender: AnyObject) {
         self.delegate?.filterViewGoToShop(self, productType: .countryFilter)
+        Flurry.logEvent(AppConfig.filter_pressed_go_country);
     }
     
     @IBAction func genderFilterBtnPressed(_ sender: AnyObject) {
         self.delegate?.filterViewGoToShop(self, productType: .genderFilter)
+        Flurry.logEvent(AppConfig.filter_pressed_go_gender);
     }
     
     @IBAction func findBottlePressed(_ sender: Any) {

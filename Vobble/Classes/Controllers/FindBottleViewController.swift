@@ -95,6 +95,19 @@ class FindBottleViewController: AbstractController {
             //replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
             replyLabel.text = "REPLY".localized
             
+            // show chat tutorial on first opening of an unblocked chat
+            if let tutShowedBefore = DataStore.shared.me?.replyTutShowed, !tutShowedBefore {
+                DataStore.shared.me?.replyTutShowed = true
+                dispatch_main_after(2) {
+                    let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ReplyTutorial") as! ReplyTutorialViewController
+                    viewController.alpha = 0.5
+                    self.present(viewController, animated: true, completion: nil)
+                    if let me = DataStore.shared.me {
+                        ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }
+                    }
+                }
+            }
+            
             isInitialized = true
         }
     }

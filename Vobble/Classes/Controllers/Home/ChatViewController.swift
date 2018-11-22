@@ -200,7 +200,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // Setup Attribute for seen bottom label
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
+        if isRTL {
+            paragraphStyle.alignment = .left
+        } else {
+            paragraphStyle.alignment = .right
+        }
         paragraphStyle.firstLineHeadIndent = 5.0
         
         let attributes: [String: Any] = [
@@ -230,12 +234,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 lblTimerRecording.font = AppFonts.bigBold
                 lblTimerRecording.textAlignment = .center
                 
-                self.recordButtonContainer.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.inputToolbar.frame.height)
-                self.recordButton.frame = CGRect(x: self.view.frame.width/2 - 60 , y: self.view.frame.height/2 - 90, width: 120, height: 120)
-                self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
+                self.recordButtonContainer.frame = CGRect(x: 0 , y: UIScreen.main.bounds.height - 70, width: UIScreen.main.bounds.width, height: 70)
+                self.recordButton.frame = CGRect(x: 20 , y: 15, width: 40, height: 40)
+                self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 20, height: 20)
                 self.ivRecordingIcon.center = self.recordButton.center
-                self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: self.recordButton.frame.origin.y - 50, width: 200, height: 30)
-                self.lblTimerRecording.frame = CGRect(x: self.view.frame.width/2 - 100 , y: recordButton.frame.maxY + 10, width: 200, height: 30)
+                self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 75 , y: self.recordButton.frame.origin.y, width: 150, height: 30)
+                self.lblTimerRecording.frame = CGRect(x: 80 , y: self.recordButton.frame.origin.y, width: 50, height: 30)
                 self.view.addSubview(self.recordButtonContainer)
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
                 //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0).isActive = true
@@ -420,7 +424,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         
         // show chat tutorial on first opening of an unblocked chat
-        if let tutShowedBefore = DataStore.shared.tutorialChatShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
+        if let tutShowedBefore = DataStore.shared.me?.homeTutShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
             DataStore.shared.tutorialChatShowed = true
             DataStore.shared.me?.chatTutShowed = true
             dispatch_main_after(2) {
@@ -1393,6 +1397,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         // record button gesture recognizers
         recordButton.setImage(image, for: .normal)
         let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
+        longGestureRecognizer.minimumPressDuration = 0.3
         recordButton.addGestureRecognizer(longGestureRecognizer)
         // used to show a tip for the user when cliking on the record button
         let tabGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTabRecordAudio(_:)))

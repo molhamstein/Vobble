@@ -412,6 +412,7 @@ class HomeViewController: AbstractController {
         if tapLocationRatio > 0.25 && tapLocationRatio < 0.6 && !self.filterViewVisible {
             self.findBottlePressed(ivSea)
         }
+        Flurry.logEvent(AppConfig.home_press_sea);
     }
     
     @IBAction func findBottlePressed(_ sender: Any) {

@@ -42,6 +42,7 @@ struct AppConfig {
     // find
     static let find_bottle = "Find_Bottle"
     static let find_bottle_not_found = "Find_Bottle_Not_Found"
+    
     // reply
     static let reply_pressed = "Reply_Pressed"
     static let reply_shooted = "Reply_Shooted"
@@ -65,6 +66,11 @@ struct AppConfig {
     
     // Filter
     static let filter_click = "Filter_Click"
+    static let filter_pressed_go_gender = "Filter_go_to_gender"
+    static let filter_pressed_go_country = "Filter_go_to_country"
+    
+    // home
+    static let home_press_sea = "Home_press_sea"
     
     static let chatValidityafterSeen: Double = 24.0*60.0*60.0*1000.0 // 24 hours
     
