@@ -264,7 +264,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mx4-tz-u8b">
-                                <rect key="frame" x="115" y="469" width="90" height="90"/>
+                                <rect key="frame" x="115" y="466" width="90" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYU-Uy-TDn">
                                         <rect key="frame" x="15" y="13" width="60" height="60"/>
@@ -303,7 +303,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hD2-1k-mJB">
-                                        <rect key="frame" x="5.5" y="-2" width="25" height="25"/>
+                                        <rect key="frame" x="5.5" y="6" width="25" height="25"/>
                                         <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.090589985959999994" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="Kfl-dQ-NCD"/>
@@ -376,7 +376,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qzh-lr-3sk">
-                                        <rect key="frame" x="0.0" y="2" width="28" height="28"/>
+                                        <rect key="frame" x="4" y="6" width="28" height="28"/>
                                         <color key="backgroundColor" red="0.86666666670000003" green="0.0" blue="0.090589985957142863" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="VbG-LJ-hAl"/>

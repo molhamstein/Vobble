@@ -17,7 +17,7 @@ struct AppConfig {
     static let appBaseDevURL = "http://104.217.253.15:7000/api"
     static let appBaseLiveURL = "http://159.65.202.38:3000/api"
     static let useLiveAPI: Bool = true
-    static let isProductionBuild: Bool = false
+    static let isProductionBuild: Bool = true
     static let useCurrentLocation: Bool = false
     static let contactUsEmail: String = "yallavideoapp@gmail.com"
     
