@@ -597,6 +597,7 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 
                 let resJson = JSON(responseObject.result.value!)
+                print(resJson)
                 if let data = resJson.array {
                     let shopItems: [ShopItem] = data.map{ShopItem(json: $0)}
                     //save to cache

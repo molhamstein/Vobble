@@ -289,7 +289,7 @@ extension ShopViewController: UICollectionViewDelegate {
         
         if bottlesButton.isSelected {
             
-            let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
+            let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? 0.0)") , preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                 
                 
@@ -347,7 +347,7 @@ extension ShopViewController: UICollectionViewDelegate {
             
             
             if seconds <= 0 {
-                let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? " ")") , preferredStyle: .alert)
+                let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? 0.0)") , preferredStyle: .alert)
                 let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                     
                     if  obj.appleProduct != nil {

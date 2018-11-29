@@ -120,7 +120,7 @@ class ShopItem: BaseModel {
     public var title_en : String?
     public var description_ar : String?
     public var description_en : String?
-    public var price : String?
+    public var price : Double?
     //public var firstColor : UIColor?
     //public var secondColor : UIColor?
     public var icon : String?
@@ -201,7 +201,7 @@ class ShopItem: BaseModel {
         if let value = json[kShopItemDescription_ar].string {
             description_ar = value
         }
-        if let value = json[kShopItemPrice].string {
+        if let value = json[kShopItemPrice].double {
             price = value
         }
         if let value = json[kShopItemValidity].double {
