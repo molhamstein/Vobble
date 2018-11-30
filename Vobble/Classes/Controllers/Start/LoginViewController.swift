@@ -44,6 +44,10 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var forgetPasswordButton: UIButton!
     @IBOutlet weak var loginButton: VobbleButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginTermsPrefixLabel: UILabel!
+    @IBOutlet weak var loginTermsButton: UIButton!
+    @IBOutlet weak var loginTermsOrLabel: UILabel!
+    @IBOutlet weak var loginPrivacyButton: UIButton!
     
     @IBOutlet weak var lblRegisetrButtonPrefix: UILabel!
     @IBOutlet weak var btnLoginRegister: UIButton!
@@ -231,6 +235,10 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         svLoginButton.titleLabel?.font = AppFonts.normalBold
         svLoginPrefixLabel.font = AppFonts.normal
         selectCountryButton.titleLabel?.font = AppFonts.big
+        loginTermsPrefixLabel.font = AppFonts.small
+        loginTermsButton.titleLabel?.font = AppFonts.smallBold
+        loginPrivacyButton.titleLabel?.font = AppFonts.smallBold
+        loginTermsPrefixLabel.font = AppFonts.small
         
         btnSocialInfoSelectCountry.titleLabel?.font = AppFonts.big
         lblSocialInfoWelcome.font = AppFonts.big
@@ -244,6 +252,10 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         lblRegisetrButtonPrefix.text = "LOGIN_REGISTER_BTN_PREFIX".localized
         btnLoginRegister.setTitle("LOGIN_REGISTER_BTN".localized, for: .normal)
         lblRegisetrButtonSuffix.text = "LOGIN_REGISTER_BTN_SUFFIX".localized
+        loginTermsPrefixLabel.text = "LOGIN_ACCESSEPT".localized
+        loginTermsButton.setTitle("LOGIN_TERMS".localized, for: .normal)
+        loginPrivacyButton.setTitle("LOGIN_PRIVACY".localized, for: .normal)
+        loginTermsPrefixLabel.text = "LOGIN_ACCESSEPT".localized
         
         svEmailLabel.text = "SIGNUP_EMAIL_TITLE".localized
         svEmailTextField.placeholder = "SIGNUP_EMAIL_PLACEHOLDER".localized

@@ -1069,7 +1069,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Et-onT" userLabel="bottom View" customClass="PassthroughView">
-                                <rect key="frame" x="0.0" y="408" width="320" height="160"/>
+                                <rect key="frame" x="0.0" y="393" width="320" height="160"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96s-Ya-2Dz">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="130"/>
@@ -1261,7 +1261,7 @@
                             <constraint firstItem="hny-Og-jaY" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="6iV-1T-g2Y"/>
                             <constraint firstAttribute="trailing" secondItem="99U-U6-K8D" secondAttribute="trailing" constant="70" id="BMD-YT-V3Y"/>
                             <constraint firstAttribute="bottom" secondItem="DCn-Ia-GpG" secondAttribute="bottom" id="E7Z-Tm-4xa"/>
-                            <constraint firstAttribute="bottom" secondItem="9ZT-Et-onT" secondAttribute="bottom" id="HKA-0l-W3u"/>
+                            <constraint firstAttribute="bottom" secondItem="9ZT-Et-onT" secondAttribute="bottom" constant="15" id="HKA-0l-W3u"/>
                             <constraint firstItem="mXs-T0-xQv" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="LeD-Vp-jel"/>
                             <constraint firstAttribute="trailing" secondItem="mXs-T0-xQv" secondAttribute="trailing" id="NnP-6b-eN3"/>
                             <constraint firstAttribute="trailing" secondItem="zjl-AZ-sn8" secondAttribute="trailing" constant="10" id="PjS-xr-XII"/>

@@ -26,7 +26,7 @@ class VideoPlayerView: AbstractNibView {
         }
         
         player = BMPlayer(customControlView: controller)
-        
+        controller.frame.origin.y += 18
 //        player = BMPlayer()
         
         videoView.addSubview(player)

@@ -48,6 +48,11 @@
 "LOGIN_REGISTER_BTN_PREFIX"             = "Or";
 "LOGIN_REGISTER_BTN"                    = "Register";
 "LOGIN_REGISTER_BTN_SUFFIX"             = "a new account";
+"LOGIN_ACCESSEPT"                       = "By login you accept our";
+"LOGIN_PRIVACY"                         = "Privacy Policy";
+"LOGIN_TERMS"                           = "Terms Of Service";
+"LOGIN_AND"                             = " & ";
+
 
 // Signup screen
 "SIGNUP_EMAIL_TITLE"                     = "EMAIL";
@@ -165,6 +170,7 @@
 "FILTERS_PANEL_PLACEHOLDER_GENDER"      = "Want to find bottles from males or females only?";
 "FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "Find Bottles from specific country";
 "FILTERS_PANEL_NO_COUNTRY_SELECTED"     = "Select Country";
+"FILTERS_PANEL_TIME_LEFT"               = "Left";
 "PREFERED_COUNTRIES_TITLE"              = "Most used";
 
 // preview

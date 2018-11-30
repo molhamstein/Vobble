@@ -84,6 +84,8 @@ class FilterView: AbstractNibView {
         lblCountryPlaceholder.text = "FILTERS_PANEL_PLACEHOLDER_COUNTRY".localized
         lblGenderPlaceholder.text = "FILTERS_PANEL_PLACEHOLDER_GENDER".localized
         countryPickerLabel.text = "FILTERS_PANEL_NO_COUNTRY_SELECTED".localized
+        countryLeftLabel.text = "FILTERS_PANEL_TIME_LEFT".localized
+        genderLeftLabel.text = "FILTERS_PANEL_TIME_LEFT".localized
         
         // fonts
         allGenderLabel.font = AppFonts.normal
@@ -96,6 +98,8 @@ class FilterView: AbstractNibView {
         lblCountryPlaceholder.font = AppFonts.normal
         lblGenderPlaceholder.font = AppFonts.normal
         countryPickerLabel.font = AppFonts.xBigBold
+        countryLeftLabel.font = AppFonts.small
+        genderLeftLabel.font = AppFonts.small
         
         allGenderButton.alpha = 1
         allGenderLabel.alpha = 1

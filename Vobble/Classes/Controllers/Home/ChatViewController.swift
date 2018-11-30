@@ -213,6 +213,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         ]
         
         seenStr = NSAttributedString(string: "SEEN".localized, attributes: attributes)
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -294,8 +297,14 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -376,6 +385,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
                 let msgToSendAr = String(format: "NOTIFICATION_CHAT_IS_ACTIVE_AR".localized, (DataStore.shared.me?.userName)!)
                 ApiManager.shared.sendPushNotification(msg: msgToSend, msg_ar: msgToSendAr, targetUser: conversation.getPeer!, chatId: self.conversationId, completionBlock: { (success, error) in })
+                
+                // schedule a notification to remind the users before the chat expires
+                ApiManager.shared.onReplyOpened(conversation: conversation, completionBlock: { (success, err) in})
             }
             
         } else {
@@ -526,8 +538,19 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
     }
 
+    // MARK: - Keybaord notification
     
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.recordButtonContainer.frame.origin.y -= keyboardSize.height
+        }
+    }
     
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.recordButtonContainer.frame.origin.y += keyboardSize.height
+        }
+    }
     
     // MARK: Collection view data source (and related) methods
     
@@ -660,7 +683,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             }
             return NSAttributedString(string: senderDisplayName)
         }
-       
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
@@ -670,7 +692,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if message.senderId == DataStore.shared.me?.objectId {
             if messageWithId == self.lastSeenMessageId {
                 return seenStr
-                
             }else {
                 return nil
             }
@@ -767,19 +788,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             // We can use the observe method to listen for new
             // messages being written to the Firebase DB
             newMessageRefHandle = messageQuery.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
-    //            let messageData = snapshot.value as! Dictionary<String, String>
+    //      let messageData = snapshot.value as! Dictionary<String, String>
                 
                 //let values = snapshot.value as? NSDictionary
-                
                 let message = Message(json: JSON(snapshot.value as! Dictionary<String, AnyObject>))
                 message.idString = snapshot.key
                 
-                
                 // check seen messages
                 if let selfRef = self {
-                    if selfRef.messageCounter == messagesCount ||
-                        selfRef.messageCounter == messagesCount - 1 {
-                        
+                    if selfRef.messageCounter == messagesCount || selfRef.messageCounter == messagesCount - 1 {
                         if selfRef.messageCounter == messagesCount - 1 {
                             self?.messageCounter += 1
                         }
@@ -788,7 +805,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         self?.messageCounter += 1
                     }
                 }
-                
                 
                 if let id = message.senderId, let name = message.senderName, let text = message.text, text.characters.count > 0 {
                     self?.addMessage(withId: id, name: name, text: text)

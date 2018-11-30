@@ -101,6 +101,8 @@ class FindBottleViewController: AbstractController {
                 dispatch_main_after(2) {
                     let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ReplyTutorial") as! ReplyTutorialViewController
                     viewController.alpha = 0.5
+                    viewController.buttonFrame = self.replyButton.superview?.convert(self.replyButton.frame, to: nil)
+                    viewController.findViewController = self
                     self.present(viewController, animated: true, completion: nil)
                     if let me = DataStore.shared.me {
                         ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }

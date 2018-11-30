@@ -16,6 +16,9 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
     @IBOutlet var lblStep1: UILabel!
     
     var stepIndex: Int = 0
+    var buttonFrame: CGRect?
+    
+    var findViewController: FindBottleViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +44,24 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
     func next(_ labelAnimated: Bool) {
         updateAnnotationView(labelAnimated)
         
-        let screenSize = UIScreen.main.bounds.size
         switch stepIndex {
         case 0:
-            let xPos = (AppConfig.currentLanguage == .arabic) ? 100 : UIScreen.main.bounds.width - 100
-            spotlightView.appear(Spotlight.Oval(center: CGPoint(x: xPos, y: UIScreen.main.bounds.height - 110), diameter: 130))
+            if var btnFrame = buttonFrame {
+                btnFrame.size.width += 30
+                btnFrame.size.height += 30
+                btnFrame.origin.x -= 15
+                btnFrame.origin.y -= 15
+                //let buttonCenter = btnFrame.origin.x + btnFrame.size.width/2
+                //let xPos = (AppConfig.currentLanguage == .arabic) ? buttonCenter : UIScreen.main.bounds.width - buttonCenter
+                //let xPos = buttonCenter
+                //let yPos = btnFrame.origin.y - btnFrame.size.height/2
+                spotlightView.appear(Spotlight.Oval(frame: btnFrame))
+                
+                // add button to recieve click
+                let btn = UIButton.init(frame: btnFrame)
+                btn.addTarget(self, action: #selector(ReplyTutorialViewController.actionReply), for: .touchUpInside);
+                self.view.addSubview(btn)
+            }
         case 1:
             dismiss(animated: true, completion: nil)
         default:
@@ -71,6 +87,12 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
     }
     
     @IBAction func actionClose(_ sender: AnyObject){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func actionReply(_ sender: AnyObject){
+        findViewController?.replyBtnPressed(sender)
+        findViewController?.replyButton.setClicked(true)
         dismiss(animated: true, completion: nil)
     }
 }

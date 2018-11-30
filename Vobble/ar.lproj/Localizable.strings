@@ -48,6 +48,11 @@
 "LOGIN_REGISTER_BTN_PREFIX"             = "أو";
 "LOGIN_REGISTER_BTN"                    = " قم بتسجيل ";
 "LOGIN_REGISTER_BTN_SUFFIX"             = "حساب جديد";
+"LOGIN_ACCESSEPT"                       = "بتسجيلك الدحول تقبل";
+"LOGIN_PRIVACY"                         = "سياسه الخصوصيه";
+"LOGIN_TERMS"                           = "شروط الاستخدام";
+"LOGIN_AND"                             = " & ";
+
 
 "SIGNUP_EMAIL_TITLE"                     = "البريد الاالكتروني";
 "SIGNUP_EMAIL_PLACEHOLDER"               = "vibomail@gmail.com";
@@ -165,6 +170,7 @@
 "FILTERS_PANEL_PLACEHOLDER_GENDER"      = "تبحث عن فيديو من جنس معين ؟";
 "FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "تبحث عن فيديو من بلد معين ؟";
 "FILTERS_PANEL_NO_COUNTRY_SELECTED"     = "حدد البلد";
+"FILTERS_PANEL_TIME_LEFT"               = "متبقي";
 "PREFERED_COUNTRIES_TITLE"              = "الأكثر تداولا";
 
 // preview
