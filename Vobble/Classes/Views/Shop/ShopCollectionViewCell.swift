@@ -41,7 +41,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
         mainView.removeGradientLayer()
         mainView.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .horizontal)
         titleLabel.text = shopItemObj.title
-        priceLabel.text = shopItemObj.price
+        priceLabel.text = String(shopItemObj.price ?? 0.0)
         descriptionLabel.text = shopItemObj.description
         if let iconUrl = shopItemObj.icon {
             image.sd_setImage(with: URL(string:iconUrl))
