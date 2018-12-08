@@ -421,7 +421,7 @@ extension ShopViewController: SKProductsRequestDelegate {
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
         
-        let failAlert = UIAlertController(title: "Error", message: "Something went wrong, please try again later", preferredStyle: .alert)
+        let failAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         failAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: {_ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -523,7 +523,12 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 
             case .failed:
                 print("buy error")
+                print(transaction.error)
                 finishTransaction(queue, transaction)
+                
+                let alert = UIAlertController(title: "Error", message: transaction.error?.localizedDescription , preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 
             case .deferred :
                 print("deferred")
