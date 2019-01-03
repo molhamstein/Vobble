@@ -12,10 +12,12 @@ import UIKit
 @objc protocol ChatNavigationDelegate {
     @objc optional func navLeftBtnPressed()
     @objc optional func navRightBtnPressed()
+    @objc optional func moreOptionsBtnPressed()
 }
 
 class VobbleChatNavigationBar: AbstractNibView {
     
+    @IBOutlet weak var moreOptions: UIButton!
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var timerLabel: TimerLabel!
     public weak var viewcontroller : UIViewController?
@@ -51,6 +53,10 @@ class VobbleChatNavigationBar: AbstractNibView {
         }
     }
  
+    @IBAction func moreOptionsPressed(_ sender: Any) {
+        self.delegate?.moreOptionsBtnPressed?()
+    }
+    
     @IBAction func leftIconPressed(_ sender: Any) {
 //        if leftIcon.currentImage == UIImage(named: "navBackIcon") {
 //            viewcontroller?.dismiss(animated: true, completion: nil)
