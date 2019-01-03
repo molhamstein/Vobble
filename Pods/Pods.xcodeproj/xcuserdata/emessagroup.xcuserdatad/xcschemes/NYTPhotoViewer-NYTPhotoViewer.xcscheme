@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D85C3D5A275CC39B0CEEC53C5FA8F233"
+               BlueprintIdentifier = "A4304DA29115790ABF2E2BE22D14F616"
                BuildableName = "NYTPhotoViewer.bundle"
                BlueprintName = "NYTPhotoViewer-NYTPhotoViewer"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D85C3D5A275CC39B0CEEC53C5FA8F233"
+            BlueprintIdentifier = "A4304DA29115790ABF2E2BE22D14F616"
             BuildableName = "NYTPhotoViewer.bundle"
             BlueprintName = "NYTPhotoViewer-NYTPhotoViewer"
             ReferencedContainer = "container:Pods.xcodeproj">

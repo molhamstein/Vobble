@@ -7,12 +7,12 @@
 		<key>OneSignalNotificationServiceExtension.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>35</integer>
+			<integer>53</integer>
 		</dict>
 		<key>Vobble.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>36</integer>
+			<integer>52</integer>
 		</dict>
 	</dict>
 </dict>

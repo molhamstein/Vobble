@@ -12,6 +12,7 @@
 		0445EF3E218E61860029A6FB /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445EF3D218E61860029A6FB /* AudioManager.swift */; };
 		045120222180952900F4EC9D /* ThrownBottleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045120202180952900F4EC9D /* ThrownBottleCollectionViewCell.swift */; };
 		045120232180952900F4EC9D /* ThrownBottleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045120212180952900F4EC9D /* ThrownBottleCollectionViewCell.xib */; };
+		045FDF2721DD89850079EE32 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045FDF2621DD89850079EE32 /* FBSDKCoreKit.framework */; };
 		0498677F2187ACBA00B3CC43 /* record-beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0498677E2187ACB900B3CC43 /* record-beep.mp3 */; };
 		04AF6F1C218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF6F1A218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift */; };
 		04AF6F1D218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AF6F1B218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib */; };
@@ -289,6 +290,7 @@
 		0445EF3D218E61860029A6FB /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		045120202180952900F4EC9D /* ThrownBottleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrownBottleCollectionViewCell.swift; sourceTree = "<group>"; };
 		045120212180952900F4EC9D /* ThrownBottleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThrownBottleCollectionViewCell.xib; sourceTree = "<group>"; };
+		045FDF2621DD89850079EE32 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0498677E2187ACB900B3CC43 /* record-beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "record-beep.mp3"; sourceTree = "<group>"; };
 		04AF6F1A218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCollectionViewCellIncoming.swift; sourceTree = "<group>"; };
 		04AF6F1B218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				045FDF2721DD89850079EE32 /* FBSDKCoreKit.framework in Frameworks */,
 				B1A37444204530310080A323 /* AddressBook.framework in Frameworks */,
 				B1A37442204530230080A323 /* StoreKit.framework in Frameworks */,
 				B1A37440204530160080A323 /* SystemConfiguration.framework in Frameworks */,
@@ -1490,6 +1493,7 @@
 		FE5F8BA41684F3115C60BED0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				045FDF2621DD89850079EE32 /* FBSDKCoreKit.framework */,
 				B1A37443204530310080A323 /* AddressBook.framework */,
 				B1A37441204530230080A323 /* StoreKit.framework */,
 				B1A3743F204530160080A323 /* SystemConfiguration.framework */,
@@ -1511,7 +1515,6 @@
 				570D129C20D9A0C700A2A793 /* Sources */,
 				570D129D20D9A0C700A2A793 /* Frameworks */,
 				570D129E20D9A0C700A2A793 /* Resources */,
-				8D3EAC24FF62F6320516AEC0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1683,7 +1686,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Vobble/Pods-Vobble-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
@@ -1696,7 +1699,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vobble/Pods-Vobble-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		570B71662172030B0019FFA6 /* CrashReporting */ = {
@@ -1719,7 +1722,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BMPlayer/BMPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -1794,22 +1797,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8D3EAC24FF62F6320516AEC0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D33A024EBB99BC00C780DC5C /* [CP] Check Pods Manifest.lock */ = {

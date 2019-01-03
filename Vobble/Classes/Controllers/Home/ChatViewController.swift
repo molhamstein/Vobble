@@ -55,6 +55,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     private var unseenMessagesCountRefHandle: DatabaseHandle?
     private var updateLastSeenMessageRefHandle: DatabaseHandle?
     private var updateFirstReplyRefHandle: DatabaseHandle?
+    private var updateMuteChatRefHandle: DatabaseHandle?
     
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
@@ -155,6 +156,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     /// Audio messages
     var currentAudioIndex: Int!
     
+    var isUserMuted = false
+    
     // MARK: View Lifecycle
     
     override func viewDidLoad() {
@@ -173,6 +176,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             initWithConversation(conversation: conv)
             observeMessages()
             observeFirstReply()
+            observeMuteAction()
         } else if let convId = conversationId {
             if let _ = bottleToReplyTo {
                 // this is the first reply on a bottle
@@ -332,6 +336,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         if let refHandle = updateFirstReplyRefHandle {
             firstReplyRef.removeObserver(withHandle: refHandle)
+        }
+        if let refHandle = updateMuteChatRefHandle {
+            conversationRef?.removeObserver(withHandle: refHandle)
         }
     }
     
@@ -772,6 +779,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             self?.initWithConversation(conversation: conversation)
             self?.observeMessages()
             self?.observeFirstReply()
+            self?.observeMuteAction()
             self?.initNavBar()
         })
     }
@@ -992,6 +1000,24 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         })
     }
     
+    private func observeMuteAction() {
+        if let convRef = conversationRef {
+            let mutedUserRef : DatabaseReference?
+            
+            if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+                mutedUserRef = convRef.child("user1ChatMute")
+            }else {
+                mutedUserRef = convRef.child("user2ChatMute")
+            }
+            
+            updateMuteChatRefHandle = mutedUserRef?.observe(.value, with: { snapshot in
+                print(snapshot.value)
+                self.isUserMuted = (snapshot.value as? Bool) ?? false
+            })
+            
+        }
+    }
+    
     private func fetchImageDataAtURL(_ mediaURL: String, forMediaItem mediaItem: JSQCustomPhotoMediaItem, clearsPhotoMessageMapOnSuccessForKey key: String?) {
         
         mediaItem.setImageWithURL()
@@ -1197,7 +1223,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         } else {
             shouldSenPushNotification = true
         }
-        if shouldSenPushNotification {
+        if shouldSenPushNotification && !self.isUserMuted {
             lastNotificationSentDate = Date()
             if let peer = conversationOriginalObject?.getPeer {
                 let msgToSend = String(format: "NOTIFICATION_NEW_MSG".localized, (DataStore.shared.me?.userName)!)
@@ -1216,6 +1242,28 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // update the lastUpdate date of the conversation
         self.conversationRef?.updateChildValues(["updatedAt": ServerValue.timestamp()])
+    }
+    
+    func muteUser() {
+        if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+            conversationRef?.updateChildValues(["user2ChatMute": true])
+            self.conversationOriginalObject?.user2ChatMute = true
+        }else {
+            conversationRef?.updateChildValues(["user1ChatMute": true])
+            self.conversationOriginalObject?.user1ChatMute = true
+        }
+        
+    }
+    
+    func unmuteUser() {
+        if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+            conversationRef?.updateChildValues(["user2ChatMute": false])
+            self.conversationOriginalObject?.user2ChatMute = false
+        }else {
+            conversationRef?.updateChildValues(["user1ChatMute": false])
+            self.conversationOriginalObject?.user1ChatMute = false
+        }
+        
     }
     
     // MARK: UITextViewDelegate methods
@@ -1409,6 +1457,37 @@ extension ChatViewController: ChatNavigationDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    func moreOptionsBtnPressed() {
+        let muteSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        var actionTitle = "MUTE".localized
+        var isActionMute = false
+        
+        if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+            if self.conversationOriginalObject?.user2ChatMute ?? false {
+                actionTitle = "UNMUTE".localized
+                isActionMute = false
+            }else {
+                actionTitle = "MUTE".localized
+                isActionMute = true
+            }
+        }else {
+            if self.conversationOriginalObject?.user1ChatMute ?? false {
+                actionTitle = "UNMUTE".localized
+                isActionMute = false
+            }else {
+                actionTitle = "MUTE".localized
+                isActionMute = true
+            }
+        }
+        
+        muteSheet.addAction(UIAlertAction(title: actionTitle, style: .destructive, handler: {_ in
+            isActionMute ? self.muteUser() : self.unmuteUser()
+        }))
+        muteSheet.addAction(UIAlertAction(title: "CANCEL".localized, style: .cancel, handler: nil))
+        self.present(muteSheet, animated: true, completion: nil)
+        
+    }
 }
 
 //TODO: make custom chat tool bar class
@@ -1440,6 +1519,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)
         inputToolbar.contentView.leftBarButtonItem.isHidden = true
+        inputToolbar.contentView.semanticContentAttribute = .forceRightToLeft
     }
     
     func showActionSheet() {

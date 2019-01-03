@@ -52,7 +52,9 @@ class FirebaseManager :NSObject {
             "user1_unseen": 1.0,
             "user2_unseen": 0.0,
             "user1LastSeenMessageId": "",
-            "user2LastSeenMessageId": ""
+            "user2LastSeenMessageId": "",
+            "user1ChatMute": false,
+            "user2ChatMute": false
         ]
         return convlItem
     }
