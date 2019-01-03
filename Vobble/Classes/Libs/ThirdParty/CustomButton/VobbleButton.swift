@@ -58,7 +58,7 @@ open class VobbleButton : RNLoadingButton {
            let padding:CGFloat = 30.0
            let rightInset = buttonWidth - imageWidth  - textWidth! - padding
         
-           self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: rightInset)
+           self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: rightInset)
         }
     }
     

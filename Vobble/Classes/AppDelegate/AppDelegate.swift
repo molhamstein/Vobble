@@ -55,7 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("additionalData = \(additionalData)")
                 if let chatId = additionalData["chatId"] as? String {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        ActionOpenChat.execute(chatId: chatId, conversation: nil)
+                        if DataStore.shared.isLoggedin {
+                            ActionOpenChat.execute(chatId: chatId, conversation: nil)
+                        }
                     }
                 }
                 

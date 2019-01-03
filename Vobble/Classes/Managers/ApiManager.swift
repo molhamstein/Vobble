@@ -571,16 +571,15 @@ class ApiManager: NSObject {
     
     func onReplyOpened(conversation: Conversation, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
         // url & parameters
-        let bottleURL = "\(baseURL)/message-notifications"
+        let bottleURL = "\(baseURL)/activeChat"
         
         var notificationDate = Date().addingTimeInterval(AppConfig.chatValidityafterSeen / 1000.0)
         // noify before 3 hours
         notificationDate = notificationDate.addingTimeInterval((60 * 60 * 3 * -1))
         let parameters : [String : Any] = [
-            "conversationId": conversation.idString ?? " ",
-            "from": DataStore.shared.me?.objectId ?? " ",
-            "to": conversation.user?.objectId ?? " ",
-            "expiredDate": DateHelper.getISOStringFromDate(notificationDate)
+            "chatId": conversation.idString ?? " ",
+            "firstUser": DataStore.shared.me?.objectId ?? " ",
+            "secondUser": conversation.user?.objectId ?? " "
         ]
         
         // build request

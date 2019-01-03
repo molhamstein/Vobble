@@ -237,24 +237,24 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 lblTimerRecording.font = AppFonts.bigBold
                 lblTimerRecording.textAlignment = .center
                 
-                self.recordButtonContainer.frame = CGRect(x: 0 , y: UIScreen.main.bounds.height - 70, width: UIScreen.main.bounds.width, height: 70)
-                self.recordButton.frame = CGRect(x: 20 , y: 15, width: 40, height: 40)
+                var safeAreaHeight :CGFloat = 0.0
+                if #available(iOS 11.0, *) {
+                    if let window = UIApplication.shared.keyWindow {
+                        safeAreaHeight = window.safeAreaInsets.bottom
+                    }
+                }
+                var recordTimerXPos = isRTL ? 80 : UIScreen.main.bounds.width - 80 - 50
+                var recordButtonXPos = isRTL ? 20 : UIScreen.main.bounds.width - 40 - 20
+                
+                self.recordButtonContainer.frame = CGRect(x: 0 , y: UIScreen.main.bounds.height - safeAreaHeight, width: UIScreen.main.bounds.width, height: (inputToolbar.frame.size.height + safeAreaHeight) )
+                self.recordButton.frame = CGRect(x: recordButtonXPos , y: 2, width: 40, height: 40)
                 self.ivRecordingIcon.frame = CGRect(x: 0 , y: 0, width: 20, height: 20)
                 self.ivRecordingIcon.center = self.recordButton.center
-                self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 75 , y: self.recordButton.frame.origin.y, width: 150, height: 30)
-                self.lblTimerRecording.frame = CGRect(x: 80 , y: self.recordButton.frame.origin.y, width: 50, height: 30)
+                self.lblRecording.frame = CGRect(x: self.view.frame.width/2 - 75 , y: self.recordButton.frame.origin.y + 5, width: 150, height: 30)
+                self.lblTimerRecording.frame = CGRect(x: recordTimerXPos , y: self.recordButton.frame.origin.y + 5, width: 50, height: 30)
                 self.view.addSubview(self.recordButtonContainer)
-                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
-                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0).isActive = true
-                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0).isActive = true
-                //            NSLayoutConstraint(item: recordButtonContainer, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height - inputToolbar.frame.height).isActive = true
                 
                 self.recordButtonContainer.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
-                //            recordButtonContainer.setNeedsLayout()
-                //            recordButton.setNeedsLayout()
-                //self.view.layoutIfNeeded()
-                //            recordButtonContainer.layoutIfNeeded()
-                //            recordButton.layoutIfNeeded()
                 recordButtonContainer.isHidden = true
                 
                 // chat blocked view
@@ -542,13 +542,29 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.recordButtonContainer.frame.origin.y -= keyboardSize.height
+//            var height = keyboardSize.height
+//            var heightTop : CGFloat = 0.0
+//            // Handle iPhone x
+//            if #available(iOS 11.0, *) {
+//                if let window = UIApplication.shared.keyWindow {
+//                    height += window.safeAreaInsets.bottom
+//                    heightTop = window.safeAreaInsets.top
+//                }
+//            }
+            self.recordButtonContainer.frame.origin.y = inputToolbar.frame.origin.y
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.recordButtonContainer.frame.origin.y += keyboardSize.height
+//            var height = keyboardSize.height
+//            // Handle iPhone x
+//            if #available(iOS 11.0, *) {
+//                if let window = UIApplication.shared.keyWindow {
+//                    height += window.safeAreaInsets.bottom
+//                }
+//            }
+            self.recordButtonContainer.frame.origin.y = inputToolbar.frame.origin.y
         }
     }
     
@@ -1479,6 +1495,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
                 // show record audio view
                 
                 self.recordButtonContainer.isHidden = false
+                self.recordButtonContainer.frame.origin.y = inputToolbar.frame.origin.y
                 self.recordButtonContainer.alpha = 0.0
                 self.recordButtonContainer.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 90)
                 UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
