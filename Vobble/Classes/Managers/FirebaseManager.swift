@@ -175,6 +175,7 @@ class FirebaseManager :NSObject {
                 }
             }
             
+            //Last update sort
             DataStore.shared.myReplies.sort(by: { (obj1, obj2) -> Bool in
                 if let date1 = obj1.updatedAt, let date2 = obj2.updatedAt {
                     return date1 > date2
@@ -196,6 +197,7 @@ class FirebaseManager :NSObject {
     func sortConversations () {
         // this will force the conversations to be sorted again
         DataStore.shared.allConversations = []
+        
         
         // sort my replies
         

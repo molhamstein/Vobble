@@ -82,16 +82,16 @@
                             </userDefinedRuntimeAttributes>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fId-mP-Tuz" userLabel="userinfo Stack View">
-                            <rect key="frame" x="97" y="49.5" width="160.5" height="27"/>
+                            <rect key="frame" x="97" y="49.5" width="152.5" height="27"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmq-6j-haP">
-                                    <rect key="frame" x="0.0" y="0.0" width="160.5" height="13.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="152.5" height="13.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" text="Main Shore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBq-Rw-fmT">
-                                    <rect key="frame" x="0.0" y="13.5" width="160.5" height="13.5"/>
+                                    <rect key="frame" x="0.0" y="13.5" width="152.5" height="13.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -99,7 +99,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZfQ-KL-q0Y" userLabel="timer Stack View">
-                            <rect key="frame" x="257.5" y="54.5" width="73.5" height="11"/>
+                            <rect key="frame" x="249.5" y="54.5" width="73.5" height="11"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-8L-ytb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="52" height="11"/>
@@ -117,12 +117,12 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2q-Ny-ALK">
-                            <rect key="frame" x="347" y="40.5" width="16" height="16"/>
+                            <rect key="frame" x="339" y="36.5" width="24" height="24"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="16" id="nEC-iB-c2d"/>
-                                <constraint firstAttribute="width" constant="16" id="rJn-hT-4me"/>
+                                <constraint firstAttribute="height" constant="24" id="nEC-iB-c2d"/>
+                                <constraint firstAttribute="width" constant="24" id="rJn-hT-4me"/>
                             </constraints>
-                            <state key="normal" image="virticalMoreOptions"/>
+                            <state key="normal" image="speakerMuted2"/>
                             <connections>
                                 <action selector="moreOptionsPressed:" destination="-1" eventType="touchUpInside" id="xj5-c7-mYl"/>
                             </connections>
@@ -164,7 +164,7 @@
     <resources>
         <image name="navBackIcon" width="25" height="23"/>
         <image name="navBarBG" width="375" height="95"/>
+        <image name="speakerMuted2" width="30" height="30"/>
         <image name="user_placeholder" width="1024" height="1024"/>
-        <image name="virticalMoreOptions" width="23" height="23"/>
     </resources>
 </document>

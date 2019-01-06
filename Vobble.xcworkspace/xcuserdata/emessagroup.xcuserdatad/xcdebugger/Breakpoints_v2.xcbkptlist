@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "568168706.096933"
+            timestampString = "568444117.339317"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1469"
-            endingLineNumber = "1469"
+            startingLineNumber = "1495"
+            endingLineNumber = "1495"
             landmarkName = "moreOptionsBtnPressed()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "568168706.097369"
+            timestampString = "568444117.339425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "766"
-            endingLineNumber = "766"
+            startingLineNumber = "781"
+            endingLineNumber = "781"
             landmarkName = "fetchConversationByid(convId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "568168706.097666"
+            timestampString = "568444117.339484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "568168706.097947"
+            timestampString = "568444117.339537"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1243"
-            endingLineNumber = "1243"
+            startingLineNumber = "1268"
+            endingLineNumber = "1268"
             landmarkName = "unmuteUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "568168706.098225"
+            timestampString = "568444117.339587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1232"
-            endingLineNumber = "1232"
+            startingLineNumber = "1255"
+            endingLineNumber = "1255"
             landmarkName = "muteUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "568168706.098497"
+            timestampString = "568444117.339637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1210"
-            endingLineNumber = "1210"
+            startingLineNumber = "1229"
+            endingLineNumber = "1229"
             landmarkName = "onNewMessageSent()"
             landmarkType = "7">
          </BreakpointContent>

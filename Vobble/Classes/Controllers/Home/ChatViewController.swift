@@ -157,6 +157,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var currentAudioIndex: Int!
     
     var isUserMuted = false
+    var muteImg = #imageLiteral(resourceName: "speakerMuted2")
+    var unmuteImg = #imageLiteral(resourceName: "speaker")
     
     // MARK: View Lifecycle
     
@@ -397,7 +399,20 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 ApiManager.shared.onReplyOpened(conversation: conversation, completionBlock: { (success, err) in})
             }
             
+            if conversation.user2ChatMute ?? false{
+                self.customNavBar.moreOptions.setImage(self.muteImg, for: .normal)
+            }else {
+                self.customNavBar.moreOptions.setImage(self.unmuteImg, for: .normal)
+            }
+            
         } else {
+            
+            if conversation.user1ChatMute ?? false {
+                self.customNavBar.moreOptions.setImage(self.muteImg, for: .normal)
+            }else {
+                self.customNavBar.moreOptions.setImage(self.unmuteImg, for: .normal)
+            }
+            
             chatVc.convTitle = conversation.user?.userName ?? ""
         }
         
@@ -997,6 +1012,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             updateMuteChatRefHandle = mutedUserRef?.observe(.value, with: { snapshot in
                 print(snapshot.value)
                 self.isUserMuted = (snapshot.value as? Bool) ?? false
+                
             })
             
         }
@@ -1203,7 +1219,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // send a push notifications to the peer if the last push notification sent was more than 20 seconds ago
         var shouldSenPushNotification = false
         if let lastNotifDate = lastNotificationSentDate {
-            shouldSenPushNotification = ((lastNotifDate.timeIntervalSinceNow) >= 30)
+            shouldSenPushNotification = (Date().addingTimeInterval(-30.0) >= (lastNotifDate))
         } else {
             shouldSenPushNotification = true
         }
@@ -1219,9 +1235,13 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // mark the other user as unread
         // if i"m the sender increase the unread count for the peer
         if self.conversationOriginalObject?.bottle?.owner?.objectId == self.senderId {
-            self.conversationRef?.updateChildValues(["user2_unseen": 1])
+            if !self.isUserMuted {
+                self.conversationRef?.updateChildValues(["user2_unseen": 1])
+            }
         } else {
-            self.conversationRef?.updateChildValues(["user1_unseen": 1])
+            if !self.isUserMuted {
+                self.conversationRef?.updateChildValues(["user1_unseen": 1])
+            }
         }
         
         // update the lastUpdate date of the conversation
@@ -1237,6 +1257,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             self.conversationOriginalObject?.user1ChatMute = true
         }
         
+        self.customNavBar.moreOptions.setImage(self.muteImg, for: .normal)
+        
     }
     
     func unmuteUser() {
@@ -1248,6 +1270,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             self.conversationOriginalObject?.user1ChatMute = false
         }
         
+        self.customNavBar.moreOptions.setImage(self.unmuteImg, for: .normal)
     }
     
     // MARK: UITextViewDelegate methods
