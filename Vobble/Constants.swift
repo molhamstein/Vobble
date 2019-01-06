@@ -17,7 +17,7 @@ struct AppConfig {
     static let appBaseDevURL = "http://104.217.253.15:7000/api"
     static let appBaseLiveURL = "http://159.65.202.38:3000/api"
     static let useLiveAPI: Bool = true
-    static let isProductionBuild: Bool = false
+    static let isProductionBuild: Bool = true
     static let useCurrentLocation: Bool = false
     static let contactUsEmail: String = "yallavideoapp@gmail.com"
     
@@ -30,7 +30,7 @@ struct AppConfig {
 //    static let oneSingleID = "3754a01e-b355-4248-a906-e04549e6ab32"
     static let oneSingleID = "e8a91e90-a766-4f1b-a47e-e3b3f569dbef"
     
-    static let AppleStoreAppId = "3754a01e-b355-4248-a906-e04549e6ab32"
+    static let AppleStoreAppId = "1407745068"
     
     static let PlaceHolderImage = UIImage(named: "bottle-1")
     

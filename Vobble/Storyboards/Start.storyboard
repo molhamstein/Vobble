@@ -394,60 +394,72 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="kTv-aN-ZuV" userLabel="third party Stack View">
-                                                                <rect key="frame" x="43" y="55" width="202" height="109"/>
+                                                                <rect key="frame" x="43" y="29.5" width="202" height="160"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZ1-L0-HRs" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="202" height="28.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="202" height="45.5"/>
                                                                         <color key="backgroundColor" red="0.082352941176470587" green="0.49019607843137253" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <state key="normal" title="Login With Facebook">
+                                                                        <state key="normal" title="Facebook Login">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="Shadow" value="YES"/>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="NO"/>
                                                                             <userDefinedRuntimeAttribute type="image" keyPath="image_name" value="fb_icon"/>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="22.5"/>
+                                                                            </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="facebookAction:" destination="5hf-2z-PY5" eventType="touchUpInside" id="c46-V4-FVv"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUP-iL-gS7" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="40.5" width="202" height="28"/>
+                                                                        <rect key="frame" x="0.0" y="57.5" width="202" height="45"/>
                                                                         <color key="backgroundColor" red="0.86666666670000003" green="0.29411764709999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <state key="normal" title="Login With Google">
+                                                                        <state key="normal" title="Google Login">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="Shadow" value="YES"/>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="NO"/>
                                                                             <userDefinedRuntimeAttribute type="image" keyPath="image_name" value="gmail_icon"/>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="22.5"/>
+                                                                            </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="googleAction:" destination="5hf-2z-PY5" eventType="touchUpInside" id="WNk-yZ-yH5"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-CK-gsm" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="80.5" width="202" height="28.5"/>
+                                                                        <rect key="frame" x="0.0" y="114.5" width="202" height="45.5"/>
                                                                         <color key="backgroundColor" red="0.54509803921568623" green="0.23529411764705882" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <state key="normal" title="Login With Instagram">
+                                                                        <state key="normal" title="Instagram Login">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="Shadow" value="YES"/>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="NO"/>
                                                                             <userDefinedRuntimeAttribute type="image" keyPath="image_name" value="insta_icon"/>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="22.5"/>
+                                                                            </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="instagramAction:" destination="5hf-2z-PY5" eventType="touchUpInside" id="Hk8-vu-Gl5"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="160" id="A08-KM-uCU"/>
+                                                                </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6EX-LD-wBl">
                                                                 <rect key="frame" x="-55.5" y="176.5" width="399" height="34"/>
@@ -490,7 +502,6 @@
                                                             <constraint firstItem="kTv-aN-ZuV" firstAttribute="width" secondItem="rgf-Zj-dGr" secondAttribute="width" multiplier="0.7" id="0aB-jB-54r"/>
                                                             <constraint firstItem="kTv-aN-ZuV" firstAttribute="centerX" secondItem="rgf-Zj-dGr" secondAttribute="centerX" id="OpG-Nq-ybT"/>
                                                             <constraint firstItem="FoQ-xm-45Y" firstAttribute="top" secondItem="rgf-Zj-dGr" secondAttribute="top" id="Sja-cV-ijP"/>
-                                                            <constraint firstItem="kTv-aN-ZuV" firstAttribute="height" secondItem="rgf-Zj-dGr" secondAttribute="height" multiplier="0.5" id="Xt0-Ba-hJm"/>
                                                             <constraint firstItem="kTv-aN-ZuV" firstAttribute="centerY" secondItem="rgf-Zj-dGr" secondAttribute="centerY" id="c6L-7z-kef"/>
                                                             <constraint firstItem="6EX-LD-wBl" firstAttribute="centerX" secondItem="rgf-Zj-dGr" secondAttribute="centerX" id="cTI-Li-B3y"/>
                                                             <constraint firstItem="FoQ-xm-45Y" firstAttribute="centerX" secondItem="rgf-Zj-dGr" secondAttribute="centerX" id="zUs-c9-gZg"/>
@@ -572,7 +583,7 @@
                                                                                 <rect key="frame" x="0.0" y="64.5" width="288" height="64"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Os0-Ue-0hZ" userLabel="UserName Stack View">
-                                                                                        <rect key="frame" x="20" y="3.5" width="248" height="58"/>
+                                                                                        <rect key="frame" x="20" y="4" width="248" height="58"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSx-kg-2i5" userLabel="UserName Label">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="248" height="23"/>
@@ -589,7 +600,7 @@
                                                                                         </subviews>
                                                                                     </stackView>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jO4-Ou-lXP" userLabel="UserName Line View">
-                                                                                        <rect key="frame" x="20" y="61.5" width="248" height="1"/>
+                                                                                        <rect key="frame" x="20" y="62" width="248" height="1"/>
                                                                                         <color key="backgroundColor" red="0.58424812559999995" green="0.58435159920000002" blue="0.58424162859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="1" id="4D9-7g-dYw"/>
@@ -665,20 +676,20 @@
                                                                                 <rect key="frame" x="0.0" y="193" width="288" height="64"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdh-Nc-E1H" userLabel="country View">
-                                                                                        <rect key="frame" x="20" y="0.5" width="152" height="64"/>
+                                                                                        <rect key="frame" x="20" y="1" width="152" height="64"/>
                                                                                         <subviews>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ka7-Uy-vyG">
-                                                                                                <rect key="frame" x="0.0" y="0.5" width="152" height="64"/>
+                                                                                                <rect key="frame" x="0.0" y="1" width="152" height="64"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bba-qh-X3a" userLabel="arrow">
-                                                                                                        <rect key="frame" x="140" y="31" width="12" height="22"/>
+                                                                                                        <rect key="frame" x="140" y="30.5" width="12" height="22"/>
                                                                                                         <state key="normal" image="dropMenuArrow"/>
                                                                                                         <connections>
                                                                                                             <action selector="countryBtnPressed:" destination="5hf-2z-PY5" eventType="touchUpInside" id="Ydf-Do-Zpn"/>
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qst-MH-DF5">
-                                                                                                        <rect key="frame" x="0.0" y="0.5" width="132" height="52.5"/>
+                                                                                                        <rect key="frame" x="0.0" y="1" width="132" height="51.5"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                         <state key="normal">
                                                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -688,7 +699,7 @@
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0w1-JE-s7g" userLabel="Line View">
-                                                                                                        <rect key="frame" x="0.0" y="58" width="152" height="1"/>
+                                                                                                        <rect key="frame" x="0.0" y="57.5" width="152" height="1"/>
                                                                                                         <color key="backgroundColor" red="0.58424812559999995" green="0.58435159920000002" blue="0.58424162859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="height" constant="1" id="zIe-G4-GZ9"/>
@@ -718,36 +729,36 @@
                                                                                         </constraints>
                                                                                     </view>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Au-wI-pcS" userLabel="gender view">
-                                                                                        <rect key="frame" x="182" y="0.5" width="106" height="64"/>
+                                                                                        <rect key="frame" x="182" y="1" width="106" height="64"/>
                                                                                         <subviews>
                                                                                             <button opaque="NO" alpha="0.5" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ff7-hE-2zw" userLabel="male">
-                                                                                                <rect key="frame" x="0.0" y="10.5" width="53" height="26"/>
+                                                                                                <rect key="frame" x="0.0" y="11" width="53" height="26"/>
                                                                                                 <state key="normal" image="signup_male"/>
                                                                                             </button>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="male" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZl-35-gI8" userLabel="male label">
-                                                                                                <rect key="frame" x="0.0" y="42.5" width="53" height="20.5"/>
+                                                                                                <rect key="frame" x="0.0" y="43" width="53" height="20.5"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <button opaque="NO" alpha="0.5" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdy-lK-18z" userLabel="female">
-                                                                                                <rect key="frame" x="53" y="10.5" width="53" height="22"/>
+                                                                                                <rect key="frame" x="53" y="11" width="53" height="22"/>
                                                                                                 <state key="normal" image="signup_female"/>
                                                                                             </button>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="female" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BeJ-MU-WZY" userLabel="female label">
-                                                                                                <rect key="frame" x="53" y="42.5" width="53" height="20.5"/>
+                                                                                                <rect key="frame" x="53" y="43" width="53" height="20.5"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eid-ID-EeG" userLabel="big male Btn">
-                                                                                                <rect key="frame" x="0.0" y="0.5" width="53" height="64"/>
+                                                                                                <rect key="frame" x="0.0" y="1" width="53" height="64"/>
                                                                                                 <connections>
                                                                                                     <action selector="maleBtnPressed:" destination="5hf-2z-PY5" eventType="touchUpInside" id="4Ew-vA-r2G"/>
                                                                                                 </connections>
                                                                                             </button>
                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtY-zf-20Y" userLabel="big female btn">
-                                                                                                <rect key="frame" x="53" y="0.5" width="53" height="64"/>
+                                                                                                <rect key="frame" x="53" y="1" width="53" height="64"/>
                                                                                                 <connections>
                                                                                                     <action selector="femaleBtnPressed:" destination="5hf-2z-PY5" eventType="touchUpInside" id="LxT-m1-Ogd"/>
                                                                                                 </connections>
