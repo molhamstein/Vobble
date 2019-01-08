@@ -220,6 +220,25 @@ class DataStore :NSObject {
                     }
                     return true
                 })
+                
+                /// sort the muted people
+                var i = 0
+                for item in _allConversations ?? []
+                {
+                    if item.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+                        if item.user2ChatMute ?? false {
+                            let element = _allConversations?.remove(at: i)
+                            _allConversations?.insert(element!, at: _allConversations?.count ?? 0)
+                        }
+                    }else {
+                        if item.user1ChatMute ?? false {
+                            let element = _allConversations?.remove(at: i)
+                            _allConversations?.insert(element!, at: _allConversations?.count ?? 0)
+                        }
+                    }
+
+                    i += 1
+                }
             }
             return _allConversations
         }
