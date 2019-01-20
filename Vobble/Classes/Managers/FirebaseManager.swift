@@ -75,8 +75,12 @@ class FirebaseManager :NSObject {
                 if !conversation.isExpired {
                     DataStore.shared.myBottles.append(conversation)
                     DataStore.shared.conversationsMyBottlesUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                    if !conversation.isConversationMuted {
+                        DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                    }
                 } else {
                     DataStore.shared.conversationsMyBottlesUnseenMesssages[rest.key] = 0
+                    DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = 0
                 }
             }
             
@@ -108,8 +112,12 @@ class FirebaseManager :NSObject {
             
             if !conversation.isExpired {
                 DataStore.shared.conversationsMyRepliesUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+                if !conversation.isConversationMuted {
+                    DataStore.shared.conversationsUnmutedUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+                }
             } else {
                 DataStore.shared.conversationsMyRepliesUnseenMesssages[snapshot.key] = 0
+                DataStore.shared.conversationsUnmutedUnseenMesssages[snapshot.key] = 0
             }
             
 //            // update the conversation last updateDate
@@ -135,8 +143,12 @@ class FirebaseManager :NSObject {
             
             if !conversation.isExpired {
                 DataStore.shared.conversationsMyBottlesUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+                if !conversation.isConversationMuted {
+                    DataStore.shared.conversationsUnmutedUnseenMesssages[snapshot.key] = conversation.myUnseenMessagesCount
+                }
             } else {
                 DataStore.shared.conversationsMyBottlesUnseenMesssages[snapshot.key] = 0
+                DataStore.shared.conversationsUnmutedUnseenMesssages[snapshot.key] = 0
             }
             
 //            // update the conversation last updateTime
@@ -170,8 +182,12 @@ class FirebaseManager :NSObject {
                 if !conversation.isExpired {
                     DataStore.shared.myReplies.append(conversation)
                     DataStore.shared.conversationsMyRepliesUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                    if !conversation.isConversationMuted {
+                        DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
+                    }
                 } else {
                     DataStore.shared.conversationsMyRepliesUnseenMesssages[rest.key] = 0
+                    DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = 0
                 }
             }
             

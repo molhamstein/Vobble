@@ -346,7 +346,7 @@ class HomeViewController: AbstractController {
     func unreadMessagesCountChange (notification: NSNotification) {
         let count = DataStore.shared.getConversationsWithUnseenMessagesCount()
         if count > 0{
-            lblUnreadConversationsBadge.text = "\(DataStore.shared.getConversationsWithUnseenMessagesCount())"
+            lblUnreadConversationsBadge.text = "\(count)"
             lblUnreadConversationsBadge.isHidden = false
         } else {
             lblUnreadConversationsBadge.isHidden = true

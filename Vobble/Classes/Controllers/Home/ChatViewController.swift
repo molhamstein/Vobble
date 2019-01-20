@@ -1251,13 +1251,13 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // mark the other user as unread
         // if i"m the sender increase the unread count for the peer
         if self.conversationOriginalObject?.bottle?.owner?.objectId == self.senderId {
-            if !self.isUserMuted {
+            //if !self.isUserMuted {
                 self.conversationRef?.updateChildValues(["user2_unseen": 1])
-            }
+            //}
         } else {
-            if !self.isUserMuted {
+            //if !self.isUserMuted {
                 self.conversationRef?.updateChildValues(["user1_unseen": 1])
-            }
+            //}
         }
         
         // update the lastUpdate date of the conversation

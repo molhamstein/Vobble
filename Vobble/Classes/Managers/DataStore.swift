@@ -56,6 +56,8 @@ class DataStore :NSObject {
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
     public var conversationsMyRepliesUnseenMesssages: [String: Int] = [:]
     
+    public var conversationsUnmutedUnseenMesssages: [String: Int] = [:]
+    
     public var conversationsUnsentTextMesssages: [String: String]?
     
     // user loggedin flag
@@ -292,7 +294,15 @@ class DataStore :NSObject {
     
     func getConversationsWithUnseenMessagesCount () -> Int {
         
-        return getMyRepliesConversationsWithUnseenMessagesCount() + getMyBottlesConversationsWithUnseenMessagesCount()
+        var convCount = 0
+        for (_, count) in conversationsUnmutedUnseenMesssages {
+            if count > 0 {
+                convCount += 1
+            }
+        }
+        return convCount
+        
+        //return getMyRepliesConversationsWithUnseenMessagesCount() + getMyBottlesConversationsWithUnseenMessagesCount()
     }
     
     func getConversationsUnsentTextMesssage (key: String) -> String? {
@@ -415,6 +425,7 @@ class DataStore :NSObject {
         tutorialChatShowed = false
         conversationsMyBottlesUnseenMesssages = [:]
         conversationsMyRepliesUnseenMesssages = [:]
+        conversationsUnmutedUnseenMesssages = [:]
         //shopItems = [ShopItem]()
         inventoryItems = [InventoryItem]()
         OneSignal.deleteTags(["user_id","user_name"])

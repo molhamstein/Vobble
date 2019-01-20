@@ -82,6 +82,14 @@ class Conversation: BaseModel {
         }
     }
     
+    public var isConversationMuted: Bool {
+        if self.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
+            return self.user2ChatMute ?? false
+        } else {
+            return self.user1ChatMute ?? false
+        }
+    }
+    
     // MARK: Initializers
     override init() {
         super.init()
