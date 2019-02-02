@@ -366,18 +366,18 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgf-Zj-dGr">
                                                         <rect key="frame" x="0.0" y="218.5" width="288" height="218.5"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FoQ-xm-45Y">
-                                                                <rect key="frame" x="38" y="0.5" width="212.5" height="29"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="FoQ-xm-45Y">
+                                                                <rect key="frame" x="24.5" y="15" width="240.5" height="35"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcL-GE-JNj" userLabel="or">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="20.5" height="29"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="20.5" height="35"/>
                                                                         <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f71-6J-L8g" userLabel="Register">
-                                                                        <rect key="frame" x="24.5" y="0.0" width="67" height="29"/>
-                                                                        <fontDescription key="fontDescription" name="MullerBold" family="Muller" pointSize="17"/>
+                                                                        <rect key="frame" x="26.5" y="0.0" width="91" height="35"/>
+                                                                        <fontDescription key="fontDescription" name="MullerBold" family="Muller" pointSize="23"/>
                                                                         <state key="normal" title="Register">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
@@ -386,42 +386,50 @@
                                                                         </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" a new account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhI-Hu-Olf" userLabel="new account">
-                                                                        <rect key="frame" x="95.5" y="0.0" width="117" height="29"/>
+                                                                        <rect key="frame" x="123.5" y="0.0" width="117" height="35"/>
                                                                         <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="kTv-aN-ZuV" userLabel="third party Stack View">
-                                                                <rect key="frame" x="43" y="29.5" width="202" height="160"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21v-ef-6sr">
+                                                                <rect key="frame" x="24" y="63.5" width="240" height="90"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZ1-L0-HRs" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="202" height="45.5"/>
+                                                                        <rect key="frame" x="2.5" y="12.5" width="65" height="65"/>
                                                                         <color key="backgroundColor" red="0.082352941176470587" green="0.49019607843137253" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="65" id="05h-VI-vlq"/>
+                                                                            <constraint firstAttribute="height" constant="65" id="Tka-xk-3jh"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <state key="normal" title="Facebook Login">
+                                                                        <state key="normal">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="Shadow" value="YES"/>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="NO"/>
-                                                                            <userDefinedRuntimeAttribute type="image" keyPath="image_name" value="fb_icon"/>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                <real key="value" value="22.5"/>
+                                                                                <real key="value" value="32.5"/>
                                                                             </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="image" keyPath="image_name" value="fb_icon"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="facebookAction:" destination="5hf-2z-PY5" eventType="touchUpInside" id="c46-V4-FVv"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUP-iL-gS7" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="57.5" width="202" height="45"/>
+                                                                        <rect key="frame" x="172.5" y="12.5" width="65" height="65"/>
                                                                         <color key="backgroundColor" red="0.86666666670000003" green="0.29411764709999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="65" id="VS9-Bw-M3P"/>
+                                                                            <constraint firstAttribute="height" constant="65" id="YYK-RQ-Jji"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <state key="normal" title="Google Login">
+                                                                        <state key="normal">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <userDefinedRuntimeAttributes>
@@ -429,7 +437,7 @@
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="NO"/>
                                                                             <userDefinedRuntimeAttribute type="image" keyPath="image_name" value="gmail_icon"/>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                <real key="value" value="22.5"/>
+                                                                                <real key="value" value="32.5"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
@@ -437,11 +445,15 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-CK-gsm" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="114.5" width="202" height="45.5"/>
+                                                                        <rect key="frame" x="87.5" y="12.5" width="65" height="65"/>
                                                                         <color key="backgroundColor" red="0.54509803921568623" green="0.23529411764705882" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="65" id="H9c-bn-Lg1"/>
+                                                                            <constraint firstAttribute="width" constant="65" id="cLg-LO-Ueq"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <state key="normal" title="Instagram Login">
+                                                                        <state key="normal">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <userDefinedRuntimeAttributes>
@@ -449,7 +461,7 @@
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="NO"/>
                                                                             <userDefinedRuntimeAttribute type="image" keyPath="image_name" value="insta_icon"/>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                <real key="value" value="22.5"/>
+                                                                                <real key="value" value="32.5"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
@@ -457,10 +469,17 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="160" id="A08-KM-uCU"/>
+                                                                    <constraint firstItem="pUP-iL-gS7" firstAttribute="centerY" secondItem="21v-ef-6sr" secondAttribute="centerY" id="846-Rb-bsn"/>
+                                                                    <constraint firstItem="pUP-iL-gS7" firstAttribute="leading" secondItem="4x1-CK-gsm" secondAttribute="trailing" constant="20" id="EGC-VZ-Y6T"/>
+                                                                    <constraint firstItem="4x1-CK-gsm" firstAttribute="centerY" secondItem="21v-ef-6sr" secondAttribute="centerY" id="UhL-t8-NE4"/>
+                                                                    <constraint firstItem="VZ1-L0-HRs" firstAttribute="centerY" secondItem="21v-ef-6sr" secondAttribute="centerY" id="YJF-by-gOx"/>
+                                                                    <constraint firstAttribute="height" constant="90" id="fXc-Tq-0Tw"/>
+                                                                    <constraint firstItem="4x1-CK-gsm" firstAttribute="centerX" secondItem="21v-ef-6sr" secondAttribute="centerX" id="mTS-YF-aiO"/>
+                                                                    <constraint firstItem="4x1-CK-gsm" firstAttribute="leading" secondItem="VZ1-L0-HRs" secondAttribute="trailing" constant="20" id="nWy-bg-0hS"/>
                                                                 </constraints>
-                                                            </stackView>
+                                                            </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6EX-LD-wBl">
                                                                 <rect key="frame" x="-55.5" y="176.5" width="399" height="34"/>
                                                                 <subviews>
@@ -499,11 +518,11 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="kTv-aN-ZuV" firstAttribute="width" secondItem="rgf-Zj-dGr" secondAttribute="width" multiplier="0.7" id="0aB-jB-54r"/>
-                                                            <constraint firstItem="kTv-aN-ZuV" firstAttribute="centerX" secondItem="rgf-Zj-dGr" secondAttribute="centerX" id="OpG-Nq-ybT"/>
-                                                            <constraint firstItem="FoQ-xm-45Y" firstAttribute="top" secondItem="rgf-Zj-dGr" secondAttribute="top" id="Sja-cV-ijP"/>
-                                                            <constraint firstItem="kTv-aN-ZuV" firstAttribute="centerY" secondItem="rgf-Zj-dGr" secondAttribute="centerY" id="c6L-7z-kef"/>
+                                                            <constraint firstAttribute="trailing" secondItem="21v-ef-6sr" secondAttribute="trailing" constant="24" id="Fuq-R9-TWZ"/>
+                                                            <constraint firstItem="FoQ-xm-45Y" firstAttribute="top" secondItem="rgf-Zj-dGr" secondAttribute="top" constant="15" id="Sja-cV-ijP"/>
                                                             <constraint firstItem="6EX-LD-wBl" firstAttribute="centerX" secondItem="rgf-Zj-dGr" secondAttribute="centerX" id="cTI-Li-B3y"/>
+                                                            <constraint firstItem="21v-ef-6sr" firstAttribute="centerY" secondItem="rgf-Zj-dGr" secondAttribute="centerY" id="qCm-NA-Rw7"/>
+                                                            <constraint firstItem="21v-ef-6sr" firstAttribute="leading" secondItem="rgf-Zj-dGr" secondAttribute="leading" constant="24" id="tlw-jv-ZPS"/>
                                                             <constraint firstItem="FoQ-xm-45Y" firstAttribute="centerX" secondItem="rgf-Zj-dGr" secondAttribute="centerX" id="zUs-c9-gZg"/>
                                                         </constraints>
                                                     </view>
@@ -1658,6 +1677,6 @@
         <image name="splahs_icon" width="572" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zq0-Kg-Tsy"/>
+        <segue reference="rhd-YC-Rxc"/>
     </inferredMetricsTieBreakers>
 </document>

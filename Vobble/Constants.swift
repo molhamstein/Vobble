@@ -17,7 +17,7 @@ struct AppConfig {
     static let appBaseDevURL = "http://104.217.253.15:7000/api"
     static let appBaseLiveURL = "http://159.65.202.38:3000/api"
     static let useLiveAPI: Bool = true
-    static let isProductionBuild: Bool = false
+    static let isProductionBuild: Bool = true
     static let useCurrentLocation: Bool = false
     static let contactUsEmail: String = "yallavideoapp@gmail.com"
     
@@ -68,6 +68,26 @@ struct AppConfig {
     static let filter_click = "Filter_Click"
     static let filter_pressed_go_gender = "Filter_go_to_gender"
     static let filter_pressed_go_country = "Filter_go_to_country"
+    
+    // Tut
+    static let login_show = "login_show"
+    static let login_success = "login_success"
+    static let login_failure = "login_failure"
+    static let signup_show = "signup_show"
+    static let signup_submit = "signup_submit"
+    static let signup_info_screen_show = "signup_info_screen_show"
+    static let signup_info_screen_submit = "signup_info_screen_submit"
+    
+    // Tut
+    static let tutorial_welcome_show = "Tutorial_Welcome_Show"
+    static let tutorial_swipe_show = "Tutorial_Swipe_Show"
+    static let tutorial_find_show = "Tutorial_Find_Show"
+    static let tutorial_reply_show = "Tutorial_Reply_Show"
+    /// Tut click
+    static let tutorial_welcome_click = "Tutorial_Welcome_Click"
+    static let tutorial_swipe_click = "Tutorial_Swipe_Click"
+    static let tutorial_find_click = "Tutorial_Find_Click"
+    static let tutorial_reply_click = "Tutorial_Reply_Click"
     
     // home
     static let home_press_sea = "Home_press_sea"

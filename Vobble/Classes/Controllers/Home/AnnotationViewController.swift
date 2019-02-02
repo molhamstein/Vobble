@@ -8,6 +8,7 @@
 
 import UIKit
 import Gecco
+import Flurry_iOS_SDK
 
 class AnnotationViewController: SpotlightViewController, UIGestureRecognizerDelegate {
     
@@ -57,19 +58,24 @@ class AnnotationViewController: SpotlightViewController, UIGestureRecognizerDele
         switch stepIndex {
         case 0:
             spotlightView.appear(Spotlight.Oval(center: CGPoint(x: screenSize.width / 2, y: screenSize.height/2), diameter: 0))
+            Flurry.logEvent(AppConfig.tutorial_welcome_show, withParameters:[:]);
         case 1:
             spotlightView.appear(Spotlight.Oval(center: CGPoint(x: screenSize.width / 2, y: screenSize.height/2), diameter: 0))
             dispatch_main_after(0.5) {
                 self.homeViewController?.tutorialActon1()
             }
+            Flurry.logEvent(AppConfig.tutorial_swipe_show, withParameters:[:]);
+            Flurry.logEvent(AppConfig.tutorial_welcome_click, withParameters:[:]);
         case 2:
             self.homeViewController?.tutorialActon2()
             dismiss(animated: true, completion: nil)
+            Flurry.logEvent(AppConfig.tutorial_swipe_click, withParameters:[:]);
             //spotlightView.move(Spotlight.Oval(center: CGPoint(x: 26, y: 42), diameter: 50), moveType: .disappear)
         case 3:
             self.spotlightView.appear(Spotlight.Oval(center: CGPoint(x: 55, y: screenSize.height - 50), diameter: 105))
             self.btnStep3ActionReciever.frame = CGRect.init(x: 0, y: screenSize.height - 105, width: 110, height: 110)
             self.btnStep3ActionReciever.bringToFront()
+            Flurry.logEvent(AppConfig.tutorial_find_show, withParameters:[:]);
             //spotlightView.move(Spotlight.Oval(center: CGPoint(x: 26, y: 42), diameter: 50), moveType: .disappear)
             //dismiss(animated: true, completion: nil)
         case 4:
@@ -159,6 +165,7 @@ class AnnotationViewController: SpotlightViewController, UIGestureRecognizerDele
     @IBAction func actionStep3FindBottle(_ sender: AnyObject){
         homeViewController?.tutorialActon3FindBottle()
         dismiss(animated: true, completion: nil)
+        Flurry.logEvent(AppConfig.tutorial_find_click, withParameters:[:]);
     }
 }
 

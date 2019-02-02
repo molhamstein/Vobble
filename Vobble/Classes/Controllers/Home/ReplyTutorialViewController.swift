@@ -8,6 +8,7 @@
 
 import UIKit
 import Gecco
+import Flurry_iOS_SDK
 
 class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerDelegate {
     
@@ -61,6 +62,8 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
                 let btn = UIButton.init(frame: btnFrame)
                 btn.addTarget(self, action: #selector(ReplyTutorialViewController.actionReply), for: .touchUpInside);
                 self.view.addSubview(btn)
+                
+                Flurry.logEvent(AppConfig.tutorial_reply_show, withParameters:[:]);
             }
         case 1:
             dismiss(animated: true, completion: nil)
@@ -94,6 +97,7 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
         findViewController?.replyBtnPressed(sender)
         findViewController?.replyButton.setClicked(true)
         dismiss(animated: true, completion: nil)
+        Flurry.logEvent(AppConfig.tutorial_reply_click, withParameters:[:]);
     }
 }
 

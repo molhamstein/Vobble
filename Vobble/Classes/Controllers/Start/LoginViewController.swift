@@ -11,6 +11,7 @@ import Firebase
 import StoreKit
 import AVFoundation
 import CountryPickerView
+import Flurry_iOS_SDK
 
 enum ViewType {
     case welcome
@@ -218,7 +219,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         lvPasswordTextField.font = AppFonts.xBigBold
         forgetPasswordButton.titleLabel?.font = AppFonts.normal
         lblRegisetrButtonPrefix.font = AppFonts.normal
-        btnLoginRegister.titleLabel?.font = AppFonts.normalBold
+        btnLoginRegister.titleLabel?.font = AppFonts.xBigBold
         lblRegisetrButtonSuffix.font = AppFonts.normal
         //signup
         svEmailLabel.font = AppFonts.big
@@ -321,6 +322,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             // the video player
             self.player = AVPlayer(url: fileURL as URL)
             self.player?.actionAtItemEnd = .none
+            self.player?.volume = 0.1
             let avPlayerLayer = AVPlayerLayer(player: self.player);
             avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
             let layerFrame = CGRect.init(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height + 8)
@@ -338,6 +340,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
             audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.volume = 0.09
             audioPlayer?.play()
         } catch let error {
             print(error.localizedDescription)
@@ -365,6 +368,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             self.waveSubView.isHidden = false
             self.waveSubView.showWave()
         }
+        
+        Flurry.logEvent(AppConfig.login_show, withParameters:[:]);
     }
     
     @IBAction func goToSignupAction(_ sender: UIButton) {
@@ -374,6 +379,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             self.waveSubView.isHidden = false
             self.waveSubView.showWave()
         }
+        Flurry.logEvent(AppConfig.signup_show, withParameters:[:]);
     }
     
     @IBAction func loginAction(_ sender: RNLoadingButton) {
@@ -406,10 +412,15 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                                     })
                                     DataStore.shared.fetchBaseData()
                                 })
-                                
+                                let logEventParams = ["loginType": "normal"];
+                                Flurry.logEvent(AppConfig.login_success, withParameters:logEventParams);
                             } else {
                                 self.showMessage(message:(error?.type.errorMessage)!, type: .error)
+                                let logEventParams = ["loginType": "normal"];
+                                Flurry.logEvent(AppConfig.login_failure, withParameters:logEventParams);
                             }
+                            let logEventParams = ["loginType": "normal"];
+                            Flurry.logEvent(AppConfig.login_failure, withParameters:logEventParams);
                         }
                     } else {
                         showMessage(message:"SINGUP_VALIDATION_PASSWORD_LENGHTH".localized, type: .warning)
@@ -441,10 +452,13 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.hideView(withType: .login)
                     if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
+                        Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
                     } else {
                         self.dismiss(animated: true, completion: { })
                         self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                     }
+                    let logEventParams = ["loginType": "facebook"];
+                    Flurry.logEvent(AppConfig.login_success, withParameters:logEventParams);
                 }
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
             } else {
@@ -455,6 +469,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 } else {
                     self.showMessage(message: errorServer.type.errorMessage, type: .error)
                 }
+                let logEventParams = ["loginType": "facebook"];
+                Flurry.logEvent(AppConfig.login_failure, withParameters:logEventParams);
             }
         }
     }
@@ -473,11 +489,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.hideView(withType: .login)
                     if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
+                        Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
                     } else {
                         self.dismiss(animated: true, completion: { })
                         self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                     }
                 }
+                let logEventParams = ["loginType": "instagram"];
+                Flurry.logEvent(AppConfig.login_success, withParameters:logEventParams);
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
             } else {
                 let errorServer = error ?? ServerError.unknownError
@@ -487,6 +506,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 } else {
                     self.showMessage(message: errorServer.type.errorMessage, type: .error)
                 }
+                let logEventParams = ["loginType": "instagram"];
+                Flurry.logEvent(AppConfig.login_failure, withParameters:logEventParams);
             }
         }
     }
@@ -543,6 +564,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
           // show loader
             signupButton.isLoading = true
             self.view.isUserInteractionEnabled = false
+            Flurry.logEvent(AppConfig.signup_submit, withParameters:[:]);
             ApiManager.shared.userSignup(user: tempUserInfoHolder, password: password) { (success: Bool, err: ServerError?, user: AppUser?) in
               
                 if let email = self.tempUserInfoHolder.email, success {
@@ -830,7 +852,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             tempUserInfoHolder.countryISOCode = countryCode
             tempUserInfoHolder.gender = isMale ? .male : .female
             tempUserInfoHolder.accountInfoCompleted = true
-            
+            Flurry.logEvent(AppConfig.signup_info_screen_submit, withParameters:[:]);
             ApiManager.shared.updateUser(user: tempUserInfoHolder) { (success: Bool, err: ServerError?, user: AppUser?) in
                 self.view.isUserInteractionEnabled = true
                 self.btnSocialInfoSubmit.isLoading = false
@@ -875,11 +897,14 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                     self.hideView(withType: .login)
                     if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
+                        Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
                     } else {
                         self.dismiss(animated: true, completion: { })
                         self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                     }
                 }
+                let logEventParams = ["loginType": "google"];
+                Flurry.logEvent(AppConfig.login_success, withParameters:logEventParams);
                 //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
             } else {
                 let errorServer = error ?? ServerError.unknownError
@@ -889,6 +914,8 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                 } else {
                     self.showMessage(message: errorServer.type.errorMessage, type: .error)
                 }
+                let logEventParams = ["loginType": "google"];
+                Flurry.logEvent(AppConfig.login_failure, withParameters:logEventParams);
             }
         }
     }
