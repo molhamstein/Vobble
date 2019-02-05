@@ -49,7 +49,7 @@ class FindBottleViewController: AbstractController {
         super.viewDidLoad()
         shoreNameLabel.text = bottle?.shore?.name
         userNameLabel.text = bottle?.owner?.userName
-        videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: nil)
+        videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
         optionView.isHidden = true
         moreOptionsOverlayButton.isHidden = true
         reportView.isHidden = true
@@ -130,7 +130,7 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func reportBtnPressed(_ sender: Any) {
-        if self.videoView.player.isPlaying {
+        if self.videoView.isPlaying() {
             videoView.playButtonPressed()
         }
         reportView.isHidden = false
@@ -138,7 +138,7 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func blockBtnPressed(_ sender: Any) {
-        if self.videoView.player.isPlaying {
+        if self.videoView.isPlaying() {
             videoView.playButtonPressed()
         }
         
@@ -204,7 +204,7 @@ class FindBottleViewController: AbstractController {
         let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (bottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (bottle?.owner?.countryISOCode) ?? ""];
         Flurry.logEvent(AppConfig.reply_pressed, withParameters:logEventParams);
         
-        if videoView.player.isPlaying {
+        if videoView.isPlaying() {
             videoView.playButtonPressed()
         }
         
@@ -241,7 +241,7 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
-        if !self.videoView.player.isPlaying {
+        if !self.videoView.isPlaying() {
             self.playButton.setImage(UIImage(named: "pause"), for: .normal)
         } else {
             self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)

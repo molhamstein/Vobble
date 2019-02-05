@@ -36,6 +36,7 @@ pod 'Crashlytics', '~> 3.10.7'
 pod 'Firebase/Performance', '~> 4.13.0'
 pod 'WCLShineButton'
 pod 'FillableLoaders', '~>1.3.0'
+pod 'Player', '~> 0.7.0'
 
 end
 
