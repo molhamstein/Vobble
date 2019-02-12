@@ -53,6 +53,13 @@
 "LOGIN_TERMS"                           = "Terms Of Service";
 "LOGIN_AND"                             = " & ";
 
+// Social media
+"FACEBOOK_LOGIN"                        = "Login with Facebook";
+"GOOGLE_LOGIN"                          = "Login with Google";
+"INSTAGRAM_LOGIN"                       = "Login with Instagram";
+"EMAIL_TITLE"                           = "Email";
+"EMAIL_LOGIN_TITLE"                     = "Email login";
+"EMAIL_SIGNUP_TITLE"                    = "Email signup";
 
 // Signup screen
 "SIGNUP_EMAIL_TITLE"                     = "EMAIL";

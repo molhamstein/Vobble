@@ -19,6 +19,8 @@ enum ViewType {
     case signup
     case countryV
     case socialLoginStep2
+    case startup
+    case emails
 }
 
 class LoginViewController: AbstractController, CountryPickerDelegate {
@@ -26,6 +28,18 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var emailtest: UILabel!
     
     // MARK: Properties
+    
+    //startup view
+    @IBOutlet weak var startupView: UIView!
+    @IBOutlet weak var facebookLoginButton: UIButton!
+    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var instaLoginButton: UIButton!
+    @IBOutlet weak var emailButton: UIButton!
+    
+    //emails view
+    @IBOutlet weak var emailsView: UIView!
+    @IBOutlet weak var loginByEmailButton: UIButton!
+    @IBOutlet weak var signupByEmailButton: UIButton!
     
     //main view
     @IBOutlet weak var backgroundView: UIView!
@@ -144,6 +158,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.loginView.frame.height)
             self.countryView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.countryView.frame.height)
             self.socialInfoView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.socialInfoView.frame.height)
+            self.startupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.startupView.frame.height)
+            self.emailsView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.emailsView.frame.height)
             
             waveSubView.awakeFromNib()
             waveSubView.isHidden = true
@@ -153,7 +169,9 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 self.hideView(withType: .signup)
                 self.hideView(withType: .countryV)
                 self.hideView(withType: .socialLoginStep2)
-                self.showView(withType: .login)
+                self.hideView(withType: .login)
+                self.hideView(withType: .emails)
+                self.showView(withType: .startup)
                 self.loginView.backgroundColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:0.0)
                 self.signupView.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:0.0)
                 self.socialInfoView.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:0.0)
@@ -280,6 +298,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         lblSocialInfoFemale.text = "female".localized
         btnSocialInfoSubmit.setTitle("SOCIAL_USER_INFO_DONE".localized, for: .normal)
 
+        facebookLoginButton.setTitle("FACEBOOK_LOGIN".localized, for: .normal)
+        googleLoginButton.setTitle("GOOGLE_LOGIN".localized, for: .normal)
+        instaLoginButton.setTitle("INSTAGRAM_LOGIN".localized, for: .normal)
+        emailButton.setTitle("EMAIL_TITLE".localized, for: .normal)
+        loginByEmailButton.setTitle("EMAIL_LOGIN_TITLE".localized, for: .normal)
+        signupByEmailButton.setTitle("EMAIL_SIGNUP_TITLE".localized, for: .normal)
         
         lvEmailTextField.tintColor = UIColor.white
         lvPasswordTextField.tintColor = UIColor.white
@@ -361,12 +385,21 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         self.performSegue(withIdentifier: "loginTermsSegue", sender: privacyButton)
     }
     
+    @IBAction func goToEmailsViewAction(_ sender: UIButton) {
+        self.hideView(withType: .startup)
+        dispatch_main_after(0.3) {
+            self.showView(withType: .emails)
+        }
+    
+    }
+    
     @IBAction func goToLoginAction(_ sender: UIButton) {
         self.hideView(withType: .welcome)
+        self.hideView(withType: .emails)
         dispatch_main_after(0.3) {
             self.showView(withType: .login)
-            self.waveSubView.isHidden = false
-            self.waveSubView.showWave()
+//            self.waveSubView.isHidden = false
+//            self.waveSubView.showWave()
         }
         
         Flurry.logEvent(AppConfig.login_show, withParameters:[:]);
@@ -374,10 +407,11 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBAction func goToSignupAction(_ sender: UIButton) {
         self.hideView(withType: .welcome)
+        self.hideView(withType: .emails)
         dispatch_main_after(0.3) {
             self.showView(withType: .signup)
-            self.waveSubView.isHidden = false
-            self.waveSubView.showWave()
+//            self.waveSubView.isHidden = false
+//            self.waveSubView.showWave()
         }
         Flurry.logEvent(AppConfig.signup_show, withParameters:[:]);
     }
@@ -766,6 +800,18 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             }, completion: {(finished: Bool) in
                 //self.player?.play()
             })
+        case .startup :
+            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.startupView.transform = CGAffineTransform.identity
+            }, completion: {(finished: Bool) in
+                //self.player?.play()
+            })
+        case .emails :
+            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.emailsView.transform = CGAffineTransform.identity
+            }, completion: {(finished: Bool) in
+                //self.player?.play()
+            })
         case .login :
             //loginView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
@@ -807,6 +853,18 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 
             })
             //self.player?.pause()
+        case .startup :
+            UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.startupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.startupView.frame.height)
+            }, completion: {(finished: Bool) in
+                
+            })
+        case .emails :
+            UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                self.emailsView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.emailsView.frame.height)
+            }, completion: {(finished: Bool) in
+                
+            })
         case .login :
             UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.loginView.frame.height)

@@ -53,6 +53,13 @@
 "LOGIN_TERMS"                           = "شروط الاستخدام";
 "LOGIN_AND"                             = " & ";
 
+// Social media
+"FACEBOOK_LOGIN"                        = "التسجيل بواسطة فيسبوك";
+"GOOGLE_LOGIN"                          = "التسجيل بواسطة جوجل";
+"INSTAGRAM_LOGIN"                       = "التسجيل بواسطة انستغرام";
+"EMAIL_TITLE"                           = "البريد الالكتروني";
+"EMAIL_LOGIN_TITLE"                     = "تسجيل الدخول بواسطة البريد";
+"EMAIL_SIGNUP_TITLE"                    = "التسجيل بواسطة البريد";
 
 "SIGNUP_EMAIL_TITLE"                     = "البريد الاالكتروني";
 "SIGNUP_EMAIL_PLACEHOLDER"               = "vibomail@gmail.com";
