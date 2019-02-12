@@ -7,108 +7,178 @@
 //
 
 import Foundation
-import BMPlayer
+//import BMPlayer
 import UIKit
+import Player
+import CoreMedia
 
 class VideoPlayerView: AbstractNibView {
     
-    var player: BMPlayer!
-    @IBOutlet weak var videoView: UIView!
-    let controller: BMPlayerCustomControlView = BMPlayerCustomControlView()
+    var player: Player!
+    var playButton: UIButton!
+    var seekTime: CMTime!
+    var tolerance: CMTime = CMTimeMakeWithSeconds(0.5, 1)
     
-    public func preparePlayer(videoURL: String,customPlayBtn: UIButton?) {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var slideBar: UISlider!
+    @IBOutlet weak var videoView: UIView!
+    
+    public func preparePlayer(videoURL: String,customPlayBtn: UIButton) {
+        animateIndicator(animated: true)
         
-        resetPlayerManager()
+        self.playButton = customPlayBtn
+        self.player = Player()
+        self.player.url = URL(string: videoURL)
         
-//        let controller: BMPlayerCustomControlView = BMPlayerCustomControlView()
-        if let cButton = customPlayBtn {
-            controller.setCustomPlayBtn(playBtn: cButton)
-        }
+        self.player.playerDelegate = self
+        self.player.playbackDelegate = self
+
+        self.videoView.addSubview(player.view)
+        self.player.view.bringToFront()
+        self.slideBar.bringToFront()
+        self.activityIndicator.bringToFront()
         
-        player = BMPlayer(customControlView: controller)
-        controller.frame.origin.y += 18
-//        player = BMPlayer()
-        
-        videoView.addSubview(player)
-        
-        player.snp.makeConstraints { (make) in
+        self.player.view.snp.makeConstraints { (make) in
             make.top.equalTo(self.videoView.snp.top)
             make.left.equalTo(self.videoView.snp.left)
             make.right.equalTo(self.videoView.snp.right)
             make.bottom.equalTo(self.videoView.snp.bottom)
         }
-        
-        player.delegate = self
-        
-        let asset = BMPlayerResource(url: URL(string: videoURL)!)
-        
-        
-        player.setVideo(resource: asset)
+
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGestureRecognizer(_:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        self.player.view.addGestureRecognizer(tapGestureRecognizer)
         
     }
-    
-    func resetPlayerManager() {
-        // should print log, default false
-        BMPlayerConf.allowLog = false
-        // should auto play, default true
-        BMPlayerConf.shouldAutoPlay = true
-        // main tint color, default whiteColor
-        BMPlayerConf.tintColor = UIColor.white
-        // options to show header view (which include the back button, title and definition change button) , default .Always，options: .Always, .HorizantalOnly and .None
-        BMPlayerConf.topBarShowInCase = .none
-        // loader type, see detail：https://github.com/ninjaprox/NVActivityIndicatorView
-       // BMPlayerConf.loaderType  = NVActivityIndicatorType.ballRotateChase
-        // enable setting the brightness by touch gesture in the player
-        BMPlayerConf.enableBrightnessGestures = false
-        // enable setting the volume by touch gesture in the player
-        BMPlayerConf.enableVolumeGestures = false
-        // enable setting the playtime by touch gesture in the player
-        BMPlayerConf.enablePlaytimeGestures = true
-    }
-    
+
     func playButtonPressed() {
-        controller.delegate?.controlView(controlView: controller, didPressButton: controller.playButton)
-    }
-    
-}
-
-
-// MARK:- BMPlayerDelegate example
-extension VideoPlayerView: BMPlayerDelegate {
-    // Call when player orinet changed
-    func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
-        player.snp.remakeConstraints { (make) in
-            make.top.equalTo(self.videoView.snp.top)
-            make.left.equalTo(self.videoView.snp.left)
-            make.right.equalTo(self.videoView.snp.right)
-            if isFullscreen {
-                make.bottom.equalTo(self.videoView.snp.bottom)
-            } else {
-                //make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
-                make.bottom.equalTo(self.videoView.snp.bottom)
-            }
+        switch (self.player.playbackState.rawValue) {
+        case PlaybackState.stopped.rawValue:
+            self.player.playFromBeginning()
+            self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+            break
+        case PlaybackState.paused.rawValue:
+            self.player.playFromCurrentTime()
+            self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+            break
+        case PlaybackState.playing.rawValue:
+            self.player.pause()
+            self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
+            break
+        case PlaybackState.failed.rawValue:
+            self.player.pause()
+            self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
+            break
+        default:
+            self.player.pause()
+            self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
+            break
         }
     }
     
-    // Call back when playing state changed, use to detect is playing or not
-    func bmPlayer(player: BMPlayer, playerIsPlaying playing: Bool) {
-        print("| BMPlayerDelegate | playerIsPlaying | playing - \(playing)")
+}
+
+
+extension VideoPlayerView {
+    
+    @objc func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
+        playButtonPressed()
     }
     
-    // Call back when playing state changed, use to detect specefic state like buffering, bufferfinished
-    func bmPlayer(player: BMPlayer, playerStateDidChange state: BMPlayerState) {
-        print("| BMPlayerDelegate | playerStateDidChange | state - \(state)")
+    @IBAction func didChangeTime(_ sender: UISlider) {
+        print("Slider value is: \(sender.value)")
+        
+        self.player.pause()
+        self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
+        self.seekTime = CMTimeMakeWithSeconds(Float64(Double(sender.value) * Double(self.player.maximumDuration)), 1)
+        self.player.seekToTime(to: seekTime, toleranceBefore: self.tolerance, toleranceAfter: self.tolerance)
     }
     
-    // Call back when play time change
-    func bmPlayer(player: BMPlayer, playTimeDidChange currentTime: TimeInterval, totalTime: TimeInterval) {
-        //  print("| BMPlayerDelegate | playTimeDidChange | \(currentTime) of \(totalTime)")
+    func isPlaying() -> Bool {
+        switch (self.player.playbackState.rawValue) {
+        case PlaybackState.playing.rawValue:
+            return true
+        default:
+            return false
+        }
     }
     
-    // Call back when the video loaded duration changed
-    func bmPlayer(player: BMPlayer, loadedTimeDidChange loadedDuration: TimeInterval, totalDuration: TimeInterval) {
-        //  print("| BMPlayerDelegate | loadedTimeDidChange | \(loadedDuration) of \(totalDuration)")
+    func isPaused() -> Bool {
+        switch (self.player.playbackState.rawValue) {
+        case PlaybackState.paused.rawValue:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func isStopped() -> Bool {
+        switch (self.player.playbackState.rawValue) {
+        case PlaybackState.stopped.rawValue:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func animateIndicator(animated: Bool) {
+        if animated {
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+        }else {
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
+        }
+    }
+}
+
+// MARK: - PlayerDelegate
+extension VideoPlayerView: PlayerDelegate {
+    
+    func playerReady(_ player: Player) {
+        print("\(#function) ready")
+    }
+    
+    func playerPlaybackStateDidChange(_ player: Player) {
+        print("\(#function) \(player.playbackState.description)")
+    }
+    
+    func playerBufferingStateDidChange(_ player: Player) {
+        switch player.bufferingState.rawValue {
+        case BufferingState.ready.rawValue:
+            self.player.playFromCurrentTime()
+            animateIndicator(animated: false)
+        default:
+            animateIndicator(animated: true)
+        }
+    }
+    
+    func playerBufferTimeDidChange(_ bufferTime: Double) {
+    }
+    
+    func player(_ player: Player, didFailWithError error: Error?) {
+        print("\(#function) error.description")
     }
     
 }
 
+// MARK: - PlayerPlaybackDelegate
+extension VideoPlayerView: PlayerPlaybackDelegate {
+    
+    func playerCurrentTimeDidChange(_ player: Player) {
+        let fraction = Double(player.currentTime) / Double(player.maximumDuration)
+        self.slideBar.setValue(Float(fraction), animated: true)
+    }
+    
+    func playerPlaybackWillStartFromBeginning(_ player: Player) {
+    }
+    
+    func playerPlaybackDidEnd(_ player: Player) {
+        self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
+    }
+    
+    func playerPlaybackWillLoop(_ player: Player) {
+        self.slideBar.setValue(0.0, animated: true)
+    }
+    
+}

@@ -1,15 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoPlayerView" customModule="Vobble" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="lPh-uj-vWp" id="9u9-UH-kRh"/>
+                <outlet property="slideBar" destination="X1D-tT-sI8" id="Imn-EI-VCa"/>
                 <outlet property="videoView" destination="iN0-l3-epB" id="BWj-pX-HlP"/>
             </connections>
         </placeholder>
@@ -17,7 +20,28 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="X1D-tT-sI8">
+                    <rect key="frame" x="14" y="631" width="347" height="31"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" white="0.45000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="didChangeTime:" destination="-1" eventType="valueChanged" id="jS0-Tm-4gK"/>
+                    </connections>
+                </slider>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lPh-uj-vWp">
+                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                    <color key="color" white="0.89659051447106686" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="X1D-tT-sI8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="2oU-Tt-0Ae"/>
+                <constraint firstAttribute="bottom" secondItem="X1D-tT-sI8" secondAttribute="bottom" constant="6" id="ByS-pH-pWe"/>
+                <constraint firstItem="lPh-uj-vWp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Z8O-Eu-Oo5"/>
+                <constraint firstItem="lPh-uj-vWp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="azD-d1-XQC"/>
+                <constraint firstAttribute="trailing" secondItem="X1D-tT-sI8" secondAttribute="trailing" constant="16" id="oi5-bV-vBW"/>
+            </constraints>
         </view>
     </objects>
 </document>
