@@ -14,7 +14,6 @@ import CountryPickerView
 import Flurry_iOS_SDK
 
 enum ViewType {
-    case welcome
     case login
     case signup
     case countryV
@@ -48,7 +47,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     // welcome view
     private var player: AVPlayer?
     private var audioPlayer: AVAudioPlayer?
-    @IBOutlet weak var welcomeView: UIView!
     
     // login view
     @IBOutlet weak var loginView: UIView!
@@ -165,7 +163,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             waveSubView.isHidden = true
             
             dispatch_main_after(0.7) {
-                self.hideView(withType: .welcome)
                 self.hideView(withType: .signup)
                 self.hideView(withType: .countryV)
                 self.hideView(withType: .socialLoginStep2)
@@ -282,6 +279,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         svUserNameTextField.placeholder = "SIGNUP_NAME_PLACEHOLDER".localized
         svPasswordLabel.text = "SIGNUP_PSW_TITLE".localized
         svPasswordTextField.placeholder = "SIGNUP_PSW_PLACEHOLDER".localized
+        maleLabel.text = "MALE".localized
+        maleLabel.text = "FEMALE".localized
 
         termsPrefixLabel.text = "SIGNUP_ACCESSEPT".localized
         termsButton.setTitle("SIGNUP_TERMS".localized, for: .normal)
@@ -294,8 +293,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         selectCountryButton.setTitle("SIGNUP_COUNTRY_PLACEHOLDER".localized, for: .normal)
         
         btnSocialInfoSelectCountry.setTitle("SIGNUP_COUNTRY_PLACEHOLDER".localized, for: .normal)
-        lblSocialInfoMale.text = "male".localized
-        lblSocialInfoFemale.text = "female".localized
+        lblSocialInfoMale.text = "MALE".localized
+        lblSocialInfoFemale.text = "FEMALE".localized
         btnSocialInfoSubmit.setTitle("SOCIAL_USER_INFO_DONE".localized, for: .normal)
 
         facebookLoginButton.setTitle("FACEBOOK_LOGIN".localized, for: .normal)
@@ -394,7 +393,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     }
     
     @IBAction func goToLoginAction(_ sender: UIButton) {
-        self.hideView(withType: .welcome)
         self.hideView(withType: .emails)
         dispatch_main_after(0.3) {
             self.showView(withType: .login)
@@ -406,7 +404,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     }
     
     @IBAction func goToSignupAction(_ sender: UIButton) {
-        self.hideView(withType: .welcome)
         self.hideView(withType: .emails)
         dispatch_main_after(0.3) {
             self.showView(withType: .signup)
@@ -794,12 +791,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     func showView(withType:ViewType) {
         switch withType {
-        case .welcome :
-            UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
-                self.welcomeView.transform = CGAffineTransform.identity
-            }, completion: {(finished: Bool) in
-                //self.player?.play()
-            })
         case .startup :
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.startupView.transform = CGAffineTransform.identity
@@ -846,13 +837,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     func hideView(withType:ViewType) {
         switch withType {
-        case .welcome :
-            UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
-                self.welcomeView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.welcomeView.frame.height)
-            }, completion: {(finished: Bool) in
-                
-            })
-            //self.player?.pause()
         case .startup :
             UIView.animate(withDuration: 0.3, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.startupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.startupView.frame.height)

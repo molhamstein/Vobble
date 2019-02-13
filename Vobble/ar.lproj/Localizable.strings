@@ -140,7 +140,7 @@
 // Settings
 "SETTINGS_USER_LOGOUT"                  = "تسجيل خروج";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "هل تود تسجيل الخروج؟";
-"SETTINGS_SLOGAN"                       = "INTO THE BLUE";
+"SETTINGS_SLOGAN"                       = "YallaVideo.inc";
 
 // home
 "main_shore"                            = "استكشف";
@@ -176,14 +176,14 @@
 "FILTERS_PANEL_GENDER_BUY_BTN"          = "شراء";
 "FILTERS_PANEL_COUNTRY_BUY_BTN"         = "شراء";
 "FILTERS_PANEL_FILTER_NOW_BTN"          = "فلترهاالاّن";
-"FILTERS_PANEL_PLACEHOLDER_GENDER"      = "تبحث عن فيديو من جنس معين ؟";
-"FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "تبحث عن فيديو من بلد معين ؟";
+"FILTERS_PANEL_PLACEHOLDER_GENDER"      = "ابحث عن فيديو اناث/ذكور";
+"FILTERS_PANEL_PLACEHOLDER_COUNTRY"     = "ابحث عن فيديو من بلدك";
 "FILTERS_PANEL_NO_COUNTRY_SELECTED"     = "حدد البلد";
 "FILTERS_PANEL_TIME_LEFT"               = "متبقي";
 "PREFERED_COUNTRIES_TITLE"              = "الأكثر تداولا";
 
 // preview
-"PREVIEW_THROW_NOW"                     = "إرم الاّن";
+"PREVIEW_THROW_NOW"                     = "إرمي الاّن";
 
 // settings
 "SETTINGS_CONTACT"                      = "تواصل معنا";
@@ -202,8 +202,8 @@
 // findBottle screen
 "REPORT"                               = "ابلاغ";
 "BLOCK_USER"                           = "حظر";
-"IGNORE"                               = "تجاهل";
-"REPLY"                                = "رد";
+"IGNORE"                               = "البحر";
+"REPLY"                                = "ارسل ردك";
 "SPAM"                                 = "مزعج";
 "OFFENDING"                             = "مهين";
 "SEXUAL_CONTENT"                       = "محتوى جنسي";
@@ -219,7 +219,7 @@
 "TAB_COUNTRY"                          = "تفضيلات البلد";
 "SHOP_TITLE"                           = "المتجر";
 "SHOP_BTN_BUY"                         = "شراءالاّن";
-
+"SHOP_INVALID_PURCHASE_MSG"            = "تبدو هذه عملية شراء غير صالحة الرجاء التواصل معنا ان كنت تواجه اي مشكلات";
 
 // My bottles
 "MY_BOTTLES_TITLE"                     = "زجاجاتي";
@@ -254,11 +254,11 @@
 "NOTIFICATION_NEW_MSG_AR"               = "ياسلااام، وصلك رسالة جديدة من %@ لا تتأخر بالرد";
 
 // tut
-"tut1_step1"                            = "أهلا بك في Vibo يمكنك ان تقوم بتصوير فيديوهات و رميها بالبحر, لا تقلق سيكون هذا سرنا الصغير";
-"tut1_step2"                            = "يوجد مجموعه من الشطاّن المختلفة, ستجد فيديهات بمواضيع مختلفة في كل شاطئ";
+"tut1_step1"                            = "هنا يمكنك ان تقوم بتصوير فيديو ورميه في البحر ليشاهده الآخرين ويتواصلوا معك";
+"tut1_step2"                            = "مواضيع مختلفة في كل شاطئ";
 
-"tut2_title"                            = "هب أنت مستعد!!!";
-"tut2_desc"                               = "لما لا تبدأ بايجاد زجاجاجة من البحر";
+"tut2_title"                            = "هل أنت مستعد!!!";
+"tut2_desc"                             = "ابحث عن زجاجة فيديو";
 
 "TUT_CHAT_1"                            = "هنا تجد الوقت المتبقي للمحادثة";
-"TUT_REPLY_1"                           = "!اعجبك الفيديو؟ ارسل ردك لصاحب الفيديو الان، انقر هنا لتسجيل الفيديو";
+"TUT_REPLY_1"                           = "!اعجبك الفيديو؟ أرسل ردك لصاحب الفيديو الان،";

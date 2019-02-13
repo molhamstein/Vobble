@@ -141,7 +141,7 @@
 // Settings
 "SETTINGS_USER_LOGOUT"                  = "Logout";
 "SETTINGS_USER_LOGOUT_CONFIRM_MSG"      = "Are you sure you want to logout?";
-"SETTINGS_SLOGAN"                       = "INTO THE BLUE";
+"SETTINGS_SLOGAN"                       = "YallaVideo.inc";
 
 // home
 "main_shore"                            = "Explore";
@@ -220,6 +220,7 @@
 "TAB_COUNTRY"                          = "Country Filters";
 "SHOP_TITLE"                           = "Shop";
 "SHOP_BTN_BUY"                         = "Buy Now";
+"SHOP_INVALID_PURCHASE_MSG"            = "This Seems an invalid purchase request, please contact us if is you are having issues";
 
 // My bottles
 "MY_BOTTLES_TITLE"                     = "My Bottles";

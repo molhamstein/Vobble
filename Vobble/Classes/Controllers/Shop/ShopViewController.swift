@@ -472,52 +472,69 @@ extension ShopViewController: SKPaymentTransactionObserver {
             case .purchased:
                 
                 let prodID = transaction.payment.productIdentifier
+                //transaction.rec
 
-                // purchase request
-                ApiManager.shared.purchaseItem(shopItem: self.selectedProduct, completionBlock: {(success, err, item) in
-                    if success {
-                        
-                        // Bottles Purchase
-                        if self.selectedProduct.type == ShopItemType.bottlesPack {
-                            ApiManager.shared.getMe(completionBlock: { (success, err, user) in
-                                self.dismiss(animated: true, completion: {})
-                            })
-                            
-                        }else{
-                            
-                            // flurry events
-                            var prodType = "bottles"
-                            if self.selectedProduct.type == ShopItemType.genderFilter {
-                                prodType = "gender"
-                            } else if self.selectedProduct.type == ShopItemType.countryFilter {
-                                prodType = "country"
-                            }
-                            
-                            // do the purchase
-                            let inventoryItem = InventoryItem()
-                            inventoryItem.isValid = true
-                            inventoryItem.isConsumed = false
-                            inventoryItem.shopItem = self.selectedProduct
-                            inventoryItem.startDate = Date().timeIntervalSince1970
-                            inventoryItem.endDate = Date().timeIntervalSince1970 + ((self.selectedProduct.validity ?? 1) * 60 * 60)
-                            DataStore.shared.inventoryItems.append(inventoryItem)
-                            
-                            // flurry events, on purchase done
-                            let logEventParams2 = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
-                            Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
-                            
-                            self.dismiss(animated: true, completion: {})
-                        }
-                       
-                        
-                       
-                    }else{
-                        let alert = UIAlertController(title: "Error", message: err?.errorName , preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                //let SUBSCRIPTION_SECRET = "yourpasswordift"
+                let receiptPath = Bundle.main.appStoreReceiptURL?.path
+                var base64encodedReceipt: String?;
+                if FileManager.default.fileExists(atPath: receiptPath!){
+                    var receiptData:NSData?
+                    do {
+                        receiptData = try NSData(contentsOf: Bundle.main.appStoreReceiptURL!, options: NSData.ReadingOptions.alwaysMapped)
+                    } catch {
+                        print("ERROR: " + error.localizedDescription)
                     }
-                    
-                })
+
+                    base64encodedReceipt = receiptData?.base64EncodedString(options: NSData.Base64EncodingOptions.endLineWithCarriageReturn)
+                    //print("base64encodedReceipt: " + base64encodedReceipt!)
+                }
+                
+                if let encodedRecept = base64encodedReceipt, let transactionId = transaction.transactionIdentifier {
+                    // purchase request
+                    ApiManager.shared.purchaseItem(shopItem: self.selectedProduct, recienptBase64String:encodedRecept, transactionId: transactionId,  completionBlock: {(success, err, item) in
+                        if success {
+                            
+                            // Bottles Purchase
+                            if self.selectedProduct.type == ShopItemType.bottlesPack {
+                                ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                                    self.dismiss(animated: true, completion: {})
+                                })
+                                
+                            } else {
+                                
+                                // flurry events
+                                var prodType = "bottles"
+                                if self.selectedProduct.type == ShopItemType.genderFilter {
+                                    prodType = "gender"
+                                } else if self.selectedProduct.type == ShopItemType.countryFilter {
+                                    prodType = "country"
+                                }
+                                
+                                // do the purchase
+                                let inventoryItem = InventoryItem()
+                                inventoryItem.isValid = true
+                                inventoryItem.isConsumed = false
+                                inventoryItem.shopItem = self.selectedProduct
+                                inventoryItem.startDate = Date().timeIntervalSince1970
+                                inventoryItem.endDate = Date().timeIntervalSince1970 + ((self.selectedProduct.validity ?? 1) * 60 * 60)
+                                DataStore.shared.inventoryItems.append(inventoryItem)
+                                
+                                // flurry events, on purchase done
+                                let logEventParams2 = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+                                Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
+                                
+                                self.dismiss(animated: true, completion: {})
+                            }
+                        }else{
+                            let alert = UIAlertController(title: "Error", message: err?.errorName , preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        
+                    })
+                }
+                
+
                 
                 finishTransaction(queue, transaction)
                 

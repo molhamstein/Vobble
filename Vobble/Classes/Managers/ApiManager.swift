@@ -670,7 +670,7 @@ class ApiManager: NSObject {
     }
     
     /// create bottle request
-    func purchaseItem(shopItem: ShopItem, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ item:InventoryItem?) -> Void) {
+    func purchaseItem(shopItem: ShopItem, recienptBase64String: String, transactionId: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ item:InventoryItem?) -> Void) {
         // url & parameters
         let bottleURL = "\(baseURL)/items"
         
@@ -691,7 +691,9 @@ class ApiManager: NSObject {
             "endAt": endDateStr,
             "valid": true,
             "ownerId": (DataStore.shared.me?.objectId)!,
-            "productId": shopItem.idString
+            "productId": shopItem.idString,
+            "receipt":"recienptBase64String",
+            "transactionId":"transactionId"
         ]
         
         // build request
@@ -1185,6 +1187,7 @@ struct ServerError {
         case expiredVerifyCode = 107
         case invalidVerifyCode = 108
         case userNotFound = 404
+        case invalidPurchase = 415
         case loginFailed = 601 // temp code
         
         /// Handle generic error messages
@@ -1219,8 +1222,10 @@ struct ServerError {
                     return "ERROR_BOTTLE_NOT_FOUND".localized
                 case .emailAlreadyExists:
                     return "ERROR_EMAIL_EXISTS".localized
-            case .emailAlreadyRegisteredWithDifferentMedia:
-                return "ERROR_WRONG_LOGIN_METHOD".localized
+                case .invalidPurchase:
+                    return "SHOP_INVALID_PURCHASE_MSG".localized
+                case .emailAlreadyRegisteredWithDifferentMedia:
+                    return "ERROR_WRONG_LOGIN_METHOD".localized
                 
                 default:
                     return "ERROR_UNKNOWN".localized
