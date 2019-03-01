@@ -696,8 +696,13 @@ class ApiManager: NSObject {
             "transactionId":"transactionId"
         ]
         
+        if let theJSONData = try? JSONSerialization.data( withJSONObject: parameters, options: []) {
+            let theJSONText = String(data: theJSONData, encoding: .ascii)
+            print("JSON string = \(theJSONText!)")
+        }
+            
+        
         // build request
-        print(headers)
         Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)

@@ -99,6 +99,7 @@ class FindBottleViewController: AbstractController {
             if let tutShowedBefore = DataStore.shared.me?.replyTutShowed, !tutShowedBefore {
                 DataStore.shared.me?.replyTutShowed = true
                 dispatch_main_after(2) {
+                    DataStore.shared.me?.replyTutShowed = true
                     let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ReplyTutorial") as! ReplyTutorialViewController
                     viewController.alpha = 0.5
                     viewController.buttonFrame = self.replyButton.superview?.convert(self.replyButton.frame, to: nil)

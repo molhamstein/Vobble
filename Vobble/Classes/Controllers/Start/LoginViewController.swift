@@ -280,7 +280,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         svPasswordLabel.text = "SIGNUP_PSW_TITLE".localized
         svPasswordTextField.placeholder = "SIGNUP_PSW_PLACEHOLDER".localized
         maleLabel.text = "MALE".localized
-        maleLabel.text = "FEMALE".localized
+        femaleLabel.text = "FEMALE".localized
 
         termsPrefixLabel.text = "SIGNUP_ACCESSEPT".localized
         termsButton.setTitle("SIGNUP_TERMS".localized, for: .normal)
@@ -481,6 +481,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
+                    self.hideView(withType: .startup)
                     if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
                         Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
@@ -518,6 +519,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
+                    self.hideView(withType: .startup)
                     if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
                         Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
@@ -937,6 +939,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                     self.tempUserInfoHolder = tempRegistredUser
                     self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
                     self.hideView(withType: .login)
+                    self.hideView(withType: .startup)
                     if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
                         self.showView(withType: .socialLoginStep2)
                         Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);

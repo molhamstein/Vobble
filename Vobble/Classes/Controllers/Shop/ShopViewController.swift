@@ -322,9 +322,10 @@ extension ShopViewController: UICollectionViewDelegate {
                 
             })
             
-            alertController.addAction(ok)
             let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
             alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
             self.present(alertController, animated: true, completion: nil)
             
         }else {
@@ -491,7 +492,7 @@ extension ShopViewController: SKPaymentTransactionObserver {
                 
                 if let encodedRecept = base64encodedReceipt, let transactionId = transaction.transactionIdentifier {
                     // purchase request
-                    ApiManager.shared.purchaseItem(shopItem: self.selectedProduct, recienptBase64String:encodedRecept, transactionId: transactionId,  completionBlock: {(success, err, item) in
+                    ApiManager.shared.purchaseItem(shopItem: self.selectedProduct, recienptBase64String: encodedRecept, transactionId: transactionId,  completionBlock: {(success, err, item) in
                         if success {
                             
                             // Bottles Purchase
@@ -499,9 +500,7 @@ extension ShopViewController: SKPaymentTransactionObserver {
                                 ApiManager.shared.getMe(completionBlock: { (success, err, user) in
                                     self.dismiss(animated: true, completion: {})
                                 })
-                                
                             } else {
-                                
                                 // flurry events
                                 var prodType = "bottles"
                                 if self.selectedProduct.type == ShopItemType.genderFilter {
