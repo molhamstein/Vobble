@@ -43,6 +43,14 @@ class PreviewMediaControl : AbstractController {
     
     //Video
     var videoUrl = NSURL();
+    
+    //Topic
+    var topicId = ""
+    
+    /// Record sound
+    var throwSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "find_bottle", ofType: "mp3")!)
+    var soundPlayer = AVAudioPlayer()
+    
 //    var avPlayer = AVPlayer();
 //    var avPlayerLayer = AVPlayerLayer();
     
@@ -167,6 +175,19 @@ class PreviewMediaControl : AbstractController {
         return true
     }
     
+    func playThrowSound () {
+        // play beep sound
+        do {
+            // Prepare beep player
+            self.soundPlayer = try AVAudioPlayer(contentsOf: throwSound as URL)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            self.soundPlayer.prepareToPlay()
+            self.soundPlayer.play()
+            
+        }catch {}
+    }
+    
     func throwInSea (shore: Shore) {
      
         let urls:[URL] = [self.videoUrl as URL]
@@ -201,6 +222,7 @@ class PreviewMediaControl : AbstractController {
                 bottle.owner = DataStore.shared.me
                 bottle.status = "active"
                 bottle.shoreId = shore.shore_id
+                bottle.topicId = self.topicId
         
                 ApiManager.shared.addBottle(bottle: bottle, completionBlock: { (success, error, bottle) in
                 
@@ -216,6 +238,7 @@ class PreviewMediaControl : AbstractController {
                         self.cvShorePicker.animateIn(mode: .animateOutToBottom, delay: 0.3)
                         self.backButton.animateIn(mode: .animateOutToTop, delay: 0.2)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 6 second
+                            self.playThrowSound()
                             self.performSegue(withIdentifier: "unwindRecordMediaSegue", sender: self)
                             self.popOrDismissViewControllerAnimated(animated: true)
                         }

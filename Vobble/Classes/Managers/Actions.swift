@@ -120,6 +120,8 @@ class ActionPlayBeep{
             var ding:AVAudioPlayer = AVAudioPlayer()
             let path = Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")
             ding = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path!))
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
             ding.prepareToPlay()
             ding.play()
         } catch let error {
