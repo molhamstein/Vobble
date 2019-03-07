@@ -246,6 +246,12 @@
 "RATE_US_BTN"                           = "Rate Vibo on Itunes";
 "RATE_US_SKIP"                          = "No, I won't help";
 
+// share app
+"SHARE_APP_TITLE"                         = "Do you Like Vibo?";
+"SHARE_APP_MSG"                           = "Share The app with your fiends, invite them to the sea...";
+"SHARE_APP_BTN"                           = "Share Vibo";
+"SHARE_APP_SKIP"                          = "No, I won't help";
+
 // notifications
 "NOTIFICATION_NEW_REPLY"                = "Hey, looks like %@ has found your bottle, come to check his reply";
 "NOTIFICATION_NEW_REPLY_AR"             = "رهيب، يبدو ان %@ عثر على زجاجة لك، ادخل شوف رده";

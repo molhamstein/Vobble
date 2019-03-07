@@ -678,7 +678,6 @@ class ApiManager: NSObject {
         let startDateStr = DateHelper.getISOStringFromDate(now)
         var endDate = now
         if let validity = shopItem.validity, validity > 0 {
-            let calendar = Calendar.current
             endDate = endDate.addingTimeInterval(validity * 60.0 * 60.0)
         }
         let endDateStr = DateHelper.getISOStringFromDate(endDate)
@@ -687,13 +686,13 @@ class ApiManager: NSObject {
             "storeType": "iTunes",
             "storeToken": "tempStoreToken",
             "isConsumed": true,
-            "startAt": startDateStr,
-            "endAt": endDateStr,
+            "startAt": startDateStr ?? "",
+            "endAt": endDateStr ?? "",
             "valid": true,
             "ownerId": (DataStore.shared.me?.objectId)!,
             "productId": shopItem.idString,
-            "receipt":"recienptBase64String",
-            "transactionId":"transactionId"
+            "receipt":recienptBase64String,
+            "transactionId":transactionId
         ]
         
         if let theJSONData = try? JSONSerialization.data( withJSONObject: parameters, options: []) {
@@ -701,7 +700,6 @@ class ApiManager: NSObject {
             print("JSON string = \(theJSONText!)")
         }
             
-        
         // build request
         Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {

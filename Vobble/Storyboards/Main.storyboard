@@ -1367,7 +1367,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="actionRateUs" destination="cjX-Q5-YUG" eventType="touchUpInside" id="evv-ue-s8p"/>
-                                            <action selector="submitBtnPressed:" destination="E99-d6-6s1" eventType="touchUpInside" id="FMm-TZ-mNh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHs-Rg-b6c">
@@ -2317,10 +2316,10 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
             </objects>
             <point key="canvasLocation" x="-1084" y="224"/>
         </scene>
-        <!--Rate Us Popup View Controller-->
+        <!--Share App Popup View Controller-->
         <scene sceneID="eFy-Ub-yL8">
             <objects>
-                <viewController id="q1G-Mt-TVO" customClass="RateUsPopupViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShareAppPopupViewController" id="q1G-Mt-TVO" customClass="ShareAppPopupViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a8h-LL-wnv"/>
                         <viewControllerLayoutGuide type="bottom" id="IPS-sx-98x"/>
@@ -2365,8 +2364,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="gradient" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="actionRateUs" destination="q1G-Mt-TVO" eventType="touchUpInside" id="OJl-vW-BH3"/>
-                                            <action selector="submitBtnPressed:" destination="E99-d6-6s1" eventType="touchUpInside" id="T4U-aQ-2aj"/>
+                                            <action selector="actionShareApp" destination="q1G-Mt-TVO" eventType="touchUpInside" id="Bf5-DV-nvO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJ7-hq-lpy">
@@ -2412,7 +2410,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnRate" destination="tJf-nk-PqV" id="GR7-cI-Dxd"/>
+                        <outlet property="btnShare" destination="tJf-nk-PqV" id="zRP-lN-PM4"/>
                         <outlet property="btnSkip" destination="oJ7-hq-lpy" id="3yo-7p-WG7"/>
                         <outlet property="lblMsg" destination="nAg-XP-IEc" id="lte-WU-X1w"/>
                         <outlet property="lblTopTitle" destination="hid-GZ-F0v" id="dCQ-wU-EdU"/>

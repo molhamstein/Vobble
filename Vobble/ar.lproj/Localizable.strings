@@ -245,6 +245,12 @@
 "RATE_US_BTN"                           = "تقيم التطيبق عل ايتونز";
 "RATE_US_SKIP"                          = "لا, لن أساعد";
 
+// share app
+"SHARE_APP_TITLE"                         = "اعجبك فيبو ؟";
+"SHARE_APP_MSG"                           = "شارك التطبيق مع صحابك!! ادعيهم للبحر....";
+"SHARE_APP_BTN"                           = "شارك فيبو";
+"SHARE_APP_SKIP"                          = "لا, لن أساعد";
+
 // notifications
 "NOTIFICATION_NEW_REPLY"                = "Hey, looks like %@ has found your bottle, come to check his reply";
 "NOTIFICATION_NEW_REPLY_AR"             = "رهيب، يبدو ان %@ عثر على زجاجة لك، ادخل شوف رده";
