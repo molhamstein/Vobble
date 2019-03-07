@@ -9,7 +9,8 @@
 import UIKit
 import Flurry_iOS_SDK
 import SwiftyGif
-
+import AVFoundation
+import AVKit
 class HomeViewController: AbstractController {
     
     // MARK: Properties
@@ -98,6 +99,10 @@ class HomeViewController: AbstractController {
     
     // temp Data Holders
     var productType: ShopItemType?
+    
+    /// Record sound
+    var findSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "find_bottle", ofType: "mp3")!)
+    var soundPlayer = AVAudioPlayer()
     
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
@@ -381,13 +386,21 @@ class HomeViewController: AbstractController {
             //self.popAnimation(view: self.vThrowBtnImg)
             
             self.disableActions(disable: true)
-            // add a delay to show button press animation
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                self.disableActions(disable: false)
-                self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
-            }
             
-            Flurry.logEvent(AppConfig.throw_bottle);
+            self.showActivityLoader(true)
+            
+            ApiManager.shared.requestTopics(completionBlock: {topics, error in
+                // add a delay to show button press animation
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    self.showActivityLoader(false)
+                    
+                    self.disableActions(disable: false)
+                    self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
+                }
+                
+                Flurry.logEvent(AppConfig.throw_bottle);
+            })
+            
             
         } else {
             
@@ -415,6 +428,19 @@ class HomeViewController: AbstractController {
         Flurry.logEvent(AppConfig.home_press_sea);
     }
     
+    func playFindSound () {
+        // play beep sound
+        do {
+            // Prepare beep player
+            self.soundPlayer = try AVAudioPlayer(contentsOf: findSound as URL)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            self.soundPlayer.prepareToPlay()
+            self.soundPlayer.play()
+            
+        }catch {}
+    }
+    
     @IBAction func findBottlePressed(_ sender: Any) {
        
         let findBottleGif = UIImage(gifName: "find_bottle.gif")
@@ -422,6 +448,7 @@ class HomeViewController: AbstractController {
         self.ivFindBottle.loopCount = 1
         //self.wiggleAnimate(view: self.ivFindBtn)
         self.popAnimation(view: self.vFindBtnCircle)
+        self.playFindSound()
         //self.popAnimation(view: self.vFindBtnImg)
         
         // send tracking event

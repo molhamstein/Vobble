@@ -31,6 +31,9 @@ class RecordMediaViewController: AbstractController {
     @IBOutlet weak var closeButton : UIButton!
     @IBOutlet weak var vOverlay:UIView!
     @IBOutlet weak var btnPhotoLibrary:UIButton!
+    @IBOutlet weak var topicsTableView:UITableView!
+    @IBOutlet weak var btnCancelTopics:UIButton!
+    @IBOutlet weak var btnTopics:UIButton!
     
     var videoImageTimer: Timer?
     var recordTimer: Timer?
@@ -44,6 +47,9 @@ class RecordMediaViewController: AbstractController {
     var isAnimating: Bool = false
     var isRecording: Bool = false
     var isCanceled: Bool = false
+    
+    var topicId: String = ""
+    var topics = DataStore.shared.topics
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +70,34 @@ class RecordMediaViewController: AbstractController {
         flashButton.animateIn(mode: .animateInFromTop, delay: 0.33)
         closeButton.animateIn(mode: .animateInFromTop, delay: 0.4)
         
-        self.btnPhotoLibrary.isHidden = AppConfig.isProductionBuild
+        btnCancelTopics.animateIn(mode: .animateInFromBottom, delay: 0.3)
+        btnTopics.animateIn(mode: .animateInFromBottom, delay: 0.3)
+        topicsTableView.animateIn(mode: .animateInFromBottom, delay: 0.3)
+        
+        btnPhotoLibrary.isHidden = AppConfig.isProductionBuild
+        btnCancelTopics.bringToFront()
+        btnTopics.bringToFront()
+        topicsTableView.bringToFront()
+        
+        if topics.count > 0 {
+            topicsTableView.isHidden = false
+            btnCancelTopics.isHidden = false
+            btnTopics.isHidden = true
+        }else {
+            topicsTableView.isHidden = true
+            btnCancelTopics.isHidden = true
+            btnTopics.isHidden = false
+        }
+        
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.topicsTableView.isHidden = true
+            self.btnCancelTopics.isHidden = true
+            self.btnTopics.isHidden = false
+        })
+    }
     func applicationDocumentsDirectory()-> NSURL {
         return FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).last! as NSURL
     }
@@ -80,6 +111,12 @@ class RecordMediaViewController: AbstractController {
     }
     
     func initViews() {
+        self.topicsTableView.delegate = self
+        self.topicsTableView.dataSource = self
+        self.topicsTableView.layer.cornerRadius = 18
+        self.topicsTableView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).withAlphaComponent(0.8)
+        self.topicsTableView.sectionFooterHeight = 15
+        self.topicsTableView.footerView(forSection: 0)?.backgroundColor = UIColor.clear
         
         let screenRect = UIScreen.main.bounds;
         let frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height)
@@ -158,6 +195,7 @@ class RecordMediaViewController: AbstractController {
             self.flashButton.isHidden = true;
             //switch camera button
             self.switchButton.tintColor = UIColor.white
+            self.switchButton.bringToFront()
             
         } else {
             let label: UILabel = UILabel(frame: CGRect.zero)
@@ -204,6 +242,24 @@ class RecordMediaViewController: AbstractController {
     
     func jumpSettinsButtonPressed(button: UIButton){
         UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL);
+    }
+    
+    @IBAction func cancelTopicsPressed(_ sender: UIButton) {
+        UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.topicsTableView.isHidden = true
+            self.btnCancelTopics.isHidden = true
+            self.btnTopics.isHidden = false
+        })
+        
+    }
+    
+    @IBAction func topicsPressed(_ sender: UIButton) {
+        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.topicsTableView.isHidden = false
+            self.btnCancelTopics.isHidden = false
+            self.btnTopics.isHidden = true
+        })
+        
     }
     
     @IBAction func presentLibraryPicker() {
@@ -587,10 +643,42 @@ extension RecordMediaViewController
                 previewControl.videoUrl = vidUrl
             }
             previewControl.from = self.from
+            previewControl.topicId = self.topicId
             
             self.navigationController?.pushViewController(previewControl, animated: false)
         }
     }
 }
 
-
+//MARK: Topics stuff
+extension RecordMediaViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.topics.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "topicCell", for: indexPath)
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.backgroundColor = UIColor.clear
+        // Get the only label in topics table view by its tag
+        let topicTitle = cell.viewWithTag(1) as! UILabel
+        topicTitle.textColor = AppColors.blueXDark
+        
+        topicTitle.text = self.topics[indexPath.row].text
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.topicId = self.topics[indexPath.row].topicId ?? "0"
+        
+        UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.topicsTableView.isHidden = true
+            self.btnCancelTopics.isHidden = true
+            self.btnTopics.isHidden = false
+        })
+        
+    }
+    
+}

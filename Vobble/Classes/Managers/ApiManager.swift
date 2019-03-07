@@ -605,6 +605,28 @@ class ApiManager: NSObject {
         }
     }
     
+    // MARK: Topics
+    func requestTopics(completionBlock: @escaping (_ topics: Array<Topic>?, _ error: NSError?) -> Void) {
+        let topicsListURL = "\(baseURL)/topics"
+        Alamofire.request(topicsListURL).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let resJson = JSON(responseObject.result.value!)
+                print(resJson)
+                if let data = resJson.array
+                {
+                    let topics: [Topic] = data.map{Topic(json: $0)}
+                    //save to cache
+                    DataStore.shared.topics = topics
+                    completionBlock(topics, nil)
+                }
+            }
+            if responseObject.result.isFailure {
+                let error : NSError = responseObject.result.error! as NSError
+                completionBlock(nil, error)
+            }
+        }
+    }
+    
     // MARK: Categories
     func requestCategories(completionBlock: @escaping (_ categories: Array<Category>?, _ error: NSError?) -> Void) {
         let categoriesListURL = "\(baseURL)categories"
@@ -881,7 +903,8 @@ class ApiManager: NSObject {
             "thumbnail": bottle.thumb!,
             "status": bottle.status!,
             "ownerId": bottle.ownerId!,
-            "shoreId": bottle.shoreId!
+            "shoreId": bottle.shoreId!,
+            "topicId": bottle.topicId ?? ""
         ]
         
         // build request

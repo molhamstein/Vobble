@@ -14,6 +14,8 @@
 		045120232180952900F4EC9D /* ThrownBottleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045120212180952900F4EC9D /* ThrownBottleCollectionViewCell.xib */; };
 		045FDF2721DD89850079EE32 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045FDF2621DD89850079EE32 /* FBSDKCoreKit.framework */; };
 		0498677F2187ACBA00B3CC43 /* record-beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0498677E2187ACB900B3CC43 /* record-beep.mp3 */; };
+		04ACC6D4222DD6B6007FF822 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACC6D3222DD6B6007FF822 /* Topic.swift */; };
+		04ACC6D62230F89B007FF822 /* find_bottle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ACC6D52230F89B007FF822 /* find_bottle.mp3 */; };
 		04AF6F1C218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF6F1A218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift */; };
 		04AF6F1D218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AF6F1B218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib */; };
 		04F7477F217DDDEA002A5F2B /* ThrownBottlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */; };
@@ -292,6 +294,8 @@
 		045120212180952900F4EC9D /* ThrownBottleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThrownBottleCollectionViewCell.xib; sourceTree = "<group>"; };
 		045FDF2621DD89850079EE32 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0498677E2187ACB900B3CC43 /* record-beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "record-beep.mp3"; sourceTree = "<group>"; };
+		04ACC6D3222DD6B6007FF822 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		04ACC6D52230F89B007FF822 /* find_bottle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = find_bottle.mp3; sourceTree = "<group>"; };
 		04AF6F1A218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCollectionViewCellIncoming.swift; sourceTree = "<group>"; };
 		04AF6F1B218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
 		04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrownBottlesViewController.swift; sourceTree = "<group>"; };
@@ -827,6 +831,7 @@
 				57DED21A2126AFCE00514FBE /* loginVideo.mp4 */,
 				576993942153FF82001211CF /* introSound.mp3 */,
 				57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */,
+				04ACC6D52230F89B007FF822 /* find_bottle.mp3 */,
 				0498677E2187ACB900B3CC43 /* record-beep.mp3 */,
 				57E611D62151B21300E0B307 /* loginVideo.m4v */,
 				B19372E92033E44E007B1E7D /* AppFonts.swift */,
@@ -915,6 +920,7 @@
 				B1AE405220699A52006B38FD /* Media.swift */,
 				B1B6DB322073D55400BD16BC /* Message.swift */,
 				571084C820C02262001163EA /* ReportType.swift */,
+				04ACC6D3222DD6B6007FF822 /* Topic.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1629,6 +1635,7 @@
 				57348472218FA36C00F4707B /* audio_msg_beeb.mp3 in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				045120232180952900F4EC9D /* ThrownBottleCollectionViewCell.xib in Resources */,
+				04ACC6D62230F89B007FF822 /* find_bottle.mp3 in Resources */,
 				B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */,
 				04AF6F1D218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib in Resources */,
 				B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */,
@@ -2016,6 +2023,7 @@
 				B18A5DA420348E4300F139B7 /* RACTargetQueueScheduler.m in Sources */,
 				B18A5DC720348E4300F139B7 /* SimpleAuthDefines.m in Sources */,
 				B18A5D8120348E4300F139B7 /* RACDelegateProxy.m in Sources */,
+				04ACC6D4222DD6B6007FF822 /* Topic.swift in Sources */,
 				B1EA39CF20560824008AADC9 /* Bottle.swift in Sources */,
 				B18A5DC420348E4300F139B7 /* UIWindow+SimpleAuthAdditions.m in Sources */,
 				9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */,

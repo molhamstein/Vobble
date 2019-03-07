@@ -33,6 +33,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_TUT_1 = "tutorial1"
     private let CACHE_KEY_TUT_CHAT = "tutorialChat"
     private let CACHE_KEY_UNSENT_TEXTS = "ChatUnsentTexts"
+    private let CACHE_KEY_TOPICS = "topics"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
@@ -51,6 +52,8 @@ class DataStore :NSObject {
     
     private var _tutorial1Showed: Bool?
     private var _tutorialChatShowed: Bool?
+    
+    private var _topics: [Topic] = [Topic]()
     
     //public var conversationsUnseenMesssages: [String: Int] = [:]
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
@@ -205,6 +208,18 @@ class DataStore :NSObject {
         }
     }
     
+    public var topics: [Topic] {
+        set {
+            _topics = newValue
+            saveBaseModelArray(array: _topics, withKey: CACHE_KEY_TOPICS)
+        }
+        get {
+            if(_topics.isEmpty){
+                _topics = loadBaseModelArrayForKey(key: CACHE_KEY_TOPICS)
+            }
+            return _topics
+        }
+    }
     
     public var allConversations: [Conversation]? {
         set {
