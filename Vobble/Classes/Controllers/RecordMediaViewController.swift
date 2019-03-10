@@ -39,6 +39,7 @@ class RecordMediaViewController: AbstractController {
     var recordTimer: Timer?
     var captureMediaType:MEDIA_TYPE = .IMAGE
     var from: typeOfController = .throwBottle
+    var selectedShore: Shore?
     
     var settingsButton = UIButton();
     var camera = LLSimpleCamera();
@@ -131,12 +132,10 @@ class RecordMediaViewController: AbstractController {
                 self.flashButton.isHidden = false
                 if camera?.flash == LLCameraFlashOff {
                     self.flashButton.isSelected = false
-                }
-                else {
+                } else {
                     self.flashButton.isSelected = true
                 }
-            }
-            else {
+            } else {
                 self.flashButton.isHidden = true
             }
         }
@@ -643,6 +642,7 @@ extension RecordMediaViewController
                 previewControl.videoUrl = vidUrl
             }
             previewControl.from = self.from
+            previewControl.selectedShore = self.selectedShore
             previewControl.topicId = self.topicId
             
             self.navigationController?.pushViewController(previewControl, animated: false)

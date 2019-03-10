@@ -36,6 +36,7 @@ class ShareAppPopupViewController: AbstractController {
     
     @IBAction func actionShareApp() {
         ActionShareText.execute(viewController: self, text: "SETTINGS_SHARE_MSG".localized, sourceView: btnShare)
+        self.dismiss(animated: true) {}
     }
     
     @IBAction func actionSkip() {

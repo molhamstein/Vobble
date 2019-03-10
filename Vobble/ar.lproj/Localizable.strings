@@ -12,6 +12,7 @@
 "GLOBAL_WARNING_TITLE"                  = "تنبيه!";
 "CANCEL"                                = "الغاء";
 "ok"                                    = "موافق";
+"SUBMIT"                                = "إرسال";
 
 // Generic erros
 "ERROR_NO_CONNECTION"                   = "يرجى التأكد من اتصالك مع الانترنيت";

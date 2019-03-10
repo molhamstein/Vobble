@@ -12,6 +12,7 @@
 "GLOBAL_WARNING_TITLE"                  = "WARNING!";
 "CANCEL"                                = "Cancel";
 "ok"                                    = "Ok";
+"SUBMIT"                                = "Submit";
 
 // Generic erros
 "ERROR_NO_CONNECTION"                   = "No internet connection, please check your connection";

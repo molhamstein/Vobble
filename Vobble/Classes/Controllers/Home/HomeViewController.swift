@@ -11,6 +11,8 @@ import Flurry_iOS_SDK
 import SwiftyGif
 import AVFoundation
 import AVKit
+import FillableLoaders
+
 class HomeViewController: AbstractController {
     
     // MARK: Properties
@@ -48,6 +50,7 @@ class HomeViewController: AbstractController {
     @IBOutlet weak var vMyBottlesBtnCircle: UIView!
     @IBOutlet weak var vMyBottlesBtnImg: UIView!
     @IBOutlet weak var lblUnreadConversationsBadge: UILabel!
+    
     // find
     @IBOutlet weak var vFindBtnContainer: UIView!
     @IBOutlet weak var lblFindBtn: UILabel!
@@ -67,6 +70,9 @@ class HomeViewController: AbstractController {
     @IBOutlet var ivBoat: UIImageView!
     
     @IBOutlet var sonTopConstraint: NSLayoutConstraint!
+    
+    // upload progress
+    var videoUploadLoader: WavesLoader?
     
     var screenWidth: CGFloat = 0.0;
     var blockPageTransitions: Bool = false;
@@ -100,7 +106,8 @@ class HomeViewController: AbstractController {
     // temp Data Holders
     var productType: ShopItemType?
     
-    /// Record sound
+    /// find/throw sound
+    var throwSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "splashSound", ofType: "mp3")!)
     var findSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "find_bottle", ofType: "mp3")!)
     var soundPlayer = AVAudioPlayer()
     
@@ -134,7 +141,7 @@ class HomeViewController: AbstractController {
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
         
         // tutorial
-        if let tutShowedBefore = DataStore.shared.me?.homeTutShowed, !tutShowedBefore{
+        if let tutShowedBefore = DataStore.shared.me?.homeTutShowed, !tutShowedBefore {
             dispatch_main_after(2) {
                 let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
                 viewController.alpha = 0.5
@@ -364,7 +371,6 @@ class HomeViewController: AbstractController {
         if let bottle = sender as? Bottle {
             let nav = segue.destination as! UINavigationController
             let findBottleVC = nav.topViewController as! FindBottleViewController
-            //findBottleVC.shoreName = self.navigationView.navTitle.text
             findBottleVC.bottle = bottle
         
         } else if segue.identifier == "shopSegue" {
@@ -372,13 +378,15 @@ class HomeViewController: AbstractController {
             if let type = productType {
                 vc.fType = type
             }
+        } else if segue.identifier == "homeRecrodSegue" {
+            let nc = segue.destination as! UINavigationController
+            let vc = nc.viewControllers[0] as! RecordMediaViewController
+            vc.selectedShore = DataStore.shared.shores[self.currentPageIndex]
         }
     }
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
        
-        //ActionRateUs.execute(hostViewController: self)
-        
         if let bCount = DataStore.shared.me?.totalBottlesLeftToThrowCount, bCount > 0 {
             //DataStore.shared.me?.thrownBottlesCount = bCount - 1
             //self.wiggleAnimate(view: self.ivThrowBtn)
@@ -437,9 +445,21 @@ class HomeViewController: AbstractController {
             try AVAudioSession.sharedInstance().setActive(true)
             self.soundPlayer.prepareToPlay()
             self.soundPlayer.play()
-            
         }catch {}
     }
+    
+    func playThrowSound () {
+        // play beep sound
+        do {
+            // Prepare beep player
+            self.soundPlayer = try AVAudioPlayer(contentsOf: throwSound as URL)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            self.soundPlayer.prepareToPlay()
+            self.soundPlayer.play()
+        }catch {}
+    }
+
     
     @IBAction func findBottlePressed(_ sender: Any) {
        
@@ -448,7 +468,10 @@ class HomeViewController: AbstractController {
         self.ivFindBottle.loopCount = 1
         //self.wiggleAnimate(view: self.ivFindBtn)
         self.popAnimation(view: self.vFindBtnCircle)
-        self.playFindSound()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 0.5 second
+            self.playFindSound()
+        }
         //self.popAnimation(view: self.vFindBtnImg)
         
         // send tracking event
@@ -461,12 +484,16 @@ class HomeViewController: AbstractController {
         self.disableActions(disable: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // delay 5 second
             self.ivFindBottle.image = nil
-            self.showActivityLoader(true)
+            //self.showActivityLoader(true)
+            
+            self.videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath(), on: self.view)
+            self.videoUploadLoader?.rectSize = 200
+            self.videoUploadLoader?.progress = CGFloat(0.5)
             
             let shoreId = self.currentPageIndex == 0 ? nil : DataStore.shared.shores[self.currentPageIndex].shore_id!
             ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: { (bottle, error) in
                 self.disableActions(disable: false)
-                self.showActivityLoader(false)
+                self.videoUploadLoader?.removeLoader(true)
                 if error == nil  {
                     if bottle != nil {
                         //print("\(bottle?.bottle_id)")
@@ -512,7 +539,21 @@ class HomeViewController: AbstractController {
     }
     
     @IBAction func unwindSendReply(segue: UIStoryboardSegue) {
-        
+        let  repliesSentCount = DataStore.shared.me?.repliesBottlesCount
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { // delay 6 second
+            self.ivThrowBottle.image = nil
+            // update user info after sending the reply
+            ApiManager.shared.getMe(completionBlock: { (success, error, user) in
+                
+                // check the number of replies made by user, and use it to determine
+                // if we should show the rate us dialog
+                let  newRepliesSentCount = DataStore.shared.me?.repliesBottlesCount
+                if newRepliesSentCount != repliesSentCount && newRepliesSentCount == 1 {
+                    ActionRateUs.execute(hostViewController: self)
+                }
+                self.refreshViewData()
+            })
+        }
     }
     
     @IBAction func unwindRecordMedia(segue: UIStoryboardSegue) {
@@ -538,14 +579,24 @@ class HomeViewController: AbstractController {
                 DataStore.shared.me?.bottlesLeftToThrowCount = bottlesLeftCount - 1
                 self.refreshViewData()
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { // delay 1 second
+                self.playThrowSound()
+            }
+            
+            let thrownBottlesCount = DataStore.shared.me?.thrownBottlesCount
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) { // delay 6 second
                 self.ivThrowBottle.image = nil
-                // update user infoafter throwing the bottle
+                // update user info after throwing the bottle
                 ApiManager.shared.getMe(completionBlock: { (success, error, user) in
-                    // check the number of bottles thrown by user, and use it to determine 
-                    // if we should show the rate us dialog 
-                    ActionRateUs.execute(hostViewController: self)
+                    
+                    // check the number of bottles thrown by user, and use it to determine
+                    // if we should show the share dialog
+                    let newThrownBottlesCount = DataStore.shared.me?.thrownBottlesCount
+                    if newThrownBottlesCount != thrownBottlesCount && newThrownBottlesCount == 1 {
+                        ActionShowSharePopup.execute(hostViewController: self)
+                    }
+                    
                     self.refreshViewData()
                 })
             }

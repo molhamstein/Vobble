@@ -36,6 +36,7 @@ class PreviewMediaControl : AbstractController {
     var from: typeOfController = .chatView
     var isVOverlayApplyGradient:Bool = false
     var selectedShoreIndex: Int = -1
+    var selectedShore: Shore?
     
     //Image
     var image = UIImage();
@@ -47,8 +48,6 @@ class PreviewMediaControl : AbstractController {
     //Topic
     var topicId = ""
     
-    /// Record sound
-    var throwSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "find_bottle", ofType: "mp3")!)
     var soundPlayer = AVAudioPlayer()
     
 //    var avPlayer = AVPlayer();
@@ -68,8 +67,8 @@ class PreviewMediaControl : AbstractController {
             
         } else if (from == .throwBottle) {
             
-            cvShorePicker.isHidden = false
-            submitButton.isHidden = true
+            cvShorePicker.isHidden = true
+            submitButton.isHidden = false
             
         } else if (from == .chatView) {
             
@@ -102,7 +101,7 @@ class PreviewMediaControl : AbstractController {
             uploadProgressWave.isHidden = true
             uploadProgressWater.isHidden = true
             
-           isVOverlayApplyGradient = true
+            isVOverlayApplyGradient = true
         }
     }
     
@@ -113,29 +112,7 @@ class PreviewMediaControl : AbstractController {
     
     func initViews() {
         
-//        if(type == .IMAGE) {
-//            
-//            if(imgUrl.isEmpty) {
-//                self.imageView.image = self.image
-//            } else {
-//                self.imageView.setImageForURL(imgUrl, placeholder: AppConfig.PlaceHolderImage)
-//            }
-//        
-////        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PreviewMediaControl.viewTapped(gesture:)))
-////        self.view!.addGestureRecognizer(tapGesture)
-//        } else {
-//            // the video player
-//            let item = AVPlayerItem(url: self.videoUrl as URL);
-//            self.avPlayer = AVPlayer(playerItem: item);
-//            self.avPlayer.actionAtItemEnd = .none
-//            self.avPlayerLayer = AVPlayerLayer(player: self.avPlayer);
-//            NotificationCenter.default.addObserver(self, selector: #selector(PreviewMediaControl.playerItemDidReachEnd(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.avPlayer.currentItem!)
-//            
-//            let screenRect: CGRect = UIScreen.main.bounds
-//            
-//            self.avPlayerLayer.frame = CGRect(x:0, y:0, width:screenRect.size.width, height:screenRect.size.height)
-//            self.view.layer.addSublayer(self.avPlayerLayer)
-//        }
+        self.submitButton.setTitle("SUBMIT".localized, for: .normal)
         
         self.backButton.tintColor = UIColor.white
         self.vOverlay.bringToFront()
@@ -151,43 +128,19 @@ class PreviewMediaControl : AbstractController {
 //        self.avPlayer.seek(to: kCMTimeZero)
     }
     
-//    func viewTapped(gesture: UIGestureRecognizer) {
-//        self.dismiss(animated: false, completion: nil)
-//    }
-    
     @IBAction func dissmiss() {
         //Image
         image = UIImage()
         imgUrl = ""
         //Video
         videoUrl = NSURL()
-//        avPlayer = AVPlayer();
-//        avPlayerLayer = AVPlayerLayer();
-        
-//        if(!imgUrl.isEmpty) {
-//            self.dismiss(animated: true, completion: nil)
-//        } else {
-            self.popOrDismissViewControllerAnimated(animated: true)
-//        }
+        self.popOrDismissViewControllerAnimated(animated: true)
     }
     
     override var prefersStatusBarHidden: Bool{
         return true
     }
-    
-    func playThrowSound () {
-        // play beep sound
-        do {
-            // Prepare beep player
-            self.soundPlayer = try AVAudioPlayer(contentsOf: throwSound as URL)
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            try AVAudioSession.sharedInstance().setActive(true)
-            self.soundPlayer.prepareToPlay()
-            self.soundPlayer.play()
-            
-        }catch {}
-    }
-    
+        
     func throwInSea (shore: Shore) {
      
         let urls:[URL] = [self.videoUrl as URL]
@@ -238,7 +191,6 @@ class PreviewMediaControl : AbstractController {
                         self.cvShorePicker.animateIn(mode: .animateOutToBottom, delay: 0.3)
                         self.backButton.animateIn(mode: .animateOutToTop, delay: 0.2)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 6 second
-                            self.playThrowSound()
                             self.performSegue(withIdentifier: "unwindRecordMediaSegue", sender: self)
                             self.popOrDismissViewControllerAnimated(animated: true)
                         }
@@ -274,10 +226,13 @@ class PreviewMediaControl : AbstractController {
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         
-        Flurry.logEvent(AppConfig.reply_shooted);
-        
-        self.performSegue(withIdentifier: "unwindToFindBottleSegue", sender: self)
-        self.popOrDismissViewControllerAnimated(animated: true)
+        if let shore = selectedShore, from == .throwBottle  {
+            throwInSea(shore: shore)
+        } else {
+            Flurry.logEvent(AppConfig.reply_shooted);
+            self.performSegue(withIdentifier: "unwindToFindBottleSegue", sender: self)
+            self.popOrDismissViewControllerAnimated(animated: true)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

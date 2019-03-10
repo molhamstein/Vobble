@@ -108,6 +108,12 @@ class FindBottleViewController: AbstractController {
                     if let me = DataStore.shared.me {
                         ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }
                     }
+                    // hide the tutorial automatically after 3 seconds
+                    dispatch_main_after(3) {
+                        if let _ = viewController.view.window, viewController.isViewLoaded {
+                           viewController.dismiss(animated: true, completion: nil)
+                        }
+                    }
                 }
             }
             

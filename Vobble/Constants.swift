@@ -30,7 +30,7 @@ struct AppConfig {
 //    static let oneSingleID = "3754a01e-b355-4248-a906-e04549e6ab32"
     static let oneSingleID = "e8a91e90-a766-4f1b-a47e-e3b3f569dbef"
     
-    static let AppleStoreAppId = "1407745068"
+    static let AppleStoreAppId = "id1407745068"
     
     static let PlaceHolderImage = UIImage(named: "bottle-1")
     

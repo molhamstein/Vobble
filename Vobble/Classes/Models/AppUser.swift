@@ -58,6 +58,8 @@ class AppUser: BaseModel, NSCopying {
     private let kUserSocialToken = "token"
     private let kUserNextRefill = "nextRefill"
     private let kAccountInfoCompleted = "registrationCompleted"
+    private let kFoundBottlesCount = "foundBottlesCount"
+    private let kRepliesBottlesCount = "repliesBottlesCount"
     
     private let kHomeTutShowed = "homeTutShowed"
     private let kChatTutShowed = "ChatTutShowed"
@@ -82,6 +84,8 @@ class AppUser: BaseModel, NSCopying {
     public var loginType: LoginType?
     public var status: Status?
     public var token: String?
+    public var foundBottlesCount: Int?
+    public var repliesBottlesCount: Int?
     public var thrownBottlesCount: Int?
     public var bottlesLeftToThrowCount: Int?
     public var extraBottlesLeftToThrowCount: Int?
@@ -158,7 +162,9 @@ class AppUser: BaseModel, NSCopying {
         }
         
         token = json[kUserTokenKey].string
+        foundBottlesCount = json[kFoundBottlesCount].int
         thrownBottlesCount = json[kUserBottlesCount].int
+        repliesBottlesCount = json[kRepliesBottlesCount].int
         bottlesLeftToThrowCount = json[kUserBottlesLeftToday].int
         
         socialId = json[kUserSocialId].string
@@ -206,7 +212,14 @@ class AppUser: BaseModel, NSCopying {
         if let value = token {
             dictionary[kUserTokenKey] = value
         }
+        // found bottles count
+        if let value = foundBottlesCount {
+            dictionary[kFoundBottlesCount] = value
+        }
         // bottle count
+        if let value = repliesBottlesCount {
+            dictionary[kRepliesBottlesCount] = value
+        }
         if let value = thrownBottlesCount {
             dictionary[kUserBottlesCount] = value
         }
@@ -262,7 +275,9 @@ class AppUser: BaseModel, NSCopying {
         copy.loginType = loginType
         copy.status = status
         copy.token = token
+        copy.foundBottlesCount = foundBottlesCount
         copy.thrownBottlesCount = thrownBottlesCount
+        copy.repliesBottlesCount = repliesBottlesCount
         copy.bottlesLeftToThrowCount = bottlesLeftToThrowCount
         copy.extraBottlesLeftToThrowCount = extraBottlesLeftToThrowCount
         copy.socialId = socialId
