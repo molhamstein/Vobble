@@ -80,15 +80,25 @@ class RecordMediaViewController: AbstractController {
         btnTopics.bringToFront()
         topicsTableView.bringToFront()
         
-        if topics.count > 0 {
-            topicsTableView.isHidden = false
-            btnCancelTopics.isHidden = false
-            btnTopics.isHidden = true
+        if from == .throwBottle {
+            if topics.count > 0 && !DataStore.shared.topicsShowed {
+                topicsTableView.isHidden = false
+                btnCancelTopics.isHidden = false
+                btnTopics.isHidden = true
+                
+                // Set topics appearance to hidden in the next time
+                DataStore.shared.topicsShowed = true
+            }else {
+                topicsTableView.isHidden = true
+                btnCancelTopics.isHidden = true
+                btnTopics.isHidden = false
+            }
         }else {
             topicsTableView.isHidden = true
             btnCancelTopics.isHidden = true
-            btnTopics.isHidden = false
+            btnTopics.isHidden = true
         }
+        
         
     }
     

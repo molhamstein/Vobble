@@ -16,6 +16,8 @@
 		0498677F2187ACBA00B3CC43 /* record-beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0498677E2187ACB900B3CC43 /* record-beep.mp3 */; };
 		04ACC6D4222DD6B6007FF822 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACC6D3222DD6B6007FF822 /* Topic.swift */; };
 		04ACC6D62230F89B007FF822 /* find_bottle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ACC6D52230F89B007FF822 /* find_bottle.mp3 */; };
+		04ACC6D82235A4A4007FF822 /* ShareAppPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACC6D72235A4A3007FF822 /* ShareAppPopupViewController.swift */; };
+		04ACC6DA2235AD66007FF822 /* splashSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ACC6D92235AD66007FF822 /* splashSound.mp3 */; };
 		04AF6F1C218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF6F1A218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift */; };
 		04AF6F1D218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AF6F1B218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib */; };
 		04F7477F217DDDEA002A5F2B /* ThrownBottlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */; };
@@ -296,6 +298,8 @@
 		0498677E2187ACB900B3CC43 /* record-beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "record-beep.mp3"; sourceTree = "<group>"; };
 		04ACC6D3222DD6B6007FF822 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		04ACC6D52230F89B007FF822 /* find_bottle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = find_bottle.mp3; sourceTree = "<group>"; };
+		04ACC6D72235A4A3007FF822 /* ShareAppPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareAppPopupViewController.swift; sourceTree = "<group>"; };
+		04ACC6D92235AD66007FF822 /* splashSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashSound.mp3; sourceTree = "<group>"; };
 		04AF6F1A218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCollectionViewCellIncoming.swift; sourceTree = "<group>"; };
 		04AF6F1B218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
 		04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrownBottlesViewController.swift; sourceTree = "<group>"; };
@@ -827,6 +831,7 @@
 		B117970B2033C665006D96BE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				04ACC6D92235AD66007FF822 /* splashSound.mp3 */,
 				B19372F72033E48F007B1E7D /* AppColors.swift */,
 				57DED21A2126AFCE00514FBE /* loginVideo.mp4 */,
 				576993942153FF82001211CF /* introSound.mp3 */,
@@ -1393,6 +1398,7 @@
 		B193710E2033D031007B1E7D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				04ACC6D72235A4A3007FF822 /* ShareAppPopupViewController.swift */,
 				B19371122033D254007B1E7D /* ProfileViewController.swift */,
 				5796242D20793B790005292A /* TermsViewController.swift */,
 				5796242E20793B790005292A /* AboutViewController.swift */,
@@ -1624,6 +1630,7 @@
 				B18719CB2079952800861B45 /* jsq_messages_sample.m4a in Resources */,
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
+				04ACC6DA2235AD66007FF822 /* splashSound.mp3 in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				57A8129D210CE63F003D738E /* find_bottle.gif in Resources */,
 				57A8129B210CE3AB003D738E /* throwBottle.gif in Resources */,
@@ -1891,6 +1898,7 @@
 				B19371152033D2F8007B1E7D /* AbstractController.swift in Sources */,
 				B18A5D7820348E4300F139B7 /* NSURLConnection+RACSupport.m in Sources */,
 				B1F7A456205A0F39009B18AB /* ShopViewController.swift in Sources */,
+				04ACC6D82235A4A4007FF822 /* ShareAppPopupViewController.swift in Sources */,
 				B18A5D6120348E4300F139B7 /* ISO8601Serialization.m in Sources */,
 				B18A5D9A20348E4300F139B7 /* RACSignal+Operations.m in Sources */,
 				5706C432204DCAA3006E7C9A /* Shore.swift in Sources */,

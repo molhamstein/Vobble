@@ -12,7 +12,7 @@ import SwiftyJSON
 class Topic : BaseModel {
     // MARK: Keys
     private let kTopicId: String = "id"
-    private let kText_en: String = "test_en"
+    private let kText_en: String = "text_en"
     private let kText_ar: String = "text_ar"
     private let kStatus: String = "status"
     private let kCreatedAt: String = "createdAt"
