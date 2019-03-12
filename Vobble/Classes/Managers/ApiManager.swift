@@ -262,6 +262,7 @@ class ApiManager: NSObject {
         Alamofire.request(signUpURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
+                print(jsonResponse)
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)

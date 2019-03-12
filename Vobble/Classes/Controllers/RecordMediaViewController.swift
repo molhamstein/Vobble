@@ -100,6 +100,8 @@ class RecordMediaViewController: AbstractController {
         }
         
         
+        btnCancelTopics.setTitle("Cancel".localized, for: .normal)
+        self.view.semanticContentAttribute = .forceLeftToRight
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -229,9 +229,9 @@ class DataStore :NSObject {
             UserDefaults.standard.set(_topicsShowed, forKey: CACHE_KEY_TOPICS_SHOWED)
         }
         get {
-            if _topicsShowed == nil{
-                _topicsShowed = UserDefaults.standard.bool(forKey: CACHE_KEY_TOPICS_SHOWED)
-            }
+            
+            _topicsShowed = UserDefaults.standard.bool(forKey: CACHE_KEY_TOPICS_SHOWED)
+            
             return _topicsShowed
         }
     }

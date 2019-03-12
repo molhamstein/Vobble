@@ -34,6 +34,10 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var instaLoginButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var startupTermsPrefixLabel: UILabel!
+    @IBOutlet weak var startupTermsButton: UIButton!
+    @IBOutlet weak var startupTermsOrLabel: UILabel!
+    @IBOutlet weak var startupPrivacyButton: UIButton!
     
     //emails view
     @IBOutlet weak var emailsView: UIView!
@@ -254,7 +258,13 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         loginTermsPrefixLabel.font = AppFonts.small
         loginTermsButton.titleLabel?.font = AppFonts.smallBold
         loginPrivacyButton.titleLabel?.font = AppFonts.smallBold
-        loginTermsPrefixLabel.font = AppFonts.small
+        loginTermsOrLabel.font = AppFonts.small
+        
+        //startup
+        startupTermsPrefixLabel.font = AppFonts.small
+        startupTermsButton.titleLabel?.font = AppFonts.smallBold
+        startupPrivacyButton.titleLabel?.font = AppFonts.smallBold
+        startupTermsOrLabel.font = AppFonts.small
         
         btnSocialInfoSelectCountry.titleLabel?.font = AppFonts.big
         lblSocialInfoWelcome.font = AppFonts.big
@@ -271,7 +281,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         loginTermsPrefixLabel.text = "LOGIN_ACCESSEPT".localized
         loginTermsButton.setTitle("LOGIN_TERMS".localized, for: .normal)
         loginPrivacyButton.setTitle("LOGIN_PRIVACY".localized, for: .normal)
-        loginTermsPrefixLabel.text = "LOGIN_ACCESSEPT".localized
+        loginTermsOrLabel.text = "LOGIN_AND".localized
+        
+        startupTermsPrefixLabel.text = "LOGIN_ACCESSEPT".localized
+        startupTermsButton.setTitle("LOGIN_TERMS".localized, for: .normal)
+        startupPrivacyButton.setTitle("LOGIN_PRIVACY".localized, for: .normal)
+        startupTermsOrLabel.text = "SIGNUP_AND".localized
         
         svEmailLabel.text = "SIGNUP_EMAIL_TITLE".localized
         svEmailTextField.placeholder = "SIGNUP_EMAIL_PLACEHOLDER".localized

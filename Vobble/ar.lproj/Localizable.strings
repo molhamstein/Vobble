@@ -52,7 +52,7 @@
 "LOGIN_ACCESSEPT"                       = "بتسجيلك الدحول تقبل";
 "LOGIN_PRIVACY"                         = "سياسه الخصوصيه";
 "LOGIN_TERMS"                           = "شروط الاستخدام";
-"LOGIN_AND"                             = " & ";
+"LOGIN_AND"                             = " و ";
 
 // Social media
 "FACEBOOK_LOGIN"                        = "التسجيل بواسطة فيسبوك";
