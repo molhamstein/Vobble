@@ -31,7 +31,6 @@ class ApiManager: NSObject {
     }
     
     let baseURL = AppConfig.useLiveAPI ? AppConfig.appBaseLiveURL : AppConfig.appBaseDevURL
-    let error_domain = "Rombaye"
     
     //MARK: Shared Instance
     static let shared: ApiManager = ApiManager()
