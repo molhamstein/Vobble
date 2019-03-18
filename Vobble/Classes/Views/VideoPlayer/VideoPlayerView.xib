@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,11 +18,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="X1D-tT-sI8">
-                    <rect key="frame" x="14" y="631" width="347" height="31"/>
+                    <rect key="frame" x="14" y="754" width="347" height="31"/>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" white="0.45000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
@@ -30,14 +30,14 @@
                     </connections>
                 </slider>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lPh-uj-vWp">
-                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                    <rect key="frame" x="169" y="387.66666666666669" width="37" height="37"/>
                     <color key="color" white="0.89659051447106686" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="X1D-tT-sI8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="2oU-Tt-0Ae"/>
-                <constraint firstAttribute="bottom" secondItem="X1D-tT-sI8" secondAttribute="bottom" constant="6" id="ByS-pH-pWe"/>
+                <constraint firstAttribute="bottom" secondItem="X1D-tT-sI8" secondAttribute="bottom" constant="28" id="ByS-pH-pWe"/>
                 <constraint firstItem="lPh-uj-vWp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Z8O-Eu-Oo5"/>
                 <constraint firstItem="lPh-uj-vWp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="azD-d1-XQC"/>
                 <constraint firstAttribute="trailing" secondItem="X1D-tT-sI8" secondAttribute="trailing" constant="16" id="oi5-bV-vBW"/>
