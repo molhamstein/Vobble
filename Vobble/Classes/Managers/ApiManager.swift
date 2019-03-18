@@ -1206,6 +1206,7 @@ struct ServerError {
         case invalidUserName = 405
         case noBottleFound = 406
         case emailAlreadyExists = 413
+        case usernameAlreadyExists = 422
         case emailAlreadyRegisteredWithDifferentMedia = 412
         case alreadyExists = 101
         case socialLoginFailed = -110
@@ -1249,6 +1250,8 @@ struct ServerError {
                     return "ERROR_BOTTLE_NOT_FOUND".localized
                 case .emailAlreadyExists:
                     return "ERROR_EMAIL_EXISTS".localized
+                case .usernameAlreadyExists:
+                    return "ERROR_USERNAME_EXISTS".localized
                 case .invalidPurchase:
                     return "SHOP_INVALID_PURCHASE_MSG".localized
                 case .emailAlreadyRegisteredWithDifferentMedia:

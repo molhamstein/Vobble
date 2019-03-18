@@ -80,12 +80,13 @@ class ActionRateUs {
 
 class ActionShowSharePopup {
     class func execute(hostViewController: UIViewController!) {
-        let rateViewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShareAppPopupViewController.className)
-        rateViewController.providesPresentationContextTransitionStyle = true
-        rateViewController.definesPresentationContext = true
-        rateViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
-        rateViewController.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
-        hostViewController.present(rateViewController, animated: true, completion: nil)
+        let shareViewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShareAppPopupViewController.className) as! ShareAppPopupViewController
+        shareViewController.providesPresentationContextTransitionStyle = true
+        shareViewController.definesPresentationContext = true
+        shareViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+        shareViewController.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+        shareViewController.hostViewController = hostViewController
+        hostViewController.present(shareViewController, animated: true, completion: nil)
     }
 }
 

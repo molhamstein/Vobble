@@ -43,7 +43,12 @@ class SocialManager: NSObject{
                                         let lName = dict["last_name"] as? String
                                         let userName = (fName?.trimed)! + "." + (lName?.trimed)!
                                         var pictureLink = ""
-                                        let email = dict["email"] as! String
+                                        
+                                        //TODO: incase the user didnt have an email we give the user a fake email account
+                                        var email = facebookId + AppConfig.fakeMailsSuffix
+                                        if let dictMail = dict["email"] as? String {
+                                            email = dictMail
+                                        }
                                         var countryCode = "CH"
                                         let gender = "male"
                                         if let locationObj = dict["location"] as? [String : AnyObject], let innerLocationObj = locationObj["location"] as? [String : AnyObject] {

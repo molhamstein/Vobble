@@ -27,6 +27,7 @@
 "ERROR_UNACTIVATED_USER"                = "Your Account is not activated yet, please check your email";
 "ERROR_INVALID_USERNAME"                = "Username already exists";
 "ERROR_EMAIL_EXISTS"                    = "Email Already exists, please try to login";
+"ERROR_USERNAME_EXISTS"                 = "Username already used, try another one";
 "ERROR_WRONG_LOGIN_METHOD"              = "This email is registered before, please login with your usual login method";
 
 

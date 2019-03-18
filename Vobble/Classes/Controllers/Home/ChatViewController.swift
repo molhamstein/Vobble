@@ -151,6 +151,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     /// Record beep
     var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")!)
+    var popSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "find_bottle", ofType: "mp3")!)
     var beepPlayer = AVAudioPlayer()
     
     /// Audio messages
@@ -249,8 +250,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         safeAreaHeight = window.safeAreaInsets.bottom
                     }
                 }
-                var recordTimerXPos = isRTL ? 80 : UIScreen.main.bounds.width - 80 - 50
-                var recordButtonXPos = isRTL ? 20 : UIScreen.main.bounds.width - 40 - 20
+                let recordTimerXPos = isRTL ? 80 : UIScreen.main.bounds.width - 80 - 50
+                let recordButtonXPos = isRTL ? 20 : UIScreen.main.bounds.width - 40 - 20
                 
                 self.recordButtonContainer.frame = CGRect(x: 0 , y: UIScreen.main.bounds.height - safeAreaHeight, width: UIScreen.main.bounds.width, height: (inputToolbar.frame.size.height + safeAreaHeight) )
                 self.recordButton.frame = CGRect(x: recordButtonXPos , y: 2, width: 40, height: 40)
@@ -294,6 +295,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 if let replyVideoUrl = replyVideoUrlToUpload {
                     self.uploadVideo(videoUrl: replyVideoUrl)
                 }
+                
+                playPopSound()
                 setupRecorder()
                 //chatPendingContainer.isHidden = true
             }
@@ -739,6 +742,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
+        
+        // expirement to resolve sound from speaker issue
+        playPopSound()
         
         let message = self.messages[indexPath.row]
         if message.isMediaMessage == true {
@@ -1761,8 +1767,6 @@ extension ChatViewController : AudioCollectionViewCellIncomingDelegate  {
                     startNewIncomingAudio(cell)
                 }
             }
-            
-            
         }else{
             startNewIncomingAudio(cell)
         }
@@ -1852,6 +1856,19 @@ extension ChatViewController {
         do {
             // Prepare beep player
             self.beepPlayer = try AVAudioPlayer(contentsOf: beepSound as URL)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            self.beepPlayer.prepareToPlay()
+            self.beepPlayer.play()
+            
+        }catch {}
+    }
+    
+    func playPopSound () {
+        // play beep sound
+        do {
+            // Prepare beep player
+            self.beepPlayer = try AVAudioPlayer(contentsOf: popSound as URL)
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
             self.beepPlayer.prepareToPlay()

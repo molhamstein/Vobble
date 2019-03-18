@@ -16,6 +16,7 @@ class ShareAppPopupViewController: AbstractController {
     @IBOutlet var btnShare: VobbleButton!
     @IBOutlet var btnSkip: UIButton!
     
+    var hostViewController: UIViewController?
     
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
@@ -35,8 +36,13 @@ class ShareAppPopupViewController: AbstractController {
     }
     
     @IBAction func actionShareApp() {
-        ActionShareText.execute(viewController: self, text: "SETTINGS_SHARE_MSG".localized, sourceView: btnShare)
-        self.dismiss(animated: true) {}
+        if let host = hostViewController {
+            //let parent = host.navigationController
+            self.dismiss(animated: true) {}
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 0.5 second
+                ActionShareText.execute(viewController: host, text: "SETTINGS_SHARE_MSG".localized, sourceView: self.btnShare)
+            }
+        }
     }
     
     @IBAction func actionSkip() {

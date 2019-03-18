@@ -99,8 +99,6 @@ class RecordMediaViewController: AbstractController {
             btnTopics.isHidden = true
         }
         
-        
-        btnCancelTopics.setTitle("Cancel".localized, for: .normal)
         self.view.semanticContentAttribute = .forceLeftToRight
     }
     
