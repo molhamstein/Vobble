@@ -370,6 +370,7 @@ extension RecordMediaViewController
         }
         
         self.switchButton.isHidden = false
+        self.btnTopics.isHidden = false
         self.camera.stopRecording()
         isRecording = false
     }
@@ -503,6 +504,7 @@ extension RecordMediaViewController
         }
         
         self.switchButton.isHidden = true
+        self.btnTopics.isHidden = true
         self.btnPhotoLibrary.isHidden = true
         // start recording
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -607,6 +609,7 @@ extension RecordMediaViewController
         }
         self.btnPhotoLibrary.isHidden = AppConfig.isProductionBuild ? true:false
         self.switchButton.isHidden = false
+        self.btnTopics.isHidden = false
         self.camera.stopRecording()
         isRecording = false
         prepareForRecording()
@@ -635,6 +638,7 @@ extension RecordMediaViewController
         recordTimeLabel.animateIn(mode: .animateOutToTop, delay: 0.2)
         
         switchButton.animateIn(mode: .animateOutToTop, delay: 0.2)
+        btnTopics.animateIn(mode: .animateOutToTop, delay: 0.2)
         flashButton.animateIn(mode: .animateOutToTop, delay: 0.23)
         closeButton.animateIn(mode: .animateOutToTop, delay: 0.2)
         btnPhotoLibrary.animateIn(mode: .animateOutToBottom, delay: 0.3)

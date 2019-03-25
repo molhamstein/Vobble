@@ -569,6 +569,39 @@ class ApiManager: NSObject {
         }
     }
     
+    func markBottleSeen(bottle: Bottle, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+        // url & parameters
+        let bottleURL = "\(baseURL)/bottleUserCompletes"
+        
+        let parameters : [String : Any] = [
+            "bottleId": bottle.bottle_id!,
+            "userId": (DataStore.shared.me?.objectId)!
+        ]
+        
+        // build request
+        Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError)
+                } else {
+                    completionBlock(true , nil)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError)
+                } else {
+                    completionBlock(false, ServerError.connectionError)
+                }
+            }
+        }
+    }
+
+    
     func onReplyOpened(conversation: Conversation, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
         // url & parameters
         let bottleURL = "\(baseURL)/activeChat"
@@ -896,14 +929,17 @@ class ApiManager: NSObject {
         // url & parameters
         let bottleURL = "\(baseURL)/bottles"
         
-        let parameters : [String : Any] = [
+        var parameters : [String : Any] = [
             "file": bottle.attachment!,
             "thumbnail": bottle.thumb!,
             "status": bottle.status!,
             "ownerId": bottle.ownerId!,
-            "shoreId": bottle.shoreId!,
-            "topicId": bottle.topicId ?? ""
+            "shoreId": bottle.shoreId!
         ]
+        
+        if let topicId = bottle.topicId, topicId.length > 0 {
+            parameters["topicId"] = topicId
+        }
         
         // build request
         Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
@@ -1020,7 +1056,7 @@ class ApiManager: NSObject {
         }
     }
     
-    // MARK: -  p  bottles
+    // MARK: - p bottles
     func findBottle(gender:String, countryCode:String, shoreId:String?, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
         
 //        var findhBottleURL = "\(baseURL)/bottles?filter[where][ownerId][neq]="

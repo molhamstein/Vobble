@@ -457,7 +457,7 @@ class DataStore :NSObject {
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
         ApiManager.shared.requesReportTypes { (reports, error) in}
         
-        if let meId = me?.objectId, let name = me?.userName {
+        if let meId = self.me?.objectId, let name = self.me?.userName {
             OneSignal.sendTags(["user_id": meId, "user_name": name])
         }
     }

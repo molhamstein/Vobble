@@ -117,6 +117,13 @@ class FindBottleViewController: AbstractController {
                 }
             }
             
+            // mar the video as seen after the user has watched 3 seconds of it
+            dispatch_main_after(3) {
+                if let bottleObj = self.bottle {
+                    ApiManager.shared.markBottleSeen(bottle: bottleObj, completionBlock: { (success, err) in })
+                }
+            }
+            
             isInitialized = true
         }
     }
@@ -243,7 +250,6 @@ class FindBottleViewController: AbstractController {
             chatVc.conversationId = newConvRef.key
             chatVc.bottleToReplyTo = btl
             chatVc.replyVideoUrlToUpload = myVideoUrl as URL
-            
         }
     }
     
@@ -257,14 +263,12 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func unwindToFindBottle(segue: UIStoryboardSegue) {
-        
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
            self.goToChat()
        }
     }
     
     func goToChat() {
-        
         if let btl = self.bottle {
             FirebaseManager.shared.createNewConversation(bottle: btl, completionBlock: { (err, databaseReference) in
                 if let error = err {
