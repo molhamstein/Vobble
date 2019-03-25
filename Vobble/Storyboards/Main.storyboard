@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="AlNile.ttc">
-            <string>AlNile</string>
-        </array>
         <array key="Antipasto_extrabold.otf">
             <string>Antipasto-ExtraBold</string>
         </array>
         <array key="Antipasto_regular.otf">
             <string>Antipasto</string>
-        </array>
-        <array key="Futura.ttc">
-            <string>Futura-Medium</string>
         </array>
         <array key="MullerRegular.otf">
             <string>MullerRegular</string>
@@ -51,7 +42,7 @@
                                 <rect key="frame" x="-10" y="142" width="533" height="426"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wave" translatesAutoresizingMaskIntoConstraints="NO" id="SmX-cY-bzy">
-                                <rect key="frame" x="-10" y="212.5" width="970" height="323.5"/>
+                                <rect key="frame" x="-10" y="213" width="970" height="323"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SmX-cY-bzy" secondAttribute="height" multiplier="4500:1500" id="K5K-hR-zFq"/>
@@ -1170,7 +1161,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Et-onT" userLabel="bottom View" customClass="PassthroughView">
-                                <rect key="frame" x="0.0" y="393" width="320" height="160"/>
+                                <rect key="frame" x="0.0" y="372" width="320" height="160"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96s-Ya-2Dz">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="130"/>
@@ -1362,7 +1353,7 @@
                             <constraint firstItem="hny-Og-jaY" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="6iV-1T-g2Y"/>
                             <constraint firstAttribute="trailing" secondItem="99U-U6-K8D" secondAttribute="trailing" constant="70" id="BMD-YT-V3Y"/>
                             <constraint firstAttribute="bottom" secondItem="DCn-Ia-GpG" secondAttribute="bottom" id="E7Z-Tm-4xa"/>
-                            <constraint firstAttribute="bottom" secondItem="9ZT-Et-onT" secondAttribute="bottom" constant="15" id="HKA-0l-W3u"/>
+                            <constraint firstAttribute="bottom" secondItem="9ZT-Et-onT" secondAttribute="bottom" constant="36" id="HKA-0l-W3u"/>
                             <constraint firstItem="mXs-T0-xQv" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="LeD-Vp-jel"/>
                             <constraint firstAttribute="trailing" secondItem="mXs-T0-xQv" secondAttribute="trailing" id="NnP-6b-eN3"/>
                             <constraint firstAttribute="trailing" secondItem="zjl-AZ-sn8" secondAttribute="trailing" constant="10" id="PjS-xr-XII"/>
@@ -1435,7 +1426,7 @@
                                 <rect key="frame" x="24" y="85" width="272" height="398"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvv-O0-UWG">
-                                        <rect key="frame" x="109" y="30" width="55" height="28"/>
+                                        <rect key="frame" x="108.5" y="30" width="55" height="28"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2433,7 +2424,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 <rect key="frame" x="24" y="85" width="272" height="398"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hid-GZ-F0v">
-                                        <rect key="frame" x="109" y="30" width="55" height="28"/>
+                                        <rect key="frame" x="108.5" y="30" width="55" height="28"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

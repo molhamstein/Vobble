@@ -193,38 +193,6 @@
             endingLineNumber = "910"
             landmarkName = "addBottle(bottle:completionBlock:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Vobble.ApiManager.addBottle(bottle: Vobble.Bottle, completionBlock: (Swift.Bool, Swift.Optional&lt;Vobble.ServerError&gt;, Swift.Optional&lt;Vobble.Bottle&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Vobble"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emessagroup/Desktop/Projects/Vobble/Vobble/Classes/Managers/ApiManager.swift"
-                  timestampString = "574126013.435102"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "910"
-                  endingLineNumber = "910"
-                  offsetFromSymbolStart = "1888">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in Vobble.ApiManager.addBottle(bottle: Vobble.Bottle, completionBlock: (Swift.Bool, Swift.Optional&lt;Vobble.ServerError&gt;, Swift.Optional&lt;Vobble.Bottle&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Vobble"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emessagroup/Desktop/Projects/Vobble/Vobble/Classes/Managers/ApiManager.swift"
-                  timestampString = "574126013.43687"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "911"
-                  endingLineNumber = "911"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -241,38 +209,6 @@
             endingLineNumber = "688"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Vobble.RecordMediaViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
-                  moduleName = "Vobble"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emessagroup/Desktop/Projects/Vobble/Vobble/Classes/Controllers/RecordMediaViewController.swift"
-                  timestampString = "574126046.022221"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "688"
-                  endingLineNumber = "688"
-                  offsetFromSymbolStart = "404">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Vobble.RecordMediaViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
-                  moduleName = "Vobble"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emessagroup/Desktop/Projects/Vobble/Vobble/Classes/Controllers/RecordMediaViewController.swift"
-                  timestampString = "574126046.024857"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "689"
-                  endingLineNumber = "689"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
