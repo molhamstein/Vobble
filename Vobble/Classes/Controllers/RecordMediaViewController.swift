@@ -104,9 +104,12 @@ class RecordMediaViewController: AbstractController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.topicsTableView.isHidden = true
-            self.btnCancelTopics.isHidden = true
-            self.btnTopics.isHidden = false
+            if self.from == .throwBottle {
+                self.topicsTableView.isHidden = true
+                self.btnCancelTopics.isHidden = true
+                self.switchButton.isHidden = false
+                self.btnTopics.isHidden = false
+            }
         })
     }
     func applicationDocumentsDirectory()-> NSURL {
@@ -257,6 +260,7 @@ class RecordMediaViewController: AbstractController {
         UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
             self.topicsTableView.isHidden = true
             self.btnCancelTopics.isHidden = true
+            self.switchButton.isHidden = false
             self.btnTopics.isHidden = false
         })
         
@@ -266,6 +270,7 @@ class RecordMediaViewController: AbstractController {
         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.topicsTableView.isHidden = false
             self.btnCancelTopics.isHidden = false
+            self.switchButton.isHidden = true
             self.btnTopics.isHidden = true
         })
         
@@ -370,7 +375,7 @@ extension RecordMediaViewController
         }
         
         self.switchButton.isHidden = false
-        self.btnTopics.isHidden = false
+        self.btnTopics.isHidden = !(from == .throwBottle)
         self.camera.stopRecording()
         isRecording = false
     }
@@ -609,7 +614,7 @@ extension RecordMediaViewController
         }
         self.btnPhotoLibrary.isHidden = AppConfig.isProductionBuild ? true:false
         self.switchButton.isHidden = false
-        self.btnTopics.isHidden = false
+        self.btnTopics.isHidden = !(from == .throwBottle)
         self.camera.stopRecording()
         isRecording = false
         prepareForRecording()

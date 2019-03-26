@@ -117,10 +117,13 @@ class FindBottleViewController: AbstractController {
                 }
             }
             
-            // mar the video as seen after the user has watched 3 seconds of it
-            dispatch_main_after(3) {
+            // mark the video as seen after the user has watched 4 seconds of it
+            dispatch_main_after(4) {
                 if let bottleObj = self.bottle {
-                    ApiManager.shared.markBottleSeen(bottle: bottleObj, completionBlock: { (success, err) in })
+                    // make sure the vie controller is still open after 4 seconds
+                    if let _ = self.view.window, self.isViewLoaded {
+                        ApiManager.shared.markBottleSeen(bottle: bottleObj, completionBlock: { (success, err) in })
+                    }
                 }
             }
             
