@@ -496,7 +496,6 @@ class HomeViewController: AbstractController {
                 self.videoUploadLoader?.removeLoader(true)
                 if error == nil  {
                     if bottle != nil {
-                        //print("\(bottle?.bottle_id)")
                         self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
                     } else {
                         // no bottles found
@@ -934,7 +933,7 @@ extension HomeViewController {
     
     func tutorialActon2() {
         self.goToMainShore()
-        dispatch_main_after(2) {
+        dispatch_main_after(1.0) {
             let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "Annotation") as! AnnotationViewController
             viewController.alpha = 0.7
             viewController.stepIndex = 3
