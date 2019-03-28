@@ -104,7 +104,7 @@ class RecordMediaViewController: AbstractController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            if self.from == .throwBottle {
+            if self.from == .throwBottle && self.isRecording == false {
                 self.topicsTableView.isHidden = true
                 self.btnCancelTopics.isHidden = true
                 self.switchButton.isHidden = false
