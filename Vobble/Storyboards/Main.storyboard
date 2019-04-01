@@ -942,7 +942,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXt-cc-Os2" userLabel="Submit Button" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                <rect key="frame" x="57" y="374" width="206" height="44"/>
+                                <rect key="frame" x="57" y="364" width="206" height="44"/>
                                 <color key="backgroundColor" red="0.26290465429999998" green="0.68604801510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="206" id="IMT-rI-Od1"/>
@@ -960,7 +960,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbj-w0-fQC" userLabel="play button">
-                                <rect key="frame" x="140" y="488" width="40" height="40"/>
+                                <rect key="frame" x="140" y="464" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="7Yb-Sf-yH9"/>
                                     <constraint firstAttribute="height" constant="40" id="EmC-S7-RQs"/>
@@ -1002,7 +1002,7 @@
                             <constraint firstItem="sbJ-Sx-Lig" firstAttribute="top" secondItem="BD9-c0-vgi" secondAttribute="top" id="Btn-XF-oTc"/>
                             <constraint firstItem="HIt-5E-9FG" firstAttribute="leading" secondItem="BD9-c0-vgi" secondAttribute="leading" id="C6g-Hb-N5I"/>
                             <constraint firstAttribute="bottom" secondItem="EU8-AS-HF6" secondAttribute="bottom" id="KCl-L3-eU1"/>
-                            <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="Qbj-w0-fQC" secondAttribute="bottom" constant="40" id="MQh-3P-R9Z"/>
+                            <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="Qbj-w0-fQC" secondAttribute="bottom" constant="64" id="MQh-3P-R9Z"/>
                             <constraint firstAttribute="trailing" secondItem="HIt-5E-9FG" secondAttribute="trailing" id="OZn-BN-yJo"/>
                             <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="Hii-un-Rp6" secondAttribute="bottom" constant="110" id="RnS-la-ql6"/>
                             <constraint firstItem="5qI-hp-cRz" firstAttribute="height" secondItem="BD9-c0-vgi" secondAttribute="height" multiplier="0.15" id="c2v-ga-bQ0"/>
@@ -1016,7 +1016,7 @@
                             <constraint firstItem="Qbj-w0-fQC" firstAttribute="centerX" secondItem="BD9-c0-vgi" secondAttribute="centerX" id="in7-Mk-Y6A"/>
                             <constraint firstAttribute="bottom" secondItem="HIt-5E-9FG" secondAttribute="bottom" id="irR-Gj-EG6"/>
                             <constraint firstAttribute="trailing" secondItem="Hii-un-Rp6" secondAttribute="trailing" id="jNf-7s-S6g"/>
-                            <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="vXt-cc-Os2" secondAttribute="bottom" constant="150" id="sGl-mP-kVB"/>
+                            <constraint firstItem="Lqe-us-71y" firstAttribute="top" secondItem="vXt-cc-Os2" secondAttribute="bottom" constant="160" id="sGl-mP-kVB"/>
                             <constraint firstAttribute="trailing" secondItem="sbJ-Sx-Lig" secondAttribute="trailing" id="xHG-FJ-fbv"/>
                         </constraints>
                     </view>

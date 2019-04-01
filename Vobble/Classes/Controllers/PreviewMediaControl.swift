@@ -46,7 +46,7 @@ class PreviewMediaControl : AbstractController {
     var videoUrl = NSURL();
     
     //Topic
-    var topicId = ""
+    var topicId: String?
     
     var soundPlayer = AVAudioPlayer()
     
