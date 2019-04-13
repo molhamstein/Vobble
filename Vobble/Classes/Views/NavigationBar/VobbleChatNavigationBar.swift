@@ -13,10 +13,12 @@ import UIKit
     @objc optional func navLeftBtnPressed()
     @objc optional func navRightBtnPressed()
     @objc optional func moreOptionsBtnPressed()
+    @objc optional func extendChatBtnPressed()
 }
 
 class VobbleChatNavigationBar: AbstractNibView {
     
+    @IBOutlet weak var btnExtendChat: UIButton!
     @IBOutlet weak var moreOptions: UIButton!
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var timerLabel: TimerLabel!
@@ -55,6 +57,10 @@ class VobbleChatNavigationBar: AbstractNibView {
  
     @IBAction func moreOptionsPressed(_ sender: Any) {
         self.delegate?.moreOptionsBtnPressed?()
+    }
+    
+    @IBAction func extendChatPressed(_ sender: Any) {
+        self.delegate?.extendChatBtnPressed?()
     }
     
     @IBAction func leftIconPressed(_ sender: Any) {

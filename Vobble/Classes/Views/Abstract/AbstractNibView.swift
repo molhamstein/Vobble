@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-@IBDesignable
 // Usage: Subclass your UIView from NibLoadView to automatically load a xib with the same name as your class
 class AbstractNibView: UIView {
     // MARK: Properties

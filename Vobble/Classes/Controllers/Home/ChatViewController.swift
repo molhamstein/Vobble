@@ -538,6 +538,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         chatPendingCloseButton.removeFromSuperview()
     }
     
+    
     @IBAction func cloesPandingChatViewAction(_ sender: AnyObject) {
         chatPendingContainer.isHidden = true
     }
@@ -1516,6 +1517,16 @@ extension ChatViewController: ChatNavigationDelegate {
         muteSheet.addAction(UIAlertAction(title: "CANCEL".localized, style: .cancel, handler: nil))
         self.present(muteSheet, animated: true, completion: nil)
         
+    }
+    
+    func extendChatBtnPressed() {
+        let extendChatVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ExtendChatPopupViewController.className) as! ExtendChatPopupViewController
+        extendChatVC.providesPresentationContextTransitionStyle = true
+        extendChatVC.definesPresentationContext = true
+        extendChatVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+        extendChatVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+        
+        self.present(extendChatVC, animated: true, completion: nil)
     }
 }
 
