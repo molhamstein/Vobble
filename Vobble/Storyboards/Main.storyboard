@@ -2411,7 +2411,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <!--Extend Chat Popup View Controller-->
         <scene sceneID="daD-SA-T9p">
             <objects>
-                <viewController id="4cA-nK-VF6" customClass="ExtendChatPopupViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExtendChatPopupViewController" id="4cA-nK-VF6" customClass="ExtendChatPopupViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ts1-9d-d6y"/>
                         <viewControllerLayoutGuide type="bottom" id="sbv-1C-yRc"/>
@@ -2439,7 +2439,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="s6e-xN-iRy">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShopCollectionViewCellID" id="s6e-xN-iRy">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

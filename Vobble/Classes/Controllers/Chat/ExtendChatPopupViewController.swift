@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Flurry_iOS_SDK
+import FirebaseDatabase
 
 /*
  TO DO:
@@ -35,13 +37,21 @@ class ExtendChatPopupViewController: AbstractController {
     
     var selectedProduct : ShopItem!
     
+    var conversationId: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.lblTopTitle.text = "EXTEND_CHAT_TITLE".localized
         
-        initBottleArray()
-        chatCollectionView.reloadData()
+        self.chatCollectionView.register(UINib(nibName: "ShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ShopCollectionViewCellID")
+        self.chatCollectionView.delegate = self
+        self.chatCollectionView.dataSource = self
+        
+        layoutDesign()
+        
+        initChatArray()
+        
         // Do any additional setup after loading the view.
         
         ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in})
@@ -54,13 +64,31 @@ class ExtendChatPopupViewController: AbstractController {
         }
     }
 
-    private func initBottleArray() {
-        var bottlsArray:[ShopItem] = [ShopItem]()
-        bottlsArray = DataStore.shared.shopItems.filter({$0.type == .bottlesPack})
+    private func initChatArray() {
+        var chatsArray:[ShopItem] = [ShopItem]()
+        chatsArray = DataStore.shared.shopItems.filter({$0.type == .ExtendChat})
         
         
-        self.chatItemsArray = bottlsArray.map{$0}
+        self.chatItemsArray = chatsArray.map{$0}
+        
+        chatCollectionView.reloadData()
     }
+    
+    private func layoutDesign(){
+        self.popUpView.layer.cornerRadius = 20
+        self.popUpView.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        self.popUpView.layer.borderWidth = 0.5
+        self.popUpView.layer.masksToBounds = true
+        self.popUpView.layer.shadowOffset = CGSize(width: 1, height: 0.5)
+        self.popUpView.layer.shadowColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        
+    }
+    
+    fileprivate func getExtendTime(_ validity: Double) -> Double {
+        return validity * 60 * 60 * 1000
+    }
+    
+    
     
     @IBAction func close(_ sender: Any){
         IAPManager.shared.cancel()
@@ -88,6 +116,49 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
         return shopCell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let obj = self.chatItemsArray[indexPath.row]
+        
+        let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? 0.0)") , preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
+            
+            if  obj.appleProduct != nil {
+                self.showActivityLoader(true)
+                self.popUpView.isUserInteractionEnabled = false
+                if let selectedItem = IAPManager.shared.getProductById(itemId: obj.appleProduct!){
+                    self.selectedProduct = obj
+                    
+                    IAPManager.shared.requestPaymentQueue(product: selectedItem, item: obj)
+                    
+                    // flurry events
+                    let prodType = "extendChat"
+                    
+                    let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+                    Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                    
+                }else{
+                    self.showActivityLoader(false)
+                    self.popUpView.isUserInteractionEnabled = true
+                }
+                
+            }
+            
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+        alertController.addAction(cancel)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
+        
+
+        // flurry events
+        let prodType = "extendChat"
+        
+        let logEventParams = ["prodType": prodType];
+        Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
+        
+    }
     
 }
 
@@ -127,8 +198,29 @@ extension ExtendChatPopupViewController: IAPManagerDelegate {
     }
     
     func didPaymentCompleted() {
-        self.dismiss(animated: true, completion: {})
+        FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").child("startTime").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get conversation start time value
+            let value = snapshot.value as? Double
+            
+            if let startTime = value {
+                let extendTime = startTime + self.getExtendTime(self.selectedProduct.validity ?? 0.0)
+                FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").updateChildValues(["startTime" : extendTime])
+                
+                // Remove Old notification id and Register a new one
+                ActionRemoveNotification.execute(id: self.conversationId ?? "")
+                ActionRegisterNotification.execute(title: "CHAT_WARNING_TITLE".localized, body: "CHAT_WARNING_BODY".localized, id: self.conversationId ?? "", hours: (extendTime / 1000) - 7200)
+            }
+            
+            
+
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
         
+        
+        self.dismiss(animated: true, completion: {})
+
         self.showActivityLoader(false)
         self.popUpView.isUserInteractionEnabled = true
     }

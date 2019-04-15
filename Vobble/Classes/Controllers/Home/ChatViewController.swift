@@ -31,6 +31,7 @@ import Flurry_iOS_SDK
 import SDWebImage
 import AVFoundation
 import FillableLoaders
+import UIView_Shake
 
 final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate {
     
@@ -56,6 +57,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     private var updateLastSeenMessageRefHandle: DatabaseHandle?
     private var updateFirstReplyRefHandle: DatabaseHandle?
     private var updateMuteChatRefHandle: DatabaseHandle?
+    private var extendChatRefHandle: DatabaseHandle?
     
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
@@ -88,6 +90,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     // notifications
     var lastNotificationSentDate: Date?
+    
+    var shakerTimer: Timer?
     
     private var localTyping = false
     private var isInitialised = false
@@ -180,6 +184,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             observeMessages()
             observeFirstReply()
             observeMuteAction()
+            observeExtededChat()
         } else if let convId = conversationId {
             if let _ = bottleToReplyTo {
                 // this is the first reply on a bottle
@@ -345,6 +350,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let refHandle = updateMuteChatRefHandle {
             conversationRef?.removeObserver(withHandle: refHandle)
         }
+        if let refHandle = extendChatRefHandle {
+            conversationRef?.removeObserver(withHandle: refHandle)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -365,6 +373,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             customNavBar.timerLabel.isHidden = true
             customNavBar.leftLabel.isHidden = true
         }
+        
+        shakerTimer = Timer(timeInterval: 2, target: self, selector: #selector(self.updateShaker), userInfo: nil, repeats: true)
+        shakerTimer?.invalidate()
+        
         customNavBar.shoreNameLabel.text = navShoreName
         customNavBar.userNameLabel.text = navUserName
         if let peerPicString = conversationOriginalObject?.getPeer?.profilePic, let picUrl = URL(string:peerPicString), picUrl.isValidUrl(){
@@ -392,6 +404,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 chatVc.conversationRef?.updateChildValues(["is_seen": 1])
                 chatVc.conversationRef?.updateChildValues(["startTime": ServerValue.timestamp()])
                 chatVc.seconds = 24.0*60.0*60.0
+                
+                // Register left time notification
+                ActionRemoveNotification.execute(id: self.conversationId ?? "")
+                ActionRegisterNotification.execute(title: "CHAT_WARNING_TITLE".localized, body: "CHAT_WARNING_BODY".localized, id: self.conversationId ?? "", hours: chatVc.seconds - 7200)
                 
                 // send push notification to peer to let him know that the chat is open now
                 let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
@@ -592,6 +608,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
 //            }
             self.recordButtonContainer.frame.origin.y = inputToolbar.frame.origin.y
         }
+    }
+    
+    // Timer for shaking buy button
+    @objc func updateShaker() {
+         customNavBar.btnExtendChat.shake(1, withDelta: 4, speed: 0.5)
     }
     
     // MARK: Collection view data source (and related) methods
@@ -802,6 +823,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             self?.observeMessages()
             self?.observeFirstReply()
             self?.observeMuteAction()
+            self?.observeExtededChat()
             self?.initNavBar()
         })
     }
@@ -1035,6 +1057,28 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             updateMuteChatRefHandle = mutedUserRef?.observe(.value, with: { snapshot in
                 print(snapshot.value)
                 self.isUserMuted = (snapshot.value as? Bool) ?? false
+                
+            })
+            
+        }
+    }
+    
+    private func observeExtededChat() {
+        if let convRef = conversationRef {
+            extendChatRefHandle = convRef.child("startTime").observe(.value, with: { snapshot in
+                let value = snapshot.value as? Double
+                if let startTime = value {
+                    self.conversationOriginalObject?.startTime = startTime
+                    
+                    self.conversationOriginalObject?.finishTime = startTime + AppConfig.chatValidityafterSeen
+                    
+                    if let fTime = self.conversationOriginalObject?.finishTime {
+                        let currentDate = Date().timeIntervalSince1970 * 1000
+                        self.seconds = (fTime - currentDate)/1000.0
+                    }
+                    
+                    self.initNavBar()
+                }
                 
             })
             
@@ -1467,6 +1511,13 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
+// MARK:- TimerLabelDelegate
+extension ChatViewController: TimerLabelDelegate {
+    func conversationWillEnd() {
+        shakerTimer?.fire()
+    }
+}
+
 // MARK:- ChatNavigationDelegate
 extension ChatViewController: ChatNavigationDelegate {
     
@@ -1525,6 +1576,7 @@ extension ChatViewController: ChatNavigationDelegate {
         extendChatVC.definesPresentationContext = true
         extendChatVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
         extendChatVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+        extendChatVC.conversationId = self.conversationId
         
         self.present(extendChatVC, animated: true, completion: nil)
     }

@@ -1064,7 +1064,7 @@ class ApiManager: NSObject {
 //        if let userId = DataStore.shared.me?.objectId {
 //            findhBottleURL += "\(userId)&filter[include]=owner"
 //        }
-//        
+//
 //        if countryCode != "" {
 //            findhBottleURL += "&filter[where][owner][countryId]=\(countryCode)"
 //        }
@@ -1078,6 +1078,8 @@ class ApiManager: NSObject {
         
 
         var findBottleURL = "\(baseURL)/bottles/getOneBottle"
+    
+        
         // shore
         if let shore = shoreId {
             findBottleURL += "?shoreId=\(shore)"

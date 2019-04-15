@@ -16,7 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VobbleChatNavigationBar">
             <connections>
-                <outlet property="btnExtendChat" destination="UPI-W5-9np" id="bEY-HD-zAu"/>
+                <outlet property="btnExtendChat" destination="UPI-W5-9np" id="lxV-i1-h94"/>
                 <outlet property="leftIcon" destination="97f-uB-vZw" id="y4u-oI-cu5"/>
                 <outlet property="leftLabel" destination="MLS-OQ-7ca" id="JM1-oJ-yrl"/>
                 <outlet property="moreOptions" destination="h2q-Ny-ALK" id="ESw-B5-9Ti"/>
@@ -83,16 +83,16 @@
                             </userDefinedRuntimeAttributes>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fId-mP-Tuz" userLabel="userinfo Stack View">
-                            <rect key="frame" x="97" y="49.5" width="120.5" height="27"/>
+                            <rect key="frame" x="97" y="49.5" width="144.5" height="27"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmq-6j-haP">
-                                    <rect key="frame" x="0.0" y="0.0" width="120.5" height="13.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="144.5" height="13.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" text="Main Shore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBq-Rw-fmT">
-                                    <rect key="frame" x="0.0" y="13.5" width="120.5" height="13.5"/>
+                                    <rect key="frame" x="0.0" y="13.5" width="144.5" height="13.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -129,15 +129,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPI-W5-9np">
-                            <rect key="frame" x="217.5" y="48" width="24" height="24"/>
+                            <rect key="frame" x="291" y="26.5" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="Zb0-ca-FyY"/>
                                 <constraint firstAttribute="height" constant="24" id="px8-yr-kqk"/>
                             </constraints>
-                            <state key="normal" image="twtr-icn-heart-on.png"/>
+                            <state key="normal" image="speech-bubble"/>
                             <connections>
-                                <action selector="extendChatPressed:" destination="-1" eventType="touchUpInside" id="fMm-nc-6A5"/>
-                                <action selector="moreOptionsPressed:" destination="-1" eventType="touchUpInside" id="dBv-2l-Ih9"/>
+                                <action selector="extendChatPressed:" destination="-1" eventType="touchUpInside" id="Yb7-9o-d3O"/>
                             </connections>
                         </button>
                     </subviews>
@@ -146,6 +145,7 @@
                         <constraint firstItem="450-gg-gVr" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="29A-9a-0MH"/>
                         <constraint firstItem="fId-mP-Tuz" firstAttribute="leading" secondItem="450-gg-gVr" secondAttribute="trailing" constant="5" id="5oB-n2-blD"/>
                         <constraint firstItem="h2q-Ny-ALK" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" id="7gM-Bv-Xbj"/>
+                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="top" secondItem="UPI-W5-9np" secondAttribute="bottom" constant="4" id="8UO-hc-15t"/>
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="leading" secondItem="450-gg-gVr" secondAttribute="leading" id="8hX-As-wvb"/>
                         <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.24" id="IVh-I5-mcn"/>
                         <constraint firstItem="97f-uB-vZw" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="Iim-8G-6mN"/>
@@ -153,12 +153,11 @@
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="bottom" secondItem="450-gg-gVr" secondAttribute="bottom" id="THH-TH-3qA"/>
                         <constraint firstItem="h2q-Ny-ALK" firstAttribute="leading" secondItem="ZfQ-KL-q0Y" secondAttribute="trailing" constant="16" id="a0o-SS-RC9"/>
                         <constraint firstItem="97f-uB-vZw" firstAttribute="leading" secondItem="2wD-NW-XhJ" secondAttribute="leading" constant="15" id="cuv-RR-AL5"/>
+                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="leading" secondItem="fId-mP-Tuz" secondAttribute="trailing" constant="8" id="dYI-KE-zsh"/>
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="trailing" secondItem="450-gg-gVr" secondAttribute="trailing" id="diQ-8U-QIw"/>
-                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="leading" secondItem="UPI-W5-9np" secondAttribute="trailing" constant="8" id="e1l-Gf-oPk"/>
-                        <constraint firstItem="UPI-W5-9np" firstAttribute="centerY" secondItem="yGv-8L-ytb" secondAttribute="centerY" id="hHM-aA-OSg"/>
                         <constraint firstAttribute="trailing" secondItem="h2q-Ny-ALK" secondAttribute="trailing" constant="12" id="hPI-9X-XXi"/>
                         <constraint firstItem="fId-mP-Tuz" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="kHv-di-0DI"/>
-                        <constraint firstItem="UPI-W5-9np" firstAttribute="leading" secondItem="fId-mP-Tuz" secondAttribute="trailing" id="mug-Bs-Qfj"/>
+                        <constraint firstItem="h2q-Ny-ALK" firstAttribute="leading" secondItem="UPI-W5-9np" secondAttribute="trailing" constant="24" id="u0L-Dn-KD8"/>
                     </constraints>
                 </view>
             </subviews>
@@ -180,7 +179,7 @@
         <image name="navBackIcon" width="25" height="23"/>
         <image name="navBarBG" width="375" height="95"/>
         <image name="speakerMuted2" width="30" height="30"/>
-        <image name="twtr-icn-heart-on.png" width="15" height="15"/>
+        <image name="speech-bubble" width="32" height="32"/>
         <image name="user_placeholder" width="1024" height="1024"/>
     </resources>
 </document>

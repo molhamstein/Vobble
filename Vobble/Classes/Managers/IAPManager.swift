@@ -123,6 +123,9 @@ extension IAPManager : SKPaymentTransactionObserver {
                                 ApiManager.shared.getMe(completionBlock: { (success, err, user) in
                                     self.delegate?.didPaymentCompleted?()
                                 })
+                            }else if self.selectedItem?.type == ShopItemType.ExtendChat {
+                                self.delegate?.didPaymentCompleted?()
+                                
                             } else {
                                 // flurry events
                                 var prodType = "bottles"

@@ -166,6 +166,9 @@
 "SEEN"                                  = "شوهد";
 "MUTE"                                  = "كتم";
 "UNMUTE"                                = "إلغاء الكتم";
+"CHAT_WARNING_TITLE"                    = "";
+"CHAT_WARNING_BODY"                     = "المحادثة على وشك الانتهاء";
+"EXTEND_CHAT_TITLE"                     = "تمديد المحادثة";
 
 // filter
 "FEMALE"                                = "بنت";
