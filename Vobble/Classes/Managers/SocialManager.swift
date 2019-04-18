@@ -27,7 +27,7 @@ class SocialManager: NSObject{
     func facebookLogin(controller: UIViewController, completionBlock: @escaping (_ user: AppUser?, _ success: Bool, _ error: ServerError?) -> Void) {
         let fbLoginManager: FBSDKLoginManager = FBSDKLoginManager()
         // ask for email permission
-        fbLoginManager.logIn(withReadPermissions: ["email", "user_location"], from: controller) { (result, error) in
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: controller) { (result, error) in
             // check errors
             if (error == nil) {
                 // check if user grants the permissions
@@ -49,11 +49,7 @@ class SocialManager: NSObject{
                                         if let dictMail = dict["email"] as? String {
                                             email = dictMail
                                         }
-                                        var countryCode = "CH"
                                         let gender = "male"
-                                        if let locationObj = dict["location"] as? [String : AnyObject], let innerLocationObj = locationObj["location"] as? [String : AnyObject] {
-                                            countryCode = innerLocationObj["country_code"] as! String
-                                        }
                                         if let picObj = dict["picture"] as? [String : AnyObject], let innerPicObj = picObj["data"] as? [String : AnyObject] {
                                             pictureLink = innerPicObj["url"] as! String
                                         }
