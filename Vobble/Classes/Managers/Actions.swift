@@ -131,4 +131,22 @@ class ActionPlayBeep{
     }
 }
 
-
+class ActionDeactiveUser {
+    class func execute(viewController: UIViewController, user: AppUser?) -> Bool {
+        guard user != nil else { return true }
+        
+        if user?.status == .deactivated {
+            // Kick the user out
+            let alert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized, message: "DEACTIVE_MSG".localized, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: {_ in
+                ActionLogout.execute()
+            }))
+            viewController.present(alert, animated: true, completion: nil)
+            
+            return false
+        }else {
+            
+            return true
+        }
+    }
+}

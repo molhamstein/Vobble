@@ -58,7 +58,9 @@ class SocialManager: NSObject{
                                         ApiManager.shared.userFacebookLogin(facebookId: facebookId, fbName: userName, fbToken: FBSDKAccessToken.current().tokenString, email: email, fbGender: gender, imageLink: pictureLink) { (isSuccess, error, user) in
                                             // login success
                                             if (isSuccess) {
-                                                completionBlock(user, true , nil)
+                                                if ActionDeactiveUser.execute(viewController: controller, user: user) {
+                                                    completionBlock(user, true , nil)
+                                                }
                                             } else {
                                                 completionBlock(nil, false , error)
                                             }
@@ -96,7 +98,10 @@ class SocialManager: NSObject{
                         ApiManager.shared.userTwitterLogin(accessToken: accessToken, secret: accessTokenSecret) { (isSuccess, error, user) in
                             // login success
                             if (isSuccess) {
-                                completionBlock(true , nil)
+                                if ActionDeactiveUser.execute(viewController: controller, user: user) {
+                                    completionBlock(true , nil)
+                                }
+                                
                             } else {
                                 completionBlock(false , error)
                             }
@@ -140,7 +145,10 @@ class SocialManager: NSObject{
                     ApiManager.shared.userInstagramLogin(user: userInfoHolder) { (isSuccess, error, user) in
                         // login success
                         if (isSuccess) {
-                            completionBlock(user, true , nil)
+                            if ActionDeactiveUser.execute(viewController: controller, user: user) {
+                                completionBlock(user, true , nil)
+                            }
+                            
                         } else {
                             completionBlock(nil, false , error)
                         }

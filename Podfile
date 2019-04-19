@@ -10,9 +10,9 @@ target ‘Vobble’ do
 pod 'Alamofire', '~> 4.0'
 pod 'SDWebImage/WebP'
 pod 'SwiftyJSON'
-pod 'FBSDKLoginKit', '~> 4.24.0', :inhibit_warnings => true
-pod 'FBSDKCoreKit', '~> 4.24.0', :inhibit_warnings => true
-pod 'FBSDKShareKit', '~> 4.24.0', :inhibit_warnings => true
+pod 'FBSDKLoginKit', :inhibit_warnings => true
+pod 'FBSDKCoreKit', :inhibit_warnings => true
+pod 'FBSDKShareKit', :inhibit_warnings => true
 pod 'TwitterKit'
 pod 'Toast-Swift', '~> 2.0.0'
 pod 'PIDatePicker', '~> 0.1.0'

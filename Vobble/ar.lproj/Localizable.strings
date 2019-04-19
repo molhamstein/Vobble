@@ -54,6 +54,7 @@
 "LOGIN_PRIVACY"                         = "سياسه الخصوصيه";
 "LOGIN_TERMS"                           = "شروط الاستخدام";
 "LOGIN_AND"                             = " و ";
+"DEACTIVE_MSG"                          = "حسابك لم يعد فعال بعد الان";
 
 // Social media
 "FACEBOOK_LOGIN"                        = "التسجيل بواسطة فيسبوك";

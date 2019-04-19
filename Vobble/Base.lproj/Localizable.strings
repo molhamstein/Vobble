@@ -54,6 +54,7 @@
 "LOGIN_PRIVACY"                         = "Privacy Policy";
 "LOGIN_TERMS"                           = "Terms Of Service";
 "LOGIN_AND"                             = " & ";
+"DEACTIVE_MSG"                          = "Your account is not active anymore";
 
 // Social media
 "FACEBOOK_LOGIN"                        = "Login with Facebook";

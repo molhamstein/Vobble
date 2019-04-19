@@ -188,7 +188,11 @@ class HomeViewController: AbstractController {
         }
         self.animateShark()
         
-        ApiManager.shared.getMe(completionBlock: { (success, error, user) in})
+        ApiManager.shared.getMe(completionBlock: { (success, error, user) in
+            if success {
+                _ = ActionDeactiveUser.execute(viewController: self, user: user)
+            }
+        })
         ApiManager.shared.requestUserInventoryItems { (items, error) in}
         ApiManager.shared.markUserAsActive { (success, error) in}
     }

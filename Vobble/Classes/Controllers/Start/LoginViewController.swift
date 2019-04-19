@@ -950,22 +950,29 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
         SocialManager.shared.googleLoginResult(signIn, didSignInFor: user, withError: error) { (user, success, error) in
             self.showActivityLoader(false)
             if (success) {
-                if let tempRegistredUser = user, let name = tempRegistredUser.userName {
-                    self.tempUserInfoHolder = tempRegistredUser
-                    self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
-                    self.hideView(withType: .login)
-                    self.hideView(withType: .startup)
-                    if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
-                        self.showView(withType: .socialLoginStep2)
-                        Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
-                    } else {
-                        self.dismiss(animated: true, completion: { })
-                        self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                
+                // Check user status 
+                if ActionDeactiveUser.execute(viewController: self, user: user) {
+                    
+                    if let tempRegistredUser = user, let name = tempRegistredUser.userName {
+                        self.tempUserInfoHolder = tempRegistredUser
+                        self.lblSocialInfoWelcome.text = String(format: "SINGUP_SOCIAL_WELCOM".localized, name)
+                        self.hideView(withType: .login)
+                        self.hideView(withType: .startup)
+                        if let isAccountComplete = DataStore.shared.me?.accountInfoCompleted, isAccountComplete == false {
+                            self.showView(withType: .socialLoginStep2)
+                            Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
+                        } else {
+                            self.dismiss(animated: true, completion: { })
+                            self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                        }
                     }
+                    let logEventParams = ["loginType": "google"];
+                    Flurry.logEvent(AppConfig.login_success, withParameters:logEventParams);
+                    //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                    
                 }
-                let logEventParams = ["loginType": "google"];
-                Flurry.logEvent(AppConfig.login_success, withParameters:logEventParams);
-                //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
+                
             } else {
                 let errorServer = error ?? ServerError.unknownError
                 // social login failed
