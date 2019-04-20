@@ -139,7 +139,9 @@ class ActionDeactiveUser {
             // Kick the user out
             let alert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized, message: "DEACTIVE_MSG".localized, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: {_ in
-                ActionLogout.execute()
+                //clear user
+                DataStore.shared.logout()
+                ActionShowStart.execute()
             }))
             viewController.present(alert, animated: true, completion: nil)
             
