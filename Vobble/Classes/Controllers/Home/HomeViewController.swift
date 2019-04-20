@@ -105,6 +105,7 @@ class HomeViewController: AbstractController {
     
     // temp Data Holders
     var productType: ShopItemType?
+    var repliesSentCount: Int?
     
     /// find/throw sound
     var throwSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "splashSound", ofType: "mp3")!)
@@ -391,6 +392,8 @@ class HomeViewController: AbstractController {
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
        
+        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me)
+        
         if let bCount = DataStore.shared.me?.totalBottlesLeftToThrowCount, bCount > 0 {
             //DataStore.shared.me?.thrownBottlesCount = bCount - 1
             //self.wiggleAnimate(view: self.ivThrowBtn)
@@ -467,6 +470,11 @@ class HomeViewController: AbstractController {
     
     @IBAction func findBottlePressed(_ sender: Any) {
        
+        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me)
+        
+        // store the current replies sent count to use it later to deside if we should ask the user for rating
+        self.repliesSentCount = DataStore.shared.me?.repliesBottlesCount
+        
         let findBottleGif = UIImage(gifName: "find_bottle.gif")
         self.ivFindBottle.setGifImage(findBottleGif)
         self.ivFindBottle.loopCount = 1
@@ -542,7 +550,7 @@ class HomeViewController: AbstractController {
     }
     
     @IBAction func unwindSendReply(segue: UIStoryboardSegue) {
-        let  repliesSentCount = DataStore.shared.me?.repliesBottlesCount
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { // delay 6 second
             self.ivThrowBottle.image = nil
             // update user info after sending the reply
@@ -551,8 +559,9 @@ class HomeViewController: AbstractController {
                 // check the number of replies made by user, and use it to determine
                 // if we should show the rate us dialog
                 let  newRepliesSentCount = DataStore.shared.me?.repliesBottlesCount
-                if newRepliesSentCount != repliesSentCount && newRepliesSentCount == 1 {
+                if newRepliesSentCount != self.repliesSentCount && newRepliesSentCount == 1 {
                     ActionRateUs.execute(hostViewController: self)
+                    self.repliesSentCount = newRepliesSentCount
                 }
                 self.refreshViewData()
             })
