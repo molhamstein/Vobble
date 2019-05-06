@@ -22,6 +22,8 @@ class IAPManager: NSObject {
     
     public var delegate: IAPManagerDelegate?
     
+    public var currentViewController: AbstractController?
+    
     private var request: SKProductsRequest?
     
     fileprivate var inAppPurchaseList = [SKProduct]()
@@ -43,6 +45,7 @@ class IAPManager: NSObject {
         clearCachedTransaction()
         
         if(SKPaymentQueue.canMakePayments()) {
+            self.currentViewController?.showActivityLoader(true)
             print("IAP is enabled, loading")
             let productID: NSSet = NSSet(array: ShopItemID.getListId())
             request = SKProductsRequest(productIdentifiers: productID as! Set<String>)
@@ -186,6 +189,7 @@ extension IAPManager : SKPaymentTransactionObserver {
 
 extension IAPManager : SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        self.currentViewController?.showActivityLoader(false)
         for faild in response.invalidProductIdentifiers {
             print(faild)
         }

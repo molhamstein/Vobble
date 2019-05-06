@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -57,20 +56,31 @@
                             <rect key="frame" x="125" y="32.5" width="240" height="36"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="jMV-1b-yX9">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="36"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="32.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Throwed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx6-j1-vgs">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Threw" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx6-j1-vgs">
                                             <rect key="frame" x="0.0" y="0.0" width="80" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                             <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXm-mA-oE3">
-                                            <rect key="frame" x="0.0" y="16.5" width="80" height="19.5"/>
-                                            <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="-24" translatesAutoresizingMaskIntoConstraints="NO" id="mtZ-Up-pVh">
+                                            <rect key="frame" x="0.0" y="16.5" width="80" height="16"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXm-mA-oE3">
+                                                    <rect key="frame" x="0.0" y="0.0" width="52" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myVideosIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Npp-fI-IKb">
+                                                    <rect key="frame" x="28" y="0.0" width="52" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="rp3-u7-NyN"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rb1-xp-9kr">
@@ -267,6 +277,7 @@
     </objects>
     <resources>
         <image name="ic_settings" width="33" height="32"/>
+        <image name="myVideosIcon" width="33" height="32"/>
         <image name="user_placeholder" width="1024" height="1024"/>
     </resources>
 </document>

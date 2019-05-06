@@ -62,6 +62,7 @@ class ExtendChatPopupViewController: AbstractController {
         
         //IAP Setup
         IAPManager.shared.delegate = self
+        IAPManager.shared.currentViewController = self
         
         if !IAPManager.shared.isPaymentsReady() {
             self.chatItemsArray = []
