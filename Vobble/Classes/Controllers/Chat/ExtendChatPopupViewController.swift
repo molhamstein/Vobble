@@ -17,6 +17,7 @@ import FirebaseDatabase
 class ExtendChatPopupViewController: AbstractController {
 
     @IBOutlet weak var lblTopTitle: UILabel!
+    @IBOutlet weak var lblUsername: UILabel!
     @IBOutlet weak var chatCollectionView: UICollectionView!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var popUpView: UIView!
@@ -39,12 +40,15 @@ class ExtendChatPopupViewController: AbstractController {
     
     var conversationId: String?
     
+    var username: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.lblTopTitle.text = "EXTEND_CHAT_TITLE".localized
+        self.lblTopTitle.text = "EXTEND_CHAT_POPUP_TITLE".localized
+        self.lblUsername.text = self.username ?? ""
         
-        self.chatCollectionView.register(UINib(nibName: "ShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ShopCollectionViewCellID")
+        self.chatCollectionView.register(UINib(nibName: "ExtendChatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ExtendChatCollectionViewCellID")
         self.chatCollectionView.delegate = self
         self.chatCollectionView.dataSource = self
         
@@ -108,7 +112,7 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
         
         let obj = self.chatItemsArray[indexPath.row]
         
-        let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShopCollectionViewCellID", for: indexPath) as! ShopCollectionViewCell
+        let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExtendChatCollectionViewCellID", for: indexPath) as! ExtendChatCollectionViewCell
         
         
         shopCell.configCell(shopItemObj: obj)
@@ -167,10 +171,10 @@ extension ExtendChatPopupViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let itemW = (popUpView.bounds.size.width)
-        let itemh = CGFloat(170)
+        let itemW = (popUpView.bounds.size.width - 16)
+        let itemh = CGFloat(230)
         
-        return CGSize(width: itemW, height: itemh)
+        return CGSize(width: itemW / 3, height: itemh)
     }
 }
 

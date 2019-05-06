@@ -169,6 +169,7 @@
 "CHAT_WARNING_TITLE"                    = "";
 "CHAT_WARNING_BODY"                     = "Your conversation is going to end soon";
 "EXTEND_CHAT_TITLE"                     = "Extend chat";
+"EXTEND_CHAT_POPUP_TITLE"               = "Extend your chat with";
 
 // filter
 "FEMALE"                                = "Female";

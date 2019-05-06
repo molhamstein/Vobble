@@ -461,17 +461,20 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             inputToolbar.isHidden = false
             chatBlockedContainer.isHidden = true
             chatPendingContainer.isHidden = true
+            customNavBar.btnExtendChat.isHidden = false
             initCustomToolBar()
         } else if let is_seen = conversation.is_seen, is_seen == 1 {
             inputToolbar.isHidden = false
             chatBlockedContainer.isHidden = true
             chatPendingContainer.isHidden = true
+            customNavBar.btnExtendChat.isHidden = false
             initCustomToolBar()
         } else {
             if !isChatBlockedShowedBefore {
                 inputToolbar.isHidden = true
                 chatBlockedContainer.isHidden = false
                 chatPendingContainer.isHidden = false
+                customNavBar.btnExtendChat.isHidden = true
                 isChatBlockedShowedBefore = true
             }
         }
@@ -1037,6 +1040,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         self?.inputToolbar.isHidden = false
                         self?.chatBlockedContainer.isHidden = true
                         self?.chatPendingContainer.isHidden = true
+                        self?.customNavBar.btnExtendChat.isHidden = false
                         self?.initCustomToolBar()
                     }
                 }
@@ -1572,11 +1576,14 @@ extension ChatViewController: ChatNavigationDelegate {
     
     func extendChatBtnPressed() {
         let extendChatVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ExtendChatPopupViewController.className) as! ExtendChatPopupViewController
+        
+        extendChatVC.conversationId = self.conversationId
+        extendChatVC.username = self.navUserName
         extendChatVC.providesPresentationContextTransitionStyle = true
         extendChatVC.definesPresentationContext = true
         extendChatVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
         extendChatVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
-        extendChatVC.conversationId = self.conversationId
+        
         
         self.present(extendChatVC, animated: true, completion: nil)
     }

@@ -134,7 +134,7 @@
                                 <constraint firstAttribute="width" constant="24" id="Zb0-ca-FyY"/>
                                 <constraint firstAttribute="height" constant="24" id="px8-yr-kqk"/>
                             </constraints>
-                            <state key="normal" image="speech-bubble"/>
+                            <state key="normal" image="clock"/>
                             <connections>
                                 <action selector="extendChatPressed:" destination="-1" eventType="touchUpInside" id="Yb7-9o-d3O"/>
                             </connections>
@@ -176,10 +176,10 @@
         </view>
     </objects>
     <resources>
+        <image name="clock" width="32" height="32"/>
         <image name="navBackIcon" width="25" height="23"/>
         <image name="navBarBG" width="375" height="95"/>
         <image name="speakerMuted2" width="30" height="30"/>
-        <image name="speech-bubble" width="32" height="32"/>
         <image name="user_placeholder" width="1024" height="1024"/>
     </resources>
 </document>

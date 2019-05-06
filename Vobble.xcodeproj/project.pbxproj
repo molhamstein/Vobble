@@ -63,6 +63,8 @@
 		57E611D72151B24200E0B307 /* loginVideo.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 57E611D62151B21300E0B307 /* loginVideo.m4v */; };
 		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		8F914CAE2259BBD800DAE47C /* ExtendChatPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */; };
+		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
+		8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
 		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
@@ -352,6 +354,8 @@
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatPopupViewController.swift; sourceTree = "<group>"; };
+		8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatCollectionViewCell.swift; sourceTree = "<group>"; };
+		8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendChatCollectionViewCell.xib; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9234B5E8203356570085F9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9234B5EF203356570085F9F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -764,6 +768,15 @@
 			name = gif;
 			sourceTree = "<group>";
 		};
+		8FF44EA1227FCB7B00DC132A /* ExtendChat */ = {
+			isa = PBXGroup;
+			children = (
+				8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */,
+				8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */,
+			);
+			path = ExtendChat;
+			sourceTree = "<group>";
+		};
 		9234B5DC203356560085F9F7 = {
 			isa = PBXGroup;
 			children = (
@@ -938,6 +951,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8FF44EA1227FCB7B00DC132A /* ExtendChat */,
 				0445EF38218E25810029A6FB /* AudioPlayer */,
 				0451201F2180952900F4EC9D /* Thrown Bottles */,
 				B1F7A459205A114E009B18AB /* Shop */,
@@ -1655,6 +1669,7 @@
 				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
+				8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */,
 				576993952153FF83001211CF /* introSound.mp3 in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
@@ -2029,6 +2044,7 @@
 				B18A5DB920348E4300F139B7 /* UISwitch+RACSignalSupport.m in Sources */,
 				571084C920C02262001163EA /* ReportType.swift in Sources */,
 				B18A5DA820348E4300F139B7 /* RACUnarySequence.m in Sources */,
+				8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */,
 				B18A5DA020348E4300F139B7 /* RACSubject.m in Sources */,
 				B1EA39CD205606D8008AADC9 /* ConversationCollectionViewCell.swift in Sources */,
 				B19371132033D254007B1E7D /* ProfileViewController.swift in Sources */,
