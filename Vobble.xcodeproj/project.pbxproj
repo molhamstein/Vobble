@@ -13,6 +13,7 @@
 		045120222180952900F4EC9D /* ThrownBottleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045120202180952900F4EC9D /* ThrownBottleCollectionViewCell.swift */; };
 		045120232180952900F4EC9D /* ThrownBottleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045120212180952900F4EC9D /* ThrownBottleCollectionViewCell.xib */; };
 		045FDF2721DD89850079EE32 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045FDF2621DD89850079EE32 /* FBSDKCoreKit.framework */; };
+		0496E3082257EA4800ABBACF /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496E3072257EA4800ABBACF /* IAPManager.swift */; };
 		0498677F2187ACBA00B3CC43 /* record-beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0498677E2187ACB900B3CC43 /* record-beep.mp3 */; };
 		04ACC6D4222DD6B6007FF822 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACC6D3222DD6B6007FF822 /* Topic.swift */; };
 		04ACC6D62230F89B007FF822 /* find_bottle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ACC6D52230F89B007FF822 /* find_bottle.mp3 */; };
@@ -61,6 +62,9 @@
 		57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 57DED21A2126AFCE00514FBE /* loginVideo.mp4 */; };
 		57E611D72151B24200E0B307 /* loginVideo.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 57E611D62151B21300E0B307 /* loginVideo.m4v */; };
 		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
+		8F914CAE2259BBD800DAE47C /* ExtendChatPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */; };
+		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
+		8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
 		9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9234B5EF203356570085F9F7 /* Assets.xcassets */; };
 		B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B1053E842043EBE600A4383D /* CountryPicker.bundle */; };
@@ -295,6 +299,7 @@
 		045120202180952900F4EC9D /* ThrownBottleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrownBottleCollectionViewCell.swift; sourceTree = "<group>"; };
 		045120212180952900F4EC9D /* ThrownBottleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThrownBottleCollectionViewCell.xib; sourceTree = "<group>"; };
 		045FDF2621DD89850079EE32 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0496E3072257EA4800ABBACF /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		0498677E2187ACB900B3CC43 /* record-beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "record-beep.mp3"; sourceTree = "<group>"; };
 		04ACC6D3222DD6B6007FF822 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		04ACC6D52230F89B007FF822 /* find_bottle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = find_bottle.mp3; sourceTree = "<group>"; };
@@ -348,6 +353,9 @@
 		57E611D62151B21300E0B307 /* loginVideo.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.m4v; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
+		8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatPopupViewController.swift; sourceTree = "<group>"; };
+		8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatCollectionViewCell.swift; sourceTree = "<group>"; };
+		8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendChatCollectionViewCell.xib; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9234B5E8203356570085F9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9234B5EF203356570085F9F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -760,6 +768,15 @@
 			name = gif;
 			sourceTree = "<group>";
 		};
+		8FF44EA1227FCB7B00DC132A /* ExtendChat */ = {
+			isa = PBXGroup;
+			children = (
+				8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */,
+				8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */,
+			);
+			path = ExtendChat;
+			sourceTree = "<group>";
+		};
 		9234B5DC203356560085F9F7 = {
 			isa = PBXGroup;
 			children = (
@@ -901,6 +918,7 @@
 				B19372AE2033E27B007B1E7D /* SocialManager.swift */,
 				B19372AA2033E27B007B1E7D /* Actions.swift */,
 				0445EF3D218E61860029A6FB /* AudioManager.swift */,
+				0496E3072257EA4800ABBACF /* IAPManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -933,6 +951,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8FF44EA1227FCB7B00DC132A /* ExtendChat */,
 				0445EF38218E25810029A6FB /* AudioPlayer */,
 				0451201F2180952900F4EC9D /* Thrown Bottles */,
 				B1F7A459205A114E009B18AB /* Shop */,
@@ -964,6 +983,7 @@
 				B13AE0992071ACB500C05F80 /* JSQCustomVideoMediaItem.swift */,
 				579F9507210B57C200E3F7F7 /* JSQCustomAudioMediaItem.swift */,
 				B11406D0207EB6AB003CEF96 /* ChatInputToolbar.swift */,
+				8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1649,6 +1669,7 @@
 				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
+				8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */,
 				576993952153FF83001211CF /* introSound.mp3 in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
@@ -1768,6 +1789,7 @@
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/UIView+Shake/UIView_Shake.framework",
 				"${BUILT_PRODUCTS_DIR}/WCLShineButton/WCLShineButton.framework",
 				"${BUILT_PRODUCTS_DIR}/YXWaveView/YXWaveView.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -1806,6 +1828,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_Shake.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCLShineButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YXWaveView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -1865,6 +1888,7 @@
 				B18A5D7C20348E4300F139B7 /* RACBlockTrampoline.m in Sources */,
 				B18A5DAF20348E4300F139B7 /* UICollectionReusableView+RACSignalSupport.m in Sources */,
 				B18A5D6520348E4300F139B7 /* NSArray+RACSequenceAdditions.m in Sources */,
+				8F914CAE2259BBD800DAE47C /* ExtendChatPopupViewController.swift in Sources */,
 				B156A44320587E8000654E2A /* ConversationCollectionViewHeader.swift in Sources */,
 				57BC6C3F2141DAD7005C4E7B /* URL.swift in Sources */,
 				B19372B22033E27B007B1E7D /* DataStore.swift in Sources */,
@@ -2021,6 +2045,7 @@
 				B18A5DB920348E4300F139B7 /* UISwitch+RACSignalSupport.m in Sources */,
 				571084C920C02262001163EA /* ReportType.swift in Sources */,
 				B18A5DA820348E4300F139B7 /* RACUnarySequence.m in Sources */,
+				8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */,
 				B18A5DA020348E4300F139B7 /* RACSubject.m in Sources */,
 				B1EA39CD205606D8008AADC9 /* ConversationCollectionViewCell.swift in Sources */,
 				B19371132033D254007B1E7D /* ProfileViewController.swift in Sources */,
@@ -2044,6 +2069,7 @@
 				B19371172033D8FC007B1E7D /* HomeViewController.swift in Sources */,
 				B1818F712066D30000086030 /* TimerLabel.swift in Sources */,
 				B18A5D8720348E4300F139B7 /* RACEmptySequence.m in Sources */,
+				0496E3082257EA4800ABBACF /* IAPManager.swift in Sources */,
 				B18A5D9920348E4300F139B7 /* RACSerialDisposable.m in Sources */,
 				B105CBF420715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift in Sources */,
 				57413D55204D3B5700450A42 /* GCD.m in Sources */,

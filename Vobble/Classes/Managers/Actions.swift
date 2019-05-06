@@ -9,6 +9,7 @@
 import Foundation
 import StoreKit
 import AVFoundation
+import UserNotifications
 
 /**
 Repeated and generic actions to be excuted from any context of the app such as show alert
@@ -150,5 +151,45 @@ class ActionDeactiveUser {
             
             return true
         }
+    }
+}
+
+class ActionRegisterNotification {
+    class func execute(title: String, body: String, id: String, hours: Double) {
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            
+            let content = UNMutableNotificationContent()
+            content.title = title
+            content.body = body
+            content.categoryIdentifier = id
+            content.sound = UNNotificationSound.default()
+            
+            var dateComponents = DateComponents()
+            //dateComponents.hour = 10
+            dateComponents.minute = 1
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: hours, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            center.add(request)
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+    }
+}
+
+class ActionRemoveNotification {
+    class func execute(id: String) {
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            
+            center.removePendingNotificationRequests(withIdentifiers: [id])
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
     }
 }

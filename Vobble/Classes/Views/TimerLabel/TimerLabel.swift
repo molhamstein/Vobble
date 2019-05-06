@@ -13,6 +13,7 @@ import UIKit
     
     @objc optional func timerFinished()
     @objc optional func countingAt(timeRemaining: TimeInterval)
+    @objc optional func conversationWillEnd()
 }
 
 
@@ -66,6 +67,12 @@ class TimerLabel: UILabel {
         } else {
             seconds -= 1
 //            timerLabel.text = timeString(time: TimeInterval(seconds))
+            
+            // call a 'conversationWillEnd' when only 2 hours left
+            if seconds == 7200 {
+                delegate?.conversationWillEnd?()
+            }
+            
             text = timeString(time: TimeInterval(seconds))
             delegate?.countingAt?(timeRemaining: TimeInterval(seconds))
         }

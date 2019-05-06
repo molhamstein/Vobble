@@ -15,6 +15,8 @@ enum ShopItemType: String {
     case bottlesPack = "5b13ee987fe59d9d184bfe3e"
     case genderFilter = "5b13ee987fe59d9d184bfe3f"
     case countryFilter = "5b13ee987fe59d9d184bfe40"
+    case ExtendChat = "5cac778b178617b180e6c905"
+    
 }
 
 enum ShopItemID: String {
@@ -32,6 +34,10 @@ enum ShopItemID: String {
     case GenderFilter12H = "com.yallavideo.Vibo.gender12h"
     case GenderFilter24H = "com.yallavideo.Vibo.24hgender"
     case GenderFilter48H = "com.yallavideo.Vibo.48hgender"
+    
+    case ExtendChat1 = "com.yallavideo.Vibo.1extend"
+    case ExtendChat3 = "com.yallavideo.Vibo.3extend"
+    case ExtendChat6 = "com.yallavideo.Vibo.6extend"
     
     static func getIdFromKey(DBId: String) -> String {
         
@@ -85,6 +91,10 @@ enum ShopItemID: String {
         listId.append(ShopItemID.GenderFilter12H.rawValue)
         listId.append(ShopItemID.GenderFilter24H.rawValue)
         listId.append(ShopItemID.GenderFilter48H.rawValue)
+        
+        listId.append(ShopItemID.ExtendChat1.rawValue)
+        listId.append(ShopItemID.ExtendChat3.rawValue)
+        listId.append(ShopItemID.ExtendChat6.rawValue)
         
         return listId
     }
@@ -156,6 +166,8 @@ class ShopItem: BaseModel {
                     return AppColors.pinkLight
                 case .countryFilter:
                     return AppColors.grayXLight
+                case .ExtendChat:
+                    return AppColors.grayXLight
                 }
             }
             return AppColors.blueXLight
@@ -171,6 +183,8 @@ class ShopItem: BaseModel {
                 case .genderFilter:
                     return AppColors.pinkDark
                 case .countryFilter:
+                    return AppColors.grayXDark
+                case .ExtendChat:
                     return AppColors.grayXDark
                 }
             }

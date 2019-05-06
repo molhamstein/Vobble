@@ -2,7 +2,7 @@
 //  Topic.swift
 //  Vobble
 //
-//  Created by Emessa Group on 3/4/19.
+//  Created by Abd Hayek on 3/4/19.
 //  Copyright © 2019 Brain-Socket. All rights reserved.
 //
 
