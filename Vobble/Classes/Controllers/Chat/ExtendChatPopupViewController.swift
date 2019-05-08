@@ -184,6 +184,9 @@ extension ExtendChatPopupViewController: UICollectionViewDelegateFlowLayout {
 extension ExtendChatPopupViewController: IAPManagerDelegate {
     
     func didFailWithError(isAPIError: Bool, error: Error?, serverError: String?){
+        self.showActivityLoader(false)
+        self.popUpView.isUserInteractionEnabled = true
+        
         if isAPIError {
             if let err = serverError {
                 let alert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized, message: err , preferredStyle: .alert)

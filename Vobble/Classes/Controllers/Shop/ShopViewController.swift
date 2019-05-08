@@ -310,6 +310,9 @@ extension ShopViewController: UICollectionViewDelegate {
 extension ShopViewController: IAPManagerDelegate {
     
     func didFailWithError(isAPIError: Bool, error: Error?, serverError: String?){
+        self.navigationView.showProgressIndicator(show: false)
+        self.view.isUserInteractionEnabled = true
+        
         if isAPIError {
             if let err = serverError {
                 let alert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized, message: err , preferredStyle: .alert)

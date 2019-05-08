@@ -227,7 +227,7 @@
 "TAB_COUNTRY"                          = "Country Filters";
 "SHOP_TITLE"                           = "Shop";
 "SHOP_BTN_BUY"                         = "Buy Now";
-"SHOP_INVALID_PURCHASE_MSG"            = "This Seems an invalid purchase request, please contact us if is you are having issues";
+"SHOP_INVALID_PURCHASE_MSG"            = "This Seems an invalid purchase request, please contact us if you are having issues";
 
 // My bottles
 "MY_BOTTLES_TITLE"                     = "My Bottles";

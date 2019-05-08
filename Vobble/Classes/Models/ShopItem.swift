@@ -15,7 +15,7 @@ enum ShopItemType: String {
     case bottlesPack = "5b13ee987fe59d9d184bfe3e"
     case genderFilter = "5b13ee987fe59d9d184bfe3f"
     case countryFilter = "5b13ee987fe59d9d184bfe40"
-    case ExtendChat = "5cac778b178617b180e6c905"
+    case ExtendChat = "5cd2d56bf133b83d7c653d8f"
     
 }
 
@@ -167,7 +167,7 @@ class ShopItem: BaseModel {
                 case .countryFilter:
                     return AppColors.grayXLight
                 case .ExtendChat:
-                    return AppColors.grayXLight
+                    return AppColors.blueXLight
                 }
             }
             return AppColors.blueXLight
@@ -185,7 +185,7 @@ class ShopItem: BaseModel {
                 case .countryFilter:
                     return AppColors.grayXDark
                 case .ExtendChat:
-                    return AppColors.grayXDark
+                    return AppColors.blueXDark
                 }
             }
             return AppColors.blueXDark

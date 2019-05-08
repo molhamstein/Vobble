@@ -33,11 +33,11 @@ class ExtendChatCollectionViewCell: UICollectionViewCell {
         mainView.removeGradientLayer()
         buyButton.removeGradientLayer()
         
-        mainView.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .diagonal)
+        mainView.applyGradient(colours: [shopItemObj.secondColor, shopItemObj.firstColor], direction: .diagonal)
         buyButton.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .horizontal)
         
         titleLabel.text = "EXTEND_CHAT_TITLE".localized
-        descriptionLabel.text = String(shopItemObj.validity ?? 0).components(separatedBy: ".")[0] + " Hours"
+        descriptionLabel.text = shopItemObj.title
         
         buyButton.setTitle(String(shopItemObj.price ?? 0.0) + "$", for: .normal)
         
