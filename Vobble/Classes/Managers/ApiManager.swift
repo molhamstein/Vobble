@@ -1077,8 +1077,8 @@ class ApiManager: NSObject {
 //        findhBottleURL += "&filter[order]=createdAt DESC&filter[limit]=5"
         
 
-        var findBottleURL = "\(baseURL)/bottles/5cb1d009947268f54cc06449"
-    
+        //var findBottleURL = "\(baseURL)/bottles/5cb1d009947268f54cc06449"
+        var findBottleURL = "\(baseURL)/bottles/getOneBottle"
         
         // shore
         if let shore = shoreId {

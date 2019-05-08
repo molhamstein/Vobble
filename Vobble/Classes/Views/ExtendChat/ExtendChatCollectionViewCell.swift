@@ -18,8 +18,8 @@ class ExtendChatCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.font = AppFonts.normalBold
-        //descriptionLabel.font = AppFonts.small
+        titleLabel.font = AppFonts.xSmallBold
+        descriptionLabel.font = AppFonts.xBigBold
         buyButton.titleLabel?.font = AppFonts.normalBold
 
     }
@@ -33,12 +33,13 @@ class ExtendChatCollectionViewCell: UICollectionViewCell {
         mainView.removeGradientLayer()
         buyButton.removeGradientLayer()
         
-        mainView.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .horizontal)
+        mainView.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .diagonal)
         buyButton.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .horizontal)
         
-        titleLabel.text = shopItemObj.title
+        titleLabel.text = "EXTEND_CHAT_TITLE".localized
+        descriptionLabel.text = String(shopItemObj.validity ?? 0).components(separatedBy: ".")[0] + " Hours"
+        
         buyButton.setTitle(String(shopItemObj.price ?? 0.0) + "$", for: .normal)
-       // descriptionLabel.text = shopItemObj.title
         
         if let iconUrl = shopItemObj.icon {
             image.sd_setImage(with: URL(string:iconUrl))

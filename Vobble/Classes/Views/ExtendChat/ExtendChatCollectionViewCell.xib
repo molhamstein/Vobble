@@ -27,18 +27,27 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRt-98-48D">
                         <rect key="frame" x="8" y="24" width="131" height="154"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend Chat" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oOI-Bf-te1">
-                                <rect key="frame" x="16" y="131" width="99" height="15"/>
-                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend Chat" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oOI-Bf-te1">
+                                <rect key="frame" x="8" y="110" width="115" height="12.5"/>
+                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="11"/>
+                                <color key="textColor" white="0.85289953859060408" alpha="0.94805463576158944" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Hours" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0M8-LA-isn">
+                                <rect key="frame" x="8" y="122.5" width="115" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.086274509799999996" green="0.41176470590000003" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="oOI-Bf-te1" secondAttribute="bottom" constant="8" id="MlD-MK-kbX"/>
-                            <constraint firstItem="oOI-Bf-te1" firstAttribute="leading" secondItem="HRt-98-48D" secondAttribute="leading" constant="16" id="f7T-Y0-JBW"/>
-                            <constraint firstAttribute="trailing" secondItem="oOI-Bf-te1" secondAttribute="trailing" constant="16" id="uez-CQ-Zip"/>
+                            <constraint firstAttribute="trailing" secondItem="0M8-LA-isn" secondAttribute="trailing" constant="8" id="0jI-ee-wC7"/>
+                            <constraint firstItem="0M8-LA-isn" firstAttribute="leading" secondItem="HRt-98-48D" secondAttribute="leading" constant="8" id="Jd1-wJ-0Av"/>
+                            <constraint firstAttribute="trailing" secondItem="oOI-Bf-te1" secondAttribute="trailing" constant="8" id="SQr-pA-VwA"/>
+                            <constraint firstItem="oOI-Bf-te1" firstAttribute="leading" secondItem="HRt-98-48D" secondAttribute="leading" constant="8" id="pbo-pd-ZDE"/>
+                            <constraint firstAttribute="bottom" secondItem="0M8-LA-isn" secondAttribute="bottom" constant="8" id="qTe-4t-eUo"/>
+                            <constraint firstItem="0M8-LA-isn" firstAttribute="top" secondItem="oOI-Bf-te1" secondAttribute="bottom" id="rFY-vk-BgR"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -98,6 +107,7 @@
             <size key="customSize" width="147" height="232"/>
             <connections>
                 <outlet property="buyButton" destination="fW2-hD-5pf" id="WRM-fp-WsH"/>
+                <outlet property="descriptionLabel" destination="0M8-LA-isn" id="pJ5-4H-iHD"/>
                 <outlet property="image" destination="daK-T2-lRM" id="6GZ-lG-5RD"/>
                 <outlet property="mainView" destination="HRt-98-48D" id="NDX-wB-ZhS"/>
                 <outlet property="titleLabel" destination="oOI-Bf-te1" id="W6B-8N-4Ho"/>
