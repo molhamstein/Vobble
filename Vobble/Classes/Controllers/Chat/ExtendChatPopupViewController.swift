@@ -46,6 +46,7 @@ class ExtendChatPopupViewController: AbstractController {
         super.viewDidLoad()
 
         self.lblTopTitle.text = "EXTEND_CHAT_POPUP_TITLE".localized
+        self.lblTopTitle.font = AppFonts.xBigBold
         self.lblUsername.text = self.username ?? ""
         
         self.chatCollectionView.register(UINib(nibName: "ExtendChatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ExtendChatCollectionViewCellID")
@@ -173,7 +174,7 @@ extension ExtendChatPopupViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemW = (popUpView.bounds.size.width - 16)
-        let itemh = CGFloat(230)
+        let itemh = CGFloat(210)
         
         return CGSize(width: itemW / 3, height: itemh)
     }
