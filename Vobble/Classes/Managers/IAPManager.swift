@@ -154,7 +154,7 @@ extension IAPManager : SKPaymentTransactionObserver {
                                 self.delegate?.didPaymentCompleted?()
                             }
                         }else{
-                            self.delegate?.didFailWithError?(isAPIError: true, error: nil, serverError: err?.errorName)
+                            self.delegate?.didFailWithError?(isAPIError: true, error: nil, serverError: err?.type.errorMessage)
                             
                         }
                         
