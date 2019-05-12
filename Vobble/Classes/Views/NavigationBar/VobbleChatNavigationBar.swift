@@ -28,6 +28,8 @@ class VobbleChatNavigationBar: AbstractNibView {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userImageButton: UIButton!
     @IBOutlet weak var leftLabel: UILabel!
+    @IBOutlet weak var extendChatLabel: UILabel!
+    @IBOutlet weak var extendAlertView: UIView!
     
     weak var delegate:ChatNavigationDelegate?
 
@@ -43,6 +45,11 @@ class VobbleChatNavigationBar: AbstractNibView {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        self.btnExtendChat.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        self.btnExtendChat.layer.shadowColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        self.btnExtendChat.layer.shadowRadius = 12
+        self.btnExtendChat.layer.shadowOpacity = 1
+        self.extendAlertView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.extendAlertView.frame.height - 50)
     }
     
     // MARK: -  Private Methods

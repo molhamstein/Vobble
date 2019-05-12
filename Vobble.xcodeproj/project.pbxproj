@@ -979,11 +979,11 @@
 			isa = PBXGroup;
 			children = (
 				B196123F206199540065019D /* ChatViewController.swift */,
+				8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */,
 				B105CBF320715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift */,
 				B13AE0992071ACB500C05F80 /* JSQCustomVideoMediaItem.swift */,
 				579F9507210B57C200E3F7F7 /* JSQCustomAudioMediaItem.swift */,
 				B11406D0207EB6AB003CEF96 /* ChatInputToolbar.swift */,
-				8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";

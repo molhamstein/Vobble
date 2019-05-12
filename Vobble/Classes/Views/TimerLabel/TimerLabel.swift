@@ -66,9 +66,8 @@ class TimerLabel: UILabel {
             delegate?.countingAt?(timeRemaining: TimeInterval(0))
         } else {
             seconds -= 1
-//            timerLabel.text = timeString(time: TimeInterval(seconds))
             
-            // call a 'conversationWillEnd' when only 2 hours left
+            // call 'conversationWillEnd' when only 2 hours left
             if seconds == 7200 {
                 delegate?.conversationWillEnd?()
             }

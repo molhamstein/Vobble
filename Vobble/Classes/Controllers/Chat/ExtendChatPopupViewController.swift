@@ -40,12 +40,14 @@ class ExtendChatPopupViewController: AbstractController {
     
     var conversationId: String?
     
+    var conversation: Conversation?
+    
     var username: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.lblTopTitle.text = "EXTEND_CHAT_POPUP_TITLE".localized
+        self.lblTopTitle.text = String.init(format: "EXTEND_CHAT_POPUP_TITLE".localized, "")
         self.lblTopTitle.font = AppFonts.xBigBold
         self.lblUsername.text = self.username ?? ""
         
@@ -215,9 +217,9 @@ extension ExtendChatPopupViewController: IAPManagerDelegate {
                 let extendTime = startTime + self.getExtendTime(self.selectedProduct.validity ?? 0.0)
                 FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").updateChildValues(["startTime" : extendTime])
                 
-                // Remove Old notification id and Register a new one
-                ActionRemoveNotification.execute(id: self.conversationId ?? "")
-                ActionRegisterNotification.execute(title: "CHAT_WARNING_TITLE".localized, body: "CHAT_WARNING_BODY".localized, id: self.conversationId ?? "", hours: (extendTime / 1000) - 7200)
+                self.conversation?.startTime = extendTime
+                
+                ActionRegisterNotification.execute(conversation: self.conversation)
             }
             
             

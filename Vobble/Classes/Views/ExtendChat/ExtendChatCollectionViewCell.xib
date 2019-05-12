@@ -70,16 +70,24 @@
                             <constraint firstAttribute="width" secondItem="daK-T2-lRM" secondAttribute="height" id="HXM-Ay-Ba2"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW2-hD-5pf">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsf-kf-gSs">
                         <rect key="frame" x="16" y="190" width="115" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-Be-Arf">
+                                <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="0.086274509799999996" green="0.41176470590000003" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="FSa-ZC-aue"/>
+                            <constraint firstAttribute="height" constant="30" id="0SG-vc-DTv"/>
+                            <constraint firstItem="qZJ-Be-Arf" firstAttribute="top" secondItem="qsf-kf-gSs" secondAttribute="top" id="6lY-4k-OdE"/>
+                            <constraint firstAttribute="bottom" secondItem="qZJ-Be-Arf" secondAttribute="bottom" id="Jl0-YM-OkU"/>
+                            <constraint firstAttribute="trailing" secondItem="qZJ-Be-Arf" secondAttribute="trailing" id="dil-oF-VxM"/>
+                            <constraint firstItem="qZJ-Be-Arf" firstAttribute="leading" secondItem="qsf-kf-gSs" secondAttribute="leading" id="r2F-kn-aKw"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                        <state key="normal" title="0.99 $">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="15"/>
@@ -91,29 +99,30 @@
                                 <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                    </button>
+                    </view>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="HRt-98-48D" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="30" id="291-e7-2BG"/>
-                <constraint firstItem="fW2-hD-5pf" firstAttribute="top" secondItem="HRt-98-48D" secondAttribute="bottom" constant="8" id="33w-Vr-Vhr"/>
-                <constraint firstAttribute="trailing" secondItem="fW2-hD-5pf" secondAttribute="trailing" constant="16" id="799-dQ-NBd"/>
                 <constraint firstItem="daK-T2-lRM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="DIU-md-4o3"/>
                 <constraint firstAttribute="trailing" secondItem="HRt-98-48D" secondAttribute="trailing" constant="8" id="Djb-yU-Fq0"/>
+                <constraint firstItem="qsf-kf-gSs" firstAttribute="top" secondItem="HRt-98-48D" secondAttribute="bottom" constant="8" id="Fbh-Fc-zwD"/>
                 <constraint firstItem="HRt-98-48D" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Hbj-b3-UvJ"/>
-                <constraint firstAttribute="bottom" secondItem="fW2-hD-5pf" secondAttribute="bottom" constant="16" id="Lel-Zo-wk6"/>
+                <constraint firstAttribute="bottom" secondItem="qsf-kf-gSs" secondAttribute="bottom" constant="16" id="KhP-gV-y3k"/>
+                <constraint firstAttribute="trailing" secondItem="qsf-kf-gSs" secondAttribute="trailing" constant="16" id="eUm-Qx-Pnl"/>
                 <constraint firstAttribute="trailing" secondItem="daK-T2-lRM" secondAttribute="trailing" constant="16" id="eaw-Ol-1q8"/>
                 <constraint firstItem="daK-T2-lRM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="lYc-fC-d8A"/>
-                <constraint firstItem="fW2-hD-5pf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="zOc-cB-uYS"/>
+                <constraint firstItem="qsf-kf-gSs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="sP5-gx-bcT"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="147" height="236"/>
             <connections>
-                <outlet property="buyButton" destination="fW2-hD-5pf" id="WRM-fp-WsH"/>
                 <outlet property="descriptionLabel" destination="0M8-LA-isn" id="pJ5-4H-iHD"/>
                 <outlet property="image" destination="daK-T2-lRM" id="6GZ-lG-5RD"/>
                 <outlet property="mainView" destination="HRt-98-48D" id="NDX-wB-ZhS"/>
+                <outlet property="priceLabel" destination="qZJ-Be-Arf" id="DY0-ZS-LEb"/>
                 <outlet property="titleLabel" destination="oOI-Bf-te1" id="W6B-8N-4Ho"/>
+                <outlet property="vPrice" destination="qsf-kf-gSs" id="aDe-S9-X6v"/>
             </connections>
             <point key="canvasLocation" x="53.600000000000001" y="168.21589205397302"/>
         </collectionViewCell>

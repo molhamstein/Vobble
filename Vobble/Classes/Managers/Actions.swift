@@ -24,6 +24,15 @@ class ActionLogout:Action {
         let cancelButton = UIAlertAction(title: "CANCEL".localized, style: .cancel, handler: nil)
         let okButton = UIAlertAction(title: "SETTINGS_USER_LOGOUT".localized, style: .default, handler: {
             (action) in
+            
+            //clear notification
+            if #available(iOS 10.0, *) {
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            } else {
+                // Fallback on earlier versions
+            }
+            
             //clear user
             DataStore.shared.logout()
             ActionShowStart.execute()
@@ -155,23 +164,35 @@ class ActionDeactiveUser {
 }
 
 class ActionRegisterNotification {
-    class func execute(title: String, body: String, id: String, hours: Double) {
+    class func execute(conversation: Conversation?) {
         if #available(iOS 10.0, *) {
+            guard let conversation = conversation else { return }
+            
+            // Remove previous registered notification if found
+            ActionRemoveNotification.execute(id: conversation.idString ?? "")
+            
             let center = UNUserNotificationCenter.current()
             
             let content = UNMutableNotificationContent()
-            content.title = title
-            content.body = body
-            content.categoryIdentifier = id
+            let strBody = String.init(format: "CHAT_WARNING_BODY".localized, conversation.getPeer?.userName ?? "")
+            content.title = "CHAT_WARNING_TITLE".localized
+            content.body = strBody
+            content.categoryIdentifier = conversation.idString ?? ""
             content.sound = UNNotificationSound.default()
             
-            var dateComponents = DateComponents()
-            //dateComponents.hour = 10
-            dateComponents.minute = 1
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: hours, repeats: false)
+            var seconds = 0.0
+            if let fTime = conversation.finishTime {
+                let currentDate = Date().timeIntervalSince1970 * 1000
+                seconds = ((fTime - currentDate) / 1000.0) - 7200
+            }
             
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            center.add(request)
+            if seconds > 0 {
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: conversation.idString ?? UUID().uuidString, content: content, trigger: trigger)
+                center.add(request)
+            }
+            
         } else {
             // Fallback on earlier versions
         }

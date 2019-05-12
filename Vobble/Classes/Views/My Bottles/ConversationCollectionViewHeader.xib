@@ -272,6 +272,7 @@
                 <outlet property="userImageBtn" destination="gma-mX-Kdl" id="twc-OJ-bZ4"/>
                 <outlet property="userImageView" destination="wwn-rf-iZW" id="axC-EH-K1L"/>
                 <outlet property="userNameLabel" destination="4QV-9r-3Bm" id="hr1-PJ-g79"/>
+                <outlet property="vThrowBottles" destination="jMV-1b-yX9" id="pto-Bh-TZw"/>
             </connections>
         </collectionReusableView>
     </objects>

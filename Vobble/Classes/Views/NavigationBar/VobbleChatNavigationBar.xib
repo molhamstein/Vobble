@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Antipasto_extrabold.otf">
+            <string>Antipasto-ExtraBold</string>
+        </array>
         <array key="MullerRegular.otf">
             <string>MullerRegular</string>
         </array>
@@ -17,6 +20,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VobbleChatNavigationBar">
             <connections>
                 <outlet property="btnExtendChat" destination="UPI-W5-9np" id="lxV-i1-h94"/>
+                <outlet property="extendAlertView" destination="9zM-VB-rxG" id="X4U-pB-7fB"/>
+                <outlet property="extendChatLabel" destination="Y9r-b4-qcl" id="hl2-S8-Ykb"/>
                 <outlet property="leftIcon" destination="97f-uB-vZw" id="y4u-oI-cu5"/>
                 <outlet property="leftLabel" destination="MLS-OQ-7ca" id="JM1-oJ-yrl"/>
                 <outlet property="moreOptions" destination="h2q-Ny-ALK" id="ESw-B5-9Ti"/>
@@ -32,6 +37,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zM-VB-rxG">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="121"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend your chat now with username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9r-b4-qcl">
+                            <rect key="frame" x="0.0" y="97.5" width="375" height="19.5"/>
+                            <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.75408733443708609" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Y9r-b4-qcl" firstAttribute="leading" secondItem="9zM-VB-rxG" secondAttribute="leading" id="I4b-zl-Ozp"/>
+                        <constraint firstAttribute="bottom" secondItem="Y9r-b4-qcl" secondAttribute="bottom" constant="4" id="jA9-8L-WdZ"/>
+                        <constraint firstAttribute="trailing" secondItem="Y9r-b4-qcl" secondAttribute="trailing" id="pTd-Cp-VIi"/>
+                    </constraints>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navBarBG" translatesAutoresizingMaskIntoConstraints="NO" id="DRo-el-GjL">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
                 </imageView>
@@ -129,7 +151,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPI-W5-9np">
-                            <rect key="frame" x="291" y="26.5" width="24" height="24"/>
+                            <rect key="frame" x="291" y="22.5" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="Zb0-ca-FyY"/>
                                 <constraint firstAttribute="height" constant="24" id="px8-yr-kqk"/>
@@ -145,7 +167,7 @@
                         <constraint firstItem="450-gg-gVr" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="29A-9a-0MH"/>
                         <constraint firstItem="fId-mP-Tuz" firstAttribute="leading" secondItem="450-gg-gVr" secondAttribute="trailing" constant="5" id="5oB-n2-blD"/>
                         <constraint firstItem="h2q-Ny-ALK" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" id="7gM-Bv-Xbj"/>
-                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="top" secondItem="UPI-W5-9np" secondAttribute="bottom" constant="4" id="8UO-hc-15t"/>
+                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="top" secondItem="UPI-W5-9np" secondAttribute="bottom" constant="8" id="8UO-hc-15t"/>
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="leading" secondItem="450-gg-gVr" secondAttribute="leading" id="8hX-As-wvb"/>
                         <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.24" id="IVh-I5-mcn"/>
                         <constraint firstItem="97f-uB-vZw" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="Iim-8G-6mN"/>
@@ -163,16 +185,20 @@
             </subviews>
             <constraints>
                 <constraint firstItem="DRo-el-GjL" firstAttribute="top" secondItem="jnR-ps-beX" secondAttribute="top" id="5Uo-nO-LMU"/>
+                <constraint firstAttribute="bottom" secondItem="9zM-VB-rxG" secondAttribute="bottom" constant="-24" id="63s-bK-Di1"/>
                 <constraint firstAttribute="trailing" secondItem="DRo-el-GjL" secondAttribute="trailing" id="6SQ-y2-8a4"/>
                 <constraint firstAttribute="bottom" secondItem="DRo-el-GjL" secondAttribute="bottom" id="GIL-ww-odr"/>
+                <constraint firstItem="9zM-VB-rxG" firstAttribute="top" secondItem="jnR-ps-beX" secondAttribute="top" id="YIp-Un-Emw"/>
                 <constraint firstAttribute="bottom" secondItem="2wD-NW-XhJ" secondAttribute="bottom" id="d78-er-Arx"/>
                 <constraint firstAttribute="trailing" secondItem="2wD-NW-XhJ" secondAttribute="trailing" id="fS2-wV-oB6"/>
                 <constraint firstItem="DRo-el-GjL" firstAttribute="leading" secondItem="jnR-ps-beX" secondAttribute="leading" id="jHl-1Z-sDI"/>
+                <constraint firstAttribute="trailing" secondItem="9zM-VB-rxG" secondAttribute="trailing" id="mQY-m3-wD3"/>
+                <constraint firstItem="9zM-VB-rxG" firstAttribute="leading" secondItem="jnR-ps-beX" secondAttribute="leading" id="mg8-dA-1mi"/>
                 <constraint firstItem="2wD-NW-XhJ" firstAttribute="leading" secondItem="jnR-ps-beX" secondAttribute="leading" id="rjN-tZ-POh"/>
                 <constraint firstItem="2wD-NW-XhJ" firstAttribute="top" secondItem="jnR-ps-beX" secondAttribute="top" id="zJ5-Sk-puf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-226.40000000000001" y="655.32233883058473"/>
+            <point key="canvasLocation" x="-551.20000000000005" y="642.72863568215894"/>
         </view>
     </objects>
     <resources>

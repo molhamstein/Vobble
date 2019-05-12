@@ -91,7 +91,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     // notifications
     var lastNotificationSentDate: Date?
     
-    var shakerTimer: Timer?
+    var shakerTimer = Timer()
     
     private var localTyping = false
     private var isInitialised = false
@@ -369,14 +369,25 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         customNavBar.leftLabel.text = "CHAT_NAV_TIME_LEFT".localized
         if seconds != 0.0 {
             customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
+            customNavBar.timerLabel.delegate = self
         } else {
             customNavBar.timerLabel.isHidden = true
             customNavBar.leftLabel.isHidden = true
         }
         
-        shakerTimer = Timer(timeInterval: 2, target: self, selector: #selector(self.updateShaker), userInfo: nil, repeats: true)
-        shakerTimer?.invalidate()
+        // Invalidate timer if it's running
+        shakerTimer.invalidate()
         
+        // hide extend alert banner
+        UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.customNavBar.extendAlertView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.customNavBar.extendAlertView.frame.height - 50)
+            
+        }, completion: {(finished: Bool) in
+            
+        })
+        
+        
+        customNavBar.extendChatLabel.text = String.init(format: "EXTEND_CHAT_POPUP_TITLE".localized, navUserName ?? "")
         customNavBar.shoreNameLabel.text = navShoreName
         customNavBar.userNameLabel.text = navUserName
         if let peerPicString = conversationOriginalObject?.getPeer?.profilePic, let picUrl = URL(string:peerPicString), picUrl.isValidUrl(){
@@ -404,11 +415,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 chatVc.conversationRef?.updateChildValues(["is_seen": 1])
                 chatVc.conversationRef?.updateChildValues(["startTime": ServerValue.timestamp()])
                 chatVc.seconds = 24.0*60.0*60.0
-                
-                // Register left time notification
-                ActionRemoveNotification.execute(id: self.conversationId ?? "")
-                ActionRegisterNotification.execute(title: "CHAT_WARNING_TITLE".localized, body: "CHAT_WARNING_BODY".localized, id: self.conversationId ?? "", hours: chatVc.seconds - 7200)
-                
+
                 // send push notification to peer to let him know that the chat is open now
                 let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
                 let msgToSendAr = String(format: "NOTIFICATION_CHAT_IS_ACTIVE_AR".localized, (DataStore.shared.me?.userName)!)
@@ -615,7 +622,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     // Timer for shaking buy button
     @objc func updateShaker() {
-         customNavBar.btnExtendChat.shake(1, withDelta: 4, speed: 0.5)
+         customNavBar.btnExtendChat.shake(8, withDelta: 5, speed: 0.1)
     }
     
     // MARK: Collection view data source (and related) methods
@@ -1080,7 +1087,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         let currentDate = Date().timeIntervalSince1970 * 1000
                         self.seconds = (fTime - currentDate)/1000.0
                     }
-                    
+
                     self.initNavBar()
                 }
                 
@@ -1125,26 +1132,26 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
     }
     
-      private func observeTyping() {
+    private func observeTyping() {
         if let convRef = conversationRef {
             let typingIndicatorRef = convRef.child("typingIndicator")
             userIsTypingRef = typingIndicatorRef.child(senderId)
             userIsTypingRef.onDisconnectRemoveValue()
             usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
-        
+            
             usersTypingQuery.observe(.value) { [weak self] (data: DataSnapshot) in
-        
-              // You're the only typing, don't show the indicator
-              if let selfRef = self, data.childrenCount == 1 && selfRef.isTyping {
-                return
-              }
-        
-              // Are there others typing?
-              self?.showTypingIndicator = data.childrenCount > 0
-              self?.scrollToBottom(animated: true)
+                
+                // You're the only typing, don't show the indicator
+                if let selfRef = self, data.childrenCount == 1 && selfRef.isTyping {
+                    return
+                }
+                
+                // Are there others typing?
+                self?.showTypingIndicator = data.childrenCount > 0
+                self?.scrollToBottom(animated: true)
             }
         }
-      }
+    }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         // 1
@@ -1518,7 +1525,14 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 // MARK:- TimerLabelDelegate
 extension ChatViewController: TimerLabelDelegate {
     func conversationWillEnd() {
-        shakerTimer?.fire()
+        shakerTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.updateShaker), userInfo: nil, repeats: true)
+        
+        UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.customNavBar.extendAlertView.transform = CGAffineTransform.identity
+            
+        }, completion: {(finished: Bool) in
+            
+        })
     }
 }
 
@@ -1577,6 +1591,7 @@ extension ChatViewController: ChatNavigationDelegate {
     func extendChatBtnPressed() {
         let extendChatVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ExtendChatPopupViewController.className) as! ExtendChatPopupViewController
         
+        extendChatVC.conversation = self.conversationOriginalObject
         extendChatVC.conversationId = self.conversationId
         extendChatVC.username = self.navUserName
         extendChatVC.providesPresentationContextTransitionStyle = true

@@ -78,6 +78,9 @@ class FirebaseManager :NSObject {
                     if !conversation.isConversationMuted {
                         DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
                     }
+                    
+                    ActionRegisterNotification.execute(conversation: conversation)
+                    
                 } else {
                     DataStore.shared.conversationsMyBottlesUnseenMesssages[rest.key] = 0
                     DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = 0
@@ -185,6 +188,8 @@ class FirebaseManager :NSObject {
                     if !conversation.isConversationMuted {
                         DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = conversation.myUnseenMessagesCount
                     }
+                    
+                    ActionRegisterNotification.execute(conversation: conversation)
                 } else {
                     DataStore.shared.conversationsMyRepliesUnseenMesssages[rest.key] = 0
                     DataStore.shared.conversationsUnmutedUnseenMesssages[rest.key] = 0

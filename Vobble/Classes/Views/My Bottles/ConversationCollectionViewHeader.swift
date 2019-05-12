@@ -28,6 +28,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     // bottles thrown
     @IBOutlet weak var lblBottlesThrownCount: UILabel!
     @IBOutlet weak var lblBottlesThrownCountTitle: UILabel!
+    @IBOutlet weak var vThrowBottles: UIStackView!
     
     @IBOutlet weak var lblUnreadMyBottlesConversationsBadge: UILabel!
     @IBOutlet weak var lblUnreadMyRepliesConversationsBadge: UILabel!
@@ -68,9 +69,9 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         lblUnreadMyBottlesConversationsBadge.isHidden = true
         lblUnreadMyRepliesConversationsBadge.isHidden = true
         
-        lblBottlesThrownCountTitle.isUserInteractionEnabled = true
+        vThrowBottles.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.thrownBottlesBtnPressed(_:)))
-        lblBottlesThrownCountTitle.addGestureRecognizer(tap)
+        vThrowBottles.addGestureRecognizer(tap)
     }
     
     func configCell(userObj: AppUser) {
