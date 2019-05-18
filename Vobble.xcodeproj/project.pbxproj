@@ -62,6 +62,9 @@
 		57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 57DED21A2126AFCE00514FBE /* loginVideo.mp4 */; };
 		57E611D72151B24200E0B307 /* loginVideo.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 57E611D62151B21300E0B307 /* loginVideo.m4v */; };
 		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
+		8F08EB26228BB1CB00CE9A81 /* PhoneLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08EB25228BB1CB00CE9A81 /* PhoneLoginViewController.swift */; };
+		8F08EB28228E184C00CE9A81 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08EB27228E184C00CE9A81 /* VerifyCodeViewController.swift */; };
+		8F4AE838228F32EA00716682 /* CompleteSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */; };
 		8F914CAE2259BBD800DAE47C /* ExtendChatPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */; };
 		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
 		8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */; };
@@ -352,6 +355,9 @@
 		57DED21A2126AFCE00514FBE /* loginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.mp4; sourceTree = "<group>"; };
 		57E611D62151B21300E0B307 /* loginVideo.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.m4v; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F08EB25228BB1CB00CE9A81 /* PhoneLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLoginViewController.swift; sourceTree = "<group>"; };
+		8F08EB27228E184C00CE9A81 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
+		8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSignupViewController.swift; sourceTree = "<group>"; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatPopupViewController.swift; sourceTree = "<group>"; };
 		8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1435,6 +1441,9 @@
 				B193711C2033D943007B1E7D /* SignupViewController.swift */,
 				B193711E2033D95E007B1E7D /* VerificationViewController.swift */,
 				B19371202033D975007B1E7D /* ResetPasswordViewController.swift */,
+				8F08EB25228BB1CB00CE9A81 /* PhoneLoginViewController.swift */,
+				8F08EB27228E184C00CE9A81 /* VerifyCodeViewController.swift */,
+				8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -1879,6 +1888,7 @@
 				B190AD25205DADB300C9F030 /* BMPlayerCustomControlView.swift in Sources */,
 				B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */,
 				B18A5D7F20348E4300F139B7 /* RACCompoundDisposable.m in Sources */,
+				8F08EB28228E184C00CE9A81 /* VerifyCodeViewController.swift in Sources */,
 				5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */,
 				B18A5D5A20348E4300F139B7 /* LocationHelper.swift in Sources */,
 				B19372E12033E3FC007B1E7D /* Category.swift in Sources */,
@@ -1973,6 +1983,7 @@
 				B19372B02033E27B007B1E7D /* ApiManager.swift in Sources */,
 				B171DA70204B450100CC3C50 /* PickerViewController.swift in Sources */,
 				B18A5D5220348E4300F139B7 /* String.swift in Sources */,
+				8F08EB26228BB1CB00CE9A81 /* PhoneLoginViewController.swift in Sources */,
 				B18A5D9120348E4300F139B7 /* RACMulticastConnection.m in Sources */,
 				B13AE09A2071ACB500C05F80 /* JSQCustomVideoMediaItem.swift in Sources */,
 				B18A5D6720348E4300F139B7 /* NSDictionary+RACSequenceAdditions.m in Sources */,
@@ -1985,6 +1996,7 @@
 				5706C430204DC568006E7C9A /* RecordMediaViewController.swift in Sources */,
 				B18A5DA620348E4300F139B7 /* RACTuple.m in Sources */,
 				B18A5DB220348E4300F139B7 /* UIDatePicker+RACSignalSupport.m in Sources */,
+				8F4AE838228F32EA00716682 /* CompleteSignupViewController.swift in Sources */,
 				B19371212033D975007B1E7D /* ResetPasswordViewController.swift in Sources */,
 				579F9508210B57C200E3F7F7 /* JSQCustomAudioMediaItem.swift in Sources */,
 				B18A5D9720348E4300F139B7 /* RACScopedDisposable.m in Sources */,

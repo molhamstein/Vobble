@@ -211,6 +211,7 @@ class ApiManager: NSObject {
         Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
+                print(jsonResponse)
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
@@ -430,6 +431,82 @@ class ApiManager: NSObject {
                     completionBlock(false, ServerError.unknownError)
                 } else {
                     completionBlock(false, ServerError.connectionError)
+                }
+            }
+        }
+    }
+    
+    func signupByPhone(phone: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ code: String?) -> Void) {
+        
+        let signUpURL = "\(baseURL)/users/signupByPhone"
+        let parameters : [String : String] = [
+            "phonenumber": phone
+        ]
+        
+        // build request
+        Alamofire.request(signUpURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    completionBlock(false , serverError, nil)
+                } else {
+                    if let verificationCode = jsonResponse["code"].int {
+                        completionBlock(true , nil, String(describing: verificationCode))
+                    }else{
+                        completionBlock(false, ServerError.unknownError, nil)
+                    }
+                    
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                print(nsError.localizedDescription)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError, nil)
+                } else {
+                    completionBlock(false, ServerError.connectionError, nil)
+                }
+            }
+        }
+    }
+    
+    func loginByPhone(phone: String, code: Int, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user: AppUser?) -> Void) {
+        
+        let loginByPhoneURL = "\(baseURL)/users/loginByPhone"
+        let parameters : [String : Any] = [
+            "phonenumber": phone,
+            "code": code
+        ]
+        
+        // build request
+        Alamofire.request(loginByPhoneURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                print(jsonResponse)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    completionBlock(false , serverError, nil)
+                } else {
+                    // parse response to data model >> user object
+                    let user = AppUser(json: jsonResponse["user"])
+                    
+                    DataStore.shared.token = jsonResponse["id"].string
+                    DataStore.shared.me = user
+                    DataStore.shared.onUserLogin()
+                    
+                    completionBlock(true , nil, user)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                print(nsError.localizedDescription)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError, nil)
+                } else {
+                    completionBlock(false, ServerError.connectionError, nil)
                 }
             }
         }

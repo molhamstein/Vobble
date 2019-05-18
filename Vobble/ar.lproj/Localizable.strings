@@ -54,7 +54,16 @@
 "LOGIN_PRIVACY"                         = "سياسه الخصوصيه";
 "LOGIN_TERMS"                           = "شروط الاستخدام";
 "LOGIN_AND"                             = " و ";
+"LOGIN_COUNTRY_CODE"                    = "الرمز";
 "DEACTIVE_MSG"                          = "حسابك لم يعد فعال بعد الان";
+"MOBILE_PHONE"                          = "الهاتف";
+"CODE_SENT_SUCCESSFULLY"                = "تم ارسال رمز التحقق بنجاح";
+"VERIFICATION_CODE_PAGE_TITLE"          = "ارسلنا اليك رسالة نصية، الرجاء وضع رمز التحقق في الاسفل";
+"RESEND_CODE_TITLE"                     = "لم تتلقى رسالة نصية؟";
+"RESEND_CODE"                           = "اعادة ارسالة رمز التحقق";
+"LOGIN_VALIDATION_CODE"                 = "الرجاء ادخال رمز التحقق المرسل";
+"LOGIN_VALIDATION_PHONE"                = "الرجاء ادخال رقم هاتفك الجوال";
+"PHONE_LOGIN"                           = "تسجيل الدخول بواسطة رقم الجوال";
 
 // Social media
 "FACEBOOK_LOGIN"                        = "التسجيل بواسطة فيسبوك";

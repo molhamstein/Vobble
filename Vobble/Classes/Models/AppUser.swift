@@ -60,6 +60,7 @@ class AppUser: BaseModel, NSCopying {
     private let kAccountInfoCompleted = "registrationCompleted"
     private let kFoundBottlesCount = "foundBottlesCount"
     private let kRepliesBottlesCount = "repliesBottlesCount"
+    private let kPhoneNumber = "phonenumber"
     
     private let kHomeTutShowed = "homeTutShowed"
     private let kChatTutShowed = "ChatTutShowed"
@@ -90,6 +91,7 @@ class AppUser: BaseModel, NSCopying {
     public var bottlesLeftToThrowCount: Int?
     public var extraBottlesLeftToThrowCount: Int?
     public var accountInfoCompleted: Bool?
+    public var phoneNumber: String?
     
     public var socialId: String?
     public var socialToken: String?
@@ -161,6 +163,10 @@ class AppUser: BaseModel, NSCopying {
             accountInfoCompleted = value
         }
         
+        if let value = json[kPhoneNumber].string {
+            phoneNumber = value
+        }
+        
         token = json[kUserTokenKey].string
         foundBottlesCount = json[kFoundBottlesCount].int
         thrownBottlesCount = json[kUserBottlesCount].int
@@ -184,6 +190,10 @@ class AppUser: BaseModel, NSCopying {
         // email
         if let value = email {
             dictionary[kUserEmailKey] = value
+        }
+        // phone number
+        if let value = phoneNumber {
+            dictionary[kPhoneNumber] = value
         }
         // profile picture
         if let value = profilePic {
@@ -269,6 +279,7 @@ class AppUser: BaseModel, NSCopying {
         copy.objectId = objectId
         copy.userName = userName
         copy.email = email
+        copy.phoneNumber = phoneNumber
         copy.profilePic = profilePic
         copy.gender = gender
         copy.countryISOCode = countryISOCode
