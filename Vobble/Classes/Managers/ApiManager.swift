@@ -725,7 +725,7 @@ class ApiManager: NSObject {
     }
     
     /// create bottle request
-    func purchaseItem(shopItem: ShopItem, recienptBase64String: String, transactionId: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ item:InventoryItem?) -> Void) {
+    func purchaseItem(shopItem: ShopItem, relatedUserId: String? = nil, recienptBase64String: String, transactionId: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ item:InventoryItem?) -> Void) {
         // url & parameters
         let bottleURL = "\(baseURL)/items"
         
@@ -737,7 +737,7 @@ class ApiManager: NSObject {
         }
         let endDateStr = DateHelper.getISOStringFromDate(endDate)
         
-        let parameters : [String : Any] = [
+        var parameters : [String : Any] = [
             "storeType": "iTunes",
             "storeToken": "tempStoreToken",
             "isConsumed": true,
@@ -745,9 +745,10 @@ class ApiManager: NSObject {
             "endAt": endDateStr ?? "",
             "valid": true,
             "ownerId": (DataStore.shared.me?.objectId)!,
-            "productId": shopItem.idString,
+            "productId": shopItem.idString ?? "",
             "receipt":recienptBase64String,
-            "transactionId":transactionId
+            "transactionId":transactionId,
+            "relatedUserId" : relatedUserId
         ]
         
         if let theJSONData = try? JSONSerialization.data( withJSONObject: parameters, options: []) {
@@ -1077,7 +1078,7 @@ class ApiManager: NSObject {
 //        findhBottleURL += "&filter[order]=createdAt DESC&filter[limit]=5"
         
 
-        //var findBottleURL = "\(baseURL)/bottles/5cb1d009947268f54cc06449"
+        //var findBottleURL = "\(baseURL)/bottles/5cad6ccc0591120741d1bb0f"
         var findBottleURL = "\(baseURL)/bottles/getOneBottle"
         
         // shore

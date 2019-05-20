@@ -30,6 +30,8 @@ class IAPManager: NSObject {
     
     fileprivate var selectedItem: ShopItem?
     
+    fileprivate var relatedUserId: String?
+    
     private override init() {
         super.init()
     }
@@ -76,8 +78,9 @@ class IAPManager: NSObject {
         return nil
     }
     
-    public func requestPaymentQueue(product: SKProduct, item: ShopItem){
-        selectedItem = item
+    public func requestPaymentQueue(product: SKProduct, item: ShopItem, relatedUserId: String? = nil){
+        self.selectedItem = item
+        self.relatedUserId = relatedUserId
         
         let pay = SKPayment(product: product)
         SKPaymentQueue.default().add(self)
@@ -118,7 +121,7 @@ extension IAPManager : SKPaymentTransactionObserver {
                 
                 if let encodedRecept = base64encodedReceipt, let transactionId = transaction.transactionIdentifier {
                     // purchase request
-                    ApiManager.shared.purchaseItem(shopItem: self.selectedItem!, recienptBase64String: encodedRecept, transactionId: transactionId,  completionBlock: {(success, err, item) in
+                    ApiManager.shared.purchaseItem(shopItem: self.selectedItem!, relatedUserId: self.relatedUserId, recienptBase64String: encodedRecept, transactionId: transactionId,  completionBlock: {(success, err, item) in
                         if success {
                             
                             // Bottles Purchase

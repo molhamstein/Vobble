@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Views/NavigationBar/VobbleChatNavigationBar.swift"
-            timestampString = "579315833.2980959"
+            filePath = "Vobble/Classes/Managers/ApiManager.swift"
+            timestampString = "579924827.088536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "init(coder:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Managers/Actions.swift"
-            timestampString = "579315833.298522"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "execute(conversation:)"
+            startingLineNumber = "740"
+            endingLineNumber = "740"
+            landmarkName = "purchaseItem(shopItem:relatedUserId:recienptBase64String:transactionId:completionBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -137,7 +137,7 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
                 if let selectedItem = IAPManager.shared.getProductById(itemId: obj.appleProduct!){
                     self.selectedProduct = obj
                     
-                    IAPManager.shared.requestPaymentQueue(product: selectedItem, item: obj)
+                    IAPManager.shared.requestPaymentQueue(product: selectedItem, item: obj, relatedUserId: self.conversation?.getPeer?.objectId)
                     
                     // flurry events
                     let prodType = "extendChat"
@@ -176,7 +176,7 @@ extension ExtendChatPopupViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemW = (popUpView.bounds.size.width - 16)
-        let itemh = CGFloat(210)
+        let itemh = UIScreen.main.bounds.height > 570 ? CGFloat(210) : CGFloat(190)
         
         return CGSize(width: itemW / 3, height: itemh)
     }

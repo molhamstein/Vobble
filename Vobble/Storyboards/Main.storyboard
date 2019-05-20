@@ -2421,23 +2421,23 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ah-1k-jFk">
-                                <rect key="frame" x="16" y="62.5" width="288" height="443"/>
+                                <rect key="frame" x="16" y="57" width="288" height="454"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ytO-wP-kkX">
-                                        <rect key="frame" x="0.0" y="275" width="288" height="144"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ytO-wP-kkX">
+                                        <rect key="frame" x="0.0" y="259" width="288" height="191"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Ei7-hX-Wbj">
-                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="itemSize" width="50" height="190"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShopCollectionViewCellID" id="s6e-xN-iRy">
-                                                <rect key="frame" x="4" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="4" y="0.0" width="50" height="190"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="190"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
                                             </collectionViewCell>
@@ -2450,12 +2450,12 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urf-Go-JCe">
-                                        <rect key="frame" x="115" y="218" width="58.5" height="17"/>
+                                        <rect key="frame" x="115" y="210" width="58.5" height="17"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend your chat with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTf-qT-c11">
-                                        <rect key="frame" x="51.5" y="190.5" width="185.5" height="23.5"/>
+                                        <rect key="frame" x="51.5" y="182.5" width="185.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2468,16 +2468,16 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                     <constraint firstAttribute="trailing" secondItem="ytO-wP-kkX" secondAttribute="trailing" id="QaD-fy-van"/>
                                     <constraint firstItem="zV5-uF-cVi" firstAttribute="top" secondItem="5Ah-1k-jFk" secondAttribute="top" constant="32" id="Rqc-hF-iw0"/>
                                     <constraint firstItem="RTf-qT-c11" firstAttribute="centerX" secondItem="5Ah-1k-jFk" secondAttribute="centerX" id="ZJE-Qr-QgO"/>
-                                    <constraint firstAttribute="bottom" secondItem="ytO-wP-kkX" secondAttribute="bottom" constant="24" id="Zkm-8e-ehq"/>
+                                    <constraint firstAttribute="bottom" secondItem="ytO-wP-kkX" secondAttribute="bottom" constant="4" id="Zkm-8e-ehq"/>
                                     <constraint firstItem="ytO-wP-kkX" firstAttribute="leading" secondItem="5Ah-1k-jFk" secondAttribute="leading" id="aFv-hI-Wna"/>
-                                    <constraint firstItem="RTf-qT-c11" firstAttribute="top" secondItem="zV5-uF-cVi" secondAttribute="bottom" constant="32" id="fzx-1G-Txr"/>
+                                    <constraint firstItem="RTf-qT-c11" firstAttribute="top" secondItem="zV5-uF-cVi" secondAttribute="bottom" constant="24" id="fzx-1G-Txr"/>
                                     <constraint firstAttribute="trailing" secondItem="zV5-uF-cVi" secondAttribute="trailing" constant="30" id="mYK-IQ-bpG"/>
-                                    <constraint firstItem="ytO-wP-kkX" firstAttribute="top" secondItem="Urf-Go-JCe" secondAttribute="bottom" constant="40" id="re7-Yo-94x"/>
+                                    <constraint firstItem="ytO-wP-kkX" firstAttribute="top" secondItem="Urf-Go-JCe" secondAttribute="bottom" constant="32" id="re7-Yo-94x"/>
                                     <constraint firstItem="Urf-Go-JCe" firstAttribute="centerX" secondItem="5Ah-1k-jFk" secondAttribute="centerX" id="sZd-eb-aea"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nib-9F-ZYW">
-                                <rect key="frame" x="16" y="30.5" width="24" height="24"/>
+                                <rect key="frame" x="16" y="25" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="My5-oc-rDC"/>
                                     <constraint firstAttribute="height" constant="24" id="oR4-I7-D4y"/>
@@ -2491,7 +2491,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                         <color key="backgroundColor" white="0.0" alpha="0.29956539735099336" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5Ah-1k-jFk" firstAttribute="top" secondItem="Nib-9F-ZYW" secondAttribute="bottom" constant="8" id="0TM-qY-Mxv"/>
-                            <constraint firstItem="5Ah-1k-jFk" firstAttribute="height" secondItem="DGQ-L9-GDC" secondAttribute="height" multiplier="0.78" id="2Gc-cr-HMW"/>
+                            <constraint firstItem="5Ah-1k-jFk" firstAttribute="height" secondItem="DGQ-L9-GDC" secondAttribute="height" multiplier="0.8" id="2Gc-cr-HMW"/>
                             <constraint firstItem="5Ah-1k-jFk" firstAttribute="centerX" secondItem="DGQ-L9-GDC" secondAttribute="centerX" id="Gbn-sr-pFZ"/>
                             <constraint firstItem="5Ah-1k-jFk" firstAttribute="centerY" secondItem="DGQ-L9-GDC" secondAttribute="centerY" id="dMT-Ue-6ss"/>
                             <constraint firstItem="5Ah-1k-jFk" firstAttribute="width" secondItem="DGQ-L9-GDC" secondAttribute="width" multiplier="0.9" id="uzL-37-mM7"/>
