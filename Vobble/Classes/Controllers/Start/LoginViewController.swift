@@ -25,6 +25,7 @@ enum ViewType {
 class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBOutlet weak var emailtest: UILabel!
+    @IBOutlet weak var btnBack: UIButton!
     
     // MARK: Properties
     
@@ -127,6 +128,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     var countryName: String = ""
     var countryCode: String?
     
+    var currentView: ViewType = .startup
     var isInitialized = false
     
     // MARK: Controller Life Cycle
@@ -399,6 +401,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBAction func privacyPolicyAction(_ sender: UIButton) {
         self.performSegue(withIdentifier: "loginTermsSegue", sender: privacyButton)
+    }
+    
+    @IBAction func backToStartupViewAction(_ sender: UIButton) {
+        self.hideView(withType: self.currentView)
+        dispatch_main_after(0.3) {
+            self.showView(withType: .startup)
+        }
+        
     }
     
     @IBAction func goToEmailsViewAction(_ sender: UIButton) {
@@ -822,12 +832,16 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         case .startup :
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.startupView.transform = CGAffineTransform.identity
+                self.btnBack.isHidden = true
+                self.currentView = .startup
             }, completion: {(finished: Bool) in
                 //self.player?.play()
             })
         case .emails :
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.emailsView.transform = CGAffineTransform.identity
+                self.btnBack.isHidden = true
+                self.currentView = .emails
             }, completion: {(finished: Bool) in
                 //self.player?.play()
             })
@@ -835,6 +849,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             //loginView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+                self.btnBack.isHidden = false
+                self.currentView = .login
             }, completion: {(finished: Bool) in
                 
             })
@@ -842,6 +858,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             //signupView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.signupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+                self.btnBack.isHidden = false
+                self.currentView = .signup
             }, completion: {(finished: Bool) in
                 
             })
@@ -857,6 +875,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             //socialInfoView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.socialInfoView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+                self.btnBack.isHidden = false
+                self.currentView = .socialLoginStep2
             }, completion: {(finished: Bool) in
                 
             })
