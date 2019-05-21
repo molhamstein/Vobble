@@ -10,12 +10,21 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Managers/ApiManager.swift"
+<<<<<<< HEAD
             timestampString = "579924827.088536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "740"
             endingLineNumber = "740"
             landmarkName = "purchaseItem(shopItem:relatedUserId:recienptBase64String:transactionId:completionBlock:)"
+=======
+            timestampString = "579895733.315908"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "userLogin(email:password:completionBlock:)"
+>>>>>>> loginByPhone
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -54,7 +54,16 @@
 "LOGIN_PRIVACY"                         = "Privacy Policy";
 "LOGIN_TERMS"                           = "Terms Of Service";
 "LOGIN_AND"                             = " & ";
+"LOGIN_COUNTRY_CODE"                    = "Code";
 "DEACTIVE_MSG"                          = "Your account is not active anymore";
+"MOBILE_PHONE"                          = "Mobile";
+"CODE_SENT_SUCCESSFULLY"                = "Code has been sent successfully";
+"VERIFICATION_CODE_PAGE_TITLE"          = "We have sent you a SMS, please fill below the verification code";
+"RESEND_CODE_TITLE"                     = "Didn't receive the SMS?";
+"RESEND_CODE"                           = "Resend code";
+"LOGIN_VALIDATION_CODE"                 = "Please enter the sent code";
+"LOGIN_VALIDATION_PHONE"                = "Please enter your mobile phone number";
+"PHONE_LOGIN"                           = "Phone number login";
 
 // Social media
 "FACEBOOK_LOGIN"                        = "Login with Facebook";

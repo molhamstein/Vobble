@@ -107,7 +107,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var seconds: Double = 0.0
     
     // VobbleChatNavigationBar
-    public var navUserName: String?
+    public var navUserName: String?	
     public var navShoreName: String?
     
     var audioUrl: URL? = nil
@@ -1857,6 +1857,7 @@ extension ChatViewController : AudioCollectionViewCellIncomingDelegate  {
         }
 
     }
+    
     func startNewIncomingAudio(_ cell: AudioCollectionViewCellIncoming) {
         if cell.data == nil || cell.data.count <= 0 {
             cell.playButton.isHidden = true

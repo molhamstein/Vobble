@@ -206,3 +206,5 @@ extension IAPManager : SKProductsRequestDelegate {
         self.delegate?.didFailWithError?(isAPIError: false, error: error, serverError: nil)
     }
 }
+
+extension IAPManager {}

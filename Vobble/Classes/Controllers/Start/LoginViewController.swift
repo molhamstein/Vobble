@@ -25,15 +25,18 @@ enum ViewType {
 class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBOutlet weak var emailtest: UILabel!
+    @IBOutlet weak var btnBack: UIButton!
     
     // MARK: Properties
     
     //startup view
     @IBOutlet weak var startupView: UIView!
     @IBOutlet weak var facebookLoginButton: UIButton!
+    @IBOutlet weak var twitterLoginButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var instaLoginButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var startupTermsPrefixLabel: UILabel!
     @IBOutlet weak var startupTermsButton: UIButton!
     @IBOutlet weak var startupTermsOrLabel: UILabel!
@@ -113,7 +116,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var socialView: UIView!
     @IBOutlet weak var socialLabel: UILabel!
     @IBOutlet weak var facebookButton: UIButton!
-    @IBOutlet weak var twitterButton: UIButton!
+    //@IBOutlet weak var twitterButton: UIButton!
     @IBOutlet weak var instagramButton: UIButton!
     
     let countryPickerView = CountryPickerView()
@@ -125,6 +128,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     var countryName: String = ""
     var countryCode: String?
     
+    var currentView: ViewType = .startup
     var isInitialized = false
     
     // MARK: Controller Life Cycle
@@ -149,7 +153,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         super.viewDidLayoutSubviews()
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -282,6 +285,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         loginTermsButton.setTitle("LOGIN_TERMS".localized, for: .normal)
         loginPrivacyButton.setTitle("LOGIN_PRIVACY".localized, for: .normal)
         loginTermsOrLabel.text = "LOGIN_AND".localized
+        phoneButton.setTitle("PHONE_LOGIN".localized, for: .normal)
         
         startupTermsPrefixLabel.text = "LOGIN_ACCESSEPT".localized
         startupTermsButton.setTitle("LOGIN_TERMS".localized, for: .normal)
@@ -314,8 +318,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
 
         facebookLoginButton.setTitle("FACEBOOK_LOGIN".localized, for: .normal)
         googleLoginButton.setTitle("GOOGLE_LOGIN".localized, for: .normal)
-        instaLoginButton.setTitle("INSTAGRAM_LOGIN".localized, for: .normal)
-        emailButton.setTitle("EMAIL_TITLE".localized, for: .normal)
+        //instaLoginButton.setTitle("INSTAGRAM_LOGIN".localized, for: .normal)
+        //emailButton.setTitle("EMAIL_TITLE".localized, for: .normal)
         loginByEmailButton.setTitle("EMAIL_LOGIN_TITLE".localized, for: .normal)
         signupByEmailButton.setTitle("EMAIL_SIGNUP_TITLE".localized, for: .normal)
         
@@ -397,6 +401,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBAction func privacyPolicyAction(_ sender: UIButton) {
         self.performSegue(withIdentifier: "loginTermsSegue", sender: privacyButton)
+    }
+    
+    @IBAction func backToStartupViewAction(_ sender: UIButton) {
+        self.hideView(withType: self.currentView)
+        dispatch_main_after(0.3) {
+            self.showView(withType: .startup)
+        }
+        
     }
     
     @IBAction func goToEmailsViewAction(_ sender: UIButton) {
@@ -581,7 +593,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         //GIDSignIn.sharedInstance().signInSilently()
     }
     
-    
     @IBAction func registerBtnPressed(_ sender: AnyObject) {
         
         /***  register btn in login view  ***/
@@ -650,10 +661,21 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         }
     }
     
+    @IBAction func PhoneBtnPressed(_ sender: Any) {
+        hideView(withType: .startup)
+        dispatch_main_after(0.3) {
+            let phoneViewController = UIStoryboard.startStoryboard.instantiateViewController(withIdentifier: PhoneLoginViewController.className) as! PhoneLoginViewController
+            phoneViewController.startUpViewController = self
+            phoneViewController.providesPresentationContextTransitionStyle = true
+            phoneViewController.definesPresentationContext = true
+            phoneViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+            self.present(phoneViewController, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func CancelBtnPressed(_ sender: Any) {
         hideView(withType: .countryV)
     }
-    
     
     @IBAction func pickCountryPressed(_ sender: Any) {
         hideView(withType: .countryV)
@@ -712,7 +734,6 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             btnSocialInfoCheckButton.isSelected = false
         }
     }
-    
     
     func validateFields () -> Bool {
         
@@ -811,12 +832,16 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         case .startup :
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.startupView.transform = CGAffineTransform.identity
+                self.btnBack.isHidden = true
+                self.currentView = .startup
             }, completion: {(finished: Bool) in
                 //self.player?.play()
             })
         case .emails :
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.emailsView.transform = CGAffineTransform.identity
+                self.btnBack.isHidden = true
+                self.currentView = .emails
             }, completion: {(finished: Bool) in
                 //self.player?.play()
             })
@@ -824,6 +849,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             //loginView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.loginView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+                self.btnBack.isHidden = false
+                self.currentView = .login
             }, completion: {(finished: Bool) in
                 
             })
@@ -831,6 +858,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             //signupView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.signupView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+                self.btnBack.isHidden = false
+                self.currentView = .signup
             }, completion: {(finished: Bool) in
                 
             })
@@ -846,6 +875,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
             //socialInfoView.dropShadow()
             UIView.animate(withDuration: 0.4, delay:0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.socialInfoView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 0)
+                self.btnBack.isHidden = false
+                self.currentView = .socialLoginStep2
             }, completion: {(finished: Bool) in
                 
             })
