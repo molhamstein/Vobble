@@ -96,6 +96,9 @@ struct AppConfig {
     // home
     static let home_press_sea = "Home_press_sea"
     
+    //Login
+    static let resend_code = "Resend_code_pressed"
+    
     static let chatValidityafterSeen: Double = 24.0*60.0*60.0*1000.0 // 24 hours
     
     // validation

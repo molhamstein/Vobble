@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Flurry_iOS_SDK
 
 class VerifyCodeViewController: AbstractController {
     
     @IBOutlet weak var vMain: UIView!
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblCounter: UILabel!
     @IBOutlet weak var lblResendCode: UILabel!
     @IBOutlet weak var txtCode: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
@@ -25,6 +27,8 @@ class VerifyCodeViewController: AbstractController {
     
     var mobileNumber: String?
     var startUpViewController: LoginViewController?
+    var codeTimer: Timer?
+    var counter: Int = 30
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,7 @@ class VerifyCodeViewController: AbstractController {
     override func customizeView() {
         txtCode.font = AppFonts.xBigBold
         btnResendCode.titleLabel?.font = AppFonts.normalBold
+        lblCounter.font = AppFonts.normalBold
         lblResendCode.font = AppFonts.bigBold
         lblTitle.font = AppFonts.xBig
         
@@ -55,6 +60,34 @@ class VerifyCodeViewController: AbstractController {
         self.lblTermsOr.text = "SIGNUP_AND".localized
     }
 
+    fileprivate func setupTimer(){
+        if codeTimer == nil {
+            self.codeTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.countDown), userInfo: nil, repeats: true)
+            self.counter = 30
+            self.btnResendCode.isEnabled = false
+            self.btnResendCode.alpha = 0.3
+        }else {
+            codeTimer?.invalidate()
+            codeTimer = nil
+            setupTimer()
+        }
+    }
+    
+    @objc
+    fileprivate func countDown(){
+        if counter > 0 {
+            self.counter -= 1
+            self.lblCounter.text = String(counter)
+            self.lblCounter.isHidden = false
+        }else {
+            self.codeTimer?.invalidate()
+            self.codeTimer = nil
+            
+            self.btnResendCode.alpha = 1
+            self.btnResendCode.isEnabled = true
+            self.lblCounter.isHidden = true
+        }
+    }
 }
 
 // MARK:- IBAction
@@ -104,6 +137,7 @@ extension VerifyCodeViewController {
                 self.showActivityLoader(false)
                 if isSuccess {
                     self.showMessage(message: "CODE_SENT_SUCCESSFULLY".localized, type: .success)
+                    self.setupTimer()
                 }else {
                     if let error = error {
                         self.showMessage(message: error.type.errorMessage, type: .error)
@@ -111,6 +145,9 @@ extension VerifyCodeViewController {
                 }
             })
         }
+        
+        Flurry.logEvent(AppConfig.resend_code)
+        
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {

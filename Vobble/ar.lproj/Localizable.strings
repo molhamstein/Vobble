@@ -63,7 +63,12 @@
 "RESEND_CODE"                           = "اعادة ارسالة رمز التحقق";
 "LOGIN_VALIDATION_CODE"                 = "الرجاء ادخال رمز التحقق المرسل";
 "LOGIN_VALIDATION_PHONE"                = "الرجاء ادخال رقم هاتفك الجوال";
+"LOGIN_VALIDATION_COUNTRY_CODE"         = "الرجاء ادخال رمز الدولة";
+"LOGIN_INVALID_PHONE"                   = "الرجاء ادخال رقم هاتف صالح";
 "PHONE_LOGIN"                           = "تسجيل الدخول بواسطة رقم الجوال";
+"LOGIN_BY_PHONE_UNAVAILABLE"            = "تسجيل الدخول بواسطة رقم الهاتف غير متوفر لهذه الدولة في هذا الوقت";
+"CHOOSE_ANOTHER_COUNTRY"                = "اختيار دولة اخرى";
+"CHOOSE_ANOTHER_METHOD"                 = "اختيار طريقة تسجيل اخرى";
 
 // Social media
 "FACEBOOK_LOGIN"                        = "التسجيل بواسطة فيسبوك";
