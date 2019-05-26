@@ -64,9 +64,9 @@
 "LOGIN_VALIDATION_CODE"                 = "Please enter the sent code";
 "LOGIN_VALIDATION_PHONE"                = "Please enter your mobile phone number";
 "LOGIN_VALIDATION_COUNTRY_CODE"         = "Please enter your country phone code";
-"LOGIN_INVALID_PHONE"                   = "Please enter a valid phone number";
+"LOGIN_INVALID_PHONE"                   = "Please enter a valid phone number without country code";
 "PHONE_LOGIN"                           = "Phone number login";
-"LOGIN_BY_PHONE_UNAVAILABLE"            = "Login by phone is unavailable in this country right now";
+"LOGIN_BY_PHONE_UNAVAILABLE"            = "Unfortunately, Login by phone is unavailable in this country right now";
 "CHOOSE_ANOTHER_COUNTRY"                = "Choose another country";
 "CHOOSE_ANOTHER_METHOD"                 = "Choose another login method";
 

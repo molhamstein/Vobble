@@ -64,9 +64,9 @@
 "LOGIN_VALIDATION_CODE"                 = "الرجاء ادخال رمز التحقق المرسل";
 "LOGIN_VALIDATION_PHONE"                = "الرجاء ادخال رقم هاتفك الجوال";
 "LOGIN_VALIDATION_COUNTRY_CODE"         = "الرجاء ادخال رمز الدولة";
-"LOGIN_INVALID_PHONE"                   = "الرجاء ادخال رقم هاتف صالح";
-"PHONE_LOGIN"                           = "تسجيل الدخول بواسطة رقم الجوال";
-"LOGIN_BY_PHONE_UNAVAILABLE"            = "تسجيل الدخول بواسطة رقم الهاتف غير متوفر لهذه الدولة في هذا الوقت";
+"LOGIN_INVALID_PHONE"                   = "الرجاء ادخال رقم هاتف صحيح بدون رمز الدولة";
+"PHONE_LOGIN"                           = "تسجيل الدخول برقم الجوال";
+"LOGIN_BY_PHONE_UNAVAILABLE"            = "للأسف, تسجيل الدخول بواسطة رقم الهاتف غير متوفر لهذه الدولة في هذا الوقت";
 "CHOOSE_ANOTHER_COUNTRY"                = "اختيار دولة اخرى";
 "CHOOSE_ANOTHER_METHOD"                 = "اختيار طريقة تسجيل اخرى";
 
@@ -75,7 +75,7 @@
 "GOOGLE_LOGIN"                          = "التسجيل بواسطة جوجل";
 "INSTAGRAM_LOGIN"                       = "التسجيل بواسطة انستغرام";
 "EMAIL_TITLE"                           = "البريد الالكتروني";
-"EMAIL_LOGIN_TITLE"                     = "تسجيل الدخول بواسطة البريد";
+"EMAIL_LOGIN_TITLE"                     = "تسجيل الدخول بالبريد";
 "EMAIL_SIGNUP_TITLE"                    = "التسجيل بواسطة البريد";
 
 "SIGNUP_EMAIL_TITLE"                     = "البريد الاالكتروني";
@@ -182,9 +182,9 @@
 "MUTE"                                  = "كتم";
 "UNMUTE"                                = "إلغاء الكتم";
 "CHAT_WARNING_TITLE"                    = "";
-"CHAT_WARNING_BODY"                     = "المحادثة مع ٪@ على وشك الانتهاء";
+"CHAT_WARNING_BODY"                     = "المحادثة مع %@ على وشك الانتهاء";
 "EXTEND_CHAT_TITLE"                     = "تمديد المحادثة";
-"EXTEND_CHAT_POPUP_TITLE"               = "مدد المحادثة مع ٪@";
+"EXTEND_CHAT_POPUP_TITLE"               = "مدد المحادثة مع %@";
 
 // filter
 "FEMALE"                                = "بنت";

@@ -151,7 +151,7 @@ extension PhoneLoginViewController : CountryPickerViewDelegate , CountryPickerVi
     
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
         if country.code == "AE" {
-            let alert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized, message: "LOGIN_BY_PHONE_UNAVAILABLE".localized, preferredStyle: .alert)
+            let alert = UIAlertController(title: "GLOBAL_WARNING_TITLE".localized, message: "LOGIN_BY_PHONE_UNAVAILABLE".localized, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "CHOOSE_ANOTHER_COUNTRY".localized, style: .default, handler: {_ in
                 self.countryPickerView.showCountriesList(from: self)
             }))
