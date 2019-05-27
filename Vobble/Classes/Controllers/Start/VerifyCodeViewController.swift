@@ -29,6 +29,7 @@ class VerifyCodeViewController: AbstractController {
     var startUpViewController: LoginViewController?
     var codeTimer: Timer?
     var counter: Int = 30
+    var countryName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,8 @@ class VerifyCodeViewController: AbstractController {
         self.btnTerms.setTitle("LOGIN_TERMS".localized, for: .normal)
         self.btnPrivacy.setTitle("LOGIN_PRIVACY".localized, for: .normal)
         self.lblTermsOr.text = "SIGNUP_AND".localized
+        
+        self.txtCode.delegate = self
     }
 
     fileprivate func setupTimer(){
@@ -108,6 +111,7 @@ extension VerifyCodeViewController {
                     }else {
                         self.dismiss(animated: true) {
                             let completeInfoVC = UIStoryboard.startStoryboard.instantiateViewController(withIdentifier: CompleteSignupViewController.className) as! CompleteSignupViewController
+                            completeInfoVC.countryName = self.countryName
                             completeInfoVC.tempUserInfoHolder = user ?? AppUser()
                             completeInfoVC.startUpViewController = self.startUpViewController
                             completeInfoVC.providesPresentationContextTransitionStyle = true
@@ -164,4 +168,20 @@ extension VerifyCodeViewController {
         self.performSegue(withIdentifier: "loginTermsSegue", sender: btnPrivacy)
     }
 
+}
+
+// MARK:- Input text delegate
+extension VerifyCodeViewController {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string != "" {
+            let numberStr: String = string
+            let formatter: NumberFormatter = NumberFormatter()
+            formatter.locale = Locale(identifier: "en")
+            if let final = formatter.number(from: numberStr) {
+                textField.text =  "\(textField.text ?? "")\(final)"
+            }
+            return false
+        }
+        return true
+    }
 }

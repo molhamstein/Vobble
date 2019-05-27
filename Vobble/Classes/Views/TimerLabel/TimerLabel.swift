@@ -23,6 +23,8 @@ class TimerLabel: UILabel {
     
     // MARK: - properties
     private var seconds = 0
+    private var shakerResetTime = 5
+    private var extendChatShouldFire = 60 * 60 * 8 // When there is only 8 hours left
     private var timer = Timer()
     private var isTimerRunning = false
     private var resumeTapped = false
@@ -67,9 +69,14 @@ class TimerLabel: UILabel {
         } else {
             seconds -= 1
             
-            // call 'conversationWillEnd' when only 2 hours left
-            if seconds <= 7200 {
-                delegate?.conversationWillEnd?()
+            // call 'conversationWillEnd' when only 8 hours left
+            if seconds <= extendChatShouldFire  {
+                if shakerResetTime == 0 {
+                    delegate?.conversationWillEnd?()
+                    shakerResetTime = 5
+                }else {
+                    shakerResetTime -= 1
+                }
             }
             
             text = timeString(time: TimeInterval(seconds))

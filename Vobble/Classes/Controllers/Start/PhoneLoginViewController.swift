@@ -24,7 +24,7 @@ class PhoneLoginViewController: AbstractController {
     @IBOutlet weak var btnPrivacy: UIButton!
     
     let countryPickerView = CountryPickerView()
-    var countryName: String = ""
+    var countryName: String?
     var countryCode: String?
     var startUpViewController: LoginViewController?
     
@@ -62,6 +62,8 @@ class PhoneLoginViewController: AbstractController {
         self.countryName = country?.name ?? ""
         self.countryCode = (country?.code ?? "") + " " + (country?.phoneCode ?? "")
         btnCountryPicker.setTitle(countryCode, for: .normal)
+        
+        self.txtMobileNumber.delegate = self
     }
 
 }
@@ -86,6 +88,7 @@ extension PhoneLoginViewController {
                         self.dismiss(animated: true) {
                             dispatch_main_after(0.3) {
                                 let verifyCodeVC = UIStoryboard.startStoryboard.instantiateViewController(withIdentifier: VerifyCodeViewController.className) as! VerifyCodeViewController
+                                verifyCodeVC.countryName = self.countryName
                                 verifyCodeVC.startUpViewController = self.startUpViewController
                                 verifyCodeVC.mobileNumber = fullMobileNumber
                                 verifyCodeVC.providesPresentationContextTransitionStyle = true
@@ -181,5 +184,21 @@ extension PhoneLoginViewController : CountryPickerViewDelegate , CountryPickerVi
     
     func sectionTitleForPreferredCountries(in countryPickerView: CountryPickerView) -> String? {
         return "PREFERED_COUNTRIES_TITLE".localized
+    }
+}
+
+// MARK:- Input text delegate
+extension PhoneLoginViewController {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string != "" {
+            let numberStr: String = string
+            let formatter: NumberFormatter = NumberFormatter()
+            formatter.locale = Locale(identifier: "en")
+            if let final = formatter.number(from: numberStr) {
+                textField.text =  "\(textField.text ?? "")\(final)"
+            }
+            return false
+        }
+        return true
     }
 }

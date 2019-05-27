@@ -9,22 +9,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Filters/ConversationViewController.swift"
+            timestampString = "580612128.292853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "refreshView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Start/VerifyCodeViewController.swift"
+            timestampString = "580612128.2929389"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "loginButtonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Managers/ApiManager.swift"
-<<<<<<< HEAD
-            timestampString = "579924827.088536"
+            timestampString = "580612236.9832"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "740"
-            endingLineNumber = "740"
-            landmarkName = "purchaseItem(shopItem:relatedUserId:recienptBase64String:transactionId:completionBlock:)"
-=======
-            timestampString = "579895733.315908"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "userLogin(email:password:completionBlock:)"
->>>>>>> loginByPhone
+            startingLineNumber = "488"
+            endingLineNumber = "488"
+            landmarkName = "loginByPhone(phone:code:completionBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

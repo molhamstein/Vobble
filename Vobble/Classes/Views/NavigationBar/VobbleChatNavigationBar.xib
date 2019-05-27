@@ -27,6 +27,7 @@
                 <outlet property="moreOptions" destination="h2q-Ny-ALK" id="ESw-B5-9Ti"/>
                 <outlet property="shoreNameLabel" destination="CBq-Rw-fmT" id="oFr-qt-HMd"/>
                 <outlet property="timerLabel" destination="yGv-8L-ytb" id="pax-PK-uuF"/>
+                <outlet property="timerView" destination="QHC-Ld-5Fs" id="ojK-os-jOJ"/>
                 <outlet property="userImageButton" destination="450-gg-gVr" id="48b-fy-q8X"/>
                 <outlet property="userImageView" destination="hCy-QL-7H7" id="5sy-Ws-0xx"/>
                 <outlet property="userNameLabel" destination="bmq-6j-haP" id="See-nJ-F4L"/>
@@ -105,36 +106,18 @@
                             </userDefinedRuntimeAttributes>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fId-mP-Tuz" userLabel="userinfo Stack View">
-                            <rect key="frame" x="97" y="49.5" width="144.5" height="27"/>
+                            <rect key="frame" x="97" y="49.5" width="102" height="27"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmq-6j-haP">
-                                    <rect key="frame" x="0.0" y="0.0" width="144.5" height="13.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="102" height="13.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" text="Main Shore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBq-Rw-fmT">
-                                    <rect key="frame" x="0.0" y="13.5" width="144.5" height="13.5"/>
+                                    <rect key="frame" x="0.0" y="13.5" width="102" height="13.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZfQ-KL-q0Y" userLabel="timer Stack View">
-                            <rect key="frame" x="249.5" y="54.5" width="73.5" height="11"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-8L-ytb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="52" height="11"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="11"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLS-OQ-7ca">
-                                    <rect key="frame" x="56" y="0.0" width="17.5" height="11"/>
-                                    <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="11"/>
-                                    <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -150,36 +133,74 @@
                                 <action selector="moreOptionsPressed:" destination="-1" eventType="touchUpInside" id="xj5-c7-mYl"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPI-W5-9np">
-                            <rect key="frame" x="291" y="22.5" width="24" height="24"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHC-Ld-5Fs">
+                            <rect key="frame" x="207" y="33.5" width="120" height="30"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9GD-iE-Mw7">
+                                    <rect key="frame" x="7.5" y="3" width="105.5" height="24"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPI-W5-9np">
+                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="Zb0-ca-FyY"/>
+                                                <constraint firstAttribute="height" constant="24" id="px8-yr-kqk"/>
+                                            </constraints>
+                                            <state key="normal" image="clock"/>
+                                            <connections>
+                                                <action selector="extendChatPressed:" destination="-1" eventType="touchUpInside" id="Yb7-9o-d3O"/>
+                                            </connections>
+                                        </button>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZfQ-KL-q0Y" userLabel="timer Stack View">
+                                            <rect key="frame" x="32" y="6.5" width="73.5" height="11"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-8L-ytb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="52" height="11"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLS-OQ-7ca">
+                                                    <rect key="frame" x="56" y="0.0" width="17.5" height="11"/>
+                                                    <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.40784313725490196" green="0.79607843137254897" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="24" id="Zb0-ca-FyY"/>
-                                <constraint firstAttribute="height" constant="24" id="px8-yr-kqk"/>
+                                <constraint firstAttribute="height" constant="30" id="WRY-OW-1fg"/>
+                                <constraint firstItem="9GD-iE-Mw7" firstAttribute="centerX" secondItem="QHC-Ld-5Fs" secondAttribute="centerX" id="amf-Ba-1Ai"/>
+                                <constraint firstItem="9GD-iE-Mw7" firstAttribute="centerY" secondItem="QHC-Ld-5Fs" secondAttribute="centerY" id="dza-Sk-w89"/>
+                                <constraint firstAttribute="width" constant="120" id="n4e-Lt-ACe"/>
                             </constraints>
-                            <state key="normal" image="clock"/>
-                            <connections>
-                                <action selector="extendChatPressed:" destination="-1" eventType="touchUpInside" id="Yb7-9o-d3O"/>
-                            </connections>
-                        </button>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="top" secondItem="450-gg-gVr" secondAttribute="top" id="0nQ-rP-nUa"/>
                         <constraint firstItem="450-gg-gVr" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="29A-9a-0MH"/>
                         <constraint firstItem="fId-mP-Tuz" firstAttribute="leading" secondItem="450-gg-gVr" secondAttribute="trailing" constant="5" id="5oB-n2-blD"/>
                         <constraint firstItem="h2q-Ny-ALK" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" id="7gM-Bv-Xbj"/>
-                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="top" secondItem="UPI-W5-9np" secondAttribute="bottom" constant="8" id="8UO-hc-15t"/>
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="leading" secondItem="450-gg-gVr" secondAttribute="leading" id="8hX-As-wvb"/>
-                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.24" id="IVh-I5-mcn"/>
+                        <constraint firstItem="QHC-Ld-5Fs" firstAttribute="centerY" secondItem="h2q-Ny-ALK" secondAttribute="centerY" id="Gbl-b3-y0l"/>
                         <constraint firstItem="97f-uB-vZw" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="Iim-8G-6mN"/>
                         <constraint firstItem="450-gg-gVr" firstAttribute="leading" secondItem="97f-uB-vZw" secondAttribute="trailing" constant="12" id="QaL-rE-rQn"/>
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="bottom" secondItem="450-gg-gVr" secondAttribute="bottom" id="THH-TH-3qA"/>
-                        <constraint firstItem="h2q-Ny-ALK" firstAttribute="leading" secondItem="ZfQ-KL-q0Y" secondAttribute="trailing" constant="16" id="a0o-SS-RC9"/>
                         <constraint firstItem="97f-uB-vZw" firstAttribute="leading" secondItem="2wD-NW-XhJ" secondAttribute="leading" constant="15" id="cuv-RR-AL5"/>
-                        <constraint firstItem="ZfQ-KL-q0Y" firstAttribute="leading" secondItem="fId-mP-Tuz" secondAttribute="trailing" constant="8" id="dYI-KE-zsh"/>
                         <constraint firstItem="hCy-QL-7H7" firstAttribute="trailing" secondItem="450-gg-gVr" secondAttribute="trailing" id="diQ-8U-QIw"/>
                         <constraint firstAttribute="trailing" secondItem="h2q-Ny-ALK" secondAttribute="trailing" constant="12" id="hPI-9X-XXi"/>
                         <constraint firstItem="fId-mP-Tuz" firstAttribute="centerY" secondItem="2wD-NW-XhJ" secondAttribute="centerY" multiplier="1.3" id="kHv-di-0DI"/>
-                        <constraint firstItem="h2q-Ny-ALK" firstAttribute="leading" secondItem="UPI-W5-9np" secondAttribute="trailing" constant="24" id="u0L-Dn-KD8"/>
+                        <constraint firstItem="h2q-Ny-ALK" firstAttribute="leading" secondItem="QHC-Ld-5Fs" secondAttribute="trailing" constant="12" id="pat-Vf-GV5"/>
+                        <constraint firstItem="QHC-Ld-5Fs" firstAttribute="leading" secondItem="fId-mP-Tuz" secondAttribute="trailing" constant="8" id="yhU-Aq-KmK"/>
                     </constraints>
                 </view>
             </subviews>

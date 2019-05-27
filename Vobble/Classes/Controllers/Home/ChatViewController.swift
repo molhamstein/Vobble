@@ -468,20 +468,20 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             inputToolbar.isHidden = false
             chatBlockedContainer.isHidden = true
             chatPendingContainer.isHidden = true
-            customNavBar.btnExtendChat.isHidden = false
+            customNavBar.timerView.isHidden = false
             initCustomToolBar()
         } else if let is_seen = conversation.is_seen, is_seen == 1 {
             inputToolbar.isHidden = false
             chatBlockedContainer.isHidden = true
             chatPendingContainer.isHidden = true
-            customNavBar.btnExtendChat.isHidden = false
+            customNavBar.timerView.isHidden = false
             initCustomToolBar()
         } else {
             if !isChatBlockedShowedBefore {
                 inputToolbar.isHidden = true
                 chatBlockedContainer.isHidden = false
                 chatPendingContainer.isHidden = false
-                customNavBar.btnExtendChat.isHidden = true
+                customNavBar.timerView.isHidden = true
                 isChatBlockedShowedBefore = true
             }
         }
@@ -622,7 +622,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     
     // Timer for shaking buy button
     @objc func updateShaker() {
-         customNavBar.btnExtendChat.shake(8, withDelta: 5, speed: 0.1)
+        customNavBar.timerView.shake(6, withDelta: 5, speed: 0.1)
+        shakerTimer.invalidate()
     }
     
     // MARK: Collection view data source (and related) methods
@@ -1047,7 +1048,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         self?.inputToolbar.isHidden = false
                         self?.chatBlockedContainer.isHidden = true
                         self?.chatPendingContainer.isHidden = true
-                        self?.customNavBar.btnExtendChat.isHidden = false
+                        self?.customNavBar.timerView.isHidden = false
                         self?.initCustomToolBar()
                     }
                 }

@@ -28,7 +28,7 @@ class CompleteSignupViewController: AbstractController {
     
     let countryPickerView = CountryPickerView()
     var isMale: Bool = true
-    var countryName: String = ""
+    var countryName: String?
     var countryCode: String?
     var startUpViewController: LoginViewController?
     var tempUserInfoHolder: AppUser = AppUser()
@@ -40,6 +40,14 @@ class CompleteSignupViewController: AbstractController {
         countryPickerView.showCountryCodeInView = true
         countryPickerView.delegate = self
         countryPickerView.dataSource = self
+        
+        if countryName != nil {
+            let country = countryPickerView.getCountryByName(countryName!)
+            self.countryName = country?.name ?? ""
+            self.countryCode = country?.code ?? ""
+            selectCountryButton.setTitle(countryName, for: .normal)
+        }
+        
     }
     
     override func customizeView() {
