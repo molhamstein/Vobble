@@ -370,9 +370,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if seconds != 0.0 {
             customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
             customNavBar.timerLabel.delegate = self
+            customNavBar.timerView.isHidden = false
         } else {
-            customNavBar.timerLabel.isHidden = true
-            customNavBar.leftLabel.isHidden = true
+            customNavBar.timerView.isHidden = true
         }
         
         // Invalidate timer if it's running
@@ -531,7 +531,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
     }
     
-    
     func backButtonAction(_ sender: AnyObject) {
         
         if let unsentText = self.inputToolbar.contentView.textView.text, let convId = conversationOriginalObject?.idString {
@@ -563,7 +562,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         chatPendingImageView.removeFromSuperview()
         chatPendingCloseButton.removeFromSuperview()
     }
-    
     
     @IBAction func cloesPandingChatViewAction(_ sender: AnyObject) {
         chatPendingContainer.isHidden = true
@@ -1258,7 +1256,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             messages.append(message)  
         }
     }
-
     
     private func addPhotoMessage(withId id: String, key: String, mediaItem: JSQCustomPhotoMediaItem) {
         if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
@@ -1750,7 +1747,6 @@ extension ChatViewController: AVAudioRecorderDelegate {
             
         }
     }
-    
   
     func setupRecorder(){
         

@@ -29,6 +29,7 @@
 "ERROR_EMAIL_EXISTS"                    = "Email Already exists, please try to login";
 "ERROR_USERNAME_EXISTS"                 = "Username already used, try another one";
 "ERROR_WRONG_LOGIN_METHOD"              = "This email is registered before, please login with your usual login method";
+"ERROR_WRONG_CODE"                      = "Verification code is invalid";
 
 
 // Connection errors messages

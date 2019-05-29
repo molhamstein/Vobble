@@ -73,7 +73,7 @@ extension PhoneLoginViewController {
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         if let number = txtMobileNumber.text, !number.isEmpty {
             if let code = countryCode {
-                if number.hasPrefix("0") || number.count > 10 || number.count < 5{
+                if number.hasPrefix("0") || number.count < 5{
                     self.showMessage(message: "LOGIN_INVALID_PHONE".localized, type: .warning)
                     return
                 }

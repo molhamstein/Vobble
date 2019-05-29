@@ -29,6 +29,7 @@
 "ERROR_EMAIL_EXISTS"                    = "البريد الالكتروني مسجل مسبقا";
 "ERROR_USERNAME_EXISTS"                 = "اسم المستخدم مستعمل سابقاً الرجاء تجربه اسم اخر";
 "ERROR_WRONG_LOGIN_METHOD"              = "الحساب موجود مسبقا الرجاء تسجيل الدخول بطريقتك المعتادة";
+"ERROR_WRONG_CODE"                      = "رمز التحقق غير صالح";
 
 
 // connection errors messages

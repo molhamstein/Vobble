@@ -486,7 +486,7 @@ class ApiManager: NSObject {
                 let jsonResponse = JSON(responseObject.result.value!)
                 print(jsonResponse)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
                 } else {
                     // parse response to data model >> user object
@@ -1321,6 +1321,7 @@ struct ServerError {
         case invalidUserName = 405
         case noBottleFound = 406
         case emailAlreadyExists = 413
+        case wrongCode = 418
         case usernameAlreadyExists = 422
         case emailAlreadyRegisteredWithDifferentMedia = 412
         case alreadyExists = 101
@@ -1371,7 +1372,8 @@ struct ServerError {
                     return "SHOP_INVALID_PURCHASE_MSG".localized
                 case .emailAlreadyRegisteredWithDifferentMedia:
                     return "ERROR_WRONG_LOGIN_METHOD".localized
-                
+                case .wrongCode:
+                    return "ERROR_WRONG_CODE".localized
                 default:
                     return "ERROR_UNKNOWN".localized
             }
