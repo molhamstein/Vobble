@@ -220,7 +220,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHZ-Qb-ccX">
-                                                <rect key="frame" x="40" y="312" width="295" height="45"/>
+                                                <rect key="frame" x="40" y="277" width="295" height="45"/>
                                                 <color key="backgroundColor" red="0.082352941176470587" green="0.49019607843137253" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="a26-HN-vmX"/>
@@ -239,7 +239,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xg8-gD-OJB">
-                                                <rect key="frame" x="40" y="373" width="295" height="45"/>
+                                                <rect key="frame" x="40" y="338" width="295" height="45"/>
                                                 <color key="backgroundColor" red="0.8666666666666667" green="0.29411764705882354" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="HdQ-KF-hd6"/>
@@ -258,14 +258,14 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fb_icon" translatesAutoresizingMaskIntoConstraints="NO" id="EeT-uf-ZHC">
-                                                <rect key="frame" x="48" y="318.5" width="32" height="32"/>
+                                                <rect key="frame" x="48" y="283.5" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="Lun-Pw-LO7"/>
                                                     <constraint firstAttribute="height" constant="32" id="enr-hS-7EL"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gmail_icon" translatesAutoresizingMaskIntoConstraints="NO" id="FdW-ro-7CF">
-                                                <rect key="frame" x="48" y="379.5" width="32" height="32"/>
+                                                <rect key="frame" x="48" y="344.5" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="3SB-GX-FHF"/>
                                                     <constraint firstAttribute="width" constant="32" id="Cue-HN-gsX"/>
@@ -309,7 +309,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoS-yh-ZS8">
-                                                <rect key="frame" x="42.5" y="542" width="290" height="65"/>
+                                                <rect key="frame" x="42.5" y="534" width="290" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btp-4d-eBt" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
                                                         <rect key="frame" x="62.5" y="0.0" width="65" height="65"/>
@@ -442,6 +442,7 @@
                                             <constraint firstItem="FdW-ro-7CF" firstAttribute="centerY" secondItem="xg8-gD-OJB" secondAttribute="centerY" id="YPp-k8-xTr"/>
                                             <constraint firstAttribute="trailing" secondItem="Cpt-J3-Gok" secondAttribute="trailing" constant="40" id="aKr-O8-hfJ"/>
                                             <constraint firstItem="EeT-uf-ZHC" firstAttribute="leading" secondItem="l9s-ZB-kFu" secondAttribute="leading" constant="48" id="fiT-0s-7sc"/>
+                                            <constraint firstItem="FHZ-Qb-ccX" firstAttribute="top" secondItem="ehU-h5-c4R" secondAttribute="bottom" constant="50" id="g8t-IA-GRz"/>
                                             <constraint firstItem="xoS-yh-ZS8" firstAttribute="leading" secondItem="l9s-ZB-kFu" secondAttribute="leading" constant="42.5" id="hAY-ay-FEn"/>
                                             <constraint firstAttribute="trailing" secondItem="xg8-gD-OJB" secondAttribute="trailing" constant="40" id="iNv-kf-MnE"/>
                                             <constraint firstItem="bFs-S8-QZb" firstAttribute="centerY" secondItem="Cpt-J3-Gok" secondAttribute="centerY" id="iNw-7B-Re1"/>
@@ -451,8 +452,14 @@
                                             <constraint firstAttribute="trailing" secondItem="FHZ-Qb-ccX" secondAttribute="trailing" constant="40" id="qvH-he-HIG"/>
                                             <constraint firstItem="bFs-S8-QZb" firstAttribute="leading" secondItem="l9s-ZB-kFu" secondAttribute="leading" constant="48" id="soW-6p-DoO"/>
                                             <constraint firstItem="FHZ-Qb-ccX" firstAttribute="leading" secondItem="l9s-ZB-kFu" secondAttribute="leading" constant="40" id="syL-2J-58k"/>
-                                            <constraint firstItem="oxO-rJ-FHh" firstAttribute="top" secondItem="xoS-yh-ZS8" secondAttribute="bottom" constant="24" id="x9f-7w-xvt"/>
+                                            <constraint firstItem="oxO-rJ-FHh" firstAttribute="top" secondItem="xoS-yh-ZS8" secondAttribute="bottom" constant="32" id="x9f-7w-xvt"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="Cpt-J3-Gok"/>
+                                                <exclude reference="bFs-S8-QZb"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsE-9U-ZId" userLabel="login view">
                                         <rect key="frame" x="19" y="60" width="337.5" height="607"/>
@@ -716,7 +723,7 @@
                                                                     <constraint firstItem="4x1-CK-gsm" firstAttribute="leading" secondItem="VZ1-L0-HRs" secondAttribute="trailing" constant="20" id="nWy-bg-0hS"/>
                                                                 </constraints>
                                                             </view>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6EX-LD-wBl">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6EX-LD-wBl">
                                                                 <rect key="frame" x="-31" y="261.5" width="399" height="34"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By login you accept " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYh-JX-bSU">
@@ -2390,16 +2397,16 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="270" height="110"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="CaS-OE-WEh" userLabel="UserName Stack View">
-                                                                                <rect key="frame" x="0.0" y="26" width="270" height="58"/>
+                                                                                <rect key="frame" x="0.0" y="25" width="270" height="60"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcM-Hc-4Xx" userLabel="UserName Label">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="23"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="24"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="17"/>
                                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcC-Yb-7ot" userLabel="username textfield">
-                                                                                        <rect key="frame" x="0.0" y="35" width="270" height="23"/>
+                                                                                        <rect key="frame" x="0.0" y="36" width="270" height="24"/>
                                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="20"/>
                                                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="next"/>
@@ -2407,7 +2414,7 @@
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6F-3g-dgw" userLabel="UserName Line View">
-                                                                                <rect key="frame" x="0.0" y="84" width="270" height="1"/>
+                                                                                <rect key="frame" x="0.0" y="85" width="270" height="1"/>
                                                                                 <color key="backgroundColor" red="0.58424812559999995" green="0.58435159920000002" blue="0.58424162859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="G6K-qN-Hub"/>
@@ -2571,10 +2578,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="123.5"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="s1H-Yg-qRb">
-                                                                                <rect key="frame" x="70.5" y="0.0" width="189" height="27"/>
+                                                                                <rect key="frame" x="64.5" y="0.0" width="201.5" height="28"/>
                                                                                 <subviews>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVe-2h-9xR" userLabel="check">
-                                                                                        <rect key="frame" x="0.0" y="2.5" width="20" height="22"/>
+                                                                                        <rect key="frame" x="0.0" y="3" width="20" height="22"/>
                                                                                         <state key="normal" image="checkBox"/>
                                                                                         <state key="selected" image="checkBoxActive"/>
                                                                                         <connections>
@@ -2583,7 +2590,7 @@
                                                                                         </connections>
                                                                                     </button>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Accept " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YP7-vN-oe4">
-                                                                                        <rect key="frame" x="22" y="8.5" width="40" height="10"/>
+                                                                                        <rect key="frame" x="22" y="8" width="40.5" height="12"/>
                                                                                         <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="10"/>
                                                                                         <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2592,7 +2599,7 @@
                                                                                         </variation>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vh-oG-Say">
-                                                                                        <rect key="frame" x="64" y="0.0" width="74" height="27"/>
+                                                                                        <rect key="frame" x="64.5" y="0.0" width="80" height="28"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="13"/>
                                                                                         <state key="normal" title="privacy policy">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2602,7 +2609,7 @@
                                                                                         </connections>
                                                                                     </button>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7Q-wV-bHN">
-                                                                                        <rect key="frame" x="140" y="7.5" width="17" height="11.5"/>
+                                                                                        <rect key="frame" x="146.5" y="8" width="20" height="12"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="10"/>
                                                                                         <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2611,7 +2618,7 @@
                                                                                         </variation>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epu-5K-WdJ">
-                                                                                        <rect key="frame" x="159" y="0.0" width="30" height="27"/>
+                                                                                        <rect key="frame" x="168.5" y="0.0" width="33" height="28"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="13"/>
                                                                                         <state key="normal" title="terms">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2762,7 +2769,7 @@
         <image name="twitter" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6bw-Tb-bbW"/>
+        <segue reference="Sa7-BM-bVt"/>
         <segue reference="rhd-YC-Rxc"/>
     </inferredMetricsTieBreakers>
 </document>
