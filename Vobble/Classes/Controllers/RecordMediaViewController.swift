@@ -175,7 +175,7 @@ class RecordMediaViewController: AbstractController {
                         self.errorLabel.removeFromSuperview()
                     }
                     
-                    let label: UILabel = UILabel(frame: CGRect.zero)
+                    let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 16, height: 50))
                     label.text = "We need permission for the camera and microphone."
                     label.numberOfLines = 2
                     label.lineBreakMode = .byWordWrapping;
@@ -189,7 +189,7 @@ class RecordMediaViewController: AbstractController {
                     self.errorLabel = label
                     self.view!.addSubview(self.errorLabel)
                     
-                    let jumpSettingsBtn: UIButton = UIButton(frame: CGRect(x:50, y:label.frame.origin.y + 50, width:screenRect.size.width - 100, height:50));
+                    let jumpSettingsBtn: UIButton = UIButton(frame: CGRect(x:50, y:label.frame.origin.y + 64, width:screenRect.size.width - 100, height:50));
                     jumpSettingsBtn.titleLabel!.font = UIFont(name: "AvenirNext-SemiBold", size: 24.0)
                     jumpSettingsBtn.setTitle("Go Settings", for: .normal);
                     jumpSettingsBtn.setTitleColor(UIColor.white, for: .normal);

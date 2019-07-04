@@ -92,7 +92,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var lastNotificationSentDate: Date?
     
     var shakerTimer = Timer()
-    
+    var invalidUserTimer = Timer()
+
     private var localTyping = false
     private var isInitialised = false
     
@@ -228,6 +229,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+        
+        // Setup timer to check on user status
+        self.invalidUserTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.checkUserStatus), userInfo: nil, repeats: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -367,7 +371,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     func initNavBar() {
 //        customNavBar.title = convTitle ?? ""
         customNavBar.leftLabel.text = "CHAT_NAV_TIME_LEFT".localized
-        if seconds != 0.0 {
+        if seconds > 0.0 {
             customNavBar.timerLabel.startTimer(seconds: TimeInterval(seconds))
             customNavBar.timerLabel.delegate = self
             customNavBar.timerView.isHidden = false
@@ -1349,6 +1353,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         self.customNavBar.moreOptions.setImage(self.unmuteImg, for: .normal)
     }
     
+    @objc func checkUserStatus(){
+        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me)
+    }
     // MARK: UITextViewDelegate methods
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
@@ -1531,6 +1538,16 @@ extension ChatViewController: TimerLabelDelegate {
         }, completion: {(finished: Bool) in
             
         })
+    }
+    
+    func timerFinished() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func countingAt(timeRemaining: TimeInterval) {
+        if timeRemaining == 0 {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
