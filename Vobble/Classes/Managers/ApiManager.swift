@@ -295,7 +295,7 @@ class ApiManager: NSObject {
         var parameters : [String : Any] = [
             "username": user.userName!,
             "gender": user.gender?.rawValue ?? "male",
-            "ISOCode" : user.countryISOCode ?? "SY",
+            "ISOCode" : user.countryISOCode ?? "SA",
             "typeLogIn": (user.loginType?.rawValue)!,
             "registrationCompleted": (user.accountInfoCompleted) ?? false,
             "homeTutShowed": (user.homeTutShowed) ?? false,
@@ -451,8 +451,8 @@ class ApiManager: NSObject {
                     let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
                 } else {
-                    if let verificationCode = jsonResponse["code"].int {
-                        completionBlock(true , nil, String(describing: verificationCode))
+                    if let successFlag = jsonResponse["success"].bool, successFlag {
+                        completionBlock(true , nil, String(describing: successFlag))
                     }else{
                         completionBlock(false, ServerError.unknownError, nil)
                     }

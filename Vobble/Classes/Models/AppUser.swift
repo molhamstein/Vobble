@@ -28,6 +28,7 @@ enum LoginType: String {
     case twitter = "twitter"
     case google = "google"
     case instagram = "instegram"
+    case phoneNumber = "phonenumber"
     /// check current login state (Social - Normal)
     var isSocial:Bool {
         switch self {

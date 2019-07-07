@@ -82,7 +82,7 @@ extension PhoneLoginViewController {
                 
                 self.showActivityLoader(true)
                 ApiManager.shared.signupByPhone(phone: fullMobileNumber, completionBlock: {(isSuccess, error, result) in
-                    print(result ?? "")
+                    //print(result ?? "")
                     self.showActivityLoader(false)
                     if isSuccess {
                         self.dismiss(animated: true) {
