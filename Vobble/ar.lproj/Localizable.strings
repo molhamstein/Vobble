@@ -164,7 +164,7 @@
 "main_shore"                            = "استكشف";
 "love_shore"                            = "تعارف";
 "fadfed_shore"                          = "فضفض";
-"THROW_BOTTLE_WARNING"                  = "لا يوجد لديك زجاجات كافية ";
+"THROW_BOTTLE_WARNING"                  = "انتظر حتى الغد للحصول على زجاجة مجانية او اذهب الى المتجر لشراء الزجاجات";
 "THROW_BOTTLE_WARNING_ACTION"           = "المزيد من الزجاجات؟";
 "HOME_THROW_BTN"                        = "ارمي";
 "HOME_FIND_BTN"                         = "ابحث";

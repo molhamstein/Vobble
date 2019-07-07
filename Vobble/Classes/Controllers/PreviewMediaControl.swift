@@ -173,7 +173,7 @@ class PreviewMediaControl : AbstractController {
                 //bottle.attachment = "http://104.217.253.15:9999/api/uploads/videos/download/1523169457577_0261BAEB-C40E-49DE-A148-2E62190B43F8.MOV"
                 bottle.ownerId = DataStore.shared.me?.objectId
                 bottle.owner = DataStore.shared.me
-                bottle.status = "active"
+                bottle.status = "pending"
                 bottle.shoreId = shore.shore_id
                 bottle.topicId = self.topicId
         

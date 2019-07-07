@@ -61,10 +61,10 @@ class TimerLabel: UILabel {
     }
     
     @objc private func updateTimer() {
+        
         if seconds < 1 {
             timer.invalidate()
             //Send alert to indicate "time's up!"
-            delegate?.timerFinished?()
             delegate?.countingAt?(timeRemaining: TimeInterval(0))
         } else {
             seconds -= 1

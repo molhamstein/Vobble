@@ -19,6 +19,8 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var shoreNameLabel: UILabel!
+    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var userimage: UIImageView!
     @IBOutlet weak var moreOptionsOverlayButton: UIButton!
@@ -49,6 +51,8 @@ class FindBottleViewController: AbstractController {
         super.viewDidLoad()
         shoreNameLabel.text = bottle?.shore?.name
         userNameLabel.text = bottle?.owner?.userName
+        countryLabel.text = bottle?.owner?.country?.name
+        genderLabel.text = bottle?.owner?.gender?.rawValue
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
         optionView.isHidden = true
         moreOptionsOverlayButton.isHidden = true

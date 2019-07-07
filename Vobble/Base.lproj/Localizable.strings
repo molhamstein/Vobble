@@ -165,7 +165,7 @@
 "main_shore"                            = "Explore";
 "love_shore"                            = "Dating";
 "fadfed_shore"                          = "Say your mind";
-"THROW_BOTTLE_WARNING"                  = "you don’t have bottles";
+"THROW_BOTTLE_WARNING"                  = "Wait until tomorrow to get one free bottle or go to shop to buy bottles";
 "THROW_BOTTLE_WARNING_ACTION"           = "Get Bottles";
 "HOME_THROW_BTN"                        = "Throw Bottle";
 "HOME_FIND_BTN"                         = "Find Bottle";
@@ -254,7 +254,7 @@
 "MY_BOTTLES_BOTTLES_TITLE"             = "My Bottles";
 "MY_BOTTLES_REPLIES_TITLE_With_count"  = "My Replies (%d)";
 "MY_BOTTLES_BOTTLES_TITLE_With_count"  = "My Bottles (%d)";
-"MY_BOTTLES_NEXT_REFILL"               = "3 free bottles after:";
+"MY_BOTTLES_NEXT_REFILL"               = "1 free bottle after:";
 "MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "%@ Didn't reply yet";
 "MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "You Didn't reply yet";
 "MY_BOTTLES_BTN_CHAT"                  = "Chat Now";
