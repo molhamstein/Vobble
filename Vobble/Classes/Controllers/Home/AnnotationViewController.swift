@@ -175,7 +175,9 @@ extension AnnotationViewController: SpotlightViewControllerDelegate {
     }
     
     func spotlightViewControllerTapped(_ viewController: SpotlightViewController, isInsideSpotlight: Bool) {
-        next(true)
+        if stepIndex != 4 {
+            next(true)
+        }
     }
     
     func spotlightViewControllerWillDismiss(_ viewController: SpotlightViewController, animated: Bool) {

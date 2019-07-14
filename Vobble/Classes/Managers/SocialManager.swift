@@ -57,12 +57,12 @@ class SocialManager: NSObject{
                                         // send facebook ID to start login process
                                         ApiManager.shared.userFacebookLogin(facebookId: facebookId, fbName: userName, fbToken: FBSDKAccessToken.current().tokenString, email: email, fbGender: gender, imageLink: pictureLink) { (isSuccess, error, user) in
                                             // login success
-                                            if (isSuccess) {
-                                                if ActionDeactiveUser.execute(viewController: controller, user: user) {
+                                            if ActionDeactiveUser.execute(viewController: controller, user: user, error: error) {
+                                                if (isSuccess) {
                                                     completionBlock(user, true , nil)
+                                                } else {
+                                                    completionBlock(nil, false , error)
                                                 }
-                                            } else {
-                                                completionBlock(nil, false , error)
                                             }
                                         }
                                     } else {
@@ -97,13 +97,12 @@ class SocialManager: NSObject{
                         // send access token and secret to start login process
                         ApiManager.shared.userTwitterLogin(accessToken: accessToken, secret: accessTokenSecret) { (isSuccess, error, user) in
                             // login success
-                            if (isSuccess) {
-                                if ActionDeactiveUser.execute(viewController: controller, user: user) {
+                            if ActionDeactiveUser.execute(viewController: controller, user: user, error: error) {
+                                if (isSuccess) {
                                     completionBlock(true , nil)
+                                } else {
+                                    completionBlock(false , error)
                                 }
-                                
-                            } else {
-                                completionBlock(false , error)
                             }
                         }
                     } else {
@@ -144,13 +143,12 @@ class SocialManager: NSObject{
                     // send instagram ID and token to start login process
                     ApiManager.shared.userInstagramLogin(user: userInfoHolder) { (isSuccess, error, user) in
                         // login success
-                        if (isSuccess) {
-                            if ActionDeactiveUser.execute(viewController: controller, user: user) {
+                        if ActionDeactiveUser.execute(viewController: controller, user: user, error: error) {
+                            if (isSuccess) {
                                 completionBlock(user, true , nil)
+                            } else {
+                                completionBlock(nil, false , error)
                             }
-                            
-                        } else {
-                            completionBlock(nil, false , error)
                         }
                     }
                 } else {

@@ -42,12 +42,11 @@ class ChatTutorialViewController: SpotlightViewController, UIGestureRecognizerDe
     func next(_ labelAnimated: Bool) {
         updateAnnotationView(labelAnimated)
         
-        let screenSize = UIScreen.main.bounds.size
         switch stepIndex {
         case 0:
-            let xPos = (AppConfig.currentLanguage == .arabic) ? 70 : UIScreen.main.bounds.width - 70
+            let xPos = (AppConfig.currentLanguage == .arabic) ? 100 : UIScreen.main.bounds.width - 100
             //spotlightView.appear(Spotlight.Oval(frame: CGPoint(x: xPos, y: 100, diameter: 100)))
-            spotlightView.appear(Spotlight.Oval(center: CGPoint(x: xPos, y: 60), diameter: 100))
+            spotlightView.appear(Spotlight.Oval(center: CGPoint(x: xPos, y: 60), diameter: 110))
         case 1:
             dismiss(animated: true, completion: nil)
             //spotlightView.appear(Spotlight.Oval(center: CGPoint(x: screenSize.width / 2, y: screenSize.height/2), diameter: 0))

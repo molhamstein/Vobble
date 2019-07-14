@@ -47,47 +47,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // This block gets called when the user reacts to a notification received
             let payload: OSNotificationPayload? = result?.notification.payload
             
-            print("Message = \(payload!.body)")
-            print("badge number = \(payload?.badge ?? 0)")
-            print("notification sound = \(payload?.sound ?? "None")")
+//            print("Message = \(payload!.body)")
+//            print("badge number = \(payload?.badge ?? 0)")
+//            print("notification sound = \(payload?.sound ?? "None")")
             
             if let additionalData = result!.notification.payload!.additionalData {
+                
                 print("additionalData = \(additionalData)")
+                if let actionSelected = payload?.actionButtons {
+                    print("actionSelected = \(actionSelected)")
+                }
+                
                 if let chatId = additionalData["chatId"] as? String {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         if DataStore.shared.isLoggedin {
                             ActionOpenChat.execute(chatId: chatId, conversation: nil)
                         }
                     }
-                }
-                
-                if let actionSelected = payload?.actionButtons {
-                    print("actionSelected = \(actionSelected)")
+                } else if let _ = additionalData["throwBottle"] as? String {
+                    // broadcast
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        if DataStore.shared.isLoggedin {
+                            NotificationCenter.default.post(name: Notification.Name("OpenThrowBottle"), object: nil)
+                        }
+                    }
+                } else if let bottleId = additionalData["bottleId"] as? String {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        if DataStore.shared.isLoggedin {
+                            NotificationCenter.default.post(name: Notification.Name("OpenBottleById"), object: bottleId)
+                        }
+                    }
+                    //                        self.window?.rootViewController = instantiatedGreenViewController
+                    //                        self.window?.makeKeyAndVisible()
                 }
                 
                 // DEEP LINK from action buttons
                 if let actionID = result?.action.actionID {
                     
                     // For presenting a ViewController from push notification action button
-                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let instantiateRedViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RedViewControllerID") as UIViewController
-                    let instantiatedGreenViewController: UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "GreenViewControllerID") as UIViewController
-                    self.window = UIWindow(frame: UIScreen.main.bounds)
+//                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let instantiateRedViewController : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "RedViewControllerID") as UIViewController
+//                    let instantiatedGreenViewController: UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "GreenViewControllerID") as UIViewController
+//                    self.window = UIWindow(frame: UIScreen.main.bounds)
+                    
                     
                     print("actionID = \(actionID)")
                     
-                    if actionID == "id2" {
-                        print("do something when button 2 is pressed")
-                        self.window?.rootViewController = instantiateRedViewController
-                        self.window?.makeKeyAndVisible()
-                        
-                        
-                    } else if actionID == "id1" {
-                        print("do something when button 1 is pressed")
-                        self.window?.rootViewController = instantiatedGreenViewController
-                        self.window?.makeKeyAndVisible()
-                        
-                    }
                 }
             }
             

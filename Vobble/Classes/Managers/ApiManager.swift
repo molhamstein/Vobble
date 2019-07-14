@@ -51,7 +51,8 @@ class ApiManager: NSObject {
             "gender": fbGender,
             "image": imageLink,
             "email": email,
-            "name": fbName
+            "name": fbName,
+            "deviceName": AppConfig.getDeviceId()
         ]
         // build request
         Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
@@ -88,14 +89,15 @@ class ApiManager: NSObject {
         let signInURL = "\(baseURL)auth/twitter/login"
         let parameters : [String : Any] = [
             "accessToken": accessToken,
-            "accessTokenSecret": secret
+            "accessTokenSecret": secret,
+            "deviceName": AppConfig.getDeviceId()
             ]
         // build request
         Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
                 } else {
                     // parse response to data model >> user object
@@ -127,7 +129,8 @@ class ApiManager: NSObject {
             "token": user.socialToken!,
             "gender": user.gender!.rawValue,
             "image": user.profilePic!,
-            "name": user.userName!
+            "name": user.userName!,
+            "deviceName": AppConfig.getDeviceId()
         ]
         // build request
         Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
@@ -167,7 +170,8 @@ class ApiManager: NSObject {
             "gender": user.gender!.rawValue,
             "image": user.profilePic!,
             "name": user.userName!,
-            "email": user.email!
+            "email": user.email!,
+            "deviceName": AppConfig.getDeviceId()
         ]
         // build request
         Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
@@ -205,13 +209,13 @@ class ApiManager: NSObject {
         
         let parameters : [String : Any] = [
             "email": email,
-            "password": password
+            "password": password,
+            "deviceName": AppConfig.getDeviceId()
         ]
         // build request
         Alamofire.request(signInURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
-                print(jsonResponse)
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
@@ -255,14 +259,14 @@ class ApiManager: NSObject {
             "email": user.email!,
             "password": password,
             "typeLogIn": "registration",
-            "image": " "
+            "image": " ",
+            "deviceName": AppConfig.getDeviceId()
         ]
         
         // build request
         Alamofire.request(signUpURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
-                print(jsonResponse)
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
@@ -342,14 +346,14 @@ class ApiManager: NSObject {
     /// get me
     func getMe(completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ user:AppUser?) -> Void) {
         // url & parameters
-        let signUpURL = "\(baseURL)/users/\(DataStore.shared.me?.objectId ?? " ")"
+        let signUpURL = "\(baseURL)/users/me/?deviceName=\(AppConfig.getDeviceId())"
         
         // build request
         Alamofire.request(signUpURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
                 } else {
                     // parse response to data model >> user object
@@ -384,7 +388,7 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
                 } else {
                     // parse response to data model >> user object
@@ -417,7 +421,7 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError)
                 } else {
                     completionBlock(true , nil)
@@ -448,7 +452,7 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
                 } else {
                     if let successFlag = jsonResponse["success"].bool, successFlag {
@@ -477,14 +481,14 @@ class ApiManager: NSObject {
         let loginByPhoneURL = "\(baseURL)/users/loginByPhone"
         let parameters : [String : Any] = [
             "phonenumber": phone,
-            "code": code
+            "code": code,
+            "deviceName": AppConfig.getDeviceId()
         ]
         
         // build request
         Alamofire.request(loginByPhoneURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
-                print(jsonResponse)
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)
@@ -525,7 +529,7 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError)
                 } else {
                     completionBlock(true , nil)
@@ -558,7 +562,7 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 if let code = responseObject.response?.statusCode, code >= 400 {
-                    let serverError = ServerError(json: jsonResponse) ?? ServerError.unknownError
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError)
                 } else {
                     // parse response to data model >> user object
@@ -586,7 +590,8 @@ class ApiManager: NSObject {
         let bottleURL = "\(baseURL)/userActive"
         
         let parameters : [String : Any] = [
-            "ownerId": (DataStore.shared.me?.objectId)!
+            "ownerId": (DataStore.shared.me?.objectId)!,
+            "deviceName": AppConfig.getDeviceId()
         ]
         
         // build request
@@ -717,13 +722,11 @@ class ApiManager: NSObject {
     
     // MARK: Topics
     func requestTopics(completionBlock: @escaping (_ topics: Array<Topic>?, _ error: NSError?) -> Void) {
-        let topicsListURL = "\(baseURL)/topics"
+        let topicsListURL = "\(baseURL)/topics?filter[where][status]=active&filter[order]=createdAt%20DESC"
         Alamofire.request(topicsListURL).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
-                print(resJson)
-                if let data = resJson.array
-                {
+                if let data = resJson.array {
                     let topics: [Topic] = data.map{Topic(json: $0)}
                     //save to cache
                     DataStore.shared.topics = topics
@@ -765,7 +768,6 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 
                 let resJson = JSON(responseObject.result.value!)
-                print(resJson)
                 if let data = resJson.array {
                     let shopItems: [ShopItem] = data.map{ShopItem(json: $0)}
                     //save to cache
@@ -828,11 +830,11 @@ class ApiManager: NSObject {
             "relatedUserId" : relatedUserId
         ]
         
-        if let theJSONData = try? JSONSerialization.data( withJSONObject: parameters, options: []) {
-            let theJSONText = String(data: theJSONData, encoding: .ascii)
-            print("JSON string = \(theJSONText!)")
-        }
-            
+//        if let theJSONData = try? JSONSerialization.data( withJSONObject: parameters, options: []) {
+//            let theJSONText = String(data: theJSONData, encoding: .ascii)
+//            print("JSON string = \(theJSONText!)")
+//        }
+        
         // build request
         Alamofire.request(bottleURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
@@ -1155,8 +1157,12 @@ class ApiManager: NSObject {
 //        findhBottleURL += "&filter[order]=createdAt DESC&filter[limit]=5"
         
 
-        //var findBottleURL = "\(baseURL)/bottles/5cad6ccc0591120741d1bb0f"
-        var findBottleURL = "\(baseURL)/bottles/getOneBottle"
+        var findBottleURL : String;
+        if AppConfig.isProductionBuild {
+            findBottleURL = "\(baseURL)/bottles/getOneBottle"
+        } else {
+            findBottleURL = "\(baseURL)/bottles/5c20f1f94c6c42445da94e7b"
+        }
         
         // shore
         if let shore = shoreId {
@@ -1224,6 +1230,33 @@ class ApiManager: NSObject {
         }
     }
     
+    
+    func findBottleById(bottleId:String, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
+        
+        let findBottleURL = "\(baseURL)/bottles/getBottleById/\(bottleId)"
+        
+        Alamofire.request(findBottleURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            
+            if responseObject.result.isSuccess {
+                
+                let resJson = JSON(responseObject.result.value!)
+                
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: resJson["error"]) ?? ServerError.unknownError
+                    completionBlock(nil , serverError)
+                } else {
+                    
+                    let bottle = Bottle(json: resJson)
+                    completionBlock(bottle, nil)
+                }
+            }
+            if responseObject.result.isFailure {
+                let _ : NSError = responseObject.result.error! as NSError
+                completionBlock(nil, ServerError.connectionError)
+            }
+        }
+    }
+    
     // MARK: notifications
     func sendPushNotification(msg: String, msg_ar: String, targetUser: AppUser, chatId: String? ,completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
         // url & parameters
@@ -1277,7 +1310,6 @@ class ApiManager: NSObject {
             if responseObject.result.isSuccess {
                 
                 let resJson = JSON(responseObject.result.value!)
-                print(resJson)
                 if let data = resJson.array {
                     let bottles: [Bottle] = data.map{Bottle(json: $0)}
                     //save to cache
@@ -1332,6 +1364,8 @@ struct ServerError {
         case invalidVerifyCode = 108
         case userNotFound = 404
         case invalidPurchase = 415
+        case accountDeactivated = 416
+        case deviceBlocked = 419
         case loginFailed = 601 // temp code
         
         /// Handle generic error messages
@@ -1370,6 +1404,10 @@ struct ServerError {
                     return "ERROR_USERNAME_EXISTS".localized
                 case .invalidPurchase:
                     return "SHOP_INVALID_PURCHASE_MSG".localized
+                case .deviceBlocked:
+                    return "ERROR_DEVICE_BLOCKED".localized
+                case .accountDeactivated:
+                    return "ERROR_ACOUNT_DEACTIVATED".localized
                 case .emailAlreadyRegisteredWithDifferentMedia:
                     return "ERROR_WRONG_LOGIN_METHOD".localized
                 case .wrongCode:

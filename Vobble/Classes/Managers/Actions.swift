@@ -142,8 +142,7 @@ class ActionPlayBeep{
 }
 
 class ActionDeactiveUser {
-    class func execute(viewController: UIViewController, user: AppUser?) -> Bool {
-        guard user != nil else { return true }
+    class func execute(viewController: UIViewController, user: AppUser?, error: ServerError?) -> Bool {
         
         if user?.status == .deactivated {
             // Kick the user out
@@ -156,7 +155,16 @@ class ActionDeactiveUser {
             viewController.present(alert, animated: true, completion: nil)
             
             return false
-        }else {
+        } else if let err = error, (err.type == .accountDeactivated || err.type == .deviceBlocked) {
+            let alert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized, message: err.type.errorMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: {_ in
+                //clear user
+                DataStore.shared.logout()
+                ActionShowStart.execute()
+            }))
+            viewController.present(alert, animated: true, completion: nil)
+            return false
+        } else {
             
             return true
         }

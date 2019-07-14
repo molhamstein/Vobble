@@ -29,7 +29,9 @@
 "ERROR_EMAIL_EXISTS"                    = "البريد الالكتروني مسجل مسبقا";
 "ERROR_USERNAME_EXISTS"                 = "اسم المستخدم مستعمل سابقاً الرجاء تجربه اسم اخر";
 "ERROR_WRONG_LOGIN_METHOD"              = "الحساب موجود مسبقا الرجاء تسجيل الدخول بطريقتك المعتادة";
+"ERROR_DEVICE_BLOCKED"                  = "للأسف, غير مصرح لك بالدخول";
 "ERROR_WRONG_CODE"                      = "رمز التحقق غير صالح";
+"ERROR_ACOUNT_DEACTIVATED"               = "للأسف حسابك لم يعد صالحاً";
 
 
 // connection errors messages
@@ -187,6 +189,11 @@
 "EXTEND_CHAT_TITLE"                     = "تمديد المحادثة";
 "EXTEND_CHAT_POPUP_TITLE"               = "مدد المحادثة مع %@";
 
+// record audio reply
+"AUDIO_REPLY_TITLE"                     = "أرسل رداً صوتياً لتبدأ المحادثة";
+"AUDIO_REPLY_RECORD"                    = "إضغط و ثبت للتسجيل";
+"AUDIO_REPLY_START"                     = "تسجيل";
+
 // filter
 "FEMALE"                                = "بنت";
 "MALE"                                  = "ولد";
@@ -290,3 +297,8 @@
 
 "TUT_CHAT_1"                            = "هنا تجد الوقت المتبقي للمحادثة";
 "TUT_REPLY_1"                           = "!اعجبك الفيديو؟ أرسل ردك لصاحب الفيديو الان،";
+"TUT_CAM_1"                             = "أي محتوى غير اخلاقي سيتم حذفه و حظر صاحبه";
+"TUT_CAM_OK_1"                          = "التالي..";
+"TUT_CAM_2"                             = "لضمان وصول الفيديو لجميع المستخدمين احرص على اظهار وجهك وصوتك بشكل واضح سيتم حذف اي فيديو بشاشه سوداء";
+"TUT_CAM_OK_2"                          = "جاهز ؟";
+

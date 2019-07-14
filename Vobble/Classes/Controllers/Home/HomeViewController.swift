@@ -100,6 +100,9 @@ class HomeViewController: AbstractController {
     var countryCode = ""
     var gender = GenderType.allGender
     
+    // bottle To Find By Id
+    var bottleIdToFind : String?
+    
     var introAnimationDone: Bool = false
     var filterViewVisible = false
     
@@ -140,6 +143,10 @@ class HomeViewController: AbstractController {
         // observe any change in the unread notifications count
         lblUnreadConversationsBadge.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
+        
+        // observe clicking any push notifications that have actions attached to them
+        NotificationCenter.default.addObserver(self, selector: #selector(openThrowBottleView(notification:)), name: Notification.Name("OpenThrowBottle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(openBottleById(notification:)), name: Notification.Name("OpenBottleById"), object: nil)
         
         // tutorial
         if let tutShowedBefore = DataStore.shared.me?.homeTutShowed, !tutShowedBefore {
@@ -190,9 +197,7 @@ class HomeViewController: AbstractController {
         self.animateShark()
         
         ApiManager.shared.getMe(completionBlock: { (success, error, user) in
-            if success {
-                _ = ActionDeactiveUser.execute(viewController: self, user: user)
-            }
+            _ = ActionDeactiveUser.execute(viewController: self, user: user, error: error)
         })
         ApiManager.shared.requestUserInventoryItems { (items, error) in}
         ApiManager.shared.markUserAsActive { (success, error) in}
@@ -371,6 +376,15 @@ class HomeViewController: AbstractController {
         
     }
     
+    func openBottleById(notification: NSNotification) {
+        self.bottleIdToFind = notification.object as? String
+        self.findBottlePressed(btnFindBtn)
+    }
+    
+    func openThrowBottleView(notification: NSNotification) {
+        self.throwBottlePressed(btnThrowBtn)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let bottle = sender as? Bottle {
@@ -392,7 +406,7 @@ class HomeViewController: AbstractController {
     
     @IBAction func throwBottlePressed(_ sender: UIButton) {
        
-        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me)
+        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me, error: nil)
         
         if let bCount = DataStore.shared.me?.totalBottlesLeftToThrowCount, bCount > 0 {
             //DataStore.shared.me?.thrownBottlesCount = bCount - 1
@@ -470,7 +484,7 @@ class HomeViewController: AbstractController {
     
     @IBAction func findBottlePressed(_ sender: Any) {
        
-        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me)
+        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me, error: nil)
         
         // store the current replies sent count to use it later to deside if we should ask the user for rating
         self.repliesSentCount = DataStore.shared.me?.repliesBottlesCount
@@ -503,7 +517,8 @@ class HomeViewController: AbstractController {
             self.videoUploadLoader?.progress = CGFloat(0.5)
             
             let shoreId = self.currentPageIndex == 0 ? nil : DataStore.shared.shores[self.currentPageIndex].shore_id!
-            ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: { (bottle, error) in
+            
+            let findBottleCompletionBlock : ( Bottle?, ServerError?)-> Void = { (bottle, error) in
                 self.disableActions(disable: false)
                 self.videoUploadLoader?.removeLoader(true)
                 if error == nil  {
@@ -527,13 +542,26 @@ class HomeViewController: AbstractController {
                         alertController.addAction(actionCancel)
                         let actionLogout = UIAlertAction(title: "LOGIN_LOGIN_BTN".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
                         alertController.addAction(actionLogout)
+                    } else if error?.type == .accountDeactivated || error?.type == .deviceBlocked {
+                        /// user should be forced to logout
+                        let actionLogout = UIAlertAction(title: "ok".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                        alertController.addAction(actionLogout)
                     } else {
                         let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
                         alertController.addAction(ok)
                     }
                     self.present(alertController, animated: true, completion: nil)
                 }
-            })
+            }
+            
+            // send the request
+            if let bottleId = self.bottleIdToFind {
+                // this request is send in case we sent the user a push notification contatinig the id of the bottle that we want him to see
+                ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
+                self.bottleIdToFind = nil
+            } else {
+                ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: findBottleCompletionBlock)
+            }
         }
     }
     

@@ -175,12 +175,12 @@ class RecordMediaViewController: AbstractController {
                         self.errorLabel.removeFromSuperview()
                     }
                     
-                    let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 16, height: 50))
+                    let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 32, height: 50))
                     label.text = "We need permission for the camera and microphone."
-                    label.numberOfLines = 2
+                    label.numberOfLines = 3
                     label.lineBreakMode = .byWordWrapping;
                     label.backgroundColor = UIColor.clear
-                    label.font = UIFont(name: "AvenirNext-SemiBold", size: 13.0)
+                    label.font = AppFonts.small
                     label.textColor = UIColor.white
                     label.textAlignment = .center
                     label.sizeToFit()
@@ -189,8 +189,8 @@ class RecordMediaViewController: AbstractController {
                     self.errorLabel = label
                     self.view!.addSubview(self.errorLabel)
                     
-                    let jumpSettingsBtn: UIButton = UIButton(frame: CGRect(x:50, y:label.frame.origin.y + 64, width:screenRect.size.width - 100, height:50));
-                    jumpSettingsBtn.titleLabel!.font = UIFont(name: "AvenirNext-SemiBold", size: 24.0)
+                    let jumpSettingsBtn: UIButton = UIButton(frame: CGRect(x:50, y:label.frame.origin.y + 84, width:screenRect.size.width - 100, height:50));
+                    jumpSettingsBtn.titleLabel!.font = AppFonts.normal
                     jumpSettingsBtn.setTitle("Go Settings", for: .normal);
                     jumpSettingsBtn.setTitleColor(UIColor.white, for: .normal);
                     jumpSettingsBtn.layer.borderColor = UIColor.white.cgColor;
@@ -222,13 +222,32 @@ class RecordMediaViewController: AbstractController {
             self.switchButton.tintColor = UIColor.white
             self.switchButton.bringToFront()
             
+            // show Cam tutorial on first opening of the record view
+            if let tutShowedBefore = DataStore.shared.tutorialCamShowed, !tutShowedBefore {
+                DataStore.shared.tutorialCamShowed = true
+                dispatch_main_after(2) {
+                    
+                    let alertController = UIAlertController(title: "", message: "TUT_CAM_1".localized, preferredStyle: .alert)
+                    let nextAction = UIAlertAction(title: "TUT_CAM_OK_1".localized, style: .default,  handler: {(alert) in
+                        // show step 2
+                        let alertController = UIAlertController(title: "", message: "TUT_CAM_2".localized, preferredStyle: .alert)
+                        let doneAction = UIAlertAction(title: "TUT_CAM_OK_2".localized, style: .default,  handler: nil)
+                        alertController.addAction(doneAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    })
+                    alertController.addAction(nextAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                }
+            }
+            
         } else {
             let label: UILabel = UILabel(frame: CGRect.zero)
             label.text = "You must have a camera to take video."
             label.numberOfLines = 2
             label.lineBreakMode = .byWordWrapping;
             label.backgroundColor = UIColor.clear
-            label.font = UIFont(name: "AvenirNext-DemiBold", size: 13.0)
+            label.font = AppFonts.small
             label.textColor = UIColor.white
             label.textAlignment = .center
             label.sizeToFit()
@@ -638,18 +657,19 @@ extension RecordMediaViewController
             Flurry.logEvent(AppConfig.recorded_video, withParameters:logEventParams);
         }
         Flurry.logEvent(AppConfig.recorded_video);
-        
-        // animate Views out
-        redImageView.layer.removeAllAnimations()
-        recordButton.animateIn(mode: .animateOutToBottom, delay: 0.3)
-        //redImageView.animateIn(mode: .animateOutToTop, delay: 0.2)
-        recordTimeLabel.animateIn(mode: .animateOutToTop, delay: 0.2)
-        
-        switchButton.animateIn(mode: .animateOutToTop, delay: 0.2)
-        btnTopics.animateIn(mode: .animateOutToTop, delay: 0.2)
-        flashButton.animateIn(mode: .animateOutToTop, delay: 0.23)
-        closeButton.animateIn(mode: .animateOutToTop, delay: 0.2)
-        btnPhotoLibrary.animateIn(mode: .animateOutToBottom, delay: 0.3)
+
+        // those animations are removed as they are being suspected of cause crash reported on firebase "check UIView crashes between 1 Jul nad 14 Jul"
+//        // animate Views out
+//        redImageView.layer.removeAllAnimations()
+//        recordButton.animateIn(mode: .animateOutToBottom, delay: 0.3)
+//        //redImageView.animateIn(mode: .animateOutToTop, delay: 0.2)
+//        recordTimeLabel.animateIn(mode: .animateOutToTop, delay: 0.2)
+//
+//        switchButton.animateIn(mode: .animateOutToTop, delay: 0.2)
+//        btnTopics.animateIn(mode: .animateOutToTop, delay: 0.2)
+//        flashButton.animateIn(mode: .animateOutToTop, delay: 0.23)
+//        closeButton.animateIn(mode: .animateOutToTop, delay: 0.2)
+//        btnPhotoLibrary.animateIn(mode: .animateOutToBottom, delay: 0.3)
         
         // show preview 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 6 second

@@ -196,7 +196,7 @@ extension ExtendChatPopupViewController: IAPManagerDelegate {
                 alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-        }else {
+        } else {
             if let error = error {
                 let failAlert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized , message: error.localizedDescription, preferredStyle: .alert)
                 failAlert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: {_ in
@@ -205,31 +205,26 @@ extension ExtendChatPopupViewController: IAPManagerDelegate {
                 self.present(failAlert, animated: true, completion: nil)
             }
         }
-        
     }
     
     func didPaymentCompleted() {
-        FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").child("startTime").observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").child("finishTime").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get conversation start time value
             let value = snapshot.value as? Double
             
-            if let startTime = value {
-                let extendTime = startTime + self.getExtendTime(self.selectedProduct.validity ?? 0.0)
-                FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").updateChildValues(["startTime" : extendTime])
+            if let expiryTime = value {
+                let extendTime = expiryTime + self.getExtendTime(self.selectedProduct.validity ?? 0.0)
+                FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").updateChildValues(["finishTime" : extendTime])
                 
-                self.conversation?.startTime = extendTime
+                self.conversation?.finishTime = extendTime
                 
                 ActionRegisterNotification.execute(conversation: self.conversation)
             }
             
-            
-
         }) { (error) in
             print(error.localizedDescription)
         }
 
-        
-        
         self.dismiss(animated: true, completion: {})
 
         self.showActivityLoader(false)

@@ -20,7 +20,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var shoreNameLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
-    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var genderImage: UIImageView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var userimage: UIImageView!
     @IBOutlet weak var moreOptionsOverlayButton: UIButton!
@@ -34,7 +34,8 @@ class FindBottleViewController: AbstractController {
     
     public var bottle:Bottle?
     public var shoreName:String?
-    public var myVideoUrl = NSURL()
+    public var myVideoUrl : NSURL?
+    public var myAudioUrl : URL?
     
     @IBOutlet weak var optionView: UIStackView!
     @IBOutlet weak var reportButton: UIButton!
@@ -52,7 +53,7 @@ class FindBottleViewController: AbstractController {
         shoreNameLabel.text = bottle?.shore?.name
         userNameLabel.text = bottle?.owner?.userName
         countryLabel.text = bottle?.owner?.country?.name
-        genderLabel.text = bottle?.owner?.gender?.rawValue
+        genderImage.image = bottle?.owner?.gender == .male ? UIImage(named: "signup_male") : UIImage(named: "signup_female")
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
         optionView.isHidden = true
         moreOptionsOverlayButton.isHidden = true
@@ -229,10 +230,17 @@ class FindBottleViewController: AbstractController {
             videoView.playButtonPressed()
         }
         
-        // show preview
+//        // show record Video screen
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
+//            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
+//            recordControl.from = .findBottle
+//
+//            self.navigationController?.pushViewController(recordControl, animated: false)
+//        }
+        
+        // show record Audio screen
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
-            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
-            recordControl.from = .findBottle
+            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordAudioReplyMediaControlID") as! RecordAudioReplyMediaControl
             
             self.navigationController?.pushViewController(recordControl, animated: false)
         }
@@ -256,7 +264,8 @@ class FindBottleViewController: AbstractController {
             chatVc.conversationRef = newConvRef
             chatVc.conversationId = newConvRef.key
             chatVc.bottleToReplyTo = btl
-            chatVc.replyVideoUrlToUpload = myVideoUrl as URL
+            chatVc.replyVideoUrlToUpload = myVideoUrl as URL?
+            chatVc.replyAudioUrlToUpload = myAudioUrl
         }
     }
     
@@ -278,7 +287,7 @@ class FindBottleViewController: AbstractController {
     func goToChat() {
         if let btl = self.bottle {
             FirebaseManager.shared.createNewConversation(bottle: btl, completionBlock: { (err, databaseReference) in
-                if let error = err {
+                if let _ = err {
                     self.showMessage(message: ServerError.unknownError.type.errorMessage, type: .error)
                 } else {
                     self.showActivityLoader(false)

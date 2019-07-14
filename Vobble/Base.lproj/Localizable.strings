@@ -30,6 +30,8 @@
 "ERROR_USERNAME_EXISTS"                 = "Username already used, try another one";
 "ERROR_WRONG_LOGIN_METHOD"              = "This email is registered before, please login with your usual login method";
 "ERROR_WRONG_CODE"                      = "Verification code is invalid";
+"ERROR_DEVICE_BLOCKED"                  = "Sorry, you are not allowed to login";
+"ERROR_ACOUNT_DEACTIVATED"               = "Sorry, Your account is not activated anymore";
 
 
 // Connection errors messages
@@ -187,6 +189,11 @@
 "EXTEND_CHAT_TITLE"                     = "Extend chat";
 "EXTEND_CHAT_POPUP_TITLE"               = "Extend your chat with %@";
 
+// record audio reply
+"AUDIO_REPLY_TITLE"                     = "Send a voice reply to start the conversation";
+"AUDIO_REPLY_RECORD"                    = "Press and hold to record";
+"AUDIO_REPLY_START"                     = "Record";
+
 // filter
 "FEMALE"                                = "Female";
 "MALE"                                  = "Male";
@@ -291,4 +298,8 @@
 
 "TUT_CHAT_1"                            = "Here you can find a countdown for how much time you have left to chat";
 "TUT_REPLY_1"                           = "is it interesting ? Reply to this user now, click to shoot a video!";
+"TUT_CAM_1"                             = "Your account will be blocked if you share any sexual content.";
+"TUT_CAM_OK_1"                          = "NEXT...";
+"TUT_CAM_2"                             = "Show your face and voice clearly. Black screen videos will be removed.. Quality videos spread faster!";
+"TUT_CAM_OK_2"                          = "READY..";
 

@@ -125,6 +125,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                           AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]
     
     var replyVideoUrlToUpload: URL?
+    var replyAudioUrlToUpload: URL?
     var bottleToReplyTo: Bottle?
     
     var isTyping: Bool {
@@ -231,7 +232,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
         
         // Setup timer to check on user status
-        self.invalidUserTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.checkUserStatus), userInfo: nil, repeats: true)
+        self.invalidUserTimer = Timer.scheduledTimer(timeInterval: 40, target: self, selector: #selector(self.checkUserStatus), userInfo: nil, repeats: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -303,6 +304,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 // upload the reply video here to make sure we can show the loader
                 if let replyVideoUrl = replyVideoUrlToUpload {
                     self.uploadVideo(videoUrl: replyVideoUrl)
+                }
+                
+                if let replyAudioUrl = replyAudioUrlToUpload {
+                    self.uploadAudio(audioUrl: replyAudioUrl)
                 }
                 
                 playPopSound()
@@ -417,8 +422,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             
             if let is_seen = conversation.is_seen, is_seen == 0 {
                 chatVc.conversationRef?.updateChildValues(["is_seen": 1])
-                chatVc.conversationRef?.updateChildValues(["startTime": ServerValue.timestamp()])
-                chatVc.seconds = 24.0*60.0*60.0
+                chatVc.conversationRef?.updateChildValues(["startTime": CUnsignedLongLong(DataStore.shared.currentUTCTime)])
+                chatVc.conversationRef?.updateChildValues(["finishTime": CUnsignedLongLong(DataStore.shared.currentUTCTime + AppConfig.chatValidityafterSeen)])
+                chatVc.seconds = AppConfig.chatValidityafterSeen/1000.0
 
                 // send push notification to peer to let him know that the chat is open now
                 let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
@@ -468,30 +474,35 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         
         //if is_seen == false --> hide chat tool bar so we can't send any message
-        if conversation.isMyBottle {
-            inputToolbar.isHidden = false
-            chatBlockedContainer.isHidden = true
-            chatPendingContainer.isHidden = true
-            customNavBar.timerView.isHidden = false
-            initCustomToolBar()
-        } else if let is_seen = conversation.is_seen, is_seen == 1 {
-            inputToolbar.isHidden = false
-            chatBlockedContainer.isHidden = true
-            chatPendingContainer.isHidden = true
-            customNavBar.timerView.isHidden = false
-            initCustomToolBar()
-        } else {
-            if !isChatBlockedShowedBefore {
-                inputToolbar.isHidden = true
-                chatBlockedContainer.isHidden = false
-                chatPendingContainer.isHidden = false
-                customNavBar.timerView.isHidden = true
-                isChatBlockedShowedBefore = true
+        if conversation.is_replay_blocked == 0 {
+            if conversation.isMyBottle {
+                
+                inputToolbar.isHidden = false
+                chatBlockedContainer.isHidden = true
+                chatPendingContainer.isHidden = true
+                customNavBar.timerView.isHidden = false
+                initCustomToolBar()
+            } else if let is_seen = conversation.is_seen, is_seen == 1 {
+                inputToolbar.isHidden = false
+                chatBlockedContainer.isHidden = true
+                chatPendingContainer.isHidden = true
+                customNavBar.timerView.isHidden = false
+                initCustomToolBar()
+            } else {
+                if !isChatBlockedShowedBefore {
+                    inputToolbar.isHidden = true
+                    chatBlockedContainer.isHidden = false
+                    chatPendingContainer.isHidden = false
+                    customNavBar.timerView.isHidden = true
+                    isChatBlockedShowedBefore = true
+                }
             }
+        } else {
+            chatBlockedLabel.isHidden = true
         }
         
         // show chat tutorial on first opening of an unblocked chat
-        if let tutShowedBefore = DataStore.shared.me?.homeTutShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
+        if let tutShowedBefore = DataStore.shared.me?.chatTutShowed, !tutShowedBefore, chatBlockedContainer.isHidden{
             DataStore.shared.tutorialChatShowed = true
             DataStore.shared.me?.chatTutShowed = true
             dispatch_main_after(2) {
@@ -511,6 +522,17 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         chatVc.conversationOriginalObject = conversation
         chatVc.conversationId = conversationOriginalObject?.idString
+        
+        // if conversation time is already expired then kick the user off
+        if let is_seen = conversation.is_seen, is_seen == 1 {
+            if let fTime = conversation.finishTime {
+                let currentDate = Date().timeIntervalSince1970 * 1000
+                let secondsLeftToCat = (fTime - currentDate)/1000.0
+                if secondsLeftToCat <= 0 {
+                    timerFinished()
+                }
+            }
+        }
     }
     
     func initNewConversation() {
@@ -1073,29 +1095,23 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 self.isUserMuted = (snapshot.value as? Bool) ?? false
                 
             })
-            
         }
     }
     
     private func observeExtededChat() {
         if let convRef = conversationRef {
-            extendChatRefHandle = convRef.child("startTime").observe(.value, with: { snapshot in
+            extendChatRefHandle = convRef.child("finishTime").observe(.value, with: { snapshot in
                 let value = snapshot.value as? Double
-                if let startTime = value {
-                    self.conversationOriginalObject?.startTime = startTime
-                    
-                    self.conversationOriginalObject?.finishTime = startTime + AppConfig.chatValidityafterSeen
+                if let expiryTime = value {
+                    self.conversationOriginalObject?.finishTime = expiryTime
                     
                     if let fTime = self.conversationOriginalObject?.finishTime {
                         let currentDate = Date().timeIntervalSince1970 * 1000
                         self.seconds = (fTime - currentDate)/1000.0
                     }
-
                     self.initNavBar()
                 }
-                
             })
-            
         }
     }
     
@@ -1325,7 +1341,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         
         // update the lastUpdate date of the conversation
-        self.conversationRef?.updateChildValues(["updatedAt": ServerValue.timestamp()])
+        self.conversationRef?.updateChildValues(["updatedAt": CUnsignedLongLong(DataStore.shared.currentUTCTime)])
     }
     
     func muteUser() {
@@ -1354,7 +1370,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     }
     
     @objc func checkUserStatus(){
-        _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me)
+        ApiManager.shared.getMe(completionBlock: { (success, error, user) in
+            _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me, error: error)
+        })
     }
     // MARK: UITextViewDelegate methods
     override func textViewDidChange(_ textView: UITextView) {
@@ -1754,8 +1772,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
                     self.soundRecorder.record()
                 }
             //}
-        }
-        else if sender.state == .ended {
+        } else if sender.state == .ended {
             recordTimer?.invalidate()
             stopRecorderTimer()
             recordButton.setProgress(0.0)
@@ -1975,6 +1992,7 @@ extension ChatViewController {
         }catch {}
     }
 }
+
 // MARK:- class PreviewPhoto
 class PreviewPhoto: NSObject, NYTPhoto {
     

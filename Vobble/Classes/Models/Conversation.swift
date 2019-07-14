@@ -20,12 +20,15 @@ class Conversation: BaseModel {
     private let kStartTime: String = "startTime"
     private let kFinishTime: String = "finishTime"
     private let kIsSeen: String = "is_seen"
+    private let kis_replay_blocked: String = "is_replay_blocked"
     private let kUser1UnseenMessagesCount: String = "user1_unseen"
     private let kUser2UnseenMessagesCount: String = "user2_unseen"
     private let kUser1LastSeenMessageId: String = "user1LastSeenMessageId"
     private let kUser2LastSeenMessageId: String = "user2LastSeenMessageId"
     private let kUser1ChatMute: String = "user1ChatMute"
     private let kUser2ChatMute: String = "user2ChatMute"
+    private let kIsReplyBlocked: String = "is_replay_blocked"
+    
     
     // MARK: Properties
     public var idString : String?
@@ -36,6 +39,8 @@ class Conversation: BaseModel {
     public var startTime: Double?
     public var finishTime: Double?
     public var is_seen: Int?
+    public var is_replay_blocked: Int? = 0
+    public var isReplyBlocked: Int?
     public var user1UnseenMessagesCount: Int?
     public var user2UnseenMessagesCount: Int?
     public var user1LastSeenMessageId: String?
@@ -116,9 +121,26 @@ class Conversation: BaseModel {
         if let value = json[kStartTime].double {
             startTime = value
         }
+        if let value = json[kFinishTime].double, value != 0 {
+            finishTime = value
+        } else if let sTime = startTime, sTime > 0.0 {
+            finishTime = sTime + AppConfig.chatValidityafterSeen
+        }
+        
         if let value = json[kIsSeen].int {
             is_seen = value
         }
+        
+        if let value = json[kIsReplyBlocked].int {
+            is_replay_blocked = value
+        } else {
+            is_replay_blocked = 0
+        }
+        
+        if let value = json[kIsReplyBlocked].int {
+            isReplyBlocked = value
+        }
+        
         if let value = json[kUser1UnseenMessagesCount].int {
             user1UnseenMessagesCount = value
         }
@@ -142,9 +164,6 @@ class Conversation: BaseModel {
             user2ChatMute = value
         }
         
-        if let sTime = startTime, sTime > 0.0 {
-            finishTime = sTime + AppConfig.chatValidityafterSeen
-        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -181,6 +200,14 @@ class Conversation: BaseModel {
         
         if let value = is_seen {
             dictionary[kIsSeen] = value
+        }
+        
+        if let value = is_replay_blocked {
+            dictionary[kis_replay_blocked] = value
+        }
+        
+        if let value = isReplyBlocked {
+            dictionary[kIsReplyBlocked] = value
         }
         
         if let value = user1UnseenMessagesCount {

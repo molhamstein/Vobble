@@ -49,6 +49,7 @@
 		576B2AD02170A352001F42C4 /* ChatTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576B2ACF2170A352001F42C4 /* ChatTutorialViewController.swift */; };
 		57771F5D21270B1900A9C884 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57771F5C21270B1800A9C884 /* AnnotationViewController.swift */; };
 		57776E7921A46D9F002A102A /* ReplyTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57776E7821A46D9F002A102A /* ReplyTutorialViewController.swift */; };
+		5778D9EB22D7521F00AA12DA /* RecordAudioReplyMediaControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5778D9EA22D7521E00AA12DA /* RecordAudioReplyMediaControl.swift */; };
 		5787DEC421008787009C2A43 /* dolphin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5787DEC321008786009C2A43 /* dolphin.gif */; };
 		5796242F20793B790005292A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242D20793B790005292A /* TermsViewController.swift */; };
 		5796243020793B790005292A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5796242E20793B790005292A /* AboutViewController.swift */; };
@@ -342,6 +343,7 @@
 		576B2ACF2170A352001F42C4 /* ChatTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTutorialViewController.swift; sourceTree = "<group>"; };
 		57771F5C21270B1800A9C884 /* AnnotationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		57776E7821A46D9F002A102A /* ReplyTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyTutorialViewController.swift; sourceTree = "<group>"; };
+		5778D9EA22D7521E00AA12DA /* RecordAudioReplyMediaControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudioReplyMediaControl.swift; sourceTree = "<group>"; };
 		5787DEC321008786009C2A43 /* dolphin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dolphin.gif; sourceTree = "<group>"; };
 		5796242D20793B790005292A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsViewController.swift; path = ../Home/TermsViewController.swift; sourceTree = "<group>"; };
 		5796242E20793B790005292A /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ../Home/AboutViewController.swift; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 			children = (
 				5706C42F204DC568006E7C9A /* RecordMediaViewController.swift */,
 				5706C435204DDFF4006E7C9A /* ShoreCell.swift */,
+				5778D9EA22D7521E00AA12DA /* RecordAudioReplyMediaControl.swift */,
 				575A16CE204EBD0F00F4B510 /* PreviewMediaControl.swift */,
 			);
 			name = "Throw bottle";
@@ -1905,6 +1908,7 @@
 				B18A5DC520348E4300F139B7 /* NSObject+SimpleAuthAdditions.m in Sources */,
 				B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */,
 				5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */,
+				5778D9EB22D7521F00AA12DA /* RecordAudioReplyMediaControl.swift in Sources */,
 				B18A5D6E20348E4300F139B7 /* NSObject+RACDescription.m in Sources */,
 				B18A5D7B20348E4300F139B7 /* RACBehaviorSubject.m in Sources */,
 				B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */,

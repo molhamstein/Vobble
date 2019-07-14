@@ -42,13 +42,17 @@ class ConversationViewController: AbstractController {
         DataStore.shared.myBottles = [Conversation]()
         DataStore.shared.myReplies = [Conversation]()
         
-        observeConversation()
-        self.refreshView()
-        
         emptyPlaceHolderView.isHidden = true
         emptyPlaceHolderLabel.font = AppFonts.normal
         emptyPlaceHolderLabel.text = "MY_BOTTLES_EMPTY_PLACEHOLDER".localized
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.observeConversation()
+        self.refreshView()
     }
     
     deinit {

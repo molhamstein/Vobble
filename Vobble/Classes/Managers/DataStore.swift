@@ -32,6 +32,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_THROWN_BOTTLES = "thrownBottles"
     private let CACHE_KEY_TUT_1 = "tutorial1"
     private let CACHE_KEY_TUT_CHAT = "tutorialChat"
+    private let CACHE_KEY_TUT_CAM = "tutorialCam"
     private let CACHE_KEY_UNSENT_TEXTS = "ChatUnsentTexts"
     private let CACHE_KEY_TOPICS = "topics"
     private let CACHE_KEY_TOPICS_SHOWED = "topicsShowed"
@@ -53,6 +54,7 @@ class DataStore :NSObject {
     
     private var _tutorial1Showed: Bool?
     private var _tutorialChatShowed: Bool?
+    private var _tutorialCamShowed: Bool?
     
     private var _topics: [Topic] = [Topic]()
     private var _topicsShowed: Bool = false
@@ -276,7 +278,6 @@ class DataStore :NSObject {
         }
     }
     
-    
     public var tutorial1Showed:Bool? {
         set{
             _tutorial1Showed = newValue
@@ -304,6 +305,21 @@ class DataStore :NSObject {
                 _tutorialChatShowed = (loadIntForKey(key: CACHE_KEY_TUT_CHAT) >= 1) ? true : false
             }
             return _tutorialChatShowed
+        }
+    }
+    
+    public var tutorialCamShowed:Bool? {
+        set{
+            _tutorialCamShowed = newValue
+            if let tutShowed = _tutorialCamShowed {
+                saveIntWithKey(intToStore: tutShowed ? 1 : 0, key: CACHE_KEY_TUT_CAM)
+            }
+        }
+        get {
+            if (_tutorialCamShowed == nil) {
+                _tutorialCamShowed = (loadIntForKey(key: CACHE_KEY_TUT_CAM) >= 1) ? true : false
+            }
+            return _tutorialCamShowed
         }
     }
     

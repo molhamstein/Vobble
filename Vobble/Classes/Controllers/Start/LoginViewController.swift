@@ -980,10 +980,10 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
         self.showActivityLoader(true)
         SocialManager.shared.googleLoginResult(signIn, didSignInFor: user, withError: error) { (user, success, error) in
             self.showActivityLoader(false)
-            if (success) {
+            
+            if ActionDeactiveUser.execute(viewController: self, user: user, error: error) {
                 
-                // Check user status 
-                if ActionDeactiveUser.execute(viewController: self, user: user) {
+                if (success) {
                     
                     if let tempRegistredUser = user, let name = tempRegistredUser.userName {
                         self.tempUserInfoHolder = tempRegistredUser
@@ -1002,18 +1002,17 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                     Flurry.logEvent(AppConfig.login_success, withParameters:logEventParams);
                     //self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                     
-                }
-                
-            } else {
-                let errorServer = error ?? ServerError.unknownError
-                // social login failed
-                if errorServer.type == ServerError.socialLoginError.type {
-                    self.showMessage(message: "ERROR_SOCIAL_GOOGLE", type: .error)
                 } else {
-                    self.showMessage(message: errorServer.type.errorMessage, type: .error)
+                    let errorServer = error ?? ServerError.unknownError
+                    // social login failed
+                    if errorServer.type == ServerError.socialLoginError.type {
+                        self.showMessage(message: "ERROR_SOCIAL_GOOGLE", type: .error)
+                    } else {
+                        self.showMessage(message: errorServer.type.errorMessage, type: .error)
+                    }
+                    let logEventParams = ["loginType": "google"];
+                    Flurry.logEvent(AppConfig.login_failure, withParameters:logEventParams);
                 }
-                let logEventParams = ["loginType": "google"];
-                Flurry.logEvent(AppConfig.login_failure, withParameters:logEventParams);
             }
         }
     }
