@@ -420,21 +420,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if conversation.isMyBottle {
             chatVc.convTitle = conversation.bottle?.owner?.userName ?? ""
             
-            if let is_seen = conversation.is_seen, is_seen == 0 {
-                chatVc.conversationRef?.updateChildValues(["is_seen": 1])
-                chatVc.conversationRef?.updateChildValues(["startTime": CUnsignedLongLong(DataStore.shared.currentUTCTime)])
-                chatVc.conversationRef?.updateChildValues(["finishTime": CUnsignedLongLong(DataStore.shared.currentUTCTime + AppConfig.chatValidityafterSeen)])
-                chatVc.seconds = AppConfig.chatValidityafterSeen/1000.0
-
-                // send push notification to peer to let him know that the chat is open now
-                let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
-                let msgToSendAr = String(format: "NOTIFICATION_CHAT_IS_ACTIVE_AR".localized, (DataStore.shared.me?.userName)!)
-                ApiManager.shared.sendPushNotification(msg: msgToSend, msg_ar: msgToSendAr, targetUser: conversation.getPeer!, chatId: self.conversationId, completionBlock: { (success, error) in })
-                
-                // schedule a notification to remind the users before the chat expires
-                ApiManager.shared.onReplyOpened(conversation: conversation, completionBlock: { (success, err) in})
-            }
-            
             if conversation.user2ChatMute ?? false{
                 self.customNavBar.moreOptions.setImage(self.muteImg, for: .normal)
             }else {
@@ -452,8 +437,20 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             chatVc.convTitle = conversation.user?.userName ?? ""
         }
         
-        if let is_seen = conversation.is_seen, is_seen == 1 {
+        if let is_seen = conversation.is_seen, is_seen == 0 {
+            chatVc.conversationRef?.updateChildValues(["is_seen": 1])
+            chatVc.conversationRef?.updateChildValues(["startTime": CUnsignedLongLong(DataStore.shared.currentUTCTime)])
+            chatVc.conversationRef?.updateChildValues(["finishTime": CUnsignedLongLong(DataStore.shared.currentUTCTime + AppConfig.chatValidityafterSeen)])
+            chatVc.seconds = AppConfig.chatValidityafterSeen/1000.0
             
+            // send push notification to peer to let him know that the chat is open now
+            let msgToSend = String(format: "NOTIFICATION_CHAT_IS_ACTIVE".localized, (DataStore.shared.me?.userName)!)
+            let msgToSendAr = String(format: "NOTIFICATION_CHAT_IS_ACTIVE_AR".localized, (DataStore.shared.me?.userName)!)
+            ApiManager.shared.sendPushNotification(msg: msgToSend, msg_ar: msgToSendAr, targetUser: conversation.getPeer!, chatId: self.conversationId, completionBlock: { (success, error) in })
+            
+            // schedule a notification to remind the users before the chat expires
+            ApiManager.shared.onReplyOpened(conversation: conversation, completionBlock: { (success, err) in})
+        } else {
             if let fTime = conversation.finishTime {
                 let currentDate = Date().timeIntervalSince1970 * 1000
                 chatVc.seconds = (fTime - currentDate)/1000.0
@@ -1502,7 +1499,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     // this means this was the first reply messsage in the conversation and the chat is not open yet
                     
                     // show explanation message
-                    self?.chatPendingContainer.isHidden = false
+                    //self?.chatPendingContainer.isHidden = false
 //
 //                    let alertController = UIAlertController(title: "", message: "CHAT_REPLY_SENT_MSG".localized, preferredStyle: .alert)
 //                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)

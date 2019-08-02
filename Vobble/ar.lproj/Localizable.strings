@@ -191,8 +191,9 @@
 
 // record audio reply
 "AUDIO_REPLY_TITLE"                     = "أرسل رداً صوتياً لتبدأ المحادثة";
-"AUDIO_REPLY_RECORD"                    = "إضغط و ثبت للتسجيل";
+"AUDIO_REPLY_RECORD"                    = "إضغط لبدء التسجيل";
 "AUDIO_REPLY_START"                     = "تسجيل";
+"AUDIO_REPLY_STOP"                      = "توقف";
 
 // filter
 "FEMALE"                                = "بنت";

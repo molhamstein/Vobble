@@ -2033,6 +2033,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+                                            <action selector="didPressRecordAudio" destination="kBh-IY-1vv" eventType="touchUpInside" id="CXF-4B-SlR"/>
                                             <action selector="ignoreBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="hBG-7G-BHv"/>
                                         </connections>
                                     </button>

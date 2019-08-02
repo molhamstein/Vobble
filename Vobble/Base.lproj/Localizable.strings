@@ -191,8 +191,9 @@
 
 // record audio reply
 "AUDIO_REPLY_TITLE"                     = "Send a voice reply to start the conversation";
-"AUDIO_REPLY_RECORD"                    = "Press and hold to record";
+"AUDIO_REPLY_RECORD"                    = "Press to start recording";
 "AUDIO_REPLY_START"                     = "Record";
+"AUDIO_REPLY_STOP"                      = "Stop";
 
 // filter
 "FEMALE"                                = "Female";

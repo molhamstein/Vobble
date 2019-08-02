@@ -88,9 +88,9 @@ class RecordAudioReplyMediaControl : AbstractController {
         
         self.backButton.tintColor = UIColor.white
         
-        let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
-        longGestureRecognizer.minimumPressDuration = 0.3
-        self.startButton.addGestureRecognizer(longGestureRecognizer)
+//        let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didPressRecordAudio(_:)))
+//        longGestureRecognizer.minimumPressDuration = 0.3
+//        self.startButton.addGestureRecognizer(longGestureRecognizer)
         
         self.startButton.bringToFront()
         
@@ -221,10 +221,25 @@ extension RecordAudioReplyMediaControl: AVAudioRecorderDelegate {
         self.playBeepSound()
     }
     
-    func didPressRecordAudio(_ sender: UILongPressGestureRecognizer){
+    @IBAction func didPressRecordAudio() {
         //print("Long tap is handled")
-        if sender.state == .began {
+        if self.isRecording == false {
            
+            self.startButton.setTitle("AUDIO_REPLY_STOP".localized, for: .normal)
+            
+            // pop animation for the button
+            UIView.animateKeyframes(withDuration: 1.0, delay: 0.0, options: [.calculationModeLinear], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
+                    self.startButton.transform = CGAffineTransform.identity.scaledBy(x: 1.2, y: 1.2)
+                })
+                UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                    self.startButton.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
+                })
+                
+            }, completion: { [weak self] (finished) in
+                self?.startButton.layer.removeAllAnimations()
+            })
+            
             self.isRecording = true
             self.playBeepSound()
             
@@ -273,14 +288,27 @@ extension RecordAudioReplyMediaControl: AVAudioRecorderDelegate {
                 self.soundRecorder.delegate = self
                 self.soundRecorder.record()
             }
-            //}
-        } else if sender.state == .ended {
+            
+        } else {
             recordTimer?.invalidate()
             stopRecorderTimer()
             recordButton.setProgress(0.0)
             self.playBeepSound()
             self.isRecording = false
-            //write the function for stop recording the voice here
+            
+            self.startButton.setTitle("AUDIO_REPLY_START".localized, for: .normal)
+            
+            // pop animation for the button
+            UIView.animateKeyframes(withDuration: 1.0, delay: 0.0, options: [.calculationModeLinear], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5, animations: {
+                    self.startButton.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8)
+                })
+                UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                    self.startButton.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
+                })
+            }, completion: { [weak self] (finished) in
+                self?.startButton.layer.removeAllAnimations()
+            })
             
         }
     }
