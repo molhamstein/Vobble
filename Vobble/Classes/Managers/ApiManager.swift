@@ -348,10 +348,14 @@ class ApiManager: NSObject {
         // url & parameters
         let signUpURL = "\(baseURL)/users/me/?deviceName=\(AppConfig.getDeviceId())"
         
+        var customHeaders = headers
+        customHeaders["ios-version"] = AppConfig.getBundleVersion()
+        print(customHeaders)
         // build request
-        Alamofire.request(signUpURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+        Alamofire.request(signUpURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: customHeaders).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
+                print(jsonResponse)
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
                     completionBlock(false , serverError, nil)

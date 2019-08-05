@@ -226,7 +226,6 @@
 "SETTINGS_SHARE_MSG"                    = "Come over and try this cool App, \n https://itunes.apple.com/us/app/vibo-خليج-الفيديو/id1407745068?ls=1&mt=8";
 "SETTINGS_MAIN_NOT_CONFIGURED"          = "Your Device is not configured to send emails";
 
-
 "ABOUT_TITLE"                           = "About us";
 "TERMS_TITLE"                           = "Terms of Service";
 
@@ -304,3 +303,7 @@
 "TUT_CAM_2"                             = "Show your face and voice clearly. Black screen videos will be removed.. Quality videos spread faster!";
 "TUT_CAM_OK_2"                          = "READY..";
 
+// version
+"VERSION_AVAILABLE"                     = "There is a newer version of Vibo available right now";
+"VERSION_OBSOLETE"                      = "You need to update the app to a newer version";
+"UPDATE"                                = "Update";

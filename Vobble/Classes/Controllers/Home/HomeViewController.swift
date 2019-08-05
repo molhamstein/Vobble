@@ -198,6 +198,7 @@ class HomeViewController: AbstractController {
         
         ApiManager.shared.getMe(completionBlock: { (success, error, user) in
             _ = ActionDeactiveUser.execute(viewController: self, user: user, error: error)
+            ActionCheckForUpdate.execute(viewController: self)
         })
         ApiManager.shared.requestUserInventoryItems { (items, error) in}
         ApiManager.shared.markUserAsActive { (success, error) in}

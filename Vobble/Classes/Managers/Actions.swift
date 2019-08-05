@@ -171,6 +171,49 @@ class ActionDeactiveUser {
     }
 }
 
+class ActionCheckForUpdate {
+    class func execute(viewController: UIViewController) {
+        if let versionStatus = DataStore.shared.me?.version?.status {
+            let alert = UIAlertController(title: "GLOBAL_WARNING_TITLE".localized, message: nil, preferredStyle: .alert)
+            let updateAction = UIAlertAction(title: "UPDATE".localized, style: .default, handler: {_ in
+                guard let url = URL(string: DataStore.shared.me?.version?.link?.replacingOccurrences(of: "\\", with: "") ?? "") else {
+                    return
+                }
+                
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            })
+            let cancelAction = UIAlertAction(title: "ok".localized, style: .cancel, handler: nil)
+            
+            
+            switch versionStatus {
+                case .obsolete:
+                    alert.message = "VERSION_OBSOLETE".localized
+                    alert.addAction(updateAction)
+                    viewController.present(alert, animated: true, completion: nil)
+                
+                case .updateAvailable:
+                    alert.message = "VERSION_AVAILABLE".localized
+                    alert.addAction(updateAction)
+                    alert.addAction(cancelAction)
+                    
+                    if !DataStore.shared.versionChecked {
+                        DataStore.shared.versionChecked = true
+                        viewController.present(alert, animated: true, completion: nil)
+                    }
+                
+                
+                case .upToDate:
+                    return
+            }
+        }
+
+    }
+}
+
 class ActionRegisterNotification {
     class func execute(conversation: Conversation?) {
         if #available(iOS 10.0, *) {

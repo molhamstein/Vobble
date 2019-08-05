@@ -62,6 +62,7 @@ class AppUser: BaseModel, NSCopying {
     private let kFoundBottlesCount = "foundBottlesCount"
     private let kRepliesBottlesCount = "repliesBottlesCount"
     private let kPhoneNumber = "phonenumber"
+    private let kVersion = "version"
     
     private let kHomeTutShowed = "homeTutShowed"
     private let kChatTutShowed = "ChatTutShowed"
@@ -85,6 +86,7 @@ class AppUser: BaseModel, NSCopying {
     public var countryISOCode: String?
     public var loginType: LoginType?
     public var status: Status?
+    public var version: Version?
     public var token: String?
     public var foundBottlesCount: Int?
     public var repliesBottlesCount: Int?
@@ -139,6 +141,9 @@ class AppUser: BaseModel, NSCopying {
         }
         if let accountStatus = json[kUserStateKey].string {
             status = Status(rawValue: accountStatus)
+        }
+        if json[kVersion] != JSON.null {
+            version = Version(json: json[kVersion])
         }
         if let nextRefill = json[kUserNextRefill].string {
             nextRefillDate = DateHelper.getDateFromISOString(nextRefill)
@@ -237,6 +242,10 @@ class AppUser: BaseModel, NSCopying {
         // bottles left to throw count
         if let value = bottlesLeftToThrowCount {
             dictionary[kUserBottlesLeftToday] = value
+        }
+        // app version
+        if let value = version {
+            dictionary[kVersion] = value.dictionaryRepresentation()
         }
         
         if let value = extraBottlesLeftToThrowCount {

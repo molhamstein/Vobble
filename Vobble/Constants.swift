@@ -16,8 +16,8 @@ struct AppConfig {
     //static let appBaseDevURL = "https://vobble.herokuapp.com/api"
     //static let appBaseDevURL = "http://104.217.253.15:7000/api"
     //static let appBaseDevURL = "http://104.217.253.15:3032/api"
-    static let appBaseDevURL = "http://104.217.253.15:3007/api"
-    //static let appBaseLiveURL = "http://159.65.202.38:3000/api"
+    //static let appBaseDevURL = "http://104.217.253.15:3007/api"
+    static let appBaseDevURL = "http://159.65.202.38:3000/api"
     static let appBaseLiveURL = "http://chabani.tv:3000/api"
     static let useLiveAPI: Bool = true
     static let isProductionBuild: Bool = true
@@ -173,6 +173,12 @@ struct AppConfig {
     static func getDeviceId () -> String{
         let deviceID = UIDevice.current.identifierForVendor!.uuidString
         return deviceID
+    }
+    
+    static func getBundleVersion () -> String{
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        return version
     }
     
 }
