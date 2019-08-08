@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Managers/Actions.swift"
-            timestampString = "586656120.4364949"
+            timestampString = "586997108.9132479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Managers/Actions.swift"
-            timestampString = "586656120.437144"
+            timestampString = "586997108.913457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/AppDelegate/AppDelegate.swift"
-            timestampString = "586656120.437536"
+            timestampString = "586997108.91357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
@@ -58,12 +58,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Managers/Actions.swift"
-            timestampString = "586656150.132617"
+            timestampString = "586997108.913693"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "183"
             endingLineNumber = "183"
             landmarkName = "execute(viewController:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
+            timestampString = "586997108.913757"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vobble.HomeViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Vobble"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdhayek/Desktop/Vobble/Vobble/Classes/Controllers/Home/HomeViewController.swift"
+                  timestampString = "586997109.559292"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "1751">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool, Swift.Optional&lt;Vobble.ServerError&gt;, Swift.Optional&lt;Vobble.AppUser&gt;) -&gt; () in Vobble.HomeViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Vobble"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdhayek/Desktop/Vobble/Vobble/Classes/Controllers/Home/HomeViewController.swift"
+                  timestampString = "586997109.566677"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "59">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Controllers/Home/HomeViewController.swift"
+            timestampString = "586997108.913849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

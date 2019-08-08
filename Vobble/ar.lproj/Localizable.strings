@@ -10,6 +10,7 @@
 "GLOBAL_ERROR_TITLE"                    = "خطأ!";
 "GLOBAL_SUCCESS_TITLE"                  = "نجاح";
 "GLOBAL_WARNING_TITLE"                  = "تنبيه!";
+"GLOBAL_HEAD_UP_TITLE"                  = "تحذير!";
 "CANCEL"                                = "الغاء";
 "ok"                                    = "موافق";
 "SUBMIT"                                = "إرسال";

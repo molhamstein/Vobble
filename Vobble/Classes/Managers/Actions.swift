@@ -191,11 +191,13 @@ class ActionCheckForUpdate {
             
             switch versionStatus {
                 case .obsolete:
+                    alert.title = "GLOBAL_HEAD_UP_TITLE".localized
                     alert.message = "VERSION_OBSOLETE".localized
                     alert.addAction(updateAction)
                     viewController.present(alert, animated: true, completion: nil)
                 
                 case .updateAvailable:
+                    alert.title = "GLOBAL_WARNING_TITLE".localized
                     alert.message = "VERSION_AVAILABLE".localized
                     alert.addAction(updateAction)
                     alert.addAction(cancelAction)

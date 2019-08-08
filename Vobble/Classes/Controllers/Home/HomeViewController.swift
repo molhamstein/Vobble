@@ -163,7 +163,12 @@ class HomeViewController: AbstractController {
                 }
             }
         }
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appGotBackFromBackground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -796,6 +801,11 @@ class HomeViewController: AbstractController {
         }
     }
     
+    @objc func appGotBackFromBackground() {
+        ApiManager.shared.getMe(completionBlock: { (success, error, user) in
+            ActionCheckForUpdate.execute(viewController: self)
+        })
+    }
     
     func goToMainShore() {
         

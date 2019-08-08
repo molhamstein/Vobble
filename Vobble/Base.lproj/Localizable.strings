@@ -10,6 +10,7 @@
 "GLOBAL_ERROR_TITLE"                    = "ERROR!";
 "GLOBAL_SUCCESS_TITLE"                  = "SUCCESS";
 "GLOBAL_WARNING_TITLE"                  = "WARNING!";
+"GLOBAL_HEAD_UP_TITLE"                  = "Head's Up!";
 "CANCEL"                                = "Cancel";
 "ok"                                    = "Ok";
 "SUBMIT"                                = "Submit";
@@ -305,5 +306,5 @@
 
 // version
 "VERSION_AVAILABLE"                     = "There is a newer version of Vibo available right now";
-"VERSION_OBSOLETE"                      = "You need to update the app to a newer version";
+"VERSION_OBSOLETE"                      = "Your app is outdated, please update you app";
 "UPDATE"                                = "Update";
