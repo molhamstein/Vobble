@@ -577,8 +577,8 @@
                         <outlet property="vThrowBtnImg" destination="x5U-O0-CwX" id="AcG-04-Yo3"/>
                         <segue destination="9aW-Lr-Rgh" kind="presentation" identifier="homeRecrodSegue" id="nLz-PW-Ry2"/>
                         <segue destination="jSj-sV-840" kind="show" identifier="findBottleSegue" id="iBc-ms-v9Z"/>
-                        <segue destination="JHw-gh-lbH" kind="show" identifier="myBottlesSegue" id="iv4-15-2aj"/>
                         <segue destination="nsm-q8-EXx" kind="show" identifier="shopSegue" id="nBc-5T-Bzd"/>
+                        <segue destination="aUN-ew-xOL" kind="show" identifier="myBottlesSegue" id="0ng-HX-92Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uNV-ml-ryT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1661,6 +1661,7 @@
                             <constraint firstItem="tBt-4d-eoz" firstAttribute="top" secondItem="w8P-AH-TJF" secondAttribute="top" constant="-10" id="vVl-Mv-8yo"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="eLE-1F-NHB"/>
                     <connections>
                         <outlet property="bottleCollectionView" destination="I7H-cB-IAM" id="gIh-21-K8O"/>
                         <outlet property="emptyPlaceHolderLabel" destination="JHr-oU-YoA" id="52H-x1-IT6"/>
@@ -1674,7 +1675,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sPl-d8-dYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2967" y="226"/>
+            <point key="canvasLocation" x="-2526" y="224"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dXw-HI-R4a">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="aUN-ew-xOL" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="dow-6N-xtX">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JHw-gh-lbH" kind="relationship" relationship="rootViewController" id="YPg-SW-fSv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SbT-q0-uwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3289" y="224"/>
         </scene>
         <!--Shop View Controller-->
         <scene sceneID="teb-WE-CcG">
@@ -1827,7 +1844,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nef-IB-Vhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2260" y="225"/>
+            <point key="canvasLocation" x="-1821" y="224"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="Taz-dV-rfH">
@@ -2946,14 +2963,14 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
     </scenes>
     <resources>
         <image name="Canopy" width="575" height="246"/>
-        <image name="boy" width="408" height="357"/>
-        <image name="boy_3_1" width="252.72000122070312" height="235.44000244140625"/>
+        <image name="boy" width="544" height="476"/>
+        <image name="boy_3_1" width="351" height="327"/>
         <image name="camera-switch" width="29" height="22"/>
         <image name="chatMoreOptions" width="22" height="20"/>
         <image name="chevron" width="24" height="24"/>
-        <image name="clouds" width="144000" height="47664"/>
+        <image name="clouds" width="2000" height="662"/>
         <image name="emptyListPlaceholder" width="50" height="50"/>
-        <image name="extend" width="456.48001098632812" height="318.72000122070312"/>
+        <image name="extend" width="1902" height="1328"/>
         <image name="filters" width="23" height="23"/>
         <image name="ic_chat_blocked" width="300" height="457"/>
         <image name="ic_close_white" width="20" height="20"/>
@@ -2966,25 +2983,25 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="ic_throw_bottle" width="24" height="24"/>
         <image name="ic_throw_bottle2" width="80" height="80"/>
         <image name="inst_fav" width="305" height="275"/>
-        <image name="island" width="564.75" height="459.75"/>
-        <image name="montains" width="3375" height="60"/>
+        <image name="island" width="753" height="613"/>
+        <image name="montains" width="4500" height="80"/>
         <image name="navBackIcon" width="25" height="23"/>
         <image name="pause" width="40" height="40"/>
-        <image name="photo" width="60" height="43"/>
+        <image name="photo" width="30" height="21"/>
         <image name="rateUsArt" width="750" height="493"/>
         <image name="recordFlashIcon" width="18" height="25"/>
         <image name="recordRecordingIcon" width="4" height="4"/>
-        <image name="sea" width="1500" height="1350.75"/>
+        <image name="sea" width="2000" height="1801"/>
         <image name="settings_art" width="610" height="615"/>
-        <image name="shore1" width="1125" height="882.75"/>
-        <image name="shore2" width="1125" height="882.75"/>
-        <image name="shore3" width="1125" height="882.75"/>
+        <image name="shore1" width="1500" height="1177"/>
+        <image name="shore2" width="1500" height="1177"/>
+        <image name="shore3" width="1500" height="1177"/>
         <image name="signup_male" width="63" height="15"/>
-        <image name="sky1" width="540.75" height="540.75"/>
-        <image name="sun" width="1316.25" height="1148.25"/>
+        <image name="sky1" width="721" height="721"/>
+        <image name="sun" width="1755" height="1531"/>
         <image name="try_finding_bottle" width="651" height="528"/>
-        <image name="umbrella" width="744.75" height="674.25"/>
-        <image name="user_placeholder" width="245.75999450683594" height="245.75999450683594"/>
-        <image name="wave" width="3375" height="554.25"/>
+        <image name="umbrella" width="993" height="899"/>
+        <image name="user_placeholder" width="1024" height="1024"/>
+        <image name="wave" width="4500" height="739"/>
     </resources>
 </document>

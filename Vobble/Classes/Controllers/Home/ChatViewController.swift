@@ -240,7 +240,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         if isInitialised == false {
             
-            if customNavBar.superview == nil {
+            if customNavBar.superview != nil || customNavBar.superview == nil{
                 // init nav bar
                 initNavBar()
                 
@@ -566,7 +566,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         if let _ = bottleToReplyTo {
             self.performSegue(withIdentifier: "unwindSendReply", sender: self)
         } else {
-            self.dismiss(animated: true, completion: nil)
+            self.popOrDismissViewControllerAnimated(animated: true)
         }
         
         if let _ = AudioManager.shared.audioPlayer {
