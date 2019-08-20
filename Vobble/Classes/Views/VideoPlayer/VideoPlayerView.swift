@@ -18,14 +18,16 @@ class VideoPlayerView: AbstractNibView {
     var playButton: UIButton!
     var seekTime: CMTime!
     var tolerance: CMTime = CMTimeMakeWithSeconds(0.5, 1)
+    var autoStart: Bool = true
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var slideBar: UISlider!
     @IBOutlet weak var videoView: UIView!
     
-    public func preparePlayer(videoURL: String,customPlayBtn: UIButton) {
+    public func preparePlayer(videoURL: String, customPlayBtn: UIButton, autoStart: Bool = true) {
         animateIndicator(animated: true)
         
+        self.autoStart = autoStart
         self.playButton = customPlayBtn
         self.player = Player()
         self.player.url = URL(string: videoURL)
@@ -121,6 +123,15 @@ extension VideoPlayerView {
         }
     }
     
+    func isReady() -> Bool {
+        switch (self.player.bufferingState.rawValue) {
+        case BufferingState.ready.rawValue:
+            return true
+        default:
+            return false
+        }
+    }
+    
     func animateIndicator(animated: Bool) {
         if animated {
             self.activityIndicator.isHidden = false
@@ -146,7 +157,10 @@ extension VideoPlayerView: PlayerDelegate {
     func playerBufferingStateDidChange(_ player: Player) {
         switch player.bufferingState.rawValue {
         case BufferingState.ready.rawValue:
-            self.player.playFromCurrentTime()
+            if self.autoStart {
+                self.player.playFromCurrentTime()
+                self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+            }
             animateIndicator(animated: false)
         default:
             animateIndicator(animated: true)

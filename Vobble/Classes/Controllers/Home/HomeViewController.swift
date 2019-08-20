@@ -396,7 +396,8 @@ class HomeViewController: AbstractController {
         if let bottle = sender as? Bottle {
             let nav = segue.destination as! UINavigationController
             let findBottleVC = nav.topViewController as! FindBottleViewController
-            findBottleVC.bottle = bottle
+            //findBottleVC.bottle = bottle
+            findBottleVC.bottles = [bottle, bottle, bottle]
         
         } else if segue.identifier == "shopSegue" {
             let vc = segue.destination as! ShopViewController
@@ -524,7 +525,7 @@ class HomeViewController: AbstractController {
             
             let shoreId = self.currentPageIndex == 0 ? nil : DataStore.shared.shores[self.currentPageIndex].shore_id!
             
-            let findBottleCompletionBlock : ( Bottle?, ServerError?)-> Void = { (bottle, error) in
+            let findBottleCompletionBlock : (Bottle?, ServerError?)-> Void = { (bottle, error) in
                 self.disableActions(disable: false)
                 self.videoUploadLoader?.removeLoader(true)
                 if error == nil  {
@@ -567,6 +568,7 @@ class HomeViewController: AbstractController {
                 self.bottleIdToFind = nil
             } else {
                 ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: findBottleCompletionBlock)
+                //ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: nil, complete: nil ,completionBlock: findBottleCompletionBlock)
             }
         }
     }
