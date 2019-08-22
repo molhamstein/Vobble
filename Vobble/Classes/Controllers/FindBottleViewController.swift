@@ -12,6 +12,8 @@ import NVActivityIndicatorView
 import Firebase
 import Flurry_iOS_SDK
 import WCLShineButton
+import Player
+import UIView_Shake
 
 class FindBottleViewController: AbstractController {
     @IBOutlet weak var topView: UIView!
@@ -42,14 +44,20 @@ class FindBottleViewController: AbstractController {
     fileprivate var currentVideoCard: VideoPlayerView?
     fileprivate var nextVideoCard: VideoPlayerView?
     fileprivate var currentIndex: CGFloat = 0.0
+    fileprivate var fixedIndex: Int = 0
     fileprivate var lastVelocityYSign = 0
+    fileprivate var seen: [String]?
+    fileprivate var complete: [String]?
     
     public var currentBottle:Bottle?
     public var bottles:[Bottle]?
     public var shoreName:String?
     public var myVideoUrl : NSURL?
     public var myAudioUrl : URL?
-    
+    public var gender: String!
+    public var countryCode: String!
+    public var shoreId: String?
+
     var isInitialized = false
 
     override func viewDidLoad() {
@@ -126,14 +134,14 @@ class FindBottleViewController: AbstractController {
             }
             
             // mark the video as seen after the user has watched 4 seconds of it
-            dispatch_main_after(4) {
-                if let bottleObj = self.currentBottle {
-                    // make sure the vie controller is still open after 4 seconds
-                    if let _ = self.view.window, self.isViewLoaded {
-                        ApiManager.shared.markBottleSeen(bottle: bottleObj, completionBlock: { (success, err) in })
-                    }
-                }
-            }
+//            dispatch_main_after(4) {
+//                if let bottleObj = self.currentBottle {
+//                    // make sure the vie controller is still open after 4 seconds
+//                    if let _ = self.view.window, self.isViewLoaded {
+//                        ApiManager.shared.markBottleSeen(bottle: bottleObj, completionBlock: { (success, err) in })
+//                    }
+//                }
+//            }
             
             isInitialized = true
         }
@@ -184,20 +192,34 @@ extension FindBottleViewController: UIScrollViewDelegate {
             
             currentIndex = pageIndex
             currentBottle = bottles?[Int(pageIndex)]
-            currentVideoCard = videoCards[Int(currentIndex)]
+            currentVideoCard = nextVideoCard
             
             // This line of code to remove the prevues card to avoid memory warning
-            videoCards[Int(currentIndex - 1)].removeFromSuperview()
-
-            currentVideoCard?.preparePlayer(videoURL: currentBottle?.attachment ?? "", customPlayBtn: playButton)
-//            if currentVideoCard?.isReady() ?? false {
-//                if !(self.currentVideoCard?.isPlaying() ?? false) {
-//                    currentVideoCard?.playButtonPressed()
-//                }
-//            }
+            //videoCards[Int(currentIndex - 1)].removeFromSuperview()
+            for i in scrollView.subviews {
+                if i == videoCards[Int(currentIndex) - 1] {
+                    i.removeFromSuperview()
+                }
+            }
+            
+            if let _ = currentVideoCard?.player.url {
+                if currentVideoCard?.player.bufferingState == BufferingState.ready {
+                    currentVideoCard?.player.playFromCurrentTime()
+                    currentVideoCard?.autoStart = true
+                }
+            }else {
+                currentVideoCard?.preparePlayer(videoURL: currentBottle?.attachment ?? "", customPlayBtn: playButton)
+            }
+            
             setupVideoData()
             
-//            setupNextCard()
+            // Get the next 5 videos if needed
+            if Int(currentIndex) == (self.bottles?.count ?? 0) - 2 {
+                self.fixedIndex = Int(self.currentIndex) + 2
+                getMoreVideos()
+            }
+            
+            setupNextCard()
         }
         
     }
@@ -245,9 +267,9 @@ extension FindBottleViewController {
         scrollView.contentOffset = CGPoint(x: 0, y: 0)
         
         currentVideoCard = videoCards[Int(currentIndex)]
-        currentVideoCard?.preparePlayer(videoURL: currentBottle?.attachment ?? "", customPlayBtn: playButton)
+        currentVideoCard?.preparePlayer(videoURL: currentBottle?.attachment ?? "", customPlayBtn: playButton, delegate: self)
         
-        //setupNextCard()
+        setupNextCard()
     }
     
     func setupVideoData(){
@@ -265,10 +287,60 @@ extension FindBottleViewController {
     }
     
     func setupNextCard(){
-        if let nextBottle = bottles?[Int(currentIndex) + 1] {
-            self.nextVideoCard = videoCards[Int(currentIndex) + 1]
-            currentVideoCard?.preparePlayer(videoURL: nextBottle.attachment ?? "", customPlayBtn: playButton, autoStart: false)
+        if (Int(currentIndex) + 1) <= ((bottles?.count ?? 0) - 1) {
+            if let nextBottle = bottles?[Int(currentIndex) + 1]{
+                nextVideoCard = videoCards[Int(currentIndex) + 1]
+                nextVideoCard?.preparePlayer(videoURL: nextBottle.attachment ?? "", customPlayBtn: playButton, autoStart: false, delegate: self)
+            }
         }
+        
+    }
+    
+    func getMoreVideos() {
+        self.seen = DataStore.shared.seenVideos
+        self.complete = DataStore.shared.completedVideos
+        ApiManager.shared.findBottles(gender: gender, countryCode: countryCode, shoreId: shoreId, seen: seen, complete: complete, offsets: Double(self.bottles?.count ?? 0), completionBlock: {(bottles, error) in
+            if error == nil  {
+                if bottles != nil {
+                    for i in bottles! {
+                        self.bottles?.append(i)
+                    }
+                    
+                    for i in self.fixedIndex ..< (self.bottles?.count ?? 0) {
+                        let card = VideoPlayerView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: self.view.frame.width, height: UIScreen.main.bounds.height))
+                        
+                        self.videoCards.append(card)
+                        self.scrollView.addSubview(card)
+                    }
+                    
+                    self.scrollView.contentSize = CGSize(width: self.view.frame.width , height: UIScreen.main.bounds.height * CGFloat(self.bottles?.count ?? 1))
+
+                } else {
+                    // no bottles found
+                    
+                }
+                
+                DataStore.shared.seenVideos = []
+                DataStore.shared.completedVideos = []
+            } else {
+                // error ex. Authoriaztion error
+                let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                if error?.type == .authorization {
+                    let actionCancel = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(actionCancel)
+                    let actionLogout = UIAlertAction(title: "LOGIN_LOGIN_BTN".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else if error?.type == .accountDeactivated || error?.type == .deviceBlocked {
+                    /// user should be forced to logout
+                    let actionLogout = UIAlertAction(title: "ok".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else {
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                }
+                self.present(alertController, animated: true, completion: nil)
+            }
+        })
     }
 }
 
@@ -407,6 +479,27 @@ extension FindBottleViewController {
     }
 }
 
+extension FindBottleViewController: VideoPlayerDelegate {
+    func didCompleteVideo() {
+        if let _ = DataStore.shared.completedVideos {
+            DataStore.shared.completedVideos?.append((self.currentBottle?.bottle_id!)!)
+        }else {
+            DataStore.shared.completedVideos = [self.currentBottle?.bottle_id!] as? [String]
+        }
+    }
+    
+    func didSeenVideo() {
+        if let _ = DataStore.shared.seenVideos {
+            DataStore.shared.seenVideos?.append((self.currentBottle?.bottle_id!)!)
+        }else {
+            DataStore.shared.seenVideos = [self.currentBottle?.bottle_id!] as? [String]
+        }
+    }
+    
+    func shakeVideoView() {
+        //self.currentVideoCard?.shake(6, withDelta: 24, speed: 1, shakeDirection: .vertical)
+    }
+}
 extension FindBottleViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     private var pickerArray: [ReportType] {

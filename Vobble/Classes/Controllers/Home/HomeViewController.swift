@@ -99,6 +99,7 @@ class HomeViewController: AbstractController {
     //filter option
     var countryCode = ""
     var gender = GenderType.allGender
+    var shoreId: String?
     
     // bottle To Find By Id
     var bottleIdToFind : String?
@@ -393,11 +394,14 @@ class HomeViewController: AbstractController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let bottle = sender as? Bottle {
+        if let bottles = sender as? [Bottle]{
             let nav = segue.destination as! UINavigationController
             let findBottleVC = nav.topViewController as! FindBottleViewController
             //findBottleVC.bottle = bottle
-            findBottleVC.bottles = [bottle, bottle, bottle]
+            findBottleVC.countryCode = self.countryCode
+            findBottleVC.gender = self.gender.rawValue
+            findBottleVC.shoreId = self.shoreId
+            findBottleVC.bottles = bottles
         
         } else if segue.identifier == "shopSegue" {
             let vc = segue.destination as! ShopViewController
@@ -524,13 +528,14 @@ class HomeViewController: AbstractController {
             self.videoUploadLoader?.progress = CGFloat(0.5)
             
             let shoreId = self.currentPageIndex == 0 ? nil : DataStore.shared.shores[self.currentPageIndex].shore_id!
+            self.shoreId = shoreId
             
-            let findBottleCompletionBlock : (Bottle?, ServerError?)-> Void = { (bottle, error) in
+            let findBottleCompletionBlock : ([Bottle]?, ServerError?)-> Void = { (bottles, error) in
                 self.disableActions(disable: false)
                 self.videoUploadLoader?.removeLoader(true)
                 if error == nil  {
-                    if bottle != nil {
-                        self.performSegue(withIdentifier: "findBottleSegue", sender: bottle)
+                    if bottles != nil {
+                        self.performSegue(withIdentifier: "findBottleSegue", sender: bottles)
                     } else {
                         // no bottles found
                         let logEventParams = ["Shore": (DataStore.shared.shores[self.currentPageIndex].name_en) ?? "", "Gender": self.gender.rawValue, "Country": self.countryCode];
@@ -564,11 +569,11 @@ class HomeViewController: AbstractController {
             // send the request
             if let bottleId = self.bottleIdToFind {
                 // this request is send in case we sent the user a push notification contatinig the id of the bottle that we want him to see
-                ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
+                //ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
                 self.bottleIdToFind = nil
             } else {
-                ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: findBottleCompletionBlock)
-                //ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: nil, complete: nil ,completionBlock: findBottleCompletionBlock)
+                //ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: findBottleCompletionBlock)
+                ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: nil, complete: nil ,completionBlock: findBottleCompletionBlock)
             }
         }
     }

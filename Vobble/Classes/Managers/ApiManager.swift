@@ -1234,7 +1234,7 @@ class ApiManager: NSObject {
         }
     }
     
-    func findBottles(gender: String, countryCode: String, shoreId: String? ,seen: [String]?, complete: [String]?, completionBlock: @escaping (_ bottles: [Bottle]?, _ errorMessage: ServerError?) -> Void) {
+    func findBottles(gender: String, countryCode: String, shoreId: String? ,seen: [String]?, complete: [String]?, offsets: Double? = nil, completionBlock: @escaping (_ bottles: [Bottle]?, _ errorMessage: ServerError?) -> Void) {
         
         
         var findBottleURL : String;
@@ -1257,6 +1257,18 @@ class ApiManager: NSObject {
         // gender
         if gender != GenderType.allGender.rawValue {
             findBottleURL += "&gender=\(gender)"
+        }
+        
+        if let seen = seen {
+            findBottleURL += "&seen=\(seen)"
+        }
+        
+        if let complete = complete {
+            findBottleURL += "&complete=\(complete)"
+        }
+        
+        if let offsets = offsets {
+            findBottleURL += "&offsets=\(offsets)"
         }
         
         let encoedeUrl = findBottleURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)

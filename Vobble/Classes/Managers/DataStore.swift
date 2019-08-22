@@ -37,6 +37,8 @@ class DataStore :NSObject {
     private let CACHE_KEY_TOPICS = "topics"
     private let CACHE_KEY_TOPICS_SHOWED = "topicsShowed"
     private let CACHE_KEY_VERSION_CHECKED = "versionChecked"
+    private let CACHE_KEY_SEEN_VIDEOS = "seenVideos"
+    private let CACHE_KEY_COMPLETED_VIDEOS = "completedVideos"
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
@@ -61,6 +63,9 @@ class DataStore :NSObject {
     private var _topicsShowed: Bool = false
     
     private var _versionChecked: Bool = false
+    
+    private var _seenVideos: [String]?
+    private var _completedVideos: [String]?
     
     //public var conversationsUnseenMesssages: [String: Int] = [:]
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
@@ -251,6 +256,36 @@ class DataStore :NSObject {
             _versionChecked = UserDefaults.standard.bool(forKey: CACHE_KEY_VERSION_CHECKED)
             
             return _versionChecked
+        }
+    }
+    
+    public var seenVideos: [String]? {
+        set {
+            _seenVideos = newValue
+            if let seen = _seenVideos {
+                UserDefaults.standard.set(seen, forKey: CACHE_KEY_SEEN_VIDEOS)
+            }
+        }
+        get {
+            if (_seenVideos?.isEmpty ?? true) || _seenVideos == nil {
+                _seenVideos = UserDefaults.standard.array(forKey: CACHE_KEY_SEEN_VIDEOS) as? [String]
+            }
+            return _seenVideos
+        }
+    }
+    
+    public var completedVideos: [String]? {
+        set {
+            _completedVideos = newValue
+            if let completed = _completedVideos {
+                UserDefaults.standard.set(completed, forKey: CACHE_KEY_COMPLETED_VIDEOS)
+            }
+        }
+        get {
+            if (_completedVideos?.isEmpty ?? true) || _completedVideos == nil {
+                _completedVideos = UserDefaults.standard.array(forKey: CACHE_KEY_COMPLETED_VIDEOS) as? [String]
+            }
+            return _completedVideos
         }
     }
 

@@ -12,9 +12,15 @@ import UIKit
 import Player
 import CoreMedia
 
+@objc protocol VideoPlayerDelegate {
+    @objc optional func didCompleteVideo()
+    @objc optional func didSeenVideo()
+    @objc optional func shakeVideoView()
+}
 class VideoPlayerView: AbstractNibView {
     
     var player: Player!
+    var delegate: VideoPlayerDelegate?
     var playButton: UIButton!
     var seekTime: CMTime!
     var tolerance: CMTime = CMTimeMakeWithSeconds(0.5, 1)
@@ -24,13 +30,15 @@ class VideoPlayerView: AbstractNibView {
     @IBOutlet weak var slideBar: UISlider!
     @IBOutlet weak var videoView: UIView!
     
-    public func preparePlayer(videoURL: String, customPlayBtn: UIButton, autoStart: Bool = true) {
+    public func preparePlayer(videoURL: String, customPlayBtn: UIButton, autoStart: Bool = true, delegate: VideoPlayerDelegate? = nil) {
         animateIndicator(animated: true)
         
+        self.delegate = delegate
         self.autoStart = autoStart
         self.playButton = customPlayBtn
         self.player = Player()
         self.player.url = URL(string: videoURL)
+        self.player.playbackFreezesAtEnd = false
         
         self.player.playerDelegate = self
         self.player.playbackDelegate = self
@@ -94,6 +102,8 @@ extension VideoPlayerView {
         self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
         self.seekTime = CMTimeMakeWithSeconds(Float64(Double(sender.value) * Double(self.player.maximumDuration)), 1)
         self.player.seekToTime(to: seekTime, toleranceBefore: self.tolerance, toleranceAfter: self.tolerance)
+        
+      
     }
     
     func isPlaying() -> Bool {
@@ -123,15 +133,6 @@ extension VideoPlayerView {
         }
     }
     
-    func isReady() -> Bool {
-        switch (self.player.bufferingState.rawValue) {
-        case BufferingState.ready.rawValue:
-            return true
-        default:
-            return false
-        }
-    }
-    
     func animateIndicator(animated: Bool) {
         if animated {
             self.activityIndicator.isHidden = false
@@ -152,16 +153,23 @@ extension VideoPlayerView: PlayerDelegate {
     
     func playerPlaybackStateDidChange(_ player: Player) {
         print("\(#function) \(player.playbackState.description)")
+        switch player.playbackState.rawValue {
+        case PlaybackState.playing.rawValue:
+            self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+            
+        default:
+            return
+        }
     }
     
     func playerBufferingStateDidChange(_ player: Player) {
         switch player.bufferingState.rawValue {
         case BufferingState.ready.rawValue:
-            if self.autoStart {
+            if autoStart {
                 self.player.playFromCurrentTime()
                 self.playButton.setImage(UIImage(named: "pause"), for: .normal)
             }
-            animateIndicator(animated: false)
+            self.animateIndicator(animated: false)
         default:
             animateIndicator(animated: true)
         }
@@ -182,6 +190,16 @@ extension VideoPlayerView: PlayerPlaybackDelegate {
     func playerCurrentTimeDidChange(_ player: Player) {
         let fraction = Double(player.currentTime) / Double(player.maximumDuration)
         self.slideBar.setValue(Float(fraction), animated: true)
+        
+        // seen video
+        if Int(Double(player.currentTime)) == 3 {
+            self.delegate?.didSeenVideo!()
+        }
+        
+        print(Double(player.maximumDuration) - Double(player.currentTime))
+        if Int(Double(player.maximumDuration) - Double(player.currentTime)) == 4 {
+            self.delegate?.shakeVideoView!()
+        }
     }
     
     func playerPlaybackWillStartFromBeginning(_ player: Player) {
@@ -189,6 +207,7 @@ extension VideoPlayerView: PlayerPlaybackDelegate {
     
     func playerPlaybackDidEnd(_ player: Player) {
         self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
+        self.delegate?.didCompleteVideo!()
     }
     
     func playerPlaybackWillLoop(_ player: Player) {
