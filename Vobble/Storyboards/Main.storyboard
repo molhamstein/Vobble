@@ -1052,7 +1052,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0z-Nd-C7w" customClass="VideoPlayerView" customModule="Vobble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXs-T0-xQv" userLabel="top View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
@@ -1099,7 +1099,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Jc5-Y7-zrh">
-                                        <rect key="frame" x="68" y="4.5" width="174" height="65"/>
+                                        <rect key="frame" x="68" y="4.5" width="174" height="48"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQG-bw-LyP">
                                                 <rect key="frame" x="0.0" y="0.0" width="174" height="20"/>
@@ -1126,22 +1126,27 @@
                                                     <constraint firstItem="qq1-fV-vFz" firstAttribute="top" secondItem="fQG-bw-LyP" secondAttribute="top" id="jaK-gq-a7g"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TC9-fE-48l">
-                                                <rect key="frame" x="0.0" y="24" width="174" height="41"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TC9-fE-48l">
+                                                <rect key="frame" x="0.0" y="24" width="174" height="24"/>
                                                 <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C4v-Wh-KA2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="24" id="NOO-3X-Txi"/>
+                                                            <constraint firstAttribute="height" constant="24" id="cmF-si-ASM"/>
+                                                        </constraints>
+                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main Shore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkW-fY-pKf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="174" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="985-hb-48A">
-                                                        <rect key="frame" x="0.0" y="20.5" width="174" height="20.5"/>
+                                                        <rect key="frame" x="40" y="0.0" width="134" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="IkW-fY-pKf" firstAttribute="leading" secondItem="C4v-Wh-KA2" secondAttribute="trailing" constant="16" id="LiK-YY-Gly"/>
+                                                    <constraint firstItem="IkW-fY-pKf" firstAttribute="centerY" secondItem="C4v-Wh-KA2" secondAttribute="centerY" id="wv7-rt-5PZ"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -1163,7 +1168,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zjl-AZ-sn8" userLabel="report Stack View">
-                                <rect key="frame" x="224" y="66" width="86" height="70"/>
+                                <rect key="frame" x="224" y="66" width="86" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxF-xB-GSs" userLabel="report">
                                         <rect key="frame" x="0.0" y="0.0" width="86" height="35"/>
@@ -1177,6 +1182,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fmA-T3-b5n" userLabel="block user">
                                         <rect key="frame" x="0.0" y="35" width="86" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="17"/>
                                         <state key="normal" title="block user">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1187,9 +1193,14 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="3c4-7Y-yoU"/>
+                                    <constraint firstAttribute="height" constant="35" id="3c4-7Y-yoU"/>
                                     <constraint firstAttribute="width" constant="86" id="WtM-Fg-HRN"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="fmA-T3-b5n"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Et-onT" userLabel="bottom View" customClass="PassthroughView">
                                 <rect key="frame" x="0.0" y="372" width="320" height="160"/>
@@ -1412,7 +1423,7 @@
                     <connections>
                         <outlet property="blockButton" destination="fmA-T3-b5n" id="zsO-KV-Coq"/>
                         <outlet property="bottomView" destination="9ZT-Et-onT" id="pqS-LP-Mwc"/>
-                        <outlet property="countryLabel" destination="985-hb-48A" id="fsZ-Ts-Q13"/>
+                        <outlet property="countryFlag" destination="C4v-Wh-KA2" id="PTo-2y-z3w"/>
                         <outlet property="genderImage" destination="VNM-xc-o7P" id="iQM-pc-NzJ"/>
                         <outlet property="ignoreButton" destination="3Ni-2I-t0H" id="6Qn-mG-uoD"/>
                         <outlet property="moreOptionsOverlayButton" destination="DCn-Ia-GpG" id="LuP-Ej-AeR"/>
@@ -1460,19 +1471,19 @@
                                 <rect key="frame" x="24" y="85" width="272" height="398"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvv-O0-UWG">
-                                        <rect key="frame" x="108.5" y="30" width="55" height="28"/>
+                                        <rect key="frame" x="105.5" y="30" width="61.5" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rateUsArt" translatesAutoresizingMaskIntoConstraints="NO" id="iwt-aE-GEg">
-                                        <rect key="frame" x="30" y="88" width="212" height="139.5"/>
+                                        <rect key="frame" x="30" y="89.5" width="212" height="139.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="iwt-aE-GEg" secondAttribute="height" multiplier="750:492" id="Ba3-tm-K1l"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-RV-571">
-                                        <rect key="frame" x="25" y="240.5" width="222" height="19.5"/>
+                                        <rect key="frame" x="25" y="240" width="222" height="20"/>
                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2604,7 +2615,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 <rect key="frame" x="16" y="57" width="288" height="454"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ytO-wP-kkX">
-                                        <rect key="frame" x="0.0" y="259" width="288" height="191"/>
+                                        <rect key="frame" x="0.0" y="260" width="288" height="190"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Ei7-hX-Wbj">
                                             <size key="itemSize" width="50" height="190"/>
@@ -2630,12 +2641,12 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urf-Go-JCe">
-                                        <rect key="frame" x="115" y="210" width="58.5" height="17"/>
+                                        <rect key="frame" x="111" y="211" width="66.5" height="17"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend your chat with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTf-qT-c11">
-                                        <rect key="frame" x="51.5" y="182.5" width="185.5" height="23.5"/>
+                                        <rect key="frame" x="42" y="182.5" width="204.5" height="24.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2706,7 +2717,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 <rect key="frame" x="24" y="85" width="272" height="398"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hid-GZ-F0v">
-                                        <rect key="frame" x="108.5" y="30" width="55" height="28"/>
+                                        <rect key="frame" x="105.5" y="30" width="61.5" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2718,7 +2729,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAg-XP-IEc">
-                                        <rect key="frame" x="25" y="240.5" width="222" height="19.5"/>
+                                        <rect key="frame" x="25" y="240" width="222" height="20"/>
                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2963,14 +2974,14 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
     </scenes>
     <resources>
         <image name="Canopy" width="575" height="246"/>
-        <image name="boy" width="544" height="476"/>
-        <image name="boy_3_1" width="351" height="327"/>
+        <image name="boy" width="408" height="357"/>
+        <image name="boy_3_1" width="252.72000122070312" height="235.44000244140625"/>
         <image name="camera-switch" width="29" height="22"/>
         <image name="chatMoreOptions" width="22" height="20"/>
         <image name="chevron" width="24" height="24"/>
-        <image name="clouds" width="2000" height="662"/>
+        <image name="clouds" width="144000" height="47664"/>
         <image name="emptyListPlaceholder" width="50" height="50"/>
-        <image name="extend" width="1902" height="1328"/>
+        <image name="extend" width="456.48001098632812" height="318.72000122070312"/>
         <image name="filters" width="23" height="23"/>
         <image name="ic_chat_blocked" width="300" height="457"/>
         <image name="ic_close_white" width="20" height="20"/>
@@ -2983,25 +2994,25 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="ic_throw_bottle" width="24" height="24"/>
         <image name="ic_throw_bottle2" width="80" height="80"/>
         <image name="inst_fav" width="305" height="275"/>
-        <image name="island" width="753" height="613"/>
-        <image name="montains" width="4500" height="80"/>
+        <image name="island" width="564.75" height="459.75"/>
+        <image name="montains" width="3375" height="60"/>
         <image name="navBackIcon" width="25" height="23"/>
         <image name="pause" width="40" height="40"/>
-        <image name="photo" width="30" height="21"/>
+        <image name="photo" width="60" height="43"/>
         <image name="rateUsArt" width="750" height="493"/>
         <image name="recordFlashIcon" width="18" height="25"/>
         <image name="recordRecordingIcon" width="4" height="4"/>
-        <image name="sea" width="2000" height="1801"/>
+        <image name="sea" width="1500" height="1350.75"/>
         <image name="settings_art" width="610" height="615"/>
-        <image name="shore1" width="1500" height="1177"/>
-        <image name="shore2" width="1500" height="1177"/>
-        <image name="shore3" width="1500" height="1177"/>
+        <image name="shore1" width="1125" height="882.75"/>
+        <image name="shore2" width="1125" height="882.75"/>
+        <image name="shore3" width="1125" height="882.75"/>
         <image name="signup_male" width="63" height="15"/>
-        <image name="sky1" width="721" height="721"/>
-        <image name="sun" width="1755" height="1531"/>
+        <image name="sky1" width="540.75" height="540.75"/>
+        <image name="sun" width="1316.25" height="1148.25"/>
         <image name="try_finding_bottle" width="651" height="528"/>
-        <image name="umbrella" width="993" height="899"/>
-        <image name="user_placeholder" width="1024" height="1024"/>
-        <image name="wave" width="4500" height="739"/>
+        <image name="umbrella" width="744.75" height="674.25"/>
+        <image name="user_placeholder" width="245.75999450683594" height="245.75999450683594"/>
+        <image name="wave" width="3375" height="554.25"/>
     </resources>
 </document>

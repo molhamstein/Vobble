@@ -145,6 +145,13 @@ class RecordMediaViewController: AbstractController {
         self.topicsTableView.sectionFooterHeight = 15
         self.topicsTableView.footerView(forSection: 0)?.backgroundColor = UIColor.clear
        
+        ApiManager.shared.requestTopics(completionBlock: {data, error in
+            if data != nil {
+                self.topics = data!
+                self.topicsTableView.reloadData()
+            }
+        })
+        
         let screenRect = UIScreen.main.bounds;
         let frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height)
         // camera with precise quality, position and video parameters.

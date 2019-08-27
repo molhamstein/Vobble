@@ -418,27 +418,14 @@ class HomeViewController: AbstractController {
             //DataStore.shared.me?.thrownBottlesCount = bCount - 1
             //self.wiggleAnimate(view: self.ivThrowBtn)
             self.popAnimation(view: self.vThrowBtnCircle)
-            //self.popAnimation(view: self.vThrowBtnImg)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
+            }
             
-            self.disableActions(disable: true)
-            
-            self.showActivityLoader(true)
-            
-            ApiManager.shared.requestTopics(completionBlock: {topics, error in
-                // add a delay to show button press animation
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                    self.showActivityLoader(false)
-                    
-                    self.disableActions(disable: false)
-                    self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
-                }
-                
-                Flurry.logEvent(AppConfig.throw_bottle);
-            })
-            
+            Flurry.logEvent(AppConfig.throw_bottle);
             
         } else {
-            
             self.wiggleAnimate(view: self.ivThrowBtn)
             
             let alertController = UIAlertController(title: "", message: "THROW_BOTTLE_WARNING".localized, preferredStyle: .alert)

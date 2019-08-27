@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 import Firebase
 import Flurry_iOS_SDK
 import WCLShineButton
+import CountryPickerView
 
 class FindBottleViewController: AbstractController {
     
@@ -19,10 +20,10 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var shoreNameLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var genderImage: UIImageView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var userimage: UIImageView!
+    @IBOutlet weak var countryFlag: UIImageView!
     @IBOutlet weak var moreOptionsOverlayButton: UIButton!
     
     @IBOutlet var videoView: VideoPlayerView!
@@ -45,14 +46,15 @@ class FindBottleViewController: AbstractController {
     
     var isInitialized = false
     
-    fileprivate var reportReasonIndex:Int = 0
-    
+    fileprivate var reportReasonIndex: Int = 0
+    fileprivate var countryPickerView: CountryPickerView = CountryPickerView()
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         shoreNameLabel.text = bottle?.shore?.name
         userNameLabel.text = bottle?.owner?.userName
-        countryLabel.text = bottle?.owner?.country?.name
+        countryFlag.image = countryPickerView.getCountryByName(bottle?.owner?.country?.nameEn ?? "")?.flag
         genderImage.image = bottle?.owner?.gender == .male ? UIImage(named: "signup_male") : UIImage(named: "signup_female")
         videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
         optionView.isHidden = true
@@ -62,6 +64,10 @@ class FindBottleViewController: AbstractController {
         blockButton.setTitle("BLOCK_USER".localized, for: .normal)
         ignoreButton.setTitle("IGNORE".localized, for: .normal)
         //replyButton.setTitle("REPLY".localized, for: .normal)
+        
+        // round flag image view
+        countryFlag.layer.cornerRadius = 12
+        countryFlag.layer.masksToBounds = true
         
         if let imgUrl = bottle?.owner?.profilePic, imgUrl.isValidLink() {
             userimage.sd_setShowActivityIndicatorView(true)
