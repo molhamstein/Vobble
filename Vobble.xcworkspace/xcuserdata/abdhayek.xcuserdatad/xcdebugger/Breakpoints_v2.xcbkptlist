@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Controllers/FindBottleViewController.swift"
-            timestampString = "588148737.71338"
+            timestampString = "588836860.541114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
-            landmarkName = "getMoreVideos()"
+            startingLineNumber = "511"
+            endingLineNumber = "511"
+            landmarkName = "didSeenVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/FindBottleViewController.swift"
-            timestampString = "588148737.714413"
+            filePath = "Vobble/Classes/Views/VideoPlayerLayer.swift"
+            timestampString = "588836860.541189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
-            landmarkName = "getMoreVideos()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Views/VideoPlayer/VideoPlayerView.swift"
-            timestampString = "588148737.7148269"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "playerCurrentTimeDidChange(_:)"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "reloadVideoPrerolls()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

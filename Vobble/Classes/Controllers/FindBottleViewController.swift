@@ -14,6 +14,7 @@ import Flurry_iOS_SDK
 import WCLShineButton
 import Player
 import UIView_Shake
+import TransitionButton
 
 class FindBottleViewController: AbstractController {
     @IBOutlet weak var topView: UIView!
@@ -31,7 +32,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var ignoreButton: VobbleButton!
     @IBOutlet weak var replyButton: WCLShineButton!
     @IBOutlet weak var replyLabel: UILabel!
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playButton: TransitionButton!
 
     @IBOutlet weak var optionView: UIStackView!
     @IBOutlet weak var reportButton: UIButton!
@@ -40,9 +41,9 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var reportPicker: UIPickerView!
     
     fileprivate var reportReasonIndex:Int = 0
-    fileprivate var videoCards: [VideoPlayerView] = []
-    fileprivate var currentVideoCard: VideoPlayerView?
-    fileprivate var nextVideoCard: VideoPlayerView?
+    fileprivate var videoCards: [VideoPlayerLayer?] = []
+    fileprivate var currentVideoCard: VideoPlayerLayer?
+    fileprivate var nextVideoCard: VideoPlayerLayer?
     fileprivate var currentIndex: CGFloat = 0.0
     fileprivate var fixedIndex: Int = 0
     fileprivate var lastVelocityYSign = 0
@@ -59,6 +60,7 @@ class FindBottleViewController: AbstractController {
     public var shoreId: String?
 
     var isInitialized = false
+    var isNextCardCreated: Bool = false
 
     override func viewDidLoad() {
         
@@ -84,21 +86,33 @@ class FindBottleViewController: AbstractController {
         replyButton.params = parameters
 
         // a workarround that I'm not sure of it yet to resolve the issue of the video sound comming from the ear speaker sometimes
-        do {
-            if #available(iOS 10.0, *) {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            } else {
-                AVAudioSession.sharedInstance().perform(NSSelectorFromString("setCategory:error:"), with: AVAudioSessionCategoryPlayback)
-            }
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print(error)
-        }
+//        do {
+//            if #available(iOS 10.0, *) {
+//                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+//            } else {
+//                AVAudioSession.sharedInstance().perform(NSSelectorFromString("setCategory:error:"), with: AVAudioSessionCategoryPlayback)
+//            }
+//            try AVAudioSession.sharedInstance().setActive(true)
+//        } catch {
+//            print(error)
+//        }
+        
+        // background event
+//        NotificationCenter.default.addObserver(self, selector: #selector(setPlayerLayerToNil), name: .UIApplicationDidEnterBackground, object: nil)
+//
+//        // foreground event
+//        NotificationCenter.default.addObserver(self, selector: #selector(reinitializePlayerLayer), name: .UIApplicationWillEnterForeground, object: nil)
 
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         setupScrollView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        /// MARK:- This block of code to make sure that all video player
+        currentVideoCard?.cancelBuffring()
+        nextVideoCard?.cancelBuffring()
     }
     
     override func viewDidLayoutSubviews() {
@@ -186,9 +200,7 @@ extension FindBottleViewController: UIScrollViewDelegate {
         let pageIndex = round(scrollView.contentOffset.y/view.frame.height)
         
         if pageIndex != currentIndex {
-            if currentVideoCard?.isPlaying() ?? false {
-                currentVideoCard?.playButtonPressed()
-            }
+            currentVideoCard?.cancelBuffring()
             
             currentIndex = pageIndex
             currentBottle = bottles?[Int(pageIndex)]
@@ -199,16 +211,18 @@ extension FindBottleViewController: UIScrollViewDelegate {
             for i in scrollView.subviews {
                 if i == videoCards[Int(currentIndex) - 1] {
                     i.removeFromSuperview()
+                    videoCards[Int(currentIndex) - 1]?.removeFromSuperview()
+                    videoCards[Int(currentIndex) - 1] = nil
                 }
             }
             
-            if let _ = currentVideoCard?.player.url {
-                if currentVideoCard?.player.bufferingState == BufferingState.ready {
-                    currentVideoCard?.player.playFromCurrentTime()
-                    currentVideoCard?.autoStart = true
+            if currentVideoCard?.isVideoAvailable() ?? false {
+                if currentVideoCard?.isVideoReady() ?? false {
+                    currentVideoCard?.play()
                 }
+                currentVideoCard?.isAutoPlay = true
             }else {
-                currentVideoCard?.preparePlayer(videoURL: currentBottle?.attachment ?? "", customPlayBtn: playButton)
+                currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self)
             }
             
             setupVideoData()
@@ -257,7 +271,7 @@ extension FindBottleViewController {
         scrollView.scrollsToTop = false
         
         for i in 0 ..< (bottles?.count ?? 0) {
-            let card = VideoPlayerView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: view.frame.width, height: UIScreen.main.bounds.height))
+            let card = VideoPlayerLayer(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: view.frame.width, height: UIScreen.main.bounds.height))
             
             videoCards.append(card)
             scrollView.addSubview(card)
@@ -267,7 +281,7 @@ extension FindBottleViewController {
         scrollView.contentOffset = CGPoint(x: 0, y: 0)
         
         currentVideoCard = videoCards[Int(currentIndex)]
-        currentVideoCard?.preparePlayer(videoURL: currentBottle?.attachment ?? "", customPlayBtn: playButton, delegate: self)
+        currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self)
         
         setupNextCard()
     }
@@ -290,8 +304,11 @@ extension FindBottleViewController {
         if (Int(currentIndex) + 1) <= ((bottles?.count ?? 0) - 1) {
             if let nextBottle = bottles?[Int(currentIndex) + 1]{
                 nextVideoCard = videoCards[Int(currentIndex) + 1]
-                nextVideoCard?.preparePlayer(videoURL: nextBottle.attachment ?? "", customPlayBtn: playButton, autoStart: false, delegate: self)
+                nextVideoCard?.configure(url: nextBottle.attachment ?? "", isAutoPlay: false, customButton: self.playButton, delegate: self)
+                isNextCardCreated = true
             }
+        }else {
+            isNextCardCreated = false
         }
         
     }
@@ -307,13 +324,17 @@ extension FindBottleViewController {
                     }
                     
                     for i in self.fixedIndex ..< (self.bottles?.count ?? 0) {
-                        let card = VideoPlayerView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: self.view.frame.width, height: UIScreen.main.bounds.height))
+                        let card = VideoPlayerLayer(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: self.view.frame.width, height: UIScreen.main.bounds.height))
                         
                         self.videoCards.append(card)
                         self.scrollView.addSubview(card)
                     }
                     
                     self.scrollView.contentSize = CGSize(width: self.view.frame.width , height: UIScreen.main.bounds.height * CGFloat(self.bottles?.count ?? 1))
+                    
+                    if !self.isNextCardCreated {
+                        self.setupNextCard()
+                    }
 
                 } else {
                     // no bottles found
@@ -460,15 +481,12 @@ extension FindBottleViewController {
     @IBAction func ignoreBtnPressed(_ sender: Any) {
         let logEventParams :[String : String] = ["Shore": shoreName ?? "", "AuthorGender": (currentBottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (currentBottle?.owner?.countryISOCode) ?? ""];
         Flurry.logEvent(AppConfig.reply_ignored, withParameters:logEventParams);
+        
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
-        if !(self.currentVideoCard?.isPlaying() ?? false){
-            self.playButton.setImage(UIImage(named: "pause"), for: .normal)
-        } else {
-            self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
-        }
         currentVideoCard?.playButtonPressed()
     }
     

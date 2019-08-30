@@ -38,6 +38,7 @@ pod 'WCLShineButton'
 pod 'FillableLoaders', '~>1.3.0'
 pod 'Player', '~> 0.7.0'
 pod 'UIView+Shake'
+pod 'TransitionButton'
 
 end
 

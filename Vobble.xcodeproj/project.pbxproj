@@ -36,7 +36,6 @@
 		57348470218F7B9E00F4707B /* AppCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734846F218F7B9E00F4707B /* AppCountry.swift */; };
 		57348472218FA36C00F4707B /* audio_msg_beeb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */; };
 		57413D55204D3B5700450A42 /* GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 57413D54204D3B5700450A42 /* GCD.m */; };
-		5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C13F205660B300A5402D /* VideoPlayerView.swift */; };
 		5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5742C140205660B300A5402D /* VideoPlayerView.xib */; };
 		5742C14420573BC300A5402D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742C14320573BC200A5402D /* UIImage+Gif.swift */; };
 		57439D3320FE06D100343FCE /* girl_3_1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57439D3120FE06CB00343FCE /* girl_3_1.gif */; };
@@ -271,6 +270,9 @@
 		B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
 		CE9A250922F7737600AC2A1D /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A250822F7737600AC2A1D /* Version.swift */; };
+		CEFC35C62315F89A001E1995 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFC35C52315F899001E1995 /* VideoPlayerView.swift */; };
+		CEFC35C82316AF95001E1995 /* VideoPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFC35C72316AF95001E1995 /* VideoPlayerLayer.swift */; };
+		CEFC35CA23171B6C001E1995 /* VideoPlayerLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFC35C923171B6C001E1995 /* VideoPlayerLayer.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -331,7 +333,6 @@
 		57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio_msg_beeb.mp3; sourceTree = "<group>"; };
 		57413D53204D3B5700450A42 /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		57413D54204D3B5700450A42 /* GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCD.m; sourceTree = "<group>"; };
-		5742C13F205660B300A5402D /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerView.swift; path = VideoPlayer/VideoPlayerView.swift; sourceTree = "<group>"; };
 		5742C140205660B300A5402D /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoPlayerView.xib; path = VideoPlayer/VideoPlayerView.xib; sourceTree = "<group>"; };
 		5742C14320573BC200A5402D /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		57439D3120FE06CB00343FCE /* girl_3_1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = girl_3_1.gif; sourceTree = "<group>"; };
@@ -695,6 +696,9 @@
 		BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
 		CE9A250822F7737600AC2A1D /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		CEFC35C52315F899001E1995 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		CEFC35C72316AF95001E1995 /* VideoPlayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerLayer.swift; sourceTree = "<group>"; };
+		CEFC35C923171B6C001E1995 /* VideoPlayerLayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerLayer.xib; sourceTree = "<group>"; };
 		E256E2B0997DBD0A356FD8B3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1012,8 +1016,10 @@
 			isa = PBXGroup;
 			children = (
 				B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */,
-				5742C13F205660B300A5402D /* VideoPlayerView.swift */,
+				CEFC35C52315F899001E1995 /* VideoPlayerView.swift */,
 				5742C140205660B300A5402D /* VideoPlayerView.xib */,
+				CEFC35C72316AF95001E1995 /* VideoPlayerLayer.swift */,
+				CEFC35C923171B6C001E1995 /* VideoPlayerLayer.xib */,
 			);
 			name = VideoPlayer;
 			sourceTree = "<group>";
@@ -1664,6 +1670,7 @@
 				57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */,
 				B18719CB2079952800861B45 /* jsq_messages_sample.m4a in Resources */,
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
+				CEFC35CA23171B6C001E1995 /* VideoPlayerLayer.xib in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				04ACC6DA2235AD66007FF822 /* splashSound.mp3 in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
@@ -1802,6 +1809,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/TransitionButton/TransitionButton.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/UIView+Shake/UIView_Shake.framework",
@@ -1841,6 +1849,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_Shake.framework",
@@ -1910,7 +1919,6 @@
 				B19372B22033E27B007B1E7D /* DataStore.swift in Sources */,
 				B18A5DC520348E4300F139B7 /* NSObject+SimpleAuthAdditions.m in Sources */,
 				B1EA3CA7203C9FED00A7A261 /* VobbleButton.swift in Sources */,
-				5742C141205660B300A5402D /* VideoPlayerView.swift in Sources */,
 				5778D9EB22D7521F00AA12DA /* RecordAudioReplyMediaControl.swift in Sources */,
 				B18A5D6E20348E4300F139B7 /* NSObject+RACDescription.m in Sources */,
 				B18A5D7B20348E4300F139B7 /* RACBehaviorSubject.m in Sources */,
@@ -2035,6 +2043,7 @@
 				B18A5D6820348E4300F139B7 /* NSEnumerator+RACSequenceAdditions.m in Sources */,
 				B18A5D9C20348E4300F139B7 /* RACSignalProvider.d in Sources */,
 				B1053E882043EBE600A4383D /* CountryPicker.m in Sources */,
+				CEFC35C82316AF95001E1995 /* VideoPlayerLayer.swift in Sources */,
 				B19372E42033E3FC007B1E7D /* Location.swift in Sources */,
 				B19372DF2033E3FC007B1E7D /* Attachment.swift in Sources */,
 				B18A5DB620348E4300F139B7 /* UISegmentedControl+RACSignalSupport.m in Sources */,
@@ -2097,6 +2106,7 @@
 				575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */,
 				B18A5DB520348E4300F139B7 /* UIRefreshControl+RACCommandSupport.m in Sources */,
 				0445EF3B218E25BC0029A6FB /* AudioCollectionViewCellOutgoing.swift in Sources */,
+				CEFC35C62315F89A001E1995 /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

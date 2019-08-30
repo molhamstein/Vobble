@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="lPh-uj-vWp" id="9u9-UH-kRh"/>
                 <outlet property="slideBar" destination="X1D-tT-sI8" id="Imn-EI-VCa"/>
-                <outlet property="videoView" destination="iN0-l3-epB" id="BWj-pX-HlP"/>
+                <outlet property="view" destination="iN0-l3-epB" id="ewV-NS-qlM"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,13 +21,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="X1D-tT-sI8">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="X1D-tT-sI8">
                     <rect key="frame" x="14" y="754" width="347" height="31"/>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" white="0.45000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <connections>
-                        <action selector="didChangeTime:" destination="-1" eventType="valueChanged" id="jS0-Tm-4gK"/>
-                    </connections>
                 </slider>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lPh-uj-vWp">
                     <rect key="frame" x="169" y="387.66666666666669" width="37" height="37"/>

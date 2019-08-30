@@ -12,14 +12,10 @@ import UIKit
 import Player
 import CoreMedia
 
-@objc protocol VideoPlayerDelegate {
-    @objc optional func didCompleteVideo()
-    @objc optional func didSeenVideo()
-    @objc optional func shakeVideoView()
-}
+
 class VideoPlayerView: AbstractNibView {
     
-    var player: Player!
+    var player: Player?
     var delegate: VideoPlayerDelegate?
     var playButton: UIButton!
     var seekTime: CMTime!
@@ -37,18 +33,18 @@ class VideoPlayerView: AbstractNibView {
         self.autoStart = autoStart
         self.playButton = customPlayBtn
         self.player = Player()
-        self.player.url = URL(string: videoURL)
-        self.player.playbackFreezesAtEnd = false
+        self.player?.url = URL(string: videoURL)
+        self.player?.playbackFreezesAtEnd = false
         
-        self.player.playerDelegate = self
-        self.player.playbackDelegate = self
+        self.player?.playerDelegate = self
+        self.player?.playbackDelegate = self
 
-        self.videoView.addSubview(player.view)
-        self.player.view.bringToFront()
+        self.videoView.addSubview((player?.view)!)
+        self.player?.view.bringToFront()
         self.slideBar.bringToFront()
         self.activityIndicator.bringToFront()
         
-        self.player.view.snp.makeConstraints { (make) in
+        self.player?.view.snp.makeConstraints { (make) in
             make.top.equalTo(self.videoView.snp.top)
             make.left.equalTo(self.videoView.snp.left)
             make.right.equalTo(self.videoView.snp.right)
@@ -57,30 +53,30 @@ class VideoPlayerView: AbstractNibView {
 
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGestureRecognizer(_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
-        self.player.view.addGestureRecognizer(tapGestureRecognizer)
+        self.player?.view.addGestureRecognizer(tapGestureRecognizer)
         
     }
 
     func playButtonPressed() {
-        switch (self.player.playbackState.rawValue) {
+        switch (self.player?.playbackState.rawValue) {
         case PlaybackState.stopped.rawValue:
-            self.player.playFromBeginning()
+            self.player?.playFromBeginning()
             self.playButton.setImage(UIImage(named: "pause"), for: .normal)
             break
         case PlaybackState.paused.rawValue:
-            self.player.playFromCurrentTime()
+            self.player?.playFromCurrentTime()
             self.playButton.setImage(UIImage(named: "pause"), for: .normal)
             break
         case PlaybackState.playing.rawValue:
-            self.player.pause()
+            self.player?.pause()
             self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
             break
         case PlaybackState.failed.rawValue:
-            self.player.pause()
+            self.player?.pause()
             self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
             break
         default:
-            self.player.pause()
+            self.player?.pause()
             self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
             break
         }
@@ -98,16 +94,16 @@ extension VideoPlayerView {
     @IBAction func didChangeTime(_ sender: UISlider) {
         print("Slider value is: \(sender.value)")
         
-        self.player.pause()
+        self.player?.pause()
         self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
-        self.seekTime = CMTimeMakeWithSeconds(Float64(Double(sender.value) * Double(self.player.maximumDuration)), 1)
-        self.player.seekToTime(to: seekTime, toleranceBefore: self.tolerance, toleranceAfter: self.tolerance)
+        self.seekTime = CMTimeMakeWithSeconds(Float64(Double(sender.value) * Double(self.player?.maximumDuration ?? 0.0)), 1)
+        self.player?.seekToTime(to: seekTime, toleranceBefore: self.tolerance, toleranceAfter: self.tolerance)
         
       
     }
     
     func isPlaying() -> Bool {
-        switch (self.player.playbackState.rawValue) {
+        switch (self.player?.playbackState.rawValue) {
         case PlaybackState.playing.rawValue:
             return true
         default:
@@ -116,7 +112,7 @@ extension VideoPlayerView {
     }
     
     func isPaused() -> Bool {
-        switch (self.player.playbackState.rawValue) {
+        switch (self.player?.playbackState.rawValue) {
         case PlaybackState.paused.rawValue:
             return true
         default:
@@ -125,7 +121,7 @@ extension VideoPlayerView {
     }
     
     func isStopped() -> Bool {
-        switch (self.player.playbackState.rawValue) {
+        switch (self.player?.playbackState.rawValue) {
         case PlaybackState.stopped.rawValue:
             return true
         default:
@@ -166,7 +162,7 @@ extension VideoPlayerView: PlayerDelegate {
         switch player.bufferingState.rawValue {
         case BufferingState.ready.rawValue:
             if autoStart {
-                self.player.playFromCurrentTime()
+                self.player?.playFromCurrentTime()
                 self.playButton.setImage(UIImage(named: "pause"), for: .normal)
             }
             self.animateIndicator(animated: false)
