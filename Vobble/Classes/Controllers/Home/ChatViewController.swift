@@ -689,9 +689,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 if message.senderId == senderId {
                     let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellOutgoing_id", for: indexPath) as! AudioCollectionViewCellOutgoing
                     
-                    cell.index = indexPath.row
-                    cell.url = audioItem.audioUrl
-                    cell.data = audioItem.audioData
+                    cell.configureCell(audioItem, index: indexPath.row)
                     cell.audioDelegate = self
                 
                     if messageWithId == self.lastSeenMessageId {
@@ -699,37 +697,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                     }else {
                         cell.cellBottomLabel.text = ""
                     }
-                    
-                    if (audioItem.audioUrl?.isValidUrl())! {
-                        cell.indicatorView.stopAnimating()
-                        cell.indicatorView.isHidden = true
-                        cell.playButton.isHidden = false
-                    }else{
-                        cell.indicatorView.startAnimating()
-                        cell.indicatorView.isHidden = false
-                        cell.playButton.isHidden = true
-                    }
-                    
+
                     return cell
                     
                 } else {
                     let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellIncoming_id", for: indexPath) as! AudioCollectionViewCellIncoming
                     
-                    cell.index = indexPath.row
-                    cell.url = audioItem.audioUrl
-                    cell.data = audioItem.audioData
+                    cell.configureCell(audioItem, index: indexPath.row)
                     cell.audioDelegate = self
-                    
-                    if (audioItem.audioUrl?.isValidUrl())! {
-                        cell.indicatorView.stopAnimating()
-                        cell.indicatorView.isHidden = true
-                        cell.playButton.isHidden = false
-                    }else{
-                        cell.indicatorView.startAnimating()
-                        cell.indicatorView.isHidden = false
-                        cell.playButton.isHidden = true
-                    }
-                    
+
                     return cell
                 }
             }
@@ -943,8 +919,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         audioItem.appliesMediaViewMaskAsOutgoing = (id == self?.senderId) == (!selfRef.isRTL)
                     }
                     audioItem.audioUrl = URL(string:mediaURL)!
-                    
-                    
+                    audioItem.audioDuration = message.audioDuration
+                  
                     if id != DataStore.shared.me?.objectId {
                         if let url = audioItem.audioUrl, url.isValidUrl() {
                             self?.addAudioMessage(withId: id, key: snapshot.key, mediaItem: audioItem)
@@ -998,6 +974,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         let audioData = Data() //NSData(contentsOf: URL(string:mediaURL)!)
                         mediaItem.audioUrl = URL(string:mediaURL)!
                         mediaItem.audioData = audioData
+                        mediaItem.audioDuration = message.audioDuration
+                  
                         self?.collectionView.reloadData()
                         self?.audioMessageMap.removeValue(forKey: message.idString!)
                     } else if let id = message.senderId {
@@ -1008,6 +986,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                             audioItem.appliesMediaViewMaskAsOutgoing = id == selfRef.senderId
                         }
                         audioItem.audioUrl = URL(string:mediaURL)!
+                        audioItem.audioDuration = message.audioDuration
                         
                         if id != DataStore.shared.me?.objectId {
                             if let url = audioItem.audioUrl, url.isValidUrl() {
@@ -1210,6 +1189,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             messageItem["thumb"] = imageURLNotSetKey
         } else { // audio
             messageItem["audioURL"] = imageURLNotSetKey
+            messageItem["duration"] = "0.0"
         }
         
         itemRef.setValue(messageItem)
@@ -1221,7 +1201,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         return itemRef.key
     }
     
-    func setMediaURL(_ media: Media, forPhotoMessageWithKey key: String) {
+    func setMediaURL(_ media: Media, forPhotoMessageWithKey key: String, duration: String? = nil) {
         let itemRef = messageRef.child(key)
         
         if media.type == .image {
@@ -1233,7 +1213,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 itemRef.updateChildValues(["videoURL": media.fileUrl!])
             }
         } else if media.type == .audio {
-            itemRef.updateChildValues(["audioURL": media.fileUrl!])
+            print(media.duration)
+            itemRef.updateChildValues(["audioURL": media.fileUrl!, "duration": media.duration ?? 0.0])
+
+            
         }
     }
     

@@ -37,6 +37,7 @@ class FindBottleViewController: AbstractController {
     public var shoreName:String?
     public var myVideoUrl : NSURL?
     public var myAudioUrl : URL?
+    public var myAudioDuration : Float?
     
     @IBOutlet weak var optionView: UIStackView!
     @IBOutlet weak var reportButton: UIButton!
@@ -141,7 +142,6 @@ class FindBottleViewController: AbstractController {
             isInitialized = true
         }
     }
-    
     
     @IBAction func exitButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -258,7 +258,6 @@ class FindBottleViewController: AbstractController {
         Flurry.logEvent(AppConfig.reply_ignored, withParameters:logEventParams);
         self.dismiss(animated: true, completion: nil)
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)

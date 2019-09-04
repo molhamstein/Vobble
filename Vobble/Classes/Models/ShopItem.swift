@@ -16,6 +16,7 @@ enum ShopItemType: String {
     case genderFilter = "5b13ee987fe59d9d184bfe3f"
     case countryFilter = "5b13ee987fe59d9d184bfe40"
     case ExtendChat = "5cd2d56bf133b83d7c653d8f"
+    case coinsPack = "5d651f0314d7c67897755ff6"
     
 }
 
@@ -38,6 +39,9 @@ enum ShopItemID: String {
     case ExtendChat1 = "com.yallavideo.Vibo.1extend"
     case ExtendChat3 = "com.yallavideo.Vibo.3extend"
     case ExtendChat6 = "com.yallavideo.Vibo.6extend"
+    
+    case Coins100 = "com.yallavideo.Vibo.coins100"
+    case Coins200 = "com.yallavideo.Vibo.coins200"
     
     static func getIdFromKey(DBId: String) -> String {
         
@@ -69,15 +73,6 @@ enum ShopItemID: String {
         
         var listId = [String]()
         
-//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe44"))
-//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe45"))
-//
-//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe48"))
-//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe49"))
-//
-//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe46"))
-//        listId.append(ShopItemID.getIdFromKey(DBId: "5b13ee987fe59d9d184bfe47"))
-        
         listId.append(ShopItemID.Bottels3.rawValue)
         listId.append(ShopItemID.Bottels5.rawValue)
         listId.append(ShopItemID.Bottels10.rawValue)
@@ -95,6 +90,9 @@ enum ShopItemID: String {
         listId.append(ShopItemID.ExtendChat1.rawValue)
         listId.append(ShopItemID.ExtendChat3.rawValue)
         listId.append(ShopItemID.ExtendChat6.rawValue)
+        
+        listId.append(ShopItemID.Coins100.rawValue)
+        listId.append(ShopItemID.Coins200.rawValue)
         
         return listId
     }
@@ -168,6 +166,8 @@ class ShopItem: BaseModel {
                     return AppColors.grayXLight
                 case .ExtendChat:
                     return AppColors.blueXLight
+                case .coinsPack:
+                    return AppColors.grayLight
                 }
             }
             return AppColors.blueXLight
@@ -186,6 +186,8 @@ class ShopItem: BaseModel {
                     return AppColors.grayXDark
                 case .ExtendChat:
                     return AppColors.blueXDark
+                case .coinsPack:
+                    return AppColors.grayDark
                 }
             }
             return AppColors.blueXDark

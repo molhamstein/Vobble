@@ -125,7 +125,8 @@ extension IAPManager : SKPaymentTransactionObserver {
                         if success {
                             
                             // Bottles Purchase
-                            if self.selectedItem?.type == ShopItemType.bottlesPack {
+                            if self.selectedItem?.type == ShopItemType.bottlesPack ||
+                                self.selectedItem?.type == ShopItemType.coinsPack {
                                 ApiManager.shared.getMe(completionBlock: { (success, err, user) in
                                     self.delegate?.didPaymentCompleted?()
                                 })

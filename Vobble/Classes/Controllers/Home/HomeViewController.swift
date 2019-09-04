@@ -651,7 +651,7 @@ class HomeViewController: AbstractController {
         
         view.transform = CGAffineTransform.identity.scaledBy(x: 1.15, y: 1.15)
         UIView.animate(withDuration: 0.25, delay: 0.0, options: [.repeat, .autoreverse], animations: {
-                UIView.setAnimationRepeatCount(2)
+                UIView.setAnimationRepeatCount(1)
                 view.transform = CGAffineTransform.identity
         }) { (done) in
         }

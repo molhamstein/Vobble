@@ -152,8 +152,7 @@ class RecordAudioReplyMediaControl : AbstractController {
             })
         })
     }
-    
-    
+
     func animatePulsatingLayerAt(index:Int) {
         
         //Giving color to the layer
@@ -183,9 +182,7 @@ class RecordAudioReplyMediaControl : AbstractController {
         pulseArray[index].add(groupAnimation, forKey: "groupanimation")
         
     }
-    
-    
-    
+
     func submitReply(_ url: URL) {
         
         Flurry.logEvent(AppConfig.reply_shooted);
@@ -212,6 +209,7 @@ class RecordAudioReplyMediaControl : AbstractController {
 extension RecordAudioReplyMediaControl: AVAudioRecorderDelegate {
     
     func didTabRecordAudio(_ sender: UITapGestureRecognizer) {
+        
         
         let alertController = UIAlertController(title: "", message: "RECORD_LONG_PRESS".localized, preferredStyle: .alert)
         let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
@@ -369,7 +367,7 @@ extension RecordAudioReplyMediaControl: AVAudioRecorderDelegate {
     }
     
     // Stop play image
-    func tickRecorder(timer:Timer){
+    func tickRecorder(timer:Timer) {
         // count down 0
         if (timeOut >= MAX_VIDEO_LENGTH){
             // stop image timer

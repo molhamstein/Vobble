@@ -29,23 +29,30 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2p-3x-HAy" userLabel="userinfo View">
                     <rect key="frame" x="0.0" y="11" width="375" height="90"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="zML-qQ-bDj">
+                            <rect key="frame" x="129" y="3" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="7Tz-P6-Lsu"/>
+                                <constraint firstAttribute="width" constant="16" id="EVJ-vl-4hL"/>
+                            </constraints>
+                        </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xE6-y1-bfD" userLabel="Stack View1">
-                            <rect key="frame" x="135" y="4" width="225" height="13.5"/>
+                            <rect key="frame" x="149" y="4" width="211" height="13.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QV-9r-3Bm" userLabel="UserName">
-                                    <rect key="frame" x="0.0" y="0.0" width="116.5" height="13.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="102.5" height="13.5"/>
                                     <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Refill in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJc-XL-Slh" userLabel="Next Refill">
-                                    <rect key="frame" x="123.5" y="0.0" width="53" height="13.5"/>
+                                    <rect key="frame" x="109.5" y="0.0" width="53" height="13.5"/>
                                     <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                     <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:03:04" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Neb-5c-Epb" customClass="TimerLabel" customModule="Vobble" customModuleProvider="target">
-                                    <rect key="frame" x="183.5" y="0.0" width="41.5" height="13.5"/>
+                                    <rect key="frame" x="169.5" y="0.0" width="41.5" height="13.5"/>
                                     <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="12"/>
                                     <color key="textColor" red="0.2470588235" green="0.27058823529999998" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -151,18 +158,20 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="zML-qQ-bDj" firstAttribute="leading" secondItem="wwn-rf-iZW" secondAttribute="trailing" constant="24" id="89x-ds-QdI"/>
                         <constraint firstItem="mOv-gc-f5s" firstAttribute="centerY" secondItem="gma-mX-Kdl" secondAttribute="centerY" id="Ceh-uB-uJL"/>
                         <constraint firstItem="wwn-rf-iZW" firstAttribute="leading" secondItem="gma-mX-Kdl" secondAttribute="leading" id="HJK-gj-Q3w"/>
                         <constraint firstItem="FlQ-vp-Lg5" firstAttribute="top" secondItem="xE6-y1-bfD" secondAttribute="bottom" constant="15" id="HVX-MQ-BM0"/>
+                        <constraint firstItem="zML-qQ-bDj" firstAttribute="centerY" secondItem="xE6-y1-bfD" secondAttribute="centerY" id="JNx-0r-KpR"/>
                         <constraint firstItem="wwn-rf-iZW" firstAttribute="top" secondItem="gma-mX-Kdl" secondAttribute="top" id="KlU-gM-TuN"/>
                         <constraint firstAttribute="trailing" secondItem="xE6-y1-bfD" secondAttribute="trailing" constant="15" id="QOB-Ak-rsi"/>
                         <constraint firstItem="FlQ-vp-Lg5" firstAttribute="leading" secondItem="gma-mX-Kdl" secondAttribute="trailing" constant="20" id="Sdr-d7-KaV"/>
                         <constraint firstAttribute="trailing" secondItem="FlQ-vp-Lg5" secondAttribute="trailing" constant="10" id="Tot-Va-1Eo"/>
                         <constraint firstItem="wwn-rf-iZW" firstAttribute="trailing" secondItem="gma-mX-Kdl" secondAttribute="trailing" id="XCD-JP-usr"/>
                         <constraint firstItem="gma-mX-Kdl" firstAttribute="leading" secondItem="W2p-3x-HAy" secondAttribute="leading" constant="15" id="aGo-VI-DUv"/>
-                        <constraint firstItem="4QV-9r-3Bm" firstAttribute="leading" secondItem="Rx6-j1-vgs" secondAttribute="leading" constant="10" id="bi5-aR-o18"/>
                         <constraint firstItem="gma-mX-Kdl" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" id="dFe-2a-AaK"/>
                         <constraint firstItem="xE6-y1-bfD" firstAttribute="top" secondItem="W2p-3x-HAy" secondAttribute="top" constant="4" id="k4u-6y-Bot"/>
+                        <constraint firstItem="xE6-y1-bfD" firstAttribute="leading" secondItem="zML-qQ-bDj" secondAttribute="trailing" constant="4" id="kwi-Dy-haF"/>
                         <constraint firstAttribute="height" constant="90" id="lL4-aa-Lzt"/>
                         <constraint firstItem="wwn-rf-iZW" firstAttribute="bottom" secondItem="gma-mX-Kdl" secondAttribute="bottom" id="nVy-Es-5cb"/>
                         <constraint firstItem="mOv-gc-f5s" firstAttribute="centerX" secondItem="gma-mX-Kdl" secondAttribute="centerX" id="qi0-VM-toP"/>
@@ -272,13 +281,16 @@
                 <outlet property="userImageBtn" destination="gma-mX-Kdl" id="twc-OJ-bZ4"/>
                 <outlet property="userImageView" destination="wwn-rf-iZW" id="axC-EH-K1L"/>
                 <outlet property="userNameLabel" destination="4QV-9r-3Bm" id="hr1-PJ-g79"/>
+                <outlet property="usernameEditIcon" destination="zML-qQ-bDj" id="tPV-mE-vAb"/>
                 <outlet property="vThrowBottles" destination="jMV-1b-yX9" id="pto-Bh-TZw"/>
             </connections>
+            <point key="canvasLocation" x="52" y="66.566716641679164"/>
         </collectionReusableView>
     </objects>
     <resources>
+        <image name="edit" width="16" height="16"/>
         <image name="ic_settings" width="33" height="32"/>
         <image name="myVideosIcon" width="33" height="32"/>
-        <image name="user_placeholder" width="1024" height="1024"/>
+        <image name="user_placeholder" width="245.75999450683594" height="245.75999450683594"/>
     </resources>
 </document>

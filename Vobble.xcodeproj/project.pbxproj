@@ -270,6 +270,7 @@
 		B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A45A205A114E009B18AB /* ShopCollectionViewCell.swift */; };
 		B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
+		CE331AC0231D55A30090B676 /* EditUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */; };
 		CE9A250922F7737600AC2A1D /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A250822F7737600AC2A1D /* Version.swift */; };
 /* End PBXBuildFile section */
 
@@ -694,6 +695,7 @@
 		B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCollectionViewCell.xib; sourceTree = "<group>"; };
 		BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
+		CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameViewController.swift; sourceTree = "<group>"; };
 		CE9A250822F7737600AC2A1D /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		E256E2B0997DBD0A356FD8B3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1435,6 +1437,7 @@
 				5796242D20793B790005292A /* TermsViewController.swift */,
 				5796242E20793B790005292A /* AboutViewController.swift */,
 				576807B020AF1A500039E2C2 /* RateUsPopupViewController.swift */,
+				CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2052,6 +2055,7 @@
 				B18A5DAD20348E4300F139B7 /* UIBarButtonItem+RACCommandSupport.m in Sources */,
 				B193711B2033D92F007B1E7D /* LoginViewController.swift in Sources */,
 				B18A5D8420348E4300F139B7 /* RACDynamicSequence.m in Sources */,
+				CE331AC0231D55A30090B676 /* EditUsernameViewController.swift in Sources */,
 				B18A5D6D20348E4300F139B7 /* NSObject+RACDeallocating.m in Sources */,
 				B18A5DB820348E4300F139B7 /* UIStepper+RACSignalSupport.m in Sources */,
 				B18A5DA720348E4300F139B7 /* RACTupleSequence.m in Sources */,

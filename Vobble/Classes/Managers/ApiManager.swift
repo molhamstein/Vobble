@@ -26,6 +26,7 @@ class ApiManager: NSObject {
                 "Authorization": ((DataStore.shared.token) != nil) ? (DataStore.shared.token)! : "",
                 "Accept-Language": AppConfig.currentLanguage.langCode
             ]
+            print(httpHeaders)
             return httpHeaders
         }
     }
@@ -338,6 +339,40 @@ class ApiManager: NSObject {
                     completionBlock(false, ServerError.unknownError, nil)
                 } else {
                     completionBlock(false, ServerError.connectionError, nil)
+                }
+            }
+        }
+    }
+    
+    /// User Signup request
+    func editUsername(username: String, completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+        // url & parameters
+        let signUpURL = "\(baseURL)/users/editUsername"
+        
+        let parameters : [String : Any] = [
+            "username": username
+        ]
+        
+        // build request
+        Alamofire.request(signUpURL, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError)
+                } else {
+                    
+                    completionBlock(true , nil)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                print(nsError.localizedDescription)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError)
+                } else {
+                    completionBlock(false, ServerError.connectionError)
                 }
             }
         }
@@ -930,6 +965,7 @@ class ApiManager: NSObject {
                             if responseObject.result.isSuccess {
                                         
                                 let resJson = JSON(responseObject.result.value!)
+                                print(resJson)
                                 if let code = responseObject.response?.statusCode, code >= 400 {
                                     let serverError = ServerError(json: resJson["error"]) ?? ServerError.unknownError
                                     completionBlock([] , serverError.type.errorMessage)
@@ -1354,6 +1390,7 @@ struct ServerError {
         case unknown = -111
         case authorization = 401
         case userNotActivated = 403
+        case youCanNotEditUsername = 423
         case invalidUserName = 405
         case noBottleFound = 406
         case emailAlreadyExists = 413
@@ -1416,6 +1453,8 @@ struct ServerError {
                     return "ERROR_WRONG_LOGIN_METHOD".localized
                 case .wrongCode:
                     return "ERROR_WRONG_CODE".localized
+                case .youCanNotEditUsername:
+                    return "CAN_NOT_EDIT_USERNAME".localized
                 default:
                     return "ERROR_UNKNOWN".localized
             }

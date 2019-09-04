@@ -16,12 +16,15 @@ class Media: BaseModel {
     private let kType: String = "type"
     private let kThumb: String = "thumbnail"
     private let kFile: String = "file"
+    private let kAudioDuration: String = "duration"
+    
     
     // MARK: Properties
     //public var name : String?
     public var type : AppMediaType?
     public var fileUrl: String?
     public var thumbUrl: String?
+    public var duration: Double?
     
     
     // MARK: Initializers
@@ -38,6 +41,9 @@ class Media: BaseModel {
         if let t = json[kThumb].string {
             self.thumbUrl = t
         }
+        if let value = json[kAudioDuration].double {
+            self.duration = value
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -52,6 +58,9 @@ class Media: BaseModel {
         }
         if let value = type {
             dictionary[kType] = value.rawValue
+        }
+        if let value = duration {
+            dictionary[kAudioDuration] = value
         }
         
         return dictionary

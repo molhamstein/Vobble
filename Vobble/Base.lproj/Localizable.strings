@@ -246,8 +246,9 @@
 "BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item with %@ ?";
 "CANT_BUY_ITEM_WARNING"                = "You have an active filter from the same type";
 "TAB_BOTTLES"                          = "Bottles";
-"TAB_GENDER"                           = "Gender Filters";
-"TAB_COUNTRY"                          = "Country Filters";
+"TAB_GENDER"                           = "Gender";
+"TAB_COUNTRY"                          = "Country";
+"TAB_COINS"                            = "Coins";
 "SHOP_TITLE"                           = "Shop";
 "SHOP_BTN_BUY"                         = "Buy Now";
 "SHOP_INVALID_PURCHASE_MSG"            = "This Seems an invalid purchase request, please contact us if you are having issues";
@@ -308,3 +309,8 @@
 "VERSION_AVAILABLE"                     = "There is a newer version of Vibo available right now";
 "VERSION_OBSOLETE"                      = "Your app is outdated, please update you app";
 "UPDATE"                                = "Update";
+
+// Edit username
+"EDIT_USER_NAME_TITLE"                  = "Edit Username";
+"USERNAME_PLACEHOLDER"                  = "username";
+"CAN_NOT_EDIT_USERNAME"                 = "You are not allowed to edit your username anymore";

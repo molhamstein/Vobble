@@ -63,6 +63,8 @@ class AppUser: BaseModel, NSCopying {
     private let kRepliesBottlesCount = "repliesBottlesCount"
     private let kPhoneNumber = "phonenumber"
     private let kVersion = "version"
+    private let kCanEditUsername = "canEditUsername"
+    private let kPocketCoins = "pocketCoins"
     
     private let kHomeTutShowed = "homeTutShowed"
     private let kChatTutShowed = "ChatTutShowed"
@@ -94,7 +96,9 @@ class AppUser: BaseModel, NSCopying {
     public var bottlesLeftToThrowCount: Int?
     public var extraBottlesLeftToThrowCount: Int?
     public var accountInfoCompleted: Bool?
+    public var canEditUsername: Bool?
     public var phoneNumber: String?
+    public var pocketCoins: String?
     
     public var socialId: String?
     public var socialToken: String?
@@ -173,6 +177,14 @@ class AppUser: BaseModel, NSCopying {
             phoneNumber = value
         }
         
+        if let value = json[kCanEditUsername].bool {
+            canEditUsername = value
+        }
+        
+        if let value = json[kPocketCoins].string {
+            pocketCoins = value
+        }
+
         token = json[kUserTokenKey].string
         foundBottlesCount = json[kFoundBottlesCount].int
         thrownBottlesCount = json[kUserBottlesCount].int
@@ -247,6 +259,14 @@ class AppUser: BaseModel, NSCopying {
         if let value = version {
             dictionary[kVersion] = value.dictionaryRepresentation()
         }
+        // can edit username
+        if let value = canEditUsername {
+            dictionary[kCanEditUsername] = value
+        }
+        // Coins
+        if let value = pocketCoins {
+            dictionary[kPocketCoins] = value
+        }
         
         if let value = extraBottlesLeftToThrowCount {
             dictionary[kUserExtraBottles] = value
@@ -308,6 +328,9 @@ class AppUser: BaseModel, NSCopying {
         copy.chatTutShowed = chatTutShowed
         copy.replyTutShowed = replyTutShowed
         copy.accountInfoCompleted = accountInfoCompleted
+        copy.canEditUsername = canEditUsername
+        copy.pocketCoins = pocketCoins
+        
         return copy
     }
 }

@@ -17,6 +17,7 @@ class ShopViewController: AbstractController {
     @IBOutlet weak var bottlesButton: UIButton!
     @IBOutlet weak var genderFilterButton: UIButton!
     @IBOutlet weak var countryFilterButton: UIButton!
+    @IBOutlet weak var coinsButton: UIButton!
     @IBOutlet weak var navigationView: VobbleNavigationBar!
     
     @IBOutlet weak var waveSubView: WaveView!
@@ -50,10 +51,13 @@ class ShopViewController: AbstractController {
         bottlesButton.titleLabel?.font = AppFonts.bigBold
         genderFilterButton.titleLabel?.font = AppFonts.bigBold
         countryFilterButton.titleLabel?.font = AppFonts.bigBold
+        coinsButton.titleLabel?.font = AppFonts.bigBold
         
         bottlesButton.setTitle("TAB_BOTTLES".localized, for: .normal)
         genderFilterButton.setTitle("TAB_GENDER".localized, for: .normal)
         countryFilterButton.setTitle("TAB_COUNTRY".localized, for: .normal)
+        coinsButton.setTitle("TAB_COINS".localized, for: .normal)
+        
         self.navigationView.navTitle.text = "SHOP_TITLE".localized
         
         if fType == .bottlesPack {
@@ -65,6 +69,9 @@ class ShopViewController: AbstractController {
         } else if fType == .genderFilter {
             genderFilterButton.isSelected = true
             self.initGenderFilterArray()
+        } else if fType == .coinsPack {
+            coinsButton.isSelected = true
+            self.initCoinsArray()
         }
         
         self.shopCollectionView.reloadData()
@@ -100,6 +107,7 @@ class ShopViewController: AbstractController {
         bottlesButton.isSelected = true
         genderFilterButton.isSelected = false
         countryFilterButton.isSelected = false
+        coinsButton.isSelected = false
     }
     
     @IBAction func genderFilterBtnPressed(_ sender: Any) {
@@ -109,6 +117,7 @@ class ShopViewController: AbstractController {
         bottlesButton.isSelected = false
         genderFilterButton.isSelected = true
         countryFilterButton.isSelected = false
+        coinsButton.isSelected = false
     }
    
     @IBAction func countryFilterBtnPressed(_ sender: Any) {
@@ -118,6 +127,17 @@ class ShopViewController: AbstractController {
         bottlesButton.isSelected = false
         genderFilterButton.isSelected = false
         countryFilterButton.isSelected = true
+        coinsButton.isSelected = false
+    }
+    
+    @IBAction func coinsBtnPressed(_ sender: Any) {
+        self.initCoinsArray()
+        self.shopCollectionView.reloadData()
+        
+        bottlesButton.isSelected = false
+        genderFilterButton.isSelected = false
+        countryFilterButton.isSelected = false
+        coinsButton.isSelected = true
     }
     
     private func initGenderFilterArray() {
@@ -140,6 +160,14 @@ class ShopViewController: AbstractController {
         
         
         self.shopItemsArray = bottlsArray.map{$0}
+    }
+    
+    private func initCoinsArray() {
+        var coinsArray:[ShopItem] = [ShopItem]()
+        coinsArray = DataStore.shared.shopItems.filter({$0.type == .coinsPack})
+        
+        
+        self.shopItemsArray = coinsArray.map{$0}
     }
     
     override func backButtonAction(_ sender: AnyObject) {
@@ -187,7 +215,7 @@ extension ShopViewController: UICollectionViewDelegate {
         
         let obj = self.shopItemsArray[indexPath.row]
         
-        if bottlesButton.isSelected {
+        if bottlesButton.isSelected || coinsButton.isSelected {
             
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? 0.0)") , preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
@@ -210,7 +238,10 @@ extension ShopViewController: UICollectionViewDelegate {
                             prodType = "gender"
                         } else if self.selectedProduct.type == ShopItemType.countryFilter {
                             prodType = "country"
+                        }else if self.selectedProduct.type == ShopItemType.coinsPack {
+                            prodType = "coins"
                         }
+                        
                         let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
                         Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                     }else {
@@ -298,7 +329,10 @@ extension ShopViewController: UICollectionViewDelegate {
             prodType = "gender"
         } else if obj.type == ShopItemType.countryFilter {
             prodType = "country"
+        } else if obj.type == ShopItemType.coinsPack {
+            prodType = "coins"
         }
+        
         let logEventParams = ["prodType": prodType];
         Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
         

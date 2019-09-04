@@ -246,8 +246,9 @@
 "BUY_ITEM_WARNING"                     = "هل آنت متآكد من عملية الشراء ب %@ ؟";
 "CANT_BUY_ITEM_WARNING"                = "لديك تفضيل فعال مسبقاً من هذا النوع";
 "TAB_BOTTLES"                          = "زجاجات";
-"TAB_GENDER"                           = "تفضيلات الجنس";
-"TAB_COUNTRY"                          = "تفضيلات البلد";
+"TAB_GENDER"                           = "الجنس";
+"TAB_COUNTRY"                          = "البلد";
+"TAB_COINS"                            = "عملات معدنية";
 "SHOP_TITLE"                           = "المتجر";
 "SHOP_BTN_BUY"                         = "شراءالاّن";
 "SHOP_INVALID_PURCHASE_MSG"            = "تبدو هذه عملية شراء غير صالحة الرجاء التواصل معنا ان كنت تواجه اي مشكلات";
@@ -308,3 +309,8 @@
 "VERSION_AVAILABLE"                     = "هناك اصدار جديد من التطبيق يمكنك تحديثه الان";
 "VERSION_OBSOLETE"                      = "انت بحاجة الى اصدار احدث من التطبيق";
 "UPDATE"                                = "تحديث";
+
+// Edit username
+"EDIT_USER_NAME_TITLE"                  = "تعديل اسم المستخدم";
+"USERNAME_PLACEHOLDER"                  = "اسم المستخدم";
+"CAN_NOT_EDIT_USERNAME"                 = "لا يمكنك تغيير اسم المستخدم بعد الان";

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Flurry_iOS_SDK
 
 class ConversationCollectionViewHeader: UICollectionReusableView {
     
@@ -16,6 +16,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     @IBOutlet weak var btnMyReplies: UIButton!
     @IBOutlet weak var btnSettings: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var usernameEditIcon: UIImageView!
     @IBOutlet weak var userImageBtn: UIButton!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -69,9 +70,17 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         lblUnreadMyBottlesConversationsBadge.isHidden = true
         lblUnreadMyRepliesConversationsBadge.isHidden = true
         
+        // MARK:- Throw Bottles View Tap Setup
         vThrowBottles.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.thrownBottlesBtnPressed(_:)))
-        vThrowBottles.addGestureRecognizer(tap)
+        let vThrowBottlesTap = UITapGestureRecognizer(target: self, action: #selector(self.thrownBottlesBtnPressed(_:)))
+        vThrowBottles.addGestureRecognizer(vThrowBottlesTap)
+        
+        // MARK:- Username label tap setup
+        userNameLabel.isUserInteractionEnabled = true
+        usernameEditIcon.isUserInteractionEnabled = true
+        let usernameLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.editUsernameDidPress(_:)))
+        userNameLabel.addGestureRecognizer(usernameLabelTap)
+        usernameEditIcon.addGestureRecognizer(usernameLabelTap)
     }
     
     func configCell(userObj: AppUser) {
@@ -156,6 +165,22 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     
     @objc func thrownBottlesBtnPressed(_ sender: Any) {
         self.convVC?.performSegue(withIdentifier: "goToThrownBottles", sender: self)
+    }
+    
+    @objc func editUsernameDidPress(_ sender: Any) {
+        if let canEditUsername = DataStore.shared.me?.canEditUsername, canEditUsername {
+            let editUsernameVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: EditUsernameViewController.className) as! EditUsernameViewController
+            editUsernameVC.convViewController = self.convVC
+            editUsernameVC.providesPresentationContextTransitionStyle = true
+            editUsernameVC.definesPresentationContext = true
+            editUsernameVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+            editUsernameVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+            self.convVC?.present(editUsernameVC, animated: true, completion: nil)
+        }else {
+            self.convVC?.showMessage(message: "CAN_NOT_EDIT_USERNAME".localized, type: .error)
+        }
+        
+        Flurry.logEvent(AppConfig.edit_username)
     }
 }
 

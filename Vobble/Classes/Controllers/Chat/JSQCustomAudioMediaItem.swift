@@ -14,6 +14,7 @@ class JSQCustomAudioMediaItem: JSQAudioMediaItem {
     var audioUrl: URL?
     var LoadingAudioSpinner: UIActivityIndicatorView?
     var uploadingImageView: UIImageView?
+    var audioDuration: Double?
     
 //    override var audioData: Data? {
 //        set {
