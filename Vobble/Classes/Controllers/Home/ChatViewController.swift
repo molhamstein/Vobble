@@ -163,9 +163,15 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     /// Audio messages
     var currentAudioIndex: Int!
     
+    /// Mute feature
     var isUserMuted = false
     var muteImg = #imageLiteral(resourceName: "speakerMuted2")
     var unmuteImg = #imageLiteral(resourceName: "speaker")
+    
+    /// Gifts
+    var giftsView: GiftsView = GiftsView()
+    var overlayGiftsView: UIView = UIView()
+    var isGiftsViewVisible: Bool = false
     
     // MARK: View Lifecycle
     
@@ -333,6 +339,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         super.viewDidAppear(animated)
         
         observeTyping()
+        setupGiftsView()
         
     }
     
@@ -1615,6 +1622,50 @@ extension ChatViewController: ChatNavigationDelegate {
     }
 }
 
+// MARK:- Gifts shop section
+extension ChatViewController {
+    func showGiftsShop() {
+        if self.isGiftsViewVisible {
+            // hide
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.giftsView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.giftsView.frame.height - 50)
+                self.overlayGiftsView.alpha = 0.0
+            }, completion: {(finished: Bool) in
+                self.isGiftsViewVisible = false
+                self.overlayGiftsView.isHidden = true
+            })
+            
+        } else {
+            self.giftsView.isHidden = false
+            self.view.bringSubview(toFront: giftsView)
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.giftsView.transform = CGAffineTransform.identity
+                //self.overlayGiftsView.alpha = 1.0
+            }, completion: {(finished: Bool) in
+                self.isGiftsViewVisible = true
+                //self.overlayGiftsView.isHidden = false
+            })
+            
+        }
+
+    }
+    
+    func setupGiftsView() {
+        giftsView.frame = CGRect(x: 0, y: self.view.frame.maxY + 300, width: self.view.frame.width, height: 300)
+        overlayGiftsView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        
+        overlayGiftsView.isHidden = true
+        //giftsView.isHidden = true
+        
+        overlayGiftsView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        
+        giftsView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.giftsView.frame.height - 50)
+        
+        self.view.addSubview(overlayGiftsView)
+        self.view.addSubview(giftsView)
+    }
+}
+
 //TODO: make custom chat tool bar class
 // MARK:- AVAudioRecorderDelegate
 extension ChatViewController: AVAudioRecorderDelegate {
@@ -1638,11 +1689,18 @@ extension ChatViewController: AVAudioRecorderDelegate {
         // used to show a tip for the user when cliking on the record button
         let tabGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTabRecordAudio(_:)))
         recordButton.addGestureRecognizer(tabGestureRecognizer)
-        
         recordButton.frame = CGRect(x: 35, y: -5, width: 60, height: CGFloat(height + 10.0))
-        inputToolbar.contentView.leftBarButtonItemWidth = 85
+        
+        image = UIImage(named: "giftsBtn")
+        let giftsButton = UIButton(type: .custom)
+        giftsButton.setImage(image, for: .normal)
+        giftsButton.addTarget(self, action: #selector(self.showGiftsShop), for: .touchUpInside)
+        giftsButton.frame = CGRect(x: 90, y: 0, width: Int(height + 2), height: Int(height + 2))
+        
+        inputToolbar.contentView.leftBarButtonItemWidth = 120
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)
+        inputToolbar.contentView.leftBarButtonContainerView.addSubview(giftsButton)
         inputToolbar.contentView.leftBarButtonItem.isHidden = true
         inputToolbar.contentView.semanticContentAttribute = .forceRightToLeft
     }

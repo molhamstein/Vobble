@@ -270,6 +270,8 @@
 		B1F7A45C205A114E009B18AB /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7A45A205A114E009B18AB /* ShopCollectionViewCell.swift */; };
 		B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */; };
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
+		CE0494C0232067D400ADF01E /* GiftsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0494BF232067D400ADF01E /* GiftsView.xib */; };
+		CE0494C22320688100ADF01E /* GiftsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0494C12320688100ADF01E /* GiftsView.swift */; };
 		CE331AC0231D55A30090B676 /* EditUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */; };
 		CE9A250922F7737600AC2A1D /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A250822F7737600AC2A1D /* Version.swift */; };
 /* End PBXBuildFile section */
@@ -695,6 +697,8 @@
 		B1F7A45B205A114E009B18AB /* ShopCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCollectionViewCell.xib; sourceTree = "<group>"; };
 		BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
+		CE0494BF232067D400ADF01E /* GiftsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftsView.xib; sourceTree = "<group>"; };
+		CE0494C12320688100ADF01E /* GiftsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftsView.swift; sourceTree = "<group>"; };
 		CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameViewController.swift; sourceTree = "<group>"; };
 		CE9A250822F7737600AC2A1D /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		E256E2B0997DBD0A356FD8B3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -965,6 +969,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE0494BE2320678A00ADF01E /* Gifts */,
 				8FF44EA1227FCB7B00DC132A /* ExtendChat */,
 				0445EF38218E25810029A6FB /* AudioPlayer */,
 				0451201F2180952900F4EC9D /* Thrown Bottles */,
@@ -1540,6 +1545,15 @@
 			path = Shop;
 			sourceTree = "<group>";
 		};
+		CE0494BE2320678A00ADF01E /* Gifts */ = {
+			isa = PBXGroup;
+			children = (
+				CE0494C12320688100ADF01E /* GiftsView.swift */,
+				CE0494BF232067D400ADF01E /* GiftsView.xib */,
+			);
+			path = Gifts;
+			sourceTree = "<group>";
+		};
 		FE5F8BA41684F3115C60BED0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1677,6 +1691,7 @@
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				570BB3242081445C00542EAD /* crab.gif in Resources */,
+				CE0494C0232067D400ADF01E /* GiftsView.xib in Resources */,
 				57348472218FA36C00F4707B /* audio_msg_beeb.mp3 in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				045120232180952900F4EC9D /* ThrownBottleCollectionViewCell.xib in Resources */,
@@ -1941,6 +1956,7 @@
 				0445EF3E218E61860029A6FB /* AudioManager.swift in Sources */,
 				5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */,
 				B193711D2033D943007B1E7D /* SignupViewController.swift in Sources */,
+				CE0494C22320688100ADF01E /* GiftsView.swift in Sources */,
 				B19371152033D2F8007B1E7D /* AbstractController.swift in Sources */,
 				B18A5D7820348E4300F139B7 /* NSURLConnection+RACSupport.m in Sources */,
 				B1F7A456205A0F39009B18AB /* ShopViewController.swift in Sources */,

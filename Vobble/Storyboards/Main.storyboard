@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vfw-kW-c1W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -212,7 +212,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_find_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-41-nJO">
-                                        <rect key="frame" x="31.5" y="12" width="27" height="62"/>
+                                        <rect key="frame" x="37" y="12" width="16" height="62"/>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_find_bottle2" translatesAutoresizingMaskIntoConstraints="NO" id="Icf-xW-4vV">
                                         <rect key="frame" x="-75" y="-19" width="240" height="28"/>
@@ -274,7 +274,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_my_bottles" translatesAutoresizingMaskIntoConstraints="NO" id="1TE-ow-wWW">
-                                        <rect key="frame" x="32" y="12" width="26" height="62"/>
+                                        <rect key="frame" x="37" y="12" width="16" height="62"/>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_my_bottles2" translatesAutoresizingMaskIntoConstraints="NO" id="SqJ-A9-Hhb">
                                         <rect key="frame" x="-75" y="-19" width="240" height="28"/>
@@ -353,7 +353,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_throw_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-sx-okP">
-                                        <rect key="frame" x="33" y="12" width="24" height="62"/>
+                                        <rect key="frame" x="37" y="12" width="16" height="62"/>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_throw_bottle2" translatesAutoresizingMaskIntoConstraints="NO" id="x5U-O0-CwX">
                                         <rect key="frame" x="10" y="0.0" width="70" height="70"/>
@@ -1064,7 +1064,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02f-rh-QdI" userLabel="more Button">
-                                        <rect key="frame" x="268" y="9" width="22" height="22"/>
+                                        <rect key="frame" x="274" y="9" width="16" height="22"/>
                                         <state key="normal" image="chatMoreOptions"/>
                                         <connections>
                                             <action selector="moreOptionBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="Ova-dE-pMb"/>
@@ -1111,7 +1111,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup_male" translatesAutoresizingMaskIntoConstraints="NO" id="VNM-xc-o7P">
-                                                        <rect key="frame" x="93" y="2.5" width="30" height="15"/>
+                                                        <rect key="frame" x="93" y="2" width="30" height="16"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="Tl5-Tt-8bk"/>
                                                         </constraints>
@@ -1471,13 +1471,13 @@
                                 <rect key="frame" x="24" y="85" width="272" height="398"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvv-O0-UWG">
-                                        <rect key="frame" x="108.5" y="30" width="55" height="28"/>
+                                        <rect key="frame" x="105.5" y="30" width="61.5" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rateUsArt" translatesAutoresizingMaskIntoConstraints="NO" id="iwt-aE-GEg">
-                                        <rect key="frame" x="30" y="88" width="212" height="139.5"/>
+                                        <rect key="frame" x="30" y="89.5" width="212" height="139.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="iwt-aE-GEg" secondAttribute="height" multiplier="750:492" id="Ba3-tm-K1l"/>
                                         </constraints>
@@ -2049,7 +2049,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_record_audio_big" translatesAutoresizingMaskIntoConstraints="NO" id="0hM-qt-G7T">
-                                        <rect key="frame" x="148" y="261.5" width="24" height="45"/>
+                                        <rect key="frame" x="152" y="276" width="16" height="16"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpD-Ua-IgL">
                                         <rect key="frame" x="139" y="397" width="42" height="21"/>
@@ -2143,7 +2143,7 @@
                                 <rect key="frame" x="32" y="170.5" width="256" height="227"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fng-RR-OW2">
-                                        <rect key="frame" x="8" y="24" width="240" height="28"/>
+                                        <rect key="frame" x="8" y="24" width="240" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2167,7 +2167,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6LX-3x-wOE">
-                                        <rect key="frame" x="16" y="84" width="224" height="30"/>
+                                        <rect key="frame" x="16" y="85.5" width="224" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="PKq-wJ-hBs"/>
                                         </constraints>
@@ -2176,7 +2176,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uT0-t0-yqx">
-                                        <rect key="frame" x="16" y="114" width="224" height="0.5"/>
+                                        <rect key="frame" x="16" y="115.5" width="224" height="0.5"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="G6d-1g-rCY"/>
@@ -2382,19 +2382,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings_art" translatesAutoresizingMaskIntoConstraints="NO" id="9xH-3f-6fq">
-                                <rect key="frame" x="50" y="95" width="220" height="57"/>
+                                <rect key="frame" x="50" y="95" width="220" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="uQR-kM-1mv"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Slogan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mel-PL-4F5" customClass="XUILabel" customModule="Vobble" customModuleProvider="target">
-                                <rect key="frame" x="117.5" y="172" width="85" height="17"/>
+                                <rect key="frame" x="117.5" y="131" width="85" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szm-Wu-Ljf">
-                                <rect key="frame" x="32" y="209" width="258" height="240"/>
+                                <rect key="frame" x="32" y="168" width="258" height="240"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnA-vv-bRh">
                                         <rect key="frame" x="0.0" y="0.0" width="258" height="60"/>
@@ -2413,7 +2413,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIs-B8-QpE">
-                                                <rect key="frame" x="234" y="18" width="24" height="24"/>
+                                                <rect key="frame" x="242" y="19" width="16" height="22"/>
                                                 <state key="normal" image="chevron"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRk-5C-KI7">
@@ -2456,7 +2456,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IL-Xr-EsX">
-                                                <rect key="frame" x="234" y="18" width="24" height="24"/>
+                                                <rect key="frame" x="242" y="19" width="16" height="22"/>
                                                 <state key="normal" image="chevron"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPU-a2-x3x">
@@ -2499,7 +2499,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Js-IY-9gB">
-                                                <rect key="frame" x="234" y="18" width="24" height="24"/>
+                                                <rect key="frame" x="242" y="19" width="16" height="22"/>
                                                 <state key="normal" image="chevron"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Dl-Ms-sRL">
@@ -2542,7 +2542,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfY-C0-TZL">
-                                                <rect key="frame" x="234" y="18" width="24" height="24"/>
+                                                <rect key="frame" x="242" y="19" width="16" height="22"/>
                                                 <state key="normal" image="chevron"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="da3-Nr-ziR">
@@ -2741,7 +2741,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 <rect key="frame" x="16" y="57" width="288" height="454"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ytO-wP-kkX">
-                                        <rect key="frame" x="0.0" y="259" width="288" height="191"/>
+                                        <rect key="frame" x="0.0" y="260" width="288" height="190"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Ei7-hX-Wbj">
                                             <size key="itemSize" width="50" height="190"/>
@@ -2767,12 +2767,12 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urf-Go-JCe">
-                                        <rect key="frame" x="115" y="210" width="58.5" height="17"/>
+                                        <rect key="frame" x="111" y="211" width="66.5" height="17"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend your chat with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTf-qT-c11">
-                                        <rect key="frame" x="51.5" y="182.5" width="185.5" height="23.5"/>
+                                        <rect key="frame" x="42" y="182.5" width="204.5" height="24.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2843,7 +2843,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 <rect key="frame" x="24" y="85" width="272" height="398"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hid-GZ-F0v">
-                                        <rect key="frame" x="108.5" y="30" width="55" height="28"/>
+                                        <rect key="frame" x="105.5" y="30" width="61.5" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -3100,14 +3100,14 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
     </scenes>
     <resources>
         <image name="Canopy" width="575" height="246"/>
-        <image name="boy" width="408" height="357"/>
-        <image name="boy_3_1" width="252.72000122070312" height="235.44000244140625"/>
+        <image name="boy" width="544" height="476"/>
+        <image name="boy_3_1" width="351" height="327"/>
         <image name="camera-switch" width="29" height="22"/>
         <image name="chatMoreOptions" width="22" height="20"/>
         <image name="chevron" width="24" height="24"/>
-        <image name="clouds" width="144000" height="47664"/>
+        <image name="clouds" width="2000" height="662"/>
         <image name="emptyListPlaceholder" width="50" height="50"/>
-        <image name="extend" width="456.48001098632812" height="318.72000122070312"/>
+        <image name="extend" width="1902" height="1328"/>
         <image name="filters" width="23" height="23"/>
         <image name="ic_chat_blocked" width="300" height="457"/>
         <image name="ic_close_white" width="20" height="20"/>
@@ -3120,25 +3120,25 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="ic_throw_bottle" width="24" height="24"/>
         <image name="ic_throw_bottle2" width="80" height="80"/>
         <image name="inst_fav" width="305" height="275"/>
-        <image name="island" width="564.75" height="459.75"/>
-        <image name="montains" width="3375" height="60"/>
+        <image name="island" width="753" height="613"/>
+        <image name="montains" width="4500" height="80"/>
         <image name="navBackIcon" width="25" height="23"/>
         <image name="pause" width="40" height="40"/>
-        <image name="photo" width="60" height="43"/>
+        <image name="photo" width="30" height="21.5"/>
         <image name="rateUsArt" width="750" height="493"/>
         <image name="recordFlashIcon" width="18" height="25"/>
         <image name="recordRecordingIcon" width="4" height="4"/>
-        <image name="sea" width="1500" height="1350.75"/>
+        <image name="sea" width="2000" height="1801"/>
         <image name="settings_art" width="610" height="615"/>
-        <image name="shore1" width="1125" height="882.75"/>
-        <image name="shore2" width="1125" height="882.75"/>
-        <image name="shore3" width="1125" height="882.75"/>
+        <image name="shore1" width="1500" height="1177"/>
+        <image name="shore2" width="1500" height="1177"/>
+        <image name="shore3" width="1500" height="1177"/>
         <image name="signup_male" width="63" height="15"/>
-        <image name="sky1" width="540.75" height="540.75"/>
-        <image name="sun" width="1316.25" height="1148.25"/>
+        <image name="sky1" width="721" height="721"/>
+        <image name="sun" width="1755" height="1531"/>
         <image name="try_finding_bottle" width="651" height="528"/>
-        <image name="umbrella" width="744.75" height="674.25"/>
-        <image name="user_placeholder" width="245.75999450683594" height="245.75999450683594"/>
-        <image name="wave" width="3375" height="554.25"/>
+        <image name="umbrella" width="993" height="899"/>
+        <image name="user_placeholder" width="1024" height="1024"/>
+        <image name="wave" width="4500" height="739"/>
     </resources>
 </document>
