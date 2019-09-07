@@ -398,6 +398,7 @@ class ApiManager: NSObject {
                     // parse response to data model >> user object
                     let user = AppUser(json: jsonResponse)
                     DataStore.shared.me = user
+                    NotificationCenter.default.post(name: Notification.Name("ObserveCoins"), object: nil)
                     //DataStore.shared.onUserLogin()
                     completionBlock(true , nil, user)
                 }
@@ -821,7 +822,26 @@ class ApiManager: NSObject {
         }
     }
     
-    
+    func chatProducts(completionBlock: @escaping (_ categories: Array<GiftCategory>?, _ error: NSError?) -> Void) {
+        let giftsListURL = "\(baseURL)/baseChatProducts/getAllChatProduct"
+        Alamofire.request(giftsListURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                
+                let resJson = JSON(responseObject.result.value!)
+                print(resJson)
+                if let data = resJson.array {
+                    let giftCategories: [GiftCategory] = data.map{GiftCategory(json: $0)}
+                    //save to cache
+                    DataStore.shared.giftCategory = giftCategories
+                    completionBlock(giftCategories, nil)
+                }
+            }
+            if responseObject.result.isFailure {
+                let error : NSError = responseObject.result.error! as NSError
+                completionBlock(nil, error)
+            }
+        }
+    }
     
     func requestUserInventoryItems(completionBlock: @escaping (_ items: Array<InventoryItem>?, _ error: NSError?) -> Void) {
         let categoriesListURL = "\(baseURL)/items/\(DataStore.shared.me?.objectId)"

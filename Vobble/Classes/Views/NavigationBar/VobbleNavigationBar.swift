@@ -19,6 +19,7 @@ class VobbleNavigationBar : AbstractNibView {
     
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var navTitle: UILabel!
+    @IBOutlet weak var lblCoins: UILabel!
     @IBOutlet weak var rightIcon: UIButton!
     public weak var viewcontroller : UIViewController?
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
@@ -59,6 +60,7 @@ class VobbleNavigationBar : AbstractNibView {
     
     func setupView () {
         navTitle.font = AppFonts.xBigBold
+        lblCoins.font = AppFonts.normalBold
         progressIndicator.isHidden = true
         
         if AppConfig.currentLanguage == .arabic {
@@ -68,6 +70,10 @@ class VobbleNavigationBar : AbstractNibView {
             leftIcon.transform = CGAffineTransform.identity
             rightIcon.transform = CGAffineTransform.identity
         }
+        
+        lblCoins.text = String(DataStore.shared.me?.pocketCoins ?? 0)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setNewCoins), name: Notification.Name("ObserveCoins"), object: nil)
     }
     
     // MARK: -  Private Methods
@@ -91,6 +97,11 @@ class VobbleNavigationBar : AbstractNibView {
         if let img = image {
             rightIcon.setImage(img, for: .normal)
         }
+    }
+    
+    // set left icon
+    @objc fileprivate func setNewCoins() {
+        lblCoins.text = String(DataStore.shared.me?.pocketCoins ?? 0)
     }
     
     func showProgressIndicator(show: Bool){
@@ -120,7 +131,7 @@ class VobbleNavigationBar : AbstractNibView {
         if let vc = viewcontroller as? HomeViewController {
             let logEventParams = ["From": "TopButton"];
             Flurry.logEvent(AppConfig.shop_enter, withParameters:logEventParams);
-            vc.showShopView(.bottlesPack)
+            vc.showShopView(.coinsPack)
         }
     }
     

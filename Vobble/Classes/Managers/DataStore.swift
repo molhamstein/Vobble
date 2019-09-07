@@ -37,6 +37,8 @@ class DataStore :NSObject {
     private let CACHE_KEY_TOPICS = "topics"
     private let CACHE_KEY_TOPICS_SHOWED = "topicsShowed"
     private let CACHE_KEY_VERSION_CHECKED = "versionChecked"
+    private let CACHE_KEY_GIFT_CATEGORY = "giftCategory"
+    
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
     private var _me:AppUser?
@@ -61,6 +63,8 @@ class DataStore :NSObject {
     private var _topicsShowed: Bool = false
     
     private var _versionChecked: Bool = false
+    
+    private var _giftCategory: [GiftCategory] = []
     
     //public var conversationsUnseenMesssages: [String: Int] = [:]
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
@@ -251,6 +255,19 @@ class DataStore :NSObject {
             _versionChecked = UserDefaults.standard.bool(forKey: CACHE_KEY_VERSION_CHECKED)
             
             return _versionChecked
+        }
+    }
+    
+    public var giftCategory: [GiftCategory] {
+        set {
+            _giftCategory = newValue
+            saveBaseModelArray(array: _giftCategory, withKey: CACHE_KEY_GIFT_CATEGORY)
+        }
+        get {
+            if(_giftCategory.isEmpty){
+                _giftCategory = loadBaseModelArrayForKey(key: CACHE_KEY_GIFT_CATEGORY)
+            }
+            return _giftCategory
         }
     }
 

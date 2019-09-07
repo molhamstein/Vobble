@@ -62,7 +62,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     fileprivate var isLoadedMedia:Bool = true
     fileprivate var numberOfSentMedia = 0
     fileprivate var messages: [JSQMessage] = []
-    private var messagesWithId: [String] = []
+    fileprivate var messagesWithId: [String] = []
     private var photoMessageMap = [String: JSQCustomPhotoMediaItem]()
     private var videoMessageMap = [String: JSQCustomVideoMediaItem]()
     private var audioMessageMap = [String: JSQCustomAudioMediaItem]()
@@ -85,6 +85,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     @IBOutlet var chatPendingLabel : UILabel!
     @IBOutlet var chatPendingImageView : UIImageView!
     @IBOutlet var chatPendingCloseButton : UIButton!
+    
+    @IBOutlet var giftsView : GiftsView!
+    @IBOutlet var overlayGiftsView : UIView!
     
     var videoUploadLoader: WavesLoader?
     
@@ -169,9 +172,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var unmuteImg = #imageLiteral(resourceName: "speaker")
     
     /// Gifts
-    var giftsView: GiftsView = GiftsView()
-    var overlayGiftsView: UIView = UIView()
     var isGiftsViewVisible: Bool = false
+    var selectedGiftCategory = 0
     
     // MARK: View Lifecycle
     
@@ -239,6 +241,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         
         // Setup timer to check on user status
         self.invalidUserTimer = Timer.scheduledTimer(timeInterval: 40, target: self, selector: #selector(self.checkUserStatus), userInfo: nil, repeats: true)
+        
+        // Get chat products ready
+        ApiManager.shared.chatProducts(completionBlock: {_ in})
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -298,6 +304,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 //self.chatPendingContainer.isHidden = true
                 self.view.addSubview(self.chatPendingContainer)
                 
+                // gifts view
+                self.overlayGiftsView.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 43)
+                self.giftsView.frame = CGRect(x: 0 , y: overlayGiftsView.frame.maxY - 350, width: UIScreen.main.bounds.width, height: 350)
+                self.view.addSubview(self.overlayGiftsView)
+                self.setupGiftsView()
+                
                 // chat background
                 let bgImage = UIImageView()
                 bgImage.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -339,8 +351,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         super.viewDidAppear(animated)
         
         observeTyping()
-        setupGiftsView()
-        
     }
     
     deinit {
@@ -652,170 +662,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     @objc func updateShaker() {
         customNavBar.timerView.shake(6, withDelta: 5, speed: 0.1)
         shakerTimer.invalidate()
-    }
-    
-    // MARK: Collection view data source (and related) methods
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
-        return messages[indexPath.item]
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages.count
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-        let message = messages[indexPath.item] // 1
-        if isRTL {
-            if message.senderId == senderId { // 2
-                return incomingBubbleImageView
-            } else { // 3
-                return outgoingBubbleImageView
-            }
-        } else {
-            // The app is in right-to-left mode
-            if message.senderId == senderId { // 2
-                return outgoingBubbleImageView
-            } else { // 3
-                return incomingBubbleImageView
-            }
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
-        
-        let message = messages[indexPath.item]
-        let messageWithId = messagesWithId[indexPath.item]
-        
-        if message.isMediaMessage {
-            if message.media is JSQAudioMediaItem {
-                let audioItem = message.media as! JSQCustomAudioMediaItem
-                
-                if message.senderId == senderId {
-                    let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellOutgoing_id", for: indexPath) as! AudioCollectionViewCellOutgoing
-                    
-                    cell.configureCell(audioItem, index: indexPath.row)
-                    cell.audioDelegate = self
-                
-                    if messageWithId == self.lastSeenMessageId {
-                        cell.cellBottomLabel.attributedText = seenStr
-                    }else {
-                        cell.cellBottomLabel.text = ""
-                    }
-
-                    return cell
-                    
-                } else {
-                    let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellIncoming_id", for: indexPath) as! AudioCollectionViewCellIncoming
-                    
-                    cell.configureCell(audioItem, index: indexPath.row)
-                    cell.audioDelegate = self
-
-                    return cell
-                }
-            }
-        }
-        
-        if isRTL {
-            if message.senderId == senderId { // 1
-                cell.textView?.textColor = UIColor.black // 3
-                
-            } else {
-                cell.textView?.textColor = UIColor.white // 2
-            }
-        } else {
-            if message.senderId == senderId { // 1
-                cell.textView?.textColor = UIColor.white // 2
-            } else {
-                cell.textView?.textColor = UIColor.black // 3
-            }
-        }
-        
-        return cell
-    }
-    
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        return 15
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
-        return 15
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString? {
-        let message = messages[indexPath.item]
-        switch message.senderId {
-        case senderId:
-            return nil
-        default:
-            guard let senderDisplayName = message.senderDisplayName else {
-                assertionFailure()
-                return nil
-            }
-            return NSAttributedString(string: senderDisplayName)
-        }
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
-        let message = messages[indexPath.item]
-        let messageWithId = messagesWithId[indexPath.item]
-        
-        if message.senderId == DataStore.shared.me?.objectId {
-            if messageWithId == self.lastSeenMessageId {
-                return seenStr
-            }else {
-                return nil
-            }
-        }else{
-            return nil
-        }
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
-        
-        // expirement to resolve sound from speaker issue
-        playPopSound()
-        
-        let message = self.messages[indexPath.row]
-        if message.isMediaMessage == true {
-            let mediaItem = message.media
-            // Photo Message
-            if mediaItem is JSQCustomPhotoMediaItem {
-                let photoItem = mediaItem as! JSQCustomPhotoMediaItem
-                if let test: UIImage = photoItem.asyncImageView.image {
-                    let photo: PreviewPhoto = PreviewPhoto(image: test, title: "")
-                    let images = [photo]
-                    let photosViewController = NYTPhotosViewController(photos: images)
-                    photosViewController.rightBarButtonItem = nil
-                    present(photosViewController, animated: true, completion: nil)
-                }
-            }
-            // Video Message
-            if mediaItem is JSQCustomVideoMediaItem {
-                let videoItem = mediaItem as! JSQCustomVideoMediaItem
-
-                if  let videoUrl = videoItem.message.videoUrl, (videoUrl.hasPrefix("http://") || videoUrl.hasPrefix("https://")) {
-                    
-                    let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
-                    previewControl.from = .chatView
-                    previewControl.type = .VIDEO
-                    previewControl.videoUrl = NSURL(string: videoUrl)!
-                    
-                    present(previewControl, animated: false)
-                }
-            }
-        }
-        
-        // hide keyboard
-        //self.inputToolbar.contentView.textView.resignFirstResponder()
-        //self.view.endEditing(true)
     }
     
     func closeKeyboard() {
@@ -1361,11 +1207,247 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             _ = ActionDeactiveUser.execute(viewController: self, user: DataStore.shared.me, error: error)
         })
     }
+    
     // MARK: UITextViewDelegate methods
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
         // If the text is not empty, the user is typing
         isTyping = textView.text != ""
+    }
+    
+    override func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.isGiftsViewVisible {
+            self.showGiftsShop()
+        }
+    }
+}
+
+// NARK:- UICollectionViewDelegate
+extension ChatViewController {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
+        return messages[indexPath.item]
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let message = messages[indexPath.item] // 1
+        if isRTL {
+            if message.senderId == senderId { // 2
+                return incomingBubbleImageView
+            } else { // 3
+                return outgoingBubbleImageView
+            }
+        } else {
+            // The app is in right-to-left mode
+            if message.senderId == senderId { // 2
+                return outgoingBubbleImageView
+            } else { // 3
+                return incomingBubbleImageView
+            }
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == giftsView.categoryCollectionView {
+            return DataStore.shared.giftCategory.count
+        }else if collectionView == giftsView.productsCollectionView {
+            if DataStore.shared.giftCategory.count > 0 {
+                return DataStore.shared.giftCategory[selectedGiftCategory].chatProducts?.count ?? 0
+            }else {
+                return 0
+            }
+        }else {
+            return messages.count
+        }
+        
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == giftsView.categoryCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GiftsCategoryCollectionViewCell", for: indexPath) as! GiftsCategoryCollectionViewCell
+            
+            if self.selectedGiftCategory == indexPath.row {
+                cell.vBackground.alpha = 1
+            }else {
+                cell.vBackground.alpha = 0.6
+            }
+            
+            cell.configureCell(DataStore.shared.giftCategory[indexPath.row])
+            
+            return cell
+            
+        }else if collectionView == giftsView.productsCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatProductCollectionViewCell", for: indexPath) as! ChatProductCollectionViewCell
+            
+            cell.configureCell(DataStore.shared.giftCategory[selectedGiftCategory].chatProducts?[indexPath.row])
+            
+            return cell
+            
+        }else {
+            let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+            
+            let message = messages[indexPath.item]
+            let messageWithId = messagesWithId[indexPath.item]
+            
+            if message.isMediaMessage {
+                if message.media is JSQAudioMediaItem {
+                    let audioItem = message.media as! JSQCustomAudioMediaItem
+                    
+                    if message.senderId == senderId {
+                        let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellOutgoing_id", for: indexPath) as! AudioCollectionViewCellOutgoing
+                        
+                        cell.configureCell(audioItem, index: indexPath.row)
+                        cell.audioDelegate = self
+                        
+                        if messageWithId == self.lastSeenMessageId {
+                            cell.cellBottomLabel.attributedText = seenStr
+                        }else {
+                            cell.cellBottomLabel.text = ""
+                        }
+                        
+                        return cell
+                        
+                    } else {
+                        let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCollectionViewCellIncoming_id", for: indexPath) as! AudioCollectionViewCellIncoming
+                        
+                        cell.configureCell(audioItem, index: indexPath.row)
+                        cell.audioDelegate = self
+                        
+                        return cell
+                    }
+                }
+            }
+            
+            if isRTL {
+                if message.senderId == senderId { // 1
+                    cell.textView?.textColor = UIColor.black // 3
+                    
+                } else {
+                    cell.textView?.textColor = UIColor.white // 2
+                }
+            } else {
+                if message.senderId == senderId { // 1
+                    cell.textView?.textColor = UIColor.white // 2
+                } else {
+                    cell.textView?.textColor = UIColor.black // 3
+                }
+            }
+            
+            return cell
+        }
+        
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == giftsView.categoryCollectionView {
+            let previuosCell = collectionView.cellForItem(at: IndexPath(row: selectedGiftCategory, section: 0)) as! GiftsCategoryCollectionViewCell
+            let currentCell = collectionView.cellForItem(at: indexPath) as! GiftsCategoryCollectionViewCell
+            
+            previuosCell.vBackground.alpha = 0.6
+            currentCell.vBackground.alpha = 1
+            
+            selectedGiftCategory = indexPath.row
+            
+            giftsView.productsCollectionView.reloadData()
+        }
+        
+        if collectionView == giftsView.productsCollectionView {
+            
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == giftsView.categoryCollectionView {
+            return CGSize(width: self.view.frame.width / 4, height: 40)
+        }
+        
+        if collectionView == giftsView.productsCollectionView {
+            let width = (self.view.frame.width / 4) - 32
+            return CGSize(width: width, height: width * 2)
+        }
+        
+        return self.collectionView.collectionViewLayout.sizeForItem(at: indexPath)
+        
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+        return nil
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        return 15
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
+        return 15
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString? {
+        let message = messages[indexPath.item]
+        switch message.senderId {
+        case senderId:
+            return nil
+        default:
+            guard let senderDisplayName = message.senderDisplayName else {
+                assertionFailure()
+                return nil
+            }
+            return NSAttributedString(string: senderDisplayName)
+        }
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        let message = messages[indexPath.item]
+        let messageWithId = messagesWithId[indexPath.item]
+        
+        if message.senderId == DataStore.shared.me?.objectId {
+            if messageWithId == self.lastSeenMessageId {
+                return seenStr
+            }else {
+                return nil
+            }
+        }else{
+            return nil
+        }
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
+        
+        // expirement to resolve sound from speaker issue
+        playPopSound()
+        
+        let message = self.messages[indexPath.row]
+        if message.isMediaMessage == true {
+            let mediaItem = message.media
+            // Photo Message
+            if mediaItem is JSQCustomPhotoMediaItem {
+                let photoItem = mediaItem as! JSQCustomPhotoMediaItem
+                if let test: UIImage = photoItem.asyncImageView.image {
+                    let photo: PreviewPhoto = PreviewPhoto(image: test, title: "")
+                    let images = [photo]
+                    let photosViewController = NYTPhotosViewController(photos: images)
+                    photosViewController.rightBarButtonItem = nil
+                    present(photosViewController, animated: true, completion: nil)
+                }
+            }
+            // Video Message
+            if mediaItem is JSQCustomVideoMediaItem {
+                let videoItem = mediaItem as! JSQCustomVideoMediaItem
+                
+                if  let videoUrl = videoItem.message.videoUrl, (videoUrl.hasPrefix("http://") || videoUrl.hasPrefix("https://")) {
+                    
+                    let previewControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "PreviewMediaControl") as! PreviewMediaControl
+                    previewControl.from = .chatView
+                    previewControl.type = .VIDEO
+                    previewControl.videoUrl = NSURL(string: videoUrl)!
+                    
+                    present(previewControl, animated: false)
+                }
+            }
+        }
+        
+        // hide keyboard
+        //self.inputToolbar.contentView.textView.resignFirstResponder()
+        //self.view.endEditing(true)
     }
 }
 
@@ -1636,11 +1718,14 @@ extension ChatViewController {
             })
             
         } else {
-            self.giftsView.isHidden = false
-            self.view.bringSubview(toFront: giftsView)
+            self.selectedGiftCategory = 0
+            self.giftsView.categoryCollectionView.reloadData()
+            self.giftsView.productsCollectionView.reloadData()
+            
+            self.overlayGiftsView.isHidden = false
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.giftsView.transform = CGAffineTransform.identity
-                //self.overlayGiftsView.alpha = 1.0
+                self.overlayGiftsView.alpha = 1.0
             }, completion: {(finished: Bool) in
                 self.isGiftsViewVisible = true
                 //self.overlayGiftsView.isHidden = false
@@ -1651,18 +1736,20 @@ extension ChatViewController {
     }
     
     func setupGiftsView() {
-        giftsView.frame = CGRect(x: 0, y: self.view.frame.maxY + 300, width: self.view.frame.width, height: 300)
-        overlayGiftsView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        
         overlayGiftsView.isHidden = true
-        //giftsView.isHidden = true
-        
+        overlayGiftsView.isUserInteractionEnabled = true
+        overlayGiftsView.alpha = 1.0
         overlayGiftsView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+
+        giftsView.productsCollectionView.delegate = self
+        giftsView.productsCollectionView.dataSource = self
+        giftsView.categoryCollectionView.dataSource = self
+        giftsView.categoryCollectionView.delegate = self
         
         giftsView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.giftsView.frame.height - 50)
         
-        self.view.addSubview(overlayGiftsView)
-        self.view.addSubview(giftsView)
+        giftsView.btnClose.addTarget(self, action: #selector(self.showGiftsShop), for: .touchUpInside)
+
     }
 }
 
@@ -1689,13 +1776,13 @@ extension ChatViewController: AVAudioRecorderDelegate {
         // used to show a tip for the user when cliking on the record button
         let tabGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTabRecordAudio(_:)))
         recordButton.addGestureRecognizer(tabGestureRecognizer)
-        recordButton.frame = CGRect(x: 35, y: -5, width: 60, height: CGFloat(height + 10.0))
+        recordButton.frame = CGRect(x: 30, y: -5, width: 60, height: CGFloat(height + 10.0))
         
         image = UIImage(named: "giftsBtn")
         let giftsButton = UIButton(type: .custom)
         giftsButton.setImage(image, for: .normal)
         giftsButton.addTarget(self, action: #selector(self.showGiftsShop), for: .touchUpInside)
-        giftsButton.frame = CGRect(x: 90, y: 0, width: Int(height + 2), height: Int(height + 2))
+        giftsButton.frame = CGRect(x: 75, y: -5, width: Int(height + 12), height: Int(height + 12))
         
         inputToolbar.contentView.leftBarButtonItemWidth = 120
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)

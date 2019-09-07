@@ -129,6 +129,7 @@ extension IAPManager : SKPaymentTransactionObserver {
                                 self.selectedItem?.type == ShopItemType.coinsPack {
                                 ApiManager.shared.getMe(completionBlock: { (success, err, user) in
                                     self.delegate?.didPaymentCompleted?()
+                                    
                                 })
                             }else if self.selectedItem?.type == ShopItemType.ExtendChat {
                                 self.delegate?.didPaymentCompleted?()

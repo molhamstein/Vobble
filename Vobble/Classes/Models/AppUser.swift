@@ -98,7 +98,7 @@ class AppUser: BaseModel, NSCopying {
     public var accountInfoCompleted: Bool?
     public var canEditUsername: Bool?
     public var phoneNumber: String?
-    public var pocketCoins: String?
+    public var pocketCoins: Int?
     
     public var socialId: String?
     public var socialToken: String?
@@ -181,7 +181,7 @@ class AppUser: BaseModel, NSCopying {
             canEditUsername = value
         }
         
-        if let value = json[kPocketCoins].string {
+        if let value = json[kPocketCoins].int {
             pocketCoins = value
         }
 

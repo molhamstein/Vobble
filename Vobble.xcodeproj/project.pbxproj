@@ -65,6 +65,12 @@
 		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		8F08EB26228BB1CB00CE9A81 /* PhoneLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08EB25228BB1CB00CE9A81 /* PhoneLoginViewController.swift */; };
 		8F08EB28228E184C00CE9A81 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08EB27228E184C00CE9A81 /* VerifyCodeViewController.swift */; };
+		8F448BA8232322A90014EB81 /* GiftsCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F448BA6232322A90014EB81 /* GiftsCategoryCollectionViewCell.swift */; };
+		8F448BA9232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F448BA7232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib */; };
+		8F448BAB2323250E0014EB81 /* GiftCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F448BAA2323250E0014EB81 /* GiftCategory.swift */; };
+		8F448BAD23232A760014EB81 /* ChatProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F448BAC23232A760014EB81 /* ChatProduct.swift */; };
+		8F448BB02323C5170014EB81 /* ChatProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F448BAE2323C5170014EB81 /* ChatProductCollectionViewCell.swift */; };
+		8F448BB12323C5170014EB81 /* ChatProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F448BAF2323C5170014EB81 /* ChatProductCollectionViewCell.xib */; };
 		8F4AE838228F32EA00716682 /* CompleteSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */; };
 		8F914CAE2259BBD800DAE47C /* ExtendChatPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */; };
 		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
@@ -363,6 +369,12 @@
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F08EB25228BB1CB00CE9A81 /* PhoneLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLoginViewController.swift; sourceTree = "<group>"; };
 		8F08EB27228E184C00CE9A81 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
+		8F448BA6232322A90014EB81 /* GiftsCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftsCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		8F448BA7232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftsCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		8F448BAA2323250E0014EB81 /* GiftCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCategory.swift; sourceTree = "<group>"; };
+		8F448BAC23232A760014EB81 /* ChatProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProduct.swift; sourceTree = "<group>"; };
+		8F448BAE2323C5170014EB81 /* ChatProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		8F448BAF2323C5170014EB81 /* ChatProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSignupViewController.swift; sourceTree = "<group>"; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatPopupViewController.swift; sourceTree = "<group>"; };
@@ -962,6 +974,8 @@
 				571084C820C02262001163EA /* ReportType.swift */,
 				04ACC6D3222DD6B6007FF822 /* Topic.swift */,
 				CE9A250822F7737600AC2A1D /* Version.swift */,
+				8F448BAA2323250E0014EB81 /* GiftCategory.swift */,
+				8F448BAC23232A760014EB81 /* ChatProduct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1550,6 +1564,10 @@
 			children = (
 				CE0494C12320688100ADF01E /* GiftsView.swift */,
 				CE0494BF232067D400ADF01E /* GiftsView.xib */,
+				8F448BA6232322A90014EB81 /* GiftsCategoryCollectionViewCell.swift */,
+				8F448BA7232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib */,
+				8F448BAE2323C5170014EB81 /* ChatProductCollectionViewCell.swift */,
+				8F448BAF2323C5170014EB81 /* ChatProductCollectionViewCell.xib */,
 			);
 			path = Gifts;
 			sourceTree = "<group>";
@@ -1683,12 +1701,14 @@
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				04ACC6DA2235AD66007FF822 /* splashSound.mp3 in Resources */,
+				8F448BA9232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				57A8129D210CE63F003D738E /* find_bottle.gif in Resources */,
 				57A8129B210CE3AB003D738E /* throwBottle.gif in Resources */,
 				5742C142205660B300A5402D /* VideoPlayerView.xib in Resources */,
 				B19B16D7203DF5D1004D684F /* VobbleNavigationBar.xib in Resources */,
 				B193731820342D9F007B1E7D /* LaunchScreen.storyboard in Resources */,
+				8F448BB12323C5170014EB81 /* ChatProductCollectionViewCell.xib in Resources */,
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				570BB3242081445C00542EAD /* crab.gif in Resources */,
 				CE0494C0232067D400ADF01E /* GiftsView.xib in Resources */,
@@ -1947,6 +1967,7 @@
 				B18A5DBE20348E4300F139B7 /* Atomic.swift in Sources */,
 				B18A5D6F20348E4300F139B7 /* NSObject+RACKVOWrapper.m in Sources */,
 				B18A5D5F20348E4300F139B7 /* NSString+CMDQueryStringSerialization.m in Sources */,
+				8F448BAB2323250E0014EB81 /* GiftCategory.swift in Sources */,
 				B18A5D6420348E4300F139B7 /* MKAnnotationView+RACSignalSupport.m in Sources */,
 				B18A5D9B20348E4300F139B7 /* RACSignal.m in Sources */,
 				570BB322208138ED00542EAD /* PassthroughView.m in Sources */,
@@ -1962,6 +1983,7 @@
 				B1F7A456205A0F39009B18AB /* ShopViewController.swift in Sources */,
 				04ACC6D82235A4A4007FF822 /* ShareAppPopupViewController.swift in Sources */,
 				B18A5D6120348E4300F139B7 /* ISO8601Serialization.m in Sources */,
+				8F448BAD23232A760014EB81 /* ChatProduct.swift in Sources */,
 				B18A5D9A20348E4300F139B7 /* RACSignal+Operations.m in Sources */,
 				5706C432204DCAA3006E7C9A /* Shore.swift in Sources */,
 				B18A5DB720348E4300F139B7 /* UISlider+RACSignalSupport.m in Sources */,
@@ -2052,6 +2074,7 @@
 				B18A5D8920348E4300F139B7 /* RACErrorSignal.m in Sources */,
 				576807B120AF1A500039E2C2 /* RateUsPopupViewController.swift in Sources */,
 				B18A5D6820348E4300F139B7 /* NSEnumerator+RACSequenceAdditions.m in Sources */,
+				8F448BA8232322A90014EB81 /* GiftsCategoryCollectionViewCell.swift in Sources */,
 				B18A5D9C20348E4300F139B7 /* RACSignalProvider.d in Sources */,
 				B1053E882043EBE600A4383D /* CountryPicker.m in Sources */,
 				B19372E42033E3FC007B1E7D /* Location.swift in Sources */,
@@ -2114,6 +2137,7 @@
 				B105CBF420715AAA00E7FFBC /* JSQCustomPhotoMediaItem.swift in Sources */,
 				57413D55204D3B5700450A42 /* GCD.m in Sources */,
 				B19372F12033E44E007B1E7D /* AppFonts.swift in Sources */,
+				8F448BB02323C5170014EB81 /* ChatProductCollectionViewCell.swift in Sources */,
 				575A16CF204EBD0F00F4B510 /* PreviewMediaControl.swift in Sources */,
 				B18A5DB520348E4300F139B7 /* UIRefreshControl+RACCommandSupport.m in Sources */,
 				0445EF3B218E25BC0029A6FB /* AudioCollectionViewCellOutgoing.swift in Sources */,

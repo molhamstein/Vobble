@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VobbleNavigationBar" customModule="Vobble" customModuleProvider="target">
             <connections>
+                <outlet property="lblCoins" destination="VN3-Uv-y3E" id="8nY-a1-bDv"/>
                 <outlet property="leftIcon" destination="gN4-5k-Fqc" id="EXg-GK-Neb"/>
                 <outlet property="navTitle" destination="1DC-up-vPY" id="vkm-6f-Yvp"/>
                 <outlet property="progressIndicator" destination="gaE-aq-7Iy" id="IlO-Fo-vf8"/>
@@ -25,29 +25,29 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navBarBG" translatesAutoresizingMaskIntoConstraints="NO" id="E4N-xv-Zi8">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iuT-R4-wzv" userLabel="Main View">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN4-5k-Fqc">
-                            <rect key="frame" x="17" y="387" width="30" height="34"/>
+                            <rect key="frame" x="17" y="43.5" width="30" height="34"/>
                             <connections>
                                 <action selector="leftIconPressed:" destination="-1" eventType="touchUpInside" id="9H0-gU-1Qb"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DC-up-vPY">
-                            <rect key="frame" x="188" y="404" width="0.0" height="0.0"/>
+                            <rect key="frame" x="187.5" y="60.5" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuD-6v-FJa">
-                            <rect key="frame" x="326.5" y="313" width="30" height="34"/>
+                            <rect key="frame" x="326.5" y="32.5" width="30" height="34"/>
                             <state key="normal">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -56,7 +56,7 @@
                             </connections>
                         </button>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gaE-aq-7Iy">
-                            <rect key="frame" x="314.5" y="309.5" width="42" height="42"/>
+                            <rect key="frame" x="314.5" y="28.5" width="42" height="42"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="drB-8j-fTM"/>
@@ -64,15 +64,35 @@
                             </constraints>
                             <color key="color" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </activityIndicatorView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sCn-Sl-7Oy">
+                            <rect key="frame" x="63" y="52.5" width="30.5" height="16"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coins" translatesAutoresizingMaskIntoConstraints="NO" id="JQn-c4-p1N">
+                                    <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="8lf-ug-cL4"/>
+                                        <constraint firstAttribute="width" constant="16" id="NSF-7D-5UW"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VN3-Uv-y3E">
+                                    <rect key="frame" x="20" y="0.0" width="10.5" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="gaE-aq-7Iy" secondAttribute="trailing" constant="18.5" id="2qO-yA-Bz8"/>
                         <constraint firstItem="yuD-6v-FJa" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="0.99" id="5Dd-EB-P2J"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerX" secondItem="iuT-R4-wzv" secondAttribute="centerX" id="ERp-gD-ZM4"/>
+                        <constraint firstItem="sCn-Sl-7Oy" firstAttribute="centerY" secondItem="gN4-5k-Fqc" secondAttribute="centerY" id="M5p-xT-NRY"/>
                         <constraint firstItem="1DC-up-vPY" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="M8h-2l-Xzs"/>
                         <constraint firstAttribute="trailing" secondItem="yuD-6v-FJa" secondAttribute="trailing" constant="18.5" id="PKi-PO-bDZ"/>
                         <constraint firstItem="gaE-aq-7Iy" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="0.99" id="dTW-hN-gfX"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="leading" secondItem="iuT-R4-wzv" secondAttribute="leading" constant="17" id="gqu-ZD-9o0"/>
+                        <constraint firstItem="sCn-Sl-7Oy" firstAttribute="leading" secondItem="gN4-5k-Fqc" secondAttribute="trailing" constant="16" id="jPU-JL-TAn"/>
                         <constraint firstItem="gN4-5k-Fqc" firstAttribute="centerY" secondItem="iuT-R4-wzv" secondAttribute="centerY" multiplier="1.21" id="yFe-D9-Pvs"/>
                     </constraints>
                 </view>
@@ -87,9 +107,12 @@
                 <constraint firstAttribute="bottom" secondItem="E4N-xv-Zi8" secondAttribute="bottom" id="tlG-kf-cMk"/>
                 <constraint firstItem="iuT-R4-wzv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uNn-Hu-adh"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="154.72263868065968"/>
         </view>
     </objects>
     <resources>
+        <image name="coins" width="206" height="216"/>
         <image name="navBarBG" width="375" height="95"/>
     </resources>
 </document>

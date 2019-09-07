@@ -22,7 +22,7 @@ class ShopViewController: AbstractController {
     
     @IBOutlet weak var waveSubView: WaveView!
     
-    public var fType: ShopItemType = .bottlesPack
+    public var fType: ShopItemType = .coinsPack
     
     private var _shopItemsArray:[ShopItem] = [ShopItem]()
     fileprivate var shopItemsArray:[ShopItem] {
