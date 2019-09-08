@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E12AB2588B9B91E01B2BED06EA45627F"
+               BlueprintIdentifier = "08223D5CEE65557C5D5D38CA0C14A08A"
                BuildableName = "UIView_Shake.framework"
                BlueprintName = "UIView+Shake"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E12AB2588B9B91E01B2BED06EA45627F"
+            BlueprintIdentifier = "08223D5CEE65557C5D5D38CA0C14A08A"
             BuildableName = "UIView_Shake.framework"
             BlueprintName = "UIView+Shake"
             ReferencedContainer = "container:Pods.xcodeproj">

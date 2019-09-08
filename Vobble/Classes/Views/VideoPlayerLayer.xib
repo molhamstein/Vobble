@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoPlayerLayer" customModule="Vobble" customModuleProvider="target">
+            <connections>
+                <outlet property="loader" destination="5X8-kA-gWz" id="lyp-v6-8kr"/>
+                <outlet property="slideBar" destination="stg-mX-91i" id="KF1-tg-oxm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="hI3-WR-4fH">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="stg-mX-91i">
+                    <rect key="frame" x="14" y="605" width="347" height="31"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" white="0.45000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </slider>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5X8-kA-gWz">
+                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Ty4-3d-C1U" firstAttribute="bottom" secondItem="stg-mX-91i" secondAttribute="bottom" constant="32" id="6sh-4l-F10"/>
+                <constraint firstItem="stg-mX-91i" firstAttribute="leading" secondItem="Ty4-3d-C1U" secondAttribute="leading" constant="16" id="Hjm-kW-GoH"/>
+                <constraint firstItem="Ty4-3d-C1U" firstAttribute="trailing" secondItem="stg-mX-91i" secondAttribute="trailing" constant="16" id="RQK-7Q-PYG"/>
+                <constraint firstItem="5X8-kA-gWz" firstAttribute="centerX" secondItem="hI3-WR-4fH" secondAttribute="centerX" id="ZFb-k5-T6E"/>
+                <constraint firstItem="5X8-kA-gWz" firstAttribute="centerY" secondItem="hI3-WR-4fH" secondAttribute="centerY" id="fqD-dT-SDZ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Ty4-3d-C1U"/>
+            <point key="canvasLocation" x="190" y="-2"/>
+        </view>
+    </objects>
+</document>

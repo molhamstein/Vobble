@@ -14,14 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD
-               BlueprintIdentifier = "152B2C8A13D709BEA96822376DEC2485"
-=======
-               BlueprintIdentifier = "49894F2BFA55FBD3CC8C53223090329B"
->>>>>>> extendChat
+               BlueprintIdentifier = "F99AB7419D4087037A082D88B6C4924D"
+               BuildableName = "TwitterCore"
                BlueprintName = "TwitterCore"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "TwitterCore">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

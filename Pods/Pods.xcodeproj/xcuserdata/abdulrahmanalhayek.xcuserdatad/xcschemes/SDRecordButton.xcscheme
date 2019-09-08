@@ -14,14 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD
-               BlueprintIdentifier = "4F951F341D914CBD77FA5A592D756A45"
-=======
-               BlueprintIdentifier = "55109BCD0F1B5D421F3E8E129B7CAE9B"
->>>>>>> extendChat
+               BlueprintIdentifier = "80D8A282E1A5ED4814F152583C3E2CF9"
+               BuildableName = "SDRecordButton.framework"
                BlueprintName = "SDRecordButton"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SDRecordButton.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

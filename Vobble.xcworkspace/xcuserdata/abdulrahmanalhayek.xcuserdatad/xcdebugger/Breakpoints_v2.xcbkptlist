@@ -10,12 +10,21 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vobble/Classes/Managers/ApiManager.swift"
+<<<<<<< HEAD
             timestampString = "589642906.928743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "858"
             endingLineNumber = "858"
             landmarkName = "purchaseChatProduct(productId:relatedUserId:completionBlock:)"
+=======
+            timestampString = "587955790.196682"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1240"
+            endingLineNumber = "1240"
+            landmarkName = "findBottles(gender:countryCode:shoreId:seen:complete:completionBlock:)"
+>>>>>>> tiktok
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,6 +34,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
             timestampString = "589642906.928827"
             startingColumnNumber = "9223372036854775807"
@@ -48,6 +58,15 @@
             startingLineNumber = "749"
             endingLineNumber = "749"
             landmarkName = "observeMessages()"
+=======
+            filePath = "Vobble/Classes/Managers/ApiManager.swift"
+            timestampString = "587955790.196751"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1268"
+            endingLineNumber = "1268"
+            landmarkName = "findBottles(gender:countryCode:shoreId:seen:complete:completionBlock:)"
+>>>>>>> tiktok
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,6 +76,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
             timestampString = "589642906.928974"
             startingColumnNumber = "9223372036854775807"
@@ -64,6 +84,15 @@
             startingLineNumber = "1321"
             endingLineNumber = "1321"
             landmarkName = "collectionView(_:cellForItemAt:)"
+=======
+            filePath = "Vobble/Classes/Controllers/FindBottleViewController.swift"
+            timestampString = "587955790.196808"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "setupNextCard()"
+>>>>>>> tiktok
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

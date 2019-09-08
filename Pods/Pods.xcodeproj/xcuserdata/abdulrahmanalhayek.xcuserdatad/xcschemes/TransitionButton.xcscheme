@@ -14,14 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD
-               BlueprintIdentifier = "152B2C8A13D709BEA96822376DEC2485"
-=======
-               BlueprintIdentifier = "49894F2BFA55FBD3CC8C53223090329B"
->>>>>>> extendChat
-               BlueprintName = "TwitterCore"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "TwitterCore">
+               BlueprintIdentifier = "B2376B53BF4020504AFBB85488AC2B0B"
+               BuildableName = "TransitionButton.framework"
+               BlueprintName = "TransitionButton"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

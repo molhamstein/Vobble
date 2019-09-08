@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "757BCD1A7AE0BCD908C2352C701B3808"
+               BlueprintIdentifier = "38E58890A7FD56AB08B1463153D15F0E"
+               BuildableName = "PIDatePicker.framework"
                BlueprintName = "PIDatePicker"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "PIDatePicker.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

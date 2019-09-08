@@ -1312,6 +1312,72 @@ class ApiManager: NSObject {
         }
     }
     
+    func findBottles(gender: String, countryCode: String, shoreId: String? ,seen: [String]?, complete: [String]?, offsets: Double? = nil, completionBlock: @escaping (_ bottles: [Bottle]?, _ errorMessage: ServerError?) -> Void) {
+        
+        
+        var findBottleURL : String;
+        if AppConfig.isProductionBuild {
+            findBottleURL = "\(baseURL)/bottles/getBottle"
+        } else {
+            findBottleURL = "\(baseURL)/bottles/5c20f1f94c6c42445da94e7b"
+        }
+        
+        // shore
+        if let shore = shoreId {
+            findBottleURL += "?shoreId=\(shore)"
+        } else {
+            findBottleURL += "?dummyParam=d"
+        }
+        // country
+        if countryCode != "" && countryCode != AppConfig.NO_COUNTRY_SELECTED{
+            findBottleURL += "&ISOCode=\(countryCode)"
+        }
+        // gender
+        if gender != GenderType.allGender.rawValue {
+            findBottleURL += "&gender=\(gender)"
+        }
+        
+        if let seen = seen {
+            findBottleURL += "&seen=\(seen)"
+        }
+        
+        if let complete = complete {
+            findBottleURL += "&complete=\(complete)"
+        }
+        
+        if let offsets = offsets {
+            findBottleURL += "&offsets=\(offsets)"
+        }
+        
+        let encoedeUrl = findBottleURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        Alamofire.request(encoedeUrl!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            
+            if responseObject.result.isSuccess {
+                
+                let resJson = JSON(responseObject.result.value!)
+                print(resJson)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: resJson["error"]) ?? ServerError.unknownError
+                    completionBlock(nil , serverError)
+                } else {
+                    if let bottles = resJson.array {
+                        var tempBottles: [Bottle] = []
+                        for i in bottles {
+                            tempBottles.append(Bottle(json: i))
+                        }
+                        
+                        completionBlock(tempBottles, nil)
+                    }
+                }
+                if responseObject.result.isFailure {
+                    let _ : NSError = responseObject.result.error! as NSError
+                    completionBlock(nil, ServerError.connectionError)
+                }
+            }
+        }
+    }
+    
     
     func findBottleById(bottleId:String, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
         

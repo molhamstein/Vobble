@@ -14,14 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD
-               BlueprintIdentifier = "3F078C8336B0B2A1CCBB02190BB3EABB"
-=======
-               BlueprintIdentifier = "488D0AEBEE30B0BFDD56658C6B324645"
->>>>>>> extendChat
+               BlueprintIdentifier = "6C4552FAC140ABF072D9387EC75A8CDA"
+               BuildableName = "SDWebImage.framework"
                BlueprintName = "SDWebImage"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SDWebImage.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

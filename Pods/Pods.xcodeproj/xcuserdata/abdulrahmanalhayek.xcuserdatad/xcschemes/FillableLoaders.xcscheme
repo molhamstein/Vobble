@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E03D01CE08CDCB0288DDB7BC285AD0E8"
+               BlueprintIdentifier = "20742676E5A4BD1907C01FB122A1E3E2"
+               BuildableName = "FillableLoaders.framework"
                BlueprintName = "FillableLoaders"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "FillableLoaders.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

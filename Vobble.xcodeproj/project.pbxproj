@@ -77,6 +77,8 @@
 		8FBD40B92324893900EFB73E /* ImageCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40B72324893900EFB73E /* ImageCollectionViewCellIncoming.xib */; };
 		8FBD40BC23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD40BA23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift */; };
 		8FBD40BD23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */; };
+		8FBD40BF23254B2B00EFB73E /* VideoPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD40BE23254B2B00EFB73E /* VideoPlayerLayer.swift */; };
+		8FBD40C123254B4600EFB73E /* VideoPlayerLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */; };
 		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
 		8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
@@ -386,6 +388,8 @@
 		8FBD40B72324893900EFB73E /* ImageCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
 		8FBD40BA23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCellOutgoing.swift; sourceTree = "<group>"; };
 		8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
+		8FBD40BE23254B2B00EFB73E /* VideoPlayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerLayer.swift; sourceTree = "<group>"; };
+		8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerLayer.xib; sourceTree = "<group>"; };
 		8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendChatCollectionViewCell.xib; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1043,6 +1047,8 @@
 				B190AD23205DADB300C9F030 /* BMPlayerCustomControlView.swift */,
 				5742C13F205660B300A5402D /* VideoPlayerView.swift */,
 				5742C140205660B300A5402D /* VideoPlayerView.xib */,
+				8FBD40BE23254B2B00EFB73E /* VideoPlayerLayer.swift */,
+				8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */,
 			);
 			name = VideoPlayer;
 			sourceTree = "<group>";
@@ -1733,6 +1739,7 @@
 				B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */,
 				8FBD40BD23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib in Resources */,
 				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
+				8FBD40C123254B4600EFB73E /* VideoPlayerLayer.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
 				8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */,
@@ -1854,6 +1861,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/TransitionButton/TransitionButton.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/UIView+Shake/UIView_Shake.framework",
@@ -1893,6 +1901,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_Shake.framework",
@@ -2144,6 +2153,7 @@
 				B19372E52033E3FC007B1E7D /* Mention.swift in Sources */,
 				B18A5D8B20348E4300F139B7 /* RACGroupedSignal.m in Sources */,
 				B18A5DCA20348E4300F139B7 /* SimpleAuthInstagramLoginViewController.m in Sources */,
+				8FBD40BF23254B2B00EFB73E /* VideoPlayerLayer.swift in Sources */,
 				B19372DE2033E3FC007B1E7D /* AppUser.swift in Sources */,
 				B19371172033D8FC007B1E7D /* HomeViewController.swift in Sources */,
 				B1818F712066D30000086030 /* TimerLabel.swift in Sources */,

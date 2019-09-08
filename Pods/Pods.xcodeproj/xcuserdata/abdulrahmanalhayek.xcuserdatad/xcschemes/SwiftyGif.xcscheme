@@ -14,14 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD
-               BlueprintIdentifier = "3A0AD4452ADF3068227EDFCA274BA3CE"
-=======
-               BlueprintIdentifier = "ECC2E756DBB2CDB914E4754EAC679F2C"
->>>>>>> extendChat
+               BlueprintIdentifier = "DDC194024D98106EAAB503D5E91C14EF"
+               BuildableName = "SwiftyGif.framework"
                BlueprintName = "SwiftyGif"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SwiftyGif.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

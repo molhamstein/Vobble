@@ -14,14 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD
-               BlueprintIdentifier = "291E51D06A06E91D2B1AF1C6761B7F9D"
-=======
-               BlueprintIdentifier = "98B4E51038B31DC1107B289C129D3D2A"
->>>>>>> extendChat
+               BlueprintIdentifier = "6F0C4D2AFDD8ECF16C0485A42A973D84"
+               BuildableName = "YXWaveView.framework"
                BlueprintName = "YXWaveView"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "YXWaveView.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

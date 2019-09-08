@@ -13,10 +13,9 @@ import Firebase
 import Flurry_iOS_SDK
 import WCLShineButton
 import CountryPickerView
+import TransitionButton
 
 class FindBottleViewController: AbstractController {
-    
-    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var shoreNameLabel: UILabel!
@@ -26,38 +25,52 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var countryFlag: UIImageView!
     @IBOutlet weak var moreOptionsOverlayButton: UIButton!
     
-    @IBOutlet var videoView: VideoPlayerView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    //@IBOutlet var videoView: VideoPlayerView!
     
     @IBOutlet weak var ignoreButton: VobbleButton!
     @IBOutlet weak var replyButton: WCLShineButton!
     @IBOutlet weak var replyLabel: UILabel!
-    @IBOutlet weak var playButton: UIButton!
-    
-    public var bottle:Bottle?
-    public var shoreName:String?
-    public var myVideoUrl : NSURL?
-    public var myAudioUrl : URL?
-    public var myAudioDuration : Float?
-    
+    @IBOutlet weak var playButton: TransitionButton!
+
     @IBOutlet weak var optionView: UIStackView!
     @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var blockButton: UIButton!
     @IBOutlet weak var reportView: UIView!
     @IBOutlet weak var reportPicker: UIPickerView!
     
-    var isInitialized = false
-    
-    fileprivate var reportReasonIndex: Int = 0
+    fileprivate var reportReasonIndex:Int = 0
+    fileprivate var videoCards: [VideoPlayerLayer?] = []
+    fileprivate var currentVideoCard: VideoPlayerLayer?
+    fileprivate var nextVideoCard: VideoPlayerLayer?
+    fileprivate var currentIndex: CGFloat = 0.0
+    fileprivate var fixedIndex: Int = 0
+    fileprivate var lastVelocityYSign = 0
+    fileprivate var seen: [String]?
+    fileprivate var complete: [String]?
     fileprivate var countryPickerView: CountryPickerView = CountryPickerView()
-
+    
+    public var currentBottle:Bottle?
+    public var bottles:[Bottle]?
+    public var shoreName:String?
+    public var myVideoUrl : NSURL?
+    public var myAudioUrl : URL?
+    public var gender: String!
+    public var countryCode: String!
+    public var shoreId: String?
+    
+    var isInitialized = false
+    var isNextCardCreated: Bool = false
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        shoreNameLabel.text = bottle?.shore?.name
-        userNameLabel.text = bottle?.owner?.userName
-        countryFlag.image = countryPickerView.getCountryByName(bottle?.owner?.country?.nameEn ?? "")?.flag
-        genderImage.image = bottle?.owner?.gender == .male ? UIImage(named: "signup_male") : UIImage(named: "signup_female")
-        videoView.preparePlayer(videoURL: bottle?.attachment ?? "", customPlayBtn: playButton)
+        if bottles?.count ?? 0 > 0 {
+            self.currentBottle = bottles?[0]
+        }
+        
+        setupVideoData()
+        
         optionView.isHidden = true
         moreOptionsOverlayButton.isHidden = true
         reportView.isHidden = true
@@ -69,13 +82,7 @@ class FindBottleViewController: AbstractController {
         // round flag image view
         countryFlag.layer.cornerRadius = 12
         countryFlag.layer.masksToBounds = true
-        
-        if let imgUrl = bottle?.owner?.profilePic, imgUrl.isValidLink() {
-            userimage.sd_setShowActivityIndicatorView(true)
-            userimage.sd_setIndicatorStyle(.gray)
-            userimage.sd_setImage(with: URL(string: imgUrl))
-        }
-        
+   
         // Reply button animation setup
         var parameters = WCLShineParams()
         parameters.bigShineColor = AppColors.blueXLight
@@ -83,18 +90,16 @@ class FindBottleViewController: AbstractController {
         replyButton.image = .defaultAndSelect(#imageLiteral(resourceName: "replay_circle"), #imageLiteral(resourceName: "replay_circle"))
         replyButton.params = parameters
 
-        // a workarround that I'm not sure of it yet to resolve the issue of the video sound comming from the ear speaker sometimes
-        do {
-            if #available(iOS 10.0, *) {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            } else {
-                AVAudioSession.sharedInstance().perform(NSSelectorFromString("setCategory:error:"), with: AVAudioSessionCategoryPlayback)
-            }
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print(error)
-        }
-
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupScrollView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        /// MARK:- This block of code to make sure that all video player
+        currentVideoCard?.cancelBuffring()
+        nextVideoCard?.cancelBuffring()
     }
     
     override func viewDidLayoutSubviews() {
@@ -129,20 +134,216 @@ class FindBottleViewController: AbstractController {
                 }
             }
             
-            // mark the video as seen after the user has watched 4 seconds of it
-            dispatch_main_after(4) {
-                if let bottleObj = self.bottle {
-                    // make sure the vie controller is still open after 4 seconds
-                    if let _ = self.view.window, self.isViewLoaded {
-                        ApiManager.shared.markBottleSeen(bottle: bottleObj, completionBlock: { (success, err) in })
-                    }
-                }
-            }
-            
             isInitialized = true
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let newConvRef = sender as? DatabaseReference, let btl = currentBottle {
+            let nav = segue.destination as! UINavigationController
+            let chatVc = nav.topViewController as! ChatViewController
+            chatVc.senderDisplayName = DataStore.shared.me?.userName
+            chatVc.conversationRef = newConvRef
+            chatVc.conversationId = newConvRef.key
+            chatVc.bottleToReplyTo = btl
+            chatVc.replyVideoUrlToUpload = myVideoUrl as URL?
+            chatVc.replyAudioUrlToUpload = myAudioUrl
+        }
+    }
+
+}
+
+// MARK:- ScrollView Delegate
+extension FindBottleViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentVelocityY =  scrollView.panGestureRecognizer.velocity(in: scrollView.superview).y
+        let currentVelocityYSign = Int(currentVelocityY).signum()
+        
+        if currentVelocityYSign != lastVelocityYSign &&
+            currentVelocityYSign != 0 {
+            lastVelocityYSign = currentVelocityYSign
+        }
+        
+        // If scrolling to top so keep me in the same point
+        if lastVelocityYSign > 0 {
+            scrollView.contentOffset = CGPoint(x: 0, y: UIScreen.main.bounds.height * self.currentIndex)
+        }
+        
+    }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.y/view.frame.height)
+        
+        if pageIndex != currentIndex {
+            currentVideoCard?.cancelBuffring()
+            
+            currentIndex = pageIndex
+            currentBottle = bottles?[Int(pageIndex)]
+            currentVideoCard = nextVideoCard
+            
+            // This line of code to remove the prevues card to avoid memory warning
+            //videoCards[Int(currentIndex - 1)].removeFromSuperview()
+            for i in scrollView.subviews {
+                if i == videoCards[Int(currentIndex) - 1] {
+                    i.removeFromSuperview()
+                    videoCards[Int(currentIndex) - 1]?.removeFromSuperview()
+                    videoCards[Int(currentIndex) - 1] = nil
+                }
+            }
+            
+            if currentVideoCard?.isVideoAvailable() ?? false {
+                if currentVideoCard?.isVideoReady() ?? false {
+                    currentVideoCard?.play()
+                }
+                currentVideoCard?.isAutoPlay = true
+            }else {
+                currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self)
+            }
+            
+            setupVideoData()
+            
+            // Get the next 5 videos if needed
+            if Int(currentIndex) == (self.bottles?.count ?? 0) - 2 {
+                self.fixedIndex = Int(self.currentIndex) + 2
+                getMoreVideos()
+            }
+            
+            setupNextCard()
+        }
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        
+    }
+    
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        return false
+    }
+}
+
+// MARK:- Functions
+extension FindBottleViewController {
+    func goToChat() {
+        if let btl = currentBottle {
+            FirebaseManager.shared.createNewConversation(bottle: btl, completionBlock: { (err, databaseReference) in
+                if let _ = err {
+                    self.showMessage(message: ServerError.unknownError.type.errorMessage, type: .error)
+                } else {
+                    self.showActivityLoader(false)
+                    ApiManager.shared.replyToBottle(bottle: btl, completionBlock: { (success, err) in })
+                    self.performSegue(withIdentifier: "goToChat", sender: databaseReference)
+                }
+            })
+        }
+    }
+    
+    func setupScrollView() {
+        scrollView.delegate = self
+        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: UIScreen.main.bounds.height)
+        scrollView.contentSize = CGSize(width: view.frame.width , height: UIScreen.main.bounds.height * CGFloat(bottles?.count ?? 1))
+        scrollView.isPagingEnabled = true
+        scrollView.scrollsToTop = false
+        
+        for i in 0 ..< (bottles?.count ?? 0) {
+            let card = VideoPlayerLayer(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: view.frame.width, height: UIScreen.main.bounds.height))
+            
+            videoCards.append(card)
+            scrollView.addSubview(card)
+        }
+        
+        // To adjust first card position
+        scrollView.contentOffset = CGPoint(x: 0, y: 0)
+        
+        currentVideoCard = videoCards[Int(currentIndex)]
+        currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self)
+        
+        setupNextCard()
+    }
+    
+    func setupVideoData(){
+        shoreNameLabel.text = currentBottle?.shore?.name
+        userNameLabel.text = currentBottle?.owner?.userName
+        countryFlag.image = countryPickerView.getCountryByName(currentBottle?.owner?.country?.nameEn ?? "")?.flag
+        genderImage.image = currentBottle?.owner?.gender == .male ? UIImage(named: "signup_male") : UIImage(named: "signup_female")
+        
+        
+        if let imgUrl = currentBottle?.owner?.profilePic, imgUrl.isValidLink() {
+            userimage.sd_setShowActivityIndicatorView(true)
+            userimage.sd_setIndicatorStyle(.gray)
+            userimage.sd_setImage(with: URL(string: imgUrl))
+        }
+    }
+    
+    func setupNextCard(){
+        if (Int(currentIndex) + 1) <= ((bottles?.count ?? 0) - 1) {
+            if let nextBottle = bottles?[Int(currentIndex) + 1]{
+                nextVideoCard = videoCards[Int(currentIndex) + 1]
+                nextVideoCard?.configure(url: nextBottle.attachment ?? "", isAutoPlay: false, customButton: self.playButton, delegate: self)
+                isNextCardCreated = true
+            }
+        }else {
+            isNextCardCreated = false
+        }
+        
+    }
+    
+    func getMoreVideos() {
+        self.seen = DataStore.shared.seenVideos
+        self.complete = DataStore.shared.completedVideos
+        ApiManager.shared.findBottles(gender: gender, countryCode: countryCode, shoreId: shoreId, seen: seen, complete: complete, offsets: Double(self.bottles?.count ?? 0), completionBlock: {(bottles, error) in
+            if error == nil  {
+                if bottles != nil {
+                    for i in bottles! {
+                        self.bottles?.append(i)
+                    }
+                    
+                    for i in self.fixedIndex ..< (self.bottles?.count ?? 0) {
+                        let card = VideoPlayerLayer(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: self.view.frame.width, height: UIScreen.main.bounds.height))
+                        
+                        self.videoCards.append(card)
+                        self.scrollView.addSubview(card)
+                    }
+                    
+                    self.scrollView.contentSize = CGSize(width: self.view.frame.width , height: UIScreen.main.bounds.height * CGFloat(self.bottles?.count ?? 1))
+                    
+                    if !self.isNextCardCreated {
+                        self.setupNextCard()
+                    }
+                    
+                } else {
+                    // no bottles found
+                    
+                }
+                
+                DataStore.shared.seenVideos = []
+                DataStore.shared.completedVideos = []
+            } else {
+                // error ex. Authoriaztion error
+                let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                if error?.type == .authorization {
+                    let actionCancel = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(actionCancel)
+                    let actionLogout = UIAlertAction(title: "LOGIN_LOGIN_BTN".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else if error?.type == .accountDeactivated || error?.type == .deviceBlocked {
+                    /// user should be forced to logout
+                    let actionLogout = UIAlertAction(title: "ok".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else {
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                }
+                self.present(alertController, animated: true, completion: nil)
+            }
+        })
+    }
+}
+
+
+// MARK:- @IBAction
+extension FindBottleViewController {
     @IBAction func exitButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -158,26 +359,26 @@ class FindBottleViewController: AbstractController {
     }
     
     @IBAction func reportBtnPressed(_ sender: Any) {
-        if self.videoView.isPlaying() {
-            videoView.playButtonPressed()
+        if self.currentVideoCard?.isPlaying() ?? false {
+            currentVideoCard?.playButtonPressed()
         }
         reportView.isHidden = false
         optionView.isHidden = true
     }
     
     @IBAction func blockBtnPressed(_ sender: Any) {
-        if self.videoView.isPlaying() {
-            videoView.playButtonPressed()
+        if self.currentVideoCard?.isPlaying() ?? false {
+            currentVideoCard?.playButtonPressed()
         }
         
-        let blockMessage = String(format: "BLOCK_USER_WARNING".localized, "\(self.bottle?.owner?.userName ?? " ")")
+        let blockMessage = String(format: "BLOCK_USER_WARNING".localized, "\(self.currentBottle?.owner?.userName ?? " ")")
         
         let alertController = UIAlertController(title: "", message: blockMessage , preferredStyle: .alert)
         //We add buttons to the alert controller by creating UIAlertActions:
         let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
             //self.dismiss(animated: true, completion: nil)
             // here send block to server
-            if let bottleOwner = self.bottle?.owner {
+            if let bottleOwner = self.currentBottle?.owner {
                 self.showActivityLoader(true)
                 ApiManager.shared.blockUser(user: bottleOwner, completionBlock: { (success, err) in
                     self.showActivityLoader(false)
@@ -210,7 +411,7 @@ class FindBottleViewController: AbstractController {
     @IBAction func doneBtnPressed(_ sender: Any) {
         print(self.reportReasonIndex)
         reportView.isHidden = true
-        if let bottle = self.bottle {
+        if let bottle = self.currentBottle {
             ApiManager.shared.reportBottle(bottle: bottle, reportType: DataStore.shared.reportTypes[self.reportReasonIndex], completionBlock: { (success, error) in
                 if success {
                     let alertController = UIAlertController(title: "", message: "REPORT_SUCCESS_MSG".localized, preferredStyle: .alert)
@@ -229,20 +430,20 @@ class FindBottleViewController: AbstractController {
     
     @IBAction func replyBtnPressed(_ sender: Any) {
         
-        let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (bottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (bottle?.owner?.countryISOCode) ?? ""];
+        let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (currentBottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (currentBottle?.owner?.countryISOCode) ?? ""];
         Flurry.logEvent(AppConfig.reply_pressed, withParameters:logEventParams);
         
-        if videoView.isPlaying() {
-            videoView.playButtonPressed()
+        if self.currentVideoCard?.isPlaying() ?? false {
+            currentVideoCard?.playButtonPressed()
         }
         
-//        // show record Video screen
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
-//            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
-//            recordControl.from = .findBottle
-//
-//            self.navigationController?.pushViewController(recordControl, animated: false)
-//        }
+        //        // show record Video screen
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
+        //            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
+        //            recordControl.from = .findBottle
+        //
+        //            self.navigationController?.pushViewController(recordControl, animated: false)
+        //        }
         
         // show record Audio screen
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
@@ -250,57 +451,45 @@ class FindBottleViewController: AbstractController {
             
             self.navigationController?.pushViewController(recordControl, animated: false)
         }
-
+        
     }
     
     @IBAction func ignoreBtnPressed(_ sender: Any) {
-        let logEventParams :[String : String] = ["Shore": shoreName ?? "", "AuthorGender": (bottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (bottle?.owner?.countryISOCode) ?? ""];
+        let logEventParams :[String : String] = ["Shore": shoreName ?? "", "AuthorGender": (currentBottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (currentBottle?.owner?.countryISOCode) ?? ""];
         Flurry.logEvent(AppConfig.reply_ignored, withParameters:logEventParams);
         self.dismiss(animated: true, completion: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if let newConvRef = sender as? DatabaseReference, let btl = bottle {
-            let nav = segue.destination as! UINavigationController
-            let chatVc = nav.topViewController as! ChatViewController
-            chatVc.senderDisplayName = DataStore.shared.me?.userName
-            chatVc.conversationRef = newConvRef
-            chatVc.conversationId = newConvRef.key
-            chatVc.bottleToReplyTo = btl
-            chatVc.replyVideoUrlToUpload = myVideoUrl as URL?
-            chatVc.replyAudioUrlToUpload = myAudioUrl
-        }
-    }
-    
     @IBAction func playButtonPressed(_ sender: Any) {
-        if !self.videoView.isPlaying() {
-            self.playButton.setImage(UIImage(named: "pause"), for: .normal)
-        } else {
-            self.playButton.setImage(UIImage(named: "ic_play"), for: .normal)
-        }
-        videoView.playButtonPressed()
+        currentVideoCard?.playButtonPressed()
     }
     
     @IBAction func unwindToFindBottle(segue: UIStoryboardSegue) {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-           self.goToChat()
-       }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.goToChat()
+        }
+    }
+}
+
+extension FindBottleViewController: VideoPlayerDelegate {
+    func didCompleteVideo() {
+        if let _ = DataStore.shared.completedVideos {
+            DataStore.shared.completedVideos?.append((self.currentBottle?.bottle_id!)!)
+        }else {
+            DataStore.shared.completedVideos = [self.currentBottle?.bottle_id!] as? [String]
+        }
     }
     
-    func goToChat() {
-        if let btl = self.bottle {
-            FirebaseManager.shared.createNewConversation(bottle: btl, completionBlock: { (err, databaseReference) in
-                if let _ = err {
-                    self.showMessage(message: ServerError.unknownError.type.errorMessage, type: .error)
-                } else {
-                    self.showActivityLoader(false)
-                    ApiManager.shared.replyToBottle(bottle: btl, completionBlock: { (success, err) in })
-                    self.performSegue(withIdentifier: "goToChat", sender: databaseReference)
-                }
-            })
+    func didSeenVideo() {
+        if let _ = DataStore.shared.seenVideos {
+            DataStore.shared.seenVideos?.append((self.currentBottle?.bottle_id!)!)
+        }else {
+            DataStore.shared.seenVideos = [self.currentBottle?.bottle_id!] as? [String]
         }
+    }
+    
+    func shakeVideoView() {
+        //self.currentVideoCard?.shake(6, withDelta: 24, speed: 1, shakeDirection: .vertical)
     }
 }
 

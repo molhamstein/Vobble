@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EFD481788F954EE014E755C8D3DE305"
+               BlueprintIdentifier = "D35BAF2F3688F394EC84CB34A6AD4CA4"
+               BuildableName = "FirebaseSwizzlingUtilities"
                BlueprintName = "FirebaseSwizzlingUtilities"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "FirebaseSwizzlingUtilities">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
