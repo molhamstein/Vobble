@@ -314,3 +314,8 @@
 "EDIT_USER_NAME_TITLE"                  = "Edit Username";
 "USERNAME_PLACEHOLDER"                  = "username";
 "CAN_NOT_EDIT_USERNAME"                 = "You are not allowed to edit your username anymore";
+
+// Coins
+"COINS"                                 = "Coins";
+"NO_ENOUGH_COINS_MSG"                   = "You don't have enough Coins";
+"GET_COINS"                             = "Get Coins";

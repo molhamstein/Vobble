@@ -1707,7 +1707,7 @@
         <!--Shop View Controller-->
         <scene sceneID="teb-WE-CcG">
             <objects>
-                <viewController id="nsm-q8-EXx" customClass="ShopViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShopViewController" id="nsm-q8-EXx" customClass="ShopViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LQQ-5f-TSn"/>
                         <viewControllerLayoutGuide type="bottom" id="vdK-6H-ENt"/>

@@ -842,7 +842,29 @@ class ApiManager: NSObject {
             }
         }
     }
-    
+
+    func purchaseChatProduct(productId: String?, relatedUserId: String?, completionBlock: @escaping (_ error: NSError?) -> Void) {
+        let purchaseChatProductURL = "\(baseURL)/chatItems"
+        
+        let parameters : [String : Any] = [
+            "chatProductId" : productId ?? "",
+            "relatedUserId" : relatedUserId ?? ""
+        ]
+        
+        Alamofire.request(purchaseChatProductURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                
+                let resJson = JSON(responseObject.result.value!)
+                print(resJson)
+                completionBlock(nil)
+            }
+            if responseObject.result.isFailure {
+                let error : NSError = responseObject.result.error! as NSError
+                completionBlock(error)
+            }
+        }
+    }
+
     func requestUserInventoryItems(completionBlock: @escaping (_ items: Array<InventoryItem>?, _ error: NSError?) -> Void) {
         let categoriesListURL = "\(baseURL)/items/\(DataStore.shared.me?.objectId)"
         Alamofire.request(categoriesListURL).responseJSON { (responseObject) -> Void in

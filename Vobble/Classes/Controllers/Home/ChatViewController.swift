@@ -216,9 +216,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         tapGesture.delegate = self
         self.collectionView.addGestureRecognizer(tapGesture)
         
-        // Register new audio cells
+        // Register new audio & image cells
         super.collectionView.register(UINib(nibName: "AudioCollectionViewCellOutgoing", bundle: nil), forCellWithReuseIdentifier: "AudioCollectionViewCellOutgoing_id")
         super.collectionView.register(UINib(nibName: "AudioCollectionViewCellIncoming", bundle: nil), forCellWithReuseIdentifier: "AudioCollectionViewCellIncoming_id")
+        super.collectionView.register(UINib(nibName: "ImageCollectionViewCellOutgoing", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCellOutgoing")
+        super.collectionView.register(UINib(nibName: "ImageCollectionViewCellIncoming", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCellIncoming")
+        
         
         // Setup Attribute for seen bottom label
         let paragraphStyle = NSMutableParagraphStyle()
@@ -1314,6 +1317,25 @@ extension ChatViewController {
                         
                         return cell
                     }
+                }else if message.media is JSQPhotoMediaItem {
+                    let photoItem = message.media as! JSQCustomPhotoMediaItem
+                    if message.senderId == senderId {
+                        let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCellOutgoing", for: indexPath) as! ImageCollectionViewCellOutgoing
+                        
+                        cell.configure(url: photoItem.message.photoUrl)
+                        cell.backgroundColor = UIColor.clear
+                        
+                        return cell
+                        
+                    } else {
+                        let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCellIncoming", for: indexPath) as! ImageCollectionViewCellIncoming
+                        
+                        cell.configure(url: photoItem.message.photoUrl)
+                        cell.backgroundColor = UIColor.clear
+                        
+                        return cell
+                    }
+                    
                 }
             }
             
@@ -1351,7 +1373,48 @@ extension ChatViewController {
         }
         
         if collectionView == giftsView.productsCollectionView {
-            
+            let product = DataStore.shared.giftCategory[selectedGiftCategory].chatProducts?[indexPath.row]
+            if (DataStore.shared.me?.pocketCoins ?? 0) >= (product?.price ?? 0) {
+                
+                let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(product?.price ?? 0) " + "COINS".localized) , preferredStyle: .alert)
+                let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
+                    ApiManager.shared.purchaseChatProduct(productId: product?.productId, relatedUserId: self.conversationOriginalObject?.getPeer?.objectId, completionBlock: {error in
+                        if error == nil {
+                            self.showGiftsShop()
+                            
+                            if let key = self.sendMediaMessage(mediaType: .image) {
+                                let media = Media()
+                                media.fileUrl = product?.icon
+                                media.type = .image
+                                self.setMediaURL(media, forPhotoMessageWithKey: key)
+                                self.onNewMessageSent()
+                                self.scrollToBottom(animated: true)
+                            }
+                        }
+                    })
+                })
+                
+                let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+                alertController.addAction(cancel)
+                alertController.addAction(ok)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }else {
+                
+                let alertController = UIAlertController(title: "", message: "NO_ENOUGH_COINS_MSG".localized, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "GET_COINS".localized, style: .default, handler: { (alertAction) in
+                    let shopVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShopViewController.className) as! ShopViewController
+                    shopVC.fType = .coinsPack
+                    
+                    self.present(shopVC, animated: true, completion: nil)
+                })
+                
+                let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+                alertController.addAction(cancel)
+                alertController.addAction(ok)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     

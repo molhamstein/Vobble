@@ -73,6 +73,10 @@
 		8F448BB12323C5170014EB81 /* ChatProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F448BAF2323C5170014EB81 /* ChatProductCollectionViewCell.xib */; };
 		8F4AE838228F32EA00716682 /* CompleteSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */; };
 		8F914CAE2259BBD800DAE47C /* ExtendChatPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */; };
+		8FBD40B82324893900EFB73E /* ImageCollectionViewCellIncoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD40B62324893900EFB73E /* ImageCollectionViewCellIncoming.swift */; };
+		8FBD40B92324893900EFB73E /* ImageCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40B72324893900EFB73E /* ImageCollectionViewCellIncoming.xib */; };
+		8FBD40BC23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD40BA23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift */; };
+		8FBD40BD23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */; };
 		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
 		8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
@@ -378,6 +382,10 @@
 		8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSignupViewController.swift; sourceTree = "<group>"; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
 		8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatPopupViewController.swift; sourceTree = "<group>"; };
+		8FBD40B62324893900EFB73E /* ImageCollectionViewCellIncoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCellIncoming.swift; sourceTree = "<group>"; };
+		8FBD40B72324893900EFB73E /* ImageCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
+		8FBD40BA23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCellOutgoing.swift; sourceTree = "<group>"; };
+		8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
 		8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendChatCollectionViewCell.xib; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1568,6 +1576,10 @@
 				8F448BA7232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib */,
 				8F448BAE2323C5170014EB81 /* ChatProductCollectionViewCell.swift */,
 				8F448BAF2323C5170014EB81 /* ChatProductCollectionViewCell.xib */,
+				8FBD40B62324893900EFB73E /* ImageCollectionViewCellIncoming.swift */,
+				8FBD40B72324893900EFB73E /* ImageCollectionViewCellIncoming.xib */,
+				8FBD40BA23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift */,
+				8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */,
 			);
 			path = Gifts;
 			sourceTree = "<group>";
@@ -1719,6 +1731,7 @@
 				B1C0C11220637E72004D82B8 /* VobbleChatNavigationBar.xib in Resources */,
 				04AF6F1D218F6E640038EF1A /* AudioCollectionViewCellIncoming.xib in Resources */,
 				B1EA39CB205606AE008AADC9 /* ConversationCollectionViewCell.xib in Resources */,
+				8FBD40BD23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib in Resources */,
 				B156A4412058763E00654E2A /* ConversationCollectionViewHeader.xib in Resources */,
 				B1053E872043EBE600A4383D /* CountryPicker.bundle in Resources */,
 				9234B5F0203356570085F9F7 /* Assets.xcassets in Resources */,
@@ -1726,6 +1739,7 @@
 				576993952153FF83001211CF /* introSound.mp3 in Resources */,
 				B135B620203DE96500755799 /* Antipasto_extrabold.otf in Resources */,
 				B135B623203DE97400755799 /* MullerRegular.otf in Resources */,
+				8FBD40B92324893900EFB73E /* ImageCollectionViewCellIncoming.xib in Resources */,
 				B193730120342423007B1E7D /* Localizable.strings in Resources */,
 				57DE7459207D77E00061CA2F /* fire.gif in Resources */,
 				57190C8B2105F4E700E88F38 /* girl_3_2.gif in Resources */,
@@ -1978,6 +1992,7 @@
 				5706C436204DDFF4006E7C9A /* ShoreCell.swift in Sources */,
 				B193711D2033D943007B1E7D /* SignupViewController.swift in Sources */,
 				CE0494C22320688100ADF01E /* GiftsView.swift in Sources */,
+				8FBD40B82324893900EFB73E /* ImageCollectionViewCellIncoming.swift in Sources */,
 				B19371152033D2F8007B1E7D /* AbstractController.swift in Sources */,
 				B18A5D7820348E4300F139B7 /* NSURLConnection+RACSupport.m in Sources */,
 				B1F7A456205A0F39009B18AB /* ShopViewController.swift in Sources */,
@@ -2077,6 +2092,7 @@
 				8F448BA8232322A90014EB81 /* GiftsCategoryCollectionViewCell.swift in Sources */,
 				B18A5D9C20348E4300F139B7 /* RACSignalProvider.d in Sources */,
 				B1053E882043EBE600A4383D /* CountryPicker.m in Sources */,
+				8FBD40BC23253A3900EFB73E /* ImageCollectionViewCellOutgoing.swift in Sources */,
 				B19372E42033E3FC007B1E7D /* Location.swift in Sources */,
 				B19372DF2033E3FC007B1E7D /* Attachment.swift in Sources */,
 				B18A5DB620348E4300F139B7 /* UISegmentedControl+RACSignalSupport.m in Sources */,

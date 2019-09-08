@@ -314,3 +314,8 @@
 "EDIT_USER_NAME_TITLE"                  = "تعديل اسم المستخدم";
 "USERNAME_PLACEHOLDER"                  = "اسم المستخدم";
 "CAN_NOT_EDIT_USERNAME"                 = "لا يمكنك تغيير اسم المستخدم بعد الان";
+
+// Coins
+"COINS"                                 = "عملة معدنية";
+"NO_ENOUGH_COINS_MSG"                   = "لا يوجد لديك رصيد كافي من العملات المعدنية";
+"GET_COINS"                             = "المزيد من العملات المعدنية؟";
