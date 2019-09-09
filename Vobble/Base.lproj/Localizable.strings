@@ -32,8 +32,8 @@
 "ERROR_WRONG_LOGIN_METHOD"              = "This email is registered before, please login with your usual login method";
 "ERROR_WRONG_CODE"                      = "Verification code is invalid";
 "ERROR_DEVICE_BLOCKED"                  = "Sorry, you are not allowed to login";
-"ERROR_ACOUNT_DEACTIVATED"               = "Sorry, Your account is not activated anymore";
-
+"ERROR_ACOUNT_DEACTIVATED"              = "Sorry, Your account is not activated anymore";
+"ERROR_NO_ENOUGH_COINS"                 = "You don't have enough Coins";
 
 // Connection errors messages
 "ERROR_NOT_AUTHORIZED"                  = "You are not authorized to access this data, please login again";

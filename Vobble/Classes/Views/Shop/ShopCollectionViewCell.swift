@@ -18,6 +18,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var coinsIcon: UIImageView!
 
     var shadowApplied: Bool! = false
     
@@ -41,18 +42,19 @@ class ShopCollectionViewCell: UICollectionViewCell {
         mainView.removeGradientLayer()
         mainView.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .horizontal)
         titleLabel.text = shopItemObj.title
-        priceLabel.text = String(shopItemObj.price ?? 0.0)
+        
         descriptionLabel.text = shopItemObj.description
         if let iconUrl = shopItemObj.icon {
             image.sd_setImage(with: URL(string:iconUrl))
         }
         
-//        dispatch_main_after(0.1) {
-//            if self.shadowHolderView != nil && !self.shadowApplied {
-//                self.shadowHolderView.dropShortShadow()
-//                self.shadowApplied = true
-//            }
-//        }
+        if shopItemObj.type == ShopItemType.coinsPack {
+            self.coinsIcon.isHidden = true
+            priceLabel.text = String(shopItemObj.price ?? 0.0) + " $"
+        }else {
+            self.coinsIcon.isHidden = false
+            priceLabel.text = String(shopItemObj.priceCoins ?? 0)
+        }
         
     }
 

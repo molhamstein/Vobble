@@ -107,6 +107,7 @@ class ShopItem: BaseModel {
     private let kShopItemDescription_en: String = "description_en"
     private let kShopItemDescription_ar: String = "description_ar"
     private let kShopItemPrice: String = "price"
+    private let kShopItemPriceCoins: String = "price_coins"
     private let kShopItemFirstColor: String = "fcolor"
     private let kShopItemSecondColor: String = "lcolor"
     private let kShopItemImageUrl: String = "icon"
@@ -129,6 +130,7 @@ class ShopItem: BaseModel {
     public var description_ar : String?
     public var description_en : String?
     public var price : Double?
+    public var priceCoins : Int?
     //public var firstColor : UIColor?
     //public var secondColor : UIColor?
     public var icon : String?
@@ -241,6 +243,9 @@ class ShopItem: BaseModel {
         if let value = json[kShopItemProdId].string {
             prodId = value
         }
+        if let value = json[kShopItemPriceCoins].int {
+            priceCoins = value
+        }
         
         // trating the goods id as an enum to define product type
         if let value = json[kShopItemType].string {
@@ -300,6 +305,10 @@ class ShopItem: BaseModel {
         
         if let value = icon {
             dictionary[kShopItemImageUrl] = value
+        }
+        
+        if let value = priceCoins {
+            dictionary[kShopItemPriceCoins] = value
         }
         
 //        if let value = firstColor {

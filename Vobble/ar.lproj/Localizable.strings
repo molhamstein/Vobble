@@ -32,8 +32,8 @@
 "ERROR_WRONG_LOGIN_METHOD"              = "الحساب موجود مسبقا الرجاء تسجيل الدخول بطريقتك المعتادة";
 "ERROR_DEVICE_BLOCKED"                  = "للأسف, غير مصرح لك بالدخول";
 "ERROR_WRONG_CODE"                      = "رمز التحقق غير صالح";
-"ERROR_ACOUNT_DEACTIVATED"               = "للأسف حسابك لم يعد صالحاً";
-
+"ERROR_ACOUNT_DEACTIVATED"              = "للأسف حسابك لم يعد صالحاً";
+"ERROR_NO_ENOUGH_COINS"                 = "لا يوجد لديك رصيد كافي من العملات المعدنية";
 
 // connection errors messages
 "ERROR_NOT_AUTHORIZED"                  = "الرجاء التحقق من صلاحيات تسجيل الدخول الخاصة بك";

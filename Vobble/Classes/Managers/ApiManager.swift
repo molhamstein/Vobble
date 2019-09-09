@@ -941,6 +941,44 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+    func purchaseItemByCoins(shopItem: ShopItem, relatedUserId: String? = nil, completionBlock: @escaping (_ success: Bool, _ error: ServerError?, _ item:InventoryItem?) -> Void) {
+        // url & parameters
+        let purchaseURL = "\(baseURL)/items/buyProductByCoins"
+        
+        var parameters : [String : Any] = [
+            "productId": shopItem.idString ]
+        
+        if let relatedUserId = relatedUserId {
+            parameters["relatedUserId"] = relatedUserId
+        }
+        
+        // build request
+        Alamofire.request(purchaseURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                print(jsonResponse)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError, nil)
+                } else {
+                    // parse response to data model >> user object
+                    let item = InventoryItem(json: jsonResponse)
+                    completionBlock(true , nil, item)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let nsError : NSError = responseObject.result.error! as NSError
+                print(nsError.localizedDescription)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError, nil)
+                } else {
+                    completionBlock(false, ServerError.connectionError, nil)
+                }
+            }
+        }
+    }
 
     func requesReportTypes(completionBlock: @escaping (_ items: Array<ReportType>?, _ error: NSError?) -> Void) {
         let categoriesListURL = "\(baseURL)/reportTypes"
@@ -1504,6 +1542,7 @@ struct ServerError {
         case emailAlreadyExists = 413
         case wrongCode = 418
         case usernameAlreadyExists = 422
+        case noEnoughCoins = 424
         case emailAlreadyRegisteredWithDifferentMedia = 412
         case alreadyExists = 101
         case socialLoginFailed = -110
@@ -1563,6 +1602,8 @@ struct ServerError {
                     return "ERROR_WRONG_CODE".localized
                 case .youCanNotEditUsername:
                     return "CAN_NOT_EDIT_USERNAME".localized
+                case .noEnoughCoins:
+                    return "ERROR_NO_ENOUGH_COINS".localized
                 default:
                     return "ERROR_UNKNOWN".localized
             }

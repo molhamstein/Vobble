@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -34,17 +34,29 @@
                         <rect key="frame" x="25" y="15" width="463" height="483"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Gender Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FBT-6n-3pb">
-                                <rect key="frame" x="15" y="9.9999999999999982" width="311.33333333333331" height="31.333333333333329"/>
+                                <rect key="frame" x="15" y="9.9999999999999982" width="280.33333333333331" height="31.333333333333329"/>
                                 <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="28"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-Rv-rfG">
-                                <rect key="frame" x="336.33333333333331" y="9.9999999999999982" width="46.666666666666686" height="31.333333333333329"/>
-                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="28"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-BX-6r1">
+                                <rect key="frame" x="305.33333333333331" y="10" width="77.666666666666686" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-Rv-rfG">
+                                        <rect key="frame" x="0.0" y="0.0" width="46.666666666666664" height="24"/>
+                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="28"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coins" translatesAutoresizingMaskIntoConstraints="NO" id="G7F-cb-axb">
+                                        <rect key="frame" x="53.666666666666686" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="TdU-Vj-dx0"/>
+                                            <constraint firstAttribute="height" constant="24" id="iSI-f8-6gZ"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="buy 3 bottles so you dont have to wait for the automatic refill" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEA-KO-0wH">
                                 <rect key="frame" x="15" y="44.333333333333343" width="368" height="386.66666666666663"/>
                                 <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="17"/>
@@ -57,12 +69,12 @@
                             <constraint firstItem="FBT-6n-3pb" firstAttribute="leading" secondItem="yu0-Y2-TI0" secondAttribute="leading" constant="15" id="BxO-0o-IGh"/>
                             <constraint firstItem="FBT-6n-3pb" firstAttribute="top" secondItem="yu0-Y2-TI0" secondAttribute="top" constant="10" id="KZE-WN-Z83"/>
                             <constraint firstAttribute="trailing" secondItem="xEA-KO-0wH" secondAttribute="trailing" constant="80" id="Nqt-8u-bM4"/>
-                            <constraint firstItem="eQB-Rv-rfG" firstAttribute="leading" secondItem="FBT-6n-3pb" secondAttribute="trailing" constant="10" id="Uhy-L8-3n3"/>
+                            <constraint firstItem="L3c-BX-6r1" firstAttribute="leading" secondItem="FBT-6n-3pb" secondAttribute="trailing" constant="10" id="QmP-SK-RmI"/>
                             <constraint firstItem="xEA-KO-0wH" firstAttribute="top" secondItem="FBT-6n-3pb" secondAttribute="bottom" constant="3" id="UoA-QC-KKL"/>
                             <constraint firstItem="xEA-KO-0wH" firstAttribute="leading" secondItem="yu0-Y2-TI0" secondAttribute="leading" constant="15" id="ZOm-bM-Cx4"/>
-                            <constraint firstAttribute="trailing" secondItem="eQB-Rv-rfG" secondAttribute="trailing" constant="80" id="amD-oi-FMD"/>
+                            <constraint firstItem="L3c-BX-6r1" firstAttribute="top" secondItem="yu0-Y2-TI0" secondAttribute="top" constant="10" id="bVT-d4-rL4"/>
                             <constraint firstAttribute="bottom" secondItem="xEA-KO-0wH" secondAttribute="bottom" constant="52" id="sbl-sR-m3A"/>
-                            <constraint firstItem="eQB-Rv-rfG" firstAttribute="top" secondItem="yu0-Y2-TI0" secondAttribute="top" constant="10" id="vbq-U5-uH4"/>
+                            <constraint firstAttribute="trailing" secondItem="L3c-BX-6r1" secondAttribute="trailing" constant="80" id="uDZ-6k-IRZ"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -114,6 +126,7 @@
             <size key="customSize" width="513" height="508"/>
             <connections>
                 <outlet property="buyButton" destination="Ehc-uj-KWX" id="olc-1e-HfC"/>
+                <outlet property="coinsIcon" destination="G7F-cb-axb" id="4Sh-fL-7tn"/>
                 <outlet property="descriptionLabel" destination="xEA-KO-0wH" id="2dB-1b-UdB"/>
                 <outlet property="image" destination="uDx-kN-RYn" id="uhN-pP-ou9"/>
                 <outlet property="mainView" destination="yu0-Y2-TI0" id="4ok-68-oG2"/>
@@ -121,10 +134,11 @@
                 <outlet property="shadowHolderView" destination="tZZ-yO-962" id="UQy-JN-XZV"/>
                 <outlet property="titleLabel" destination="FBT-6n-3pb" id="SPq-8D-ecL"/>
             </connections>
-            <point key="canvasLocation" x="591.5" y="71"/>
+            <point key="canvasLocation" x="590.57971014492762" y="70.923913043478265"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="bottles2" width="396" height="512"/>
+        <image name="coins" width="206" height="216"/>
     </resources>
 </document>

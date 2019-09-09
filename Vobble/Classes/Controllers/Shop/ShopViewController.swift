@@ -214,8 +214,8 @@ extension ShopViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let obj = self.shopItemsArray[indexPath.row]
-        
-        if bottlesButton.isSelected || coinsButton.isSelected {
+        self.selectedProduct = obj
+        if coinsButton.isSelected {
             
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? 0.0)") , preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
@@ -230,20 +230,10 @@ extension ShopViewController: UICollectionViewDelegate {
                         self.selectedProduct = obj
                         
                         IAPManager.shared.requestPaymentQueue(product: selectedItem, item: obj)
-                        
-                        
-                        // flurry events
-                        var prodType = "bottles"
-                        if self.selectedProduct.type == ShopItemType.genderFilter {
-                            prodType = "gender"
-                        } else if self.selectedProduct.type == ShopItemType.countryFilter {
-                            prodType = "country"
-                        }else if self.selectedProduct.type == ShopItemType.coinsPack {
-                            prodType = "coins"
-                        }
-                        
-                        let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+
+                        let logEventParams = ["prodType": "coins", "ProdName": self.selectedProduct.title_en ?? ""];
                         Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                        
                     }else {
                         self.navigationView.showProgressIndicator(show: false)
                         self.view.isUserInteractionEnabled = true
@@ -261,65 +251,117 @@ extension ShopViewController: UICollectionViewDelegate {
             
         }else {
             
-            var items:[InventoryItem] = [InventoryItem]()
-            if genderFilterButton.isSelected {
-                items = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})
-            } else if countryFilterButton.isSelected {
-                items = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})
-            }
             
-            var fTime : TimeInterval = 0
-            let currentDate = Date().timeIntervalSince1970
-            var seconds = 0.0
-            
-            if items.count > 0 {
-                fTime = items[items.count - 1].endDate ?? 0
-                seconds = (fTime - currentDate)
-            }
-            
-            
-            if seconds <= 0 {
-                let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? 0.0)") , preferredStyle: .alert)
+            if (DataStore.shared.me?.pocketCoins ?? 0) >= (obj.priceCoins ?? 0) {
+                
+                let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.priceCoins ?? 0) " + "COINS".localized) , preferredStyle: .alert)
                 let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                     
-                    if  obj.appleProduct != nil {
-                        self.navigationView.showProgressIndicator(show: true)
-                        self.view.isUserInteractionEnabled = false
-                        if let selectedItem = IAPManager.shared.getProductById(itemId: obj.appleProduct!){
-                            self.selectedProduct = obj
-                            
-                            IAPManager.shared.requestPaymentQueue(product: selectedItem, item: obj)
-                            
-                            // flurry events
-                            var prodType = "bottles"
-                            if self.selectedProduct.type == ShopItemType.genderFilter {
-                                prodType = "gender"
-                            } else if self.selectedProduct.type == ShopItemType.countryFilter {
-                                prodType = "country"
-                            }
-                            let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
-                            Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
-                            
-                        }else{
-                            self.navigationView.showProgressIndicator(show: false)
-                            self.view.isUserInteractionEnabled = true
+                    // flurry events
+                    var prodType = "bottles"
+                    if self.selectedProduct.type == ShopItemType.genderFilter {
+                        prodType = "gender"
+                    } else if self.selectedProduct.type == ShopItemType.countryFilter {
+                        prodType = "country"
+                    }
+                    let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
+                    Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                    
+                    if !self.bottlesButton.isSelected {
+                        
+                        var items:[InventoryItem] = [InventoryItem]()
+                        if self.genderFilterButton.isSelected {
+                            items = DataStore.shared.inventoryItems.filter({$0.type == .genderFilter})
+                        } else if self.countryFilterButton.isSelected {
+                            items = DataStore.shared.inventoryItems.filter({$0.type == .countryFilter})
                         }
                         
+                        var fTime : TimeInterval = 0
+                        let currentDate = Date().timeIntervalSince1970
+                        var seconds = 0.0
+                        
+                        if items.count > 0 {
+                            fTime = items[items.count - 1].endDate ?? 0
+                            seconds = (fTime - currentDate)
+                        }
+
+                        if !(seconds <= 0) {
+                            let alertController = UIAlertController(title: "", message: "CANT_BUY_ITEM_WARNING".localized, preferredStyle: .alert)
+                            let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                            alertController.addAction(ok)
+                            self.present(alertController, animated: true, completion: nil)
+                            
+                            return
+                        }
+
                     }
                     
+                    self.showActivityLoader(true)
+                    
+                    ApiManager.shared.purchaseItemByCoins(shopItem: obj, completionBlock: {isSuccess, error, shopItem in
+                        if error == nil {
+                            DataStore.shared.me?.pocketCoins! -= (obj.priceCoins ?? 0)
+                            
+                            if self.bottlesButton.isSelected {
+                                ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                                    self.showActivityLoader(false)
+                                    self.dismiss(animated: true, completion: {})
+                                    
+                                })
+                            }else {
+                                self.showActivityLoader(false)
+                                
+                                // flurry events
+                                var prodType = "bottles"
+                                if obj.type == ShopItemType.genderFilter {
+                                    prodType = "gender"
+                                } else if obj.type == ShopItemType.countryFilter {
+                                    prodType = "country"
+                                }
+                                
+                                let inventoryItem = InventoryItem()
+                                inventoryItem.isValid = true
+                                inventoryItem.isConsumed = false
+                                inventoryItem.shopItem = obj
+                                inventoryItem.startDate = Date().timeIntervalSince1970
+                                inventoryItem.endDate = Date().timeIntervalSince1970 + ((obj.validity ?? 1) * 60 * 60)
+                                DataStore.shared.inventoryItems.append(inventoryItem)
+                                
+                                // flurry events, on purchase done
+                                let logEventParams2 = ["prodType": prodType, "ProdName": obj.title_en ?? ""];
+                                Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
+                                
+                                self.dismiss(animated: true, completion: {})
+                            }
+                            
+                        }else {
+                            self.showActivityLoader(false)
+                            self.showMessage(message: error?.type.errorMessage ?? "", type: .error)
+                        }
+                        
+                    })
                 })
                 
                 let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
                 alertController.addAction(cancel)
                 alertController.addAction(ok)
-                self.present(alertController, animated: true, completion: nil)
                 
-            }else{
-                let alertController = UIAlertController(title: "", message: "CANT_BUY_ITEM_WARNING".localized, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                self.present(alertController, animated: true, completion: nil)
+            }else {
+                
+                let alertController = UIAlertController(title: "", message: "NO_ENOUGH_COINS_MSG".localized, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "GET_COINS".localized, style: .default, handler: { (alertAction) in
+                    
+                    self.coinsBtnPressed(self.coinsButton)
+                })
+                
+                let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+                alertController.addAction(cancel)
                 alertController.addAction(ok)
+                
                 self.present(alertController, animated: true, completion: nil)
             }
+            
         }
         
         
