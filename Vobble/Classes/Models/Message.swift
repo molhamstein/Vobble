@@ -21,20 +21,20 @@ class Message: BaseModel {
     private let kAudioUrl: String = "audioURL"
     private let kThumb: String = "thumb"
     private let kAudioDuration: String = "duration"
-
+    private let kIsGift: String = "isGift"
     
     // MARK: Properties
     public var idString : String?
     public var senderId : String?
     public var senderName : String?
     public var text : String?
-    public var isSeen : String?
+    public var isSeen : Bool?
     public var photoUrl: String?
     public var videoUrl: String?
     public var audioUrl: String?
     public var thumbUrl: String?
     public var audioDuration: Double?
-    
+    public var isGift: Bool?
     
     // MARK: Initializers
     override init() {
@@ -53,9 +53,6 @@ class Message: BaseModel {
         if let value = json[kText].string {
             text = value
         }
-        if let value = json[kIsSeen].string {
-            isSeen = value
-        }
         if let value = json[kPhotoUrl].string {
             photoUrl = value
         }
@@ -70,6 +67,12 @@ class Message: BaseModel {
         }
         if let value = json[kAudioDuration].double {
             audioDuration = value
+        }
+        if let value = json[kIsGift].bool {
+            self.isGift = value
+        }
+        if let value = json[kIsSeen].bool {
+            self.isSeen = value
         }
     }
     
@@ -86,9 +89,6 @@ class Message: BaseModel {
         if let value = text {
             dictionary[kText] = value
         }
-        if let value = isSeen {
-            dictionary[kIsSeen] = value
-        }
         if let value = photoUrl {
             dictionary[kPhotoUrl] = value
         }
@@ -104,6 +104,13 @@ class Message: BaseModel {
         if let value = audioDuration {
             dictionary[kAudioDuration] = value
         }
+        if let value = isGift {
+            dictionary[kIsGift] = value
+        }
+        if let value = isSeen {
+            dictionary[kIsSeen] = value
+        }
+        
         return dictionary
     }
     

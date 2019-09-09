@@ -32,6 +32,7 @@ import SDWebImage
 import AVFoundation
 import FillableLoaders
 import UIView_Shake
+import WCLShineButton
 
 final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate {
     
@@ -174,6 +175,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     /// Gifts
     var isGiftsViewVisible: Bool = false
     var selectedGiftCategory = 0
+    var isLastSentMessageGift: Bool = false
+    var hasIncomingGift: Bool = false
+    var overlayAnimationView: UIView = UIView()
+    var giftAnimation: WCLShineButton = WCLShineButton()
     
     // MARK: View Lifecycle
     
@@ -313,6 +318,22 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 self.view.addSubview(self.overlayGiftsView)
                 self.setupGiftsView()
                 
+                // gifts animation view
+                self.overlayAnimationView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                self.overlayAnimationView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+                var animationParam = WCLShineParams()
+                animationParam.enableFlashing = true
+                animationParam.allowRandomColor = true
+                animationParam.animDuration = 3
+                
+                self.giftAnimation = WCLShineButton(frame: CGRect(x: self.view.frame.midX - 75, y: self.view.frame.midY - 75, width: 150, height: 150), params: animationParam)
+                self.giftAnimation.params = animationParam
+                self.giftAnimation.image = .defaultAndSelect(#imageLiteral(resourceName: "sent_gift"), #imageLiteral(resourceName: "sent_gift"))
+                
+                self.overlayAnimationView.isHidden = true
+                self.overlayAnimationView.addSubview(giftAnimation)
+                self.view.addSubview(self.overlayAnimationView)
+                
                 // chat background
                 let bgImage = UIImageView()
                 bgImage.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -334,6 +355,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 playPopSound()
                 setupRecorder()
                 //chatPendingContainer.isHidden = true
+                
             }
             isInitialised = true
         }
@@ -973,10 +995,20 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             if self.conversationOriginalObject?.bottle?.owner?.objectId == DataStore.shared.me?.objectId {
                 if senderId != DataStore.shared.me?.objectId {
                     self.conversationRef?.updateChildValues(["user1LastSeenMessageId" : id])
+                    
+                    if (message.isGift ?? false) && !(message.isSeen ?? false){
+                        messageRef.child(id).updateChildValues(["isSeen" : true])
+                        self.hasIncomingGift = true
+                    }
                 }
             }else{
                 if senderId != DataStore.shared.me?.objectId {
                     self.conversationRef?.updateChildValues(["user2LastSeenMessageId" : id])
+                    
+                    if (message.isGift ?? false) && !(message.isSeen ?? false) {
+                        messageRef.child(id).updateChildValues(["isSeen" : true])
+                        self.hasIncomingGift = true
+                    }
                 }
             }
             
@@ -1043,6 +1075,8 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         } else if mediaType == .image {
             messageItem["photoURL"] = imageURLNotSetKey
             messageItem["thumb"] = imageURLNotSetKey
+            messageItem["isGift"] = imageURLNotSetKey
+            messageItem["isSeen"] = imageURLNotSetKey
         } else { // audio
             messageItem["audioURL"] = imageURLNotSetKey
             messageItem["duration"] = "0.0"
@@ -1061,16 +1095,20 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         let itemRef = messageRef.child(key)
         
         if media.type == .image {
-            itemRef.updateChildValues(["photoURL": media.fileUrl!])
+            itemRef.updateChildValues(["photoURL": media.fileUrl!,
+                                       "isGift": media.isGift ?? false,
+                                       "isSeen": media.isSeen ?? false])
         } else if media.type == .video {
             if let thumbUrl = media.thumbUrl {
-                itemRef.updateChildValues(["thumb": thumbUrl, "videoURL": media.fileUrl!])
+                itemRef.updateChildValues(["thumb": thumbUrl,
+                                           "videoURL": media.fileUrl!])
             } else {
                 itemRef.updateChildValues(["videoURL": media.fileUrl!])
             }
         } else if media.type == .audio {
             print(media.duration)
-            itemRef.updateChildValues(["audioURL": media.fileUrl!, "duration": media.duration ?? 0.0])
+            itemRef.updateChildValues(["audioURL": media.fileUrl!,
+                                       "duration": media.duration ?? 0.0])
 
             
         }
@@ -1317,7 +1355,7 @@ extension ChatViewController {
                         
                         return cell
                     }
-                }else if message.media is JSQPhotoMediaItem {
+                }else if (message.media is JSQPhotoMediaItem) && ((message.media as! JSQCustomPhotoMediaItem).message.isGift ?? false) {
                     let photoItem = message.media as! JSQCustomPhotoMediaItem
                     if message.senderId == senderId {
                         let cell = super.collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCellOutgoing", for: indexPath) as! ImageCollectionViewCellOutgoing
@@ -1325,6 +1363,16 @@ extension ChatViewController {
                         cell.configure(url: photoItem.message.photoUrl)
                         cell.backgroundColor = UIColor.clear
                         
+                        if isLastSentMessageGift {
+                            self.overlayAnimationView.isHidden = false
+                            self.giftAnimation.setClicked(true, animated: true)
+                            self.isLastSentMessageGift = false
+                            
+                            dispatch_main_after(3) {
+                                self.overlayAnimationView.isHidden = true
+                                self.giftAnimation.setClicked(false)
+                            }
+                        }
                         return cell
                         
                     } else {
@@ -1333,6 +1381,16 @@ extension ChatViewController {
                         cell.configure(url: photoItem.message.photoUrl)
                         cell.backgroundColor = UIColor.clear
                         
+                        if self.hasIncomingGift{
+                            self.overlayAnimationView.isHidden = false
+                            self.giftAnimation.setClicked(true, animated: true)
+                            self.hasIncomingGift = false
+                            
+                            dispatch_main_after(3) {
+                                self.overlayAnimationView.isHidden = true
+                                self.giftAnimation.setClicked(false)
+                            }
+                        }
                         return cell
                     }
                     
@@ -1382,10 +1440,16 @@ extension ChatViewController {
                         if error == nil {
                             self.showGiftsShop()
                             
+                            DataStore.shared.me?.pocketCoins! -= (product?.price ?? 0)
+                            
                             if let key = self.sendMediaMessage(mediaType: .image) {
                                 let media = Media()
                                 media.fileUrl = product?.icon
                                 media.type = .image
+                                media.isGift = true
+                                media.isSeen = false
+                                
+                                self.isLastSentMessageGift = true
                                 self.setMediaURL(media, forPhotoMessageWithKey: key)
                                 self.onNewMessageSent()
                                 self.scrollToBottom(animated: true)

@@ -17,6 +17,8 @@ class Media: BaseModel {
     private let kThumb: String = "thumbnail"
     private let kFile: String = "file"
     private let kAudioDuration: String = "duration"
+    private let kIsGift: String = "isGift"
+    private let kIsSeen: String = "isSeen"
     
     
     // MARK: Properties
@@ -25,6 +27,8 @@ class Media: BaseModel {
     public var fileUrl: String?
     public var thumbUrl: String?
     public var duration: Double?
+    public var isGift: Bool?
+    public var isSeen: Bool?
     
     
     // MARK: Initializers
@@ -44,6 +48,12 @@ class Media: BaseModel {
         if let value = json[kAudioDuration].double {
             self.duration = value
         }
+        if let value = json[kIsGift].bool {
+            self.isGift = value
+        }
+        if let value = json[kIsSeen].bool {
+            self.isSeen = value
+        }
     }
     
     public override func dictionaryRepresentation() -> [String: Any] {
@@ -61,6 +71,12 @@ class Media: BaseModel {
         }
         if let value = duration {
             dictionary[kAudioDuration] = value
+        }
+        if let value = isGift {
+            dictionary[kIsGift] = value
+        }
+        if let value = isSeen {
+            dictionary[kIsSeen] = value
         }
         
         return dictionary

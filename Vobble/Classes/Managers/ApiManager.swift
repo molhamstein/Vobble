@@ -1379,7 +1379,7 @@ class ApiManager: NSObject {
     }
     
     
-    func findBottleById(bottleId:String, completionBlock: @escaping (_ bottle: Bottle?, _ errorMessage: ServerError?) -> Void) {
+    func findBottleById(bottleId:String, completionBlock: @escaping (_ bottle: [Bottle]?, _ errorMessage: ServerError?) -> Void) {
         
         let findBottleURL = "\(baseURL)/bottles/getBottleById/\(bottleId)"
         
@@ -1394,7 +1394,7 @@ class ApiManager: NSObject {
                     completionBlock(nil , serverError)
                 } else {
                     
-                    let bottle = Bottle(json: resJson)
+                    let bottle = [Bottle(json: resJson)]
                     completionBlock(bottle, nil)
                 }
             }

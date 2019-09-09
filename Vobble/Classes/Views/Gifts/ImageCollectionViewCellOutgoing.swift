@@ -8,6 +8,7 @@
 
 import UIKit
 import JSQMessagesViewController
+import WCLShineButton
 
 class ImageCollectionViewCellOutgoing: JSQMessagesCollectionViewCellOutgoing {
     
@@ -21,6 +22,6 @@ class ImageCollectionViewCellOutgoing: JSQMessagesCollectionViewCellOutgoing {
     func configure(url: String?) {
         if let iconUrl = url {
             imgGift.sd_setImage(with: URL(string: iconUrl))
-        }
+        }   
     }
 }

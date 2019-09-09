@@ -556,10 +556,9 @@ class HomeViewController: AbstractController {
             // send the request
             if let bottleId = self.bottleIdToFind {
                 // this request is send in case we sent the user a push notification contatinig the id of the bottle that we want him to see
-                //ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
+                ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
                 self.bottleIdToFind = nil
             } else {
-                //ApiManager.shared.findBottle(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, completionBlock: findBottleCompletionBlock)
                 ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: nil, complete: nil ,completionBlock: findBottleCompletionBlock)
             }
         }
