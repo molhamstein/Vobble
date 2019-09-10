@@ -177,19 +177,26 @@ extension FindBottleViewController: UIScrollViewDelegate {
         let pageIndex = round(scrollView.contentOffset.y/view.frame.height)
         
         if pageIndex != currentIndex {
-            currentVideoCard?.cancelBuffring()
-            
             currentIndex = pageIndex
             currentBottle = bottles?[Int(pageIndex)]
-            currentVideoCard = nextVideoCard
+            
+            if (nextVideoCard?.index ?? 0) == Int(currentIndex){
+                currentVideoCard = nextVideoCard
+            }else {
+                currentVideoCard = videoCards[Int(currentIndex)]
+            }
+            
             
             // This line of code to remove the prevues card to avoid memory warning
             //videoCards[Int(currentIndex - 1)].removeFromSuperview()
             for i in scrollView.subviews {
-                if i == videoCards[Int(currentIndex) - 1] {
-                    i.removeFromSuperview()
-                    videoCards[Int(currentIndex) - 1]?.removeFromSuperview()
-                    videoCards[Int(currentIndex) - 1] = nil
+                for j in  0...Int(currentIndex) - 1 {
+                    if i == videoCards[j] {
+                        i.removeFromSuperview()
+                        videoCards[j]?.cancelBuffring()
+                        videoCards[j]?.removeFromSuperview()
+                        videoCards[j] = nil
+                    }
                 }
             }
             
@@ -199,7 +206,7 @@ extension FindBottleViewController: UIScrollViewDelegate {
                 }
                 currentVideoCard?.isAutoPlay = true
             }else {
-                currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self)
+                currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self, index: Int(currentIndex))
             }
             
             setupVideoData()
@@ -207,6 +214,9 @@ extension FindBottleViewController: UIScrollViewDelegate {
             // Get the next 5 videos if needed
             if Int(currentIndex) == (self.bottles?.count ?? 0) - 2 {
                 self.fixedIndex = Int(self.currentIndex) + 2
+                getMoreVideos()
+            }else if (Int(currentIndex) == (self.bottles?.count ?? 0) - 1) {
+                self.fixedIndex = Int(self.currentIndex) + 1
                 getMoreVideos()
             }
             
@@ -257,7 +267,7 @@ extension FindBottleViewController {
         scrollView.contentOffset = CGPoint(x: 0, y: 0)
         
         currentVideoCard = videoCards[Int(currentIndex)]
-        currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self)
+        currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self, index: Int(currentIndex))
         
         setupNextCard()
     }
@@ -280,7 +290,7 @@ extension FindBottleViewController {
         if (Int(currentIndex) + 1) <= ((bottles?.count ?? 0) - 1) {
             if let nextBottle = bottles?[Int(currentIndex) + 1]{
                 nextVideoCard = videoCards[Int(currentIndex) + 1]
-                nextVideoCard?.configure(url: nextBottle.attachment ?? "", isAutoPlay: false, customButton: self.playButton, delegate: self)
+                nextVideoCard?.configure(url: nextBottle.attachment ?? "", isAutoPlay: false, customButton: self.playButton, delegate: self, index: Int(currentIndex) + 1)
                 isNextCardCreated = true
             }
         }else {

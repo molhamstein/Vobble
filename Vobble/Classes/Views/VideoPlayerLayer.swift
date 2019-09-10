@@ -19,7 +19,7 @@ import TransitionButton
 
 class VideoPlayerLayer: AbstractNibView {
     
-    @IBOutlet weak var loader: UIActivityIndicatorView!
+    //@IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var slideBar: UISlider!
     
     fileprivate var playerLayer: AVPlayerLayer?
@@ -31,14 +31,16 @@ class VideoPlayerLayer: AbstractNibView {
     fileprivate var delegate: VideoPlayerDelegate?
     
     public var isAutoPlay: Bool = false
+    public var index: Int?
     
-    func configure(url: String, isAutoPlay: Bool = false, customButton: TransitionButton, delegate: VideoPlayerDelegate) {
+    func configure(url: String, isAutoPlay: Bool = false, customButton: TransitionButton, delegate: VideoPlayerDelegate, index: Int?) {
         if let videoURL = URL(string: url) {
             
             self.isAutoPlay = isAutoPlay
             self.url = videoURL
             self.playButton = customButton
             self.delegate = delegate
+            self.index = index
             
             asset = AVAsset(url: videoURL)
             playerItem = AVPlayerItem(asset: asset!)
@@ -48,13 +50,9 @@ class VideoPlayerLayer: AbstractNibView {
             playerLayer?.frame = bounds
             playerLayer?.videoGravity = AVLayerVideoGravityResize
             
-            loader.hidesWhenStopped = true
-            
             if let playerLayer = self.playerLayer {
                 layer.addSublayer(playerLayer)
             }
-            
-            bringSubview(toFront: loader)
             
             addObservers()
             

@@ -1845,6 +1845,7 @@ extension ChatViewController {
             })
             
         } else {
+            self.closeKeyboard()
             self.selectedGiftCategory = 0
             self.giftsView.categoryCollectionView.reloadData()
             self.giftsView.productsCollectionView.reloadData()
@@ -1876,7 +1877,15 @@ extension ChatViewController {
         giftsView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: self.giftsView.frame.height - 50)
         
         giftsView.btnClose.addTarget(self, action: #selector(self.showGiftsShop), for: .touchUpInside)
-
+        
+        let overlayGiftsViewTap = UITapGestureRecognizer(target: self, action: #selector(self.showGiftsShop))
+        overlayGiftsViewTap.delegate = self
+        overlayGiftsView.addGestureRecognizer(overlayGiftsViewTap)
+    }
+    
+    // this is for overlayGiftsViewTap to make sure only parent view is responding
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
     }
 }
 

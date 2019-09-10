@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoPlayerLayer" customModule="Vobble" customModuleProvider="target">
             <connections>
-                <outlet property="loader" destination="5X8-kA-gWz" id="lyp-v6-8kr"/>
                 <outlet property="slideBar" destination="stg-mX-91i" id="KF1-tg-oxm"/>
             </connections>
         </placeholder>
@@ -26,17 +25,12 @@
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" white="0.45000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </slider>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5X8-kA-gWz">
-                    <rect key="frame" x="169" y="315" width="37" height="37"/>
-                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Ty4-3d-C1U" firstAttribute="bottom" secondItem="stg-mX-91i" secondAttribute="bottom" constant="32" id="6sh-4l-F10"/>
                 <constraint firstItem="stg-mX-91i" firstAttribute="leading" secondItem="Ty4-3d-C1U" secondAttribute="leading" constant="16" id="Hjm-kW-GoH"/>
                 <constraint firstItem="Ty4-3d-C1U" firstAttribute="trailing" secondItem="stg-mX-91i" secondAttribute="trailing" constant="16" id="RQK-7Q-PYG"/>
-                <constraint firstItem="5X8-kA-gWz" firstAttribute="centerX" secondItem="hI3-WR-4fH" secondAttribute="centerX" id="ZFb-k5-T6E"/>
-                <constraint firstItem="5X8-kA-gWz" firstAttribute="centerY" secondItem="hI3-WR-4fH" secondAttribute="centerY" id="fqD-dT-SDZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Ty4-3d-C1U"/>
             <point key="canvasLocation" x="190" y="-2"/>
