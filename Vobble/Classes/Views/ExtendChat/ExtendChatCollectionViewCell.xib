@@ -73,20 +73,30 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsf-kf-gSs">
                         <rect key="frame" x="16" y="181" width="115" height="30"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-Be-Arf">
-                                <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="gEA-4W-jlD">
+                                <rect key="frame" x="36.5" y="5" width="42" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-Be-Arf">
+                                        <rect key="frame" x="0.0" y="0.0" width="18" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coins" translatesAutoresizingMaskIntoConstraints="NO" id="3ll-uV-kGf">
+                                        <rect key="frame" x="22" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="9ST-7A-42J"/>
+                                            <constraint firstAttribute="height" constant="20" id="Wti-sg-ceX"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.086274509799999996" green="0.41176470590000003" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="0SG-vc-DTv"/>
-                            <constraint firstItem="qZJ-Be-Arf" firstAttribute="top" secondItem="qsf-kf-gSs" secondAttribute="top" id="6lY-4k-OdE"/>
-                            <constraint firstAttribute="bottom" secondItem="qZJ-Be-Arf" secondAttribute="bottom" id="Jl0-YM-OkU"/>
-                            <constraint firstAttribute="trailing" secondItem="qZJ-Be-Arf" secondAttribute="trailing" id="dil-oF-VxM"/>
-                            <constraint firstItem="qZJ-Be-Arf" firstAttribute="leading" secondItem="qsf-kf-gSs" secondAttribute="leading" id="r2F-kn-aKw"/>
+                            <constraint firstItem="gEA-4W-jlD" firstAttribute="centerX" secondItem="qsf-kf-gSs" secondAttribute="centerX" id="Qoe-Kg-7D8"/>
+                            <constraint firstItem="gEA-4W-jlD" firstAttribute="centerY" secondItem="qsf-kf-gSs" secondAttribute="centerY" id="X5P-i7-0Lv"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -129,5 +139,6 @@
     </objects>
     <resources>
         <image name="bottles2" width="396" height="512"/>
+        <image name="coins" width="206" height="216"/>
     </resources>
 </document>

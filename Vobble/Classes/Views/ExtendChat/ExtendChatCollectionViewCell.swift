@@ -41,7 +41,7 @@ class ExtendChatCollectionViewCell: UICollectionViewCell {
         titleLabel.text = "EXTEND_CHAT_TITLE".localized
         descriptionLabel.text = shopItemObj.title
         
-        priceLabel.text = String(shopItemObj.price ?? 0.0) + "$"
+        priceLabel.text = String(shopItemObj.priceCoins ?? 0) 
         
         if let iconUrl = shopItemObj.icon {
             image.sd_setImage(with: URL(string:iconUrl))

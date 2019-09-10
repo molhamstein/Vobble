@@ -125,45 +125,60 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let obj = self.chatItemsArray[indexPath.row]
-        
-        let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.price ?? 0.0)") , preferredStyle: .alert)
-        let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
+        if (DataStore.shared.me?.pocketCoins ?? 0) >= (obj.priceCoins ?? 0) {
             
-            if  obj.appleProduct != nil {
-                self.showActivityLoader(true)
-                self.popUpView.isUserInteractionEnabled = false
-                if let selectedItem = IAPManager.shared.getProductById(itemId: obj.appleProduct!){
-                    self.selectedProduct = obj
-                    
-                    IAPManager.shared.requestPaymentQueue(product: selectedItem, item: obj, relatedUserId: self.conversation?.getPeer?.objectId)
-                    
-                    // flurry events
-                    let prodType = "extendChat"
-                    
-                    let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
-                    Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
-                    
-                }else{
-                    self.showActivityLoader(false)
-                    self.popUpView.isUserInteractionEnabled = true
-                }
+            let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.priceCoins ?? 0) " + "COINS".localized) , preferredStyle: .alert)
+            let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
                 
-            }
+                self.selectedProduct = obj
+                
+                // flurry events
+                let logEventParams = ["prodType": "extendChat", "ProdName": self.selectedProduct.title_en ?? ""];
+                Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                
+                self.showActivityLoader(true)
+                
+                ApiManager.shared.purchaseItemByCoins(shopItem: obj, completionBlock: {isSuccess, error, shopItem in
+                    if error == nil {
+                        DataStore.shared.me?.pocketCoins! -= (obj.priceCoins ?? 0)
+                        
+                        self.didPaymentCompleted()
+                        
+                    }else {
+                        self.showActivityLoader(false)
+                        self.showMessage(message: error?.type.errorMessage ?? "", type: .error)
+                    }
+                    
+                })
+            })
             
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
-        alertController.addAction(cancel)
-        alertController.addAction(ok)
-        self.present(alertController, animated: true, completion: nil)
-        
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            
+            let alertController = UIAlertController(title: "", message: "NO_ENOUGH_COINS_MSG".localized, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "GET_COINS".localized, style: .default, handler: { (alertAction) in
+                
+                let shopVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShopViewController.className) as! ShopViewController
+                shopVC.fType = .coinsPack
+                
+                self.present(shopVC, animated: true, completion: nil)
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+
 
         // flurry events
-        let prodType = "extendChat"
-        
-        let logEventParams = ["prodType": prodType];
+        let logEventParams = ["prodType": "extendChat"];
         Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
         
     }
