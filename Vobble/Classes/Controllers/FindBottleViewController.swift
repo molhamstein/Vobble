@@ -439,28 +439,39 @@ extension FindBottleViewController {
     }
     
     @IBAction func replyBtnPressed(_ sender: Any) {
-        
-        let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (currentBottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (currentBottle?.owner?.countryISOCode) ?? ""];
-        Flurry.logEvent(AppConfig.reply_pressed, withParameters:logEventParams);
-        
-        if self.currentVideoCard?.isPlaying() ?? false {
-            currentVideoCard?.playButtonPressed()
-        }
-        
-        //        // show record Video screen
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
-        //            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
-        //            recordControl.from = .findBottle
-        //
-        //            self.navigationController?.pushViewController(recordControl, animated: false)
-        //        }
-        
-        // show record Audio screen
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
-            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordAudioReplyMediaControlID") as! RecordAudioReplyMediaControl
+        let repliesCount = (DataStore.shared.me?.repliesCount ?? 0) + (DataStore.shared.me?.extraRepliesCount ?? 0)
+        if repliesCount != 0 {
+            let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (currentBottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (currentBottle?.owner?.countryISOCode) ?? ""];
+            Flurry.logEvent(AppConfig.reply_pressed, withParameters:logEventParams);
             
-            self.navigationController?.pushViewController(recordControl, animated: false)
+            if self.currentVideoCard?.isPlaying() ?? false {
+                currentVideoCard?.playButtonPressed()
+            }
+            
+            //        // show record Video screen
+            //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
+            //            let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordMediaViewControllerID") as! RecordMediaViewController
+            //            recordControl.from = .findBottle
+            //
+            //            self.navigationController?.pushViewController(recordControl, animated: false)
+            //        }
+            
+            // show record Audio screen
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
+                let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordAudioReplyMediaControlID") as! RecordAudioReplyMediaControl
+                
+                self.navigationController?.pushViewController(recordControl, animated: false)
+            }
+        }else {
+            let getRepliesAction = UIAlertAction(title: "GET_REPLIES".localized, style: .default, handler: {_ in
+                let shopVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShopViewController.className) as! ShopViewController
+                shopVC.fType = .replies
+                
+                self.present(shopVC, animated: true, completion: nil)
+            })
+            self.showAlert(title: "GLOBAL_WARNING_TITLE".localized, message: "NO_REPLIES_MSG".localized , actions: [getRepliesAction])
         }
+        
         
     }
     

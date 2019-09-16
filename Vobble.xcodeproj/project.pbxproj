@@ -79,6 +79,10 @@
 		8FBD40BD23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */; };
 		8FBD40BF23254B2B00EFB73E /* VideoPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD40BE23254B2B00EFB73E /* VideoPlayerLayer.swift */; };
 		8FBD40C123254B4600EFB73E /* VideoPlayerLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */; };
+		8FC66831232DAF8100EEAE0A /* NotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6682F232DAF8100EEAE0A /* NotificationCollectionViewCell.swift */; };
+		8FC66832232DAF8100EEAE0A /* NotificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC66830232DAF8100EEAE0A /* NotificationCollectionViewCell.xib */; };
+		8FC66834232DB31300EEAE0A /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */; };
+		8FC66836232F89FB00EEAE0A /* NCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66835232F89FB00EEAE0A /* NCenter.swift */; };
 		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
 		8FF44EA7227FCBD200DC132A /* ExtendChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
@@ -390,6 +394,10 @@
 		8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
 		8FBD40BE23254B2B00EFB73E /* VideoPlayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerLayer.swift; sourceTree = "<group>"; };
 		8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerLayer.xib; sourceTree = "<group>"; };
+		8FC6682F232DAF8100EEAE0A /* NotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionViewCell.swift; sourceTree = "<group>"; };
+		8FC66830232DAF8100EEAE0A /* NotificationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCollectionViewCell.xib; sourceTree = "<group>"; };
+		8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
+		8FC66835232F89FB00EEAE0A /* NCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCenter.swift; sourceTree = "<group>"; };
 		8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		8FF44EA5227FCBD200DC132A /* ExtendChatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendChatCollectionViewCell.xib; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -809,6 +817,15 @@
 			name = gif;
 			sourceTree = "<group>";
 		};
+		8FC6682E232DAF3800EEAE0A /* NotificationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				8FC6682F232DAF8100EEAE0A /* NotificationCollectionViewCell.swift */,
+				8FC66830232DAF8100EEAE0A /* NotificationCollectionViewCell.xib */,
+			);
+			path = NotificationCenter;
+			sourceTree = "<group>";
+		};
 		8FF44EA1227FCB7B00DC132A /* ExtendChat */ = {
 			isa = PBXGroup;
 			children = (
@@ -988,6 +1005,7 @@
 				CE9A250822F7737600AC2A1D /* Version.swift */,
 				8F448BAA2323250E0014EB81 /* GiftCategory.swift */,
 				8F448BAC23232A760014EB81 /* ChatProduct.swift */,
+				8FC66835232F89FB00EEAE0A /* NCenter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -995,6 +1013,7 @@
 		B11797122033C80B006D96BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8FC6682E232DAF3800EEAE0A /* NotificationCenter */,
 				CE0494BE2320678A00ADF01E /* Gifts */,
 				8FF44EA1227FCB7B00DC132A /* ExtendChat */,
 				0445EF38218E25810029A6FB /* AudioPlayer */,
@@ -1458,6 +1477,7 @@
 				B1EA39D020562673008AADC9 /* ConversationViewController.swift */,
 				B1508CD520461F630048123F /* FindBottleViewController.swift */,
 				04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */,
+				8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1719,6 +1739,7 @@
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				04ACC6DA2235AD66007FF822 /* splashSound.mp3 in Resources */,
+				8FC66832232DAF8100EEAE0A /* NotificationCollectionViewCell.xib in Resources */,
 				8F448BA9232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				57A8129D210CE63F003D738E /* find_bottle.gif in Resources */,
@@ -1982,6 +2003,7 @@
 				B18A5D6920348E4300F139B7 /* NSFileHandle+RACSupport.m in Sources */,
 				B18A5DA520348E4300F139B7 /* RACTestScheduler.m in Sources */,
 				CE9A250922F7737600AC2A1D /* Version.swift in Sources */,
+				8FC66836232F89FB00EEAE0A /* NCenter.swift in Sources */,
 				B18A5D9820348E4300F139B7 /* RACSequence.m in Sources */,
 				B18A5D5820348E4300F139B7 /* UIViewController.swift in Sources */,
 				B18A5DCB20348E4300F139B7 /* SimpleAuthInstagramProvider.m in Sources */,
@@ -2037,6 +2059,7 @@
 				B18A5D7520348E4300F139B7 /* NSString+RACKeyPathUtilities.m in Sources */,
 				57348470218F7B9E00F4707B /* AppCountry.swift in Sources */,
 				04AF6F1C218F6E640038EF1A /* AudioCollectionViewCellIncoming.swift in Sources */,
+				8FC66834232DB31300EEAE0A /* NotificationCenterViewController.swift in Sources */,
 				B19372D22033E36C007B1E7D /* AbstractNibView.swift in Sources */,
 				B18A5D8020348E4300F139B7 /* RACCompoundDisposableProvider.d in Sources */,
 				B19B16D9203DF60B004D684F /* VobbleNavigationBar.swift in Sources */,
@@ -2088,6 +2111,7 @@
 				B18A5D6020348E4300F139B7 /* NSURL+CMDQueryStringSerialization.m in Sources */,
 				B18A5DA320348E4300F139B7 /* RACSubscriptionScheduler.m in Sources */,
 				B18A5D7220348E4300F139B7 /* NSObject+RACSelectorSignal.m in Sources */,
+				8FC66831232DAF8100EEAE0A /* NotificationCollectionViewCell.swift in Sources */,
 				B19372E02033E3FC007B1E7D /* BaseModel.swift in Sources */,
 				04F7477F217DDDEA002A5F2B /* ThrownBottlesViewController.swift in Sources */,
 				B18A5D5E20348E4300F139B7 /* CMDQueryStringValueTransformer.m in Sources */,

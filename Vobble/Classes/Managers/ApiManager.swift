@@ -1478,7 +1478,7 @@ class ApiManager: NSObject {
             }
             // Network error request time out or server error with no payload
             if responseObject.result.isFailure {
-                let nsError : NSError = responseObject.result.error! as NSError
+                let _ : NSError = responseObject.result.error! as NSError
                 if let code = responseObject.response?.statusCode, code >= 400 {
                     completionBlock(false, ServerError.unknownError)
                 } else {
@@ -1487,6 +1487,44 @@ class ApiManager: NSObject {
             }
         }
     }
+
+    func getNotificationsCenter(completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+        // url & parameters
+        let bottleURL = "\(baseURL)/notificationCenters/getMyCenterNotification"
+        
+        // build request
+        Alamofire.request(bottleURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                print(jsonResponse)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError)
+                    
+                } else {
+                    if let data = jsonResponse.array {
+                        let notifications: [NCenter] = data.map{NCenter(json: $0)}
+                        DataStore.shared.notificationsCenter = notifications
+                        
+                        NotificationCenter.default.post(name: Notification.Name("ObserveNotificationCenter"), object: nil)
+                        
+                        completionBlock(true , nil)
+                    }
+                    
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let _ : NSError = responseObject.result.error! as NSError
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError)
+                } else {
+                    completionBlock(false, ServerError.connectionError)
+                }
+            }
+        }
+    }
+
 
     
     // MARK: Get thrown bottles

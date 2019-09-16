@@ -40,6 +40,7 @@ class DataStore :NSObject {
     private let CACHE_KEY_GIFT_CATEGORY = "giftCategory"
     private let CACHE_KEY_SEEN_VIDEOS = "seenVideos"
     private let CACHE_KEY_COMPLETED_VIDEOS = "completedVideos"
+    private let CACHE_KEY_NOTIFICATIONS_CENTER = "notificationsCenter"
     
     //MARK: Temp data holders
     //keep reference to the written value in another private property just to prevent reading from cache each time you use this var
@@ -70,6 +71,8 @@ class DataStore :NSObject {
     
     private var _seenVideos: [String]?
     private var _completedVideos: [String]?
+    
+    private var _notificationsCenter: [NCenter] = [NCenter]()
     
     //public var conversationsUnseenMesssages: [String: Int] = [:]
     public var conversationsMyBottlesUnseenMesssages: [String: Int] = [:]
@@ -303,6 +306,19 @@ class DataStore :NSObject {
                 _giftCategory = loadBaseModelArrayForKey(key: CACHE_KEY_GIFT_CATEGORY)
             }
             return _giftCategory
+        }
+    }
+    
+    public var notificationsCenter: [NCenter] {
+        set {
+            _notificationsCenter = newValue
+            saveBaseModelArray(array: _notificationsCenter, withKey: CACHE_KEY_NOTIFICATIONS_CENTER)
+        }
+        get {
+            if(_notificationsCenter.isEmpty){
+                _notificationsCenter = loadBaseModelArrayForKey(key: CACHE_KEY_NOTIFICATIONS_CENTER)
+            }
+            return _notificationsCenter
         }
     }
 
