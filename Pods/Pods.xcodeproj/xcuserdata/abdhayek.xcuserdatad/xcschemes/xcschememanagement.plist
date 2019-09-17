@@ -234,30 +234,35 @@
 			<key>orderHint</key>
 			<integer>50</integer>
 		</dict>
-		<key>TwitterCore.xcscheme_^#shared#^_</key>
+		<key>TransitionButton.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>51</integer>
 		</dict>
-		<key>TwitterKit.xcscheme_^#shared#^_</key>
+		<key>TwitterCore.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>52</integer>
 		</dict>
-		<key>UIView+Shake.xcscheme_^#shared#^_</key>
+		<key>TwitterKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>53</integer>
 		</dict>
-		<key>WCLShineButton.xcscheme_^#shared#^_</key>
+		<key>UIView+Shake.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>54</integer>
 		</dict>
-		<key>YXWaveView.xcscheme_^#shared#^_</key>
+		<key>WCLShineButton.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>55</integer>
+		</dict>
+		<key>YXWaveView.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>56</integer>
 		</dict>
 		<key>leveldb-library.xcscheme_^#shared#^_</key>
 		<dict>

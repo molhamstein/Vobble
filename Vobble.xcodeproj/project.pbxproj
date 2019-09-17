@@ -79,8 +79,6 @@
 		8FBD40BD23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */; };
 		8FBD40BF23254B2B00EFB73E /* VideoPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD40BE23254B2B00EFB73E /* VideoPlayerLayer.swift */; };
 		8FBD40C123254B4600EFB73E /* VideoPlayerLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */; };
-		8FC66831232DAF8100EEAE0A /* NotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6682F232DAF8100EEAE0A /* NotificationCollectionViewCell.swift */; };
-		8FC66832232DAF8100EEAE0A /* NotificationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC66830232DAF8100EEAE0A /* NotificationCollectionViewCell.xib */; };
 		8FC66834232DB31300EEAE0A /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */; };
 		8FC66836232F89FB00EEAE0A /* NCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66835232F89FB00EEAE0A /* NCenter.swift */; };
 		8FF44EA6227FCBD200DC132A /* ExtendChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */; };
@@ -288,6 +286,8 @@
 		B67BFA03A7E30E19189DB762 /* Pods_Vobble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */; };
 		CE0494C0232067D400ADF01E /* GiftsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0494BF232067D400ADF01E /* GiftsView.xib */; };
 		CE0494C22320688100ADF01E /* GiftsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0494C12320688100ADF01E /* GiftsView.swift */; };
+		CE27AF9B232FB52C004824A5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE27AF99232FB52C004824A5 /* NotificationTableViewCell.swift */; };
+		CE27AF9C232FB52C004824A5 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE27AF9A232FB52C004824A5 /* NotificationTableViewCell.xib */; };
 		CE331AC0231D55A30090B676 /* EditUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */; };
 		CE9A250922F7737600AC2A1D /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A250822F7737600AC2A1D /* Version.swift */; };
 /* End PBXBuildFile section */
@@ -394,8 +394,6 @@
 		8FBD40BB23253A3900EFB73E /* ImageCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
 		8FBD40BE23254B2B00EFB73E /* VideoPlayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerLayer.swift; sourceTree = "<group>"; };
 		8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerLayer.xib; sourceTree = "<group>"; };
-		8FC6682F232DAF8100EEAE0A /* NotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionViewCell.swift; sourceTree = "<group>"; };
-		8FC66830232DAF8100EEAE0A /* NotificationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCollectionViewCell.xib; sourceTree = "<group>"; };
 		8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
 		8FC66835232F89FB00EEAE0A /* NCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCenter.swift; sourceTree = "<group>"; };
 		8FF44EA4227FCBD200DC132A /* ExtendChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -731,6 +729,8 @@
 		BF1B3107CD93811729AD8D2E /* Pods-Vobble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.debug.xcconfig"; sourceTree = "<group>"; };
 		CE0494BF232067D400ADF01E /* GiftsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftsView.xib; sourceTree = "<group>"; };
 		CE0494C12320688100ADF01E /* GiftsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftsView.swift; sourceTree = "<group>"; };
+		CE27AF99232FB52C004824A5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		CE27AF9A232FB52C004824A5 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameViewController.swift; sourceTree = "<group>"; };
 		CE9A250822F7737600AC2A1D /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		E256E2B0997DBD0A356FD8B3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -820,8 +820,8 @@
 		8FC6682E232DAF3800EEAE0A /* NotificationCenter */ = {
 			isa = PBXGroup;
 			children = (
-				8FC6682F232DAF8100EEAE0A /* NotificationCollectionViewCell.swift */,
-				8FC66830232DAF8100EEAE0A /* NotificationCollectionViewCell.xib */,
+				CE27AF99232FB52C004824A5 /* NotificationTableViewCell.swift */,
+				CE27AF9A232FB52C004824A5 /* NotificationTableViewCell.xib */,
 			);
 			path = NotificationCenter;
 			sourceTree = "<group>";
@@ -1739,7 +1739,6 @@
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				04ACC6DA2235AD66007FF822 /* splashSound.mp3 in Resources */,
-				8FC66832232DAF8100EEAE0A /* NotificationCollectionViewCell.xib in Resources */,
 				8F448BA9232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				57A8129D210CE63F003D738E /* find_bottle.gif in Resources */,
@@ -1777,6 +1776,7 @@
 				0498677F2187ACBA00B3CC43 /* record-beep.mp3 in Resources */,
 				5787DEC421008787009C2A43 /* dolphin.gif in Resources */,
 				B1F7A45D205A114E009B18AB /* ShopCollectionViewCell.xib in Resources */,
+				CE27AF9C232FB52C004824A5 /* NotificationTableViewCell.xib in Resources */,
 				57439D3320FE06D100343FCE /* girl_3_1.gif in Resources */,
 				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
@@ -2111,7 +2111,6 @@
 				B18A5D6020348E4300F139B7 /* NSURL+CMDQueryStringSerialization.m in Sources */,
 				B18A5DA320348E4300F139B7 /* RACSubscriptionScheduler.m in Sources */,
 				B18A5D7220348E4300F139B7 /* NSObject+RACSelectorSignal.m in Sources */,
-				8FC66831232DAF8100EEAE0A /* NotificationCollectionViewCell.swift in Sources */,
 				B19372E02033E3FC007B1E7D /* BaseModel.swift in Sources */,
 				04F7477F217DDDEA002A5F2B /* ThrownBottlesViewController.swift in Sources */,
 				B18A5D5E20348E4300F139B7 /* CMDQueryStringValueTransformer.m in Sources */,
@@ -2144,6 +2143,7 @@
 				B193711B2033D92F007B1E7D /* LoginViewController.swift in Sources */,
 				B18A5D8420348E4300F139B7 /* RACDynamicSequence.m in Sources */,
 				CE331AC0231D55A30090B676 /* EditUsernameViewController.swift in Sources */,
+				CE27AF9B232FB52C004824A5 /* NotificationTableViewCell.swift in Sources */,
 				B18A5D6D20348E4300F139B7 /* NSObject+RACDeallocating.m in Sources */,
 				B18A5DB820348E4300F139B7 /* UIStepper+RACSignalSupport.m in Sources */,
 				B18A5DA720348E4300F139B7 /* RACTupleSequence.m in Sources */,

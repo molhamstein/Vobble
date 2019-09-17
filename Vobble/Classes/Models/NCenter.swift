@@ -15,11 +15,13 @@ class NCenter: BaseModel {
     private let kTitle: String = "title"
     private let kText: String = "text"
     private let kCreatedAt: String = "createdAt"
+    private let kIsSeen: String = "isSeen"
     
     // MARK: Properties
     public var title: String?
     public var text: String?
     public var createdAt: String?
+    public var isSeen: Bool?
     
     // MARK: Initializers
     override init() {
@@ -38,7 +40,10 @@ class NCenter: BaseModel {
         if let value = json[kCreatedAt].string {
             createdAt = value
         }
-        
+        if let value = json[kIsSeen].bool {
+            isSeen = value
+        }
+
         
     }
     
@@ -53,6 +58,9 @@ class NCenter: BaseModel {
         }
         if let value = createdAt {
             dictionary[kCreatedAt] = value
+        }
+        if let value = isSeen {
+            dictionary[kIsSeen] = value
         }
 
         return dictionary

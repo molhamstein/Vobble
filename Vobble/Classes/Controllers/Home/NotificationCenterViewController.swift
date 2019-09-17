@@ -8,36 +8,49 @@
 
 import UIKit
 
-class NotificationCenterViewController: AbstractController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    @IBOutlet weak var collectionView: UICollectionView!
+class NotificationCenterViewController: AbstractController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorStyle = .none
         
-        collectionView.register(UINib(nibName: "NotificationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NotificationCollectionViewCell")
+        tableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationTableViewCell")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
+    
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotificationCollectionViewCell", for: indexPath) as! NotificationCollectionViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
         
-        if indexPath.row == 3 {
-            cell.lblDescription.text = "Our mission is to get you from not knowing anything about programming and Android development, to building top-notch, scalable applications in no time. Our mission is to get you from not knowing anything about programming and Android development, to building top-notch, scalable applications in no time. Our mission is to get you from not knowing anything about programming and Android development, to building top-notch, scalable applications in no time. Our mission is to get you from not knowing anything about programming and Android development, to building top-notch, scalable applications in no time. Our mission is to get you from not knowing anything about programming and Android development, to building top-notch, scalable applications in no time. "
+        //let notification =  DataStore.shared.notificationsCenter[indexPath.row]
+        
+        cell.selectionStyle = .none
+        cell.lblDescription.text = "notification.text ?? notification.text ?? notification.text ?? notification.text ?? "
+        cell.lblTitle.text = "notification.title ?? "
+        cell.mainView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        
+        if indexPath.row == 2 {
+            cell.notificationImage.image = #imageLiteral(resourceName: "coins")
         }
+        cell.backgroundColor = UIColor.clear
+        
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width - 16, height: 50)
+
+    @IBAction func dismissAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

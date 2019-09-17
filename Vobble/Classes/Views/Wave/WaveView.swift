@@ -15,6 +15,7 @@ class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
     @IBOutlet var waterView: YXWaveView?
     @IBOutlet var bottle: UIImageView?
     
+    private var unSeenNotificationsCount = DataStore.shared.notificationsCenter.map {$0.isSeen == false}.count
     private var lblBadge: UILabel?
     private var viewController: UIViewController?
     public var isBadgeActive = false
@@ -52,13 +53,13 @@ class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
             
             // add badge to the bottle
             lblBadge = UILabel(frame: CGRect(x: 56, y: 12, width: 24, height: 24))
-            lblBadge?.text = "0"
+            lblBadge?.text = "\(unSeenNotificationsCount)"
             lblBadge?.textAlignment = .center
             lblBadge?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             lblBadge?.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
             lblBadge?.layer.cornerRadius = 12
             lblBadge?.layer.masksToBounds = true
-            lblBadge?.isHidden = (DataStore.shared.notificationsCenter.count > 0) ? false : true
+            lblBadge?.isHidden = (unSeenNotificationsCount > 0) ? false : true
             lblBadge?.isHidden = !isBadgeActive
             bottle?.addSubview(lblBadge!)
             
@@ -85,12 +86,17 @@ class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
     @objc
     fileprivate func presentNotificationVC(){
         let notificationVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: NotificationCenterViewController.className)
-        self.viewController?.present(notificationVC, animated: true, completion: nil)
+        notificationVC.providesPresentationContextTransitionStyle = true
+        notificationVC.definesPresentationContext = true
+        notificationVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+        notificationVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+        viewController?.present(notificationVC, animated: true, completion: nil)
     }
     
     @objc
     fileprivate func setNewBadge() {
-        lblBadge?.text = String(DataStore.shared.notificationsCenter.count)
+        lblBadge?.text = "\(unSeenNotificationsCount)"
+        lblBadge?.isHidden = (unSeenNotificationsCount > 0) ? false : true
     }
     
     
