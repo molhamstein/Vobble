@@ -499,8 +499,8 @@ class HomeViewController: AbstractController {
         //self.popAnimation(view: self.vFindBtnImg)
         
         // send tracking event
-        //let logEventParams = ["Shore": DataStore.shared.shores[self.currentPageIndex].name_en ?? "Main Shore", "Gender": self.gender.rawValue, "Country": self.countryCode];
-        //Flurry.logEvent(AppConfig.find_bottle, withParameters:logEventParams);
+        let logEventParams = ["Shore": DataStore.shared.shores[self.currentPageIndex].name_en ?? "Main Shore", "Gender": self.gender.rawValue, "Country": self.countryCode];
+        Flurry.logEvent(AppConfig.find_bottle, withParameters:logEventParams);
         
         // filters tracking events
         

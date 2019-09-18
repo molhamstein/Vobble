@@ -12,16 +12,20 @@ import SwiftyJSON
 class NCenter: BaseModel {
     
     // MARK: Keys
+    private let kNId: String = "id"
     private let kTitle: String = "title"
     private let kText: String = "text"
     private let kCreatedAt: String = "createdAt"
     private let kIsSeen: String = "isSeen"
+    private let kImage: String = "image"
     
     // MARK: Properties
+    public var notificationId: String?
     public var title: String?
     public var text: String?
     public var createdAt: String?
     public var isSeen: Bool?
+    public var image: String?
     
     // MARK: Initializers
     override init() {
@@ -43,7 +47,12 @@ class NCenter: BaseModel {
         if let value = json[kIsSeen].bool {
             isSeen = value
         }
-
+        if let value = json[kImage].string {
+            image = value
+        }
+        if let value = json[kNId].string {
+            notificationId = value
+        }
         
     }
     
@@ -61,6 +70,12 @@ class NCenter: BaseModel {
         }
         if let value = isSeen {
             dictionary[kIsSeen] = value
+        }
+        if let value = image {
+            dictionary[kImage] = value
+        }
+        if let value = notificationId {
+            dictionary[kNId] = value
         }
 
         return dictionary

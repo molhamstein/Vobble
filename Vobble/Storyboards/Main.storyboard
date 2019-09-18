@@ -2258,6 +2258,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="ic_close_white"/>
                                 <connections>
+                                    <action selector="dismissAction:" destination="TwJ-Ai-953" eventType="touchUpInside" id="j1L-2h-euE"/>
                                     <action selector="dissmiss" destination="E99-d6-6s1" eventType="touchUpInside" id="A8r-27-U7o"/>
                                     <action selector="dissmiss" destination="kBh-IY-1vv" eventType="touchUpInside" id="tM1-lO-0Fm"/>
                                 </connections>
@@ -2879,6 +2880,108 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
             </objects>
             <point key="canvasLocation" x="-1084" y="224"/>
         </scene>
+        <!--Get More Replies View Controller-->
+        <scene sceneID="daT-TT-hQX">
+            <objects>
+                <viewController storyboardIdentifier="GetMoreRepliesViewController" id="es5-lR-H0C" customClass="GetMoreRepliesViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gfa-Hh-8Nt"/>
+                        <viewControllerLayoutGuide type="bottom" id="BKV-n4-0BR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ppg-hm-mmf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlX-D0-Hh4">
+                                <rect key="frame" x="20.666666666666657" y="73.666666666666686" width="372.66666666666674" height="588.66666666666652"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V2v-I7-QJa">
+                                        <rect key="frame" x="0.0" y="289" width="372.66666666666669" height="295.66666666666674"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ZPo-Aj-GTf">
+                                            <size key="itemSize" width="50" height="190"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShopCollectionViewCellID" id="xFW-zJ-PiB">
+                                                <rect key="frame" x="4" y="0.0" width="50" height="190"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="190"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="try_finding_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="TYy-5Y-ZGx">
+                                        <rect key="frame" x="30" y="32" width="312.66666666666669" height="173.66666666666666"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="TYy-5Y-ZGx" secondAttribute="height" multiplier="1.8" id="lYT-aS-6zV"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4k-8X-ldH">
+                                        <rect key="frame" x="186.33333333333334" y="257" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="15"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get more replies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fr3-mL-Jl8">
+                                        <rect key="frame" x="114.99999999999999" y="229.66666666666663" width="142.66666666666663" height="23.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Fr3-mL-Jl8" firstAttribute="centerX" secondItem="QlX-D0-Hh4" secondAttribute="centerX" id="2fo-YE-d3k"/>
+                                    <constraint firstAttribute="bottom" secondItem="V2v-I7-QJa" secondAttribute="bottom" constant="4" id="41t-U6-hAJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="V2v-I7-QJa" secondAttribute="trailing" id="8Rt-r6-5JP"/>
+                                    <constraint firstItem="V2v-I7-QJa" firstAttribute="top" secondItem="f4k-8X-ldH" secondAttribute="bottom" constant="32" id="FdD-q5-fQh"/>
+                                    <constraint firstAttribute="trailing" secondItem="TYy-5Y-ZGx" secondAttribute="trailing" constant="30" id="Hob-aI-MyS"/>
+                                    <constraint firstItem="f4k-8X-ldH" firstAttribute="top" secondItem="Fr3-mL-Jl8" secondAttribute="bottom" constant="4" id="WG6-aO-wCW"/>
+                                    <constraint firstItem="f4k-8X-ldH" firstAttribute="centerX" secondItem="QlX-D0-Hh4" secondAttribute="centerX" id="cva-HX-1iE"/>
+                                    <constraint firstItem="TYy-5Y-ZGx" firstAttribute="top" secondItem="QlX-D0-Hh4" secondAttribute="top" constant="32" id="hxI-M4-LVo"/>
+                                    <constraint firstItem="V2v-I7-QJa" firstAttribute="leading" secondItem="QlX-D0-Hh4" secondAttribute="leading" id="nas-Lh-gc4"/>
+                                    <constraint firstItem="TYy-5Y-ZGx" firstAttribute="leading" secondItem="QlX-D0-Hh4" secondAttribute="leading" constant="30" id="nnE-mC-ZER"/>
+                                    <constraint firstItem="Fr3-mL-Jl8" firstAttribute="top" secondItem="TYy-5Y-ZGx" secondAttribute="bottom" constant="24" id="r7f-mE-mr7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EG8-hb-e3t">
+                                <rect key="frame" x="20.666666666666671" y="41.666666666666664" width="24" height="23.999999999999993"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="BJk-jy-CjJ"/>
+                                    <constraint firstAttribute="width" constant="24" id="JsQ-37-Ppr"/>
+                                </constraints>
+                                <state key="normal" image="ic_close_white"/>
+                                <connections>
+                                    <action selector="close:" destination="4cA-nK-VF6" eventType="touchUpInside" id="MHO-4r-YEX"/>
+                                    <action selector="close:" destination="es5-lR-H0C" eventType="touchUpInside" id="cGU-FE-kf7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="width" secondItem="ppg-hm-mmf" secondAttribute="width" multiplier="0.9" id="7Uu-fb-kvA"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="centerY" secondItem="ppg-hm-mmf" secondAttribute="centerY" id="IyA-fv-ipT"/>
+                            <constraint firstItem="EG8-hb-e3t" firstAttribute="leading" secondItem="QlX-D0-Hh4" secondAttribute="leading" id="WKd-EM-KqV"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="height" secondItem="ppg-hm-mmf" secondAttribute="height" multiplier="0.8" id="iS7-ys-a0U"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="top" secondItem="EG8-hb-e3t" secondAttribute="bottom" constant="8" id="rKB-Yx-4s1"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="centerX" secondItem="ppg-hm-mmf" secondAttribute="centerX" id="rvm-5e-RPE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="EG8-hb-e3t" id="Dd9-3Z-shf"/>
+                        <outlet property="collectionView" destination="V2v-I7-QJa" id="JY2-mE-v0m"/>
+                        <outlet property="lblTopTitle" destination="Fr3-mL-Jl8" id="d3w-Il-r47"/>
+                        <outlet property="popUpView" destination="QlX-D0-Hh4" id="Bv9-s1-9ii"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wDR-j9-ljm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6435" y="254"/>
+        </scene>
         <!--Extend Chat Popup View Controller-->
         <scene sceneID="daD-SA-T9p">
             <objects>
@@ -3254,14 +3357,14 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
     </scenes>
     <resources>
         <image name="Canopy" width="575" height="246"/>
-        <image name="boy" width="408" height="357"/>
-        <image name="boy_3_1" width="252.72000122070312" height="235.44000244140625"/>
+        <image name="boy" width="544" height="476"/>
+        <image name="boy_3_1" width="351" height="327"/>
         <image name="camera-switch" width="29" height="22"/>
         <image name="chatMoreOptions" width="22" height="20"/>
         <image name="chevron" width="24" height="24"/>
-        <image name="clouds" width="144000" height="47664"/>
+        <image name="clouds" width="2000" height="662"/>
         <image name="emptyListPlaceholder" width="50" height="50"/>
-        <image name="extend" width="456.48001098632812" height="318.72000122070312"/>
+        <image name="extend" width="1902" height="1328"/>
         <image name="filters" width="23" height="23"/>
         <image name="ic_chat_blocked" width="300" height="457"/>
         <image name="ic_close_white" width="20" height="20"/>
@@ -3274,25 +3377,25 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="ic_throw_bottle" width="24" height="24"/>
         <image name="ic_throw_bottle2" width="80" height="80"/>
         <image name="inst_fav" width="305" height="275"/>
-        <image name="island" width="564.75" height="459.75"/>
-        <image name="montains" width="3375" height="60"/>
+        <image name="island" width="753" height="613"/>
+        <image name="montains" width="4500" height="80"/>
         <image name="navBackIcon" width="25" height="23"/>
         <image name="pause" width="40" height="40"/>
-        <image name="photo" width="60" height="43"/>
+        <image name="photo" width="30" height="21"/>
         <image name="rateUsArt" width="750" height="493"/>
         <image name="recordFlashIcon" width="18" height="25"/>
         <image name="recordRecordingIcon" width="4" height="4"/>
-        <image name="sea" width="1500" height="1350.75"/>
+        <image name="sea" width="2000" height="1801"/>
         <image name="settings_art" width="610" height="615"/>
-        <image name="shore1" width="1125" height="882.75"/>
-        <image name="shore2" width="1125" height="882.75"/>
-        <image name="shore3" width="1125" height="882.75"/>
+        <image name="shore1" width="1500" height="1177"/>
+        <image name="shore2" width="1500" height="1177"/>
+        <image name="shore3" width="1500" height="1177"/>
         <image name="signup_male" width="63" height="15"/>
-        <image name="sky1" width="540.75" height="540.75"/>
-        <image name="sun" width="1316.25" height="1148.25"/>
+        <image name="sky1" width="721" height="721"/>
+        <image name="sun" width="1755" height="1531"/>
         <image name="try_finding_bottle" width="651" height="528"/>
-        <image name="umbrella" width="744.75" height="674.25"/>
-        <image name="user_placeholder" width="245.75999450683594" height="245.75999450683594"/>
-        <image name="wave" width="3375" height="554.25"/>
+        <image name="umbrella" width="993" height="899"/>
+        <image name="user_placeholder" width="1024" height="1024"/>
+        <image name="wave" width="4500" height="739"/>
     </resources>
 </document>

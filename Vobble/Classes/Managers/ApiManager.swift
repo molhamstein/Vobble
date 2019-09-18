@@ -1490,10 +1490,10 @@ class ApiManager: NSObject {
 
     func getNotificationsCenter(completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
         // url & parameters
-        let bottleURL = "\(baseURL)/notificationCenters/getMyCenterNotification"
+        let url = "\(baseURL)/notificationCenters/getMyCenterNotification"
         
         // build request
-        Alamofire.request(bottleURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             if responseObject.result.isSuccess {
                 let jsonResponse = JSON(responseObject.result.value!)
                 print(jsonResponse)
@@ -1525,6 +1525,35 @@ class ApiManager: NSObject {
         }
     }
 
+    func seenNotifications(ids: [String], completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
+        // url & parameters
+        let url = "\(baseURL)/notificationCenters/makeNotificationSeen"
+        
+        let parameters: Parameters = ["notificationIds" : ids]
+        // build request
+        Alamofire.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
+            if responseObject.result.isSuccess {
+                let jsonResponse = JSON(responseObject.result.value!)
+                print(jsonResponse)
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    let serverError = ServerError(json: jsonResponse["error"]) ?? ServerError.unknownError
+                    completionBlock(false , serverError)
+                    
+                } else {
+                    completionBlock(true , nil)
+                }
+            }
+            // Network error request time out or server error with no payload
+            if responseObject.result.isFailure {
+                let _ : NSError = responseObject.result.error! as NSError
+                if let code = responseObject.response?.statusCode, code >= 400 {
+                    completionBlock(false, ServerError.unknownError)
+                } else {
+                    completionBlock(false, ServerError.connectionError)
+                }
+            }
+        }
+    }
 
     
     // MARK: Get thrown bottles

@@ -114,6 +114,7 @@ class ShopViewController: AbstractController {
         countryFilterButton.isSelected = false
         coinsButton.isSelected = false
         repliesButton.isSelected = false
+
     }
     
     @IBAction func genderFilterBtnPressed(_ sender: Any) {
@@ -157,7 +158,7 @@ class ShopViewController: AbstractController {
         genderFilterButton.isSelected = false
         countryFilterButton.isSelected = false
         coinsButton.isSelected = false
-        repliesButton.isSelected = true
+        repliesButton.isSelected = true 
     }
 
     
@@ -181,6 +182,8 @@ class ShopViewController: AbstractController {
         
         
         self.shopItemsArray = bottlsArray.map{$0}
+        
+        self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
     private func initCoinsArray() {
@@ -197,6 +200,7 @@ class ShopViewController: AbstractController {
         
         
         self.shopItemsArray = repliesArray.map{$0}
+        self.scrollView.contentOffset = CGPoint(x: self.repliesButton.frame.width, y: 0)
     }
     
     override func backButtonAction(_ sender: AnyObject) {

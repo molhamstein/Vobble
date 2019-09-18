@@ -243,6 +243,8 @@
 "BLOCK_USER_SUCCESS"                   = "We will make sure %@ will never bother you again";
 "NO_REPLIES_MSG"                       = "Reply locked for 12 hours, wait and come back later or unlock by getting more replies";
 "GET_REPLIES"                          = "Get replies";
+"REPLY_POPUP_TITLE"                    = "Get more replies";
+"REPLIES_TITLE"                        = "Add replies";
 
 // shop
 "BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item with %@ ?";

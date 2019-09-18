@@ -439,7 +439,8 @@ extension FindBottleViewController {
     }
     
     @IBAction func replyBtnPressed(_ sender: Any) {
-        let repliesCount = (DataStore.shared.me?.repliesCount ?? 0) + (DataStore.shared.me?.extraRepliesCount ?? 0)
+        //let repliesCount = (DataStore.shared.me?.repliesCount ?? 0) + (DataStore.shared.me?.extraRepliesCount ?? 0)
+        let repliesCount = 0
         if repliesCount != 0 {
             let logEventParams = ["Shore": shoreName ?? "", "AuthorGender": (currentBottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (currentBottle?.owner?.countryISOCode) ?? ""];
             Flurry.logEvent(AppConfig.reply_pressed, withParameters:logEventParams);
@@ -464,10 +465,14 @@ extension FindBottleViewController {
             }
         }else {
             let getRepliesAction = UIAlertAction(title: "GET_REPLIES".localized, style: .default, handler: {_ in
-                let shopVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShopViewController.className) as! ShopViewController
-                shopVC.fType = .replies
+                let moreRepliesVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: GetMoreRepliesViewController.className) as! GetMoreRepliesViewController
                 
-                self.present(shopVC, animated: true, completion: nil)
+                moreRepliesVC.providesPresentationContextTransitionStyle = true
+                moreRepliesVC.definesPresentationContext = true
+                moreRepliesVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+                moreRepliesVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+                
+                self.present(moreRepliesVC, animated: true, completion: nil)
             })
             self.showAlert(title: "GLOBAL_WARNING_TITLE".localized, message: "NO_REPLIES_MSG".localized , actions: [getRepliesAction])
         }
