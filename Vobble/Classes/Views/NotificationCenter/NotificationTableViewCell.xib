@@ -58,17 +58,33 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lrg-gG-fLv">
+                        <rect key="frame" x="315" y="0.0" width="16" height="16"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="ZPX-8I-WVL"/>
+                            <constraint firstAttribute="width" constant="16" id="bTa-4e-6ox"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="XX2-CS-94f" secondAttribute="bottom" constant="8" id="1t3-hj-Vbo"/>
                     <constraint firstAttribute="trailing" secondItem="XX2-CS-94f" secondAttribute="trailing" constant="16" id="56g-8X-Pm8"/>
+                    <constraint firstItem="Lrg-gG-fLv" firstAttribute="trailing" secondItem="XX2-CS-94f" secondAttribute="trailing" constant="8" id="59a-rF-7Kv"/>
                     <constraint firstItem="XX2-CS-94f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="XFJ-pc-mW0"/>
+                    <constraint firstItem="Lrg-gG-fLv" firstAttribute="top" secondItem="XX2-CS-94f" secondAttribute="top" constant="-8" id="XVN-qy-tee"/>
                     <constraint firstItem="XX2-CS-94f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="keY-GG-ahd"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="badgeView" destination="Lrg-gG-fLv" id="aBp-gY-k4C"/>
                 <outlet property="lblDescription" destination="SVd-dg-g8d" id="1Fh-xk-AkA"/>
                 <outlet property="lblTitle" destination="etP-sx-BIG" id="9S7-g6-6eJ"/>
                 <outlet property="mainView" destination="XX2-CS-94f" id="mEO-r2-yRR"/>

@@ -14,6 +14,7 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     //@IBOutlet weak var notificationImage: UIImageView!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var badgeView: UIView!
 
     var mainImageView : UIImageView?  = {
         var imageView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
@@ -48,11 +49,7 @@ class NotificationTableViewCell: UITableViewCell {
         self.lblTitle.text = item.title
         self.backgroundColor = UIColor.clear
         
-        if item.isSeen ?? false {
-            self.mainView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
-        }else {
-            self.mainView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.9)
-        }
+        self.badgeView.isHidden = item.isSeen ?? false
         
         if let iconUrl = item.image {
             self.mainImageView?.sd_setImage(with: URL(string:iconUrl), completed: {completed in
@@ -61,6 +58,5 @@ class NotificationTableViewCell: UITableViewCell {
                 }
             })
         }
-        
     }
 }

@@ -150,6 +150,9 @@
 	<string>$(PRODUCT_NAME) uses photos to enable you share photos with your friends </string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ChalkboardSE-Light.ttf</string>
+		<string>ChalkboardSE-Regular.ttf</string>
+		<string>ChalkboardSE-Bold.ttf</string>
 		<string>Antipasto_extrabold.otf</string>
 		<string>Antipasto_regular.otf</string>
 		<string>MullerBold.otf</string>

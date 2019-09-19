@@ -27,7 +27,6 @@ class NotificationCenterViewController: AbstractController, UITableViewDelegate,
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,13 +44,16 @@ class NotificationCenterViewController: AbstractController, UITableViewDelegate,
     }
 
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if let imageSource = CGImageSourceCreateWithURL((DataStore.shared.notificationsCenter[indexPath.row].image ?? "https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg") as! CFURL, nil) {
-//            if let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {
-//                let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as! Int
-//                let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as! Int
-//                
-//                return (tableView.frame.width / CGFloat(pixelWidth / pixelHeight))
-//            }
+//            if let url = URL(string: DataStore.shared.notificationsCenter[indexPath.row].image ?? "https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg") {
+//                if let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil) {
+//                    if let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {
+//                        let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as! Int
+//                        let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as! Int
+//                        
+//                        return (tableView.frame.width / CGFloat(pixelWidth / pixelHeight))
+//                    }
+//                }
+//            
 //        }
 //        
 //        return (tableView.frame.width / 0)

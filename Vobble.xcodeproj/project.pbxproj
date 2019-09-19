@@ -82,6 +82,9 @@
 		8FC66834232DB31300EEAE0A /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */; };
 		8FC66836232F89FB00EEAE0A /* NCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66835232F89FB00EEAE0A /* NCenter.swift */; };
 		8FC668382331C58D00EEAE0A /* GetMoreRepliesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC668372331C58D00EEAE0A /* GetMoreRepliesViewController.swift */; };
+		8FD910F12333A80200DD3450 /* ChalkboardSE-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD910EE2333A80200DD3450 /* ChalkboardSE-Bold.ttf */; };
+		8FD910F22333A80200DD3450 /* ChalkboardSE-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD910EF2333A80200DD3450 /* ChalkboardSE-Light.ttf */; };
+		8FD910F32333A80200DD3450 /* ChalkboardSE-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD910F02333A80200DD3450 /* ChalkboardSE-Regular.ttf */; };
 		8FF44EA6227FCBD200DC132A /* OutsideShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF44EA4227FCBD200DC132A /* OutsideShopCollectionViewCell.swift */; };
 		8FF44EA7227FCBD200DC132A /* OutsideShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF44EA5227FCBD200DC132A /* OutsideShopCollectionViewCell.xib */; };
 		9234B5E9203356570085F9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234B5E8203356570085F9F7 /* AppDelegate.swift */; };
@@ -398,6 +401,9 @@
 		8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
 		8FC66835232F89FB00EEAE0A /* NCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCenter.swift; sourceTree = "<group>"; };
 		8FC668372331C58D00EEAE0A /* GetMoreRepliesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoreRepliesViewController.swift; sourceTree = "<group>"; };
+		8FD910EE2333A80200DD3450 /* ChalkboardSE-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Bold.ttf"; sourceTree = "<group>"; };
+		8FD910EF2333A80200DD3450 /* ChalkboardSE-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Light.ttf"; sourceTree = "<group>"; };
+		8FD910F02333A80200DD3450 /* ChalkboardSE-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Regular.ttf"; sourceTree = "<group>"; };
 		8FF44EA4227FCBD200DC132A /* OutsideShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutsideShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		8FF44EA5227FCBD200DC132A /* OutsideShopCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutsideShopCollectionViewCell.xib; sourceTree = "<group>"; };
 		9234B5E5203356570085F9F7 /* Vobble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vobble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1532,6 +1538,9 @@
 		B19372EA2033E44E007B1E7D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				8FD910EE2333A80200DD3450 /* ChalkboardSE-Bold.ttf */,
+				8FD910EF2333A80200DD3450 /* ChalkboardSE-Light.ttf */,
+				8FD910F02333A80200DD3450 /* ChalkboardSE-Regular.ttf */,
 				B135B61C203DE93600755799 /* Antipasto_extrabold.otf */,
 				B135B61D203DE93600755799 /* Antipasto_regular.otf */,
 				B135B61E203DE93600755799 /* MullerBold.otf */,
@@ -1753,6 +1762,7 @@
 				B19372F32033E44E007B1E7D /* DroidKufiRegular.ttf in Resources */,
 				570BB3242081445C00542EAD /* crab.gif in Resources */,
 				CE0494C0232067D400ADF01E /* GiftsView.xib in Resources */,
+				8FD910F22333A80200DD3450 /* ChalkboardSE-Light.ttf in Resources */,
 				57348472218FA36C00F4707B /* audio_msg_beeb.mp3 in Resources */,
 				B11B52472038AE7700C51EE8 /* WaveView.xib in Resources */,
 				045120232180952900F4EC9D /* ThrownBottleCollectionViewCell.xib in Resources */,
@@ -1788,6 +1798,8 @@
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
 				B11B52492038B19700C51EE8 /* Start.storyboard in Resources */,
 				0445EF3C218E25BC0029A6FB /* AudioCollectionViewCellOutgoing.xib in Resources */,
+				8FD910F12333A80200DD3450 /* ChalkboardSE-Bold.ttf in Resources */,
+				8FD910F32333A80200DD3450 /* ChalkboardSE-Regular.ttf in Resources */,
 				B19372F62033E44E007B1E7D /* OpenSansSemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

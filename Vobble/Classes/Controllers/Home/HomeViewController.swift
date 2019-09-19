@@ -144,6 +144,7 @@ class HomeViewController: AbstractController {
         // observe any change in the unread notifications count
         lblUnreadConversationsBadge.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("ObserveNotificationCenter"), object: nil)
         
         // observe clicking any push notifications that have actions attached to them
         NotificationCenter.default.addObserver(self, selector: #selector(openThrowBottleView(notification:)), name: Notification.Name("OpenThrowBottle"), object: nil)
@@ -167,6 +168,8 @@ class HomeViewController: AbstractController {
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appGotBackFromBackground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
+        ApiManager.shared.getNotificationsCenter(completionBlock: {_, _ in})
     }
     
     
@@ -373,7 +376,8 @@ class HomeViewController: AbstractController {
     }
     
     func unreadMessagesCountChange (notification: NSNotification) {
-        let count = DataStore.shared.getConversationsWithUnseenMessagesCount()
+        var count = DataStore.shared.getConversationsWithUnseenMessagesCount()
+        count += DataStore.shared.notificationsCenter.filter {$0.isSeen == false}.count
         if count > 0{
             lblUnreadConversationsBadge.text = "\(count)"
             lblUnreadConversationsBadge.isHidden = false
