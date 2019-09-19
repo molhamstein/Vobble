@@ -1737,70 +1737,147 @@
                                             <constraint firstAttribute="height" constant="150.33000000000001" id="geZ-kQ-dsH"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hVF-Nr-YCk">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iaa-x5-L81">
                                         <rect key="frame" x="0.0" y="140.33333333333334" width="414" height="32"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Jv-5I-5cO" userLabel="Coins">
-                                                <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="32"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="Coins">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.49568111799999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="coinsBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="OuR-xm-gcr"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2l-ZC-aAd">
-                                                <rect key="frame" x="103.66666666666669" y="0.0" width="103.33333333333331" height="32"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="Bottles">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.4956811179577465" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="bottlesBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="Ump-RW-02S"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5U-WK-NSB">
-                                                <rect key="frame" x="206.99999999999997" y="0.0" width="103.66666666666666" height="32"/>
-                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="Gender Filters">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="genderFilterBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="O4P-Po-Rbr"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1o-Rp-7A4">
-                                                <rect key="frame" x="310.66666666666669" y="0.0" width="103.33333333333331" height="32"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="Country Filters">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected">
-                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="countryFilterBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="Q7f-fu-klf"/>
-                                                </connections>
-                                            </button>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqW-3d-jPg">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xk-QC-fj7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="500" height="32"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbW-qS-mJG" userLabel="Coins">
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="DZH-oG-R1T"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <state key="normal" title="Coins">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.49568111799999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="coinsBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="9Fd-Se-qdO"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uoR-Dz-Aq6">
+                                                                <rect key="frame" x="100" y="0.0" width="100" height="32"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="e0O-Qf-8Aq"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <state key="normal" title="Bottles">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.49568111799999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="bottlesBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="WmH-0t-ndW"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PC8-58-FEn">
+                                                                <rect key="frame" x="200" y="0.0" width="100" height="32"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="q5k-Ez-RFe"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <state key="normal" title="Gender Filters">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="genderFilterBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="L9V-xc-z2X"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="old-g6-kch">
+                                                                <rect key="frame" x="300" y="0.0" width="100" height="32"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="C8k-ea-hoY"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <state key="normal" title="Country Filters">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="countryFilterBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="SvG-vL-RVZ"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQi-XY-Q7b" userLabel="Replies">
+                                                                <rect key="frame" x="400" y="0.0" width="100" height="32"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="WWX-zO-2ib"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="tHJ-Vt-TbV"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <state key="normal" title="Replies">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <color key="titleColor" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="countryFilterBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="chF-Mt-WxL"/>
+                                                                    <action selector="repliesBtnPressed:" destination="nsm-q8-EXx" eventType="touchUpInside" id="hSz-RJ-PtQ"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="PC8-58-FEn" firstAttribute="top" secondItem="4xk-QC-fj7" secondAttribute="top" id="2l6-KA-XnL"/>
+                                                            <constraint firstItem="uoR-Dz-Aq6" firstAttribute="leading" secondItem="LbW-qS-mJG" secondAttribute="trailing" id="4IX-s7-xtu"/>
+                                                            <constraint firstItem="vQi-XY-Q7b" firstAttribute="leading" secondItem="old-g6-kch" secondAttribute="trailing" id="8wq-rT-E7p"/>
+                                                            <constraint firstItem="PC8-58-FEn" firstAttribute="leading" secondItem="uoR-Dz-Aq6" secondAttribute="trailing" id="HQv-V9-g2P"/>
+                                                            <constraint firstAttribute="bottom" secondItem="LbW-qS-mJG" secondAttribute="bottom" id="OuD-yd-Hml"/>
+                                                            <constraint firstAttribute="trailing" secondItem="vQi-XY-Q7b" secondAttribute="trailing" id="QDU-My-y6l"/>
+                                                            <constraint firstItem="old-g6-kch" firstAttribute="leading" secondItem="PC8-58-FEn" secondAttribute="trailing" id="R09-pk-6WI"/>
+                                                            <constraint firstAttribute="bottom" secondItem="vQi-XY-Q7b" secondAttribute="bottom" id="TDE-wk-Mgk"/>
+                                                            <constraint firstItem="vQi-XY-Q7b" firstAttribute="top" secondItem="4xk-QC-fj7" secondAttribute="top" id="TKH-W9-uhV"/>
+                                                            <constraint firstAttribute="bottom" secondItem="uoR-Dz-Aq6" secondAttribute="bottom" id="h5J-nd-JXV"/>
+                                                            <constraint firstItem="uoR-Dz-Aq6" firstAttribute="top" secondItem="4xk-QC-fj7" secondAttribute="top" id="kuN-zo-ALd"/>
+                                                            <constraint firstItem="LbW-qS-mJG" firstAttribute="leading" secondItem="4xk-QC-fj7" secondAttribute="leading" id="m88-jf-8DF"/>
+                                                            <constraint firstAttribute="bottom" secondItem="old-g6-kch" secondAttribute="bottom" id="qg2-3E-qCd"/>
+                                                            <constraint firstItem="LbW-qS-mJG" firstAttribute="top" secondItem="4xk-QC-fj7" secondAttribute="top" id="uC0-qC-RX4"/>
+                                                            <constraint firstItem="old-g6-kch" firstAttribute="top" secondItem="4xk-QC-fj7" secondAttribute="top" id="weF-XC-Ey3"/>
+                                                            <constraint firstAttribute="bottom" secondItem="PC8-58-FEn" secondAttribute="bottom" id="xpw-AH-7rd"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="4xk-QC-fj7" secondAttribute="trailing" id="8fM-3n-Qzl"/>
+                                                    <constraint firstAttribute="bottom" secondItem="4xk-QC-fj7" secondAttribute="bottom" id="cDQ-oT-Nbs"/>
+                                                    <constraint firstItem="4xk-QC-fj7" firstAttribute="top" secondItem="mqW-3d-jPg" secondAttribute="top" id="rBK-eQ-u24"/>
+                                                    <constraint firstItem="4xk-QC-fj7" firstAttribute="leading" secondItem="mqW-3d-jPg" secondAttribute="leading" id="sPQ-y2-sYy"/>
+                                                </constraints>
+                                            </scrollView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="mqW-3d-jPg" secondAttribute="bottom" id="BNv-9d-sVE"/>
+                                            <constraint firstItem="4xk-QC-fj7" firstAttribute="height" secondItem="Iaa-x5-L81" secondAttribute="height" id="HQ1-Zj-ifz"/>
+                                            <constraint firstItem="mqW-3d-jPg" firstAttribute="leading" secondItem="Iaa-x5-L81" secondAttribute="leading" id="Q6c-4q-Nt0"/>
+                                            <constraint firstItem="4xk-QC-fj7" firstAttribute="width" secondItem="Iaa-x5-L81" secondAttribute="width" priority="250" id="QyU-VE-CaU"/>
+                                            <constraint firstAttribute="trailing" secondItem="mqW-3d-jPg" secondAttribute="trailing" id="aUP-7b-gdi"/>
+                                            <constraint firstAttribute="height" constant="32" id="jhP-1n-bS3"/>
+                                            <constraint firstItem="mqW-3d-jPg" firstAttribute="top" secondItem="Iaa-x5-L81" secondAttribute="top" id="nyA-Yv-9nm"/>
+                                        </constraints>
+                                    </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PEH-3z-RyS">
                                         <rect key="frame" x="0.0" y="180.33333333333331" width="414" height="535.66666666666674"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1828,13 +1905,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="hVF-Nr-YCk" secondAttribute="trailing" id="46G-Ke-7ND"/>
+                                    <constraint firstItem="Iaa-x5-L81" firstAttribute="leading" secondItem="YqH-A7-uGq" secondAttribute="leading" id="38k-1y-ILE"/>
+                                    <constraint firstItem="Iaa-x5-L81" firstAttribute="top" secondItem="4lr-K3-wGT" secondAttribute="bottom" constant="10" id="Bha-Zo-7gd"/>
                                     <constraint firstAttribute="bottom" secondItem="PEH-3z-RyS" secondAttribute="bottom" id="FFQ-fu-aYe"/>
                                     <constraint firstItem="PEH-3z-RyS" firstAttribute="leading" secondItem="YqH-A7-uGq" secondAttribute="leading" id="H5T-cP-eed"/>
-                                    <constraint firstItem="hVF-Nr-YCk" firstAttribute="top" secondItem="4lr-K3-wGT" secondAttribute="bottom" constant="10" id="Kze-L0-HXI"/>
+                                    <constraint firstItem="PEH-3z-RyS" firstAttribute="top" secondItem="Iaa-x5-L81" secondAttribute="bottom" constant="8" id="LXZ-aJ-A3b"/>
+                                    <constraint firstAttribute="trailing" secondItem="Iaa-x5-L81" secondAttribute="trailing" id="OAw-Sf-xQc"/>
                                     <constraint firstAttribute="trailing" secondItem="PEH-3z-RyS" secondAttribute="trailing" id="byH-LX-GVd"/>
-                                    <constraint firstItem="hVF-Nr-YCk" firstAttribute="leading" secondItem="YqH-A7-uGq" secondAttribute="leading" id="lPf-Sg-y0s"/>
-                                    <constraint firstItem="PEH-3z-RyS" firstAttribute="top" secondItem="hVF-Nr-YCk" secondAttribute="bottom" constant="8" id="mGS-FZ-0hE"/>
                                     <constraint firstItem="4lr-K3-wGT" firstAttribute="top" secondItem="YqH-A7-uGq" secondAttribute="top" constant="-20" id="tP8-Ab-fk5"/>
                                     <constraint firstItem="4lr-K3-wGT" firstAttribute="leading" secondItem="YqH-A7-uGq" secondAttribute="leading" id="wIa-GM-XrW"/>
                                     <constraint firstAttribute="trailing" secondItem="4lr-K3-wGT" secondAttribute="trailing" id="xoV-L6-Ozt"/>
@@ -1872,18 +1949,20 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottlesButton" destination="Q2l-ZC-aAd" id="phu-1x-8Vw"/>
-                        <outlet property="coinsButton" destination="5Jv-5I-5cO" id="2ih-ZZ-x6w"/>
-                        <outlet property="countryFilterButton" destination="c1o-Rp-7A4" id="mRt-Yg-tKB"/>
-                        <outlet property="genderFilterButton" destination="v5U-WK-NSB" id="JeB-4a-bol"/>
+                        <outlet property="bottlesButton" destination="uoR-Dz-Aq6" id="AQ7-Oj-ne4"/>
+                        <outlet property="coinsButton" destination="LbW-qS-mJG" id="hwj-hR-H4F"/>
+                        <outlet property="countryFilterButton" destination="old-g6-kch" id="wIg-gN-EcR"/>
+                        <outlet property="genderFilterButton" destination="PC8-58-FEn" id="fdS-oB-RVJ"/>
                         <outlet property="navigationView" destination="dvh-1P-xoE" id="SDs-CI-Wa4"/>
+                        <outlet property="repliesButton" destination="vQi-XY-Q7b" id="efe-EG-e04"/>
+                        <outlet property="scrollView" destination="mqW-3d-jPg" id="d7P-kk-E4w"/>
                         <outlet property="shopCollectionView" destination="PEH-3z-RyS" id="zuM-bh-PQm"/>
                         <outlet property="waveSubView" destination="I46-7w-K05" id="6W2-0L-joT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nef-IB-Vhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1821" y="224"/>
+            <point key="canvasLocation" x="-1821.7391304347827" y="223.36956521739131"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="Taz-dV-rfH">
@@ -2151,7 +2230,57 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsc-AX-Sje" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1221" y="997"/>
+            <point key="canvasLocation" x="-1221.7391304347827" y="996.19565217391312"/>
+        </scene>
+        <!--Notification Center View Controller-->
+        <scene sceneID="ChA-0J-647">
+            <objects>
+                <viewController storyboardIdentifier="NotificationCenterViewController" id="TwJ-Ai-953" customClass="NotificationCenterViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cdW-Y5-qMM"/>
+                        <viewControllerLayoutGuide type="bottom" id="eoi-li-f4h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JlH-zk-vbh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Fq-gP-ntk">
+                                <rect key="frame" x="0.0" y="72" width="414" height="664"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbe-BZ-o0v">
+                                <rect key="frame" x="16" y="16" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="4ky-20-5Vl"/>
+                                    <constraint firstAttribute="width" constant="40" id="9lt-O1-eCA"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="ic_close_white"/>
+                                <connections>
+                                    <action selector="dismissAction:" destination="TwJ-Ai-953" eventType="touchUpInside" id="j1L-2h-euE"/>
+                                    <action selector="dissmiss" destination="E99-d6-6s1" eventType="touchUpInside" id="A8r-27-U7o"/>
+                                    <action selector="dissmiss" destination="kBh-IY-1vv" eventType="touchUpInside" id="tM1-lO-0Fm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eoi-li-f4h" firstAttribute="top" secondItem="5Fq-gP-ntk" secondAttribute="bottom" id="8JI-Gw-JA5"/>
+                            <constraint firstAttribute="trailing" secondItem="5Fq-gP-ntk" secondAttribute="trailing" id="GXp-nU-sdL"/>
+                            <constraint firstItem="Bbe-BZ-o0v" firstAttribute="top" secondItem="JlH-zk-vbh" secondAttribute="top" constant="16" id="H0h-jq-ny5"/>
+                            <constraint firstItem="Bbe-BZ-o0v" firstAttribute="leading" secondItem="JlH-zk-vbh" secondAttribute="leading" constant="16" id="OLa-iy-K8i"/>
+                            <constraint firstItem="5Fq-gP-ntk" firstAttribute="leading" secondItem="JlH-zk-vbh" secondAttribute="leading" id="SsE-yU-feu"/>
+                            <constraint firstItem="5Fq-gP-ntk" firstAttribute="top" secondItem="Bbe-BZ-o0v" secondAttribute="bottom" constant="16" id="eNL-0q-chJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="5Fq-gP-ntk" id="rhL-6E-2N0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oLl-lV-14B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-267" y="999"/>
         </scene>
         <!--Edit Username View Controller-->
         <scene sceneID="pDZ-US-T2s">
@@ -2684,7 +2813,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqp-z1-byA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-115" y="486"/>
+            <point key="canvasLocation" x="-149" y="223"/>
         </scene>
         <!--Terms View Controller-->
         <scene sceneID="uAx-AH-Oda">
@@ -2750,6 +2879,108 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sOZ-AL-oXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1084" y="224"/>
+        </scene>
+        <!--Get More Replies View Controller-->
+        <scene sceneID="daT-TT-hQX">
+            <objects>
+                <viewController storyboardIdentifier="GetMoreRepliesViewController" id="es5-lR-H0C" customClass="GetMoreRepliesViewController" customModule="Vobble" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gfa-Hh-8Nt"/>
+                        <viewControllerLayoutGuide type="bottom" id="BKV-n4-0BR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ppg-hm-mmf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlX-D0-Hh4">
+                                <rect key="frame" x="20.666666666666657" y="73.666666666666686" width="372.66666666666674" height="588.66666666666652"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V2v-I7-QJa">
+                                        <rect key="frame" x="0.0" y="289" width="372.66666666666669" height="295.66666666666674"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ZPo-Aj-GTf">
+                                            <size key="itemSize" width="50" height="190"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShopCollectionViewCellID" id="xFW-zJ-PiB">
+                                                <rect key="frame" x="4" y="0.0" width="50" height="190"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="190"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="try_finding_bottle" translatesAutoresizingMaskIntoConstraints="NO" id="TYy-5Y-ZGx">
+                                        <rect key="frame" x="30" y="32" width="312.66666666666669" height="173.66666666666666"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="TYy-5Y-ZGx" secondAttribute="height" multiplier="1.8" id="lYT-aS-6zV"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4k-8X-ldH">
+                                        <rect key="frame" x="186.33333333333334" y="257" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="15"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get more replies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fr3-mL-Jl8">
+                                        <rect key="frame" x="114.99999999999999" y="229.66666666666663" width="142.66666666666663" height="23.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Fr3-mL-Jl8" firstAttribute="centerX" secondItem="QlX-D0-Hh4" secondAttribute="centerX" id="2fo-YE-d3k"/>
+                                    <constraint firstAttribute="bottom" secondItem="V2v-I7-QJa" secondAttribute="bottom" constant="4" id="41t-U6-hAJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="V2v-I7-QJa" secondAttribute="trailing" id="8Rt-r6-5JP"/>
+                                    <constraint firstItem="V2v-I7-QJa" firstAttribute="top" secondItem="f4k-8X-ldH" secondAttribute="bottom" constant="32" id="FdD-q5-fQh"/>
+                                    <constraint firstAttribute="trailing" secondItem="TYy-5Y-ZGx" secondAttribute="trailing" constant="30" id="Hob-aI-MyS"/>
+                                    <constraint firstItem="f4k-8X-ldH" firstAttribute="top" secondItem="Fr3-mL-Jl8" secondAttribute="bottom" constant="4" id="WG6-aO-wCW"/>
+                                    <constraint firstItem="f4k-8X-ldH" firstAttribute="centerX" secondItem="QlX-D0-Hh4" secondAttribute="centerX" id="cva-HX-1iE"/>
+                                    <constraint firstItem="TYy-5Y-ZGx" firstAttribute="top" secondItem="QlX-D0-Hh4" secondAttribute="top" constant="32" id="hxI-M4-LVo"/>
+                                    <constraint firstItem="V2v-I7-QJa" firstAttribute="leading" secondItem="QlX-D0-Hh4" secondAttribute="leading" id="nas-Lh-gc4"/>
+                                    <constraint firstItem="TYy-5Y-ZGx" firstAttribute="leading" secondItem="QlX-D0-Hh4" secondAttribute="leading" constant="30" id="nnE-mC-ZER"/>
+                                    <constraint firstItem="Fr3-mL-Jl8" firstAttribute="top" secondItem="TYy-5Y-ZGx" secondAttribute="bottom" constant="24" id="r7f-mE-mr7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EG8-hb-e3t">
+                                <rect key="frame" x="20.666666666666671" y="41.666666666666664" width="24" height="23.999999999999993"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="BJk-jy-CjJ"/>
+                                    <constraint firstAttribute="width" constant="24" id="JsQ-37-Ppr"/>
+                                </constraints>
+                                <state key="normal" image="ic_close_white"/>
+                                <connections>
+                                    <action selector="close:" destination="4cA-nK-VF6" eventType="touchUpInside" id="MHO-4r-YEX"/>
+                                    <action selector="close:" destination="es5-lR-H0C" eventType="touchUpInside" id="cGU-FE-kf7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="width" secondItem="ppg-hm-mmf" secondAttribute="width" multiplier="0.9" id="7Uu-fb-kvA"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="centerY" secondItem="ppg-hm-mmf" secondAttribute="centerY" id="IyA-fv-ipT"/>
+                            <constraint firstItem="EG8-hb-e3t" firstAttribute="leading" secondItem="QlX-D0-Hh4" secondAttribute="leading" id="WKd-EM-KqV"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="height" secondItem="ppg-hm-mmf" secondAttribute="height" multiplier="0.8" id="iS7-ys-a0U"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="top" secondItem="EG8-hb-e3t" secondAttribute="bottom" constant="8" id="rKB-Yx-4s1"/>
+                            <constraint firstItem="QlX-D0-Hh4" firstAttribute="centerX" secondItem="ppg-hm-mmf" secondAttribute="centerX" id="rvm-5e-RPE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="EG8-hb-e3t" id="Dd9-3Z-shf"/>
+                        <outlet property="collectionView" destination="V2v-I7-QJa" id="JY2-mE-v0m"/>
+                        <outlet property="lblTopTitle" destination="Fr3-mL-Jl8" id="d3w-Il-r47"/>
+                        <outlet property="popUpView" destination="QlX-D0-Hh4" id="Bv9-s1-9ii"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wDR-j9-ljm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6435" y="254"/>
         </scene>
         <!--Extend Chat Popup View Controller-->
         <scene sceneID="daD-SA-T9p">

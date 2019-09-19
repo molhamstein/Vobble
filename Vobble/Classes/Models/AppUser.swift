@@ -65,6 +65,8 @@ class AppUser: BaseModel, NSCopying {
     private let kVersion = "version"
     private let kCanEditUsername = "canEditUsername"
     private let kPocketCoins = "pocketCoins"
+    private let kRepliesCount = "replysCount"
+    private let kExtraRepliesCount = "extraReplysCount"
     
     private let kHomeTutShowed = "homeTutShowed"
     private let kChatTutShowed = "ChatTutShowed"
@@ -99,6 +101,8 @@ class AppUser: BaseModel, NSCopying {
     public var canEditUsername: Bool?
     public var phoneNumber: String?
     public var pocketCoins: Int?
+    public var repliesCount: Int?
+    public var extraRepliesCount: Int?
     
     public var socialId: String?
     public var socialToken: String?
@@ -184,6 +188,14 @@ class AppUser: BaseModel, NSCopying {
         if let value = json[kPocketCoins].int {
             pocketCoins = value
         }
+        
+        if let value = json[kRepliesCount].int {
+            repliesCount = value
+        }
+        
+        if let value = json[kExtraRepliesCount].int {
+            extraRepliesCount = value
+        }
 
         token = json[kUserTokenKey].string
         foundBottlesCount = json[kFoundBottlesCount].int
@@ -266,6 +278,14 @@ class AppUser: BaseModel, NSCopying {
         // Coins
         if let value = pocketCoins {
             dictionary[kPocketCoins] = value
+        }
+        
+        // Reply
+        if let value = repliesCount {
+            dictionary[kRepliesCount] = value
+        }
+        if let value = extraRepliesCount {
+            dictionary[kExtraRepliesCount] = value
         }
         
         if let value = extraBottlesLeftToThrowCount {

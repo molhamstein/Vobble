@@ -46,6 +46,10 @@ class ConversationViewController: AbstractController {
         emptyPlaceHolderLabel.font = AppFonts.normal
         emptyPlaceHolderLabel.text = "MY_BOTTLES_EMPTY_PLACEHOLDER".localized
         
+        ApiManager.shared.getNotificationsCenter(completionBlock: {_, _ in
+            
+        })
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,8 +69,10 @@ class ConversationViewController: AbstractController {
     
     override func viewDidLayoutSubviews() {
         waveSubView.awakeFromNib()
+        waveSubView.isBadgeActive = true
         waveSubView.showWave()
-        waveSubView.isUserInteractionEnabled = false
+        waveSubView.addTapAction(self)
+        waveSubView.isUserInteractionEnabled = true
     }
     
     override func customizeView() {

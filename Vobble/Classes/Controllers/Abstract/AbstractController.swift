@@ -276,6 +276,23 @@ class AbstractController: UIViewController, UITextFieldDelegate, UIGestureRecogn
     {
         print("unwind!!")
     }
+    
+    /// Show custom alert
+    func showAlert(title: String?, message: String?, actions: [UIAlertAction]?, okAction: Bool = true) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        if let actions = actions {
+            for action in actions {
+                alert.addAction(action)
+            }
+        }
+        
+        if okAction {
+            alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 

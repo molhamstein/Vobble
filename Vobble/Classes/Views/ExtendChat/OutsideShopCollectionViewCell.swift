@@ -38,7 +38,12 @@ class OutsideShopCollectionViewCell: UICollectionViewCell {
         mainView.applyGradient(colours: [shopItemObj.secondColor, shopItemObj.firstColor], direction: .diagonal)
         vPrice.applyGradient(colours: [shopItemObj.firstColor, shopItemObj.secondColor], direction: .horizontal)
         
-        titleLabel.text = "EXTEND_CHAT_TITLE".localized
+        if shopItemObj.type == .replies {
+            titleLabel.text = "REPLIES_TITLE".localized
+        }else if shopItemObj.type == .ExtendChat {
+            titleLabel.text = "EXTEND_CHAT_TITLE".localized
+        }
+        
         descriptionLabel.text = shopItemObj.title
         
         priceLabel.text = String(shopItemObj.priceCoins ?? 0) 

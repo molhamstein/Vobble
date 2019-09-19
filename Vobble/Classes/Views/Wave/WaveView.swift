@@ -10,10 +10,15 @@ import UIKit
 import YXWaveView
 
 
-class WaveView : AbstractNibView {
+class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
     
     @IBOutlet var waterView: YXWaveView?
     @IBOutlet var bottle: UIImageView?
+    
+    private var unSeenNotificationsCount = DataStore.shared.notificationsCenter.map {$0.isSeen == false}.count
+    private var lblBadge: UILabel?
+    private var viewController: UIViewController?
+    public var isBadgeActive = false
     
     func showWave () {
         
@@ -46,13 +51,57 @@ class WaveView : AbstractNibView {
             // Start wave
             waterView!.start()
             
+            // add badge to the bottle
+            lblBadge = UILabel(frame: CGRect(x: 56, y: 12, width: 24, height: 24))
+            lblBadge?.text = "\(unSeenNotificationsCount)"
+            lblBadge?.textAlignment = .center
+            lblBadge?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            lblBadge?.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
+            lblBadge?.layer.cornerRadius = 12
+            lblBadge?.layer.masksToBounds = true
+            lblBadge?.isHidden = (unSeenNotificationsCount > 0) ? false : true
+            lblBadge?.isHidden = !isBadgeActive
+            bottle?.addSubview(lblBadge!)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(setNewBadge), name: Notification.Name("ObserveNotificationCenter"), object: nil)
+            
             // animate the bottle
             bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/5)).translatedBy(x: self.view.frame.width/3, y: 30)
-            UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+            UIView.animate(withDuration: 3.0, delay: 0, options: [.repeat, .autoreverse, .allowUserInteraction], animations: {
                 self.bottle?.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double.pi/8)).translatedBy(x: (self.view.frame.width/3)-10, y: 30)
             }, completion: nil)
         }
         
     }
     
+    
+    public func addTapAction(_ viewController: UIViewController) {
+        self.viewController = viewController
+        let tap = UITapGestureRecognizer(target: self, action: #selector(presentNotificationVC))
+        tap.delegate = self
+        self.bottle?.isUserInteractionEnabled = true
+        self.bottle?.addGestureRecognizer(tap)
+    }
+    
+    @objc
+    fileprivate func presentNotificationVC(){
+        let notificationVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: NotificationCenterViewController.className)
+        notificationVC.providesPresentationContextTransitionStyle = true
+        notificationVC.definesPresentationContext = true
+        notificationVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+        notificationVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+        viewController?.present(notificationVC, animated: true, completion: nil)
+    }
+    
+    @objc
+    fileprivate func setNewBadge() {
+        lblBadge?.text = "\(unSeenNotificationsCount)"
+        lblBadge?.isHidden = (unSeenNotificationsCount > 0) ? false : true
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("tapped")
+        presentNotificationVC()
+    }
 }

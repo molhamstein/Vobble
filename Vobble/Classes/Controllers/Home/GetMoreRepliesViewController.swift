@@ -1,85 +1,65 @@
 //
-//  ExtendChatPopupViewController.swift
+//  GetMoreRepliesViewController.swift
 //  Vobble
 //
-//  Created by Abdulrahman Alhayek on 4/7/19.
+//  Created by Abdulrahman Alhayek on 9/18/19.
 //  Copyright © 2019 Brain-Socket. All rights reserved.
 //
 
 import UIKit
 import Flurry_iOS_SDK
-import FirebaseDatabase
 
-/*
- TO DO:
-1- Add subtitles to strings files
-*/
-class ExtendChatPopupViewController: AbstractController {
-
+class GetMoreRepliesViewController: AbstractController {
     @IBOutlet weak var lblTopTitle: UILabel!
-    @IBOutlet weak var lblUsername: UILabel!
-    @IBOutlet weak var chatCollectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var popUpView: UIView!
     
-    private var _chatItemsArray:[ShopItem] = [ShopItem]()
-    fileprivate var chatItemsArray: [ShopItem] {
+    private var _repliesItemsArray:[ShopItem] = [ShopItem]()
+    fileprivate var repliesItemsArray: [ShopItem] {
         set {
-            _chatItemsArray = newValue
-            chatCollectionView.reloadData()
+            _repliesItemsArray = newValue
+            collectionView.reloadData()
         }
         get {
-            if(_chatItemsArray.isEmpty){
-                _chatItemsArray = [ShopItem]()
+            if(_repliesItemsArray.isEmpty){
+                _repliesItemsArray = [ShopItem]()
             }
-            return _chatItemsArray
+            return _repliesItemsArray
         }
     }
     
     var selectedProduct : ShopItem!
     
-    var conversationId: String?
-    
-    var conversation: Conversation?
-    
-    var username: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.lblTopTitle.text = String.init(format: "EXTEND_CHAT_POPUP_TITLE".localized, "")
+        self.lblTopTitle.text = String.init(format: "REPLY_POPUP_TITLE".localized, "")
         self.lblTopTitle.font = AppFonts.xBigBold
-        self.lblUsername.text = self.username ?? ""
         
-        self.chatCollectionView.register(UINib(nibName: "OutsideShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "OutsideShopCollectionViewCell")
-        self.chatCollectionView.delegate = self
-        self.chatCollectionView.dataSource = self
+        self.collectionView.register(UINib(nibName: "OutsideShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "OutsideShopCollectionViewCell")
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
         
         layoutDesign()
         
-        initChatArray()
+        initRepliesArray()
         
-        // Do any additional setup after loading the view.
-        
-        ApiManager.shared.requestShopItems(completionBlock: { (items, error) in})
-        
-        //IAP Setup
-        IAPManager.shared.delegate = self
-        IAPManager.shared.currentViewController = self
-        
-        if !IAPManager.shared.isPaymentsReady() {
-            self.chatItemsArray = []
-        }
+        ApiManager.shared.requestShopItems(completionBlock: { (items, error) in
+            if error == nil {
+                self.initRepliesArray()
+            }
+        })
     }
-
-    private func initChatArray() {
-        var chatsArray:[ShopItem] = [ShopItem]()
-        chatsArray = DataStore.shared.shopItems.filter({$0.type == .ExtendChat})
+    
+    private func initRepliesArray() {
+        var repliesArray:[ShopItem] = [ShopItem]()
+        repliesArray = DataStore.shared.shopItems.filter({$0.type == .replies})
         
         
-        self.chatItemsArray = chatsArray.map{$0}
+        self.repliesItemsArray = repliesArray.map{$0}
         
-        chatCollectionView.reloadData()
+        collectionView.reloadData()
     }
     
     private func layoutDesign(){
@@ -92,29 +72,20 @@ class ExtendChatPopupViewController: AbstractController {
         
     }
     
-    fileprivate func getExtendTime(_ validity: Double) -> Double {
-        return validity * 60 * 60 * 1000
-    }
-    
-    
-    
     @IBAction func close(_ sender: Any){
-        IAPManager.shared.cancel()
-        
         self.dismiss(animated: true, completion: nil)
     }
 }
 
-
-extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension GetMoreRepliesViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return self.chatItemsArray.count
+        return self.repliesItemsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let obj = self.chatItemsArray[indexPath.row]
+        let obj = self.repliesItemsArray[indexPath.row]
         
         let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutsideShopCollectionViewCell", for: indexPath) as! OutsideShopCollectionViewCell
         
@@ -125,7 +96,7 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let obj = self.chatItemsArray[indexPath.row]
+        let obj = self.repliesItemsArray[indexPath.row]
         if (DataStore.shared.me?.pocketCoins ?? 0) >= (obj.priceCoins ?? 0) {
             
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.priceCoins ?? 0) " + "COINS".localized) , preferredStyle: .alert)
@@ -134,7 +105,7 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
                 self.selectedProduct = obj
                 
                 // flurry events
-                let logEventParams = ["prodType": "extendChat", "ProdName": self.selectedProduct.title_en ?? ""];
+                let logEventParams = ["prodType": "reply", "ProdName": self.selectedProduct.title_en ?? ""];
                 Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                 
                 self.showActivityLoader(true)
@@ -143,7 +114,12 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
                     if error == nil {
                         DataStore.shared.me?.pocketCoins! -= (obj.priceCoins ?? 0)
                         
-                        self.didPaymentCompleted()
+                        ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                            self.showActivityLoader(false)
+                            self.dismiss(animated: true, completion: {})
+                            
+                        })
+
                         
                     }else {
                         self.showActivityLoader(false)
@@ -175,10 +151,10 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
             
             self.present(alertController, animated: true, completion: nil)
         }
-
-
+        
+        
         // flurry events
-        let logEventParams = ["prodType": "extendChat"];
+        let logEventParams = ["prodType": "reply"];
         Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
         
     }
@@ -186,7 +162,7 @@ extension ExtendChatPopupViewController : UICollectionViewDelegate, UICollection
 }
 
 
-extension ExtendChatPopupViewController: UICollectionViewDelegateFlowLayout {
+extension GetMoreRepliesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -195,55 +171,4 @@ extension ExtendChatPopupViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: itemW / 3, height: itemh)
     }
-}
-
-
-// MARK:- IAPManagerDelegate
-extension ExtendChatPopupViewController: IAPManagerDelegate {
-    
-    func didFailWithError(isAPIError: Bool, error: Error?, serverError: String?){
-        self.showActivityLoader(false)
-        self.popUpView.isUserInteractionEnabled = true
-        
-        if isAPIError {
-            if let err = serverError {
-                let alert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized, message: err , preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        } else {
-            if let error = error {
-                let failAlert = UIAlertController(title: "GLOBAL_ERROR_TITLE".localized , message: error.localizedDescription, preferredStyle: .alert)
-                failAlert.addAction(UIAlertAction(title: "ok".localized, style: .cancel, handler: {_ in
-                    self.dismiss(animated: true, completion: nil)
-                }))
-                self.present(failAlert, animated: true, completion: nil)
-            }
-        }
-    }
-    
-    func didPaymentCompleted() {
-        FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").child("finishTime").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get conversation start time value
-            let value = snapshot.value as? Double
-            
-            if let expiryTime = value {
-                let extendTime = expiryTime + self.getExtendTime(self.selectedProduct.validity ?? 0.0)
-                FirebaseManager.shared.conversationRef.child(self.conversationId ?? "").updateChildValues(["finishTime" : extendTime])
-                
-                self.conversation?.finishTime = extendTime
-                
-                ActionRegisterNotification.execute(conversation: self.conversation)
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-
-        self.dismiss(animated: true, completion: {})
-
-        self.showActivityLoader(false)
-        self.popUpView.isUserInteractionEnabled = true
-    }
-    
 }

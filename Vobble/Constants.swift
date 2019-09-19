@@ -15,7 +15,7 @@ struct AppConfig {
     //static let appBaseDevURL = "https://brain-socket.com/dev"
     //static let appBaseDevURL = "https://vobble.herokuapp.com/api"
     //static let appBaseDevURL = "http://104.217.253.15:7000/api"
-    //static let appBaseDevURL = "http://104.217.253.15:3032/api"
+    //static let appBaseDevURL = "http://192.168.1.7:3000/api"
     static let appBaseDevURL = "http://104.217.253.15:3034/api"
     //static let appBaseDevURL = "http://159.65.202.38:3000/api"
     static let appBaseLiveURL = "http://chabani.tv:3000/api"
