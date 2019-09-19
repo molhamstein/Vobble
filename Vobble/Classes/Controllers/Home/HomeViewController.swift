@@ -424,7 +424,7 @@ class HomeViewController: AbstractController {
             //self.wiggleAnimate(view: self.ivThrowBtn)
             self.popAnimation(view: self.vThrowBtnCircle)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 self.performSegue(withIdentifier: "homeRecrodSegue", sender: self)
             }
             
@@ -493,9 +493,10 @@ class HomeViewController: AbstractController {
         //self.wiggleAnimate(view: self.ivFindBtn)
         self.popAnimation(view: self.vFindBtnCircle)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 0.5 second
-            self.playFindSound()
-        }
+        self.playFindSound()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // delay 0.5 second
+//
+//        }
         //self.popAnimation(view: self.vFindBtnImg)
         
         // send tracking event
@@ -506,61 +507,65 @@ class HomeViewController: AbstractController {
         
         // make sure user wont move to other shores while playing animation
         self.disableActions(disable: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // delay 5 second
-            self.ivFindBottle.image = nil
-            //self.showActivityLoader(true)
-            
-            self.videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath(), on: self.view)
-            self.videoUploadLoader?.rectSize = 200
-            self.videoUploadLoader?.progress = CGFloat(0.5)
-            
-            let shoreId = self.currentPageIndex == 0 ? nil : DataStore.shared.shores[self.currentPageIndex].shore_id!
-            self.shoreId = shoreId
-            
-            let findBottleCompletionBlock : ([Bottle]?, ServerError?)-> Void = { (bottles, error) in
-                self.disableActions(disable: false)
-                self.videoUploadLoader?.removeLoader(true)
-                if error == nil  {
-                    if bottles != nil {
-                        self.performSegue(withIdentifier: "findBottleSegue", sender: bottles)
-                    } else {
-                        // no bottles found
-                        let logEventParams = ["Shore": (DataStore.shared.shores[self.currentPageIndex].name_en) ?? "", "Gender": self.gender.rawValue, "Country": self.countryCode];
-                        Flurry.logEvent(AppConfig.find_bottle_not_found, withParameters:logEventParams);
-                        
-                        let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
-                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                        alertController.addAction(ok)
-                        self.present(alertController, animated: true, completion: nil)
-                    }
+        
+        //self.showActivityLoader(true)
+        
+        self.videoUploadLoader = WavesLoader.showProgressBasedLoader(with:AppConfig.getBottlePath(), on: self.view)
+        self.videoUploadLoader?.rectSize = 200
+        self.videoUploadLoader?.progress = CGFloat(0.5)
+        
+        let shoreId = self.currentPageIndex == 0 ? nil : DataStore.shared.shores[self.currentPageIndex].shore_id!
+        self.shoreId = shoreId
+        
+        let findBottleCompletionBlock : ([Bottle]?, ServerError?)-> Void = { (bottles, error) in
+            self.disableActions(disable: false)
+            self.videoUploadLoader?.removeLoader(true)
+            if error == nil  {
+                if bottles != nil {
+                    self.performSegue(withIdentifier: "findBottleSegue", sender: bottles)
                 } else {
-                    // error ex. Authoriaztion error
+                    // no bottles found
+                    let logEventParams = ["Shore": (DataStore.shared.shores[self.currentPageIndex].name_en) ?? "", "Gender": self.gender.rawValue, "Country": self.countryCode];
+                    Flurry.logEvent(AppConfig.find_bottle_not_found, withParameters:logEventParams);
+                    
                     let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
-                    if error?.type == .authorization {
-                        let actionCancel = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                        alertController.addAction(actionCancel)
-                        let actionLogout = UIAlertAction(title: "LOGIN_LOGIN_BTN".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
-                        alertController.addAction(actionLogout)
-                    } else if error?.type == .accountDeactivated || error?.type == .deviceBlocked {
-                        /// user should be forced to logout
-                        let actionLogout = UIAlertAction(title: "ok".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
-                        alertController.addAction(actionLogout)
-                    } else {
-                        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-                        alertController.addAction(ok)
-                    }
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
                     self.present(alertController, animated: true, completion: nil)
                 }
-            }
-            
-            // send the request
-            if let bottleId = self.bottleIdToFind {
-                // this request is send in case we sent the user a push notification contatinig the id of the bottle that we want him to see
-                ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
-                self.bottleIdToFind = nil
             } else {
-                ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: nil, complete: nil ,completionBlock: findBottleCompletionBlock)
+                // error ex. Authoriaztion error
+                let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                if error?.type == .authorization {
+                    let actionCancel = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(actionCancel)
+                    let actionLogout = UIAlertAction(title: "LOGIN_LOGIN_BTN".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else if error?.type == .accountDeactivated || error?.type == .deviceBlocked {
+                    /// user should be forced to logout
+                    let actionLogout = UIAlertAction(title: "ok".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else {
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                }
+                self.present(alertController, animated: true, completion: nil)
             }
+        }
+        
+        // send the request
+        if let bottleId = self.bottleIdToFind {
+            // this request is send in case we sent the user a push notification contatinig the id of the bottle that we want him to see
+            ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
+            self.bottleIdToFind = nil
+        } else {
+            ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: nil, complete: nil ,completionBlock: findBottleCompletionBlock)
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { // delay 5 second
+            // clear the find bottle gif aniamtion
+            self.ivFindBottle.image = nil
         }
     }
     
@@ -644,8 +649,8 @@ class HomeViewController: AbstractController {
     
     func wiggleAnimate(view: UIView) {
         let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.07
-        animation.repeatCount = 4
+        animation.duration = 0.05
+        animation.repeatCount = 3
         animation.autoreverses = true
         animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x - 15, y: view.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: view.center.x + 15, y: view.center.y))

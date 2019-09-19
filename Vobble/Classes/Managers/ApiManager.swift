@@ -627,7 +627,7 @@ class ApiManager: NSObject {
     
     func markUserAsActive(completionBlock: @escaping (_ success: Bool, _ error: ServerError?) -> Void) {
         // url & parameters
-        let bottleURL = "\(baseURL)/userActive"
+        let bottleURL = "\(baseURL)/userActive/newLogin"
         
         let parameters : [String : Any] = [
             "ownerId": (DataStore.shared.me?.objectId)!,
