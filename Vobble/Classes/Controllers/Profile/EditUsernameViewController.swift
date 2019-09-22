@@ -23,6 +23,8 @@ class EditUsernameViewController: AbstractController {
         txtUsername.placeholder = "USERNAME_PLACEHOLDER".localized
         btnSubmit.setTitle("SUBMIT".localized, for: .normal)
         txtUsername.font = AppFonts.xBigBold
+        btnSubmit.titleLabel?.font = AppFonts.normalSemiBold
+        lblTopTitle.font = AppFonts.xBigBold
     }
 
     override func viewDidAppear(_ animated: Bool) {

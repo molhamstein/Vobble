@@ -16,6 +16,7 @@ protocol FilterViewDelegate {
     func filterViewShowBuyFilterMessage(_ filterView: FilterView, type:ShopItemType)
     func filterViewFindBottle(_ filterView: FilterView)
     func filterViewGoToShop(_ filterView: FilterView, productType: ShopItemType)
+    func filterBuyItem(_ filterView: FilterView, product: ShopItem)
 }
 
 class FilterView: AbstractNibView {
@@ -35,6 +36,8 @@ class FilterView: AbstractNibView {
     @IBOutlet weak var genderFilterTitle: UILabel!
     @IBOutlet weak var genderBuyFilterButton: UIButton!
     
+    @IBOutlet weak var genderShopCollectionView: UICollectionView!
+    @IBOutlet weak var vGenderShop: UIView!
     @IBOutlet weak var vGenderPlaceholder: UIView!
     @IBOutlet weak var lblGenderPlaceholder: UILabel!
     
@@ -51,6 +54,8 @@ class FilterView: AbstractNibView {
     @IBOutlet weak var countryPickerClear: UIButton!
     @IBOutlet weak var genderPicker: UIView!
     
+    @IBOutlet weak var countryShopCollectionView: UICollectionView!
+    @IBOutlet weak var vCountryShop: UIView!
     @IBOutlet weak var vCountryPlaceholder: UIView!
     @IBOutlet weak var lblCountryPlaceholder: UILabel!
     
@@ -58,7 +63,10 @@ class FilterView: AbstractNibView {
     
     fileprivate var selectedGender: String = GenderType.allGender.rawValue
     fileprivate var selectedCountry: String = AppConfig.NO_COUNTRY_SELECTED
+    fileprivate var genderShopItems = [ShopItem]()
+    fileprivate var countryShopItems = [ShopItem]()
     
+    public var relatedVC: AbstractController!
     // MARK: - Initializers
     
     public required init?(coder aDecoder: NSCoder) {
@@ -110,6 +118,17 @@ class FilterView: AbstractNibView {
         countryPicker.dataSource = self
         countryPickerOverlay.isHidden = selectedCountry != AppConfig.NO_COUNTRY_SELECTED
         
+        vGenderPlaceholder.isHidden = true
+        vCountryPlaceholder.isHidden = true
+        
+        genderShopCollectionView.delegate = self
+        genderShopCollectionView.dataSource = self
+        countryShopCollectionView.delegate = self
+        countryShopCollectionView.dataSource = self
+        
+        genderShopCollectionView.register(UINib(nibName: "FilterShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FilterShopCollectionViewCell")
+        countryShopCollectionView.register(UINib(nibName: "FilterShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FilterShopCollectionViewCell")
+        
         refreshFilterView()
     }
     
@@ -134,18 +153,21 @@ class FilterView: AbstractNibView {
                     genderTimer.startTimer(seconds: TimeInterval(seconds))
                     genderTimer.delegate = self
                     //genderPicker.isUserInteractionEnabled = true
-                    vGenderPlaceholder.isHidden = true
+                    //vGenderPlaceholder.isHidden = true
+                    vGenderShop.isHidden = true
                     genderTimerStackView.isHidden = false
                     btnFindBottle.isEnabled = true
                     btnFindBottle.alpha = 1.0
                     
                 }else{
-                    vGenderPlaceholder.isHidden = false
+                    //vGenderPlaceholder.isHidden = false
+                    vGenderShop.isHidden = false
                     genderTimerStackView.isHidden = true
                 }
                 
             } else {
-                vGenderPlaceholder.isHidden = false
+                //vGenderPlaceholder.isHidden = false
+                vGenderShop.isHidden = false
                 genderTimerStackView.isHidden = true
             }
         }
@@ -162,20 +184,30 @@ class FilterView: AbstractNibView {
                     countryTimer.resetTimer(seconds: seconds)
                     countryTimer.startTimer(seconds: TimeInterval(seconds))
                     countryTimer.delegate = self
-                    vCountryPlaceholder.isHidden = true
+                    //vCountryPlaceholder.isHidden = true
+                    vCountryShop.isHidden = true
                     countryTimerStackView.isHidden = false
                     btnFindBottle.isEnabled = true
                     btnFindBottle.alpha = 1.0
                 }else{
-                    vCountryPlaceholder.isHidden = false
+                    vCountryShop.isHidden = false
+                    //vCountryPlaceholder.isHidden = false
                     countryTimerStackView.isHidden = true
                 }
                 
             } else {
-                vCountryPlaceholder.isHidden = false
+                vCountryShop.isHidden = false
+                //vCountryPlaceholder.isHidden = false
                 countryTimerStackView.isHidden = true
             }
         }
+        
+        countryShopItems = DataStore.shared.shopItems.filter({$0.type == .countryFilter}).map{$0}
+        genderShopItems = DataStore.shared.shopItems.filter({$0.type == .genderFilter}).map{$0}
+        
+        countryShopCollectionView.reloadData()
+        genderShopCollectionView.reloadData()
+
     }
     
     @IBAction func allGenderBtnPressed(_ sender: Any) {
@@ -260,6 +292,56 @@ class FilterView: AbstractNibView {
             self.countryPicker.showCountriesList(from: viewController)
         }
     }
+}
+
+extension FilterView: UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.genderShopCollectionView {
+            return genderShopItems.count
+        }else {
+            return countryShopItems.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterShopCollectionViewCell", for: indexPath) as! FilterShopCollectionViewCell
+        
+        if collectionView == self.genderShopCollectionView {
+            
+            cell.configCell(shopItemObj: genderShopItems[indexPath.row])
+            
+        }else {
+            
+            cell.configCell(shopItemObj: countryShopItems[indexPath.row])
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.genderShopCollectionView {
+            delegate?.filterBuyItem(self, product: genderShopItems[indexPath.row])
+        }else {
+            delegate?.filterBuyItem(self, product: countryShopItems[indexPath.row])
+        }
+
+        
+        
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.genderShopCollectionView {
+            
+            return CGSize(width: self.vGenderShop.frame.width / 1.5, height: self.vGenderShop.frame.height - 16)
+            
+        }else {
+            
+            return CGSize(width: self.vCountryShop.frame.width / 1.5, height: self.vCountryShop.frame.height - 16)
+            
+        }
+        
+    }
+    
 }
 
 // MARK:- CountryPickerDelegate

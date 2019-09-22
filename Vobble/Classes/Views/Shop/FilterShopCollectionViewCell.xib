@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterShopCollectionViewCell" id="gTV-IL-0wX" customClass="FilterShopCollectionViewCell" customModule="Vobble" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="211" height="89"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="211" height="89"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tQ-za-1wN">
+                        <rect key="frame" x="8" y="16" width="187" height="65"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Gender Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jrn-Y4-7iZ">
+                                <rect key="frame" x="8" y="4" width="123" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coins" translatesAutoresizingMaskIntoConstraints="NO" id="Nrg-KA-SDp">
+                                <rect key="frame" x="54" y="32.5" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="Jfe-Qd-TFJ"/>
+                                    <constraint firstAttribute="height" constant="16" id="tlK-3p-Yfn"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39O-Ih-f7t">
+                                <rect key="frame" x="8" y="30" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="39O-Ih-f7t" firstAttribute="leading" secondItem="5tQ-za-1wN" secondAttribute="leading" constant="8" id="Ag8-1H-CsF"/>
+                            <constraint firstItem="39O-Ih-f7t" firstAttribute="top" secondItem="Jrn-Y4-7iZ" secondAttribute="bottom" constant="8" id="BGf-pq-ebj"/>
+                            <constraint firstItem="Nrg-KA-SDp" firstAttribute="leading" secondItem="39O-Ih-f7t" secondAttribute="trailing" constant="4" id="Oy5-7Y-HGJ"/>
+                            <constraint firstItem="Nrg-KA-SDp" firstAttribute="centerY" secondItem="39O-Ih-f7t" secondAttribute="centerY" id="dCZ-D4-J8j"/>
+                            <constraint firstItem="Jrn-Y4-7iZ" firstAttribute="leading" secondItem="5tQ-za-1wN" secondAttribute="leading" constant="8" id="gpc-sF-Qit"/>
+                            <constraint firstAttribute="trailing" secondItem="Jrn-Y4-7iZ" secondAttribute="trailing" constant="56" id="mhn-WM-PsR"/>
+                            <constraint firstItem="Jrn-Y4-7iZ" firstAttribute="top" secondItem="5tQ-za-1wN" secondAttribute="top" constant="4" id="vbS-Xo-KF0"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottle-1" translatesAutoresizingMaskIntoConstraints="NO" id="MHs-5e-mzW">
+                        <rect key="frame" x="139" y="8" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="Hg1-5H-ahx"/>
+                            <constraint firstAttribute="height" constant="64" id="Xb2-aK-cch"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="MHs-5e-mzW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="DFk-CT-F8d"/>
+                <constraint firstAttribute="bottom" secondItem="5tQ-za-1wN" secondAttribute="bottom" constant="8" id="XLh-5W-IXF"/>
+                <constraint firstAttribute="trailing" secondItem="MHs-5e-mzW" secondAttribute="trailing" constant="8" id="b96-7r-mV0"/>
+                <constraint firstAttribute="trailing" secondItem="5tQ-za-1wN" secondAttribute="trailing" constant="16" id="ckb-wI-VJb"/>
+                <constraint firstItem="5tQ-za-1wN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="iwn-9b-Oax"/>
+                <constraint firstItem="5tQ-za-1wN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="scb-r2-ksA"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="211" height="89"/>
+            <connections>
+                <outlet property="image" destination="MHs-5e-mzW" id="jpm-YC-xjx"/>
+                <outlet property="mainView" destination="5tQ-za-1wN" id="GAK-Do-UM7"/>
+                <outlet property="priceLabel" destination="39O-Ih-f7t" id="fn2-zE-SyF"/>
+                <outlet property="titleLabel" destination="Jrn-Y4-7iZ" id="3zN-66-6fw"/>
+            </connections>
+            <point key="canvasLocation" x="2.3999999999999999" y="168.6656671664168"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="bottle-1" width="191" height="281"/>
+        <image name="coins" width="206" height="216"/>
+    </resources>
+</document>

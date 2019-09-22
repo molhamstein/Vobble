@@ -53,6 +53,7 @@ class ShopViewController: AbstractController {
         genderFilterButton.titleLabel?.font = AppFonts.bigBold
         countryFilterButton.titleLabel?.font = AppFonts.bigBold
         coinsButton.titleLabel?.font = AppFonts.bigBold
+        repliesButton.titleLabel?.font = AppFonts.bigBold
         
         bottlesButton.setTitle("TAB_BOTTLES".localized, for: .normal)
         genderFilterButton.setTitle("TAB_GENDER".localized, for: .normal)
