@@ -338,7 +338,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 let bgImage = UIImageView()
                 bgImage.frame = CGRect(x: 0 , y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 bgImage.image = UIImage(named: "chat_bg")
-                bgImage.contentMode = .scaleAspectFill
+                bgImage.contentMode = .scaleToFill
                 bgImage.backgroundColor = UIColor(red:242/255, green:234/255, blue:220/255, alpha:0.0)
                 self.collectionView.backgroundColor = UIColor.clear
                 self.view.insertSubview(bgImage, belowSubview: self.collectionView)
@@ -409,10 +409,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        let alertController = UIAlertController(title: "MemoryWarning", message: "Memory Warning recieved", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
-        alertController.addAction(ok)
-        self.present(alertController, animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "MemoryWarning", message: "Memory Warning recieved", preferredStyle: .alert)
+//        let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+//        alertController.addAction(ok)
+//        self.present(alertController, animated: true, completion: nil)
     }
     
     func initNavBar() {
@@ -603,18 +603,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         }
         disposeFirebaseReference()
         
-        //if we opened this chat from FindBottleViewContrller to reply to a
-        //bottle we should back to the home screen not to the previous screen
-        if let _ = bottleToReplyTo {
-            self.performSegue(withIdentifier: "unwindSendReply", sender: self)
-        } else {
-            self.popOrDismissViewControllerAnimated(animated: true)
-        }
-        
-        if let _ = AudioManager.shared.audioPlayer {
-            AudioManager.shared.stopAudio()
-        }
-        
         customNavBar.removeFromSuperview()
         recordButton.removeFromSuperview()
         lblRecording.removeFromSuperview()
@@ -626,6 +614,20 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         chatPendingLabel.removeFromSuperview()
         chatPendingImageView.removeFromSuperview()
         chatPendingCloseButton.removeFromSuperview()
+        
+        if let _ = AudioManager.shared.audioPlayer {
+            AudioManager.shared.stopAudio()
+        }
+        
+        //if we opened this chat from FindBottleViewContrller to reply to a
+        //bottle we should back to the home screen not to the previous screen
+        if let _ = bottleToReplyTo {
+            self.performSegue(withIdentifier: "unwindSendReply", sender: self)
+        } else {
+            self.popOrDismissViewControllerAnimated(animated: true)
+        }
+        
+        
     }
     
     @IBAction func cloesPandingChatViewAction(_ sender: AnyObject) {

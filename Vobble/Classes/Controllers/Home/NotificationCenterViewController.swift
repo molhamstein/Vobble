@@ -21,13 +21,13 @@ class NotificationCenterViewController: AbstractController, UITableViewDelegate,
         self.tableView.separatorStyle = .none
         
         tableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationTableViewCell")
+
         
         seenNotifications()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,19 +44,6 @@ class NotificationCenterViewController: AbstractController, UITableViewDelegate,
         return cell
     }
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if let imageSource = CGImageSourceCreateWithURL((DataStore.shared.notificationsCenter[indexPath.row].image ?? "https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg") as! CFURL, nil) {
-//            if let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {
-//                let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as! Int
-//                let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as! Int
-//                
-//                return (tableView.frame.width / CGFloat(pixelWidth / pixelHeight))
-//            }
-//        }
-//        
-//        return (tableView.frame.width / 0)
-//        
-//    }
     
     func seenNotifications() {
         let unSeenNotifications = (DataStore.shared.notificationsCenter.map { $0.notificationId ?? ""})
@@ -68,7 +55,7 @@ class NotificationCenterViewController: AbstractController, UITableViewDelegate,
             NotificationCenter.default.post(name: Notification.Name("ObserveNotificationCenter"), object: nil)
         })
     }
-    
+
     @IBAction func dismissAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

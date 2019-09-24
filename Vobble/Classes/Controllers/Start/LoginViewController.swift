@@ -268,6 +268,10 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         startupTermsButton.titleLabel?.font = AppFonts.smallBold
         startupPrivacyButton.titleLabel?.font = AppFonts.smallBold
         startupTermsOrLabel.font = AppFonts.small
+        facebookLoginButton.titleLabel?.font = AppFonts.normalBold
+        googleLoginButton.titleLabel?.font = AppFonts.normalBold
+        loginByEmailButton.titleLabel?.font = AppFonts.normalBold
+        signupByEmailButton.titleLabel?.font = AppFonts.normalBold
         
         btnSocialInfoSelectCountry.titleLabel?.font = AppFonts.big
         lblSocialInfoWelcome.font = AppFonts.big

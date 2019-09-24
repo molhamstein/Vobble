@@ -126,6 +126,7 @@ class HomeViewController: AbstractController {
         self.filterView.delegate = self
         
         // hide filters View by default
+        self.filterView.relatedVC = self
         self.filterView.isHidden = true
         self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
         self.filterViewOverlay.alpha = 0.0
@@ -144,6 +145,7 @@ class HomeViewController: AbstractController {
         // observe any change in the unread notifications count
         lblUnreadConversationsBadge.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("unreadMessagesChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(unreadMessagesCountChange(notification:)), name: Notification.Name("ObserveNotificationCenter"), object: nil)
         
         // observe clicking any push notifications that have actions attached to them
         NotificationCenter.default.addObserver(self, selector: #selector(openThrowBottleView(notification:)), name: Notification.Name("OpenThrowBottle"), object: nil)
@@ -167,6 +169,8 @@ class HomeViewController: AbstractController {
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appGotBackFromBackground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
+        ApiManager.shared.getNotificationsCenter(completionBlock: {_, _ in})
     }
     
     
@@ -208,6 +212,9 @@ class HomeViewController: AbstractController {
         })
         ApiManager.shared.requestUserInventoryItems { (items, error) in}
         ApiManager.shared.markUserAsActive { (success, error) in}
+        ApiManager.shared.requestShopItems(completionBlock: { (shores, error) in
+            self.filterView.refreshFilterView()
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -262,6 +269,7 @@ class HomeViewController: AbstractController {
         
         // tab on sea to find bottle
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(seaTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
         self.ivShore2Girl.setGifImage(UIImage(gifName: "girl.gif"))
@@ -373,7 +381,8 @@ class HomeViewController: AbstractController {
     }
     
     func unreadMessagesCountChange (notification: NSNotification) {
-        let count = DataStore.shared.getConversationsWithUnseenMessagesCount()
+        var count = DataStore.shared.getConversationsWithUnseenMessagesCount()
+        count += DataStore.shared.notificationsCenter.filter {$0.isSeen == false}.count
         if count > 0{
             lblUnreadConversationsBadge.text = "\(count)"
             lblUnreadConversationsBadge.isHidden = false
@@ -971,6 +980,87 @@ extension HomeViewController: FilterViewDelegate {
         let logEventParams = ["From": "filter"];
         Flurry.logEvent(AppConfig.shop_enter, withParameters:logEventParams);
         self.showShopView(productType)
+    }
+    
+    func filterBuyItem(_ filterView: FilterView, product: ShopItem) {
+        var prodcutType = "country"
+        if product.type == .genderFilter {
+            prodcutType = "gender"
+        }
+        
+        
+        if (DataStore.shared.me?.pocketCoins ?? 0) >= (product.priceCoins ?? 0) {
+            
+            let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(product.priceCoins ?? 0) " + "COINS".localized) , preferredStyle: .alert)
+            let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
+                
+                
+                // flurry events
+                
+                let logEventParams = ["prodType": prodcutType, "ProdName": product.title_en ?? ""];
+                Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                
+                self.showActivityLoader(true)
+                
+                ApiManager.shared.purchaseItemByCoins(shopItem: product, completionBlock: {isSuccess, error, shopItem in
+                    if error == nil {
+                        DataStore.shared.me?.pocketCoins! -= (product.priceCoins ?? 0)
+                        
+                        ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                            self.showActivityLoader(false)
+                            
+                            let inventoryItem = InventoryItem()
+                            inventoryItem.isValid = true
+                            inventoryItem.isConsumed = false
+                            inventoryItem.shopItem = product
+                            inventoryItem.startDate = Date().timeIntervalSince1970
+                            inventoryItem.endDate = Date().timeIntervalSince1970 + ((product.validity ?? 1) * 60 * 60)
+                            DataStore.shared.inventoryItems.append(inventoryItem)
+                            
+                            // flurry events, on purchase done
+                            let logEventParams2 = ["prodType": prodcutType, "ProdName": product.title_en ?? ""];
+                            Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
+                            
+                            self.filterView.refreshFilterView()
+                            
+                        })
+                        
+                        
+                    }else {
+                        self.showActivityLoader(false)
+                        self.showMessage(message: error?.type.errorMessage ?? "", type: .error)
+                    }
+                    
+                })
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            
+            let alertController = UIAlertController(title: "", message: "NO_ENOUGH_COINS_MSG".localized, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "GET_COINS".localized, style: .default, handler: { (alertAction) in
+                
+                let shopVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShopViewController.className) as! ShopViewController
+                shopVC.fType = .coinsPack
+                
+                self.present(shopVC, animated: true, completion: nil)
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        
+        // flurry events
+        let logEventParams = ["prodType": prodcutType];
+        Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
     }
 }
 

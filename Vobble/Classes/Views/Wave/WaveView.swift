@@ -15,7 +15,7 @@ class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
     @IBOutlet var waterView: YXWaveView?
     @IBOutlet var bottle: UIImageView?
     
-    private var unSeenNotificationsCount = DataStore.shared.notificationsCenter.map {$0.isSeen == false}.count
+    private var unSeenNotificationsCount = DataStore.shared.notificationsCenter.filter {$0.isSeen == false}.count
     private var lblBadge: UILabel?
     private var viewController: UIViewController?
     public var isBadgeActive = false
@@ -59,8 +59,12 @@ class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
             lblBadge?.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
             lblBadge?.layer.cornerRadius = 12
             lblBadge?.layer.masksToBounds = true
-            lblBadge?.isHidden = (unSeenNotificationsCount > 0) ? false : true
-            lblBadge?.isHidden = !isBadgeActive
+            if isBadgeActive {
+                lblBadge?.isHidden = (unSeenNotificationsCount > 0) ? false : true
+            }else {
+                lblBadge?.isHidden = true
+            }
+
             bottle?.addSubview(lblBadge!)
             
             NotificationCenter.default.addObserver(self, selector: #selector(setNewBadge), name: Notification.Name("ObserveNotificationCenter"), object: nil)
@@ -95,13 +99,16 @@ class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
     
     @objc
     fileprivate func setNewBadge() {
-        lblBadge?.text = "\(unSeenNotificationsCount)"
-        lblBadge?.isHidden = (unSeenNotificationsCount > 0) ? false : true
+        let count = DataStore.shared.notificationsCenter.filter {$0.isSeen == false}.count
+        lblBadge?.text = "\(count)"
+        lblBadge?.isHidden = (count > 0) ? false : true
     }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("tapped")
-        presentNotificationVC()
+        if isBadgeActive {
+            presentNotificationVC()
+        }
     }
 }
