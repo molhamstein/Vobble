@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VobbleNavigationBar" customModule="Vobble" customModuleProvider="target">
             <connections>
+                <outlet property="coinsView" destination="sCn-Sl-7Oy" id="4En-Ft-9S0"/>
                 <outlet property="lblCoins" destination="VN3-Uv-y3E" id="8nY-a1-bDv"/>
                 <outlet property="leftIcon" destination="gN4-5k-Fqc" id="EXg-GK-Neb"/>
                 <outlet property="navTitle" destination="1DC-up-vPY" id="vkm-6f-Yvp"/>
@@ -65,17 +66,17 @@
                             <color key="color" red="0.2470588235" green="0.23921568630000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </activityIndicatorView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sCn-Sl-7Oy">
-                            <rect key="frame" x="63" y="52.5" width="30.5" height="16"/>
+                            <rect key="frame" x="63" y="48.5" width="38.5" height="24"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coins" translatesAutoresizingMaskIntoConstraints="NO" id="JQn-c4-p1N">
-                                    <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="8lf-ug-cL4"/>
-                                        <constraint firstAttribute="width" constant="16" id="NSF-7D-5UW"/>
+                                        <constraint firstAttribute="height" constant="24" id="8lf-ug-cL4"/>
+                                        <constraint firstAttribute="width" constant="24" id="NSF-7D-5UW"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VN3-Uv-y3E">
-                                    <rect key="frame" x="20" y="0.0" width="10.5" height="16"/>
+                                    <rect key="frame" x="28" y="0.0" width="10.5" height="24"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>

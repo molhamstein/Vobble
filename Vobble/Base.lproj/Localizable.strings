@@ -268,7 +268,7 @@
 "MY_BOTTLES_BOTTLES_TITLE"             = "My Bottles";
 "MY_BOTTLES_REPLIES_TITLE_With_count"  = "My Replies (%d)";
 "MY_BOTTLES_BOTTLES_TITLE_With_count"  = "My Bottles (%d)";
-"MY_BOTTLES_NEXT_REFILL"               = "1 free bottle after:";
+"MY_BOTTLES_NEXT_REFILL"               = "free bottle after:";
 "MY_BOTTLES_PEER_DIDNT_REPLY_YET"      = "%@ Didn't reply yet";
 "MY_BOTTLES_YOU_DIDNT_REPLY_YET"       = "You Didn't reply yet";
 "MY_BOTTLES_BTN_CHAT"                  = "Chat Now";

@@ -76,9 +76,11 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         vThrowBottles.addGestureRecognizer(vThrowBottlesTap)
         
         // MARK:- Username label tap setup
+        let usernameLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.editUsernameDidPress))
+        usernameLabelTap.numberOfTapsRequired = 1
+        usernameLabelTap.cancelsTouchesInView = false
         userNameLabel.isUserInteractionEnabled = true
         usernameEditIcon.isUserInteractionEnabled = true
-        let usernameLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.editUsernameDidPress(_:)))
         userNameLabel.addGestureRecognizer(usernameLabelTap)
         usernameEditIcon.addGestureRecognizer(usernameLabelTap)
     }
@@ -167,7 +169,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         self.convVC?.performSegue(withIdentifier: "goToThrownBottles", sender: self)
     }
     
-    @objc func editUsernameDidPress(_ sender: Any) {
+    @objc func editUsernameDidPress() {
         if let canEditUsername = DataStore.shared.me?.canEditUsername, canEditUsername {
             let editUsernameVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: EditUsernameViewController.className) as! EditUsernameViewController
             editUsernameVC.convViewController = self.convVC

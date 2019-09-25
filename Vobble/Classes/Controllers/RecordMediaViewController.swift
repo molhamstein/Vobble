@@ -693,6 +693,7 @@ extension RecordMediaViewController
             previewControl.from = self.from
             previewControl.selectedShore = self.selectedShore
             previewControl.topicId = self.topicId
+            previewControl.parentVC = self
             
             self.navigationController?.pushViewController(previewControl, animated: false)
         }

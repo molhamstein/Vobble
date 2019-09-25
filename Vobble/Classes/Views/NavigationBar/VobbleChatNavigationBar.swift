@@ -52,10 +52,12 @@ class VobbleChatNavigationBar: AbstractNibView {
         self.btnExtendChat.layer.shadowOpacity = 1
         self.extendAlertView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.extendAlertView.frame.height - 50)
         
-        // Make all timer view clickable
+        // Make all timer view clickable and extend chat alert view
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.timerViewDidPressed))
         self.timerView.addGestureRecognizer(tap)
         self.timerView.isUserInteractionEnabled = true
+        self.extendAlertView.isUserInteractionEnabled = true
+        self.extendAlertView.addGestureRecognizer(tap)
     }
     
     // MARK: -  Private Methods

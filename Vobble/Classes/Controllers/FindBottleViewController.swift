@@ -28,7 +28,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var scrollView: UIScrollView!
     //@IBOutlet var videoView: VideoPlayerView!
     
-    @IBOutlet weak var ignoreButton: VobbleButton!
+    //@IBOutlet weak var ignoreButton: VobbleButton!
     @IBOutlet weak var replyButton: WCLShineButton!
     @IBOutlet weak var replyLabel: UILabel!
     @IBOutlet weak var playButton: TransitionButton!
@@ -76,9 +76,9 @@ class FindBottleViewController: AbstractController {
         reportView.isHidden = true
         reportButton.setTitle("REPORT".localized, for: .normal)
         blockButton.setTitle("BLOCK_USER".localized, for: .normal)
-        ignoreButton.setTitle("IGNORE".localized, for: .normal)
+        //ignoreButton.setTitle("IGNORE".localized, for: .normal)
         //replyButton.setTitle("REPLY".localized, for: .normal)
-        ignoreButton.titleLabel?.font = AppFonts.normalBold
+        //ignoreButton.titleLabel?.font = AppFonts.normalBold
         replyLabel.font = AppFonts.normalBold
         
         // round flag image view
@@ -110,7 +110,7 @@ class FindBottleViewController: AbstractController {
         if isInitialized == false {
             topView.applyGradient(colours: [AppColors.blackXDarkWithAlpha, AppColors.blackXLightWithAlpha], direction: .vertical)
             //bottomView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
-            ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
+            //ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
             //replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
             replyLabel.text = "REPLY".localized
             

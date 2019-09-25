@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Flurry_iOS_SDK
 
 class EditUsernameViewController: AbstractController {
     
@@ -43,6 +44,10 @@ class EditUsernameViewController: AbstractController {
                         self.convViewController?.bottleCollectionView.reloadData()
                         self.dismiss(animated: true, completion: nil)
                     })
+                    
+                    let logEventParams = ["userId": DataStore.shared.me?.objectId ?? "", "username": self.txtUsername.text!];
+                    Flurry.logEvent(AppConfig.edit_username, withParameters: logEventParams)
+                    
                 }else {
                     self.showActivityLoader(false)
                     self.showMessage(message: error?.type.errorMessage ?? "", type: .error)

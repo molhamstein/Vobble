@@ -1062,6 +1062,11 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // 5
         finishSendingMessage()
         isTyping = false
+        
+        inputToolbar.contentView.rightBarButtonItemWidth = 0
+        UIView.animate(withDuration: 0.2, animations: {
+            self.inputToolbar.layoutIfNeeded()
+        })
     }
     
     func sendMediaMessage(mediaType: AppMediaType) -> String? {
@@ -1256,6 +1261,17 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         super.textViewDidChange(textView)
         // If the text is not empty, the user is typing
         isTyping = textView.text != ""
+        
+        // Hide send button when there is no text
+        if textView.text != "" {
+            inputToolbar.contentView.rightBarButtonItemWidth = 41
+        }else {
+            inputToolbar.contentView.rightBarButtonItemWidth = 0
+        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.inputToolbar.layoutIfNeeded()
+        })
     }
     
     override func textViewDidBeginEditing(_ textView: UITextView) {
@@ -1923,6 +1939,7 @@ extension ChatViewController: AVAudioRecorderDelegate {
         giftsButton.frame = CGRect(x: 75, y: -5, width: Int(height + 12), height: Int(height + 12))
         
         inputToolbar.contentView.leftBarButtonItemWidth = 120
+        inputToolbar.contentView.rightBarButtonItemWidth = 0
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(mediaButton)
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(recordButton)
         inputToolbar.contentView.leftBarButtonContainerView.addSubview(giftsButton)

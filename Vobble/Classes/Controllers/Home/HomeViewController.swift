@@ -173,8 +173,6 @@ class HomeViewController: AbstractController {
         ApiManager.shared.getNotificationsCenter(completionBlock: {_, _ in})
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -487,7 +485,6 @@ class HomeViewController: AbstractController {
             self.soundPlayer.play()
         }catch {}
     }
-
     
     @IBAction func findBottlePressed(_ sender: Any) {
         

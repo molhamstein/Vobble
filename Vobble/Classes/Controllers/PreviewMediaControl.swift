@@ -23,6 +23,7 @@ class PreviewMediaControl : AbstractController {
     @IBOutlet weak var vOverlay:UIView!
     @IBOutlet weak var cvShorePicker:UICollectionView!
     @IBOutlet weak var submitButton: VobbleButton!
+    @IBOutlet weak var retakeButton: UIButton!
     @IBOutlet var vp: VideoPlayerView!
     @IBOutlet weak var playButton: UIButton!
     
@@ -49,6 +50,7 @@ class PreviewMediaControl : AbstractController {
     var topicId: String?
     
     var soundPlayer = AVAudioPlayer()
+    var parentVC: UIViewController!
     
 //    var avPlayer = AVPlayer();
 //    var avPlayerLayer = AVPlayerLayer();
@@ -64,16 +66,19 @@ class PreviewMediaControl : AbstractController {
             
             cvShorePicker.isHidden = true
             submitButton.isHidden = false
+            retakeButton.isHidden = false
             
         } else if (from == .throwBottle) {
             
             cvShorePicker.isHidden = true
             submitButton.isHidden = false
+            retakeButton.isHidden = false
             
         } else if (from == .chatView) {
             
             cvShorePicker.isHidden = true
             submitButton.isHidden = true
+            retakeButton.isHidden = true
         }
         
         // itro animation 
@@ -118,6 +123,7 @@ class PreviewMediaControl : AbstractController {
         self.vOverlay.bringToFront()
         self.cvShorePicker.bringToFront()
         self.submitButton.bringToFront()
+        self.retakeButton.bringToFront()
         
         // regisert the shores picker cells
         let shoreNib = UINib(nibName: "ShoreCell", bundle: nil)
@@ -129,6 +135,16 @@ class PreviewMediaControl : AbstractController {
     }
     
     @IBAction func dissmiss() {
+        //Image
+        image = UIImage()
+        imgUrl = ""
+        //Video
+        videoUrl = NSURL()
+        self.parentVC.dismiss(animated: true, completion: nil)
+
+    }
+    
+    @IBAction func retake() {
         //Image
         image = UIImage()
         imgUrl = ""
