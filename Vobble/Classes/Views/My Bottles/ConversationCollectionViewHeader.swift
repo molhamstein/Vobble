@@ -17,6 +17,7 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
     @IBOutlet weak var btnSettings: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var usernameEditIcon: UIImageView!
+    @IBOutlet weak var vEditUsername: UIStackView!
     @IBOutlet weak var userImageBtn: UIButton!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -76,13 +77,12 @@ class ConversationCollectionViewHeader: UICollectionReusableView {
         vThrowBottles.addGestureRecognizer(vThrowBottlesTap)
         
         // MARK:- Username label tap setup
-        let usernameLabelTap = UITapGestureRecognizer(target: self, action: #selector(self.editUsernameDidPress))
-        usernameLabelTap.numberOfTapsRequired = 1
-        usernameLabelTap.cancelsTouchesInView = false
-        userNameLabel.isUserInteractionEnabled = true
-        usernameEditIcon.isUserInteractionEnabled = true
-        userNameLabel.addGestureRecognizer(usernameLabelTap)
-        usernameEditIcon.addGestureRecognizer(usernameLabelTap)
+        let usernameTap = UITapGestureRecognizer(target: self, action: #selector(self.editUsernameDidPress))
+        usernameTap.numberOfTapsRequired = 1
+        usernameTap.cancelsTouchesInView = false
+        vEditUsername.isUserInteractionEnabled = true
+        vEditUsername.addGestureRecognizer(usernameTap)
+
     }
     
     func configCell(userObj: AppUser) {
