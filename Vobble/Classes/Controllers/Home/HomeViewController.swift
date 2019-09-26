@@ -565,7 +565,8 @@ class HomeViewController: AbstractController {
             ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
             self.bottleIdToFind = nil
         } else {
-            ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: nil, complete: nil ,completionBlock: findBottleCompletionBlock)
+
+            ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: DataStore.shared.seenVideos, complete: DataStore.shared.completedVideos ,completionBlock: findBottleCompletionBlock)
         }
         
         

@@ -204,7 +204,7 @@ extension FindBottleViewController: UIScrollViewDelegate {
             
             if currentVideoCard?.isVideoAvailable() ?? false {
                 if currentVideoCard?.isVideoReady() ?? false {
-                    currentVideoCard?.play()
+                    currentVideoCard?.play(true)
                 }
                 currentVideoCard?.isAutoPlay = true
             }else {

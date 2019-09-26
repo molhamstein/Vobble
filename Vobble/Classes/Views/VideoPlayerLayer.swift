@@ -93,9 +93,13 @@ class VideoPlayerLayer: AbstractNibView {
                         self?.slideBar.value = 0.0
                     }
                     
-                    if seconds == 3 {
-                        self?.delegate?.didSeenVideo!()
+                    print(Int(seconds))
+                    if Int(seconds) == 3 {
+                        self?.delegate?.didCompleteVideo!()
                     }
+//                    if Int(seconds) == 0 {
+//                        self?.delegate?.didSeenVideo!()
+//                    }
                 }
             }
         }
@@ -168,7 +172,7 @@ class VideoPlayerLayer: AbstractNibView {
             switch status {
             case .readyToPlay:
                 if self.isAutoPlay {
-                    play()
+                    play(true)
                 }else{
                     pause()
                 }
@@ -184,8 +188,12 @@ class VideoPlayerLayer: AbstractNibView {
 
 // MARK:- Player Control Functions
 extension VideoPlayerLayer {
-    func play() {
+    func play(_ isSeen: Bool = false) {
         player?.play()
+        
+        if isSeen {
+            self.delegate?.didSeenVideo!()
+        }
     }
     
     func pause() {
