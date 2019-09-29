@@ -72,6 +72,7 @@
 		8F448BB02323C5170014EB81 /* ChatProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F448BAE2323C5170014EB81 /* ChatProductCollectionViewCell.swift */; };
 		8F448BB12323C5170014EB81 /* ChatProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F448BAF2323C5170014EB81 /* ChatProductCollectionViewCell.xib */; };
 		8F4AE838228F32EA00716682 /* CompleteSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */; };
+		8F85B1E0233ECC1C00D0EF94 /* sea_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8F85B1DF233ECC1A00D0EF94 /* sea_video.mp4 */; };
 		8F914CAE2259BBD800DAE47C /* ExtendChatPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */; };
 		8FBD40B82324893900EFB73E /* ImageCollectionViewCellIncoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD40B62324893900EFB73E /* ImageCollectionViewCellIncoming.swift */; };
 		8FBD40B92324893900EFB73E /* ImageCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40B72324893900EFB73E /* ImageCollectionViewCellIncoming.xib */; };
@@ -81,7 +82,7 @@
 		8FBD40C123254B4600EFB73E /* VideoPlayerLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */; };
 		8FC66834232DB31300EEAE0A /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */; };
 		8FC66836232F89FB00EEAE0A /* NCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC66835232F89FB00EEAE0A /* NCenter.swift */; };
-		8FC668382331C58D00EEAE0A /* GetMoreRepliesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC668372331C58D00EEAE0A /* GetMoreRepliesViewController.swift */; };
+		8FC668382331C58D00EEAE0A /* GetMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC668372331C58D00EEAE0A /* GetMoreViewController.swift */; };
 		8FD910F12333A80200DD3450 /* ChalkboardSE-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD910EE2333A80200DD3450 /* ChalkboardSE-Bold.ttf */; };
 		8FD910F22333A80200DD3450 /* ChalkboardSE-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD910EF2333A80200DD3450 /* ChalkboardSE-Light.ttf */; };
 		8FD910F32333A80200DD3450 /* ChalkboardSE-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD910F02333A80200DD3450 /* ChalkboardSE-Regular.ttf */; };
@@ -393,6 +394,7 @@
 		8F448BAF2323C5170014EB81 /* ChatProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		8F4AE837228F32EA00716682 /* CompleteSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSignupViewController.swift; sourceTree = "<group>"; };
 		8F53A2897E2A9BFB052D3938 /* Pods-Vobble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vobble.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vobble/Pods-Vobble.release.xcconfig"; sourceTree = "<group>"; };
+		8F85B1DF233ECC1A00D0EF94 /* sea_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sea_video.mp4; sourceTree = "<group>"; };
 		8F914CAD2259BBD800DAE47C /* ExtendChatPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendChatPopupViewController.swift; sourceTree = "<group>"; };
 		8FBD40B62324893900EFB73E /* ImageCollectionViewCellIncoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCellIncoming.swift; sourceTree = "<group>"; };
 		8FBD40B72324893900EFB73E /* ImageCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
@@ -402,7 +404,7 @@
 		8FBD40C023254B4600EFB73E /* VideoPlayerLayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerLayer.xib; sourceTree = "<group>"; };
 		8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
 		8FC66835232F89FB00EEAE0A /* NCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCenter.swift; sourceTree = "<group>"; };
-		8FC668372331C58D00EEAE0A /* GetMoreRepliesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoreRepliesViewController.swift; sourceTree = "<group>"; };
+		8FC668372331C58D00EEAE0A /* GetMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoreViewController.swift; sourceTree = "<group>"; };
 		8FD910EE2333A80200DD3450 /* ChalkboardSE-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Bold.ttf"; sourceTree = "<group>"; };
 		8FD910EF2333A80200DD3450 /* ChalkboardSE-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Light.ttf"; sourceTree = "<group>"; };
 		8FD910F02333A80200DD3450 /* ChalkboardSE-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Regular.ttf"; sourceTree = "<group>"; };
@@ -919,6 +921,7 @@
 				04ACC6D92235AD66007FF822 /* splashSound.mp3 */,
 				B19372F72033E48F007B1E7D /* AppColors.swift */,
 				57DED21A2126AFCE00514FBE /* loginVideo.mp4 */,
+				8F85B1DF233ECC1A00D0EF94 /* sea_video.mp4 */,
 				576993942153FF82001211CF /* introSound.mp3 */,
 				57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */,
 				04ACC6D52230F89B007FF822 /* find_bottle.mp3 */,
@@ -1488,7 +1491,7 @@
 				B1508CD520461F630048123F /* FindBottleViewController.swift */,
 				04F7477E217DDDEA002A5F2B /* ThrownBottlesViewController.swift */,
 				8FC66833232DB31300EEAE0A /* NotificationCenterViewController.swift */,
-				8FC668372331C58D00EEAE0A /* GetMoreRepliesViewController.swift */,
+				8FC668372331C58D00EEAE0A /* GetMoreViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1758,6 +1761,7 @@
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
 				04ACC6DA2235AD66007FF822 /* splashSound.mp3 in Resources */,
 				8F448BA9232322A90014EB81 /* GiftsCategoryCollectionViewCell.xib in Resources */,
+				8F85B1E0233ECC1C00D0EF94 /* sea_video.mp4 in Resources */,
 				B19372F52033E44E007B1E7D /* OpenSansRegular.ttf in Resources */,
 				57A8129D210CE63F003D738E /* find_bottle.gif in Resources */,
 				57A8129B210CE3AB003D738E /* throwBottle.gif in Resources */,
@@ -2034,7 +2038,7 @@
 				B18A5D5C20348E4300F139B7 /* CMDQueryStringReader.m in Sources */,
 				B18A5DBE20348E4300F139B7 /* Atomic.swift in Sources */,
 				B18A5D6F20348E4300F139B7 /* NSObject+RACKVOWrapper.m in Sources */,
-				8FC668382331C58D00EEAE0A /* GetMoreRepliesViewController.swift in Sources */,
+				8FC668382331C58D00EEAE0A /* GetMoreViewController.swift in Sources */,
 				B18A5D5F20348E4300F139B7 /* NSString+CMDQueryStringSerialization.m in Sources */,
 				8F448BAB2323250E0014EB81 /* GiftCategory.swift in Sources */,
 				B18A5D6420348E4300F139B7 /* MKAnnotationView+RACSignalSupport.m in Sources */,

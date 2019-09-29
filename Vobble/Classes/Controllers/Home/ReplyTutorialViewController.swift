@@ -15,9 +15,14 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
     @IBOutlet var annotationViews: [UIView]!
     
     @IBOutlet var lblStep1: UILabel!
+    @IBOutlet var lblStep2: UILabel!
+    @IBOutlet var lblStep3: UILabel!
+    
+    @IBOutlet var ivStep1: UIImageView!
     
     var stepIndex: Int = 0
-    var buttonFrame: CGRect?
+    var closeButtonFrame: CGRect?
+    var replyButtonFrame: CGRect?
     
     var findViewController: FindBottleViewController?
     
@@ -47,15 +52,25 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
         
         switch stepIndex {
         case 0:
-            if var btnFrame = buttonFrame {
+            spotlightView.appear(Spotlight.Oval(center: CGPoint(x: UIScreen.main.bounds.size.width / 2, y: UIScreen.main.bounds.size.height/2), diameter: 0))
+        case 1:
+            if var btnFrame = closeButtonFrame {
                 btnFrame.size.width += 30
                 btnFrame.size.height += 30
                 btnFrame.origin.x -= 15
                 btnFrame.origin.y -= 15
-                //let buttonCenter = btnFrame.origin.x + btnFrame.size.width/2
-                //let xPos = (AppConfig.currentLanguage == .arabic) ? buttonCenter : UIScreen.main.bounds.width - buttonCenter
-                //let xPos = buttonCenter
-                //let yPos = btnFrame.origin.y - btnFrame.size.height/2
+
+                spotlightView.appear(Spotlight.Oval(frame: btnFrame))
+                
+                Flurry.logEvent(AppConfig.tutorial_reply_show, withParameters:[:]);
+            }
+        case 2:
+            if var btnFrame = replyButtonFrame {
+                btnFrame.size.width += 30
+                btnFrame.size.height += 30
+                btnFrame.origin.x -= 15
+                btnFrame.origin.y -= 15
+
                 spotlightView.appear(Spotlight.Oval(frame: btnFrame))
                 
                 // add button to recieve click
@@ -65,7 +80,7 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
                 
                 Flurry.logEvent(AppConfig.tutorial_reply_show, withParameters:[:]);
             }
-        case 1:
+        case 3:
             dismiss(animated: true, completion: nil)
         default:
             break
@@ -79,10 +94,39 @@ class ReplyTutorialViewController: SpotlightViewController, UIGestureRecognizerD
             switch self.stepIndex {
             case 0:
                 self.lblStep1.alpha = 1
+                self.lblStep2.alpha = 0
+                self.lblStep3.alpha = 0
+                
+                self.ivStep1.alpha = 1
+                
                 self.lblStep1.text = "TUT_REPLY_1".localized
                 self.lblStep1.font = AppFonts.xBigBold
             case 1:
                 self.lblStep1.alpha = 0
+                self.lblStep2.alpha = 1
+                self.lblStep3.alpha = 0
+                
+                self.ivStep1.alpha = 0
+                
+                self.lblStep2.text = "TUT_REPLY_2".localized
+                self.lblStep2.font = AppFonts.xBigBold
+                
+            case 2:
+                self.lblStep1.alpha = 0
+                self.lblStep2.alpha = 0
+                self.lblStep3.alpha = 1
+                
+                self.ivStep1.alpha = 0
+                
+                self.lblStep3.text = "TUT_REPLY_3".localized
+                self.lblStep3.font = AppFonts.xBigBold
+                
+            case 3:
+                self.lblStep1.alpha = 0
+                self.lblStep2.alpha = 0
+                self.lblStep3.alpha = 0
+                
+                self.ivStep1.alpha = 0
             default:
                 break
             }

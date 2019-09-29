@@ -16,7 +16,7 @@ enum ShopItemType: String {
     case genderFilter = "5b13ee987fe59d9d184bfe3f"
     case countryFilter = "5b13ee987fe59d9d184bfe40"
     case ExtendChat = "5cd2d56bf133b83d7c653d8f"
-    case coinsPack = "5d651f0314d7c67897755ff6"
+    case coinsPack = "5d909c02b2cf5c43578ea28d"
     case replies = "5d77c18810230ba934241d97"
     
 }

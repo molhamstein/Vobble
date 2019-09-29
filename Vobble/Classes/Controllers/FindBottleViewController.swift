@@ -24,6 +24,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var userimage: UIImageView!
     @IBOutlet weak var countryFlag: UIImageView!
     @IBOutlet weak var moreOptionsOverlayButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
     //@IBOutlet var videoView: VideoPlayerView!
@@ -32,6 +33,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var replyButton: WCLShineButton!
     @IBOutlet weak var replyLabel: UILabel!
     @IBOutlet weak var playButton: TransitionButton!
+    @IBOutlet weak var slideBar: UISlider!
 
     @IBOutlet weak var optionView: UIStackView!
     @IBOutlet weak var reportButton: UIButton!
@@ -61,6 +63,9 @@ class FindBottleViewController: AbstractController {
     
     var isInitialized = false
     var isNextCardCreated: Bool = false
+    var isGoingToSubViewController: Bool = false
+    var shouldSetupScrollView: Bool = true
+    var didCancelBuffering: Bool = false
     
     override func viewDidLoad() {
         
@@ -95,13 +100,41 @@ class FindBottleViewController: AbstractController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupScrollView()
+        if isGoingToSubViewController {
+            isGoingToSubViewController = false
+            scrollView.contentOffset = CGPoint(x: 0, y: Int(self.currentVideoCard?.frame.height ?? 0.0) * Int(self.currentIndex))
+        }else {
+            if shouldSetupScrollView {
+                setupScrollView()
+            }
+        }
+        
+        // To make sure there is no other sound is playing
+        do {
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient, mode: AVAudioSessionModeMoviePlayback, options: .mixWithOthers)
+            } else {
+                // Fallback on earlier versions
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         /// MARK:- This block of code to make sure that all video player
-        currentVideoCard?.cancelBuffring()
-        nextVideoCard?.cancelBuffring()
+        
+        if !isGoingToSubViewController {
+            if !didCancelBuffering {
+                currentVideoCard?.cancelBuffring()
+                nextVideoCard?.cancelBuffring()
+                didCancelBuffering = true
+            }
+        }else { 
+            currentVideoCard?.stop()
+            nextVideoCard?.stop()
+        }
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -121,18 +154,19 @@ class FindBottleViewController: AbstractController {
                     DataStore.shared.me?.replyTutShowed = true
                     let viewController = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "ReplyTutorial") as! ReplyTutorialViewController
                     viewController.alpha = 0.5
-                    viewController.buttonFrame = self.replyButton.superview?.convert(self.replyButton.frame, to: nil)
+                    viewController.replyButtonFrame = self.replyButton.superview?.convert(self.replyButton.frame, to: nil)
+                    viewController.closeButtonFrame = self.closeButton.superview?.convert(self.closeButton.frame, to: nil)
                     viewController.findViewController = self
                     self.present(viewController, animated: true, completion: nil)
                     if let me = DataStore.shared.me {
                         ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }
                     }
                     // hide the tutorial automatically after 3 seconds
-                    dispatch_main_after(3) {
-                        if let _ = viewController.view.window, viewController.isViewLoaded {
-                           viewController.dismiss(animated: true, completion: nil)
-                        }
-                    }
+//                    dispatch_main_after(3) {
+//                        if let _ = viewController.view.window, viewController.isViewLoaded {
+//                           viewController.dismiss(animated: true, completion: nil)
+//                        }
+//                    }
                 }
             }
             
@@ -152,6 +186,8 @@ class FindBottleViewController: AbstractController {
             chatVc.bottleToReplyTo = btl
             chatVc.replyVideoUrlToUpload = myVideoUrl as URL?
             chatVc.replyAudioUrlToUpload = myAudioUrl
+            isGoingToSubViewController = false
+            shouldSetupScrollView = false
         }
     }
 
@@ -208,7 +244,7 @@ extension FindBottleViewController: UIScrollViewDelegate {
                 }
                 currentVideoCard?.isAutoPlay = true
             }else {
-                currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self, index: Int(currentIndex))
+                currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self, index: Int(currentIndex), slideBar: self.slideBar)
             }
             
             setupVideoData()
@@ -269,7 +305,7 @@ extension FindBottleViewController {
         scrollView.contentOffset = CGPoint(x: 0, y: 0)
         
         currentVideoCard = videoCards[Int(currentIndex)]
-        currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self, index: Int(currentIndex))
+        currentVideoCard?.configure(url: currentBottle?.attachment ?? "", isAutoPlay: true, customButton: self.playButton, delegate: self, index: Int(currentIndex), slideBar: self.slideBar)
         
         setupNextCard()
     }
@@ -286,13 +322,15 @@ extension FindBottleViewController {
             userimage.sd_setIndicatorStyle(.gray)
             userimage.sd_setImage(with: URL(string: imgUrl))
         }
+        
+        currentVideoCard?.slideBar?.value = 0.0
     }
     
     func setupNextCard(){
         if (Int(currentIndex) + 1) <= ((bottles?.count ?? 0) - 1) {
             if let nextBottle = bottles?[Int(currentIndex) + 1]{
                 nextVideoCard = videoCards[Int(currentIndex) + 1]
-                nextVideoCard?.configure(url: nextBottle.attachment ?? "", isAutoPlay: false, customButton: self.playButton, delegate: self, index: Int(currentIndex) + 1)
+                nextVideoCard?.configure(url: nextBottle.attachment ?? "", isAutoPlay: false, customButton: self.playButton, delegate: self, index: Int(currentIndex) + 1, slideBar: self.slideBar)
                 isNextCardCreated = true
             }
         }else {
@@ -441,6 +479,8 @@ extension FindBottleViewController {
     }
     
     @IBAction func replyBtnPressed(_ sender: Any) {
+        isGoingToSubViewController = true
+        
         let repliesCount = (DataStore.shared.me?.repliesCount ?? 0) + (DataStore.shared.me?.extraRepliesCount ?? 0)
         //let repliesCount = 0
         if repliesCount != 0 {
@@ -463,12 +503,13 @@ extension FindBottleViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // delay 6 second
                 let recordControl = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: "RecordAudioReplyMediaControlID") as! RecordAudioReplyMediaControl
                 
-                self.navigationController?.pushViewController(recordControl, animated: false)
+                self.present(recordControl, animated: true, completion: nil)
             }
         }else {
             let getRepliesAction = UIAlertAction(title: "GET_REPLIES".localized, style: .default, handler: {_ in
-                let moreRepliesVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: GetMoreRepliesViewController.className) as! GetMoreRepliesViewController
+                let moreRepliesVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: GetMoreViewController.className) as! GetMoreViewController
                 
+                moreRepliesVC.fType = .replies
                 moreRepliesVC.providesPresentationContextTransitionStyle = true
                 moreRepliesVC.definesPresentationContext = true
                 moreRepliesVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
@@ -485,11 +526,21 @@ extension FindBottleViewController {
     @IBAction func ignoreBtnPressed(_ sender: Any) {
         let logEventParams :[String : String] = ["Shore": shoreName ?? "", "AuthorGender": (currentBottle?.owner?.gender?.rawValue) ?? "", "AuthorCountry": (currentBottle?.owner?.countryISOCode) ?? ""];
         Flurry.logEvent(AppConfig.reply_ignored, withParameters:logEventParams);
+        
+        isGoingToSubViewController = false
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
         currentVideoCard?.playButtonPressed()
+    }
+    
+    @IBAction func didChangeTime(_ sender: UISlider) {
+        currentVideoCard?.seekToTime(sender)
+    }
+    
+    @IBAction func didFinishSliding(_ sender: UISlider) {
+        currentVideoCard?.play()
     }
     
     @IBAction func unwindToFindBottle(segue: UIStoryboardSegue) {

@@ -27,6 +27,7 @@
                 <outlet property="moreOptions" destination="h2q-Ny-ALK" id="ESw-B5-9Ti"/>
                 <outlet property="shoreNameLabel" destination="CBq-Rw-fmT" id="oFr-qt-HMd"/>
                 <outlet property="timerLabel" destination="yGv-8L-ytb" id="pax-PK-uuF"/>
+                <outlet property="timerStackView" destination="9GD-iE-Mw7" id="4vy-nb-Pne"/>
                 <outlet property="timerView" destination="QHC-Ld-5Fs" id="ojK-os-jOJ"/>
                 <outlet property="userImageButton" destination="450-gg-gVr" id="48b-fy-q8X"/>
                 <outlet property="userImageView" destination="hCy-QL-7H7" id="5sy-Ws-0xx"/>

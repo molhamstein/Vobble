@@ -30,5 +30,6 @@ class GiftsView: AbstractNibView {
         self.productsCollectionView.register(UINib(nibName: "ChatProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ChatProductCollectionViewCell")
 
         lblTitle.font = AppFonts.xBigBold
+        lblTitle.text = "CHAT_GIFTS_TITLE".localized
     }
 }

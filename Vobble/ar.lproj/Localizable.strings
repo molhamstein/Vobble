@@ -82,6 +82,7 @@
 "EMAIL_LOGIN_TITLE"                     = "تسجيل الدخول بالبريد";
 "EMAIL_SIGNUP_TITLE"                    = "التسجيل بواسطة البريد";
 
+// Signup screen
 "SIGNUP_EMAIL_TITLE"                     = "البريد الاالكتروني";
 "SIGNUP_EMAIL_PLACEHOLDER"               = "vibomail@gmail.com";
 "SIGNUP_NAME_TITLE"                      = "اسم المستخدم";
@@ -112,7 +113,6 @@
 
 // forgot password
 "FORGOT_PASSWORD_LINK_SENT"             = "لقد قمنا بارسال رابط اعاده تعيين كلمه السر الى بريدك الالكتروني";
-
 
 // Date ago
 "YEARS_AGO"                             = "منذ %@ سنين";
@@ -167,12 +167,13 @@
 "main_shore"                            = "استكشف";
 "love_shore"                            = "تعارف";
 "fadfed_shore"                          = "فضفض";
-"THROW_BOTTLE_WARNING"                  = "انتظر حتى الغد للحصول على زجاجة مجانية او اذهب الى المتجر لشراء الزجاجات";
+"THROW_BOTTLE_WARNING"                  = "انتظر حتى الغد للحصول على زجاجة مجانية او احصل على المزيد من الزجاجات الان";
 "THROW_BOTTLE_WARNING_ACTION"           = "المزيد من الزجاجات؟";
 "HOME_THROW_BTN"                        = "ارمي";
 "HOME_FIND_BTN"                         = "ابحث";
 "HOME_MY_BOTTLES_BTN"                   = "زجاجاتي";
-
+"BOTTLES_TITLE"                         = "اضف زجاجة";
+"BOTTLE_POPUP_TITLE"                    = "احصل على مزيد من الزجاجات";
 
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد من العودة؟ عليك الانتظار ليتم رفع الملف الذي ارسلته ";
@@ -189,6 +190,7 @@
 "CHAT_WARNING_BODY"                     = "المحادثة مع %@ على وشك الانتهاء";
 "EXTEND_CHAT_TITLE"                     = "تمديد المحادثة";
 "EXTEND_CHAT_POPUP_TITLE"               = "مدد المحادثة مع %@";
+"CHAT_GIFTS_TITLE"                      = "هدايا المحادثة";
 
 // record audio reply
 "AUDIO_REPLY_TITLE"                     = "أرسل رداً صوتياً لتبدأ المحادثة";
@@ -304,7 +306,9 @@
 "tut2_desc"                             = "ابحث عن زجاجة فيديو";
 
 "TUT_CHAT_1"                            = "هنا تجد الوقت المتبقي للمحادثة";
-"TUT_REPLY_1"                           = "!اعجبك الفيديو؟ أرسل ردك لصاحب الفيديو الان،";
+"TUT_REPLY_3"                           = "!اعجبك الفيديو؟ أرسل ردك لصاحب الفيديو الان،";
+"TUT_REPLY_1"                           = "اسحب للاعلى لمشاهدة الفيديو التالي!";
+"TUT_REPLY_2"                           = "عودة الى الصفحة الرئيسية";
 "TUT_CAM_1"                             = "أي محتوى غير اخلاقي سيتم حذفه و حظر صاحبه";
 "TUT_CAM_OK_1"                          = "التالي..";
 "TUT_CAM_2"                             = "لضمان وصول الفيديو لجميع المستخدمين احرص على اظهار وجهك وصوتك بشكل واضح سيتم حذف اي فيديو بشاشه سوداء";

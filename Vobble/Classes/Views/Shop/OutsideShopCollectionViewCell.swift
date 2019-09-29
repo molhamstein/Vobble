@@ -42,6 +42,8 @@ class OutsideShopCollectionViewCell: UICollectionViewCell {
             titleLabel.text = "REPLIES_TITLE".localized
         }else if shopItemObj.type == .ExtendChat {
             titleLabel.text = "EXTEND_CHAT_TITLE".localized
+        }else if shopItemObj.type == .bottlesPack {
+            titleLabel.text = "BOTTLES_TITLE".localized
         }
         
         descriptionLabel.text = shopItemObj.title

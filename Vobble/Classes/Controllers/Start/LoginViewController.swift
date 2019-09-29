@@ -364,7 +364,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     }
     
     private func preparePlayer() {
-        if let fileURL = Bundle.main.url(forResource: "loginVideo", withExtension: "m4v"){
+        if let fileURL = Bundle.main.url(forResource: "sea_video", withExtension: "mp4"){
             // the video player
             self.player = AVPlayer(url: fileURL as URL)
             self.player?.actionAtItemEnd = .none

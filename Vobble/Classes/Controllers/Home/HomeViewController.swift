@@ -443,7 +443,15 @@ class HomeViewController: AbstractController {
             let alertController = UIAlertController(title: "", message: "THROW_BOTTLE_WARNING".localized, preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
             let getBottlesAction = UIAlertAction(title: "THROW_BOTTLE_WARNING_ACTION".localized, style: .default,  handler: {(alert) in 
-                self.showShopView(.bottlesPack)
+                let moreBottlesVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: GetMoreViewController.className) as! GetMoreViewController
+                
+                moreBottlesVC.fType = .bottlesPack
+                moreBottlesVC.providesPresentationContextTransitionStyle = true
+                moreBottlesVC.definesPresentationContext = true
+                moreBottlesVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
+                moreBottlesVC.view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.8)
+                
+                self.present(moreBottlesVC, animated: true, completion: nil)
                 })
             alertController.addAction(ok)
             alertController.addAction(getBottlesAction)

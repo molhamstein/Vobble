@@ -20,12 +20,15 @@ class VobbleNavigationBar : AbstractNibView {
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var navTitle: UILabel!
     @IBOutlet weak var lblCoins: UILabel!
-    @IBOutlet weak var coinsView: UIStackView!
     @IBOutlet weak var rightIcon: UIButton!
     public weak var viewcontroller : UIViewController?
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
-    var mode:NavBarMode = .normal
+    var mode: NavBarMode = .normal {
+        didSet {
+            lblCoins.isHidden = mode == .home ? false : true
+        }
+    }
     
     /// set navigation title when navigationTitle is visible.
     @IBInspectable open var title: String = "" {
@@ -61,7 +64,7 @@ class VobbleNavigationBar : AbstractNibView {
     
     func setupView () {
         navTitle.font = AppFonts.xBigBold
-        lblCoins.font = AppFonts.normalBold
+        lblCoins.font = AppFonts.bigBold
         progressIndicator.isHidden = true
         
         if AppConfig.currentLanguage == .arabic {
@@ -73,13 +76,14 @@ class VobbleNavigationBar : AbstractNibView {
         }
         
         lblCoins.text = String(DataStore.shared.me?.pocketCoins ?? 0)
+        lblCoins.isHidden = mode == .home ? false : true
         
         NotificationCenter.default.addObserver(self, selector: #selector(setNewCoins), name: Notification.Name("ObserveCoins"), object: nil)
         
         // Add tap gesture to coins view
         let tap = UITapGestureRecognizer(target: self, action: #selector(displayShop))
-        self.coinsView.isUserInteractionEnabled = true
-        self.coinsView.addGestureRecognizer(tap)
+        self.lblCoins.isUserInteractionEnabled = true
+        self.lblCoins.addGestureRecognizer(tap)
     }
     
     // MARK: -  Private Methods

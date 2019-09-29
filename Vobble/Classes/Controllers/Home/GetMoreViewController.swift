@@ -9,32 +9,33 @@
 import UIKit
 import Flurry_iOS_SDK
 
-class GetMoreRepliesViewController: AbstractController {
+class GetMoreViewController: AbstractController {
     @IBOutlet weak var lblTopTitle: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var popUpView: UIView!
+    @IBOutlet weak var imgIcon: UIImageView!
     
-    private var _repliesItemsArray:[ShopItem] = [ShopItem]()
-    fileprivate var repliesItemsArray: [ShopItem] {
+    public var fType: ShopItemType = .coinsPack
+    
+    fileprivate var selectedProduct : ShopItem!
+    fileprivate var _itemsArray:[ShopItem] = [ShopItem]()
+    fileprivate var itemsArray: [ShopItem] {
         set {
-            _repliesItemsArray = newValue
+            _itemsArray = newValue
             collectionView.reloadData()
         }
         get {
-            if(_repliesItemsArray.isEmpty){
-                _repliesItemsArray = [ShopItem]()
+            if(_itemsArray.isEmpty){
+                _itemsArray = [ShopItem]()
             }
-            return _repliesItemsArray
+            return _itemsArray
         }
     }
-    
-    var selectedProduct : ShopItem!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.lblTopTitle.text = String.init(format: "REPLY_POPUP_TITLE".localized, "")
         self.lblTopTitle.font = AppFonts.xBigBold
         
         self.collectionView.register(UINib(nibName: "OutsideShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "OutsideShopCollectionViewCell")
@@ -43,11 +44,26 @@ class GetMoreRepliesViewController: AbstractController {
         
         layoutDesign()
         
-        initRepliesArray()
+        if fType == .bottlesPack {
+            self.lblTopTitle.text = String.init(format: "BOTTLE_POPUP_TITLE".localized, "")
+            initBottlesArray()
+            
+        }else if fType == .replies {
+            self.lblTopTitle.text = String.init(format: "REPLY_POPUP_TITLE".localized, "")
+            initRepliesArray()
+        }
+        
         
         ApiManager.shared.requestShopItems(completionBlock: { (items, error) in
             if error == nil {
-                self.initRepliesArray()
+                if self.fType == .bottlesPack {
+                    self.initBottlesArray()
+                    
+                }else if self.fType == .replies {
+                    
+                    self.initRepliesArray()
+                }
+                
             }
         })
     }
@@ -57,7 +73,17 @@ class GetMoreRepliesViewController: AbstractController {
         repliesArray = DataStore.shared.shopItems.filter({$0.type == .replies})
         
         
-        self.repliesItemsArray = repliesArray.map{$0}
+        self.itemsArray = repliesArray.map{$0}
+        
+        collectionView.reloadData()
+    }
+    
+    private func initBottlesArray() {
+        var bottlesArray:[ShopItem] = [ShopItem]()
+        bottlesArray = DataStore.shared.shopItems.filter({$0.type == .bottlesPack})
+        
+        
+        self.itemsArray = bottlesArray.map{$0}
         
         collectionView.reloadData()
     }
@@ -77,15 +103,15 @@ class GetMoreRepliesViewController: AbstractController {
     }
 }
 
-extension GetMoreRepliesViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension GetMoreViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return self.repliesItemsArray.count
+        return self.itemsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let obj = self.repliesItemsArray[indexPath.row]
+        let obj = self.itemsArray[indexPath.row]
         
         let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutsideShopCollectionViewCell", for: indexPath) as! OutsideShopCollectionViewCell
         
@@ -96,7 +122,13 @@ extension GetMoreRepliesViewController : UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let obj = self.repliesItemsArray[indexPath.row]
+        let obj = self.itemsArray[indexPath.row]
+        
+        var prodType = "bottles"
+        if self.fType == .replies {
+            prodType = "reply"
+        }
+        
         if (DataStore.shared.me?.pocketCoins ?? 0) >= (obj.priceCoins ?? 0) {
             
             let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(obj.priceCoins ?? 0) " + "COINS".localized) , preferredStyle: .alert)
@@ -105,7 +137,8 @@ extension GetMoreRepliesViewController : UICollectionViewDelegate, UICollectionV
                 self.selectedProduct = obj
                 
                 // flurry events
-                let logEventParams = ["prodType": "reply", "ProdName": self.selectedProduct.title_en ?? ""];
+                
+                let logEventParams = ["prodType": prodType, "ProdName": self.selectedProduct.title_en ?? ""];
                 Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
                 
                 self.showActivityLoader(true)
@@ -154,7 +187,7 @@ extension GetMoreRepliesViewController : UICollectionViewDelegate, UICollectionV
         
         
         // flurry events
-        let logEventParams = ["prodType": "reply"];
+        let logEventParams = ["prodType": prodType];
         Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
         
     }
@@ -162,7 +195,7 @@ extension GetMoreRepliesViewController : UICollectionViewDelegate, UICollectionV
 }
 
 
-extension GetMoreRepliesViewController: UICollectionViewDelegateFlowLayout {
+extension GetMoreViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

@@ -31,6 +31,7 @@ class VobbleChatNavigationBar: AbstractNibView {
     @IBOutlet weak var extendChatLabel: UILabel!
     @IBOutlet weak var extendAlertView: UIView!
     @IBOutlet weak var timerView: UIView!
+    @IBOutlet weak var timerStackView: UIStackView!
     
     weak var delegate:ChatNavigationDelegate?
 
@@ -54,10 +55,13 @@ class VobbleChatNavigationBar: AbstractNibView {
         
         // Make all timer view clickable and extend chat alert view
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.timerViewDidPressed))
+        tap.cancelsTouchesInView = false
         self.timerView.addGestureRecognizer(tap)
         self.timerView.isUserInteractionEnabled = true
+        self.timerStackView.isUserInteractionEnabled = true
         self.extendAlertView.isUserInteractionEnabled = true
         self.extendAlertView.addGestureRecognizer(tap)
+        self.timerStackView.addGestureRecognizer(tap)
     }
     
     // MARK: -  Private Methods

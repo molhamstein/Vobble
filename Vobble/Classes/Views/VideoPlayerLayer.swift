@@ -19,9 +19,6 @@ import TransitionButton
 
 class VideoPlayerLayer: AbstractNibView {
     
-    //@IBOutlet weak var loader: UIActivityIndicatorView!
-    @IBOutlet weak var slideBar: UISlider!
-    
     fileprivate var playerLayer: AVPlayerLayer?
     fileprivate var player: AVPlayer?
     fileprivate var asset: AVAsset?
@@ -29,11 +26,14 @@ class VideoPlayerLayer: AbstractNibView {
     fileprivate var url: URL?
     fileprivate var playButton: TransitionButton?
     fileprivate var delegate: VideoPlayerDelegate?
-    
+    fileprivate var tolerance: CMTime = CMTimeMakeWithSeconds(0.001, 1000)
+    fileprivate var seekTime: CMTime!
+
+    public var slideBar: UISlider?
     public var isAutoPlay: Bool = false
     public var index: Int?
     
-    func configure(url: String, isAutoPlay: Bool = false, customButton: TransitionButton, delegate: VideoPlayerDelegate, index: Int?) {
+    func configure(url: String, isAutoPlay: Bool = false, customButton: TransitionButton, delegate: VideoPlayerDelegate, index: Int?, slideBar: UISlider) {
         if let videoURL = URL(string: url) {
             
             self.isAutoPlay = isAutoPlay
@@ -41,6 +41,7 @@ class VideoPlayerLayer: AbstractNibView {
             self.playButton = customButton
             self.delegate = delegate
             self.index = index
+            self.slideBar = slideBar
             
             asset = AVAsset(url: videoURL)
             playerItem = AVPlayerItem(asset: asset!)
@@ -54,20 +55,9 @@ class VideoPlayerLayer: AbstractNibView {
                 layer.addSublayer(playerLayer)
             }
             
-            addObservers()
+            addObserversForFirstInit()
             
             setupTapGesture()
-            
-            // To make sure there is no other sound is playing
-            do {
-                if #available(iOS 10.0, *) {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault, options: .mixWithOthers)
-                } else {
-                    // Fallback on earlier versions
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
             
             // Notify when the video is played to the end
             NotificationCenter.default.addObserver(self, selector: #selector(reachTheEndOfTheVideo(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
@@ -78,9 +68,9 @@ class VideoPlayerLayer: AbstractNibView {
         }
     }
     
-    func addObservers(){
+    func addObserversForFirstInit(){
         // This observer for seek bar
-        player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main) {[weak self] (progressTime) in
+        player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.01, preferredTimescale: 1000), queue: DispatchQueue.main) {[weak self] (progressTime) in
             if let duration = self?.player?.currentItem?.duration {
                 
                 let durationSeconds = CMTimeGetSeconds(duration)
@@ -88,9 +78,9 @@ class VideoPlayerLayer: AbstractNibView {
                 let progress = Float(seconds/durationSeconds)
                 
                 DispatchQueue.main.async {
-                    self?.slideBar.value = progress
+                    self?.slideBar?.value = progress
                     if progress >= 1.0 {
-                        self?.slideBar.value = 0.0
+                        self?.slideBar?.value = 0.0
                     }
                     
                     print(Int(seconds))
@@ -107,6 +97,21 @@ class VideoPlayerLayer: AbstractNibView {
         playerItem?.addObserver(self, forKeyPath: "status", options: [.old, .new], context: nil)
         player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         
+    }
+    
+    func addObservers(){
+        playerItem?.addObserver(self, forKeyPath: "status", options: [.old, .new], context: nil)
+        player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+        
+    }
+    
+    func removeObservers() {
+        if let playerItem = self.playerItem, let player = self.player {
+            playerItem.removeObserver(self, forKeyPath: "status", context: nil)
+            player.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
+            
+            pause()
+        }
     }
     
     func setupTapGesture(){
@@ -205,6 +210,12 @@ extension VideoPlayerLayer {
         player?.seek(to: kCMTimeZero)
     }
     
+    func seekToTime(_ sender: UISlider) {
+        self.pause()
+        self.seekTime = CMTimeMakeWithSeconds(Float64(Double(sender.value) * (self.player?.currentItem?.duration.seconds ?? 0.0)), 1000)
+        self.player?.seek(to: seekTime, toleranceBefore: self.tolerance, toleranceAfter: self.tolerance)
+    }
+    
     func isPlaying() -> Bool {
         if let player = self.player {
             if #available(iOS 10.0, *) {
@@ -246,6 +257,8 @@ extension VideoPlayerLayer {
             stop()
         }
     }
+    
+    
     
     func reloadVideoPrerolls(){
         if let player = player {

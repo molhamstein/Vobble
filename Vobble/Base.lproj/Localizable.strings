@@ -140,7 +140,6 @@
 "SINGUP_VALIDATION_TERMS"               = "You need to agree to the terms and conditions before signup";
 "SINGUP_VALIDATION_CHOOSE_COUNTRY"      = "Please select your country";
 
-
 "SINGUP_EMAIL_TITLE"                    = "ENTER EMAIL";
 "SINGUP_SOCIAL_WELCOM"                  = "Welcome %@ \n please fill the rest of these information to finish the signup";
 
@@ -168,12 +167,13 @@
 "main_shore"                            = "Explore";
 "love_shore"                            = "Dating";
 "fadfed_shore"                          = "Say your mind";
-"THROW_BOTTLE_WARNING"                  = "Wait until tomorrow to get one free bottle or go to shop to buy bottles";
+"THROW_BOTTLE_WARNING"                  = "Wait until tomorrow to get one free bottle or get more bottles now";
 "THROW_BOTTLE_WARNING_ACTION"           = "Get Bottles";
 "HOME_THROW_BTN"                        = "Throw Bottle";
 "HOME_FIND_BTN"                         = "Find Bottle";
 "HOME_MY_BOTTLES_BTN"                   = "My Bottles";
-
+"BOTTLES_TITLE"                         = "Add bottle";
+"BOTTLE_POPUP_TITLE"                    = "Get more bottles";
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? your video will not be uploaded.";
 "CHAT_REPLY_SENT_MSG"                   = "Your Reply was sent to the bottle owner, when he sees your reply you guys can chat for 24 hours";
@@ -189,6 +189,7 @@
 "CHAT_WARNING_BODY"                     = "Your conversation with %@ is going to end soon";
 "EXTEND_CHAT_TITLE"                     = "Extend chat";
 "EXTEND_CHAT_POPUP_TITLE"               = "Extend your chat with %@";
+"CHAT_GIFTS_TITLE"                      = "Chat Gifts";
 
 // record audio reply
 "AUDIO_REPLY_TITLE"                     = "Send a voice reply to start the conversation";
@@ -304,7 +305,9 @@
 "tut2_desc"                             = "Why don't you start by looking for a thrown bottle from the main shore ?";
 
 "TUT_CHAT_1"                            = "Here you can find a countdown for how much time you have left to chat";
-"TUT_REPLY_1"                           = "is it interesting ? Reply to this user now, click to shoot a video!";
+"TUT_REPLY_3"                           = "is it interesting ? Reply to this user now, click to make a voice record!";
+"TUT_REPLY_1"                           = "Swipe up to watch the next video!";
+"TUT_REPLY_2"                           = "Back to home screen";
 "TUT_CAM_1"                             = "Your account will be blocked if you share any sexual content.";
 "TUT_CAM_OK_1"                          = "NEXT...";
 "TUT_CAM_2"                             = "Show your face and voice clearly. Black screen videos will be removed.. Quality videos spread faster!";
