@@ -66,6 +66,7 @@ class FindBottleViewController: AbstractController {
     var isGoingToSubViewController: Bool = false
     var shouldSetupScrollView: Bool = true
     var didCancelBuffering: Bool = false
+    var isGettingVideos: Bool = false
     
     override func viewDidLoad() {
         
@@ -157,6 +158,7 @@ class FindBottleViewController: AbstractController {
                     viewController.replyButtonFrame = self.replyButton.superview?.convert(self.replyButton.frame, to: nil)
                     viewController.closeButtonFrame = self.closeButton.superview?.convert(self.closeButton.frame, to: nil)
                     viewController.findViewController = self
+                    self.isGoingToSubViewController = true
                     self.present(viewController, animated: true, completion: nil)
                     if let me = DataStore.shared.me {
                         ApiManager.shared.updateUser(user: me) { (success: Bool, err: ServerError?, user: AppUser?) in }
@@ -213,7 +215,7 @@ extension FindBottleViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.y/view.frame.height)
-        
+        print("page index is: \(pageIndex)")
         if pageIndex != currentIndex {
             currentIndex = pageIndex
             currentBottle = bottles?[Int(pageIndex)]
@@ -250,20 +252,23 @@ extension FindBottleViewController: UIScrollViewDelegate {
             setupVideoData()
             
             // Get the next 5 videos if needed
-            if Int(currentIndex) == (self.bottles?.count ?? 0) - 2 {
-                self.fixedIndex = Int(self.currentIndex) + 2
-                getMoreVideos()
-            }else if (Int(currentIndex) == (self.bottles?.count ?? 0) - 1) {
-                self.fixedIndex = Int(self.currentIndex) + 1
-                getMoreVideos()
+            if !isGettingVideos {
+                if Int(currentIndex) == (self.bottles?.count ?? 0) - 2 {
+                    self.fixedIndex = Int(self.currentIndex) + 2
+                    getMoreVideos()
+                    isGettingVideos = true
+                }else if (Int(currentIndex) == (self.bottles?.count ?? 0) - 1) {
+                    self.fixedIndex = Int(self.currentIndex) + 1
+                    getMoreVideos()
+                    isGettingVideos = true
+                }
             }
             
+            
             setupNextCard()
+            
+            print("Current index is: \(self.currentIndex) \n Current video card index: \(self.currentVideoCard?.index)")
         }
-    }
-    
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        
     }
     
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
@@ -343,6 +348,9 @@ extension FindBottleViewController {
         self.seen = DataStore.shared.seenVideos
         self.complete = DataStore.shared.completedVideos
         ApiManager.shared.findBottles(gender: gender, countryCode: countryCode, shoreId: shoreId, seen: seen, complete: complete, offsets: Double(self.bottles?.count ?? 0), completionBlock: {(bottles, error) in
+            
+            self.isGettingVideos = false
+            
             if error == nil  {
                 if bottles != nil {
                     for i in bottles! {

@@ -1509,7 +1509,7 @@ extension ChatViewController {
         
         if collectionView == giftsView.productsCollectionView {
             let width = (self.view.frame.width / 4) - 32
-            return CGSize(width: width, height: width * 2)
+            return CGSize(width: width, height: (width * 2) + 10)
         }
         
         return self.collectionView.collectionViewLayout.sizeForItem(at: indexPath)

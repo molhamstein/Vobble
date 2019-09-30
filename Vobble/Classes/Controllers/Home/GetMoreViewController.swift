@@ -199,9 +199,15 @@ extension GetMoreViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        
         let itemW = (popUpView.bounds.size.width - 16)
         let itemh = UIScreen.main.bounds.height > 570 ? CGFloat(210) : CGFloat(190)
         
-        return CGSize(width: itemW / 3, height: itemh)
+        if self.fType == .replies {
+            return CGSize(width: itemW / 2.5, height: itemh + 40)
+        }else {
+            return CGSize(width: itemW / 3, height: itemh)
+        }
+        
     }
 }

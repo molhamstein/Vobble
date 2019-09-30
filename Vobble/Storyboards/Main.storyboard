@@ -1239,42 +1239,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-Et-onT" userLabel="bottom View" customClass="PassthroughView">
                                 <rect key="frame" x="0.0" y="500" width="414" height="200"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ZZ-T5-aNn">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F82-xd-Sqh" userLabel="Replay button view" customClass="WCLShineButton" customModule="WCLShineButton">
-                                                <rect key="frame" x="167" y="8" width="80" height="80"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="4lq-rk-OVA"/>
-                                                    <constraint firstAttribute="height" constant="80" id="rpn-VZ-kHA"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
-                                                        <color key="value" red="0.2474412383" green="0.62938354419999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="replyBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="9b8-wb-8UD"/>
-                                                </connections>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reply" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7e-GD-lzc">
-                                                <rect key="frame" x="188" y="38.333333333333371" width="38" height="19.333333333333329"/>
-                                                <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="g7e-GD-lzc" firstAttribute="centerX" secondItem="F82-xd-Sqh" secondAttribute="centerX" id="BEj-FA-BAf"/>
-                                            <constraint firstItem="g7e-GD-lzc" firstAttribute="centerY" secondItem="F82-xd-Sqh" secondAttribute="centerY" id="YZX-GY-HYt"/>
-                                            <constraint firstItem="F82-xd-Sqh" firstAttribute="top" secondItem="2ZZ-T5-aNn" secondAttribute="top" constant="8" id="l52-dl-GHl"/>
-                                            <constraint firstItem="F82-xd-Sqh" firstAttribute="centerX" secondItem="2ZZ-T5-aNn" secondAttribute="centerX" id="z7H-0z-uV5"/>
-                                        </constraints>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRM-BQ-2qY" customClass="TransitionButton" customModule="TransitionButton">
                                         <rect key="frame" x="187" y="106" width="40" height="40"/>
                                         <constraints>
@@ -1305,18 +1269,43 @@
                                             <action selector="didFinishSliding:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="pVf-Zz-Zov"/>
                                         </connections>
                                     </slider>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F82-xd-Sqh" userLabel="Replay button view" customClass="WCLShineButton" customModule="WCLShineButton">
+                                        <rect key="frame" x="167" y="10" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="4lq-rk-OVA"/>
+                                            <constraint firstAttribute="height" constant="80" id="rpn-VZ-kHA"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                                <color key="value" red="0.2474412383" green="0.62938354419999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="replyBtnPressed:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="9b8-wb-8UD"/>
+                                        </connections>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reply" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7e-GD-lzc">
+                                        <rect key="frame" x="188" y="40.333333333333371" width="38" height="19.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="tX5-ON-IIY" firstAttribute="top" secondItem="fRM-BQ-2qY" secondAttribute="bottom" constant="16" id="306-WP-6GK"/>
+                                    <constraint firstItem="fRM-BQ-2qY" firstAttribute="top" secondItem="F82-xd-Sqh" secondAttribute="bottom" constant="16" id="4mA-RD-Hcg"/>
                                     <constraint firstItem="fRM-BQ-2qY" firstAttribute="centerX" secondItem="9ZT-Et-onT" secondAttribute="centerX" id="5tF-46-OYe"/>
-                                    <constraint firstItem="2ZZ-T5-aNn" firstAttribute="width" secondItem="9ZT-Et-onT" secondAttribute="width" id="EYB-cu-fS4"/>
                                     <constraint firstAttribute="height" constant="200" id="FyC-sh-R6s"/>
+                                    <constraint firstItem="F82-xd-Sqh" firstAttribute="centerX" secondItem="9ZT-Et-onT" secondAttribute="centerX" id="Jgs-oP-qMo"/>
                                     <constraint firstAttribute="bottom" secondItem="tX5-ON-IIY" secondAttribute="bottom" constant="8" id="LHc-2Q-Cse"/>
-                                    <constraint firstItem="2ZZ-T5-aNn" firstAttribute="top" secondItem="9ZT-Et-onT" secondAttribute="top" id="WXf-1Y-aMf"/>
+                                    <constraint firstItem="g7e-GD-lzc" firstAttribute="centerY" secondItem="F82-xd-Sqh" secondAttribute="centerY" id="TDf-M5-7ku"/>
                                     <constraint firstItem="tX5-ON-IIY" firstAttribute="leading" secondItem="9ZT-Et-onT" secondAttribute="leading" constant="32" id="XIn-ct-Vif"/>
-                                    <constraint firstAttribute="trailing" secondItem="2ZZ-T5-aNn" secondAttribute="trailing" id="aLX-Vy-tCq"/>
-                                    <constraint firstAttribute="bottom" secondItem="2ZZ-T5-aNn" secondAttribute="bottom" constant="50" id="jl7-pu-JvR"/>
                                     <constraint firstAttribute="trailing" secondItem="tX5-ON-IIY" secondAttribute="trailing" constant="32" id="kyb-yD-Lnk"/>
+                                    <constraint firstItem="g7e-GD-lzc" firstAttribute="centerX" secondItem="F82-xd-Sqh" secondAttribute="centerX" id="oje-7h-s7f"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hny-Og-jaY" userLabel="report View">
