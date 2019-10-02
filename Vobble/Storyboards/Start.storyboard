@@ -103,6 +103,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" red="0.082061633725427741" green="0.70283695035570626" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mKW-mn-2Ak">
+                                        <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="7mL-AT-nzi"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQK-ci-4gZ">
                                         <rect key="frame" x="16" y="32" width="32" height="32"/>
                                         <constraints>
@@ -723,7 +730,7 @@
                                                                     <constraint firstItem="4x1-CK-gsm" firstAttribute="leading" secondItem="VZ1-L0-HRs" secondAttribute="trailing" constant="20" id="nWy-bg-0hS"/>
                                                                 </constraints>
                                                             </view>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6EX-LD-wBl">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6EX-LD-wBl">
                                                                 <rect key="frame" x="-31" y="261.5" width="399" height="34"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By login you accept " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYh-JX-bSU">
@@ -1638,7 +1645,10 @@
                                     <constraint firstAttribute="trailing" secondItem="8vQ-L0-qBe" secondAttribute="trailing" id="gD5-d4-ymm"/>
                                     <constraint firstItem="8vQ-L0-qBe" firstAttribute="leading" secondItem="hnH-Y7-82r" secondAttribute="leading" id="jWI-uR-jeY"/>
                                     <constraint firstItem="8vQ-L0-qBe" firstAttribute="top" secondItem="hnH-Y7-82r" secondAttribute="top" id="jjc-Gp-kOX"/>
+                                    <constraint firstAttribute="trailing" secondItem="mKW-mn-2Ak" secondAttribute="trailing" id="lHz-gN-jx9"/>
+                                    <constraint firstItem="mKW-mn-2Ak" firstAttribute="leading" secondItem="hnH-Y7-82r" secondAttribute="leading" id="lIW-h9-QMp"/>
                                     <constraint firstAttribute="trailing" secondItem="ZWm-Gw-lLY" secondAttribute="trailing" id="mf0-7l-rUz"/>
+                                    <constraint firstAttribute="bottom" secondItem="mKW-mn-2Ak" secondAttribute="bottom" id="nNH-Bv-nHs"/>
                                     <constraint firstItem="xsE-9U-ZId" firstAttribute="height" secondItem="hnH-Y7-82r" secondAttribute="height" multiplier="0.91" id="oaa-3g-ETs"/>
                                     <constraint firstAttribute="bottom" secondItem="xsE-9U-ZId" secondAttribute="bottom" id="rfm-bV-LcG"/>
                                     <constraint firstItem="xsE-9U-ZId" firstAttribute="width" secondItem="hnH-Y7-82r" secondAttribute="width" multiplier="0.9" id="sd8-Ak-1iU"/>
@@ -1701,6 +1711,7 @@
                         <outlet property="privacyButton" destination="Dxm-Dg-ZdG" id="SiW-P1-M9V"/>
                         <outlet property="registerButton" destination="f71-6J-L8g" id="rsU-95-MFn"/>
                         <outlet property="selectCountryButton" destination="Qst-MH-DF5" id="VGz-eM-MjM"/>
+                        <outlet property="shadowView" destination="mKW-mn-2Ak" id="gRx-XX-kzZ"/>
                         <outlet property="signupButton" destination="x1o-9G-gWi" id="EK2-UX-OPW"/>
                         <outlet property="signupByEmailButton" destination="RpZ-Te-4ds" id="hNy-AQ-hZy"/>
                         <outlet property="signupView" destination="7S1-8J-zGf" id="Ot1-uH-RhO"/>
@@ -1756,16 +1767,16 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="k1O-pb-ixl">
-                                        <rect key="frame" x="24" y="543" width="289.5" height="28"/>
+                                        <rect key="frame" x="0.5" y="542" width="336.5" height="29"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By login you accept " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nyh-an-Mpu">
-                                                <rect key="frame" x="0.0" y="9" width="92.5" height="10"/>
+                                                <rect key="frame" x="0.0" y="8.5" width="91.5" height="12"/>
                                                 <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="10"/>
                                                 <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39C-wG-FbP">
-                                                <rect key="frame" x="94.5" y="0.0" width="71" height="28"/>
+                                                <rect key="frame" x="93.5" y="0.0" width="92" height="29"/>
                                                 <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="14"/>
                                                 <state key="normal" title="Privacy Policy ">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1776,13 +1787,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" &amp; " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdy-pJ-cpc">
-                                                <rect key="frame" x="167.5" y="8.5" width="9" height="11.5"/>
+                                                <rect key="frame" x="187.5" y="8.5" width="12" height="12"/>
                                                 <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="10"/>
                                                 <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mL1-Yd-gnu">
-                                                <rect key="frame" x="178.5" y="0.0" width="111" height="28"/>
+                                                <rect key="frame" x="201.5" y="0.0" width="135" height="29"/>
                                                 <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="14"/>
                                                 <state key="normal" title="Terms and conditions">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1795,7 +1806,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtR-JU-xeL">
-                                        <rect key="frame" x="32" y="230" width="54" height="23.5"/>
+                                        <rect key="frame" x="32" y="229" width="63.5" height="24.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2170,16 +2181,16 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="aUr-Va-wxk">
-                                        <rect key="frame" x="24" y="543" width="289.5" height="28"/>
+                                        <rect key="frame" x="0.5" y="542" width="336.5" height="29"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By login you accept " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5s-Ak-bXw">
-                                                <rect key="frame" x="0.0" y="9" width="92.5" height="10"/>
+                                                <rect key="frame" x="0.0" y="8.5" width="91.5" height="12"/>
                                                 <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="10"/>
                                                 <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gI7-Yp-2IE">
-                                                <rect key="frame" x="94.5" y="0.0" width="71" height="28"/>
+                                                <rect key="frame" x="93.5" y="0.0" width="92" height="29"/>
                                                 <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="14"/>
                                                 <state key="normal" title="Privacy Policy ">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2191,13 +2202,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" &amp; " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eza-gY-s1l">
-                                                <rect key="frame" x="167.5" y="8.5" width="9" height="11.5"/>
+                                                <rect key="frame" x="187.5" y="8.5" width="12" height="12"/>
                                                 <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="10"/>
                                                 <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pww-2S-rqv">
-                                                <rect key="frame" x="178.5" y="0.0" width="111" height="28"/>
+                                                <rect key="frame" x="201.5" y="0.0" width="135" height="29"/>
                                                 <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="14"/>
                                                 <state key="normal" title="Terms and conditions">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2211,7 +2222,7 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNW-zs-1ok">
-                                        <rect key="frame" x="64" y="257.5" width="209.5" height="40"/>
+                                        <rect key="frame" x="64" y="284" width="209.5" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="XXXXXX" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y50-Gk-xRl">
                                                 <rect key="frame" x="0.0" y="0.0" width="209.5" height="35"/>
@@ -2240,7 +2251,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdj-LI-PiK" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
-                                        <rect key="frame" x="65.5" y="321.5" width="206" height="44"/>
+                                        <rect key="frame" x="65.5" y="348" width="206" height="44"/>
                                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Dt0-QL-Jbm"/>
@@ -2260,25 +2271,25 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We have sent you an SMS, please fill below the verification code" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uOp-LA-3Fc">
-                                        <rect key="frame" x="16" y="186.5" width="305.5" height="47"/>
+                                        <rect key="frame" x="16" y="186.5" width="305.5" height="73.5"/>
                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ACN-74-sUM">
-                                        <rect key="frame" x="0.0" y="466" width="165.5" height="45"/>
+                                        <rect key="frame" x="0.0" y="465" width="184" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Didn't receive the SMS?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqt-HM-amL">
-                                                <rect key="frame" x="0.0" y="0.0" width="165.5" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="184" height="20"/>
                                                 <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WWR-4f-5PG">
-                                                <rect key="frame" x="0.0" y="19.5" width="86" height="25.5"/>
+                                                <rect key="frame" x="0.0" y="20" width="95" height="25"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWG-uy-jvS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="86" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="20.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20.5" id="xfK-33-oHJ"/>
                                                         </constraints>
@@ -2291,7 +2302,7 @@
                                                         </connections>
                                                     </button>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbx-CW-BkG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -2397,16 +2408,16 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="270" height="110"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="CaS-OE-WEh" userLabel="UserName Stack View">
-                                                                                <rect key="frame" x="0.0" y="25" width="270" height="60"/>
+                                                                                <rect key="frame" x="0.0" y="26" width="270" height="58"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcM-Hc-4Xx" userLabel="UserName Label">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="23"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="17"/>
                                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcC-Yb-7ot" userLabel="username textfield">
-                                                                                        <rect key="frame" x="0.0" y="36" width="270" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="35" width="270" height="23"/>
                                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="20"/>
                                                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="next"/>
@@ -2414,7 +2425,7 @@
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6F-3g-dgw" userLabel="UserName Line View">
-                                                                                <rect key="frame" x="0.0" y="85" width="270" height="1"/>
+                                                                                <rect key="frame" x="0.0" y="84" width="270" height="1"/>
                                                                                 <color key="backgroundColor" red="0.58424812559999995" green="0.58435159920000002" blue="0.58424162859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="1" id="G6K-qN-Hub"/>
@@ -2578,10 +2589,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="123.5"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="s1H-Yg-qRb">
-                                                                                <rect key="frame" x="64.5" y="0.0" width="201.5" height="28"/>
+                                                                                <rect key="frame" x="70.5" y="0.0" width="189" height="27"/>
                                                                                 <subviews>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVe-2h-9xR" userLabel="check">
-                                                                                        <rect key="frame" x="0.0" y="3" width="20" height="22"/>
+                                                                                        <rect key="frame" x="0.0" y="2.5" width="20" height="22"/>
                                                                                         <state key="normal" image="checkBox"/>
                                                                                         <state key="selected" image="checkBoxActive"/>
                                                                                         <connections>
@@ -2590,7 +2601,7 @@
                                                                                         </connections>
                                                                                     </button>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Accept " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YP7-vN-oe4">
-                                                                                        <rect key="frame" x="22" y="8" width="40.5" height="12"/>
+                                                                                        <rect key="frame" x="22" y="8.5" width="40" height="10"/>
                                                                                         <fontDescription key="fontDescription" name="MullerRegular" family="Muller" pointSize="10"/>
                                                                                         <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2599,7 +2610,7 @@
                                                                                         </variation>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vh-oG-Say">
-                                                                                        <rect key="frame" x="64.5" y="0.0" width="80" height="28"/>
+                                                                                        <rect key="frame" x="64" y="0.0" width="74" height="27"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="13"/>
                                                                                         <state key="normal" title="privacy policy">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2609,7 +2620,7 @@
                                                                                         </connections>
                                                                                     </button>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7Q-wV-bHN">
-                                                                                        <rect key="frame" x="146.5" y="8" width="20" height="12"/>
+                                                                                        <rect key="frame" x="140" y="7.5" width="17" height="11.5"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto" family="Antipasto" pointSize="10"/>
                                                                                         <color key="textColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2618,7 +2629,7 @@
                                                                                         </variation>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epu-5K-WdJ">
-                                                                                        <rect key="frame" x="168.5" y="0.0" width="33" height="28"/>
+                                                                                        <rect key="frame" x="159" y="0.0" width="30" height="27"/>
                                                                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="13"/>
                                                                                         <state key="normal" title="terms">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

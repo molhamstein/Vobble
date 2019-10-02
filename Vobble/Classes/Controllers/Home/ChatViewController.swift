@@ -162,7 +162,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     /// Record beep
     var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")!)
     var popSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "find_bottle", ofType: "mp3")!)
-    var beepPlayer = AVAudioPlayer()
+    var beepPlayer : AVAudioPlayer!
     
     /// Audio messages
     var currentAudioIndex: Int!

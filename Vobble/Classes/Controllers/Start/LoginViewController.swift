@@ -26,7 +26,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     @IBOutlet weak var emailtest: UILabel!
     @IBOutlet weak var btnBack: UIButton!
-    
+    @IBOutlet weak var shadowView: UIView!
     // MARK: Properties
     
     //startup view
@@ -52,8 +52,8 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     @IBOutlet weak var waveSubView: WaveView!
     
     // welcome view
-    private var player: AVPlayer?
-    private var audioPlayer: AVAudioPlayer?
+    fileprivate var player: AVPlayer?
+    fileprivate var audioPlayer: AVAudioPlayer?
     
     // login view
     @IBOutlet weak var loginView: UIView!
@@ -191,6 +191,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         
         if !self.isInitialized {
             //self.backgroundView.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
+            self.shadowView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
             self.loginButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
             self.signupButton.applyGradient(colours: [AppColors.blueXDark, AppColors.blueXLight], direction: .diagonal)
             self.preparePlayer()
@@ -206,8 +207,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.player?.pause()
-        self.audioPlayer?.pause()
+        self.stopMedia()
     }
     
     func applicationDidBecomeActive() {
@@ -398,6 +398,11 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
         self.player?.play()
     }
     
+    func stopMedia(){
+        self.player?.pause()
+        self.audioPlayer?.pause()
+    }
+    
     // MARK: Actions
     @IBAction func termsOfServiceAction(_ sender: UIButton) {
         self.performSegue(withIdentifier: "loginTermsSegue", sender: termsButton)
@@ -517,6 +522,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                         self.showView(withType: .socialLoginStep2)
                         Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
                     } else {
+                        self.stopMedia()
                         self.dismiss(animated: true, completion: { })
                         self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                     }
@@ -555,6 +561,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                         self.showView(withType: .socialLoginStep2)
                         Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
                     } else {
+                        self.stopMedia()
                         self.dismiss(animated: true, completion: { })
                         self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                     }
@@ -645,6 +652,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                                     self.showMessage(message:err.localizedDescription, type: .error)
                                 }
                                 self.loginButton.isLoading = false
+                                self.stopMedia()
                                 self.dismiss(animated: true, completion: { })
                                 self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                             })
@@ -998,6 +1006,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate{
                             self.showView(withType: .socialLoginStep2)
                             Flurry.logEvent(AppConfig.signup_info_screen_show, withParameters:[:]);
                         } else {
+                            self.stopMedia()
                             self.dismiss(animated: true, completion: { })
                             self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                         }

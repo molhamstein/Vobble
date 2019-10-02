@@ -39,7 +39,7 @@ class RecordAudioReplyMediaControl : AbstractController {
     
     /// Record beep
     var beepSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "audio_msg_beeb", ofType: "mp3")!)
-    var beepPlayer = AVAudioPlayer()
+    var beepPlayer : AVAudioPlayer!
     
     var isVOverlayApplyGradient:Bool = false
     

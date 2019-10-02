@@ -39,6 +39,7 @@ class GetMoreViewController: AbstractController {
         self.lblTopTitle.font = AppFonts.xBigBold
         
         self.collectionView.register(UINib(nibName: "OutsideShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "OutsideShopCollectionViewCell")
+        self.collectionView.register(UINib(nibName: "ShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ShopCollectionViewCellID")
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
@@ -113,12 +114,21 @@ extension GetMoreViewController : UICollectionViewDelegate, UICollectionViewData
         
         let obj = self.itemsArray[indexPath.row]
         
-        let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutsideShopCollectionViewCell", for: indexPath) as! OutsideShopCollectionViewCell
-        
-        
-        shopCell.configCell(shopItemObj: obj)
-        
-        return shopCell
+        if self.fType == .replies {
+            let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShopCollectionViewCellID", for: indexPath) as! ShopCollectionViewCell
+            
+            shopCell.configCell(shopItemObj: obj)
+            
+            return shopCell
+        }else {
+            
+            let shopCell = collectionView.dequeueReusableCell(withReuseIdentifier: "OutsideShopCollectionViewCell", for: indexPath) as! OutsideShopCollectionViewCell
+            
+            shopCell.configCell(shopItemObj: obj)
+            
+            return shopCell
+        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -204,7 +214,7 @@ extension GetMoreViewController: UICollectionViewDelegateFlowLayout {
         let itemh = UIScreen.main.bounds.height > 570 ? CGFloat(210) : CGFloat(190)
         
         if self.fType == .replies {
-            return CGSize(width: itemW / 2.5, height: itemh + 40)
+            return CGSize(width: popUpView.bounds.size.width, height: 170)
         }else {
             return CGSize(width: itemW / 3, height: itemh)
         }

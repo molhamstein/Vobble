@@ -49,7 +49,7 @@ class PreviewMediaControl : AbstractController {
     //Topic
     var topicId: String?
     
-    var soundPlayer = AVAudioPlayer()
+    var soundPlayer : AVAudioPlayer!
     var parentVC: UIViewController!
     
 //    var avPlayer = AVPlayer();

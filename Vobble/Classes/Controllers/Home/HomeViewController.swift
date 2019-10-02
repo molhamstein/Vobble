@@ -114,7 +114,7 @@ class HomeViewController: AbstractController {
     /// find/throw sound
     var throwSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "splashSound", ofType: "mp3")!)
     var findSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "find_bottle", ofType: "mp3")!)
-    var soundPlayer = AVAudioPlayer()
+    var soundPlayer : AVAudioPlayer!
     
     // MARK: Controller Life Cycle
     override func viewDidLoad() {
