@@ -285,8 +285,15 @@ extension FindBottleViewController {
                     self.showMessage(message: ServerError.unknownError.type.errorMessage, type: .error)
                 } else {
                     self.showActivityLoader(false)
-                    ApiManager.shared.replyToBottle(bottle: btl, completionBlock: { (success, err) in })
-                    self.performSegue(withIdentifier: "goToChat", sender: databaseReference)
+                    ApiManager.shared.replyToBottle(bottle: btl, completionBlock: { (success, err) in
+                        if let error = err {
+                            self.showMessage(message: error.type.errorMessage, type: .error )
+                            return
+                        }
+                        
+                        self.performSegue(withIdentifier: "goToChat", sender: databaseReference)
+                    })
+                    
                 }
             })
         }

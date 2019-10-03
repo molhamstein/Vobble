@@ -50,7 +50,7 @@ class PreviewMediaControl : AbstractController {
     var topicId: String?
     
     var soundPlayer : AVAudioPlayer!
-    var parentVC: UIViewController!
+    var parentVC: UIViewController?
     
 //    var avPlayer = AVPlayer();
 //    var avPlayerLayer = AVPlayerLayer();
@@ -140,7 +140,12 @@ class PreviewMediaControl : AbstractController {
         imgUrl = ""
         //Video
         videoUrl = NSURL()
-        self.parentVC.dismiss(animated: true, completion: nil)
+        if let vc = parentVC {
+            vc.dismiss(animated: true, completion: nil)
+        }else {
+            self.dismiss(animated: true, completion: nil)
+        }
+        
 
     }
     

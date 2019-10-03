@@ -182,6 +182,12 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 
             }
             
+            adjustButtonFontScale(buttons: [self.termsButton,
+                                            self.loginTermsButton,
+                                            self.startupTermsButton,
+                                            self.privacyButton,
+                                            self.loginPrivacyButton,
+                                            self.startupPrivacyButton])
         }
         //lvEmailLabel.font = AppFonts.big
     }
@@ -801,6 +807,14 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
 
         
         return true
+    }
+    
+    func adjustButtonFontScale(buttons: [UIButton]){
+        for button in buttons {
+            button.titleLabel?.minimumScaleFactor = 0.5
+            button.titleLabel?.numberOfLines = 1
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+        }
     }
     
     func validateSocialLoginStep2Fields () -> Bool {

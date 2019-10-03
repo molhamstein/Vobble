@@ -1622,6 +1622,7 @@ struct ServerError {
         case invalidPurchase = 415
         case accountDeactivated = 416
         case deviceBlocked = 419
+        case noEnoughReplies = 421
         case loginFailed = 601 // temp code
         
         /// Handle generic error messages
@@ -1672,6 +1673,8 @@ struct ServerError {
                     return "CAN_NOT_EDIT_USERNAME".localized
                 case .noEnoughCoins:
                     return "ERROR_NO_ENOUGH_COINS".localized
+                case .noEnoughReplies:
+                    return "ERROR_NO_ENOUGH_REPLIES".localized
                 default:
                     return "ERROR_UNKNOWN".localized
             }

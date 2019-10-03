@@ -48,10 +48,12 @@ class GetMoreViewController: AbstractController {
         if fType == .bottlesPack {
             self.lblTopTitle.text = String.init(format: "BOTTLE_POPUP_TITLE".localized, "")
             initBottlesArray()
+            self.collectionView.isScrollEnabled = false
             
         }else if fType == .replies {
             self.lblTopTitle.text = String.init(format: "REPLY_POPUP_TITLE".localized, "")
             initRepliesArray()
+            self.collectionView.isScrollEnabled = true
         }
         
         
@@ -214,7 +216,7 @@ extension GetMoreViewController: UICollectionViewDelegateFlowLayout {
         let itemh = UIScreen.main.bounds.height > 570 ? CGFloat(210) : CGFloat(190)
         
         if self.fType == .replies {
-            return CGSize(width: popUpView.bounds.size.width, height: 170)
+            return CGSize(width: popUpView.bounds.size.width - 8, height: 170)
         }else {
             return CGSize(width: itemW / 3, height: itemh)
         }

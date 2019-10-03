@@ -17,6 +17,7 @@ class VobbleNavigationBar : AbstractNibView {
         case normal
     }
     
+    @IBOutlet weak var navBarBG: UIImageView!
     @IBOutlet weak var leftIcon: UIButton!
     @IBOutlet weak var navTitle: UILabel!
     @IBOutlet weak var lblCoins: UILabel!
@@ -84,6 +85,12 @@ class VobbleNavigationBar : AbstractNibView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(displayShop))
         self.lblCoins.isUserInteractionEnabled = true
         self.lblCoins.addGestureRecognizer(tap)
+        
+        // Mirror navigation bar image
+        if AppConfig.currentLanguage == .arabic {
+            self.navBarBG.image = self.navBarBG.image?.imageFlippedForRightToLeftLayoutDirection()
+        }
+        
     }
     
     // MARK: -  Private Methods

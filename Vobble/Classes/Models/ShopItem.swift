@@ -41,8 +41,11 @@ enum ShopItemID: String {
     case ExtendChat3 = "com.yallavideo.Vibo.3extend"
     case ExtendChat6 = "com.yallavideo.Vibo.6extend"
     
-    case Coins100 = "com.yallavideo.Vibo.coins100"
-    case Coins200 = "com.yallavideo.Vibo.coins200"
+    case Coins500 = "com.yallavideo.Vibo.coins500"
+    case Coins1200 = "com.yallavideo.Vibo.coins1200"
+    case Coins2500 = "com.yallavideo.Vibo.coins2500"
+    case Coins6500 = "com.yallavideo.Vibo.coins6500"
+    case Coins14000 = "com.yallavideo.Vibo.coins14000"
     
     static func getIdFromKey(DBId: String) -> String {
         
@@ -92,8 +95,11 @@ enum ShopItemID: String {
         listId.append(ShopItemID.ExtendChat3.rawValue)
         listId.append(ShopItemID.ExtendChat6.rawValue)
         
-        listId.append(ShopItemID.Coins100.rawValue)
-        listId.append(ShopItemID.Coins200.rawValue)
+        listId.append(ShopItemID.Coins500.rawValue)
+        listId.append(ShopItemID.Coins1200.rawValue)
+        listId.append(ShopItemID.Coins2500.rawValue)
+        listId.append(ShopItemID.Coins6500.rawValue)
+        listId.append(ShopItemID.Coins14000.rawValue)
         
         return listId
     }

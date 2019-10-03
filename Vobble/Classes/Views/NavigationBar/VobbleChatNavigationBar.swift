@@ -18,6 +18,7 @@ import UIKit
 
 class VobbleChatNavigationBar: AbstractNibView {
     
+    @IBOutlet weak var navBarBG: UIImageView!
     @IBOutlet weak var btnExtendChat: UIButton!
     @IBOutlet weak var moreOptions: UIButton!
     @IBOutlet weak var leftIcon: UIButton!
@@ -62,6 +63,11 @@ class VobbleChatNavigationBar: AbstractNibView {
         self.extendAlertView.isUserInteractionEnabled = true
         self.extendAlertView.addGestureRecognizer(tap)
         self.timerStackView.addGestureRecognizer(tap)
+        
+        // Mirror navigation bar image
+        if AppConfig.currentLanguage == .arabic {
+            self.navBarBG.image = self.navBarBG.image?.imageFlippedForRightToLeftLayoutDirection()
+        }
     }
     
     // MARK: -  Private Methods

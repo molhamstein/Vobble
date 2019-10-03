@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="lblCoins" destination="VN3-Uv-y3E" id="8nY-a1-bDv"/>
                 <outlet property="leftIcon" destination="gN4-5k-Fqc" id="EXg-GK-Neb"/>
+                <outlet property="navBarBG" destination="E4N-xv-Zi8" id="XdA-4v-uRG"/>
                 <outlet property="navTitle" destination="1DC-up-vPY" id="vkm-6f-Yvp"/>
                 <outlet property="progressIndicator" destination="gaE-aq-7Iy" id="IlO-Fo-vf8"/>
                 <outlet property="rightIcon" destination="yuD-6v-FJa" id="Jqa-PN-CTi"/>
