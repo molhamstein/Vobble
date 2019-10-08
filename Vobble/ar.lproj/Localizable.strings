@@ -248,6 +248,9 @@
 "GET_REPLIES"                          = "احصل على ردود";
 "REPLY_POPUP_TITLE"                    = "احصل على مزيد من الردود";
 "REPLIES_TITLE"                        = "اضف ردود";
+"FILTER_BY_TITLE"                      = "تفضيل بواسطة:";
+"GENDER_FILTER"                        = "الجنس";
+"COUNTRY_FILTER"                       = "البلد";
 
 // shop
 "BUY_ITEM_WARNING"                     = "هل آنت متآكد من عملية الشراء ب %@ ؟";

@@ -1194,6 +1194,48 @@
                                     <constraint firstItem="qHm-VL-mSv" firstAttribute="centerY" secondItem="Jc5-Y7-zrh" secondAttribute="centerY" id="rW6-HD-o9q"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYw-kf-6v9">
+                                <rect key="frame" x="24" y="94" width="66" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EmD-kh-W6n">
+                                <rect key="frame" x="106" y="91.333333333333329" width="70" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="d9H-dr-xj4"/>
+                                    <constraint firstAttribute="height" constant="26" id="kOW-nZ-txq"/>
+                                </constraints>
+                                <state key="normal" title="Gender">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="13"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="showFilter:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="6wU-kM-PbX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3o-9f-uXH">
+                                <rect key="frame" x="192" y="91.333333333333329" width="70" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="He6-Y0-xrT"/>
+                                    <constraint firstAttribute="height" constant="26" id="Jd9-2X-GKL"/>
+                                </constraints>
+                                <state key="normal" title="Country">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="13"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="showFilter:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="xHN-Nh-EdK"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCn-Ia-GpG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
@@ -1394,24 +1436,56 @@
                                     <constraint firstAttribute="bottom" secondItem="YNG-sl-8D4" secondAttribute="bottom" id="wJ9-x1-bta"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHc-Ka-leD">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.2962588028" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="showFilter:" destination="YbT-3z-m7x" eventType="touchUpInside" id="brQ-Ac-G5t"/>
+                                    <action selector="showFilter:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="cK8-No-ni5"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0z-Nd-C7w" customClass="VideoPlayerView" customModule="Vobble" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScO-7d-mb2" customClass="FilterView" customModule="Vobble" customModuleProvider="target">
+                                <rect key="frame" x="41.333333333333343" y="-24" width="331.33333333333326" height="450"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="450" id="rQc-xR-fDx"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="HHc-Ka-leD" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="030-iQ-xfA"/>
                             <constraint firstItem="FEs-Za-Eqo" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="5Gd-fi-Hru"/>
                             <constraint firstItem="UKi-6x-39o" firstAttribute="top" secondItem="i4J-Da-9sm" secondAttribute="bottom" id="6eR-MV-r2c"/>
                             <constraint firstItem="hny-Og-jaY" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="6iV-1T-g2Y"/>
+                            <constraint firstItem="EmD-kh-W6n" firstAttribute="centerY" secondItem="yYw-kf-6v9" secondAttribute="centerY" id="7WD-PS-hrF"/>
+                            <constraint firstItem="EmD-kh-W6n" firstAttribute="leading" secondItem="yYw-kf-6v9" secondAttribute="trailing" constant="16" id="7c2-q5-TWG"/>
                             <constraint firstAttribute="trailing" secondItem="99U-U6-K8D" secondAttribute="trailing" constant="70" id="BMD-YT-V3Y"/>
                             <constraint firstAttribute="bottom" secondItem="DCn-Ia-GpG" secondAttribute="bottom" id="E7Z-Tm-4xa"/>
                             <constraint firstAttribute="bottom" secondItem="9ZT-Et-onT" secondAttribute="bottom" constant="36" id="HKA-0l-W3u"/>
                             <constraint firstItem="mXs-T0-xQv" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="LeD-Vp-jel"/>
                             <constraint firstAttribute="trailing" secondItem="mXs-T0-xQv" secondAttribute="trailing" id="NnP-6b-eN3"/>
+                            <constraint firstItem="yYw-kf-6v9" firstAttribute="top" secondItem="99U-U6-K8D" secondAttribute="bottom" constant="24" id="Pby-ol-NFN"/>
                             <constraint firstAttribute="trailing" secondItem="zjl-AZ-sn8" secondAttribute="trailing" constant="10" id="PjS-xr-XII"/>
                             <constraint firstAttribute="bottom" secondItem="FEs-Za-Eqo" secondAttribute="bottom" id="SUR-Nz-WXb"/>
                             <constraint firstItem="99U-U6-K8D" firstAttribute="top" secondItem="i4J-Da-9sm" secondAttribute="bottom" id="SVK-Vf-ah7"/>
+                            <constraint firstItem="ScO-7d-mb2" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" constant="-24" id="T17-m5-Vrh"/>
                             <constraint firstAttribute="bottom" secondItem="A0z-Nd-C7w" secondAttribute="bottom" id="UQo-aB-bWi"/>
                             <constraint firstItem="DCn-Ia-GpG" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="UYB-cm-9Gp"/>
                             <constraint firstItem="9ZT-Et-onT" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="Vzz-G2-WzS"/>
@@ -1419,18 +1493,26 @@
                             <constraint firstItem="zjl-AZ-sn8" firstAttribute="top" secondItem="02f-rh-QdI" secondAttribute="bottom" constant="15" id="Wit-iv-Gqe"/>
                             <constraint firstItem="hny-Og-jaY" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="Wxf-ay-XIu"/>
                             <constraint firstAttribute="trailing" secondItem="DCn-Ia-GpG" secondAttribute="trailing" id="YR4-aW-sd8"/>
+                            <constraint firstItem="HHc-Ka-leD" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="Ylr-ju-udc"/>
                             <constraint firstAttribute="bottom" secondItem="hny-Og-jaY" secondAttribute="bottom" id="cXV-k5-VhF"/>
                             <constraint firstAttribute="trailing" secondItem="A0z-Nd-C7w" secondAttribute="trailing" id="dJ3-Gc-aru"/>
                             <constraint firstAttribute="trailing" secondItem="hny-Og-jaY" secondAttribute="trailing" id="dOz-aW-wlx"/>
                             <constraint firstItem="UKi-6x-39o" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="dyK-ay-ZmQ"/>
+                            <constraint firstItem="yYw-kf-6v9" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" constant="24" id="e4h-Ct-xUh"/>
                             <constraint firstItem="DCn-Ia-GpG" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="eTV-HW-FNo"/>
                             <constraint firstItem="A0z-Nd-C7w" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="eeb-5F-XBY"/>
                             <constraint firstItem="99U-U6-K8D" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="gaA-q0-102"/>
+                            <constraint firstItem="nBr-Q4-xhz" firstAttribute="top" secondItem="HHc-Ka-leD" secondAttribute="bottom" id="heB-hA-a2J"/>
+                            <constraint firstItem="ScO-7d-mb2" firstAttribute="centerX" secondItem="BlD-gh-JjX" secondAttribute="centerX" id="jQK-6d-e66"/>
                             <constraint firstAttribute="trailing" secondItem="UKi-6x-39o" secondAttribute="trailing" id="k3G-ab-I7g"/>
                             <constraint firstItem="A0z-Nd-C7w" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="luv-3Z-2UZ"/>
+                            <constraint firstItem="ScO-7d-mb2" firstAttribute="width" secondItem="BlD-gh-JjX" secondAttribute="width" multiplier="0.8" id="nK3-Ac-YEX"/>
                             <constraint firstAttribute="trailing" secondItem="9ZT-Et-onT" secondAttribute="trailing" id="paa-81-uPc"/>
                             <constraint firstItem="mXs-T0-xQv" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="qc1-Ft-R2x"/>
+                            <constraint firstItem="h3o-9f-uXH" firstAttribute="centerY" secondItem="EmD-kh-W6n" secondAttribute="centerY" id="sHx-EU-9ea"/>
+                            <constraint firstAttribute="trailing" secondItem="HHc-Ka-leD" secondAttribute="trailing" id="sO3-ZA-yj2"/>
                             <constraint firstItem="FEs-Za-Eqo" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="tMg-xS-RBy"/>
+                            <constraint firstItem="h3o-9f-uXH" firstAttribute="leading" secondItem="EmD-kh-W6n" secondAttribute="trailing" constant="16" id="uFm-fI-lC9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -1442,9 +1524,14 @@
                     <connections>
                         <outlet property="blockButton" destination="fmA-T3-b5n" id="zsO-KV-Coq"/>
                         <outlet property="bottomView" destination="9ZT-Et-onT" id="pqS-LP-Mwc"/>
+                        <outlet property="btnCountryFilter" destination="h3o-9f-uXH" id="tOF-GM-oX6"/>
+                        <outlet property="btnGenderFilter" destination="EmD-kh-W6n" id="LuA-HQ-O3D"/>
                         <outlet property="closeButton" destination="NYp-uR-axZ" id="Sxn-gK-oA9"/>
                         <outlet property="countryFlag" destination="C4v-Wh-KA2" id="PTo-2y-z3w"/>
+                        <outlet property="filterView" destination="ScO-7d-mb2" id="Llg-Dy-efN"/>
+                        <outlet property="filterViewOverlay" destination="HHc-Ka-leD" id="Ulx-GW-mb0"/>
                         <outlet property="genderImage" destination="VNM-xc-o7P" id="iQM-pc-NzJ"/>
+                        <outlet property="lblFilterTitle" destination="yYw-kf-6v9" id="sFq-z2-Iga"/>
                         <outlet property="moreOptionsOverlayButton" destination="DCn-Ia-GpG" id="LuP-Ej-AeR"/>
                         <outlet property="optionView" destination="zjl-AZ-sn8" id="D6K-fg-OLV"/>
                         <outlet property="playButton" destination="fRM-BQ-2qY" id="SFM-UB-O6l"/>

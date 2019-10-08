@@ -17,6 +17,7 @@ protocol FilterViewDelegate {
     func filterViewFindBottle(_ filterView: FilterView)
     func filterViewGoToShop(_ filterView: FilterView, productType: ShopItemType)
     func filterBuyItem(_ filterView: FilterView, product: ShopItem)
+    func didPressOnCountryFilter()
 }
 
 class FilterView: AbstractNibView {
@@ -130,6 +131,10 @@ class FilterView: AbstractNibView {
         countryShopCollectionView.register(UINib(nibName: "FilterShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FilterShopCollectionViewCell")
         
         refreshFilterView()
+        
+        // I disabled these buttons because filters will be bought dirctly from this view
+        genderBuyFilterButton.isEnabled = false
+        countryBuyFilterButton.isEnabled = false
     }
     
     func refreshFilterView() {
@@ -288,6 +293,7 @@ class FilterView: AbstractNibView {
     }
     
     @IBAction func countryPickerOverlayAction(_ sender: Any) {
+        self.delegate?.didPressOnCountryFilter()
         if let viewController = delegate as? UIViewController {
             self.countryPicker.showCountriesList(from: viewController)
         }

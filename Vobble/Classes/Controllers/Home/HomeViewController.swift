@@ -406,7 +406,7 @@ class HomeViewController: AbstractController {
             let findBottleVC = nav.topViewController as! FindBottleViewController
             //findBottleVC.bottle = bottle
             findBottleVC.countryCode = self.countryCode
-            findBottleVC.gender = self.gender.rawValue
+            findBottleVC.gender = self.gender
             findBottleVC.shoreId = self.shoreId
             findBottleVC.bottles = bottles
         
@@ -1067,6 +1067,9 @@ extension HomeViewController: FilterViewDelegate {
         // flurry events
         let logEventParams = ["prodType": prodcutType];
         Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
+    }
+    
+    func didPressOnCountryFilter() {
     }
 }
 

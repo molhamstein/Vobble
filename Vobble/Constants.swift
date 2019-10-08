@@ -71,6 +71,7 @@ struct AppConfig {
     
     // Filter
     static let filter_click = "Filter_Click"
+    static let filter_click_from_find_bottle = "Filter_Click_From_Find_Bottle"
     static let filter_pressed_go_gender = "Filter_go_to_gender"
     static let filter_pressed_go_country = "Filter_go_to_country"
     

@@ -247,6 +247,9 @@
 "GET_REPLIES"                          = "Get replies";
 "REPLY_POPUP_TITLE"                    = "Get more replies";
 "REPLIES_TITLE"                        = "Add replies";
+"FILTER_BY_TITLE"                      = "Filter by:";
+"GENDER_FILTER"                        = "Gender";
+"COUNTRY_FILTER"                       = "Country";
 
 // shop
 "BUY_ITEM_WARNING"                     = "Are you sure you want to buy this item with %@ ?";

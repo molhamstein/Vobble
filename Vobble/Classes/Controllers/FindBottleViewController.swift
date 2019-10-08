@@ -41,6 +41,12 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var reportView: UIView!
     @IBOutlet weak var reportPicker: UIPickerView!
     
+    @IBOutlet weak var lblFilterTitle: UILabel!
+    @IBOutlet weak var btnGenderFilter: UIButton!
+    @IBOutlet weak var btnCountryFilter: UIButton!
+    @IBOutlet weak var filterView: FilterView!
+    @IBOutlet weak var filterViewOverlay: UIView!
+    
     fileprivate var reportReasonIndex:Int = 0
     fileprivate var videoCards: [VideoPlayerLayer?] = []
     fileprivate var currentVideoCard: VideoPlayerLayer?
@@ -57,7 +63,7 @@ class FindBottleViewController: AbstractController {
     public var shoreName:String?
     public var myVideoUrl : NSURL?
     public var myAudioUrl : URL?
-    public var gender: String!
+    public var gender: GenderType = .allGender
     public var countryCode: String!
     public var shoreId: String?
     
@@ -67,6 +73,7 @@ class FindBottleViewController: AbstractController {
     var shouldSetupScrollView: Bool = true
     var didCancelBuffering: Bool = false
     var isGettingVideos: Bool = false
+    var filterViewVisible = false
     
     override func viewDidLoad() {
         
@@ -82,10 +89,17 @@ class FindBottleViewController: AbstractController {
         reportView.isHidden = true
         reportButton.setTitle("REPORT".localized, for: .normal)
         blockButton.setTitle("BLOCK_USER".localized, for: .normal)
+        btnGenderFilter.setTitle("GENDER_FILTER".localized, for: .normal)
+        btnCountryFilter.setTitle("COUNTRY_FILTER".localized, for: .normal)
+        lblFilterTitle.text = "FILTER_BY_TITLE".localized
+        
         //ignoreButton.setTitle("IGNORE".localized, for: .normal)
         //replyButton.setTitle("REPLY".localized, for: .normal)
         //ignoreButton.titleLabel?.font = AppFonts.normalBold
         replyLabel.font = AppFonts.normalBold
+        btnGenderFilter.titleLabel?.font = AppFonts.smallSemiBold
+        btnCountryFilter.titleLabel?.font = AppFonts.smallSemiBold
+        lblFilterTitle.font = AppFonts.normal
         
         // round flag image view
         countryFlag.layer.cornerRadius = 12
@@ -97,6 +111,14 @@ class FindBottleViewController: AbstractController {
         parameters.animDuration = 2
         replyButton.image = .defaultAndSelect(#imageLiteral(resourceName: "replay_circle"), #imageLiteral(resourceName: "replay_circle"))
         replyButton.params = parameters
+        
+        // inisialize filter view
+        self.filterView.delegate = self
+        self.filterView.relatedVC = self
+        self.filterView.isHidden = true
+        self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
+        self.filterViewOverlay.alpha = 0.0
+        
 
     }
     
@@ -146,6 +168,8 @@ class FindBottleViewController: AbstractController {
             //bottomView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
             //ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
             //replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
+            btnCountryFilter.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .vertical)
+            btnGenderFilter.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .vertical)
             replyLabel.text = "REPLY".localized
             
             // show chat tutorial on first opening of an unblocked chat
@@ -333,7 +357,10 @@ extension FindBottleViewController {
             userimage.sd_setShowActivityIndicatorView(true)
             userimage.sd_setIndicatorStyle(.gray)
             userimage.sd_setImage(with: URL(string: imgUrl))
+        }else {
+            userimage.image = UIImage(named:"user_placeholder")
         }
+
         
         currentVideoCard?.slideBar?.value = 0.0
     }
@@ -354,7 +381,7 @@ extension FindBottleViewController {
     func getMoreVideos() {
         self.seen = DataStore.shared.seenVideos
         self.complete = DataStore.shared.completedVideos
-        ApiManager.shared.findBottles(gender: gender, countryCode: countryCode, shoreId: shoreId, seen: seen, complete: complete, offsets: Double(self.bottles?.count ?? 0), completionBlock: {(bottles, error) in
+        ApiManager.shared.findBottles(gender: gender.rawValue, countryCode: countryCode, shoreId: shoreId, seen: seen, complete: complete, offsets: Double(self.bottles?.count ?? 0), completionBlock: {(bottles, error) in
             
             self.isGettingVideos = false
             
@@ -563,22 +590,61 @@ extension FindBottleViewController {
             self.goToChat()
         }
     }
+    
+    @IBAction func showFilter (_ sender: Any) {
+        if self.filterViewVisible {
+            // hide
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.filterView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -self.filterView.frame.height - 50)
+                self.filterViewOverlay.alpha = 0.0
+            }, completion: {(finished: Bool) in
+                self.filterViewVisible = false
+                self.filterViewOverlay.isHidden = true
+            })
+        } else {
+            // show
+            if self.currentVideoCard?.isPlaying() ?? false {
+                currentVideoCard?.playButtonPressed()
+            }
+            
+            self.filterView.onFilterViewAppaer()
+            self.filterView.isHidden = false
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.filterView.transform = CGAffineTransform.identity
+                self.filterViewOverlay.alpha = 1.0
+            }, completion: {(finished: Bool) in
+                self.filterViewVisible = true
+                self.filterViewOverlay.isHidden = false
+            })
+        }
+        Flurry.logEvent(AppConfig.filter_click_from_find_bottle);
+    }
+
 }
 
 extension FindBottleViewController: VideoPlayerDelegate {
     func didCompleteVideo() {
-        if let _ = DataStore.shared.completedVideos {
-            DataStore.shared.completedVideos?.append((self.currentBottle?.bottle_id!)!)
-        }else {
-            DataStore.shared.completedVideos = [self.currentBottle?.bottle_id!] as? [String]
+        let alreadyExist = DataStore.shared.completedVideos?.filter {$0 == self.currentBottle?.bottle_id!}
+        
+        if !(alreadyExist?.count ?? 0 > 0) {
+            if let _ = DataStore.shared.completedVideos {
+                DataStore.shared.completedVideos?.append((self.currentBottle?.bottle_id!)!)
+            }else {
+                DataStore.shared.completedVideos = [self.currentBottle?.bottle_id!] as? [String]
+            }
         }
+        
     }
     
     func didSeenVideo() {
-        if let _ = DataStore.shared.seenVideos {
-            DataStore.shared.seenVideos?.append((self.currentBottle?.bottle_id!)!)
-        }else {
-            DataStore.shared.seenVideos = [self.currentBottle?.bottle_id!] as? [String]
+        let alreadyExist = DataStore.shared.seenVideos?.filter {$0 == self.currentBottle?.bottle_id!}
+        
+        if !(alreadyExist?.count ?? 0 > 0) {
+            if let _ = DataStore.shared.seenVideos {
+                DataStore.shared.seenVideos?.append((self.currentBottle?.bottle_id!)!)
+            }else {
+                DataStore.shared.seenVideos = [self.currentBottle?.bottle_id!] as? [String]
+            }
         }
     }
     
@@ -614,5 +680,170 @@ extension FindBottleViewController: UIPickerViewDelegate,UIPickerViewDataSource 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.reportReasonIndex = row
         print(pickerArray[row])
+    }
+}
+
+extension FindBottleViewController: FilterViewDelegate {
+    func filterViewGet(_ filterView: FilterView, gender: String, country: String) {
+        
+        self.gender = GenderType(rawValue: gender)!
+        self.countryCode = country
+
+        
+    }
+    
+    func filterViewShowBuyFilterMessage(_ filterView: FilterView, type: ShopItemType) {
+        
+    }
+    
+    func filterViewFindBottle(_ filterView: FilterView) {
+        // hide filters view is
+        self.showFilter(self)
+        
+        self.seen = DataStore.shared.seenVideos
+        self.complete = DataStore.shared.completedVideos
+        self.showActivityLoader(true)
+    
+        ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: self.shoreId, seen: seen, complete: complete, offsets: 0, completionBlock: {(bottles, error) in
+            
+            self.isGettingVideos = false
+            self.showActivityLoader(false)
+            
+            if error == nil  {
+                if bottles != nil {
+                    self.currentVideoCard?.cancelBuffring()
+                    self.nextVideoCard?.cancelBuffring()
+                    
+                    self.bottles = nil
+                    self.videoCards = []
+                    self.currentIndex = 0.0
+                    self.fixedIndex = 0
+                    self.lastVelocityYSign = 0
+                    
+                    self.bottles = bottles
+                    
+                    if self.bottles?.count ?? 0 > 0 {
+                        self.currentBottle = self.bottles?[0]
+                    }
+                    
+                    self.setupVideoData()
+                    self.setupScrollView()
+                    
+                    
+                } else {
+                    // no bottles found
+                    self.showMessage(message: error?.type.errorMessage ?? "", type: .error)
+                }
+                
+                DataStore.shared.seenVideos = []
+                DataStore.shared.completedVideos = []
+            } else {
+                // error ex. Authoriaztion error
+                let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                if error?.type == .authorization {
+                    let actionCancel = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(actionCancel)
+                    let actionLogout = UIAlertAction(title: "LOGIN_LOGIN_BTN".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else if error?.type == .accountDeactivated || error?.type == .deviceBlocked {
+                    /// user should be forced to logout
+                    let actionLogout = UIAlertAction(title: "ok".localized, style: .default,  handler: {(alert) in ActionLogout.execute()})
+                    alertController.addAction(actionLogout)
+                } else {
+                    let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
+                    alertController.addAction(ok)
+                }
+                self.present(alertController, animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func filterViewGoToShop(_ filterView: FilterView, productType: ShopItemType) {
+       
+    }
+    
+    func filterBuyItem(_ filterView: FilterView, product: ShopItem) {
+        var prodcutType = "country"
+        if product.type == .genderFilter {
+            prodcutType = "gender"
+        }
+        
+        
+        if (DataStore.shared.me?.pocketCoins ?? 0) >= (product.priceCoins ?? 0) {
+            
+            let alertController = UIAlertController(title: "", message: String(format: "BUY_ITEM_WARNING".localized, "\(product.priceCoins ?? 0) " + "COINS".localized) , preferredStyle: .alert)
+            let ok = UIAlertAction(title: "ok".localized, style: .default, handler: { (alertAction) in
+                
+                
+                // flurry events
+                
+                let logEventParams = ["prodType": prodcutType, "ProdName": product.title_en ?? ""];
+                Flurry.logEvent(AppConfig.shop_purchase_click, withParameters:logEventParams);
+                
+                self.showActivityLoader(true)
+                
+                ApiManager.shared.purchaseItemByCoins(shopItem: product, completionBlock: {isSuccess, error, shopItem in
+                    if error == nil {
+                        DataStore.shared.me?.pocketCoins! -= (product.priceCoins ?? 0)
+                        
+                        ApiManager.shared.getMe(completionBlock: { (success, err, user) in
+                            self.showActivityLoader(false)
+                            
+                            let inventoryItem = InventoryItem()
+                            inventoryItem.isValid = true
+                            inventoryItem.isConsumed = false
+                            inventoryItem.shopItem = product
+                            inventoryItem.startDate = Date().timeIntervalSince1970
+                            inventoryItem.endDate = Date().timeIntervalSince1970 + ((product.validity ?? 1) * 60 * 60)
+                            DataStore.shared.inventoryItems.append(inventoryItem)
+                            
+                            // flurry events, on purchase done
+                            let logEventParams2 = ["prodType": prodcutType, "ProdName": product.title_en ?? ""];
+                            Flurry.logEvent(AppConfig.shop_purchase_complete, withParameters:logEventParams2);
+                            
+                            self.filterView.refreshFilterView()
+                            
+                        })
+                        
+                        
+                    }else {
+                        self.showActivityLoader(false)
+                        self.showMessage(message: error?.type.errorMessage ?? "", type: .error)
+                    }
+                    
+                })
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            
+            let alertController = UIAlertController(title: "", message: "NO_ENOUGH_COINS_MSG".localized, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "GET_COINS".localized, style: .default, handler: { (alertAction) in
+                
+                let shopVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShopViewController.className) as! ShopViewController
+                shopVC.fType = .coinsPack
+                
+                self.present(shopVC, animated: true, completion: nil)
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default,  handler: nil)
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        
+        // flurry events
+        let logEventParams = ["prodType": prodcutType];
+        Flurry.logEvent(AppConfig.shop_select_product, withParameters:logEventParams);
+    }
+    
+    func didPressOnCountryFilter() {
+        self.isGoingToSubViewController = true
     }
 }

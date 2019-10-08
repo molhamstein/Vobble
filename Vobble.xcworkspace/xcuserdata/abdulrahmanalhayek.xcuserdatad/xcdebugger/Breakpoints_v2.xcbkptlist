@@ -2,4 +2,86 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Managers/ApiManager.swift"
+            timestampString = "591804963.028195"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "675"
+            endingLineNumber = "675"
+            landmarkName = "replyToBottle(bottle:completionBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Managers/ApiManager.swift"
+            timestampString = "591804963.028596"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "673"
+            endingLineNumber = "673"
+            landmarkName = "replyToBottle(bottle:completionBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Managers/ApiManager.swift"
+            timestampString = "591804963.028849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "672"
+            endingLineNumber = "672"
+            landmarkName = "replyToBottle(bottle:completionBlock:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vobble.ApiManager.replyToBottle(bottle: Vobble.Bottle, completionBlock: (Swift.Bool, Swift.Optional&lt;Vobble.ServerError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Vobble"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emessagroup/Desktop/Projects/Vobble/Vobble/Classes/Managers/ApiManager.swift"
+                  timestampString = "592191011.423514"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "672"
+                  endingLineNumber = "672"
+                  offsetFromSymbolStart = "1152">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in Vobble.ApiManager.replyToBottle(bottle: Vobble.Bottle, completionBlock: (Swift.Bool, Swift.Optional&lt;Vobble.ServerError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Vobble"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emessagroup/Desktop/Projects/Vobble/Vobble/Classes/Managers/ApiManager.swift"
+                  timestampString = "592191011.425289"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "673"
+                  endingLineNumber = "673"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
