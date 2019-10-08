@@ -827,6 +827,7 @@ extension FindBottleViewController: FilterViewDelegate {
                 let shopVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: ShopViewController.className) as! ShopViewController
                 shopVC.fType = .coinsPack
                 
+                self.isGoingToSubViewController = true
                 self.present(shopVC, animated: true, completion: nil)
             })
             
