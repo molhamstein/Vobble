@@ -107,8 +107,13 @@ class WaveView : AbstractNibView , UIGestureRecognizerDelegate{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("tapped")
-        if isBadgeActive {
-            presentNotificationVC()
+        
+        if let touch = touches.first {
+            if self.bottle?.bounds.contains(touch.location(in: self.bottle)) ?? false {
+                if isBadgeActive {
+                    presentNotificationVC()
+                }
+            }
         }
     }
 }

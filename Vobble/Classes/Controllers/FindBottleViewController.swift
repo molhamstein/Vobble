@@ -587,6 +587,7 @@ extension FindBottleViewController {
     
     @IBAction func unwindToFindBottle(segue: UIStoryboardSegue) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.didSeenVideo()
             self.goToChat()
         }
     }

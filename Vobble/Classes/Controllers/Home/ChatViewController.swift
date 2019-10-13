@@ -370,7 +370,6 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
     }
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -629,6 +628,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
             self.popOrDismissViewControllerAnimated(animated: true)
         }
         
+        self.invalidUserTimer.invalidate()
         
     }
     
@@ -1030,6 +1030,10 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                 
                 // You're the only typing, don't show the indicator
                 if let selfRef = self, data.childrenCount == 1 && selfRef.isTyping {
+                    return
+                }
+                
+                if self?.isGiftsViewVisible ?? false {
                     return
                 }
                 
@@ -1447,10 +1451,10 @@ extension ChatViewController {
             
             selectedGiftCategory = indexPath.row
             
+            self.showTypingIndicator = false
             giftsView.productsCollectionView.reloadData()
-        }
-        
-        if collectionView == giftsView.productsCollectionView {
+            
+        }else if collectionView == giftsView.productsCollectionView {
             let product = DataStore.shared.giftCategory[selectedGiftCategory].chatProducts?[indexPath.row]
             if (DataStore.shared.me?.pocketCoins ?? 0) >= (product?.price ?? 0) {
                 
@@ -1499,6 +1503,8 @@ extension ChatViewController {
                 
                 self.present(alertController, animated: true, completion: nil)
             }
+        }else {
+            self.closeKeyboard()
         }
     }
     
@@ -1590,12 +1596,19 @@ extension ChatViewController {
                     present(previewControl, animated: false)
                 }
             }
+        }else {
+            self.closeKeyboard()
         }
         
         // hide keyboard
         //self.inputToolbar.contentView.textView.resignFirstResponder()
         //self.view.endEditing(true)
     }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapCellAt indexPath: IndexPath!, touchLocation: CGPoint) {
+        closeKeyboard()
+    }
+    
 }
 
 // MARK: Image Picker Delegate
@@ -1867,6 +1880,8 @@ extension ChatViewController {
         } else {
             self.closeKeyboard()
             self.selectedGiftCategory = 0
+            self.showTypingIndicator = false
+            
             self.giftsView.categoryCollectionView.reloadData()
             self.giftsView.productsCollectionView.reloadData()
             

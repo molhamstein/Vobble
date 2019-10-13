@@ -169,7 +169,7 @@ class ApiManager: NSObject {
             "socialId": user.socialId!,
             "token": user.socialToken!,
             "gender": user.gender!.rawValue,
-            "image": user.profilePic!,
+            "image": user.profilePic ?? "",
             "name": user.userName!,
             "email": user.email!,
             "deviceName": AppConfig.getDeviceId()
