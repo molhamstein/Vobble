@@ -43,7 +43,7 @@ class FindBottleViewController: AbstractController {
     
     @IBOutlet weak var lblFilterTitle: UILabel!
     @IBOutlet weak var btnGenderFilter: UIButton!
-    @IBOutlet weak var btnCountryFilter: UIButton!
+    //@IBOutlet weak var btnCountryFilter: UIButton!
     @IBOutlet weak var filterView: FilterView!
     @IBOutlet weak var filterViewOverlay: UIView!
     
@@ -89,8 +89,8 @@ class FindBottleViewController: AbstractController {
         reportView.isHidden = true
         reportButton.setTitle("REPORT".localized, for: .normal)
         blockButton.setTitle("BLOCK_USER".localized, for: .normal)
-        btnGenderFilter.setTitle("GENDER_FILTER".localized, for: .normal)
-        btnCountryFilter.setTitle("COUNTRY_FILTER".localized, for: .normal)
+        btnGenderFilter.setTitle("GENDER_AND_COUNTRY_FILTER".localized, for: .normal)
+        //btnCountryFilter.setTitle("COUNTRY_FILTER".localized, for: .normal)
         lblFilterTitle.text = "FILTER_BY_TITLE".localized
         
         //ignoreButton.setTitle("IGNORE".localized, for: .normal)
@@ -98,7 +98,7 @@ class FindBottleViewController: AbstractController {
         //ignoreButton.titleLabel?.font = AppFonts.normalBold
         replyLabel.font = AppFonts.normalBold
         btnGenderFilter.titleLabel?.font = AppFonts.smallSemiBold
-        btnCountryFilter.titleLabel?.font = AppFonts.smallSemiBold
+        //btnCountryFilter.titleLabel?.font = AppFonts.smallSemiBold
         lblFilterTitle.font = AppFonts.normal
         
         // round flag image view
@@ -168,7 +168,7 @@ class FindBottleViewController: AbstractController {
             //bottomView.applyGradient(colours: [AppColors.blackXLightWithAlpha, AppColors.blackXDarkWithAlpha], direction: .vertical)
             //ignoreButton.applyGradient(colours: [AppColors.grayXLight, AppColors.grayDark], direction: .horizontal)
             //replyButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
-            btnCountryFilter.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .vertical)
+            //btnCountryFilter.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .vertical)
             btnGenderFilter.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .vertical)
             replyLabel.text = "REPLY".localized
             

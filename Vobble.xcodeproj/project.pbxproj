@@ -60,8 +60,6 @@
 		57BC6C3F2141DAD7005C4E7B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BC6C3E2141DAD7005C4E7B /* URL.swift */; };
 		57D64E65210707AC00A22B52 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D64E64210707AB00A22B52 /* FirebaseManager.swift */; };
 		57DE7459207D77E00061CA2F /* fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = 57DE7458207D77E00061CA2F /* fire.gif */; };
-		57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 57DED21A2126AFCE00514FBE /* loginVideo.mp4 */; };
-		57E611D72151B24200E0B307 /* loginVideo.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 57E611D62151B21300E0B307 /* loginVideo.m4v */; };
 		69BFE0AE033FF5EDE6981E05 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3D3B0C5AFDAB386F044F74 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		8F08EB26228BB1CB00CE9A81 /* PhoneLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08EB25228BB1CB00CE9A81 /* PhoneLoginViewController.swift */; };
 		8F08EB28228E184C00CE9A81 /* VerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08EB27228E184C00CE9A81 /* VerifyCodeViewController.swift */; };
@@ -296,6 +294,8 @@
 		CE27AF9B232FB52C004824A5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE27AF99232FB52C004824A5 /* NotificationTableViewCell.swift */; };
 		CE27AF9C232FB52C004824A5 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE27AF9A232FB52C004824A5 /* NotificationTableViewCell.xib */; };
 		CE331AC0231D55A30090B676 /* EditUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */; };
+		CE55A2CC235744BA005C2221 /* TempConvCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE55A2CA235744BA005C2221 /* TempConvCollectionViewCell.swift */; };
+		CE55A2CD235744BA005C2221 /* TempConvCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE55A2CB235744BA005C2221 /* TempConvCollectionViewCell.xib */; };
 		CE9A250922F7737600AC2A1D /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A250822F7737600AC2A1D /* Version.swift */; };
 /* End PBXBuildFile section */
 
@@ -381,8 +381,6 @@
 		57BC6C3E2141DAD7005C4E7B /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		57D64E64210707AB00A22B52 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		57DE7458207D77E00061CA2F /* fire.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fire.gif; sourceTree = "<group>"; };
-		57DED21A2126AFCE00514FBE /* loginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.mp4; sourceTree = "<group>"; };
-		57E611D62151B21300E0B307 /* loginVideo.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideo.m4v; sourceTree = "<group>"; };
 		8C4FC40B75AF7FFB0E9C1296 /* Pods_Vobble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vobble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F08EB25228BB1CB00CE9A81 /* PhoneLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLoginViewController.swift; sourceTree = "<group>"; };
 		8F08EB27228E184C00CE9A81 /* VerifyCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewController.swift; sourceTree = "<group>"; };
@@ -746,6 +744,8 @@
 		CE27AF99232FB52C004824A5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		CE27AF9A232FB52C004824A5 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		CE331ABF231D55A30090B676 /* EditUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameViewController.swift; sourceTree = "<group>"; };
+		CE55A2CA235744BA005C2221 /* TempConvCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempConvCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE55A2CB235744BA005C2221 /* TempConvCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempConvCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE9A250822F7737600AC2A1D /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		E256E2B0997DBD0A356FD8B3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -920,13 +920,11 @@
 			children = (
 				04ACC6D92235AD66007FF822 /* splashSound.mp3 */,
 				B19372F72033E48F007B1E7D /* AppColors.swift */,
-				57DED21A2126AFCE00514FBE /* loginVideo.mp4 */,
 				8F85B1DF233ECC1A00D0EF94 /* sea_video.mp4 */,
 				576993942153FF82001211CF /* introSound.mp3 */,
 				57348471218FA36C00F4707B /* audio_msg_beeb.mp3 */,
 				04ACC6D52230F89B007FF822 /* find_bottle.mp3 */,
 				0498677E2187ACB900B3CC43 /* record-beep.mp3 */,
-				57E611D62151B21300E0B307 /* loginVideo.m4v */,
 				B19372E92033E44E007B1E7D /* AppFonts.swift */,
 				B19372EA2033E44E007B1E7D /* Fonts */,
 			);
@@ -1588,6 +1586,8 @@
 				B1EA39CC205606D8008AADC9 /* ConversationCollectionViewCell.swift */,
 				B156A4402058763E00654E2A /* ConversationCollectionViewHeader.xib */,
 				B156A44220587E8000654E2A /* ConversationCollectionViewHeader.swift */,
+				CE55A2CB235744BA005C2221 /* TempConvCollectionViewCell.xib */,
+				CE55A2CA235744BA005C2221 /* TempConvCollectionViewCell.swift */,
 			);
 			path = "My Bottles";
 			sourceTree = "<group>";
@@ -1754,8 +1754,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57E611D72151B24200E0B307 /* loginVideo.m4v in Resources */,
-				57DED21B2126D9B800514FBE /* loginVideo.mp4 in Resources */,
 				B18719CB2079952800861B45 /* jsq_messages_sample.m4a in Resources */,
 				57439D3420FE06D100343FCE /* girl_3_1_night.gif in Resources */,
 				B135B621203DE96900755799 /* Antipasto_regular.otf in Resources */,
@@ -1805,6 +1803,7 @@
 				B17DE5B52055BB8600DC349B /* FilterView.xib in Resources */,
 				B135B622203DE97000755799 /* MullerBold.otf in Resources */,
 				5706C434204DDFE0006E7C9A /* ShoreCell.xib in Resources */,
+				CE55A2CD235744BA005C2221 /* TempConvCollectionViewCell.xib in Resources */,
 				B193731920342D9F007B1E7D /* Main.storyboard in Resources */,
 				B19372F42033E44E007B1E7D /* OpenSansBold.ttf in Resources */,
 				B11B52492038B19700C51EE8 /* Start.storyboard in Resources */,
@@ -1882,7 +1881,6 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Vobble/Pods-Vobble-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BMPlayer/BMPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CountryPickerView/CountryPickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -1922,7 +1920,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryPickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -2024,6 +2021,7 @@
 				B18A5D7B20348E4300F139B7 /* RACBehaviorSubject.m in Sources */,
 				B11B52452038ADC300C51EE8 /* WaveView.swift in Sources */,
 				B18A5D7320348E4300F139B7 /* NSOrderedSet+RACSequenceAdditions.m in Sources */,
+				CE55A2CC235744BA005C2221 /* TempConvCollectionViewCell.swift in Sources */,
 				B18A5D6B20348E4300F139B7 /* NSInvocation+RACTypeParsing.m in Sources */,
 				B18A5D5D20348E4300F139B7 /* CMDQueryStringSerialization.m in Sources */,
 				B18A5D6920348E4300F139B7 /* NSFileHandle+RACSupport.m in Sources */,

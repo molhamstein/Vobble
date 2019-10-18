@@ -249,7 +249,7 @@
 "REPLY_POPUP_TITLE"                    = "احصل على مزيد من الردود";
 "REPLIES_TITLE"                        = "اضف ردود";
 "FILTER_BY_TITLE"                      = "تفضيل بواسطة:";
-"GENDER_FILTER"                        = "الجنس";
+"GENDER_AND_COUNTRY_FILTER"            = "الجنس والبلد";
 "COUNTRY_FILTER"                       = "البلد";
 
 // shop

@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "conversations": {
+      ".indexOn": [
+        "user1ID",
+        "user2ID"
+      ]
+    }
+  }
+}

@@ -13,7 +13,7 @@ class ConversationCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var shadowHolderView: UIView!
-    @IBOutlet weak var chatButton: VobbleButton!
+    @IBOutlet weak var chatButton: UIButton!
     @IBOutlet weak var bottleNameLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
@@ -26,6 +26,14 @@ class ConversationCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization
+        chatButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        chatButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        chatButton.layer.shadowOpacity = 1.0
+        chatButton.layer.shadowRadius = 7.0
+        chatButton.layer.masksToBounds = false
+        chatButton.layer.cornerRadius = chatButton.frame.height/2
+        chatButton.layer.borderWidth = 0
+        
         chatButton.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
         //mainView.applyGradient(colours: [AppColors.blueXLight, AppColors.blueXDark], direction: .horizontal)
         

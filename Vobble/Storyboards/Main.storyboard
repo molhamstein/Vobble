@@ -1201,9 +1201,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EmD-kh-W6n">
-                                <rect key="frame" x="106" y="91.333333333333329" width="70" height="26"/>
+                                <rect key="frame" x="106" y="91.333333333333329" width="150" height="26"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="d9H-dr-xj4"/>
+                                    <constraint firstAttribute="width" constant="150" id="d9H-dr-xj4"/>
                                     <constraint firstAttribute="height" constant="26" id="kOW-nZ-txq"/>
                                 </constraints>
                                 <state key="normal" title="Gender">
@@ -1216,24 +1216,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="showFilter:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="6wU-kM-PbX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3o-9f-uXH">
-                                <rect key="frame" x="192" y="91.333333333333329" width="70" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="He6-Y0-xrT"/>
-                                    <constraint firstAttribute="height" constant="26" id="Jd9-2X-GKL"/>
-                                </constraints>
-                                <state key="normal" title="Country">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="13"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="showFilter:" destination="cyQ-xT-FEa" eventType="touchUpInside" id="xHN-Nh-EdK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCn-Ia-GpG">
@@ -1509,10 +1491,8 @@
                             <constraint firstItem="ScO-7d-mb2" firstAttribute="width" secondItem="BlD-gh-JjX" secondAttribute="width" multiplier="0.8" id="nK3-Ac-YEX"/>
                             <constraint firstAttribute="trailing" secondItem="9ZT-Et-onT" secondAttribute="trailing" id="paa-81-uPc"/>
                             <constraint firstItem="mXs-T0-xQv" firstAttribute="leading" secondItem="BlD-gh-JjX" secondAttribute="leading" id="qc1-Ft-R2x"/>
-                            <constraint firstItem="h3o-9f-uXH" firstAttribute="centerY" secondItem="EmD-kh-W6n" secondAttribute="centerY" id="sHx-EU-9ea"/>
                             <constraint firstAttribute="trailing" secondItem="HHc-Ka-leD" secondAttribute="trailing" id="sO3-ZA-yj2"/>
                             <constraint firstItem="FEs-Za-Eqo" firstAttribute="top" secondItem="BlD-gh-JjX" secondAttribute="top" id="tMg-xS-RBy"/>
-                            <constraint firstItem="h3o-9f-uXH" firstAttribute="leading" secondItem="EmD-kh-W6n" secondAttribute="trailing" constant="16" id="uFm-fI-lC9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -1524,7 +1504,6 @@
                     <connections>
                         <outlet property="blockButton" destination="fmA-T3-b5n" id="zsO-KV-Coq"/>
                         <outlet property="bottomView" destination="9ZT-Et-onT" id="pqS-LP-Mwc"/>
-                        <outlet property="btnCountryFilter" destination="h3o-9f-uXH" id="tOF-GM-oX6"/>
                         <outlet property="btnGenderFilter" destination="EmD-kh-W6n" id="LuA-HQ-O3D"/>
                         <outlet property="closeButton" destination="NYp-uR-axZ" id="Sxn-gK-oA9"/>
                         <outlet property="countryFlag" destination="C4v-Wh-KA2" id="PTo-2y-z3w"/>
@@ -1578,7 +1557,7 @@
                                 <rect key="frame" x="31" y="110.33333333333331" width="352" height="515.33333333333348"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvv-O0-UWG">
-                                        <rect key="frame" x="148.66666666666666" y="30.000000000000014" width="55" height="28"/>
+                                        <rect key="frame" x="148.66666666666666" y="30.000000000000014" width="54.666666666666657" height="28"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -3093,7 +3072,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 <rect key="frame" x="20.666666666666657" y="73.666666666666686" width="372.66666666666674" height="588.66666666666652"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ytO-wP-kkX">
-                                        <rect key="frame" x="0.0" y="306" width="372.66666666666669" height="278.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="307.33333333333337" width="372.66666666666669" height="277.33333333333337"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Ei7-hX-Wbj">
                                             <size key="itemSize" width="50" height="190"/>
@@ -3119,12 +3098,12 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urf-Go-JCe">
-                                        <rect key="frame" x="157" y="257" width="58.666666666666657" height="17"/>
+                                        <rect key="frame" x="157.33333333333334" y="258.33333333333331" width="58.333333333333343" height="17"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extend your chat with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTf-qT-c11">
-                                        <rect key="frame" x="93.666666666666643" y="229.66666666666663" width="185.33333333333337" height="23.333333333333343"/>
+                                        <rect key="frame" x="93.666666666666643" y="229.66666666666663" width="185.33333333333337" height="24.666666666666657"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3195,7 +3174,7 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
                                 <rect key="frame" x="31" y="110.33333333333331" width="352" height="515.33333333333348"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hid-GZ-F0v">
-                                        <rect key="frame" x="148.66666666666666" y="30.000000000000014" width="55" height="28"/>
+                                        <rect key="frame" x="148.66666666666666" y="30.000000000000014" width="54.666666666666657" height="28"/>
                                         <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -3483,15 +3462,15 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
     </scenes>
     <resources>
         <image name="Canopy" width="575" height="246"/>
-        <image name="boy" width="544" height="476"/>
-        <image name="boy_3_1" width="351" height="327"/>
+        <image name="boy" width="408" height="357"/>
+        <image name="boy_3_1" width="252.72000122070312" height="235.44000244140625"/>
         <image name="camera-switch" width="29" height="22"/>
         <image name="chatMoreOptions" width="22" height="20"/>
         <image name="chevron" width="24" height="24"/>
-        <image name="clouds" width="2000" height="662"/>
-        <image name="coins" width="206" height="216"/>
+        <image name="clouds" width="144000" height="47664"/>
+        <image name="coins" width="412" height="433"/>
         <image name="emptyListPlaceholder" width="50" height="50"/>
-        <image name="extend" width="1902" height="1328"/>
+        <image name="extend" width="456.48001098632812" height="318.72000122070312"/>
         <image name="filters" width="23" height="23"/>
         <image name="ic_chat_blocked" width="300" height="457"/>
         <image name="ic_close_white" width="20" height="20"/>
@@ -3503,28 +3482,28 @@ may be reproduced, distributed, or transmitted in any form or by any means.</str
         <image name="ic_throw_bottle" width="24" height="24"/>
         <image name="ic_throw_bottle2" width="80" height="80"/>
         <image name="inst_fav" width="305" height="275"/>
-        <image name="island" width="753" height="613"/>
-        <image name="montains" width="4500" height="80"/>
+        <image name="island" width="564.75" height="459.75"/>
+        <image name="montains" width="3375" height="60"/>
         <image name="navBackIcon" width="25" height="23"/>
         <image name="pause" width="40" height="40"/>
-        <image name="photo" width="30" height="21"/>
+        <image name="photo" width="60" height="43"/>
         <image name="rateUsArt" width="750" height="493"/>
         <image name="recordFlashIcon" width="18" height="25"/>
         <image name="recordRecordingIcon" width="4" height="4"/>
         <image name="retake" width="30" height="31"/>
-        <image name="sea" width="2000" height="1801"/>
+        <image name="sea" width="1500" height="1350.75"/>
         <image name="settings_art" width="610" height="615"/>
-        <image name="shore1" width="1500" height="1177"/>
-        <image name="shore2" width="1500" height="1177"/>
-        <image name="shore3" width="1500" height="1177"/>
+        <image name="shore1" width="1125" height="882.75"/>
+        <image name="shore2" width="1125" height="882.75"/>
+        <image name="shore3" width="1125" height="882.75"/>
         <image name="signup_male" width="63" height="15"/>
-        <image name="sky1" width="721" height="721"/>
-        <image name="sun" width="1755" height="1531"/>
+        <image name="sky1" width="540.75" height="540.75"/>
+        <image name="sun" width="1316.25" height="1148.25"/>
         <image name="swipe_up" width="305" height="275"/>
-        <image name="topics" width="32" height="32"/>
+        <image name="topics" width="48" height="48"/>
         <image name="try_finding_bottle" width="651" height="528"/>
-        <image name="umbrella" width="993" height="899"/>
-        <image name="user_placeholder" width="1024" height="1024"/>
-        <image name="wave" width="4500" height="739"/>
+        <image name="umbrella" width="744.75" height="674.25"/>
+        <image name="user_placeholder" width="245.75999450683594" height="245.75999450683594"/>
+        <image name="wave" width="3375" height="554.25"/>
     </resources>
 </document>

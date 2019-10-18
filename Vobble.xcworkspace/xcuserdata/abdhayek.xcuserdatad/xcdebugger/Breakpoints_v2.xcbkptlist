@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vobble/Classes/Controllers/Home/ChatViewController.swift"
-            timestampString = "589328286.058658"
+            filePath = "Vobble/Classes/Managers/SocialManager.swift"
+            timestampString = "593005344.154429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1639"
-            endingLineNumber = "1639"
-            landmarkName = "showGiftsShop()"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "facebookLogin(controller:completionBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vobble/Classes/Managers/SocialManager.swift"
+            timestampString = "593005344.1555949"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "facebookLogin(controller:completionBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -132,6 +132,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     var replyAudioUrlToUpload: URL?
     var bottleToReplyTo: Bottle?
     
+    var shouldSetTypingIndicator: Bool = true
     var isTyping: Bool {
         get {
             return localTyping
@@ -1068,6 +1069,7 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
         // 5
         finishSendingMessage()
         isTyping = false
+        shouldSetTypingIndicator = true
         
         inputToolbar.contentView.rightBarButtonItemWidth = 0
         UIView.animate(withDuration: 0.2, animations: {
@@ -1266,7 +1268,12 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
         // If the text is not empty, the user is typing
-        isTyping = textView.text != ""
+        //isTyping = textView.text != ""
+        
+        if textView.text != "" && shouldSetTypingIndicator {
+            isTyping = true
+            shouldSetTypingIndicator = false
+        }
         
         // Hide send button when there is no text
         if textView.text != "" {

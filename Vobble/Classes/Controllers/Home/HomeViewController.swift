@@ -446,6 +446,7 @@ class HomeViewController: AbstractController {
                 let moreBottlesVC = UIStoryboard.mainStoryboard.instantiateViewController(withIdentifier: GetMoreViewController.className) as! GetMoreViewController
                 
                 moreBottlesVC.fType = .bottlesPack
+                moreBottlesVC.homeVC = self
                 moreBottlesVC.providesPresentationContextTransitionStyle = true
                 moreBottlesVC.definesPresentationContext = true
                 moreBottlesVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext;
@@ -590,7 +591,7 @@ class HomeViewController: AbstractController {
         //self.popAnimation(view: self.vMyBottlesBtnImg)
         self.disableActions(disable: true)
         // add a delay to show button press animation
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.disableActions(disable: false)
             self.performSegue(withIdentifier: "myBottlesSegue", sender: self)
         }

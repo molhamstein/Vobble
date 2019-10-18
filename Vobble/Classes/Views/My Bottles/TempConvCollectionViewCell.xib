@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Antipasto_extrabold.otf">
+            <string>Antipasto-ExtraBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TempConvCollectionViewCell" id="gTV-IL-0wX" customClass="TempConvCollectionViewCell" customModule="Vobble" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="110"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="323" height="110"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8e-ch-BEp">
+                        <rect key="frame" x="15" y="8" width="293" height="92"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lwd-TI-PjW" customClass="VobbleButton" customModule="Vobble" customModuleProvider="target">
+                        <rect key="frame" x="189" y="67" width="129" height="35"/>
+                        <color key="backgroundColor" red="0.0" green="0.68627450980000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="nCK-b1-RcP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="17"/>
+                        <state key="normal" title="Chat">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="disabled">
+                            <color key="titleColor" white="0.90479910720000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7PE-Wm-tWI">
+                        <rect key="frame" x="10" y="0.0" width="65" height="65"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="65" id="6Jl-XT-oiD"/>
+                            <constraint firstAttribute="width" constant="65" id="oqH-Db-ojT"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="F8e-ch-BEp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="H3A-kk-CwS"/>
+                <constraint firstAttribute="bottom" secondItem="F8e-ch-BEp" secondAttribute="bottom" constant="10" id="IYM-jL-qRR"/>
+                <constraint firstAttribute="trailing" secondItem="Lwd-TI-PjW" secondAttribute="trailing" constant="5" id="Tgn-jR-GuY"/>
+                <constraint firstItem="F8e-ch-BEp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="WIm-5p-WgD"/>
+                <constraint firstAttribute="bottom" secondItem="Lwd-TI-PjW" secondAttribute="bottom" constant="8" id="XXZ-cq-HfG"/>
+                <constraint firstItem="7PE-Wm-tWI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="YfS-8g-ctK"/>
+                <constraint firstItem="Lwd-TI-PjW" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.4" id="qCN-Ck-E3T"/>
+                <constraint firstItem="7PE-Wm-tWI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="qQF-tf-pVb"/>
+                <constraint firstAttribute="trailing" secondItem="F8e-ch-BEp" secondAttribute="trailing" constant="15" id="uMr-nx-klt"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="323" height="110"/>
+            <connections>
+                <outlet property="mainView" destination="F8e-ch-BEp" id="6Ka-HX-pHa"/>
+            </connections>
+            <point key="canvasLocation" x="117.59999999999999" y="149.32533733133434"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -248,7 +248,7 @@
 "REPLY_POPUP_TITLE"                    = "Get more replies";
 "REPLIES_TITLE"                        = "Add replies";
 "FILTER_BY_TITLE"                      = "Filter by:";
-"GENDER_FILTER"                        = "Gender";
+"GENDER_AND_COUNTRY_FILTER"            = "Gender & Country";
 "COUNTRY_FILTER"                       = "Country";
 
 // shop

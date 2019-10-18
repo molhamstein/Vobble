@@ -33,7 +33,7 @@
                                 <color key="textColor" white="0.85289953859060408" alpha="0.94805463576158944" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Hours" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0M8-LA-isn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0M8-LA-isn">
                                 <rect key="frame" x="4" y="131.5" width="123" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Antipasto-ExtraBold" family="Antipasto" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -136,6 +136,6 @@
     </objects>
     <resources>
         <image name="bottles2" width="396" height="512"/>
-        <image name="coins" width="206" height="216"/>
+        <image name="coins" width="412" height="433"/>
     </resources>
 </document>

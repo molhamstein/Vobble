@@ -25,17 +25,17 @@ class SocialManager: NSObject{
     // MARK: Authorization
     /// Facebook login request
     func facebookLogin(controller: UIViewController, completionBlock: @escaping (_ user: AppUser?, _ success: Bool, _ error: ServerError?) -> Void) {
-        let fbLoginManager: FBSDKLoginManager = FBSDKLoginManager()
+        let fbLoginManager: LoginManager = LoginManager()
         // ask for email permission
-        fbLoginManager.logIn(withReadPermissions: ["email"], from: controller) { (result, error) in
+        fbLoginManager.logIn(permissions: ["email"], from: controller) { (result, error) in
             // check errors
             if (error == nil) {
                 // check if user grants the permissions
-                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                let fbloginresult : LoginManagerLoginResult = result!
                 if (fbloginresult.grantedPermissions != nil) {
                     if (fbloginresult.grantedPermissions.contains("email")) {
-                        if ((FBSDKAccessToken.current()) != nil) {
-                            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id,name,first_name,last_name,picture,email,location{location{country_code}},gender"]).start(completionHandler: { (connection, result, error) -> Void in
+                        if ((AccessToken.current) != nil) {
+                            GraphRequest(graphPath: "me", parameters: ["fields": "id,name,first_name,last_name,picture,email,location{location{country_code}},gender"]).start(completionHandler: { (connection, result, error) -> Void in
                                 if (error == nil) {
                                     let dict = result as! [String : AnyObject]
                                     if let facebookId = dict["id"] as? String {
@@ -55,7 +55,7 @@ class SocialManager: NSObject{
                                         }
                                         // TODO: counreyCode is not being used in the signup api
                                         // send facebook ID to start login process
-                                        ApiManager.shared.userFacebookLogin(facebookId: facebookId, fbName: userName, fbToken: FBSDKAccessToken.current().tokenString, email: email, fbGender: gender, imageLink: pictureLink) { (isSuccess, error, user) in
+                                        ApiManager.shared.userFacebookLogin(facebookId: facebookId, fbName: userName, fbToken: AccessToken.current?.tokenString ?? "", email: email, fbGender: gender, imageLink: pictureLink) { (isSuccess, error, user) in
                                             // login success
                                             if ActionDeactiveUser.execute(viewController: controller, user: user, error: error) {
                                                 if (isSuccess) {

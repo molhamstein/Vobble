@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // set navigation style
         AppConfig.setNavigationStyle()
         // init social managers
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         TWTRTwitter.sharedInstance().start(withConsumerKey: AppConfig.twitterConsumerKey, consumerSecret: AppConfig.twitterConsumerSecret)
         FirebaseApp.configure()
         Fabric.sharedSDK().debug = !AppConfig.isProductionBuild
@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) ||
+        return ApplicationDelegate.shared.application(app, open: url, options: options) ||
             TWTRTwitter.sharedInstance().application(app, open: url, options: options) ||
             GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
     }

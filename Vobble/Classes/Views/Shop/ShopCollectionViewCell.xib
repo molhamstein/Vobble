@@ -138,7 +138,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="bottles2" width="396" height="512"/>
-        <image name="coins" width="206" height="216"/>
+        <image name="bottles2" width="95" height="122.87999725341797"/>
+        <image name="coins" width="412" height="433"/>
     </resources>
 </document>

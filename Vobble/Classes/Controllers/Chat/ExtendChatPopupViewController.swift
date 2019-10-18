@@ -64,12 +64,15 @@ class ExtendChatPopupViewController: AbstractController {
         ApiManager.shared.requestShopItems(completionBlock: { (items, error) in})
         
         //IAP Setup
-        IAPManager.shared.delegate = self
-        IAPManager.shared.currentViewController = self
+        //IAPManager.shared.delegate = self
+        //IAPManager.shared.currentViewController = self
         
-        if !IAPManager.shared.isPaymentsReady() {
-            self.chatItemsArray = []
-        }
+//        if !IAPManager.shared.isPaymentsReady() {
+//            self.chatItemsArray = []
+//        }
+        
+        self.chatCollectionView.isScrollEnabled = true
+
     }
 
     private func initChatArray() {

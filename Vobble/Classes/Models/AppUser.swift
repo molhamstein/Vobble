@@ -324,6 +324,43 @@ class AppUser: BaseModel, NSCopying {
         return dictionary
     }
     
+    public func smallDictionaryRepresentation() -> [String: Any] {
+        var dictionary: [String: Any] = super.dictionaryRepresentation()
+        // object id
+        if let value = objectId {
+            dictionary[kUserObjectIdKey] = value
+        }
+        // first name
+        if let value = userName {
+            dictionary[kUserFirstNameKey] = value
+        }
+        // email
+        if let value = email {
+            dictionary[kUserEmailKey] = value
+        }
+        // phone number
+        if let value = phoneNumber {
+            dictionary[kPhoneNumber] = value
+        }
+        // profile picture
+        if let value = profilePic {
+            dictionary[kUserProfilePicKey] = value
+        }
+        // gender
+        if let value = gender?.rawValue {
+            dictionary[kUserGenderKey] = value
+        }
+        // country
+        if let value = country {
+            dictionary[kUserCountryKey] = value.dictionaryRepresentation()
+        }
+        if let value = countryISOCode {
+            dictionary[kUserCountryISOKey] = value
+        }
+
+        return dictionary
+    }
+    
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = AppUser()
         copy.objectId = objectId

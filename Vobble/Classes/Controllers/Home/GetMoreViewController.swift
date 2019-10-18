@@ -17,6 +17,7 @@ class GetMoreViewController: AbstractController {
     @IBOutlet weak var imgIcon: UIImageView!
     
     public var fType: ShopItemType = .coinsPack
+    public var homeVC: HomeViewController?
     
     fileprivate var selectedProduct : ShopItem!
     fileprivate var _itemsArray:[ShopItem] = [ShopItem]()
@@ -161,6 +162,11 @@ extension GetMoreViewController : UICollectionViewDelegate, UICollectionViewData
                         
                         ApiManager.shared.getMe(completionBlock: { (success, err, user) in
                             self.showActivityLoader(false)
+                            
+                            if let vc = self.homeVC {
+                                vc.refreshViewData()
+                            }
+                            
                             self.dismiss(animated: true, completion: {})
                             
                         })

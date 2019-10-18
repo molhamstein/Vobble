@@ -28,6 +28,7 @@ class ConversationViewController: AbstractController {
     fileprivate var filteredConvArray: [Conversation] = [Conversation]()
     fileprivate var searchText: UITextField?
     fileprivate var searchString: String = ""
+    fileprivate var isInisilized: Bool = false
     var imgLoading: UIActivityIndicatorView?
     var userImageView: UIImageView?
         
@@ -38,9 +39,6 @@ class ConversationViewController: AbstractController {
         self.navigationView.viewcontroller = self
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "conversationCollectionViewCellID")
         self.bottleCollectionView.register(UINib(nibName: "ConversationCollectionViewHeader",bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "conversationCollectionViewHeaderID")
-        
-        DataStore.shared.myBottles = [Conversation]()
-        DataStore.shared.myReplies = [Conversation]()
         
         emptyPlaceHolderView.isHidden = true
         emptyPlaceHolderLabel.font = AppFonts.normal
@@ -55,12 +53,12 @@ class ConversationViewController: AbstractController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.observeConversation()
-        self.refreshView()
-    }
-    
-    deinit {
-        
+        if !isInisilized {
+            self.observeConversation()
+            self.refreshView()
+            
+            self.isInisilized = true
+        }
     }
     
     func releaseFirebaseReferences(){
@@ -93,7 +91,6 @@ class ConversationViewController: AbstractController {
 }
 // MARK: - UICollectionViewDataSource
 extension ConversationViewController: UICollectionViewDataSource {
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -318,23 +315,25 @@ extension ConversationViewController {
         // We can use the observe method to listen for new
         // conversations being written to the Firebase DB
         
-        self.navigationView.showProgressIndicator(show: true)
-        
-        FirebaseManager.shared.fetchMyBottlesConversations { [weak self] (err) in
-            self?.navigationView.showProgressIndicator(show: false)
-            if let error = err {
-                print(error.localizedDescription)
-            } else {
-                self?.refreshView()
+        if (DataStore.shared.allConversations?.count ?? 0) == 0 && !isInisilized {
+            self.navigationView.showProgressIndicator(show: true)
+            
+            FirebaseManager.shared.fetchMyBottlesConversations { [weak self] (err) in
+                self?.navigationView.showProgressIndicator(show: false)
+                if let error = err {
+                    print(error.localizedDescription)
+                } else {
+                    self?.refreshView()
+                }
             }
-        }
-        
-        FirebaseManager.shared.fetchMyRepliesConversations { [weak self] (err) in
-            self?.navigationView.showProgressIndicator(show: false)
-            if let error = err {
-                print(error.localizedDescription)
-            } else {
-                self?.refreshView()
+            
+            FirebaseManager.shared.fetchMyRepliesConversations { [weak self] (err) in
+                self?.navigationView.showProgressIndicator(show: false)
+                if let error = err {
+                    print(error.localizedDescription)
+                } else {
+                    self?.refreshView()
+                }
             }
         }
         
@@ -349,6 +348,14 @@ extension ConversationViewController {
                     
                     //print("my replies")
                     let myBottlesArray = DataStore.shared.myReplies
+                    
+                    if !myBottlesArray.contains(where: {$0.idString == conversation.idString}) {
+                        FirebaseManager.shared.sortReplies(snapshot)
+                        
+                        FirebaseManager.shared.sortConversations()
+                        self?.refreshView()
+                    }
+                    
                     var i = 0
                     for conv in myBottlesArray {
                         if conv.idString == conversation.idString {
@@ -364,6 +371,15 @@ extension ConversationViewController {
                 } else if let currentUserID = DataStore.shared.me?.objectId,  let convBottleOwnerID = conversation.bottle?.owner?.objectId, currentUserID == convBottleOwnerID {
                     // (My bottles)
                     let myBottlesArray = DataStore.shared.myBottles
+                    
+                    if !myBottlesArray.contains(where: {$0.idString == conversation.idString}) {
+                        FirebaseManager.shared.sortBottles(snapshot)
+                        
+                        FirebaseManager.shared.sortConversations()
+                        self?.refreshView()
+                    }
+
+                    
                     var i = 0
                     for conv in myBottlesArray {
                         if conv.idString == conversation.idString {
@@ -377,7 +393,6 @@ extension ConversationViewController {
                     }
                 }
             }
-            //self.navigationView.showProgressIndicator(show: false)
         })
     }
 }
