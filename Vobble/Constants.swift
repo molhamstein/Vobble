@@ -47,6 +47,7 @@ struct AppConfig {
     // find
     static let find_bottle = "Find_Bottle"
     static let find_bottle_not_found = "Find_Bottle_Not_Found"
+    static let swipe_bottle = "Swipe_Bottle"
     
     // reply
     static let reply_pressed = "Reply_Pressed"

@@ -175,6 +175,8 @@
 "HOME_MY_BOTTLES_BTN"                   = "My Bottles";
 "BOTTLES_TITLE"                         = "Add bottle";
 "BOTTLE_POPUP_TITLE"                    = "Get more bottles";
+"NO_BOTTLES_FOUND"                      = "There are no bottles found";
+
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "are you sure you want to go back? your video will not be uploaded.";
 "CHAT_REPLY_SENT_MSG"                   = "Your Reply was sent to the bottle owner, when he sees your reply you guys can chat for 24 hours";

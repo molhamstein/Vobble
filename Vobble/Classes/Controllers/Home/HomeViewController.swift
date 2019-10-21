@@ -409,6 +409,7 @@ class HomeViewController: AbstractController {
             findBottleVC.gender = self.gender
             findBottleVC.shoreId = self.shoreId
             findBottleVC.bottles = bottles
+            findBottleVC.currentShoreIndex = currentPageIndex
         
         } else if segue.identifier == "shopSegue" {
             let vc = segue.destination as! ShopViewController
@@ -536,14 +537,14 @@ class HomeViewController: AbstractController {
             self.disableActions(disable: false)
             self.videoUploadLoader?.removeLoader(true)
             if error == nil  {
-                if bottles != nil {
+                if bottles != nil && bottles?.count != 0 {
                     self.performSegue(withIdentifier: "findBottleSegue", sender: bottles)
                 } else {
                     // no bottles found
                     let logEventParams = ["Shore": (DataStore.shared.shores[self.currentPageIndex].name_en) ?? "", "Gender": self.gender.rawValue, "Country": self.countryCode];
                     Flurry.logEvent(AppConfig.find_bottle_not_found, withParameters:logEventParams);
                     
-                    let alertController = UIAlertController(title: "", message: error?.type.errorMessage , preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "", message: "NO_BOTTLES_FOUND".localized , preferredStyle: .alert)
                     let ok = UIAlertAction(title: "ok".localized, style: .default,  handler: nil)
                     alertController.addAction(ok)
                     self.present(alertController, animated: true, completion: nil)
@@ -826,6 +827,8 @@ class HomeViewController: AbstractController {
         if blockPageTransitions {
             return
         }
+        
+        self.currentPageIndex = 0
         blockPageTransitions = true
         self.navigationView.navTitle.text = "main_shore".localized
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
@@ -843,7 +846,7 @@ class HomeViewController: AbstractController {
             self.ivClouds.transform = CGAffineTransform.identity
             self.ivCrap.transform = CGAffineTransform.identity
         }, completion: {(finished: Bool) in
-            self.currentPageIndex = 0
+            //self.currentPageIndex = 0
             self.blockPageTransitions = false
             
             // animate the crab 
@@ -859,6 +862,7 @@ class HomeViewController: AbstractController {
         
         ivCrap.stopAnimating()
         
+        self.currentPageIndex = 1
         blockPageTransitions = true
         self.navigationView.navTitle.text = "love_shore".localized
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping:0.70, initialSpringVelocity:2.2, options: .curveEaseInOut, animations: {
@@ -875,7 +879,7 @@ class HomeViewController: AbstractController {
             self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.mountainsParallaxSpeed), y: 0)
             self.ivCrap.transform = CGAffineTransform.identity.translatedBy(x: -(self.screenWidth * self.shore1ParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
-            self.currentPageIndex = 1
+            //self.currentPageIndex = 1
             self.blockPageTransitions = false
         })
     }
@@ -887,6 +891,7 @@ class HomeViewController: AbstractController {
         
         ivCrap.stopAnimating()
         
+        self.currentPageIndex = 2
         blockPageTransitions = true
         self.navigationView.navTitle.text = "fadfed_shore".localized
         //let transform = CGAffineTransform.identity.translatedBy(x: -screenWidth, y: 0)
@@ -905,7 +910,7 @@ class HomeViewController: AbstractController {
             self.ivMountains.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.mountainsParallaxSpeed), y: 0)
             self.ivCrap.transform = CGAffineTransform.identity.translatedBy(x: -(doubleScreenWidth * self.shore1ParallaxSpeed), y: 0)
         }, completion: {(finished: Bool) in
-            self.currentPageIndex = 2
+            //self.currentPageIndex = 2
             self.blockPageTransitions = false
         })
     }

@@ -47,6 +47,7 @@ class FindBottleViewController: AbstractController {
     @IBOutlet weak var filterView: FilterView!
     @IBOutlet weak var filterViewOverlay: UIView!
     
+    fileprivate var displayNoContentMsg: Bool = false
     fileprivate var reportReasonIndex:Int = 0
     fileprivate var videoCards: [VideoPlayerLayer?] = []
     fileprivate var currentVideoCard: VideoPlayerLayer?
@@ -66,6 +67,7 @@ class FindBottleViewController: AbstractController {
     public var gender: GenderType = .allGender
     public var countryCode: String!
     public var shoreId: String?
+    public var currentShoreIndex: Int = 0
     
     var isInitialized = false
     var isNextCardCreated: Bool = false
@@ -291,7 +293,15 @@ extension FindBottleViewController: UIScrollViewDelegate {
             
             setupNextCard()
             
-            print("Current index is: \(self.currentIndex) \n Current video card index: \(self.currentVideoCard?.index)")
+            // Flurry event
+            let logEventParams = ["Shore": DataStore.shared.shores[self.currentShoreIndex].name_en ?? "Main Shore", "Gender": self.gender.rawValue, "Country": self.countryCode];
+            Flurry.logEvent(AppConfig.swipe_bottle, withParameters:logEventParams);
+            
+        }else {
+            // This code is to display to the user that there is no content when he reaches the last page
+            if Int(self.currentIndex) == ((self.bottles?.count ?? 0) - 1) && self.displayNoContentMsg {
+                self.showMessage(message: "NO_BOTTLES_FOUND".localized, type: .error)
+            }
         }
     }
     
@@ -386,7 +396,7 @@ extension FindBottleViewController {
             self.isGettingVideos = false
             
             if error == nil  {
-                if bottles != nil {
+                if bottles != nil && bottles?.count != 0{
                     for i in bottles! {
                         self.bottles?.append(i)
                     }
@@ -404,8 +414,10 @@ extension FindBottleViewController {
                         self.setupNextCard()
                     }
                     
+                    self.displayNoContentMsg = false
                 } else {
                     // no bottles found
+                    self.displayNoContentMsg = true
                     
                 }
                 
@@ -711,7 +723,7 @@ extension FindBottleViewController: FilterViewDelegate {
             self.showActivityLoader(false)
             
             if error == nil  {
-                if bottles != nil {
+                if bottles != nil && bottles?.count != 0{
                     self.currentVideoCard?.cancelBuffring()
                     self.nextVideoCard?.cancelBuffring()
                     
@@ -720,6 +732,7 @@ extension FindBottleViewController: FilterViewDelegate {
                     self.currentIndex = 0.0
                     self.fixedIndex = 0
                     self.lastVelocityYSign = 0
+                    self.displayNoContentMsg = false
                     
                     self.bottles = bottles
                     
@@ -733,7 +746,7 @@ extension FindBottleViewController: FilterViewDelegate {
                     
                 } else {
                     // no bottles found
-                    self.showMessage(message: error?.type.errorMessage ?? "", type: .error)
+                    self.showMessage(message: "NO_BOTTLES_FOUND".localized, type: .error)
                 }
                 
                 DataStore.shared.seenVideos = []

@@ -175,6 +175,7 @@
 "HOME_MY_BOTTLES_BTN"                   = "زجاجاتي";
 "BOTTLES_TITLE"                         = "اضف زجاجة";
 "BOTTLE_POPUP_TITLE"                    = "احصل على مزيد من الزجاجات";
+"NO_BOTTLES_FOUND"                      = "لم يتم العثور على زجاجات";
 
 // chat
 "UPLOAD_MEDIA_WARNING"                  = "هل أنت متأكد من العودة؟ عليك الانتظار ليتم رفع الملف الذي ارسلته ";
