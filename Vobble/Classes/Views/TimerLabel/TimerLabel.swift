@@ -80,6 +80,7 @@ class TimerLabel: UILabel {
             }
             
             text = timeString(time: TimeInterval(seconds))
+            
             delegate?.countingAt?(timeRemaining: TimeInterval(seconds))
         }
     }

@@ -933,6 +933,9 @@ final class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDe
                         self?.chatPendingContainer.isHidden = true
                         self?.customNavBar.timerView.isHidden = false
                         self?.initCustomToolBar()
+                        
+                        // Fetch conversations because it's coming directly from FindBottleVC
+                        FirebaseManager.shared.fetchMyRepliesConversations {_ in }
                     }
                 }
             }

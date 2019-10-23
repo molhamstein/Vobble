@@ -279,7 +279,7 @@
                 <outlet property="lblBottlesLeftCountTitle" destination="MII-u1-n5f" id="oUL-Cu-a7v"/>
                 <outlet property="lblBottlesThrownCount" destination="GXm-mA-oE3" id="JOG-mZ-k8m"/>
                 <outlet property="lblBottlesThrownCountTitle" destination="Rx6-j1-vgs" id="oda-8K-G5q"/>
-                <outlet property="lblNextRefillDate" destination="Neb-5c-Epb" id="hix-5D-iyJ"/>
+                <outlet property="lblNextRefillDate" destination="Neb-5c-Epb" id="X2b-b6-m9S"/>
                 <outlet property="lblNextRefillTitle" destination="MJc-XL-Slh" id="9x4-H6-dYS"/>
                 <outlet property="lblUnreadMyBottlesConversationsBadge" destination="p25-vy-ksP" id="Nnn-pk-cYY"/>
                 <outlet property="lblUnreadMyRepliesConversationsBadge" destination="CQt-Mg-EjU" id="sgb-Ql-b9s"/>
@@ -294,9 +294,9 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="edit" width="8" height="8"/>
+        <image name="edit" width="16" height="16"/>
         <image name="ic_settings" width="33" height="32"/>
         <image name="myVideosIcon" width="33" height="32"/>
-        <image name="user_placeholder" width="1024" height="1024"/>
+        <image name="user_placeholder" width="245.75999450683594" height="245.75999450683594"/>
     </resources>
 </document>
