@@ -575,6 +575,8 @@ class DataStore :NSObject {
         conversationsMyBottlesUnseenMesssages = [:]
         conversationsMyRepliesUnseenMesssages = [:]
         conversationsUnmutedUnseenMesssages = [:]
+        seenVideos = []
+        completedVideos = []
         //shopItems = [ShopItem]()
         inventoryItems = [InventoryItem]()
         OneSignal.deleteTags(["user_id","user_name"])

@@ -537,6 +537,9 @@ class HomeViewController: AbstractController {
             self.disableActions(disable: false)
             self.videoUploadLoader?.removeLoader(true)
             if error == nil  {
+                DataStore.shared.seenVideos = []
+                DataStore.shared.completedVideos = []
+                
                 if bottles != nil && bottles?.count != 0 {
                     self.performSegue(withIdentifier: "findBottleSegue", sender: bottles)
                 } else {
@@ -575,7 +578,9 @@ class HomeViewController: AbstractController {
             ApiManager.shared.findBottleById(bottleId: bottleId, completionBlock: findBottleCompletionBlock)
             self.bottleIdToFind = nil
         } else {
-
+            
+            print(DataStore.shared.seenVideos)
+            print(DataStore.shared.completedVideos)
             ApiManager.shared.findBottles(gender: self.gender.rawValue, countryCode: self.countryCode, shoreId: shoreId, seen: DataStore.shared.seenVideos, complete: DataStore.shared.completedVideos ,completionBlock: findBottleCompletionBlock)
         }
         

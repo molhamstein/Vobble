@@ -391,6 +391,8 @@ extension FindBottleViewController {
     func getMoreVideos() {
         self.seen = DataStore.shared.seenVideos
         self.complete = DataStore.shared.completedVideos
+        print(DataStore.shared.seenVideos)
+        print(DataStore.shared.completedVideos)
         ApiManager.shared.findBottles(gender: gender.rawValue, countryCode: countryCode, shoreId: shoreId, seen: seen, complete: complete, offsets: Double(self.bottles?.count ?? 0), completionBlock: {(bottles, error) in
             
             self.isGettingVideos = false

@@ -479,6 +479,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                                     ApiManager.shared.getShores(completionBlock: { (shores, error) in
                                         
                                         self.loginButton.isLoading = false
+                                        self.stopMedia()
                                         self.dismiss(animated: true, completion: { })
                                         self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                                         
@@ -973,6 +974,7 @@ class LoginViewController: AbstractController, CountryPickerDelegate {
                 self.view.isUserInteractionEnabled = true
                 self.btnSocialInfoSubmit.isLoading = false
                 if success {
+                    self.stopMedia()
                     self.dismiss(animated: true, completion: { })
                     self.performSegue(withIdentifier: "loginHomeSegue", sender: self)
                 } else {
