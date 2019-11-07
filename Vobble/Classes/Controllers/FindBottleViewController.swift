@@ -657,6 +657,7 @@ extension FindBottleViewController: VideoPlayerDelegate {
         if !(alreadyExist?.count ?? 0 > 0) {
             if let _ = DataStore.shared.seenVideos {
                 DataStore.shared.seenVideos?.append((self.currentBottle?.bottle_id!)!)
+                print("Seen video added now: \(self.currentBottle?.bottle_id!)")
             }else {
                 DataStore.shared.seenVideos = [self.currentBottle?.bottle_id!] as? [String]
             }

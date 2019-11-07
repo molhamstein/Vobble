@@ -257,9 +257,7 @@ extension VideoPlayerLayer {
             stop()
         }
     }
-    
-    
-    
+
     func reloadVideoPrerolls(){
         if let player = player {
             player.preroll(atRate: 0, completionHandler: nil)
